@@ -1,0 +1,45 @@
+{
+  "name": "react-redux-starter-kit",
+  "version": "1.0.0",
+  "description": "Starter kit from Fullstack-development company developers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fullstack-development/react-redux-starter-kit.git"
+  },
+  "keywords": [
+    "starter-kit",
+    "react",
+    "redux"
+  ],
+  "author": "Fullstack-development",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fullstack-development/react-redux-starter-kit/issues"
+  },
+  "homepage": "https://github.com/fullstack-development/react-redux-starter-kit#readme",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.7.1",
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^1.2.2",
+    "tslint": "^4.0.2",
+    "typescript": "^2.0.10",
+    "typescript-eslint-parser": "^1.0.0",
+    "typings": "^2.0.0",
+    "webpack": "^2.1.0-beta.27"
+  },
+  "dependencies": {
+    "@types/react": "^0.14.52",
+    "@types/react-dom": "^0.14.19",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}

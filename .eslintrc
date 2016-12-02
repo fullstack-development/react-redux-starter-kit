@@ -1,0 +1,99 @@
+{
+  "extends": "eslint-config-airbnb",
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    // "strict": 0,  // required by babel-eslint
+    "indent": [2, 2, {"SwitchCase": 1}],
+    "wrap-iife": ["error", "inside"],
+    "max-len": ["error", 180],
+    "no-underscore-dangle": 0,  // it is our style guide requirement - we love private methods :)
+    "no-console": 0,
+    "no-alert": 0,
+    "no-unused-vars": 0,
+    "no-unused-expressions": 0,
+    "import/default": 0,
+    "import/no-duplicates": 0,
+    "import/named": 0,
+    "import/namespace": 0,
+    "import/no-unresolved": 0,
+    "import/no-named-as-default": 2,
+    "import/prefer-default-export": 0,
+    "react/sort-comp": 0,
+    "react/no-multi-comp": 0,
+    "react/require-extension": "off",  // This rule is deprecated. Please use the eslint-plugin-import extensions rule instead.
+    "jsx-a11y/label-has-for": 0,
+    "global-require": 0,
+    "prefer-spread": 0,
+    "prefer-template": 0,
+    "prefer-rest-params": 0,
+    "no-case-declarations": 0,
+    "no-confusing-arrow": 0,
+    "no-unneeded-ternary": 0,
+    "no-trailing-spaces": 0,
+    "no-use-before-define": 0,
+    "no-useless-rename": 0,
+    "consistent-return": 0,
+    "prefer-arrow-callback": 0,
+    "object-property-newline": 0,
+    "arrow-body-style": 0,
+    "no-mixed-operators": 0,
+    "import/imports-first": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/newline-after-import": 0,
+    "react/prefer-stateless-function": 0,
+    "react/jsx-first-prop-new-line": 0,
+    "react/jsx-filename-extension": 0,
+    "react/jsx-no-bind": 0,
+    "react/prefer-es6-class": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "react/self-closing-comp": 0,
+    "jsx-a11y/img-has-alt": 0,
+    "jsx-a11y/href-no-hash": 0
+  },
+  "plugins": [
+    "react", "import"
+  ],
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack/dev.config.js"
+      }
+    }
+  },
+  "parser": "typescript-eslint-parser",
+  "parserOptions":{
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "globals": {
+    "__DEVELOPMENT__": true,
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DISABLE_SSR__": true,
+    "__DEVTOOLS__": true,
+    "__HOST__": true,
+    "__SERVER_POLLING_DELAY__": true,
+    "__SERVER_POLLING_MAX_ATTEMPTS__": true,
+    "socket": true,
+    "webpackIsomorphicTools": true,
+
+    // libraries
+    "google": true,  // Google Maps JS SDK
+    "ga": true,  // Google Maps JS SDK
+
+    // test frameworks
+    "expect": true,
+    "it": true,
+    "describe": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "sinon": true
+  }
+}
