@@ -4,7 +4,9 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node_modules/.bin/webpack-dev-server --progress --colors --config webpack/dev.config.js",
+    "build": "node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js"
   },
   "repository": {
     "type": "git",
@@ -28,13 +30,15 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
+    "html-webpack-plugin": "^2.24.1",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^1.2.2",
     "tslint": "^4.0.2",
     "typescript": "^2.0.10",
     "typescript-eslint-parser": "^1.0.0",
     "typings": "^2.0.0",
-    "webpack": "^2.1.0-beta.27"
+    "webpack": "^2.1.0-beta.27",
+    "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
     "@types/react": "^0.14.52",
