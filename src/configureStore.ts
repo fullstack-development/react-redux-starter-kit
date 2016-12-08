@@ -1,5 +1,6 @@
 import {createStore, compose, Reducer, combineReducers, applyMiddleware, Middleware, Store} from 'redux';
 import thunk from 'redux-thunk';
+import {Action} from "./shared/types/redux";
 
 function configureStore () : Store<Object> {
     const middlewares : Middleware[] = [
@@ -7,7 +8,7 @@ function configureStore () : Store<Object> {
     ];
 
     const reducer : Reducer<Object> = combineReducers({
-        data: (state : Object, action : Object) => state
+        data: (state : Object = {}, action : Action) => state
     });
 
     return createStore(

@@ -4,6 +4,11 @@ interface HelloProps { compiler: string; framework: string; }
 
 class Hello extends React.Component<HelloProps, {}> {
 
+    static defaultProps = {
+        compiler: 'TypeScript',
+        framework: 'React'
+    };
+
     greet () : string {
         return 'Hello!';
     }
@@ -14,4 +19,5 @@ class Hello extends React.Component<HelloProps, {}> {
     }
 }
 
+export { HelloProps };
 export default Hello;

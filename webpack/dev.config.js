@@ -23,6 +23,7 @@ module.exports = {
             template: 'assets/index.html'
         })
     ],
+    watch: true,
     devServer: {
         contentBase: path.resolve('..', 'build'),
         host: '0.0.0.0',
