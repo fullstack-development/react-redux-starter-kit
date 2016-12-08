@@ -6,7 +6,7 @@ import TestComponent from './view/TestComponent';
 class TestModule implements Module {
     getRoutes () {
         return (
-            <Route path="test" component={TestComponent} />
+            <Route key="test" path="test" component={TestComponent} />
         );
     }
 }

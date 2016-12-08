@@ -10,7 +10,7 @@ class Hello extends React.Component<HelloProps, {}> {
     };
 
     greet () : string {
-        return 'Hello!';
+        return 'Hello';
     }
 
     render() {

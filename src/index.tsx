@@ -2,10 +2,15 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {Router, browserHistory} from 'react-router';
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import createRoutes from './routes';
 import {Module} from "./modules/Module";
-import configureStore from "./configureStore";
 import {TestModule} from './modules';
+import configureStore from "./configureStore";
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 /* Prepare main app elements */
 const history = browserHistory;
