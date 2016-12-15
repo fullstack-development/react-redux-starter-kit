@@ -15,12 +15,28 @@ module.exports = {
     },
     module: {
         rules: [
-            {test: /\.(ts|tsx)/, use: 'ts-loader'},
+            {test: /\.(ts|tsx)$/, use: ['babel-loader', 'ts-loader']},
             {
-                test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+                test: /\.(svg|ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
                 use: 'file-loader?name=fonts/[hash].[ext]',
             },
-            {test: /\.styl/, use: ['style-loader', 'css-loader', 'stylus-loader']}
+            {test: /.css$/, use: ['style-loader', 'css-loader']},
+            {
+                test: /\.styl$/,
+                use: [
+                    'style-loader',
+                    {loader: 'css-loader', options: { modules: true } },
+                    'stylus-loader'
+                ]
+            },
+            {
+                test: /\.(png)/,
+                loader: 'url-loader',
+                options: {
+                    name: 'images/[name].[ext]',
+                    limit: 10000
+                }
+            }
         ]
     },
     plugins: [

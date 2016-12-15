@@ -1,3 +1,3 @@
-import TestModule from './Test';
+import IndexModule from './Index';
 
-export { TestModule };
+export { IndexModule };

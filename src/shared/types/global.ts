@@ -17,6 +17,8 @@ interface Require {
 declare const process : Process;
 declare const require : Require;
 
-
 declare module 'react-tap-event-plugin';
 declare module 'bem-cn';
+declare module '*.styl';
+declare module '*.png';
+declare module 'shared/*';

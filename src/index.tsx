@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {Router, browserHistory} from 'react-router';
+import { Provider } from 'react-redux';
+import { Router, browserHistory } from 'react-router';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import createRoutes from './routes';
-import {Module} from "./modules/Module";
-import {TestModule} from './modules';
+import { Module } from "./modules/Module";
+import { IndexModule } from './modules';
 import configureStore from "./configureStore";
 
 // Needed for onTouchTap
@@ -14,7 +14,7 @@ injectTapEventPlugin();
 
 /* Prepare main app elements */
 const history = browserHistory;
-const modules : Array<Module> = [ new TestModule() ];
+const modules : Array<Module> = [ new IndexModule() ];
 const store = configureStore();
 const routes = createRoutes(modules);
 
