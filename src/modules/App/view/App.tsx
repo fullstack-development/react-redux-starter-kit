@@ -8,18 +8,18 @@ import './fonts';
 
 interface Props {}
 
-class App extends React.Component<Props, null> {
-    render () {
-        const b = block('application');
-        const {children} = this.props;
+class App extends React.Component<Props, {}> {
+  render() {
+    const b = block('application');
+    const { children } = this.props;
 
-        return (
-            <div className={styles[b()]}>
-                {children}
-            </div>
-        );
-    }
+    return (
+      <div className={styles[b()]}>
+        {children}
+      </div>
+    );
+  }
 }
 
-export {Props};
+export { Props };
 export default App;

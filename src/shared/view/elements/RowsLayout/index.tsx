@@ -4,28 +4,28 @@ import * as block from 'bem-cn';
 import * as s from './styles.styl';
 
 interface Props {
-    children? : React.ReactElement<Object>,
-    footerContent? : React.ReactElement<Object>,
-    headerContent? : React.ReactElement<Object>
+  children?: React.ReactNode;
+  footerContent?: React.ReactNode;
+  headerContent?: React.ReactNode;
 }
 
-function RowsLayout ({ children, footerContent, headerContent } : Props) {
-    const b = block('rows-layout');
-    return (
-        <Grid fluid className={s[b()]}>
-            <Row>
-                <header>{headerContent}</header>
-            </Row>
-            <Row>
-                <main>{children}</main>
-            </Row>
-            <Row className={s[b('footer-row')()]}>
-                <footer>
-                    <Panel className={s[b('footer-content')]} header={<Grid>{footerContent}</Grid>} />
-                </footer>
-            </Row>
-        </Grid>
-    );
+function RowsLayout({ children, footerContent, headerContent }: Props) {
+  const b = block('rows-layout');
+  return (
+    <Grid fluid className={s[b()]}>
+      <Row>
+        <header>{headerContent}</header>
+      </Row>
+      <Row>
+        <main>{children}</main>
+      </Row>
+      <Row className={s[b('footer-row')()]}>
+        <footer>
+          <Panel className={s[b('footer-content')]} header={<Grid>{footerContent}</Grid>}/>
+        </footer>
+      </Row>
+    </Grid>
+  );
 }
 
 export default RowsLayout;

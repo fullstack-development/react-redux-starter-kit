@@ -1,13 +1,11 @@
 {
+    "rulesDirectory": "./node_modules/tslint-eslint-rules/dist/rules",
     "jsRules": {
+        "indent": ["error", 2],
         "class-name": true,
         "comment-format": [
             true,
             "check-space"
-        ],
-        "indent": [
-            true,
-            "spaces"
         ],
         "no-duplicate-variable": true,
         "no-eval": true,
@@ -54,6 +52,8 @@
             true,
             "spaces"
         ],
+        "ter-indent": ["error", 2],
+        "object-curly-spacing": ["error", "always"],
         "no-eval": true,
         "no-internal-module": true,
         "no-trailing-whitespace": true,

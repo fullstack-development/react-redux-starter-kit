@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
-    "build": "node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js"
+    "watch:dev": "NODE_ENV=development node_modules/.bin/webpack-dev-server --hide-modules --watch --progress --colors --config webpack/dev.config.js",
+    "watch:prod": "NODE_ENV=development node_modules/.bin/webpack-dev-server --hide-modules --watch --progress --colors --config webpack/prod.config.js",
+    "build:dev": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js",
+    "build:prod": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/prod.config.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +35,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.24.1",
     "source-map-loader": "^0.1.5",
@@ -41,6 +44,8 @@
     "stylus-loader": "^2.4.0",
     "ts-loader": "^1.2.2",
     "tslint": "^4.0.2",
+    "tslint-eslint-rules": "^3.2.3",
+    "tslint-loader": "^3.3.0",
     "typescript": "^2.0.10",
     "typings": "^2.0.0",
     "url-loader": "^0.5.7",
@@ -56,9 +61,10 @@
     "@types/react-router": "^2.0.41",
     "@types/redux": "^3.6.0",
     "@types/redux-thunk": "^2.1.32",
+    "axios": "^0.15.3",
     "bem-cn": "^2.1.3",
     "bootstrap": "^3.3.7",
-    "material-ui": "^0.16.4",
+    "immutable": "^3.8.1",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.1",

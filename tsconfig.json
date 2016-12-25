@@ -1,11 +1,15 @@
 {
   "compilerOptions": {
+    "traceResolution": true,
     "sourceMap": true,
+    "strictNullChecks": true,
     "noImplicitAny": true,
     "module": "commonjs",
-    "target": "es6",
+    "target": "es5",
+    "lib": ["es2015", "es2017", "es6", "es7", "es5", "DOM", "ScriptHost"],
     "jsx": "react",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": "./src"
   },
   "include": [
     "src/**/*"

@@ -1,3 +1,4 @@
-import IndexModule from './Index';
+import HomeModule from './Home/Home';
 
-export { IndexModule };
+
+export { HomeModule };
