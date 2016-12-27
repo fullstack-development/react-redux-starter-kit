@@ -2,6 +2,12 @@ import { ReactElement } from 'react';
 import { Route } from 'react-router';
 import { ThunkAction, ActionCreator } from 'redux';
 import { Reducer } from 'redux';
+import Api from '../api/Api';
+import { Namespace as CategorySelectNamespace } from 'features/categorySelect';
+import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
+import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
+import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
+
 
 declare namespace App {
 
@@ -10,7 +16,9 @@ declare namespace App {
     getReducer?: () => { name: string; reducer: Reducer<S> };
   }
 
-  interface ExtraArguments {}
+  interface ExtraArguments {
+    api: Api;
+  }
 
   interface Action {
     payload?: { [key: string]: any } | number | string | null;
@@ -19,7 +27,10 @@ declare namespace App {
 
 
   interface ReduxState {
-    // home: HomeModuleNamespace.InitialState;
+    categorySelect: CategorySelectNamespace.InitialState;
+    locationSelect: LocationSelectNamespace.InitialState;
+    dynamicFields: DynamicFieldsNamespace.InitialState;
+    orderForm: HomeModuleNamespace.InitialState;
   }
 
   type AsyncActionCreatorResult = ThunkAction<Promise<void>, ReduxState, ExtraArguments>;

@@ -6,7 +6,7 @@ import Namespace from './namespace';
 
 class HomeModule implements AppNamespace.Module<Namespace.ReduxState> {
   getRoutes() {
-    return <Route key="index" path="index" component={Layout}/>;
+    return <Route key="home" path="home" component={Layout} />;
   }
 }
 

@@ -82,7 +82,8 @@ module.exports = {
             template: 'assets/index.html'
         }),
         new webpack.DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify('development'),
+            'process.env.NODE_ENV': JSON.stringify('development'),
+            __HOST__: JSON.stringify('http://localhost:8000'),
         }),
     ],
     watch: true,

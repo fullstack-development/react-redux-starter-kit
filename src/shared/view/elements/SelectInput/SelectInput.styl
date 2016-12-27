@@ -1,0 +1,32 @@
+:global
+  .is-open > Select-control
+    background-color transparent
+    border 0
+    border-bottom 2px solid
+    border-color #66afe9
+
+  .is-focused:not(.is-open) > .Select-control
+    border-bottom-width 2px
+    border-color #66afe9
+    box-shadow none
+
+  .Select
+    &-control,
+    &-placeholder,
+    &:focus &-placeholder
+      background-color transparent
+      border 0
+      border-radius 0
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+    &-control
+      border-bottom 1px solid
+      border-color #ddd
+
+      &:focus
+        border-bottom-width 2px
+        border-color #66afe9
+        outline 0
+
+      &:hover
+        box-shadow none

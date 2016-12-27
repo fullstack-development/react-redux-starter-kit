@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 interface Props {
   children?: React.ReactNode;
@@ -10,7 +11,7 @@ function Header({ children }: Props) {
     <Navbar>
       <Navbar.Header>
         <Navbar.Brand>
-          <a href="#">FSD Starter kit</a>
+          <Link to="/home">FSD Starter kit</Link>
         </Navbar.Brand>
       </Navbar.Header>
       <Nav>
