@@ -5,35 +5,37 @@ import { spy } from 'sinon';
 import GenericDateInput, { IProps, IState } from './../GenericDateInput';
 import TextInput, { IProps as ITextInputProps } from 'shared/view/elements/TextInput/TextInput';
 
-describe('(View) GenericDateInput', () => {
-  it('should render <input> tag', () => {
-    const component = mount(<GenericDateInput />);
-    const header = component.find('input');
+describe('(Shared) View', () => {
+  describe('(Component) GenericDateInput', () => {
+    it('should render <input> tag', () => {
+      const component = mount(<GenericDateInput />);
+      const header = component.find('input');
 
-    expect(header.length).to.be.equal(1);
-  });
+      expect(header.length).to.be.equal(1);
+    });
 
-  it('should call onChange prop, if onChange called in TextInput composite component', () => {
-    const onChangeSpy = spy();
-    const component = shallow<IProps, IState>(<GenericDateInput onChange={onChangeSpy} />);
-    const textInput = component.find('TextInput').first() as ShallowWrapper<ITextInputProps, {}>;
-    const textInputProps: ITextInputProps = textInput.props();
-    const event = { nativeEvent: { target: { value: '123' } } } as any;
+    it('should call onChange prop, if onChange called in TextInput composite component', () => {
+      const onChangeSpy = spy();
+      const component = shallow<IProps, IState>(<GenericDateInput onChange={onChangeSpy} />);
+      const textInput = component.find('TextInput').first() as ShallowWrapper<ITextInputProps, {}>;
+      const textInputProps: ITextInputProps = textInput.props();
+      const event = { nativeEvent: { target: { value: '123' } } } as any;
 
-    if (textInputProps.onChange) {
-      textInputProps.onChange(event);
-    } else {
-      throw new AssertionError('OnChange doesn\'t passed to TextInput');
-    }
+      if (textInputProps.onChange) {
+        textInputProps.onChange(event);
+      } else {
+        throw new AssertionError('OnChange doesn\'t passed to TextInput');
+      }
 
-    expect(onChangeSpy.calledOnce).to.be.true;
-    expect(onChangeSpy.firstCall.args).to.deep.equal(['123', []]);
-  });
+      expect(onChangeSpy.calledOnce).to.be.true;
+      expect(onChangeSpy.firstCall.args).to.deep.equal(['123', []]);
+    });
 
-  it('should call onChange, when just mounted with \'Field required\' error, if component is required', () => {
-    const onChangeSpy = spy();
-    mount<IProps, IState>(<GenericDateInput onChange={onChangeSpy} required />);
-    expect(onChangeSpy.calledOnce).to.be.true;
-    expect(onChangeSpy.firstCall.args).to.deep.equal(['', ['Field is required']]);
+    it('should call onChange, when just mounted with \'Field required\' error, if component is required', () => {
+      const onChangeSpy = spy();
+      mount<IProps, IState>(<GenericDateInput onChange={onChangeSpy} required />);
+      expect(onChangeSpy.calledOnce).to.be.true;
+      expect(onChangeSpy.firstCall.args).to.deep.equal(['', ['Field is required']]);
+    });
   });
 });

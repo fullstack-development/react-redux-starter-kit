@@ -1,9 +1,9 @@
 import initialState from '../initial';
 import { Map, fromJS } from 'immutable';
 import { IAction } from 'shared/types/app';
-import CategorySelect from '../../namespace';
+import { IReduxState } from '../../namespace';
 
-function reducer(state: CategorySelect.InitialState = initialState, action: IAction): CategorySelect.InitialState {
+function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
   const imState: Map<string, any> = fromJS(state);
 
   switch (action.type) {

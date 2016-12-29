@@ -41,4 +41,5 @@ class Api {
   }
 }
 
+export { ICategoriesResponse, IFieldsResponse };
 export default Api;

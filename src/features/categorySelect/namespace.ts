@@ -1,24 +1,26 @@
-declare namespace CategorySelect {
-    interface Category {
-        uid: number;
-        name: string;
-        id: number;
-    }
-
-    interface Communication {
-        isRequesting: boolean;
-        error: string;
-    }
-
-    interface InitialState {
-        communications: {
-            categoriesFetching: Communication
-        };
-        data: {
-            options: Array<Category>
-            selected?: number
-        };
-    }
+interface ICategory {
+  uid: number;
+  name: string;
+  id: number;
 }
 
-export default CategorySelect;
+interface ICommunication {
+  isRequesting: boolean;
+  error: string;
+}
+
+interface IReduxState {
+  communications: {
+    categoriesFetching: ICommunication;
+  };
+  data: {
+    options: ICategory[];
+    selected?: number;
+  };
+}
+
+export {
+  IReduxState,
+  ICommunication,
+  ICategory,
+};

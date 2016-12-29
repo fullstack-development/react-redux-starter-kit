@@ -4,7 +4,7 @@ type AsyncRequest<T> = Axios.IPromise<Axios.AxiosXHR<T>>;
 
 class HttpActions {
   private request: Axios.AxiosInstance;
-  private host = __HOST__;
+  private host = process.env.__HOST__;
 
   constructor(baseURL: string) {
     const config: Axios.AxiosXHRConfigBase<null> = {

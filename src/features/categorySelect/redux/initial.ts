@@ -1,6 +1,6 @@
-import CategorySelect from '../namespace';
+import { IReduxState } from '../namespace';
 
-const initialState: CategorySelect.InitialState = {
+const initialState: IReduxState = {
   communications: {
     categoriesFetching: {
       isRequesting: false,

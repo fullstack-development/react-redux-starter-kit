@@ -1,22 +1,22 @@
 import { createSelector } from 'reselect';
-import CategorySelect from '../namespace';
+import { IReduxState, ICategory, ICommunication } from '../namespace';
 
-function selectCategories(state: CategorySelect.InitialState): CategorySelect.Category[] {
+function selectCategories(state: IReduxState): ICategory[] {
   return state.data.options;
 }
 
-function selectChosenCategory (state: CategorySelect.InitialState): number | undefined {
+function selectChosenCategory (state: IReduxState): number | undefined {
   return state.data.selected;
 }
 
-const selectChosenCategoryObject: () => CategorySelect.Category = createSelector(
+const selectChosenCategoryObject: () => ICategory = createSelector(
   [ selectCategories, selectChosenCategory ],
-  (categories: CategorySelect.Category[], uid: number) => {
-    return categories.find((category: CategorySelect.Category) => category.uid === uid);
+  (categories: ICategory[], uid: number) => {
+    return categories.find((category: ICategory) => category.uid === uid);
   },
 );
 
-function selectCategoriesFetching(state: CategorySelect.InitialState): CategorySelect.Communication {
+function selectCategoriesFetching(state: IReduxState): ICommunication {
   return state.communications.categoriesFetching;
 }
 

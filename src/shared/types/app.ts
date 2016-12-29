@@ -23,7 +23,7 @@ interface IAction {
 }
 
 interface IReduxState {
-  categorySelect: CategorySelectNamespace.InitialState;
+  categorySelect: CategorySelectNamespace.IReduxState;
   locationSelect: LocationSelectNamespace.InitialState;
   dynamicFields: DynamicFieldsNamespace.IReduxState;
   orderForm: HomeModuleNamespace.IReduxState;

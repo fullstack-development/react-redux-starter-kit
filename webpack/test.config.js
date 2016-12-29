@@ -1,4 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 const devConfig = require('./dev.config.js');
 
@@ -8,6 +9,10 @@ devConfig.entry = {};
 devConfig.plugins = [
     new ExtractTextPlugin({
         filename: 'styles.css'
+    }),
+    new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('test'),
+        'process.env.__HOST__': JSON.stringify('http://localhost:8000'),
     }),
 ];
 devConfig.node = {

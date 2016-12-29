@@ -7,7 +7,7 @@ import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions, selectors } from '../../redux';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
-import Namespace from '../../namespace';
+import { IReduxState } from '../../namespace';
 
 interface IOwnProps {
   onCategoryChosen: Function;
@@ -28,7 +28,7 @@ interface IProps extends IDispatchProps, IStateProps {
 }
 
 function mapStateToProps(state: any): IStateProps {
-  const categoriesState: Namespace.InitialState = state.categorySelect;
+  const categoriesState: IReduxState = state.categorySelect;
   const categories = selectors.selectCategories(categoriesState);
   const chosen = selectors.selectChosenCategory(categoriesState);
 
