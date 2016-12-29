@@ -69,6 +69,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'vendor.bundle.js',
@@ -92,6 +93,7 @@ module.exports = {
         host: '0.0.0.0',
         port: 8080,
         watch: true,
+        hot: true,
         historyApiFallback: true,
         stats: 'errors-only',
     }
