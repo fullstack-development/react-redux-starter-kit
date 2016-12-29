@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as block from 'bem-cn'; // default
 import GenericField from '../GenericInput/GenericInput';
 import TextInput, { EventType } from 'shared/view/elements/TextInput/TextInput';
 import InputGroup from 'shared/view/elements/InputGroup/InputGroup';
@@ -9,18 +8,18 @@ import FormEvent = React.FormEvent;
 import Component = React.Component;
 import Errors from '../../elements/Errors/Errors';
 
-interface IntegerProps extends GenericField.Props {
+interface IProps extends GenericField.Props {
   minimum: number;
   maximum: number;
   isFloat?: boolean;
 }
 
-interface State {
-  errors: Array<string>;
+interface IState {
+  errors: string[];
   isEdited: boolean;
 }
 
-class GenericIntegerInput extends React.Component<IntegerProps, State> {
+class GenericIntegerInput extends React.Component<IProps, IState> {
   private errors = {
     required: 'Field is required',
     tooLow: 'Number value is too low',
@@ -32,51 +31,17 @@ class GenericIntegerInput extends React.Component<IntegerProps, State> {
     super(props);
     this.state = {
       errors: [],
-      isEdited: false
+      isEdited: false,
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     const value: string = '';
     const errors: string[] = this.validate(value);
     this.change(value, errors);
   }
 
-  onChange = (event: EventType): void => {
-    const value = (event.nativeEvent.target as HTMLInputElement).value;
-    const errors = this.validate(value);
-    this.change(value, errors);
-    this.setState((prevState: State) => ({ ...prevState, isEdited: true }));
-  }
-
-  validate = (value: string): string[] => {
-    const { isFloat, minimum, maximum, required } = this.props;
-    const parsedValue: number = isFloat ? parseFloat(value) : parseInt(value, 10);
-    const errors = [];
-
-    if (required && !value) {
-      errors.push(this.errors.required);
-    } else if (isNaN(parsedValue)) {
-      errors.push(this.errors.invalid);
-    } else {
-      if (minimum && parsedValue < minimum) {
-        errors.push(this.errors.tooLow);
-      }
-      if (maximum && parsedValue > maximum) {
-        errors.push(this.errors.tooBig);
-      }
-    }
-
-    this.setState({ ...this.state, errors });
-
-    return errors;
-  }
-
-  change = (value: string, errors: string[]) => {
-    this.props.onChange(value.toString(), errors);
-  }
-
-  render() {
+  public render() {
     const {
       name,
       isFloat,
@@ -104,6 +69,44 @@ class GenericIntegerInput extends React.Component<IntegerProps, State> {
       </InputGroup>
     );
   }
+
+  private onChange = (event: EventType): void => {
+    const value = (event.nativeEvent.target as HTMLInputElement).value;
+    const errors = this.validate(value);
+    this.change(value, errors);
+    this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
+  }
+
+  private validate = (value: string): string[] => {
+    const { isFloat, minimum, maximum, required } = this.props;
+    const parsedValue: number = isFloat ? parseFloat(value) : parseInt(value, 10);
+    const errors = [];
+
+    if (required && !value) {
+      errors.push(this.errors.required);
+    } else if (isNaN(parsedValue)) {
+      errors.push(this.errors.invalid);
+    } else {
+      if (minimum && parsedValue < minimum) {
+        errors.push(this.errors.tooLow);
+      }
+      if (maximum && parsedValue > maximum) {
+        errors.push(this.errors.tooBig);
+      }
+    }
+
+    this.setState({ ...this.state, errors });
+
+    return errors;
+  }
+
+  private change = (value: string, errors: string[]) => {
+    const handler = this.props.onChange;
+    if (handler) {
+      handler(value.toString(), errors);
+    }
+  }
+
 }
 
 export default GenericIntegerInput;

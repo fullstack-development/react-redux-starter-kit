@@ -4,29 +4,27 @@ import { FormControl, Form, Button, Glyphicon } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import * as s from './styles.styl';
-import Namespace from './../../namespace';
+import { IReduxState as IAppReduxState } from 'shared/types/app';
 
-interface OwnProps {}
+interface IOwnProps {}
 
-interface StateProps {}
+interface IStateProps {}
 
-interface DispatchProps {
-}
+interface IDispatchProps {}
 
-
-function mapState(state: Namespace.ReduxState): StateProps {
+function mapState(state: IAppReduxState): IStateProps {
   return {};
 }
 
-function mapDispatch(dispatch: Dispatch<Namespace.ReduxState>): DispatchProps {
+function mapDispatch(dispatch: Dispatch<IAppReduxState>): IDispatchProps {
   return bindActionCreators({}, dispatch);
 }
 
-interface Props {
+interface IProps {
   value?: string;
 }
 
-function SearchRepositoriesInput(props: Props): React.ReactElement<Props> {
+function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
   const b = block('search-repositories-input');
 
   return (
@@ -39,19 +37,5 @@ function SearchRepositoriesInput(props: Props): React.ReactElement<Props> {
   );
 }
 
-
-/**
- * Wrapper for container, which allow parametrize state branch,
- * with which feature should work.
- * @param stateSelector - function, which should select correct branch for this feature
- * */
-function Wrapper(stateSelector: Namespace.StateSelector) {
-  function mapStateToProps(state: { [key: string]: any }): StateProps {
-    return mapState(stateSelector(state));
-  }
-
-  return connect(mapStateToProps, mapDispatch)(SearchRepositoriesInput);
-}
-
-export { Props };
-export default Wrapper;
+export { IProps };
+export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(SearchRepositoriesInput);

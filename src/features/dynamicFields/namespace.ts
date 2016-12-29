@@ -1,62 +1,71 @@
-import { GeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 
-declare namespace DynamicFields {
-  type FormProperties = {
-    [key: string]: string | number | GeosuggestOption;
-  };
-  type FlatFormProperties = {
-    [key: string]: string | number;
-  };
-  type LocationProperties = {
-    [key: string]: {
-      lat: number;
-      lng: number;
-    };
-  };
-  interface Field {
-    type: 'string' | 'integer';
-    component: 'text' | 'integer' | 'radio' | 'dropdown' | 'location' | 'date' | 'time';
-    order: number;
-    label: string;
-    pattern: string;
-    placeholder: string;
-    display: number;
-    'enum': Array<string>;
-    minimum: number;
-    maximum: number;
-    minLength: number;
-    maxLength: number;
-  }
+type FormProperties = {
+  [key: string]: string | number | IGeosuggestOption;
+};
 
-  interface Schema {
-    properties: {[key: string]: Field};
-    required: Array<string>;
-    type: 'string';
-    title: string;
-  }
+type FlatFormProperties = {
+  [key: string]: string | number;
+};
 
-  interface Fields {
-    schema?: Schema;
-    id?: number;
-    uid?: number;
-    alert?: boolean;
-    name?: number;
-  }
+type LocationProperties = {
+  [key: string]: { lat: number; lng: number; };
+  from: { lat: number; lng: number; };
+  to: { lat: number; lng: number; };
+};
 
-  interface Communication {
-    isRequesting: boolean;
-    error: string;
-  }
-
-  interface InitialState {
-    communications: {
-      fetching: Communication
-    };
-    data: {
-      fields: Fields;
-      values: FormProperties;
-    };
-  }
+interface IField {
+  type: 'string' | 'integer';
+  component: 'text' | 'integer' | 'radio' | 'dropdown' | 'location' | 'date' | 'time';
+  order: number;
+  label: string;
+  pattern: string;
+  placeholder: string;
+  display: number;
+  'enum': string[];
+  minimum: number;
+  maximum: number;
+  minLength: number;
+  maxLength: number;
 }
 
-export default DynamicFields;
+interface ISchema {
+  properties: {[key: string]: IField};
+  required: string[];
+  type: 'string';
+  title: string;
+}
+
+interface IFields {
+  schema?: ISchema;
+  id?: number;
+  uid?: number;
+  alert?: boolean;
+  name?: number;
+}
+
+interface ICommunication {
+  isRequesting: boolean;
+  error: string;
+}
+
+interface IReduxState {
+  communications: {
+    fetching: ICommunication;
+  };
+  data: {
+    fields: IFields;
+    values: FormProperties;
+  };
+}
+
+export {
+  FormProperties,
+  FlatFormProperties,
+  LocationProperties,
+  ISchema,
+  IFields,
+  IField,
+  ICommunication,
+  IReduxState,
+}

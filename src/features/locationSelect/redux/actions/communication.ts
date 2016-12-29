@@ -1,4 +1,4 @@
-import AppRedux from 'shared/types/app';
+import { AsyncActionCreatorResult, IExtraArguments } from 'shared/types/app';
 import { Dispatch } from 'redux';
 import { normalize, Schema, arrayOf } from 'normalizr';
 import normalizeKey from 'shared/helpers/normalizeKey';
@@ -10,12 +10,11 @@ const city = new Schema('cities');
 const area = new Schema('areas');
 city.define({ areas: arrayOf(area) });
 
-
-function loadCities(): AppRedux.AsyncActionCreatorResult {
+function loadCities(): AsyncActionCreatorResult {
   return async(
     dispatch: Dispatch<any>,
     getState: Function,
-    { api }: AppRedux.ExtraArguments
+    { api }: IExtraArguments
   ) => {
     dispatch({ type: 'LOCATION_SELECT:LOAD_CITIES' });
 
@@ -32,8 +31,8 @@ function loadCities(): AppRedux.AsyncActionCreatorResult {
               const point = output[key].split(',').map((val: string) => parseFloat(val.trim()));
               output[key] = { lat: point[0], lng: point[1] };
             }
-          }
-        }
+          },
+        },
       );
 
       dispatch({ type: 'LOCATION_SELECT:LOAD_CITIES_SUCCESS', payload: data });

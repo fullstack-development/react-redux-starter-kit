@@ -8,33 +8,35 @@ import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
 import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
-
-declare namespace App {
-
-  interface Module<S> {
-    getRoutes?: () => ReactElement<Route.RouteProps> | Array<ReactElement<Route.RouteProps>>;
-    getReducer?: () => { name: string; reducer: Reducer<S> };
-  }
-
-  interface ExtraArguments {
-    api: Api;
-  }
-
-  interface Action {
-    payload?: { [key: string]: any } | number | string | null;
-    type: string;
-  }
-
-
-  interface ReduxState {
-    categorySelect: CategorySelectNamespace.InitialState;
-    locationSelect: LocationSelectNamespace.InitialState;
-    dynamicFields: DynamicFieldsNamespace.InitialState;
-    orderForm: HomeModuleNamespace.InitialState;
-  }
-
-  type AsyncActionCreatorResult = ThunkAction<Promise<void>, ReduxState, ExtraArguments>;
-  type AsyncActionCreator = ActionCreator<AsyncActionCreatorResult>;
+interface IModule<S> {
+  getRoutes?: () => ReactElement<Route.RouteProps> | Array<ReactElement<Route.RouteProps>>;
+  getReducer?: () => { name: string; reducer: Reducer<S> };
 }
 
-export default App;
+interface IExtraArguments {
+  api: Api;
+}
+
+interface IAction {
+  payload?: { [key: string]: any } | number | string | null;
+  type: string;
+}
+
+interface IReduxState {
+  categorySelect: CategorySelectNamespace.InitialState;
+  locationSelect: LocationSelectNamespace.InitialState;
+  dynamicFields: DynamicFieldsNamespace.IReduxState;
+  orderForm: HomeModuleNamespace.IReduxState;
+}
+
+type AsyncActionCreatorResult = ThunkAction<Promise<void>, IReduxState, IExtraArguments>;
+type AsyncActionCreator = ActionCreator<AsyncActionCreatorResult>;
+
+export {
+  IModule,
+  IAction,
+  IExtraArguments,
+  IReduxState,
+  AsyncActionCreator,
+  AsyncActionCreatorResult
+};

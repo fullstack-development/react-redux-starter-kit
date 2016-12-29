@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 import { App } from './modules/App';
-import AppNamespace from './shared/types/app';
-import Module = AppNamespace.Module;
+import { IModule } from './shared/types/app';
 
-function getRoutes(modules: Array<Module<any>>): React.ReactElement<Route.RouteProps> {
+function getRoutes(modules: Array<IModule<any>>): React.ReactElement<Route.RouteProps> {
   return (
     <Route path="/" component={App}>
-      <IndexRedirect to="index"/>
-      {modules.map((module: Module<any>) => module.getRoutes ? module.getRoutes() : null)}
+      <IndexRedirect to="home"/>
+      {modules.map((module: IModule<any>) => module.getRoutes ? module.getRoutes() : null)}
     </Route>
   );
 }

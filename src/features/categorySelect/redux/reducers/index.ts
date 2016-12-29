@@ -1,10 +1,9 @@
 import initialState from '../initial';
 import { Map, fromJS } from 'immutable';
-import AppRedux from 'shared/types/app';
+import { IAction } from 'shared/types/app';
 import CategorySelect from '../../namespace';
 
-
-function reducer(state: CategorySelect.InitialState = initialState, action: AppRedux.Action): CategorySelect.InitialState {
+function reducer(state: CategorySelect.InitialState = initialState, action: IAction): CategorySelect.InitialState {
   const imState: Map<string, any> = fromJS(state);
 
   switch (action.type) {
@@ -29,6 +28,5 @@ function reducer(state: CategorySelect.InitialState = initialState, action: AppR
     return state;
   }
 }
-
 
 export default reducer;

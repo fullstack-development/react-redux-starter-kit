@@ -9,50 +9,30 @@ import SyntheticEvent = React.SyntheticEvent;
 import FormEvent = React.FormEvent;
 import Component = React.Component;
 
-interface Props extends GenericField.Props {
+interface IProps extends GenericField.Props {
   minLength: number;
   maxLength: number;
 }
 
-interface State {
+interface IState {
   isEdited: boolean;
   errors: string[];
 }
 
-class GenericTextInput extends React.Component<Props, State> {
+class GenericTextInput extends React.Component<IProps, IState> {
   constructor(props: GenericField.Props) {
     super(props);
     this.state = {
       errors: [],
-      isEdited: false
+      isEdited: false,
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.changeValue(''); // first changing with validation, but without showing errors
   }
 
-  onChange = (event: FormEvent<Component<FormControlProps, {}>>): void => {
-    const value = (event.nativeEvent.target as HTMLInputElement).value;
-    this.changeValue(value);
-    if (!this.state.isEdited) {
-      this.setState((prevState: State, props: Props) => ({ ...prevState, isEdited: true }));
-    }
-  }
-
-  changeValue = (value: string): void => {
-    const errors: string[] = [];
-
-    if (this.props.required && !value.length) {
-      errors.push('Field is required');
-    }
-
-    this.setState({ ...this.state, errors });
-
-    this.props.onChange(value, errors);
-  }
-
-  render() {
+  public render() {
     const {
       name,
       label,
@@ -76,6 +56,31 @@ class GenericTextInput extends React.Component<Props, State> {
       </InputGroup>
     );
   }
+
+  private onChange = (event: FormEvent<Component<FormControlProps, {}>>): void => {
+    const value = (event.nativeEvent.target as HTMLInputElement).value;
+    this.changeValue(value);
+
+    if (!this.state.isEdited) {
+      this.setState((prevState: IState, props: IProps) => ({ ...prevState, isEdited: true }));
+    }
+  }
+
+  private changeValue = (value: string): void => {
+    const { required, onChange } = this.props;
+    const errors: string[] = [];
+
+    if (required && !value.length) {
+      errors.push('Field is required');
+    }
+
+    this.setState({ ...this.state, errors });
+
+    if (onChange) {
+      onChange(value, errors);
+    }
+  }
+
 }
 
 export default GenericTextInput;

@@ -1,11 +1,11 @@
-import HomeModule from '../namespace';
+import { IReduxState } from '../namespace';
 
-const initialState: HomeModule.InitialState = {
+const initialState: IReduxState = {
   communications: {
     saving: {
       isRequesting: false,
       error: '',
-    }
+    },
   },
   data: null,
 };

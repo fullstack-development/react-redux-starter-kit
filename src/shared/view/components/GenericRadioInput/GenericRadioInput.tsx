@@ -1,17 +1,17 @@
 import * as React from 'react';
 import { Radio, FormGroup } from 'react-bootstrap';
 import Errors from 'shared/view/elements/Errors/Errors';
-import * as block from 'bem-cn'; // default
+import * as block from 'bem-cn';
 import * as s from './GenericRadioInput.styl';
 import GenericField from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 
-interface State {
+interface IState {
   errors: string[];
   isEdited: boolean;
 }
 
-class GenericRadioInput extends React.Component<GenericField.Props, State> {
+class GenericRadioInput extends React.Component<GenericField.Props, IState> {
   private b = block('generic-radio-input');
 
   constructor(props: GenericField.Props) {
@@ -22,39 +22,20 @@ class GenericRadioInput extends React.Component<GenericField.Props, State> {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.validateAndChange('', '');
   }
 
-  onChange = (fieldName: string, value: string): () => void => {
-    return () => {
-      this.validateAndChange(fieldName, value);
-      this.setState((prevState: State) => ({ ...prevState, isEdited: true }));
-    };
-  }
-
-  validateAndChange = (fieldName: string, value: string): void => {
-    const errors: string[] = [];
-
-    if (this.props.required && !value.length) {
-      errors.push('Field is required');
-    }
-
-    this.setState({ ...this.state, errors });
-
-    this.props.onChange(value, errors);
-  }
-
-  render() {
+  public render() {
     const b = this.b;
-    const { name, label, 'enum': options } = this.props;
+    const { name = '', label, 'enum': options } = this.props;
     const { errors, isEdited } = this.state;
 
     return (
      <InputGroup label={label}>
         <FormGroup className={s[b('radios-group')]}>
           {
-            options.map((option: string, index: number) => (
+            options ? options.map((option: string, index: number) => (
                 <Radio
                   inline
                   key={index}
@@ -64,14 +45,37 @@ class GenericRadioInput extends React.Component<GenericField.Props, State> {
                 >
                   {option}
                 </Radio>
-              )
-            )
+              ),
+            ) : 'No choices'
           }
         </FormGroup>
         <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
      </InputGroup>
     );
   }
+
+  private onChange = (fieldName: string, value: string): () => void => {
+    return () => {
+      this.validateAndChange(fieldName, value);
+      this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
+    };
+  }
+
+  private validateAndChange = (fieldName: string, value: string): void => {
+    const { required, onChange } = this.props;
+    const errors: string[] = [];
+
+    if (required && !value.length) {
+      errors.push('Field is required');
+    }
+
+    this.setState({ ...this.state, errors });
+
+    if (onChange) {
+      onChange(value, errors);
+    }
+  }
+
 }
 
 export default GenericRadioInput;

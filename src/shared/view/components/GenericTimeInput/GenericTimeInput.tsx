@@ -6,13 +6,12 @@ import InputGroup from '../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 import Component = React.Component;
 
-interface State {
-  errors: Array<string>;
+interface IState {
+  errors: string[];
   isEdited: boolean;
 }
 
-
-class GenericTimeInput extends Component<GenericField.Props, State> {
+class GenericTimeInput extends Component<GenericField.Props, IState> {
   private pattern = '^([0-1][0-9]|2[0-3]):([0-5]{2})$';
   private errors = {
     invalid: 'Incorrect Time format, expected hh:mm',
@@ -26,31 +25,11 @@ class GenericTimeInput extends Component<GenericField.Props, State> {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.validateAndChange('');
   }
 
-  onChange = (event: EventType) => {
-    const value: string = (event.nativeEvent.target as HTMLInputElement).value;
-    this.validateAndChange(value);
-    this.setState((prevState: State) => ({ ...prevState, isEdited: true }));
-  }
-
-  validateAndChange = (value: string): void => {
-    const errors: string[] = [];
-
-    if (this.props.required && !value.length) {
-      errors.push('Field is required');
-    } else if (this.props.pattern && !(new RegExp(this.props.pattern)).test(value)) {
-      errors.push(this.errors.invalid);
-    }
-
-    this.setState({ ...this.state, errors });
-    this.props.onChange(value, errors);
-  }
-
-
-  render() {
+  public render() {
     const { name, label, placeholder } = this.props;
     const { errors, isEdited } = this.state;
 
@@ -65,6 +44,29 @@ class GenericTimeInput extends Component<GenericField.Props, State> {
         <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
       </InputGroup>
     );
+  }
+
+  private onChange = (event: EventType) => {
+    const value: string = (event.nativeEvent.target as HTMLInputElement).value;
+    this.validateAndChange(value);
+    this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
+  }
+
+  private validateAndChange = (value: string): void => {
+    const { required, onChange, pattern } = this.props;
+    const errors: string[] = [];
+
+    if (required && !value.length) {
+      errors.push('Field is required');
+    } else if (pattern && !(new RegExp(pattern)).test(value)) {
+      errors.push(this.errors.invalid);
+    }
+
+    this.setState({ ...this.state, errors });
+
+    if (onChange) {
+      onChange(value, errors);
+    }
   }
 }
 

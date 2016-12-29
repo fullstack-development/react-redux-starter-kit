@@ -1,12 +1,11 @@
-import AppRedux from 'shared/types/app';
+import { AsyncActionCreatorResult, IExtraArguments } from 'shared/types/app';
 import { Dispatch } from 'redux';
 
-
-function loadFields(uid: number): AppRedux.AsyncActionCreatorResult {
+function loadFields(uid: number): AsyncActionCreatorResult {
   return async(
     dispatch: Dispatch<any>,
     getState: Function,
-    { api }: AppRedux.ExtraArguments
+    { api }: IExtraArguments
   ) => {
     dispatch({ type: 'DYNAMIC_FIELDS:LOAD_FIELDS', payload: uid });
     try {
@@ -18,7 +17,6 @@ function loadFields(uid: number): AppRedux.AsyncActionCreatorResult {
     }
   };
 }
-
 
 export {
   loadFields,

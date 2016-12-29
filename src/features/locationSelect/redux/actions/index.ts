@@ -1,13 +1,13 @@
 import {
-  loadCities
+  loadCities,
 } from './communication';
 import {
-  selectLocationByAreaId
+  selectLocationByAreaId,
 } from './data';
 
 const actions = {
   loadCities,
-  selectLocationByAreaId
+  selectLocationByAreaId,
 };
 
 export default actions;

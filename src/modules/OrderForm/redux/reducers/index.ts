@@ -1,10 +1,9 @@
 import initialState from '../initial';
 import { Map, fromJS } from 'immutable';
-import AppRedux from 'shared/types/app';
-import HomeModule from '../../namespace';
+import { IAction } from 'shared/types/app';
+import { IReduxState } from '../../namespace';
 
-
-function reducer(state: HomeModule.InitialState = initialState, action: AppRedux.Action): HomeModule.InitialState {
+function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
   const imState: Map<string, any> = fromJS(state);
 
   switch (action.type) {
@@ -29,6 +28,5 @@ function reducer(state: HomeModule.InitialState = initialState, action: AppRedux
     return state;
   }
 }
-
 
 export default reducer;

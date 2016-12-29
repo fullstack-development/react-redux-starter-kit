@@ -6,10 +6,10 @@ import 'shared/view/styles/base.styl';
 import * as styles from './styles.styl';
 import './fonts';
 
-interface Props {}
+interface IProps {}
 
-class App extends React.Component<Props, {}> {
-  render() {
+class App extends React.Component<IProps, {}> {
+  public render() {
     const b = block('application');
     const { children } = this.props;
 
@@ -21,5 +21,5 @@ class App extends React.Component<Props, {}> {
   }
 }
 
-export { Props };
+export { IProps };
 export default App;

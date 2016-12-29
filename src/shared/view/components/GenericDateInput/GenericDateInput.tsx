@@ -6,36 +6,61 @@ import FormEvent = React.FormEvent;
 import Component = React.Component;
 import Errors from '../../elements/Errors/Errors';
 
-interface State {
-  errors: Array<string>;
+interface IProps extends GenericField.Props {}
+interface IState {
+  errors: string[];
   isEdited: boolean;
 }
 
-class GenericDateInput extends React.Component<GenericField.Props, State> {
+class GenericDateInput extends React.PureComponent<IProps, IState> {
   private standardHTMLpattern = '^([0-9]{4})-([0-9]{2})-([0-9]{2})$';
   private errors = {
     invalid: 'Incorrect Date format',
+    required: 'Field is required',
   };
 
   constructor(props: GenericField.Props) {
     super(props);
     this.state = {
       errors: [],
-      isEdited: false
+      isEdited: false,
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.validateAndChange(''); // first changing with validation, but without showing errors
   }
 
-  onChange = (event: EventType) => {
-    const value: string = (event.nativeEvent.target as HTMLInputElement).value;
-    this.validateAndChange(value);
-    this.setState((prevState: State) => ({ ...prevState, isEdited: true }));
+  public render() {
+    const {
+      name,
+      label,
+      pattern,
+      placeholder,
+    } = this.props;
+    const { errors, isEdited } = this.state;
+
+    return (
+      <InputGroup label={label}>
+        <TextInput
+          type="date"
+          name={name}
+          placeholder={placeholder}
+          pattern={pattern}
+          onChange={this.onChange}
+        />
+        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
+      </InputGroup>
+    );
   }
 
-  validateAndChange = (rawValue: string): void => {
+  private onChange = (event: EventType) => {
+    const value: string = (event.nativeEvent.target as HTMLInputElement).value;
+    this.validateAndChange(value);
+    this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
+  }
+
+  private validateAndChange = (rawValue: string): void => {
     const { pattern, required, onChange } = this.props;
     let value: string;
     let errors: string[] = [];
@@ -52,34 +77,16 @@ class GenericDateInput extends React.Component<GenericField.Props, State> {
     }
 
     if (required && !value.length) {
-      errors.push('Field is required');
+      errors.push(this.errors.required);
     }
 
     this.setState({ ...this.state, errors });
-    onChange(value, errors);
-  }
 
-  render() {
-    const {
-      name,
-      label,
-      pattern,
-      placeholder,
-    } = this.props;
-    const { errors, isEdited } = this.state;
-
-    return (
-      <InputGroup label={label}>
-        <TextInput
-          type="date"
-          name={name}
-          placeholder={placeholder}
-          pattern={pattern}
-          onChange={this.onChange} />
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
-      </InputGroup>
-    );
+    if (onChange) {
+      onChange(value, errors);
+    }
   }
 }
 
+export { IProps, IState };
 export default GenericDateInput;

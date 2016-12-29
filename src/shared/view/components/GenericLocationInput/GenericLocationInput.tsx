@@ -4,7 +4,7 @@ import GenericField from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 
-interface GeosuggestOption {
+interface IGeosuggestOption {
   label: string;
   placeId?: string;
   location?: {
@@ -12,22 +12,22 @@ interface GeosuggestOption {
     lng: number;
   };
   gmaps?: {
-    address_components: Array<Object>;
+    address_components: Object[];
     formatted_address: string;
     // few other fields; check this https://developers.google.com/maps/documentation/javascript/reference#GeocoderResult
   };
 }
 
-interface State {
+interface IState {
   errors: string[];
   isEdited: boolean;
 }
 
-function isGeosuggestOption(item: GeosuggestOption | any): item is GeosuggestOption {
+function isGeosuggestOption(item: IGeosuggestOption | any): item is IGeosuggestOption {
   return item.label && typeof item.label === 'string';
 }
 
-class GenericLocationInput extends React.Component<GenericField.Props, State> {
+class GenericLocationInput extends React.Component<GenericField.Props, IState> {
   constructor(props: GenericField.Props) {
     super(props);
     this.state = {
@@ -36,27 +36,11 @@ class GenericLocationInput extends React.Component<GenericField.Props, State> {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.validateAndChange({ label: '' });
   }
 
-  onSelect = (selected: GeosuggestOption) => {
-    this.validateAndChange(selected);
-    this.setState((prevState: State) => ({ ...prevState, isEdited: true }));
-  }
-
-  validateAndChange = (value: GeosuggestOption) => {
-    const errors: string[] = [];
-
-    if (this.props.required && (!value.label || !value.placeId)) {
-      errors.push('Field is required');
-    }
-
-    this.props.onChange(value, errors);
-    this.setState({ ...this.state, errors });
-  }
-
-  render() {
+  public render() {
     const { placeholder, label } = this.props;
     const { errors, isEdited } = this.state;
     const shriLankaLatLng = new google.maps.LatLng(7.75000, 80.76667);
@@ -75,7 +59,27 @@ class GenericLocationInput extends React.Component<GenericField.Props, State> {
       </InputGroup>
     );
   }
+
+  private onSelect = (selected: IGeosuggestOption) => {
+    this.validateAndChange(selected);
+    this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
+  }
+
+  private validateAndChange = (value: IGeosuggestOption) => {
+    const { onChange, required } = this.props;
+    const errors: string[] = [];
+
+    if (required && (!value.label || !value.placeId)) {
+      errors.push('Field is required');
+    }
+
+    if (onChange) {
+      onChange(value, errors);
+    }
+
+    this.setState({ ...this.state, errors });
+  }
 }
 
-export { GeosuggestOption, isGeosuggestOption }
+export { IGeosuggestOption, isGeosuggestOption }
 export default GenericLocationInput;

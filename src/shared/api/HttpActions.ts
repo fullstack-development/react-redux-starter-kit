@@ -1,5 +1,7 @@
 import * as axios from 'axios';
 
+type AsyncRequest<T> = Axios.IPromise<Axios.AxiosXHR<T>>;
+
 class HttpActions {
   private request: Axios.AxiosInstance;
   private host = __HOST__;
@@ -7,31 +9,31 @@ class HttpActions {
   constructor(baseURL: string) {
     const config: Axios.AxiosXHRConfigBase<null> = {
       baseURL: this.host + baseURL,
-      withCredentials: true
+      withCredentials: true,
     };
 
     this.request = axios.create(config);
   }
 
-  get<T>(url: string, params?: Object, options?: Axios.AxiosXHRConfigBase<T>): Axios.IPromise<Axios.AxiosXHR<T>> {
+  public get<T>(url: string, params?: Object, options?: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     const config: Axios.AxiosXHRConfigBase<T> = { params, ...options };
     return this.request.get(url, config);
   }
 
-  post<T>(url: string, data?: any, options?: Axios.AxiosXHRConfigBase<T>): Axios.IPromise<Axios.AxiosXHR<T>> {
+  public post<T>(url: string, data?: any, options?: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     return this.request.post(url, data, options);
   }
 
-  patch<T>(url: string, data: any, options: Axios.AxiosXHRConfigBase<T>): Axios.IPromise<Axios.AxiosXHR<T>> {
+  public patch<T>(url: string, data: any, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     return this.request.patch(url, data, options);
   }
 
-  del<T>(url: string, data: any, params: Object, options: Axios.AxiosXHRConfigBase<T>): Axios.IPromise<Axios.AxiosXHR<T>> {
+  public del<T>(url: string, data: any, params: Object, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     const config: Axios.AxiosXHRConfig<T> = { url, data, params, ...options };
     return this.request.delete(url, config);
   }
 
-  put<T>(url: string, data: any, params: Object, options: Axios.AxiosXHRConfigBase<T>): Axios.IPromise<Axios.AxiosXHR<T>> {
+  public put<T>(url: string, data: any, params: Object, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     return this.request.put(url, data, { params, ...options });
   }
 }

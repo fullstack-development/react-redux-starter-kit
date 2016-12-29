@@ -1,12 +1,11 @@
-import AppRedux from 'shared/types/app';
+import { AsyncActionCreatorResult, IAction, IExtraArguments } from 'shared/types/app';
 import { Dispatch } from 'redux';
 
-
-function loadCategories(): AppRedux.AsyncActionCreatorResult {
+function loadCategories(): AsyncActionCreatorResult {
   return async(
     dispatch: Dispatch<any>,
     getState: Function,
-    { api }: AppRedux.ExtraArguments
+    { api }: IExtraArguments
   ) => {
     dispatch({ type: 'CATEGORY_SELECT:LOAD_CATEGORIES' });
 
@@ -20,8 +19,7 @@ function loadCategories(): AppRedux.AsyncActionCreatorResult {
   };
 }
 
-
-function chooseCategory(categoryUid: number): AppRedux.Action {
+function chooseCategory(categoryUid: number): IAction {
   return {
     type: 'CATEGORY_SELECT:CATEGORY_SELECTED',
     payload: categoryUid,

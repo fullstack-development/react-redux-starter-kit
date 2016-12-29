@@ -3,13 +3,13 @@ import { Grid, Row, Panel } from 'react-bootstrap';
 import * as block from 'bem-cn';
 import * as s from './styles.styl';
 
-interface Props {
+interface IProps {
   children?: React.ReactNode;
   footerContent?: React.ReactNode;
   headerContent?: React.ReactNode;
 }
 
-function RowsLayout({ children, footerContent, headerContent }: Props) {
+function RowsLayout({ children, footerContent, headerContent }: IProps) {
   const b = block('rows-layout');
   return (
     <Grid fluid className={s[b()]}>

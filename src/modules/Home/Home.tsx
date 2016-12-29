@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Route } from 'react-router';
 import Layout from './view/Layout/Layout';
-import AppNamespace from 'shared/types/app';
+import { IModule } from 'shared/types/app';
 import Namespace from './namespace';
 
-class HomeModule implements AppNamespace.Module<Namespace.ReduxState> {
-  getRoutes() {
+class HomeModule implements IModule<Namespace.ReduxState> {
+  public getRoutes() {
     return <Route key="home" path="home" component={Layout} />;
   }
 }

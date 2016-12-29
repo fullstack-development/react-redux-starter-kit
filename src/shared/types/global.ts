@@ -28,4 +28,3 @@ declare module 'normalizr';
 declare module '*.styl';
 declare module '*.png';
 declare module 'shared/*';
-

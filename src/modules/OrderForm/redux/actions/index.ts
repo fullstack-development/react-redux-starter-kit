@@ -3,7 +3,7 @@ import {
 } from './communication';
 
 const actions = {
-  saveFields
+  saveFields,
 };
 
 export default actions;

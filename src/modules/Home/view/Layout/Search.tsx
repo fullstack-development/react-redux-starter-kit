@@ -1,18 +1,13 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import { PageHeader } from 'react-bootstrap';
-import { SearchRepositoriesInputGetter } from 'features/searchRepositories';
-import App from 'shared/types/app';
+import { SearchRepositoriesInput } from 'features/searchRepositories';
 import * as GitHubIcon from './images/github-icon.png';
 import * as s from './Layout.styl';
 
-interface Props {}
+interface IProps {}
 
-const SearchRepositoriesInput = SearchRepositoriesInputGetter(
-  (state: App.ReduxState) => ({})
-);
-
-function Search (props: Props) {
+function Search (props: IProps) {
   const b = block('index-page');
   return (
     <div>
@@ -27,5 +22,5 @@ function Search (props: Props) {
   );
 }
 
-export { Props };
+export { IProps };
 export default Search;

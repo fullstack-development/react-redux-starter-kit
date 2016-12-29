@@ -1,12 +1,13 @@
 import HttpActions from './HttpActions';
 import { Namespace as LocationsNamespace } from 'features/locationSelect';
-import HomeModuleNamespace from '../../modules/OrderForm/namespace';
+import { IOrderFormResponse, IOrderFormRequest } from '../../modules/OrderForm/namespace';
 import * as mocks from './mocks';
 
-interface CategoriesResponse {
+interface ICategoriesResponse {
   categories: Array<{ name: string, id: number }>;
 }
-interface FieldsResponse {
+
+interface IFieldsResponse {
   fields: Object;
 }
 
@@ -17,23 +18,25 @@ class Api {
     this.actions = new HttpActions(`${baseUrl}/${version}`);
   }
 
-  async loadCategories(): Promise<CategoriesResponse> {
+  public async loadCategories(): Promise<ICategoriesResponse> {
     // const response: Axios.AxiosXHR<CategoriesResponse> = await this.actions.get<CategoriesResponse>('/categories/');
     return mocks.categories;
   }
 
-  async loadFields(uid: number): Promise<FieldsResponse> {
+  public async loadFields(uid: number): Promise<IFieldsResponse> {
     // const response: Axios.AxiosXHR<FieldsResponse> = await this.actions.get<FieldsResponse>(`/categories/${uid}/`);
     return mocks.schemas[uid];
   }
 
-  async loadCities(): Promise<Array<LocationsNamespace.CityResponse>> {
-    // const response: Axios.AxiosXHR<Array<LocationsNamespace.CityResponse>> = await this.actions.get<Array<LocationsNamespace.CityResponse>>('/cities/');
+  public async loadCities(): Promise<LocationsNamespace.CityResponse[]> {
+    // const response: Axios.AxiosXHR<Array<LocationsNamespace.CityResponse>> =
+    // await this.actions.get<Array<LocationsNamespace.CityResponse>>('/cities/');
     return mocks.cities;
   }
 
-  async saveFields(data: HomeModuleNamespace.OrderFormRequest): Promise<HomeModuleNamespace.OrderFormResponse> {
-    const response: Axios.AxiosXHR<HomeModuleNamespace.OrderFormResponse> = await this.actions.post<HomeModuleNamespace.OrderFormResponse>('/travels/create/', data);
+  public async saveFields(data: IOrderFormRequest): Promise<IOrderFormResponse> {
+    const response: Axios.AxiosXHR<IOrderFormResponse> =
+      await this.actions.post<IOrderFormResponse>('/travels/create/', data);
     return response.data;
   }
 }

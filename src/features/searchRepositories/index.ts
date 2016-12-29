@@ -1,4 +1,2 @@
-import SearchRepositoriesInputGetter from './view/SearchInput';
-
-
-export { SearchRepositoriesInputGetter };
+import SearchRepositoriesInput from './view/SearchInput';
+export { SearchRepositoriesInput };

@@ -1,10 +1,9 @@
 import initialState from '../initial';
 import { Map, fromJS } from 'immutable';
-import AppRedux from 'shared/types/app';
-import DynamicFields from '../../namespace';
+import { IAction } from 'shared/types/app';
+import { IReduxState } from '../../namespace';
 
-
-function reducer(state: DynamicFields.InitialState = initialState, action: AppRedux.Action): DynamicFields.InitialState {
+function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
   const imState: Map<string, any> = fromJS(state);
 
   switch (action.type) {
@@ -26,14 +25,13 @@ function reducer(state: DynamicFields.InitialState = initialState, action: AppRe
       .setIn(['communications', 'fetching', 'error'], action.payload)
       .toJS();
   case 'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE': {
-    interface Data { name: string; value: string; }
-    const payload = action.payload as Data;
+    interface IData { name: string; value: string; }
+    const payload = action.payload as IData;
     return imState.setIn(['data', 'values', payload.name], payload.value).toJS();
   }
   default:
     return state;
   }
 }
-
 
 export default reducer;

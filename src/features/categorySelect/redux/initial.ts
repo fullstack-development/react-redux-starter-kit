@@ -5,7 +5,7 @@ const initialState: CategorySelect.InitialState = {
     categoriesFetching: {
       isRequesting: false,
       error: '',
-    }
+    },
   },
   data: {
     options: [],

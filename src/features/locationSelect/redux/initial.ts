@@ -5,19 +5,19 @@ const initialState: Namespace.InitialState = {
     citiesFetching: {
       isRequesting: false,
       error: '',
-    }
+    },
   },
   data: {
     entities: {
       areas: {},
-      cities: {}
+      cities: {},
     },
     citiesSet: [],
-    selectedLocation: null
+    selectedLocation: null,
   },
   ui: {
-    showSelectedLocation: false
-  }
+    showSelectedLocation: false,
+  },
 };
 
 export default initialState;

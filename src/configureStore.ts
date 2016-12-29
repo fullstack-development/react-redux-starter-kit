@@ -6,25 +6,19 @@ import {
   Reducer,
   Middleware,
   Store,
-  ReducersMapObject
+  ReducersMapObject,
 } from 'redux';
 import thunk from 'redux-thunk';
 import { reducer as categorySelectReducer } from './features/categorySelect';
 import { reducer as locationSelectReducer } from './features/locationSelect';
 import { reducer as dynamicFieldsReducer } from './features/dynamicFields';
-import AppNamespace from './shared/types/app';
+import { IModule, IReduxState, IExtraArguments } from './shared/types/app';
 import Api from './shared/api/Api';
 
-import Module = AppNamespace.Module;
-import ExtraArguments = AppNamespace.ExtraArguments;
-import ReduxState = AppNamespace.ReduxState;
-
-function configureStore(modules: Module<any>[], api: Api): Store<Object> {
-  const extraArguments: ExtraArguments = {
-    api
-  };
+function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
+  const extraArguments: IExtraArguments = { api };
   const middlewares: Middleware[] = [
-    thunk.withExtraArgument(extraArguments)
+    thunk.withExtraArgument(extraArguments),
   ];
 
   const modulesReducers: ReducersMapObject = modules.reduce((reducers, module) => {
@@ -36,7 +30,7 @@ function configureStore(modules: Module<any>[], api: Api): Store<Object> {
     return reducers;
   }, {} as ReducersMapObject);
 
-  const reducer: Reducer<ReduxState> = combineReducers<ReduxState>({
+  const reducer: Reducer<IReduxState> = combineReducers<IReduxState>({
     categorySelect: categorySelectReducer,
     locationSelect: locationSelectReducer,
     dynamicFields: dynamicFieldsReducer,
@@ -47,8 +41,9 @@ function configureStore(modules: Module<any>[], api: Api): Store<Object> {
     reducer,
     compose(
       applyMiddleware(...middlewares),
-      ('development' === process.env.NODE_ENV && window.devToolsExtension) ? window.devToolsExtension() : ((arg: any) => arg)
-    )
+      ('development' === process.env.NODE_ENV && window.devToolsExtension)
+        ? window.devToolsExtension() : ((arg: any) => arg),
+    ),
   );
 }
 

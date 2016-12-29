@@ -1,16 +1,16 @@
 import * as React from 'react';
 import * as s from './Errors.styl';
-import * as block from 'bem-cn'; // default
+import * as block from 'bem-cn';
 
-interface Props {
-  errors?: Array<string>;
+interface IProps {
+  errors?: string[];
   hidden?: boolean;
 }
 
 const b = block('errors');
-s[b({ hidden: true })] = `${s[b()]} ${s['errors_hidden']}`;
+s[b({ hidden: true })] = `${s[b()]} ${s.errors_hidden}`;
 
-function Errors ({ hidden, errors = [] }: Props) {
+function Errors ({ hidden, errors = [] }: IProps) {
   return (
     <div className={s[b({ hidden })]}>
       {
@@ -22,5 +22,5 @@ function Errors ({ hidden, errors = [] }: Props) {
   );
 }
 
-export { Props };
+export { IProps };
 export default Errors;

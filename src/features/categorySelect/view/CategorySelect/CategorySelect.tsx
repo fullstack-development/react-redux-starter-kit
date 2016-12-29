@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as block from 'bem-cn'; // default
+import * as block from 'bem-cn';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
-import * as Select from 'react-select'; // default
+import * as Select from 'react-select';
 import * as s from './styles.styl';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,21 +9,25 @@ import { actions, selectors } from '../../redux';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import Namespace from '../../namespace';
 
-interface StateProps {
-  options: Array<Select.Option>;
+interface IOwnProps {
+  onCategoryChosen: Function;
+}
+
+interface IStateProps {
+  options: Select.Option[];
   value: number | undefined;
 }
 
-interface DispatchProps {
+interface IDispatchProps {
   loadCategories: typeof actions.loadCategories;
   chooseCategory: typeof actions.chooseCategory;
 }
 
-interface Props extends DispatchProps, StateProps {
+interface IProps extends IDispatchProps, IStateProps {
   onCategoryChosen: (category: number) => void;
 }
 
-function mapStateToProps(state: any): StateProps {
+function mapStateToProps(state: any): IStateProps {
   const categoriesState: Namespace.InitialState = state.categorySelect;
   const categories = selectors.selectCategories(categoriesState);
   const chosen = selectors.selectChosenCategory(categoriesState);
@@ -31,35 +35,25 @@ function mapStateToProps(state: any): StateProps {
   return {
     options: categories.map<Select.Option>(category => ({
       label: category.name,
-      value: category.uid
+      value: category.uid,
     })),
     value: chosen,
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<any>): DispatchProps {
+function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
   return bindActionCreators({
     loadCategories: actions.loadCategories,
     chooseCategory: actions.chooseCategory,
   }, dispatch);
 }
 
-class CategorySelect extends React.Component<Props, {}> {
-  componentDidMount() {
+class CategorySelect extends React.Component<IProps, {}> {
+  public componentDidMount() {
     this.props.loadCategories();
   }
 
-  onSelect = (selected: Select.Option | null) => {
-    if (selected && typeof selected.value === 'number') {
-      // Type Guards allow you to narrow down the type of an object within a conditional block.
-      // TypeScript is aware of the usage of the JavaScript instanceof and typeof operators
-      // Read "Type Guards and Differentiating Types" of Typescript's docs
-      this.props.chooseCategory(selected.value);
-      this.props.onCategoryChosen(selected.value);
-    }
-  }
-
-  render() {
+  public render() {
     const { value, options } = this.props;
     const b = block('categories-select');
 
@@ -77,7 +71,17 @@ class CategorySelect extends React.Component<Props, {}> {
       </FormGroup>
     );
   }
+
+  private onSelect = (selected: Select.Option | null) => {
+    if (selected && typeof selected.value === 'number') {
+      // Type Guards allow you to narrow down the type of an object within a conditional block.
+      // TypeScript is aware of the usage of the JavaScript instanceof and typeof operators
+      // Read "Type Guards and Differentiating Types" of Typescript's docs
+      this.props.chooseCategory(selected.value);
+      this.props.onCategoryChosen(selected.value);
+    }
+  }
 }
 
-export { Props, CategorySelect };
-export default connect<StateProps, DispatchProps, {onCategoryChosen: Function}>(mapStateToProps, mapDispatchToProps)(CategorySelect);
+export { IProps, CategorySelect };
+export default connect<IStateProps, IDispatchProps, IOwnProps>(mapStateToProps, mapDispatchToProps)(CategorySelect);

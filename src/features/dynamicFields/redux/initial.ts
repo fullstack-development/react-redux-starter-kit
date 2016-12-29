@@ -1,11 +1,11 @@
-import DynamicFields from '../namespace';
+import { IReduxState } from '../namespace';
 
-const initialState: DynamicFields.InitialState = {
+const initialState: IReduxState = {
   communications: {
     fetching: {
       isRequesting: false,
       error: '',
-    }
+    },
   },
   data: {
     fields: {},

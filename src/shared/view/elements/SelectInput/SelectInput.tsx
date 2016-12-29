@@ -1,15 +1,15 @@
 import * as React from 'react';
-import * as Select from 'react-select'; // default
+import * as Select from 'react-select';
 import 'react-select/dist/react-select.min.css';
 import './SelectInput.styl';
 
-interface Props extends Select.ReactSelectProps {}
+interface IProps extends Select.ReactSelectProps {}
 
-function SelectInput (props: Props) {
+function SelectInput (props: IProps) {
   return (
-    <Select { ...props } />
+    <Select {...props} />
   );
 }
 
-export { Props };
+export { IProps };
 export default SelectInput;

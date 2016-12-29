@@ -1,13 +1,13 @@
 import * as React from 'react';
-import * as block from 'bem-cn'; // default
+import * as block from 'bem-cn';
 import * as s from './InputGroup.styl';
 
-interface Props {
+interface IProps {
   label?: string;
   children?: React.ReactNode;
 }
 
-function InputGroup ({ label, children }: Props) {
+function InputGroup ({ label, children }: IProps) {
   const b = block('input-group');
   return (
     <div className={s[b()]}>
@@ -21,5 +21,5 @@ function InputGroup ({ label, children }: Props) {
   );
 }
 
-export { Props };
+export { IProps };
 export default InputGroup;

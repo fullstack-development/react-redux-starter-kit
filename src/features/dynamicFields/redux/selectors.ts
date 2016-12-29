@@ -1,23 +1,33 @@
 import { createSelector } from 'reselect';
-import Namespace from '../namespace';
-import { isGeosuggestOption, GeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import {
+  isGeosuggestOption,
+  IGeosuggestOption,
+} from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import {
+  ICommunication,
+  IReduxState,
+  LocationProperties,
+  FlatFormProperties,
+  FormProperties,
+  IFields,
+} from '../namespace';
 
-function selectFields(state: Namespace.InitialState): Namespace.Fields {
+function selectFields(state: IReduxState): IFields {
   return state.data.fields;
 }
 
-function selectCommunication(state: Namespace.InitialState): {fetching: Namespace.Communication} {
+function selectCommunication(state: IReduxState): {fetching: ICommunication} {
   return state.communications;
 }
 
-function selectValues(state: Namespace.InitialState): Namespace.FormProperties {
+function selectValues(state: IReduxState): FormProperties {
   return state.data.values;
 }
 
-function selectFlatValues(state: Namespace.InitialState): Namespace.FlatFormProperties {
+function selectFlatValues(state: IReduxState): FlatFormProperties {
   const fields = selectValues(state);
-  return Object.keys(fields).reduce<Namespace.FlatFormProperties>((acc: Namespace.FlatFormProperties, key: string): Namespace.FlatFormProperties => {
-    const value: string | number | GeosuggestOption = fields[key];
+  return Object.keys(fields).reduce<FlatFormProperties>((acc: FlatFormProperties, key: string): FlatFormProperties => {
+    const value: string | number | IGeosuggestOption = fields[key];
     if (isGeosuggestOption(value)) {
       return {
         ...acc,
@@ -32,10 +42,10 @@ function selectFlatValues(state: Namespace.InitialState): Namespace.FlatFormProp
   }, {});
 }
 
-function selectLocationValues(state: Namespace.InitialState): Namespace.LocationProperties {
+function selectLocationValues(state: IReduxState): LocationProperties {
   const fields = selectValues(state);
-  return Object.keys(fields).reduce<Namespace.LocationProperties>((acc: Namespace.LocationProperties, key: string): Namespace.LocationProperties => {
-    const value: string | number | GeosuggestOption = fields[key];
+  return Object.keys(fields).reduce<LocationProperties>((acc: LocationProperties, key: string): LocationProperties => {
+    const value: string | number | IGeosuggestOption = fields[key];
     if (isGeosuggestOption(value)) {
       return {
         ...acc,
@@ -44,9 +54,8 @@ function selectLocationValues(state: Namespace.InitialState): Namespace.Location
     } else {
       return acc;
     }
-  }, {});
+  }, {} as LocationProperties);
 }
-
 
 export {
   selectFields,

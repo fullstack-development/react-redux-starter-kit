@@ -24,5 +24,5 @@ export default {
   selectAreaById,
   selectCityById,
   getFeatureState,
-  selectSelectedLocation
+  selectSelectedLocation,
 };

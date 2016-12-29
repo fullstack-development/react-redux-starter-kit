@@ -4,7 +4,7 @@ import FormEventHandler = React.FormEventHandler;
 import Component = React.Component;
 import FormEvent = React.FormEvent;
 
-interface Props {
+interface IProps {
   type: string;
   placeholder?: string;
   name?: string;
@@ -21,7 +21,7 @@ interface Props {
 type EventType = FormEvent<Component<ControlProps, {}>>;
 type ControlProps = FormControlProps;
 
-function TextInput (props: Props) {
+function TextInput (props: IProps) {
   return (
     <FormControl
       type={props.type}
@@ -36,5 +36,5 @@ function TextInput (props: Props) {
   );
 }
 
-export { Props, ControlProps, EventType };
+export { IProps, ControlProps, EventType };
 export default TextInput;

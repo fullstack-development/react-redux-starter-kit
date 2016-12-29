@@ -3,38 +3,29 @@ import * as block from 'bem-cn';
 import { Navbar } from 'react-bootstrap';
 import RowsLayout from '../../../../shared/view/elements/RowsLayout';
 import Header from '../../../../shared/view/components/Header/index';
-import { SearchRepositoriesInputGetter } from '../../../../features/searchRepositories';
-import App from 'shared/types/app';
+import { SearchRepositoriesInput } from '../../../../features/searchRepositories';
 import Description from './Description';
 import Search from './Search';
 import * as s from './Layout.styl';
 
-interface Props {}
+interface IProps {}
 
-const SearchRepositoriesInput = SearchRepositoriesInputGetter(
-  (state: App.ReduxState) => ({})
-);
-
-class HomeLayout extends React.Component<Props, {}> {
+class HomeLayout extends React.PureComponent<IProps, {}> {
   private b = block('index-page');
 
-  constructor(props: Props) {
-    super(props);
-  }
-
-  render() {
+  public render() {
     const b = this.b;
 
     return (
       <RowsLayout
         footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}
-        headerContent={
+        headerContent={(
             <Header>
                 <Navbar.Form pullRight>
                     <SearchRepositoriesInput />
                 </Navbar.Form>
             </Header>
-        }
+        )}
       >
         <div className={s[b()]}>
           <div className={s[b('content')]}>
@@ -47,5 +38,5 @@ class HomeLayout extends React.Component<Props, {}> {
   }
 }
 
-export { Props };
+export { IProps };
 export default HomeLayout;

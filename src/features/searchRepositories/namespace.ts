@@ -1,8 +1,8 @@
-declare namespace SearchRepositories {
-  interface ReduxState {
-  }
+interface IReduxState {}
 
-  type StateSelector = (state: { [key: string]: any }) => ReduxState;
-}
+type StateSelector = (state: { [key: string]: any }) => IReduxState;
 
-export default SearchRepositories;
+export {
+  IReduxState,
+  StateSelector,
+};
