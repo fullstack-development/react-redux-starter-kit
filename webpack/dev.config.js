@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, '..', 'src'),
@@ -24,7 +23,7 @@ module.exports = {
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, '..', 'build'),
-        filename: 'app.bundle.js'
+        filename: 'js/app.bundle.js'
     },
     resolve: {
         modules: ['node_modules', 'src'],
@@ -48,15 +47,11 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader:  ExtractTextPlugin.extract({
-                    loader: 'css-loader'
-                })
+                loader:  ['style-loader', 'css-loader']
             },
             {
                 test: /\.styl$/,
-                loader: ExtractTextPlugin.extract({
-                    loader: ['css-loader?modules', 'stylus-loader']
-                }),
+                loader: ['style-loader', 'css-loader?modules', 'stylus-loader']
             },
             {
                 test: /\.(png|svg)/,
@@ -72,11 +67,8 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'vendor.bundle.js',
+            filename: 'js/vendor.bundle.js',
             minChunks: Infinity,
-        }),
-        new ExtractTextPlugin({
-            filename: 'styles.css'
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -87,12 +79,11 @@ module.exports = {
             'process.env.__HOST__': JSON.stringify('http://localhost:8000'),
         }),
     ],
-    watch: true,
+
     devServer: {
         contentBase: path.resolve('..', 'build'),
         host: '0.0.0.0',
         port: 8080,
-        watch: true,
         hot: true,
         historyApiFallback: true,
         stats: 'errors-only',
