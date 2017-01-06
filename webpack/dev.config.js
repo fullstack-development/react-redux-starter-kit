@@ -76,7 +76,7 @@ module.exports = {
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development'),
-            'process.env.__HOST__': JSON.stringify('http://localhost:8000'),
+            'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
         }),
     ],
 

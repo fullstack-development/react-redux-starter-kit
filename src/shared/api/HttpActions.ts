@@ -9,7 +9,7 @@ class HttpActions {
   constructor(baseURL: string) {
     const config: Axios.AxiosXHRConfigBase<null> = {
       baseURL: this.host + baseURL,
-      withCredentials: true,
+      withCredentials: false,
     };
 
     this.request = axios.create(config);
