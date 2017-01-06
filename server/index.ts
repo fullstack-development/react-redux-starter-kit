@@ -6,24 +6,28 @@ const PREFIX = 'api';
 
 const app: express.Express = express();
 
-app.get(`/${PREFIX}/${API_VERSION}/categories/`, (req: express.Request, res: express.Response) => {
+app.use((req: express.Request, res: express.Response, next: express.NextFunction ) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+/* Routes */
+app.get(`/${PREFIX}/${API_VERSION}/categories/`, (req: express.Request, res: express.Response) => {
   res.send(JSON.stringify(categories));
 });
 
 app.get(`/${PREFIX}/${API_VERSION}/cities/`, (req: express.Request, res: express.Response) => {
-  res.header('Access-Control-Allow-Origin', '*');
   res.send(JSON.stringify(cities));
 });
 
 app.get(`/${PREFIX}/${API_VERSION}/categories/:uid/`, (req: express.Request, res: express.Response) => {
   const schema: any = schemas[req.params.uid];
-  res.header('Access-Control-Allow-Origin', '*');
   res.send(JSON.stringify(schema));
 });
 
 app.post(`/${PREFIX}/${API_VERSION}/travels/create/`, (req: express.Request, res: express.Response) => {
-  // TODO
+  res.send(JSON.stringify({ message: 'Successfully created' }));
 });
 
 app.listen(3000, () => {
