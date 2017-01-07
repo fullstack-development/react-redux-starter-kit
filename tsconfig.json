@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "traceResolution": true,
-    "sourceMap": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
     "module": "es2015",

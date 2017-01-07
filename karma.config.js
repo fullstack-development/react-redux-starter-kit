@@ -1,9 +1,7 @@
-var webpackConfig = require('./webpack/test.config');
-
 module.exports = function (config) {
     config.set({
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'chai'],
+        frameworks: ['mocha', 'chai', 'source-map-support'],
         client: {
             captureConsole: true,
         },
@@ -12,20 +10,27 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'node_modules/babel-polyfill/dist/polyfill.min.js',
-            'tests.js',
+            'karma.entry.js',
         ],
 
         exclude: [],
 
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            'tests.js': ['webpack']
+            'karma.entry.js': ['webpack'],
+        },
+
+        remapIstanbulReporter: {
+            remapOptions: {}, //additional remap options
+            reports: {
+                html: 'coverage'
+            },
         },
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['mocha'],
+        reporters: ['mocha', 'coverage', 'karma-remap-istanbul'],
 
         // web server port
         port: 9876,
@@ -47,15 +52,19 @@ module.exports = function (config) {
             "karma-sinon",
             "karma-mocha",
             "karma-webpack",
+            "karma-coverage",
+            "karma-remap-istanbul",
             "karma-mocha-reporter",
             "karma-chrome-launcher",
+            "karma-source-map-support",
             "karma-phantomjs-launcher",
         ],
+
+        webpack: require('./webpack/test.config'),
 
         // Concurrency level
         // how many browser should be started simultaneous
         concurrency: Infinity,
-        webpack: webpackConfig,
         webpackMiddleware: {
             noInfo: true
         }

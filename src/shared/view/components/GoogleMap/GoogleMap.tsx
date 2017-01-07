@@ -4,11 +4,11 @@ import { google } from 'google-maps';
 import { bind } from 'decko';
 import MapOptions = google.maps.MapOptions;
 import * as s from './GoogleMap.styl';
-import LatLng = google.maps.LatLng;
-import GCRequest = google.maps.GeocoderRequest;
-import GCResult = google.maps.GeocoderResult;
-import GCStatus = google.maps.GeocoderStatus;
-import GCAddressComponent = google.maps.GeocoderAddressComponent;
+
+type GCRequest = google.maps.GeocoderRequest;
+type GCResult = google.maps.GeocoderResult;
+type GCStatus = google.maps.GeocoderStatus;
+type GCAddressComponent = google.maps.GeocoderAddressComponent;
 
 interface IProps {
   lat?: number;
@@ -20,7 +20,7 @@ interface IProps {
 interface ILocation {
   locality: string;
   area: string;
-  point: LatLng | null;
+  point: google.maps.LatLng | null;
 };
 
 class GoogleMap extends React.Component<IProps, null> {
@@ -44,7 +44,7 @@ class GoogleMap extends React.Component<IProps, null> {
   }
 
   public setPoint(lat: number, lng: number) {
-    const point: LatLng = new LatLng(lat, lng);
+    const point: google.maps.LatLng = new google.maps.LatLng(lat, lng);
 
     if (this.map !== null) {
       this.map.setCenter(point);
@@ -83,7 +83,7 @@ class GoogleMap extends React.Component<IProps, null> {
   @bind
   private onDragEnd() {
     if (this.map && this.geocoder) {
-      const location: LatLng = this.map.getCenter();
+      const location: google.maps.LatLng = this.map.getCenter();
       const request: GCRequest = { location };
       this.geocoder.geocode(request, this.onPlaceDecoded);
     }

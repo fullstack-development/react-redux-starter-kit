@@ -18,13 +18,13 @@ const modules: Array<IModule<any>> = [ new HomeModule(), new OrderFormModule() ]
 const api = new Api('/api');
 const store = configureStore(modules, api);
 const routes = createRoutes(modules);
+const rootComponent = (
+  <Provider store={store}>
+    <Router history={history} routes={routes} />
+  </Provider>
+);
 
 /* Start application */
-ReactDOM.render(
-  (
-    <Provider store={store}>
-      <Router history={history} routes={routes} />
-    </Provider>
-  ),
-  document.getElementById('root'),
-);
+if (process.env.NODE_ENV !== 'test') {
+  ReactDOM.render(rootComponent, document.getElementById('root'));
+}
