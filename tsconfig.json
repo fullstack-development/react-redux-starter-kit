@@ -8,6 +8,7 @@
     "target": "es5",
     "lib": ["es2015", "es2017", "es6", "es7", "es5", "es2017.object", "DOM", "ScriptHost"],
     "jsx": "react",
+    "experimentalDecorators": true,
     "moduleResolution": "node",
     "baseUrl": "./src"
   },

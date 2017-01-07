@@ -6,6 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions, selectors } from '../../redux';
 import { IFields, ICommunication, IReduxState, IField } from '../../namespace';
+import { bind } from 'decko';
 import GenericTextInput from 'shared/view/components/GenericTextInput/GenericTextInput';
 import GenericIntegerInput from 'shared/view/components/GenericIntegerInput/GenericIntegerInput';
 import GenericRadioInput from 'shared/view/components/GenericRadioInput/GenericRadioInput';
@@ -13,7 +14,7 @@ import GenericDropdownInput from 'shared/view/components/GenericDropdownInput/Ge
 import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDateInput';
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
-import GenericInputsNamespace from './../../../../shared/view/components/GenericInput/GenericInput';
+import GenericInputsNamespace from 'shared/view/components/GenericInput/GenericInput';
 
 import EventHandler = React.EventHandler;
 import FormEvent = React.FormEvent;
@@ -38,7 +39,7 @@ interface IDispatchProps {
   changeFieldValue: typeof actions.changeFieldValue;
 }
 
-interface IProps extends IDispatchProps, IStateProps, IOwnProps {}
+type Props = IDispatchProps & IStateProps & IOwnProps;
 
 interface IState {
   values: {[key: string]: string | number | {[key: string]: any}};
@@ -63,7 +64,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
-class DynamicFields extends React.Component<IProps, IState> {
+class DynamicFields extends React.Component<Props, IState> {
   private b = block('dynamic-fields');
   private components: { [key: string]: React.ComponentClass<any> | React.StatelessComponent<any> } = {
     text: GenericTextInput,
@@ -76,7 +77,7 @@ class DynamicFields extends React.Component<IProps, IState> {
     location: GenericLocationInput,
   };
 
-  constructor(props: IProps) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       values: {},
@@ -90,7 +91,7 @@ class DynamicFields extends React.Component<IProps, IState> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: IProps) {
+  public componentWillReceiveProps(nextProps: Props) {
     if (nextProps.category && this.props.category !== nextProps.category) {
       this.changeCategory(nextProps.category);
     }
@@ -109,12 +110,14 @@ class DynamicFields extends React.Component<IProps, IState> {
     );
   }
 
+  @bind
   private changeCategory(uid: number) {
     this.setState({ values: {}, errors: [] });
     this.props.loadFields(uid);
   }
 
-  private onFieldChange = (fieldName: string) => {
+  @bind
+  private onFieldChange(fieldName: string) {
     return (value: FieldValue, errors: string[]) => {
       const { changeFieldValue, onChange } = this.props;
 
@@ -169,5 +172,5 @@ class DynamicFields extends React.Component<IProps, IState> {
   }
 }
 
-export { IProps, DynamicFields, FieldValue };
+export { Props, DynamicFields, FieldValue };
 export default connect<IStateProps, IDispatchProps, IOwnProps>(mapStateToProps, mapDispatchToProps)(DynamicFields);

@@ -7,7 +7,7 @@ interface IProps {
   children?: React.ReactNode;
 }
 
-function InputGroup ({ label, children }: IProps) {
+function InputGroup({ label, children }: IProps) {
   const b = block('input-group');
   return (
     <div className={s[b()]}>

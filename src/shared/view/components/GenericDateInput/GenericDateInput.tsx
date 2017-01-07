@@ -1,12 +1,13 @@
 import * as React from 'react';
+import { bind } from 'decko';
 import GenericField from '../GenericInput/GenericInput';
 import TextInput, { EventType } from './../../elements/TextInput/TextInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
+import Errors from '../../elements/Errors/Errors';
 import FormEvent = React.FormEvent;
 import Component = React.Component;
-import Errors from '../../elements/Errors/Errors';
 
-interface IProps extends GenericField.Props {}
+type IProps = GenericField.Props;
 interface IState {
   errors: string[];
   isEdited: boolean;
@@ -54,16 +55,18 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
     );
   }
 
-  private onChange = (event: EventType) => {
+  @bind
+  private onChange(event: EventType) {
     const value: string = (event.nativeEvent.target as HTMLInputElement).value;
     this.validateAndChange(value);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }
 
-  private validateAndChange = (rawValue: string): void => {
+  @bind
+  private validateAndChange(rawValue: string): void {
     const { pattern, required, onChange } = this.props;
+    const errors: string[] = [];
     let value: string;
-    let errors: string[] = [];
 
     if ((new RegExp(this.standardHTMLpattern)).test(rawValue)) {
       // current browser support date inputs

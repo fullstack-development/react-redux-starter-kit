@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import { google } from 'google-maps';
+import { bind } from 'decko';
 import MapOptions = google.maps.MapOptions;
 import * as s from './GoogleMap.styl';
 import LatLng = google.maps.LatLng;
@@ -13,10 +14,10 @@ interface IProps {
   lat?: number;
   lng?: number;
   showNewPoint: boolean;
-  onLocationSelected?: (location: Location) => void;
+  onLocationSelected?: (location: ILocation) => void;
 }
 
-type Location = {
+interface ILocation {
   locality: string;
   area: string;
   point: LatLng | null;
@@ -79,7 +80,8 @@ class GoogleMap extends React.Component<IProps, null> {
     );
   }
 
-  private onDragEnd = () => {
+  @bind
+  private onDragEnd() {
     if (this.map && this.geocoder) {
       const location: LatLng = this.map.getCenter();
       const request: GCRequest = { location };
@@ -93,7 +95,8 @@ class GoogleMap extends React.Component<IProps, null> {
     );
   }
 
-  private onPlaceDecoded = (results: GCResult[] | null): void => {
+  @bind
+  private onPlaceDecoded(results: GCResult[] | null): void {
     const result: GCResult | null = results && results.length ? results[0] : null;
 
     if (result) {
@@ -105,7 +108,7 @@ class GoogleMap extends React.Component<IProps, null> {
         result.address_components,
         'administrative_area_level_2',
       );
-      const newLocation: Location = {
+      const newLocation: ILocation = {
         locality: locality ? locality.long_name : '',
         area: administrativeArea ? administrativeArea.long_name : '',
         point: this.map ? this.map.getCenter() : null,
@@ -119,11 +122,11 @@ class GoogleMap extends React.Component<IProps, null> {
     }
   }
 
-  private onMapRef = (map: Element) => {
+  @bind
+  private onMapRef(map: Element) {
     this.mapContainer = map;
   }
-
 }
 
-export { IProps, Location };
+export { IProps, ILocation };
 export default GoogleMap;

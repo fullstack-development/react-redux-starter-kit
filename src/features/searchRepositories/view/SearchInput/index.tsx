@@ -6,22 +6,16 @@ import { connect, Dispatch } from 'react-redux';
 import * as s from './styles.styl';
 import { IReduxState as IAppReduxState } from 'shared/types/app';
 
-interface IOwnProps {}
+interface IProps {
+  value?: string;
+}
 
-interface IStateProps {}
-
-interface IDispatchProps {}
-
-function mapState(state: IAppReduxState): IStateProps {
+function mapState(state: IAppReduxState): {} {
   return {};
 }
 
-function mapDispatch(dispatch: Dispatch<IAppReduxState>): IDispatchProps {
+function mapDispatch(dispatch: Dispatch<IAppReduxState>): {} {
   return bindActionCreators({}, dispatch);
-}
-
-interface IProps {
-  value?: string;
 }
 
 function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
@@ -38,4 +32,4 @@ function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
 }
 
 export { IProps };
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(SearchRepositoriesInput);
+export default connect<{}, {}, IProps>(mapState, mapDispatch)(SearchRepositoriesInput);

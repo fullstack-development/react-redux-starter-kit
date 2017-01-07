@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { bind } from 'decko';
 import GenericField from '../GenericInput/GenericInput';
 import TextInput, { EventType } from 'shared/view/elements/TextInput/TextInput';
 import InputGroup from 'shared/view/elements/InputGroup/InputGroup';
@@ -70,14 +71,16 @@ class GenericIntegerInput extends React.Component<IProps, IState> {
     );
   }
 
-  private onChange = (event: EventType): void => {
+  @bind
+  private onChange(event: EventType): void {
     const value = (event.nativeEvent.target as HTMLInputElement).value;
     const errors = this.validate(value);
     this.change(value, errors);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }
 
-  private validate = (value: string): string[] => {
+  @bind
+  private validate(value: string): string[] {
     const { isFloat, minimum, maximum, required } = this.props;
     const parsedValue: number = isFloat ? parseFloat(value) : parseInt(value, 10);
     const errors = [];
@@ -100,7 +103,8 @@ class GenericIntegerInput extends React.Component<IProps, IState> {
     return errors;
   }
 
-  private change = (value: string, errors: string[]) => {
+  @bind
+  private change(value: string, errors: string[]) {
     const handler = this.props.onChange;
     if (handler) {
       handler(value.toString(), errors);

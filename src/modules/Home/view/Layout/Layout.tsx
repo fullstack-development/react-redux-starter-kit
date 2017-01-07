@@ -8,9 +8,7 @@ import Description from './Description';
 import Search from './Search';
 import * as s from './Layout.styl';
 
-interface IProps {}
-
-class HomeLayout extends React.PureComponent<IProps, {}> {
+class HomeLayout extends React.PureComponent<{}, {}> {
   private b = block('index-page');
 
   public render() {
@@ -38,5 +36,4 @@ class HomeLayout extends React.PureComponent<IProps, {}> {
   }
 }
 
-export { IProps };
 export default HomeLayout;

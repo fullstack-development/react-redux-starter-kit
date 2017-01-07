@@ -9,7 +9,7 @@ function reducer(state: Namespace.InitialState = initialState, action: IAction):
 
   switch (action.type) {
   case 'LOCATION_SELECT:LOAD_CITIES_SUCCESS': {
-    const data: Namespace.NormalizedCitiesResponse = <Namespace.NormalizedCitiesResponse> action.payload;
+    const data: Namespace.NormalizedCitiesResponse = action.payload as Namespace.NormalizedCitiesResponse;
     return imState
       .setIn(['data', 'entities'], data.entities)
       .setIn(['data', 'citiesSet'], data.result)

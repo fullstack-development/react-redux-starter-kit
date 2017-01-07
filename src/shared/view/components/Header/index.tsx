@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
 import { RouterOnContext } from 'react-router';
+import { bind } from 'decko';
 import * as s from './styles.styl';
 import * as block from 'bem-cn';
 import SyntheticEvent = React.SyntheticEvent;
@@ -41,7 +42,8 @@ class Header extends React.PureComponent<IProps, {}> {
     );
   }
 
-  private onNavItemClick = (eventKey: string, e: SyntheticEvent<{}>) => {
+  @bind
+  private onNavItemClick(eventKey: string, e: SyntheticEvent<{}>) {
     // TODO: use dynamic url makers
     switch (eventKey) {
     case 'order':
@@ -51,7 +53,8 @@ class Header extends React.PureComponent<IProps, {}> {
     }
   }
 
-  private onBrandClick = () => {
+  @bind
+  private onBrandClick() {
     this.context.router.push('/home');
   }
 

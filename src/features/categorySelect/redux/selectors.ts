@@ -5,7 +5,7 @@ function selectCategories(state: IReduxState): ICategory[] {
   return state.data.options;
 }
 
-function selectChosenCategory (state: IReduxState): number | undefined {
+function selectChosenCategory(state: IReduxState): number | undefined {
   return state.data.selected;
 }
 

@@ -3,7 +3,7 @@ import { PageHeader, Label } from 'react-bootstrap';
 import * as s from './Layout.styl';
 import * as block from 'bem-cn';
 
-function Description (): React.ReactElement<Object> {
+function Description(): React.ReactElement<Object> {
   const b = block('index-page');
   return (
     <div>

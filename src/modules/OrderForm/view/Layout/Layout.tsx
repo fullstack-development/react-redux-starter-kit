@@ -3,6 +3,7 @@ import * as block from 'bem-cn';
 import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { bind } from 'decko';
 import { IReduxState, AsyncActionCreatorResult } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
@@ -13,8 +14,6 @@ import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFie
 import { actions } from './../../redux';
 import * as s from './Layout.styl';
 import FormEvent = React.FormEvent;
-
-interface IOwnProps {}
 
 interface IDispatchProps {
   saveFields: () => AsyncActionCreatorResult;
@@ -36,7 +35,7 @@ interface IState {
   };
 }
 
-interface IProps extends IStateProps, IDispatchProps, IOwnProps {}
+type IProps = IStateProps & IDispatchProps;
 
 function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   return bindActionCreators(actions, dispatch);
@@ -96,14 +95,16 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     );
   }
 
-  private onLocationSelected = (location: LocationSelectNamespace.SelectedLocationData) : void => {
+  @bind
+  private onLocationSelected(location: LocationSelectNamespace.SelectedLocationData): void {
     this.setState({
       ...this.state,
       location,
     });
   }
 
-  private onCategorySelected = (uid: number) : void => {
+  @bind
+  private onCategorySelected(uid: number): void {
     this.setState({
       ...this.state,
       categoryUid: uid,
@@ -111,12 +112,14 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     });
   }
 
-  private onFormSubmit = (e: FormEvent<Form>) : void => {
+  @bind
+  private onFormSubmit(e: FormEvent<Form>): void {
     e.preventDefault();
     this.props.saveFields();
   }
 
-  private onDynamicValueChanged = (name: string, value: FieldValue, errors: string[]) => {
+  @bind
+  private onDynamicValueChanged(name: string, value: FieldValue, errors: string[]) {
     this.setState((prevState: IState) => ({
       ...prevState,
       dynamicFields: {
@@ -136,4 +139,4 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 }
 
 export { IProps };
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(OrderFormLayout);
+export default connect<IStateProps, IDispatchProps, {}>(mapState, mapDispatch)(OrderFormLayout);

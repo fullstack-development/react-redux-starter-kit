@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Geosuggest from 'react-geosuggest';
+import { bind } from 'decko';
 import GenericField from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
@@ -60,12 +61,14 @@ class GenericLocationInput extends React.Component<GenericField.Props, IState> {
     );
   }
 
-  private onSelect = (selected: IGeosuggestOption) => {
+  @bind
+  private onSelect(selected: IGeosuggestOption) {
     this.validateAndChange(selected);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }
 
-  private validateAndChange = (value: IGeosuggestOption) => {
+  @bind
+  private validateAndChange(value: IGeosuggestOption) {
     const { onChange, required } = this.props;
     const errors: string[] = [];
 

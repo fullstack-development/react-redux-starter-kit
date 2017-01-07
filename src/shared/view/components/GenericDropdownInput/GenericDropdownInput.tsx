@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Select from 'react-select';
+import { bind } from 'decko';
 import Errors from 'shared/view/elements/Errors/Errors';
 import GenericField from '../GenericInput/GenericInput';
 import SelectInput from '../../elements/SelectInput/SelectInput';
@@ -47,7 +48,8 @@ class GenericDropdownInput extends React.PureComponent<GenericField.Props, IStat
     );
   }
 
-  private onSelect = (selected: Select.Option | null) => {
+  @bind
+  private onSelect(selected: Select.Option | null) {
     this.validateAndChangeValue(selected);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }

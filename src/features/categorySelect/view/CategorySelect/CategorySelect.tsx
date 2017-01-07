@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
+import { bind } from 'decko';
 import * as Select from 'react-select';
 import * as s from './styles.styl';
 import { connect, Dispatch } from 'react-redux';
@@ -72,7 +73,8 @@ class CategorySelect extends React.Component<IProps, {}> {
     );
   }
 
-  private onSelect = (selected: Select.Option | null) => {
+  @bind
+  private onSelect(selected: Select.Option | null) {
     if (selected && typeof selected.value === 'number') {
       // Type Guards allow you to narrow down the type of an object within a conditional block.
       // TypeScript is aware of the usage of the JavaScript instanceof and typeof operators

@@ -4,9 +4,10 @@ import * as Select from 'react-select';
 import { FormControl } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
+import { bind } from 'decko';
 import { actions, selectors } from './../../../redux';
 import Namespace from '../../../namespace';
-import GoogleMap, { Location as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
+import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import * as s from './LocationSelect.styl';
 
@@ -25,7 +26,7 @@ interface IDispatchProps {
   selectLocation: typeof actions.selectLocationByAreaId;
 }
 
-interface IProps extends IStateProps, IDispatchProps, IOwnProps {}
+type Props = IStateProps & IDispatchProps & IOwnProps;
 
 function mapState(state: any): IStateProps {
   const ownState: Namespace.InitialState = selectors.getFeatureState(state);
@@ -54,14 +55,14 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
-class LocationSelect extends React.Component<IProps, {}> {
+class LocationSelect extends React.Component<Props, {}> {
   private b = block('location-select');
 
-  constructor(props: IProps) {
+  constructor(props: Props) {
     super(props);
   }
 
-  public componentWillReceiveProps(nextProps: IProps) {
+  public componentWillReceiveProps(nextProps: Props) {
     const { onChange } = this.props;
     // notify subscribed components (if they are exist), if selected location changed
     if (nextProps.selectedLocation !== this.props.selectedLocation) {
@@ -76,13 +77,13 @@ class LocationSelect extends React.Component<IProps, {}> {
   }
 
   public render() {
-    type RenderData = {
+    interface IRenderData {
       options: Select.Option[];
       selectedLocation: Namespace.SelectedLocationData;
-    };
+    }
 
     const b = this.b;
-    const { options, selectedLocation }: RenderData = this.props;
+    const { options, selectedLocation }: IRenderData = this.props;
     const selectedArea: Namespace.Area | null = selectedLocation ? selectedLocation.area : null;
     const selectedCity: Namespace.City | null = selectedLocation ? selectedLocation.city : null;
     const showSelectedAreaOnMap: boolean = this.props.showLocation;
@@ -124,7 +125,8 @@ class LocationSelect extends React.Component<IProps, {}> {
     );
   }
 
-  private onSelectLocation = (item: Select.Option | null) => {
+  @bind
+  private onSelectLocation(item: Select.Option | null) {
     if (item === null) {
       this.props.selectLocation(null, false);
     } else {
@@ -132,7 +134,8 @@ class LocationSelect extends React.Component<IProps, {}> {
     }
   }
 
-  private onSelectMapLocation = (location: MapLocation) => {
+  @bind
+  private onSelectMapLocation(location: MapLocation) {
     const selectedAreaName: string = `${location.locality}, ${location.area}`;
     const areas = this.props.options;
 
@@ -148,5 +151,5 @@ class LocationSelect extends React.Component<IProps, {}> {
   }
 }
 
-export { IProps };
+export { Props };
 export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(LocationSelect);

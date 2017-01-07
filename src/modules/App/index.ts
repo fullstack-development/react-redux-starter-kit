@@ -1,2 +1,2 @@
-import App, { IProps } from './view/App';
-export { App, IProps as AppProps };
+import App from './view/App';
+export { App };

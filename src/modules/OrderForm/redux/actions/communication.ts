@@ -6,10 +6,10 @@ import { Namespace as LocationSelect, selectors as locationSelectors  } from 'fe
 
 type Point = LocationSelect.Point;
 type SelectedLocation = LocationSelect.SelectedLocation;
-type FlatFormProperties = DynamicFields.FlatFormProperties;
-type LocationProperties = DynamicFields.LocationProperties;
+type FlatFormProperties = DynamicFields.IFlatFormProperties;
+type LocationProperties = DynamicFields.ILocationProperties;
 
-function getFromLocation(dynamicFields: DynamicFields.LocationProperties, locationSelect: SelectedLocation): Point {
+function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: SelectedLocation): Point {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

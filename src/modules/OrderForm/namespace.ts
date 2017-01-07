@@ -1,7 +1,7 @@
-import { FormProperties } from '../../features/dynamicFields/namespace';
+import { IFormProperties } from '../../features/dynamicFields/namespace';
 
 interface IOrderFormRequest {
-  attributes: FormProperties;
+  attributes: IFormProperties;
   notify: boolean;
   description: string;
   location: number;  // area id only - don't need a city id

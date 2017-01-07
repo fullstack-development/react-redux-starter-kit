@@ -1,14 +1,14 @@
 import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 
-type FormProperties = {
+interface IFormProperties {
   [key: string]: string | number | IGeosuggestOption;
 };
 
-type FlatFormProperties = {
+interface IFlatFormProperties {
   [key: string]: string | number;
 };
 
-type LocationProperties = {
+interface ILocationProperties {
   [key: string]: { lat: number; lng: number; };
   from: { lat: number; lng: number; };
   to: { lat: number; lng: number; };
@@ -55,14 +55,14 @@ interface IReduxState {
   };
   data: {
     fields: IFields;
-    values: FormProperties;
+    values: IFormProperties;
   };
 }
 
 export {
-  FormProperties,
-  FlatFormProperties,
-  LocationProperties,
+  IFormProperties,
+  IFlatFormProperties,
+  ILocationProperties,
   ISchema,
   IFields,
   IField,

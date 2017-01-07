@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { bind } from 'decko';
 import GenericField from '../GenericInput/GenericInput';
-import TextInput from './../../elements/TextInput/TextInput';
-import { EventType } from '../../elements/TextInput/TextInput';
+import TextInput, { EventType } from './../../elements/TextInput/TextInput';
 import InputGroup from '../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 import Component = React.Component;
@@ -46,13 +46,15 @@ class GenericTimeInput extends Component<GenericField.Props, IState> {
     );
   }
 
-  private onChange = (event: EventType) => {
+  @bind
+  private onChange(event: EventType) {
     const value: string = (event.nativeEvent.target as HTMLInputElement).value;
     this.validateAndChange(value);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }
 
-  private validateAndChange = (value: string): void => {
+  @bind
+  private validateAndChange(value: string): void {
     const { required, onChange, pattern } = this.props;
     const errors: string[] = [];
 

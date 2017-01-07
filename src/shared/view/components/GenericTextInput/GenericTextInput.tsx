@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormControlProps } from 'react-bootstrap';
+import { bind } from 'decko';
 import GenericField from '../GenericInput/GenericInput';
 import TextInput from './../../elements/TextInput/TextInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
@@ -57,7 +58,8 @@ class GenericTextInput extends React.Component<IProps, IState> {
     );
   }
 
-  private onChange = (event: FormEvent<Component<FormControlProps, {}>>): void => {
+  @bind
+  private onChange(event: FormEvent<Component<FormControlProps, {}>>): void {
     const value = (event.nativeEvent.target as HTMLInputElement).value;
     this.changeValue(value);
 
@@ -66,7 +68,8 @@ class GenericTextInput extends React.Component<IProps, IState> {
     }
   }
 
-  private changeValue = (value: string): void => {
+  @bind
+  private changeValue(value: string): void {
     const { required, onChange } = this.props;
     const errors: string[] = [];
 

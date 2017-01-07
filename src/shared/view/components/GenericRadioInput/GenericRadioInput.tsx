@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Radio, FormGroup } from 'react-bootstrap';
-import Errors from 'shared/view/elements/Errors/Errors';
+import { bind } from 'decko';
 import * as block from 'bem-cn';
 import * as s from './GenericRadioInput.styl';
+import Errors from 'shared/view/elements/Errors/Errors';
 import GenericField from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 
@@ -54,14 +55,16 @@ class GenericRadioInput extends React.Component<GenericField.Props, IState> {
     );
   }
 
-  private onChange = (fieldName: string, value: string): () => void => {
+  @bind
+  private onChange(fieldName: string, value: string): () => void {
     return () => {
       this.validateAndChange(fieldName, value);
       this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
     };
   }
 
-  private validateAndChange = (fieldName: string, value: string): void => {
+  @bind
+  private validateAndChange(fieldName: string, value: string): void {
     const { required, onChange } = this.props;
     const errors: string[] = [];
 

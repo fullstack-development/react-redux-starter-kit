@@ -21,7 +21,7 @@ interface IProps {
 type EventType = FormEvent<Component<ControlProps, {}>>;
 type ControlProps = FormControlProps;
 
-function TextInput (props: IProps) {
+function TextInput(props: IProps) {
   return (
     <FormControl
       type={props.type}

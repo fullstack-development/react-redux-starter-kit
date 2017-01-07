@@ -3,13 +3,13 @@ import * as Select from 'react-select';
 import 'react-select/dist/react-select.min.css';
 import './SelectInput.styl';
 
-interface IProps extends Select.ReactSelectProps {}
+type Props = Select.ReactSelectProps;
 
-function SelectInput (props: IProps) {
+function SelectInput(props: Props) {
   return (
     <Select {...props} />
   );
 }
 
-export { IProps };
+export { Props };
 export default SelectInput;

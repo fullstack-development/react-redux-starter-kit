@@ -10,7 +10,7 @@ interface IProps {
 const b = block('errors');
 s[b({ hidden: true })] = `${s[b()]} ${s.errors_hidden}`;
 
-function Errors ({ hidden, errors = [] }: IProps) {
+function Errors({ hidden, errors = [] }: IProps) {
   return (
     <div className={s[b({ hidden })]}>
       {
