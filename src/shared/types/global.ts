@@ -4,6 +4,10 @@ interface Window {
   devToolsExtension: Function;
 }
 
+interface SinonStub {
+  callsFake: Function;
+}
+
 declare module 'reselect';
 declare module 'redux-async-connect';
 declare module 'react-tap-event-plugin';

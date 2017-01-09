@@ -25,7 +25,7 @@ describe('(Feature) categorySelect', () => {
 
         const api = new Api('');
         const fakeLoadCategoriesApi = (): Promise<ICategoriesResponse> => Promise.resolve({ categories });
-        const loadCategoriesStub = stub(api, 'loadCategories').callsFake(fakeLoadCategoriesApi);
+        const loadCategoriesStub = (stub(api, 'loadCategories') as any).callsFake(fakeLoadCategoriesApi);
 
         const action = loadCategories();
         const store: IStore<IReduxState> = mockStore({ categorySelect: { ...initial } } as IReduxState);
@@ -44,7 +44,7 @@ describe('(Feature) categorySelect', () => {
       it('should dispatch FAILED action, if error occurred', async() => {
         const api = new Api('');
         const fakeLoadCategoriesApi = (): Promise<ICategoriesResponse> => Promise.reject('Error!');
-        const loadCategoriesStub = stub(api, 'loadCategories').callsFake(fakeLoadCategoriesApi);
+        const loadCategoriesStub = (stub(api, 'loadCategories') as any).callsFake(fakeLoadCategoriesApi);
 
         const action = loadCategories();
         const store: IStore<IReduxState> = mockStore({ categorySelect: { ...initial } } as IReduxState);
