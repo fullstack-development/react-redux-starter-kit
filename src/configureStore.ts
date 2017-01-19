@@ -9,15 +9,19 @@ import {
   ReducersMapObject,
 } from 'redux';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 import { reducer as categorySelectReducer } from './features/categorySelect';
-import { reducer as locationSelectReducer } from './features/locationSelect';
+import { reducer as locationSelectReducer, actions } from './features/locationSelect';
 import { reducer as dynamicFieldsReducer } from './features/dynamicFields';
 import { IModule, IReduxState, IExtraArguments } from './shared/types/app';
 import Api from './shared/api/Api';
 
 function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
+  const sagaMiddleware = createSagaMiddleware();
   const extraArguments: IExtraArguments = { api };
+
   const middlewares: Middleware[] = [
+    sagaMiddleware,
     thunk.withExtraArgument(extraArguments),
   ];
 
@@ -37,7 +41,7 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
     ...modulesReducers,
   });
 
-  return createStore(
+  const store = createStore(
     reducer,
     compose(
       applyMiddleware(...middlewares),
@@ -45,6 +49,10 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
         ? window.devToolsExtension() : ((arg: any) => arg),
     ),
   );
+
+  sagaMiddleware.run(actions.saga(extraArguments));
+
+  return store;
 }
 
 export default configureStore;

@@ -1,6 +1,6 @@
-import Namespace from '../namespace';
+import { IReduxState } from '../../namespace';
 
-const initialState: Namespace.InitialState = {
+const initialState: IReduxState = {
   communications: {
     citiesFetching: {
       isRequesting: false,

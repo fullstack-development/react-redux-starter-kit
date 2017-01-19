@@ -4,7 +4,7 @@ import { IOrderFormResponse, IOrderFormRequest } from '../../namespace';
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { Namespace as LocationSelect, selectors as locationSelectors  } from 'features/locationSelect';
 
-type Point = LocationSelect.Point;
+type Point = LocationSelect.IPoint;
 type SelectedLocation = LocationSelect.SelectedLocation;
 type FlatFormProperties = DynamicFields.IFlatFormProperties;
 type LocationProperties = DynamicFields.ILocationProperties;

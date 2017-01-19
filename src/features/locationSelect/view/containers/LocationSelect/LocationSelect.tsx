@@ -6,18 +6,18 @@ import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { bind } from 'decko';
 import { actions, selectors } from './../../../redux';
-import Namespace from '../../../namespace';
+import { SelectedLocationData, IReduxState, IArea, ICity } from '../../../namespace';
 import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import * as s from './LocationSelect.styl';
 
 interface IOwnProps {
-  onChange?: (location: Namespace.SelectedLocationData) => void;
+  onChange?: (location: SelectedLocationData) => void;
 }
 
 interface IStateProps {
   options: Select.Option[];
-  selectedLocation: Namespace.SelectedLocationData;
+  selectedLocation: SelectedLocationData;
   showLocation: boolean;
 }
 
@@ -29,13 +29,13 @@ interface IDispatchProps {
 type Props = IStateProps & IDispatchProps & IOwnProps;
 
 function mapState(state: any): IStateProps {
-  const ownState: Namespace.InitialState = selectors.getFeatureState(state);
+  const ownState: IReduxState = selectors.getFeatureState(state);
   const selectedLocation = selectors.selectSelectedLocation(state);
 
   return {
     options: Object.keys(ownState.data.entities.areas).map<Select.Option>(
       (areaId: string) => {
-        const area: Namespace.Area = ownState.data.entities.areas[parseInt(areaId, 10)];
+        const area: IArea = ownState.data.entities.areas[parseInt(areaId, 10)];
         return { label: area.displayName, value: area.id };
       },
     ),
@@ -79,13 +79,13 @@ class LocationSelect extends React.Component<Props, {}> {
   public render() {
     interface IRenderData {
       options: Select.Option[];
-      selectedLocation: Namespace.SelectedLocationData;
+      selectedLocation: SelectedLocationData;
     }
 
     const b = this.b;
     const { options, selectedLocation }: IRenderData = this.props;
-    const selectedArea: Namespace.Area | null = selectedLocation ? selectedLocation.area : null;
-    const selectedCity: Namespace.City | null = selectedLocation ? selectedLocation.city : null;
+    const selectedArea: IArea | null = selectedLocation ? selectedLocation.area : null;
+    const selectedCity: ICity | null = selectedLocation ? selectedLocation.city : null;
     const showSelectedAreaOnMap: boolean = this.props.showLocation;
 
     return (

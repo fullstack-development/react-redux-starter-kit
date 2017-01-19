@@ -10,12 +10,28 @@ const stylLoader = {
         loader: ['css-loader?modules', 'stylus-loader']
     })
 };
+
 const cssLoader = {
     test: /\.css$/,
     loader:  ExtractTextPlugin.extract({
         loader: 'css-loader'
     })
 }
+
+const scriptsLoader = {
+    test: /\.(ts|tsx)$/,
+    use: [
+        {
+            loader: 'babel-loader',
+            options: { presets: ['es2015'], plugins: ["transform-regenerator"]}
+        },
+        {
+            loader: 'ts-loader',
+            options: { logLevel: 'debug' }
+        },
+        'tslint-loader'
+    ],
+};
 
 // replace modules, if already exists modules with same patterns
 prodConfig.module.rules = prodConfig.module.rules.map(loader => {
@@ -24,6 +40,8 @@ prodConfig.module.rules = prodConfig.module.rules.map(loader => {
             return stylLoader;
         case cssLoader.test.toString():
             return cssLoader;
+        case scriptsLoader.test.toString():
+            return scriptsLoader;
         default: return loader;
     }
 });

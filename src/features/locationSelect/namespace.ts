@@ -1,71 +1,81 @@
-declare namespace LocationSelect {
-  interface Communication {
-    isRequesting: boolean;
-    error: string;
-  }
-
-
-  interface AreaResponse {
-    city: number;
-    display_name: string;
-    name: string;
-    point: string;
-  }
-
-  interface CityResponse {
-    areas: Array<AreaResponse>;
-    name: string;
-    id: number;
-  }
-
-  interface Point {
-    lat: number;
-    lng: number;
-  }
-
-  interface Area {
-    displayName: string;
-    name: string;
-    city: number;
-    point: Point;
-    id: number;
-  }
-
-  interface City {
-    areas: Array<number>;
-    name: string;
-    id: number;
-  }
-
-  interface NormalizedCitiesResponse {
-    result: Array<number>;
-    entities: {
-      cities: CityEntities,
-      areas: AreaEntities
-    };
-  }
-
-  type AreaEntities = { [key: number]: Area };
-  type CityEntities = { [key: number]: City };
-  type SelectedLocation = null | { city: number, area: number, point: Point };
-  type SelectedLocationData = null | { city: City; area: Area, point: Point };
-
-  interface InitialState {
-    communications: {
-      citiesFetching: Communication
-    };
-    data: {
-      entities: {
-        areas: AreaEntities,
-        cities: CityEntities
-      },
-      citiesSet: Array<number>,
-      selectedLocation: SelectedLocation
-    };
-    ui: {
-      showSelectedLocation: boolean;
-    };
-  }
+interface ICommunication {
+  isRequesting: boolean;
+  error: string;
 }
 
-export default LocationSelect;
+interface IAreaResponse {
+  city: number;
+  display_name: string;
+  name: string;
+  point: string;
+}
+
+interface ICityResponse {
+  areas: IAreaResponse[];
+  name: string;
+  id: number;
+}
+
+interface IPoint {
+  lat: number;
+  lng: number;
+}
+
+interface IArea {
+  displayName: string;
+  name: string;
+  city: number;
+  point: IPoint;
+  id: number;
+}
+
+interface ICity {
+  areas: number[];
+  name: string;
+  id: number;
+}
+
+interface INormalizedCitiesResponse {
+  result: number[];
+  entities: {
+    cities: IAreaEntities;
+    areas: ICityEntities;
+  };
+}
+
+interface IAreaEntities { [key: number]: IArea; };
+interface ICityEntities { [key: number]: ICity; };
+type SelectedLocation = null | { city: number, area: number, point: IPoint };
+type SelectedLocationData = null | { city: ICity; area: IArea, point: IPoint };
+
+interface IReduxState {
+  communications: {
+    citiesFetching: ICommunication;
+  };
+  data: {
+    entities: {
+      areas: IAreaEntities;
+      cities: ICityEntities;
+    },
+    citiesSet: number[],
+    selectedLocation: SelectedLocation;
+  };
+  ui: {
+    showSelectedLocation: boolean;
+  };
+}
+
+export {
+  ICommunication,
+  IReduxState,
+  IAreaResponse,
+  ICityResponse,
+  IPoint,
+  IArea,
+  ICity,
+  IAreaEntities,
+  ICityEntities,
+  INormalizedCitiesResponse,
+  SelectedLocationData,
+  SelectedLocation,
+};
