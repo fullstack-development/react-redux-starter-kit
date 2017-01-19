@@ -10,9 +10,9 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import { reducer as categorySelectReducer } from './features/categorySelect';
-import { reducer as locationSelectReducer, actions } from './features/locationSelect';
-import { reducer as dynamicFieldsReducer } from './features/dynamicFields';
+import * as categorySelectFeature from './features/categorySelect';
+import * as locationSelectFeature from './features/locationSelect';
+import * as dynamicFieldsFeature from './features/dynamicFields';
 import { IModule, IReduxState, IExtraArguments } from './shared/types/app';
 import Api from './shared/api/Api';
 
@@ -35,9 +35,9 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
   }, {} as ReducersMapObject);
 
   const reducer: Reducer<IReduxState> = combineReducers<IReduxState>({
-    categorySelect: categorySelectReducer,
-    locationSelect: locationSelectReducer,
-    dynamicFields: dynamicFieldsReducer,
+    categorySelect: categorySelectFeature.reducer,
+    locationSelect: locationSelectFeature.reducer,
+    dynamicFields: dynamicFieldsFeature.reducer,
     ...modulesReducers,
   });
 
@@ -50,7 +50,8 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
     ),
   );
 
-  sagaMiddleware.run(actions.saga(extraArguments));
+  sagaMiddleware.run(locationSelectFeature.actions.saga(extraArguments));
+  sagaMiddleware.run(dynamicFieldsFeature.actions.saga(extraArguments));
 
   return store;
 }

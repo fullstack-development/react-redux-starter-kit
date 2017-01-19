@@ -1,4 +1,4 @@
-import initialState from '../initial';
+import initialState from '../data/initial';
 import { Map, fromJS } from 'immutable';
 import { IAction } from 'shared/types/app';
 import { IReduxState } from '../../namespace';

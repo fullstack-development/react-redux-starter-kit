@@ -10,7 +10,7 @@ import {
   IFlatFormProperties,
   IFormProperties,
   IFields,
-} from '../namespace';
+} from '../../namespace';
 
 function selectFields(state: IReduxState): IFields {
   return state.data.fields;
