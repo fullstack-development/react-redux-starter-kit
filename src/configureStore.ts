@@ -52,6 +52,7 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
 
   sagaMiddleware.run(locationSelectFeature.actions.saga(extraArguments));
   sagaMiddleware.run(dynamicFieldsFeature.actions.saga(extraArguments));
+  sagaMiddleware.run(categorySelectFeature.actions.saga(extraArguments));
 
   return store;
 }

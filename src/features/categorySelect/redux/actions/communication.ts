@@ -1,22 +1,7 @@
-import { AsyncActionCreatorResult, IAction, IExtraArguments } from 'shared/types/app';
-import { Dispatch } from 'redux';
+import { IAction } from 'shared/types/app';
 
-function loadCategories(): AsyncActionCreatorResult {
-  return async(
-    dispatch: Dispatch<any>,
-    getState: Function,
-    { api }: IExtraArguments
-  ) => {
-    dispatch({ type: 'CATEGORY_SELECT:LOAD_CATEGORIES' });
-
-    try {
-      const response = await api.loadCategories();
-      dispatch({ type: 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED', payload: response });
-    } catch (err) {
-      dispatch({ type: 'CATEGORY_SELECT:LOAD_CATEGORIES_FAILED', payload: err });
-      throw err;
-    }
-  };
+function loadCategories(): IAction {
+  return { type: 'CATEGORY_SELECT:LOAD_CATEGORIES' };
 }
 
 function chooseCategory(categoryUid: number): IAction {

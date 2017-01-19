@@ -5,11 +5,11 @@ function loadFields(uid: number): IAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS', payload: uid };
 }
 
-function loadFieldsSuccessed(data: IFieldsResponse) {
+function loadFieldsSuccessed(data: IFieldsResponse): IAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', payload: data };
 }
 
-function loadFieldsFailed(message: string) {
+function loadFieldsFailed(message: string): IAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', payload: message };
 }
 

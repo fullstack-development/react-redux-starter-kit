@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { IReduxState, ICategory, ICommunication } from '../namespace';
+import { IReduxState, ICategory, ICommunication } from '../../namespace';
 
 function selectCategories(state: IReduxState): ICategory[] {
   return state.data.options;
@@ -21,13 +21,6 @@ function selectCategoriesFetching(state: IReduxState): ICommunication {
 }
 
 export {
-  selectCategories,
-  selectChosenCategory,
-  selectChosenCategoryObject,
-  selectCategoriesFetching,
-};
-
-export default {
   selectCategories,
   selectChosenCategory,
   selectChosenCategoryObject,

@@ -1,6 +1,6 @@
 import reducer from './reducers';
-import selectors from './selectors';
 import actions from './actions';
-import initial from './initial';
+import * as selectors from './data/selectors';
+import initial from './data/initial';
 
 export { reducer, selectors, actions, initial };

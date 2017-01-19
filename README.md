@@ -6,3 +6,18 @@ Modular starter kit for React+Redux+React Router projects.
 
 ## To build localy
 ```npm run build``` for development purposes without watch mode (see build folder)
+
+## Features
+- [x] Typescript 2.x
+- [x] React
+- [x] React-router
+- [x] Redux
+- [x] Redux-saga for side-effects
+- [x] Stylus
+- [x] BEM methodology
+- [x] Webpack 2.x
+- [x] Hot reload
+- [x] Tests (karma, mocha, chai, sinon)
+- [ ] Code coverage (Istanbul) - temporary disabled (waiting for Phantom es6 support or typescript compiler generators support for es5 target)
+- [ ] Isomorphic
+- [ ] ~100% tests coverage

@@ -21,25 +21,30 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 use: [
                     {
+                        loader: 'babel-loader',
+                        options: { presets: ['es2015'], plugins: ["transform-regenerator"]}
+                    },
+                    {
                         loader: 'ts-loader',
                         options: {
                             logLevel: 'debug',
                             compilerOptions: {
-                                inlineSourceMap: true
+                                inlineSourceMap: true,
+                                target: 'es6',
+                                "module": "commonjs",
                             }
                         }
-                    },
-                    'tslint-loader'
+                    }
                 ],
             },
             // instrument only testing sources with Istanbul
-            {
-                test: /\.tsx?$/,
-                enforce: 'post',
-                include: path.resolve('src'),
-                exclude: [/node_modules/, /-tests?\.tsx?$/],
-                loader: 'sourcemap-istanbul-instrumenter-loader?esModules&produceSourceMap'
-            },
+            // {
+            //     test: /\.tsx?$/,
+            //     enforce: 'post',
+            //     include: path.resolve('src'),
+            //     exclude: [/node_modules/, /-tests?\.tsx?$/],
+            //     loader: 'sourcemap-istanbul-instrumenter-loader?esModules&produceSourceMap'
+            // },
             {
                 test: /\.(png|svg)/,
                 loader: 'url-loader',

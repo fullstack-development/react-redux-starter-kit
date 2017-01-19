@@ -1,4 +1,4 @@
-import { IReduxState } from '../namespace';
+import { IReduxState } from '../../namespace';
 
 const initialState: IReduxState = {
   communications: {
