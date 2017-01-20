@@ -21,3 +21,4 @@ Modular starter kit for React+Redux+React Router projects.
 - [ ] Code coverage (Istanbul) - temporary disabled (waiting for Phantom es6 support or typescript compiler generators support for es5 target)
 - [ ] Isomorphic
 - [ ] ~100% tests coverage
+- [ ] Code splitting (async chunks loading)

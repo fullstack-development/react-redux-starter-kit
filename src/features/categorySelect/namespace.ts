@@ -9,17 +9,20 @@ interface ICommunication {
   error: string;
 }
 
+interface IData {
+  options: ICategory[];
+  selected: number | null;
+};
+
 interface IReduxState {
   communications: {
     categoriesFetching: ICommunication;
   };
-  data: {
-    options: ICategory[];
-    selected?: number;
-  };
+  data: IData;
 }
 
 export {
+  IData,
   IReduxState,
   ICommunication,
   ICategory,

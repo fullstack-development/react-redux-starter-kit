@@ -16,7 +16,7 @@ interface IOwnProps {
 
 interface IStateProps {
   options: Select.Option[];
-  value: number | undefined;
+  value: number | null;
 }
 
 interface IDispatchProps {
@@ -65,7 +65,7 @@ class CategorySelect extends React.Component<IProps, {}> {
         </ControlLabel>
         <SelectInput
           name="category"
-          value={value}
+          value={value ? value : undefined}
           options={options}
           onChange={this.onSelect}
         />
