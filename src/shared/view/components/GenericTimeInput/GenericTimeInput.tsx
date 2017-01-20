@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import TextInput, { EventType } from './../../elements/TextInput/TextInput';
 import InputGroup from '../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
@@ -11,13 +11,13 @@ interface IState {
   isEdited: boolean;
 }
 
-class GenericTimeInput extends Component<GenericField.Props, IState> {
+class GenericTimeInput extends Component<GenericFieldProps, IState> {
   private pattern = '^([0-1][0-9]|2[0-3]):([0-5]{2})$';
   private errors = {
     invalid: 'Incorrect Time format, expected hh:mm',
   };
 
-  constructor(props: GenericField.Props) {
+  constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
       errors: [],

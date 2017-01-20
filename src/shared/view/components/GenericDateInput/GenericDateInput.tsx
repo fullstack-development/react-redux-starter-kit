@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import TextInput, { EventType } from './../../elements/TextInput/TextInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 import FormEvent = React.FormEvent;
 import Component = React.Component;
 
-type IProps = GenericField.Props;
+type IProps = GenericFieldProps;
 interface IState {
   errors: string[];
   isEdited: boolean;
@@ -20,7 +20,7 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
     required: 'Field is required',
   };
 
-  constructor(props: GenericField.Props) {
+  constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
       errors: [],

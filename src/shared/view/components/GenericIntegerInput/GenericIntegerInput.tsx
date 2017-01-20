@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import TextInput, { EventType } from 'shared/view/elements/TextInput/TextInput';
 import InputGroup from 'shared/view/elements/InputGroup/InputGroup';
 
@@ -9,7 +9,7 @@ import FormEvent = React.FormEvent;
 import Component = React.Component;
 import Errors from '../../elements/Errors/Errors';
 
-interface IProps extends GenericField.Props {
+interface IProps extends GenericFieldProps {
   minimum: number;
   maximum: number;
   isFloat?: boolean;
@@ -28,7 +28,7 @@ class GenericIntegerInput extends React.Component<IProps, IState> {
     invalid: 'Number value is incorrect',
   };
 
-  constructor(props: GenericField.Props) {
+  constructor(props: IProps) {
     super(props);
     this.state = {
       errors: [],

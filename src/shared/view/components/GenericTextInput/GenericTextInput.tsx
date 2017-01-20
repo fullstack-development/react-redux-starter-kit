@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormControlProps } from 'react-bootstrap';
 import { bind } from 'decko';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import TextInput from './../../elements/TextInput/TextInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
@@ -10,7 +10,7 @@ import SyntheticEvent = React.SyntheticEvent;
 import FormEvent = React.FormEvent;
 import Component = React.Component;
 
-interface IProps extends GenericField.Props {
+interface IProps extends GenericFieldProps {
   minLength: number;
   maxLength: number;
 }
@@ -21,7 +21,7 @@ interface IState {
 }
 
 class GenericTextInput extends React.Component<IProps, IState> {
-  constructor(props: GenericField.Props) {
+  constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
       errors: [],

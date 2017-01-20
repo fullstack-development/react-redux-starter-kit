@@ -14,13 +14,12 @@ import GenericDropdownInput from 'shared/view/components/GenericDropdownInput/Ge
 import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDateInput';
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
-import GenericInputsNamespace from 'shared/view/components/GenericInput/GenericInput';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
 
 import EventHandler = React.EventHandler;
 import FormEvent = React.FormEvent;
 import ComponentClass = React.ComponentClass;
 import StatelessComponent = React.StatelessComponent;
-import FieldValue = GenericInputsNamespace.FieldValue;
 
 interface IOwnProps {
   category?: number;

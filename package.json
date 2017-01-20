@@ -10,7 +10,8 @@
     "watch:prod": "NODE_ENV=development node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.js",
     "build:dev": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js",
     "build:prod": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/prod.config.js",
-    "dev": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:dev\""
+    "dev": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:dev\"",
+    "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\""
   },
   "repository": {
     "type": "git",
@@ -82,8 +83,8 @@
     "typescript": "^2.0.10",
     "typings": "^2.0.0",
     "url-loader": "^0.5.7",
-    "webpack": "^2.1.0-beta.27",
-    "webpack-dev-server": "^2.2.0-rc.0"
+    "webpack": "^2.2.0",
+    "webpack-dev-server": "^2.2.0"
   },
   "dependencies": {
     "@types/axios": "^0.9.34",

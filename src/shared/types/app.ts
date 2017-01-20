@@ -8,9 +8,22 @@ import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
 import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
+abstract class Module<S> implements IModule<S> {
+  protected onConnectRequestHandler?: (reducers: Array<IReducerData<any>>) => void;
+
+  public set onConnectRequest(handler: (reducers: Array<IReducerData<any>>) => void) {
+    this.onConnectRequestHandler = handler;
+  };
+}
+
 interface IModule<S> {
-  getRoutes?: () => ReactElement<Route.RouteProps> | Array<ReactElement<Route.RouteProps>>;
-  getReducer?: () => { name: string; reducer: Reducer<S> };
+  getRoutes?(): ReactElement<Route.RouteProps> | Array<ReactElement<Route.RouteProps>>;
+  getReducer?(): IReducerData<S>;
+}
+
+interface IReducerData<S> {
+  name: string;
+  reducer: Reducer<S>;
 }
 
 interface IExtraArguments {
@@ -33,6 +46,8 @@ type AsyncActionCreatorResult = ThunkAction<Promise<void>, IReduxState, IExtraAr
 type AsyncActionCreator = ActionCreator<AsyncActionCreatorResult>;
 
 export {
+  Module,
+  IReducerData,
   IModule,
   IAction,
   IExtraArguments,

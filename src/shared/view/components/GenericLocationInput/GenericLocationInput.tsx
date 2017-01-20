@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Geosuggest from 'react-geosuggest';
 import { bind } from 'decko';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 
@@ -28,8 +28,8 @@ function isGeosuggestOption(item: IGeosuggestOption | any): item is IGeosuggestO
   return item.label && typeof item.label === 'string';
 }
 
-class GenericLocationInput extends React.Component<GenericField.Props, IState> {
-  constructor(props: GenericField.Props) {
+class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
+  constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
       errors: [],

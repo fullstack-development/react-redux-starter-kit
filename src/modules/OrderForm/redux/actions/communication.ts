@@ -2,7 +2,7 @@ import { IReduxState, IExtraArguments, AsyncActionCreatorResult } from 'shared/t
 import { Dispatch } from 'redux';
 import { IOrderFormResponse, IOrderFormRequest } from '../../namespace';
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
-import { Namespace as LocationSelect, selectors as locationSelectors  } from 'features/locationSelect';
+import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
 
 type Point = LocationSelect.IPoint;
 type SelectedLocation = LocationSelect.SelectedLocation;

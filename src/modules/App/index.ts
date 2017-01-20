@@ -1,2 +1,1 @@
-import App from './view/App';
-export { App };
+export { default as App } from './view/App';

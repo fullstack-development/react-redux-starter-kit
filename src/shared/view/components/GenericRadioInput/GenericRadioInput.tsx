@@ -4,7 +4,7 @@ import { bind } from 'decko';
 import * as block from 'bem-cn';
 import * as s from './GenericRadioInput.styl';
 import Errors from 'shared/view/elements/Errors/Errors';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 
 interface IState {
@@ -12,10 +12,10 @@ interface IState {
   isEdited: boolean;
 }
 
-class GenericRadioInput extends React.Component<GenericField.Props, IState> {
+class GenericRadioInput extends React.Component<GenericFieldProps, IState> {
   private b = block('generic-radio-input');
 
-  constructor(props: GenericField.Props) {
+  constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
       errors: [],

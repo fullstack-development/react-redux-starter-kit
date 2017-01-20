@@ -4,11 +4,11 @@ import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bind } from 'decko';
-import { IReduxState, AsyncActionCreatorResult } from 'shared/types/app';
+import { IReduxState, AsyncActionCreatorResult, IReducerData } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import { LocationSelect, Namespace as LocationSelectNamespace } from 'features/locationSelect';
-import { CategorySelect } from 'features/categorySelect';
+import { CategorySelect, reducer as categorySelectReducer } from 'features/categorySelect';
 import { DynamicFields } from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 import { actions } from './../../redux';
@@ -135,8 +135,16 @@ class OrderFormLayout extends React.Component<IProps, IState> {
       (key: string) => Boolean(fields[key].errors.length),
     );
   }
-
 }
 
-export { IProps };
-export default connect<IStateProps, IDispatchProps, {}>(mapState, mapDispatch)(OrderFormLayout);
+const connectedComponent = connect<IStateProps, IDispatchProps, {}>(mapState, mapDispatch)(OrderFormLayout);
+
+function getView(): { component: typeof OrderFormLayout; reducers: Array<IReducerData<any>>; } {
+  return {
+    component: OrderFormLayout,
+    reducers: [{ name: 'categorySelect', reducer: categorySelectReducer }],
+  };
+}
+
+export { IProps, getView };
+export default connectedComponent;

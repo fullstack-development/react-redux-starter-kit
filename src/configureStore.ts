@@ -10,10 +10,9 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import * as categorySelectFeature from './features/categorySelect';
 import * as locationSelectFeature from './features/locationSelect';
 import * as dynamicFieldsFeature from './features/dynamicFields';
-import { IModule, IReduxState, IExtraArguments } from './shared/types/app';
+import { IModule, IReduxState, IExtraArguments, IReducerData } from './shared/types/app';
 import Api from './shared/api/Api';
 
 function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
@@ -25,21 +24,7 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
     thunk.withExtraArgument(extraArguments),
   ];
 
-  const modulesReducers: ReducersMapObject = modules.reduce((reducers, module) => {
-    if (module.getReducer) {
-      const reducerData = module.getReducer();
-      reducers[reducerData.name] = reducerData.reducer;
-    }
-
-    return reducers;
-  }, {} as ReducersMapObject);
-
-  const reducer: Reducer<IReduxState> = combineReducers<IReduxState>({
-    categorySelect: categorySelectFeature.reducer,
-    locationSelect: locationSelectFeature.reducer,
-    dynamicFields: dynamicFieldsFeature.reducer,
-    ...modulesReducers,
-  });
+  const reducer: Reducer<IReduxState> = createReducer(modules);
 
   const store = createStore(
     reducer,
@@ -52,9 +37,28 @@ function configureStore(modules: Array<IModule<any>>, api: Api): Store<Object> {
 
   sagaMiddleware.run(locationSelectFeature.actions.saga(extraArguments));
   sagaMiddleware.run(dynamicFieldsFeature.actions.saga(extraArguments));
-  sagaMiddleware.run(categorySelectFeature.actions.saga(extraArguments));
 
   return store;
 }
 
+function createReducer(modules: Array<IModule<any>>, extraReducers?: Array<IReducerData<any>>): Reducer<IReduxState> {
+  const reducersData = modules
+    .filter((module: IModule<any>) => module.getReducer)
+    .map((module: IModule<any>) => module.getReducer ? module.getReducer() : null)
+    .concat(extraReducers || []);
+
+  const modulesReducers: ReducersMapObject = reducersData.reduce(
+    (reducers: ReducersMapObject, reducerData: IReducerData<any>) => {
+      return { ...reducers, [reducerData.name]: reducerData.reducer };
+    }, {} as ReducersMapObject,
+  );
+
+  return combineReducers<IReduxState>({
+    locationSelect: locationSelectFeature.reducer,
+    dynamicFields: dynamicFieldsFeature.reducer,
+    ...modulesReducers,
+  });
+}
+
+export { createReducer };
 export default configureStore;

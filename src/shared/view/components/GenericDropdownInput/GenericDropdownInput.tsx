@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as Select from 'react-select';
 import { bind } from 'decko';
 import Errors from 'shared/view/elements/Errors/Errors';
-import GenericField from '../GenericInput/GenericInput';
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import SelectInput from '../../elements/SelectInput/SelectInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 
@@ -12,8 +12,8 @@ interface IState {
   isEdited: boolean;
 }
 
-class GenericDropdownInput extends React.PureComponent<GenericField.Props, IState> {
-  constructor(props: GenericField.Props) {
+class GenericDropdownInput extends React.PureComponent<GenericFieldProps, IState> {
+  constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
       errors: [],

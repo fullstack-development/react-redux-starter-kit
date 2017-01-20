@@ -3,21 +3,29 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    target: 'web',
     context: path.resolve(__dirname, '..', 'src'),
     entry: {
         app: './index.tsx',
+        shared: [
+            './shared/index.ts',
+        ],
         vendor: [
             'axios',
             'react',
             'redux',
             'bem-cn',
+            'reselect',
             'immutable',
             'react-dom',
             'react-redux',
             'redux-thunk',
             'react-router',
+            'react-select',
             'react-bootstrap',
             'react-tap-event-plugin',
+            'bootstrap/dist/css/bootstrap.min.css',
+            './assets/bootstrap.paper.min.css',
         ]
     },
     output: {
@@ -69,6 +77,11 @@ module.exports = {
             name: 'vendor',
             filename: 'js/vendor.bundle.js',
             minChunks: Infinity,
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'shared',
+            filename: 'js/shared.bundle.js',
+            chunks: ['app']
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
