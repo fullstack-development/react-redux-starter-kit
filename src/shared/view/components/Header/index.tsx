@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
 import { RouterOnContext } from 'react-router';
 import { bind } from 'decko';
-import * as s from './styles.styl';
 import * as block from 'bem-cn';
+import * as s from './styles.styl';
 import SyntheticEvent = React.SyntheticEvent;
 
 interface IProps {

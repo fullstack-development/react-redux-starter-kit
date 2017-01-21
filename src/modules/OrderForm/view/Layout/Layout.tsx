@@ -8,7 +8,11 @@ import { IReduxState, AsyncActionCreatorResult, IReducerData } from 'shared/type
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import { LocationSelect, Namespace as LocationSelectNamespace } from 'features/locationSelect';
-import { CategorySelect, reducer as categorySelectReducer } from 'features/categorySelect';
+import {
+  CategorySelect,
+  reducer as categorySelectReducer,
+  actions as categorySelectActions,
+} from 'features/categorySelect';
 import { DynamicFields } from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 import { actions } from './../../redux';
@@ -139,10 +143,11 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
 const connectedComponent = connect<IStateProps, IDispatchProps, {}>(mapState, mapDispatch)(OrderFormLayout);
 
-function getView(): { component: typeof OrderFormLayout; reducers: Array<IReducerData<any>>; } {
+function getView(): { component: typeof OrderFormLayout; reducers: Array<IReducerData<any>>; saga: Function; } {
   return {
     component: OrderFormLayout,
     reducers: [{ name: 'categorySelect', reducer: categorySelectReducer }],
+    saga: categorySelectActions.saga,
   };
 }
 

@@ -9,9 +9,9 @@ import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
 abstract class Module<S> implements IModule<S> {
-  protected onConnectRequestHandler?: (reducers: Array<IReducerData<any>>) => void;
+  protected onConnectRequestHandler?: (reducers: Array<IReducerData<any>>, saga: Function) => void;
 
-  public set onConnectRequest(handler: (reducers: Array<IReducerData<any>>) => void) {
+  public set onConnectRequest(handler: (reducers: Array<IReducerData<any>>, saga: Function) => void) {
     this.onConnectRequestHandler = handler;
   };
 }

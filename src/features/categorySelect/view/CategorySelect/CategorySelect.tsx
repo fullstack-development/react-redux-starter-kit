@@ -49,7 +49,7 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
-class CategorySelect extends React.Component<IProps, {}> {
+class CategorySelect extends React.PureComponent<IProps, {}> {
   public componentDidMount() {
     this.props.loadCategories();
   }

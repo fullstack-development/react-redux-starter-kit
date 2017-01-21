@@ -6,11 +6,11 @@
   "scripts": {
     "test": "export PHANTOMJS_BIN=node_modules/phantomjs-prebuilt/bin/phantomjs && ./node_modules/.bin/karma start karma.config.js",
     "start-server": "node_modules/.bin/ts-node --compiler typescript --compilerOptions '{\"target\": \"es5\", \"module\": \"commonjs\"}' server/index.ts",
-    "watch:dev": "NODE_ENV=development node_modules/.bin/webpack-dev-server --hot --inline --watch --progress --colors --config webpack/dev.config.js",
+    "watch:dev": "NODE_ENV=development node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
     "watch:prod": "NODE_ENV=development node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.js",
     "build:dev": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js",
     "build:prod": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/prod.config.js",
-    "dev": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:dev\"",
+    "dev": "node_modules/.bin/concurrently  -k \"npm run start-server\" \"npm run watch:dev\"",
     "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\""
   },
   "repository": {
@@ -67,6 +67,7 @@
     "mocha": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "react-addons-test-utils": "^15.4.1",
+    "react-hot-loader": "^1.3.1",
     "redux-mock-store": "^1.2.1",
     "sinon": "^2.0.0-pre.5",
     "source-map-loader": "^0.1.5",

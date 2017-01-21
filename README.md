@@ -16,9 +16,9 @@ Modular starter kit for React+Redux+React Router projects.
 - [x] Stylus
 - [x] BEM methodology
 - [x] Webpack 2.x
-- [x] Hot reload
 - [x] Tests (karma, mocha, chai, sinon)
+- [ ] Code splitting (async chunks loading)
 - [ ] Code coverage (Istanbul) - temporary disabled (waiting for Phantom es6 support or typescript compiler generators support for es5 target)
+- [ ] Hot reload
 - [ ] Isomorphic
 - [ ] ~100% tests coverage
-- [ ] Code splitting (async chunks loading)

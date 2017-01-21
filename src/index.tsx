@@ -16,7 +16,7 @@ injectTapEventPlugin();
 const history = browserHistory;
 const modules: Array<Module<any>> = [ new HomeModule(), new OrderFormModule() ];
 const api = new Api('/api');
-const store = configureStore(modules, api);
+const { store, runSaga } = configureStore(modules, api);
 const routes = createRoutes(modules);
 const rootComponent = (
   <Provider store={store}>
@@ -28,9 +28,10 @@ modules.forEach((module: Module<any>) => {
   module.onConnectRequest = onModuleConnectRequest;
 });
 
-function onModuleConnectRequest(reducers: Array<IReducerData<any>>) {
+function onModuleConnectRequest(reducers: Array<IReducerData<any>>, saga: Function) {
   const newReducer = createReducer(modules, reducers);
   store.replaceReducer(newReducer);
+  runSaga(saga({ api }));
 }
 
 /* Start application */

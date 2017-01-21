@@ -14,10 +14,9 @@ class OrderForm extends Module<Namespace.IReduxState> {
     return { name: 'orderForm', reducer };
   }
 
-  @bind
-  private notifyAboutConnection(reducers: Array<IReducerData<any>>) {
+  private notifyAboutConnection(reducers: Array<IReducerData<any>>, saga: Function) {
     if (this.onConnectRequestHandler) {
-      this.onConnectRequestHandler(reducers);
+      this.onConnectRequestHandler(reducers, saga);
     }
   }
 
@@ -25,7 +24,7 @@ class OrderForm extends Module<Namespace.IReduxState> {
   private getLayoutComponent(nextState: RouterState, cb: (error: any, component?: RouteComponent) => void) {
     (require as any).ensure([], () => {
       const view = require('./view/Layout/Layout').getView();
-      this.notifyAboutConnection(view.reducers);
+      this.notifyAboutConnection(view.reducers, view.saga);
       cb(null, view.component);
     });
   }

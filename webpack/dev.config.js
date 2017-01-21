@@ -42,6 +42,7 @@ module.exports = {
             {
                 test: /\.(ts|tsx)$/,
                 use: [
+                    // { loader: 'react-hot-loader' }, // temporary disabled
                     {
                         loader: 'ts-loader',
                         options: { logLevel: 'debug' }
@@ -59,7 +60,7 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                loader: ['style-loader', 'css-loader?modules', 'stylus-loader']
+                loader: ['style-loader', 'css-loader?modules&importLoaders=1', 'stylus-loader']
             },
             {
                 test: /\.(png|svg)/,
@@ -91,12 +92,15 @@ module.exports = {
             'process.env.NODE_ENV': JSON.stringify('development'),
             'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
         }),
+        new webpack.NamedModulesPlugin(),
     ],
 
     devServer: {
         contentBase: path.resolve('..', 'build'),
         host: '0.0.0.0',
         port: 8080,
+        inline: true,
+        lazy: false,
         hot: true,
         historyApiFallback: true,
         stats: 'errors-only',
