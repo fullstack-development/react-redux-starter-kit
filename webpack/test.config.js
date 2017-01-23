@@ -2,6 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+    entry: {
+        tests: './../karma.entry.js'
+    },
     context: path.resolve(__dirname, '..', 'src'),
     resolve: {
         modules: ['node_modules', 'src'],
