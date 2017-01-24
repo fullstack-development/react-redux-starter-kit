@@ -35,6 +35,4 @@ function onModuleConnectRequest(reducers: Array<IReducerData<any>>, saga: Functi
 }
 
 /* Start application */
-if (process.env.NODE_ENV !== 'test') {
-  ReactDOM.render(rootComponent, document.getElementById('root'));
-}
+ReactDOM.render(rootComponent, document.getElementById('root'));

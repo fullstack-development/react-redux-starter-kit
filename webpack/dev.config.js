@@ -43,10 +43,7 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 use: [
                     // { loader: 'react-hot-loader' }, // temporary disabled
-                    {
-                        loader: 'ts-loader',
-                        options: { logLevel: 'debug' }
-                    },
+                    { loader: 'awesome-typescript-loader' },
                     'tslint-loader'
                 ],
             },
