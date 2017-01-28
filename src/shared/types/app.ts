@@ -9,9 +9,9 @@ import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
 abstract class Module<S> implements IModule<S> {
-  protected onConnectRequestHandler?: (reducers: Array<IReducerData<any>>, saga: Function) => void;
+  protected onConnectRequestHandler?: (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void;
 
-  public set onConnectRequest(handler: (reducers: Array<IReducerData<any>>, saga: Function) => void) {
+  public set onConnectRequest(handler: (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void) {
     this.onConnectRequestHandler = handler;
   };
 }
@@ -26,7 +26,7 @@ interface IReducerData<S> {
   reducer: Reducer<S>;
 }
 
-interface IExtraArguments {
+interface IDependencies {
   api: Api;
 }
 
@@ -42,7 +42,14 @@ interface IReduxState {
   orderForm: HomeModuleNamespace.IReduxState;
 }
 
-type AsyncActionCreatorResult = ThunkAction<Promise<void>, IReduxState, IExtraArguments>;
+interface IModuleEntryData {
+  component: React.ReactType;
+  reducers: Array<IReducerData<any>>;
+  sagas: RootSaga[];
+}
+
+type RootSaga = (deps: IDependencies) => void;
+type AsyncActionCreatorResult = ThunkAction<Promise<void>, IReduxState, IDependencies>;
 type AsyncActionCreator = ActionCreator<AsyncActionCreatorResult>;
 
 export {
@@ -50,8 +57,10 @@ export {
   IReducerData,
   IModule,
   IAction,
-  IExtraArguments,
+  IDependencies,
   IReduxState,
+  IModuleEntryData,
+  RootSaga,
   AsyncActionCreator,
   AsyncActionCreatorResult
 };

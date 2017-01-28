@@ -3,14 +3,14 @@ import * as block from 'bem-cn';
 import { PageHeader } from 'react-bootstrap';
 import { SearchRepositoriesInput } from 'features/searchRepositories';
 import * as GitHubIcon from './images/github-icon.png';
-import * as s from './Layout.styl';
+import './Layout.styl';
 
 function Search(props: {}) {
   const b = block('index-page');
   return (
     <div>
       <PageHeader>
-        <img className={s[b('github-icon')()]} src={GitHubIcon} height="64"/>
+        <img className={b('github-icon')()} src={GitHubIcon} height="64"/>
         <small>
           Search repositories on github
         </small>

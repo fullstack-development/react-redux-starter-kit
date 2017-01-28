@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import * as Select from 'react-select';
-import * as s from './styles.styl';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,6 +8,7 @@ import { actions, selectors } from '../../redux';
 import { bind } from 'decko';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import { IReduxState } from '../../namespace';
+import './styles.styl';
 
 interface IOwnProps {
   onCategoryChosen: Function;
@@ -60,7 +60,7 @@ class CategorySelect extends React.PureComponent<IProps, {}> {
 
     return (
       <FormGroup>
-        <ControlLabel className={s[b('select-label')()]}>
+        <ControlLabel className={b('select-label')()}>
           <b>Choose category:</b>
         </ControlLabel>
         <SelectInput

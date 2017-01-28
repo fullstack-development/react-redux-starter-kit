@@ -3,7 +3,7 @@ import * as block from 'bem-cn';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'assets/bootstrap.paper.min.css';
 import 'shared/view/styles/base.styl';
-import * as styles from './styles.styl';
+import './styles.styl';
 import './fonts';
 
 class App extends React.Component<{}, {}> {
@@ -12,7 +12,7 @@ class App extends React.Component<{}, {}> {
     const { children } = this.props;
 
     return (
-      <div className={styles[b()]}>
+      <div className={b}>
         {children}
       </div>
     );
