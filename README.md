@@ -22,3 +22,10 @@ Modular starter kit for React+Redux+React Router projects.
 - [ ] Hot reload
 - [ ] Isomorphic
 - [ ] ~100% tests coverage
+
+## Запуск под Windows
+
+1) ```SET TS_NODE_COMPILER_OPTIONS={"target": "es5", "module": "commonjs"}```
+
+2) ```npm run dev-windows```
+

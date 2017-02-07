@@ -6,12 +6,38 @@
   "scripts": {
     "test": "export PHANTOMJS_BIN=node_modules/phantomjs-prebuilt/bin/phantomjs && ./node_modules/.bin/karma start karma.config.js",
     "start-server": "node_modules/.bin/ts-node --compiler typescript --compilerOptions '{\"target\": \"es5\", \"module\": \"commonjs\"}' server/index.ts",
-    "watch:dev": "NODE_ENV=development node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
-    "watch:prod": "NODE_ENV=development node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.js",
-    "build:dev": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js",
-    "build:prod": "NODE_ENV=production node_modules/.bin/webpack --progress --colors --config webpack/prod.config.js",
+    "watch:dev": "better-npm-run watch:dev",
+    "watch:prod": "better-npm-run watch:prod",
+    "build:dev": "better-npm-run build:dev",
+    "build:prod": "better-npm-run build:prod",
     "dev": "node_modules/.bin/concurrently  -k \"npm run start-server\" \"npm run watch:dev\"",
     "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\""
+  },
+  "betterScripts": {
+    "watch:dev": {
+      "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "watch:prod": {
+      "command": "node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build:dev": {
+      "command": "node_modules/.bin/webpack --progress --colors --config webpack/dev.config.js",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "build:prod": {
+      "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.js",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
   },
   "repository": {
     "type": "git",
@@ -46,6 +72,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "better-npm-run": "^0.0.14",
     "chai": "^3.5.0",
     "concurrently": "^3.1.0",
     "css-loader": "^0.26.1",
