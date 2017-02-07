@@ -7,7 +7,7 @@ const prodConfig = Object.assign({}, devConfig);
 const stylLoader = {
     test: /\.styl$/,
     loader: ExtractTextPlugin.extract({
-        loader: 'css-loader?modules!stylus-loader'
+        loader: 'css-loader?modules!autoprefixer-loader?browsers=last 2 version!stylus-loader'
     })
 };
 
@@ -17,7 +17,7 @@ const cssLoader = {
         loader: 'css-loader',
         fallbackLoader: 'style-loader',
     })
-}
+};
 
 const scriptsLoader = {
     test: /\.(ts|tsx)$/,
