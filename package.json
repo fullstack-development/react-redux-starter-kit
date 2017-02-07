@@ -4,7 +4,7 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
-    "test": "export PHANTOMJS_BIN=node_modules/phantomjs-prebuilt/bin/phantomjs && ./node_modules/.bin/karma start karma.config.js",
+    "test": "better-npm-run test",
     "start-server": "node_modules/.bin/ts-node --compiler typescript --compilerOptions '{\"target\": \"es5\", \"module\": \"commonjs\"}' server/index.ts",
     "watch:dev": "better-npm-run watch:dev",
     "watch:prod": "better-npm-run watch:prod",
@@ -14,6 +14,9 @@
     "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\""
   },
   "betterScripts": {
+    "test": {
+      "command": "export PHANTOMJS_BIN=node_modules/phantomjs-prebuilt/bin/phantomjs && ./node_modules/.bin/karma start karma.config.js"
+    },
     "watch:dev": {
       "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
       "env": {
