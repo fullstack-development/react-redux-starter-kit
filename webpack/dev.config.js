@@ -57,7 +57,12 @@ module.exports = {
             },
             {
                 test: /\.styl$/,
-                loader: ['style-loader', 'css-loader?modules&importLoaders=1', 'stylus-loader']
+                loader: [
+                    'style-loader',
+                    'css-loader?modules&importLoaders=1',
+                    'autoprefixer-loader?browsers=last 2 version',
+                    'stylus-loader',
+                ],
             },
             {
                 test: /\.(png|svg)/,
