@@ -6,7 +6,7 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import createRoutes from './routes';
 import { HomeModule, OrderFormModule } from './modules';
 import configureStore, { createReducer } from './configureStore';
-import { Module, IReducerData } from './shared/types/app';
+import { Module, IReducerData, IDependencies, RootSaga } from './shared/types/app';
 import Api from './shared/api/Api';
 
 // Needed for onTouchTap: http://stackoverflow.com/a/34015469/988941
@@ -28,10 +28,10 @@ modules.forEach((module: Module<any>) => {
   module.onConnectRequest = onModuleConnectRequest;
 });
 
-function onModuleConnectRequest(reducers: Array<IReducerData<any>>, saga: Function) {
+function onModuleConnectRequest(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
   const newReducer = createReducer(modules, reducers);
   store.replaceReducer(newReducer);
-  runSaga(saga({ api }));
+  sagas.forEach((saga: RootSaga) => saga({ api }));
 }
 
 /* Start application */

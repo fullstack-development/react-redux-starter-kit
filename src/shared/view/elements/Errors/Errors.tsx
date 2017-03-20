@@ -1,6 +1,6 @@
 import * as React from 'react';
-import * as s from './Errors.styl';
 import * as block from 'bem-cn';
+import './Errors.styl';
 
 interface IProps {
   errors?: string[];
@@ -8,14 +8,13 @@ interface IProps {
 }
 
 const b = block('errors');
-s[b({ hidden: true })] = `${s[b()]} ${s.errors_hidden}`;
 
 function Errors({ hidden, errors = [] }: IProps) {
   return (
-    <div className={s[b({ hidden })]}>
+    <div className={b({ hidden })}>
       {
         errors.map((error: string, index: number) => (
-          <span key={index} className={s[b('error')()]}>{error}</span>
+          <span key={index} className={b('error')}>{error}</span>
         ))
       }
     </div>

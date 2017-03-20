@@ -7,9 +7,6 @@ module.exports = {
     context: path.resolve(__dirname, '..', 'src'),
     entry: {
         app: './index.tsx',
-        shared: [
-            './shared/index.ts',
-        ],
         vendor: [
             'axios',
             'react',
@@ -59,7 +56,7 @@ module.exports = {
                 test: /\.styl$/,
                 loader: [
                     'style-loader',
-                    'css-loader?modules&importLoaders=1',
+                    'css-loader?importLoaders=1',
                     'autoprefixer-loader?browsers=last 2 version',
                     'stylus-loader',
                 ],
@@ -75,16 +72,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(), // temporary disabled
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'js/vendor.bundle.js',
             minChunks: Infinity,
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'shared',
-            filename: 'js/shared.bundle.js',
-            chunks: ['app']
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -103,7 +95,7 @@ module.exports = {
         port: 8080,
         inline: true,
         lazy: false,
-        hot: true,
+        hot: false,
         historyApiFallback: true,
         stats: 'errors-only',
     }

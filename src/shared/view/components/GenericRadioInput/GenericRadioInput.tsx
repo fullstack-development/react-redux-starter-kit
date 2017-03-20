@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Radio, FormGroup } from 'react-bootstrap';
 import { bind } from 'decko';
 import * as block from 'bem-cn';
-import * as s from './GenericRadioInput.styl';
 import Errors from 'shared/view/elements/Errors/Errors';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
+import './GenericRadioInput.styl';
 
 interface IState {
   errors: string[];
@@ -34,14 +34,14 @@ class GenericRadioInput extends React.Component<GenericFieldProps, IState> {
 
     return (
      <InputGroup label={label}>
-        <FormGroup className={s[b('radios-group')]}>
+        <FormGroup className={b('radios-group')}>
           {
             options ? options.map((option: string, index: number) => (
                 <Radio
                   inline
                   key={index}
                   name={name}
-                  className={s[b('radio-button')()]}
+                  className={b('radio-button')()}
                   onChange={this.onChange(name, option)}
                 >
                   {option}

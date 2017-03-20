@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import { Form, FormGroup } from 'react-bootstrap';
-import * as s from './DynamicFields.styl';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions, selectors } from '../../redux';
@@ -15,6 +14,7 @@ import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDat
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import './DynamicFields.styl';
 
 import EventHandler = React.EventHandler;
 import FormEvent = React.FormEvent;
@@ -100,7 +100,7 @@ class DynamicFields extends React.Component<Props, IState> {
     const b = this.b;
 
     return (
-      <div className={s[b()]}>
+      <div className={b}>
         <FormGroup>
           <h4>Dynamic Fields</h4>
           {this.renderFields()}
@@ -153,7 +153,7 @@ class DynamicFields extends React.Component<Props, IState> {
           props.label = isRequired ? `${props.label}*` : props.label;
 
           return (
-            <div className={s[this.b('field')]} key={props.order}>
+            <div className={this.b('field')} key={props.order}>
               <Component
                 {...props}
                 required={isRequired}

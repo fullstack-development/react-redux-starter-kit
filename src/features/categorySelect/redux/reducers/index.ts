@@ -1,17 +1,18 @@
 import { initialCommunicationState, initialDataState } from '../data/initial';
 import { Map, fromJS } from 'immutable';
 import { IAction } from 'shared/types/app';
-import { IReduxState, ICommunication, IData } from '../../namespace';
+import { IReduxState, ICommunication, IData, Action } from '../../namespace';
 import { combineReducers, Reducer } from 'redux';
 
-function mainReducer(state: IData = initialDataState, { type, payload }: IAction): IData {
+function mainReducer(state: IData = initialDataState, action: Action): IData {
   const imState: Map<string, any> = fromJS(state);
 
-  switch (type) {
-  case `CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED`:
-    return imState.set('options', payload).toJS();
+  switch (action.type) {
+  case 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED':
+    // return { ...state, options: action.payload };
+    return imState.set('options', action.payload).toJS();
   case ('CATEGORY_SELECT:CATEGORY_SELECTED'):
-    return imState.set('selected', payload).toJS();
+    return imState.set('selected', action.payload).toJS();
   default:
     return state;
   }

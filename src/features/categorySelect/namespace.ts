@@ -1,3 +1,5 @@
+import { ICategoriesResponse } from 'shared/api/Api';
+
 interface ICategory {
   uid: number;
   name: string;
@@ -21,9 +23,15 @@ interface IReduxState {
   data: IData;
 }
 
+type Action =
+  { type: 'CATEGORY_SELECT:CATEGORY_SELECTED'; payload: number } |
+  { type: 'CATEGORY_SELECT:LOAD_CATEGORIES'; } |
+  { type: 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED'; payload: ICategoriesResponse; };
+
 export {
   IData,
   IReduxState,
   ICommunication,
   ICategory,
+  Action
 };

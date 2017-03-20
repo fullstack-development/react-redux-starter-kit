@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import * as s from './InputGroup.styl';
+import './InputGroup.styl';
 
 interface IProps {
   label?: string;
@@ -10,10 +10,10 @@ interface IProps {
 function InputGroup({ label, children }: IProps) {
   const b = block('input-group');
   return (
-    <div className={s[b()]}>
-      <label className={s[b('label-wrapper')()]}>
-        <span className={s[b('label')()]}>{label}</span>
-        <div className={s[b('input-wrapper')()]}>
+    <div className={b()}>
+      <label className={b('label-wrapper')()}>
+        <span className={b('label')()}>{label}</span>
+        <div className={b('input-wrapper')()}>
           {children}
         </div>
       </label>
