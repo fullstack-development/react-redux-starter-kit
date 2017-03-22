@@ -19,7 +19,7 @@ function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locat
 }
 
 function saveFields(): AsyncActionCreatorResult {
-  return async(dispatch: Dispatch<any>, getState: () => IReduxState, { api }: IDependencies) => {
+  return async (dispatch: Dispatch<any>, getState: () => IReduxState, { api }: IDependencies) => {
     dispatch({ type: 'HOME_MODULE:SAVE_FIELDS' });
     const state: IReduxState = getState();
 

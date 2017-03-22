@@ -11,7 +11,7 @@ import { IReduxState } from '../../namespace';
 import './styles.scss';
 
 interface IOwnProps {
-  onCategoryChosen: Function;
+  onCategoryChosen(category: number): void;
 }
 
 interface IStateProps {
@@ -24,9 +24,7 @@ interface IDispatchProps {
   chooseCategory: typeof actions.chooseCategory;
 }
 
-interface IProps extends IDispatchProps, IStateProps {
-  onCategoryChosen: (category: number) => void;
-}
+type IProps = IOwnProps & IDispatchProps & IStateProps;
 
 function mapStateToProps(state: any): IStateProps {
   const categoriesState: IReduxState = state.categorySelect;

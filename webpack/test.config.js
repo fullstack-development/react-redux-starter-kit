@@ -33,21 +33,21 @@ module.exports = {
                             logLevel: 'debug',
                             compilerOptions: {
                                 inlineSourceMap: true,
-                                target: 'es6',
-                                "module": "commonjs",
+                                target: 'es5',
+                                module: 'commonjs',
                             }
                         }
                     }
                 ],
             },
             // instrument only testing sources with Istanbul
-            // {
-            //     test: /\.tsx?$/,
-            //     enforce: 'post',
-            //     include: path.resolve('src'),
-            //     exclude: [/node_modules/, /-tests?\.tsx?$/],
-            //     loader: 'sourcemap-istanbul-instrumenter-loader?esModules&produceSourceMap'
-            // },
+            {
+                test: /\.tsx?$/,
+                enforce: 'post',
+                include: path.resolve('src'),
+                exclude: [/node_modules/, /-tests?\.tsx?$/],
+                loader: 'sourcemap-istanbul-instrumenter-loader?esModules&produceSourceMap'
+            },
             {
                 test: /\.(png|svg)/,
                 loader: 'url-loader',

@@ -1,7 +1,7 @@
 {
   "extends": [
-    "tslint:latest",
-    "tslint-react"
+    "./node_modules/tslint-react/tslint-react.json",
+    "tslint:latest"
   ],
   "rulesDirectory": "./node_modules/tslint-eslint-rules/dist/rules",
   "jsRules": {
@@ -50,6 +50,7 @@
     ]
   },
   "rules": {
+    "jsx-boolean-value": "never",
     "no-var-requires": false,
     "no-console": false,
     "jsx-no-multiline-js": false,

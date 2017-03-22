@@ -21,13 +21,10 @@ interface IState {
 }
 
 class GenericTextInput extends React.Component<IProps, IState> {
-  constructor(props: GenericFieldProps) {
-    super(props);
-    this.state = {
-      errors: [],
-      isEdited: false,
-    };
-  }
+  public static: IState = {
+    errors: [],
+    isEdited: false,
+  };
 
   public componentDidMount() {
     this.changeValue(''); // first changing with validation, but without showing errors
