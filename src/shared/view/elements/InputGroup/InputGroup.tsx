@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import './InputGroup.styl';
+import './InputGroup.scss';
 
 interface IProps {
   label?: string;

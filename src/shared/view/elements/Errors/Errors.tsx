@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import './Errors.styl';
+import './Errors.scss';
 
 interface IProps {
   errors?: string[];

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { PageHeader, Label } from 'react-bootstrap';
-import './Layout.styl';
+import './Layout.scss';
 import * as block from 'bem-cn';
 
 function Description(): React.ReactElement<Object> {

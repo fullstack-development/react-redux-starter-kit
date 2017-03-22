@@ -5,7 +5,7 @@ import * as block from 'bem-cn';
 import Errors from 'shared/view/elements/Errors/Errors';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
-import './GenericRadioInput.styl';
+import './GenericRadioInput.scss';
 
 interface IState {
   errors: string[];

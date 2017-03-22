@@ -16,7 +16,7 @@ import {
 import { DynamicFields } from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 import { actions } from './../../redux';
-import './Layout.styl';
+import './Layout.scss';
 import FormEvent = React.FormEvent;
 
 interface IDispatchProps {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as Select from 'react-select';
 import 'react-select/dist/react-select.min.css';
-import './SelectInput.styl';
+import './SelectInput.scss';
 
 type Props = Select.ReactSelectProps;
 

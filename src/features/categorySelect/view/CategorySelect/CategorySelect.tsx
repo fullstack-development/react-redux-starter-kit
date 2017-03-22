@@ -8,7 +8,7 @@ import { actions, selectors } from '../../redux';
 import { bind } from 'decko';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import { IReduxState } from '../../namespace';
-import './styles.styl';
+import './styles.scss';
 
 interface IOwnProps {
   onCategoryChosen: Function;

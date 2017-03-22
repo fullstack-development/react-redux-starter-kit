@@ -3,7 +3,7 @@ import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
 import { RouterOnContext } from 'react-router';
 import { bind } from 'decko';
 import * as block from 'bem-cn';
-import './styles.styl';
+import './styles.scss';
 import SyntheticEvent = React.SyntheticEvent;
 
 interface IProps {

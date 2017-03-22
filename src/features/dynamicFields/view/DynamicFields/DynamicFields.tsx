@@ -14,7 +14,7 @@ import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDat
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-import './DynamicFields.styl';
+import './DynamicFields.scss';
 
 import EventHandler = React.EventHandler;
 import FormEvent = React.FormEvent;

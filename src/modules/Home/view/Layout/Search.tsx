@@ -3,7 +3,7 @@ import * as block from 'bem-cn';
 import { PageHeader } from 'react-bootstrap';
 import { SearchRepositoriesInput } from 'features/searchRepositories';
 import * as GitHubIcon from './images/github-icon.png';
-import './Layout.styl';
+import './Layout.scss';
 
 function Search(props: {}) {
   const b = block('index-page');

@@ -1,0 +1,14 @@
+.errors {
+  display: block;
+  min-height: 25px;
+  order: 1;
+
+  &_hidden {
+    visibility: collapse;
+  }
+
+  &__error {
+    display: block;
+    color: red;
+  }
+}

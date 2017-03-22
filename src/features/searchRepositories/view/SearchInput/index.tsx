@@ -4,7 +4,7 @@ import { FormControl, Form, Button, Glyphicon } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { IReduxState as IAppReduxState } from 'shared/types/app';
-import './styles.styl';
+import './styles.scss';
 
 interface IProps {
   value?: string;

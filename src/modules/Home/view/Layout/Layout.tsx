@@ -6,7 +6,7 @@ import Header from '../../../../shared/view/components/Header/index';
 import { SearchRepositoriesInput } from '../../../../features/searchRepositories';
 import Description from './Description';
 import Search from './Search';
-import './Layout.styl';
+import './Layout.scss';
 
 class HomeLayout extends React.PureComponent<{}, {}> {
   private b = block('index-page');

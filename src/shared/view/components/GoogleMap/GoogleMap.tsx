@@ -3,7 +3,7 @@ import * as block from 'bem-cn';
 import { google } from 'google-maps';
 import { bind } from 'decko';
 import MapOptions = google.maps.MapOptions;
-import './GoogleMap.styl';
+import './GoogleMap.scss';
 
 type GCRequest = google.maps.GeocoderRequest;
 type GCResult = google.maps.GeocoderResult;

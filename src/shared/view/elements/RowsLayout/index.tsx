@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Grid, Row, Panel } from 'react-bootstrap';
 import * as block from 'bem-cn';
-import './styles.styl';
+import './styles.scss';
 
 interface IProps {
   children?: React.ReactNode;

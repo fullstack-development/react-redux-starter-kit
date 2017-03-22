@@ -9,7 +9,7 @@ import { actions, selectors } from './../../../redux';
 import { SelectedLocationData, IReduxState, IArea, ICity } from '../../../namespace';
 import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
-import './LocationSelect.styl';
+import './LocationSelect.scss';
 
 interface IOwnProps {
   onChange?: (location: SelectedLocationData) => void;
