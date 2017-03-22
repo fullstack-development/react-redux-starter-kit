@@ -1,6 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const postcssReporter = require('postcss-reporter');
+const postcssEasyImport = require('postcss-easy-import');
+const postcssSCSS = require('postcss-scss');
+const autoprefixer = require('autoprefixer');
+const stylelint = require('stylelint');
+const doiuse = require('doiuse');
+const precss = require('precss');
+
 module.exports = {
     entry: {
         tests: './../karma.entry.js'
@@ -17,8 +25,36 @@ module.exports = {
                 loader:  ['style-loader', 'css-loader']
             },
             {
-                test: /\.styl$/,
-                loader: ['style-loader', 'css-loader?modules', 'stylus-loader']
+                test: /\.scss$/,
+                loader: [
+                    'style-loader',
+                    'css-loader?importLoaders=1',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            syntax: postcssSCSS,
+                            plugins: function () {
+                                return [
+                                    postcssEasyImport({
+                                        extensions: '.scss',
+                                    }),
+                                    stylelint(),
+                                    doiuse({
+                                        browsers:['ie >= 11', 'last 2 versions'],
+                                        ignore: ['flexbox', 'rem'],
+                                        ignoreFiles: ['**/normalize.css'],
+                                    }),
+                                    postcssReporter({
+                                        clearReportedMessages: true,
+                                        throwError: true,
+                                    }),
+                                    precss(),
+                                    autoprefixer({browsers: ['last 2 versions']}),
+                                ];
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(ts|tsx)$/,
