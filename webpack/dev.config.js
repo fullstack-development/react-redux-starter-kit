@@ -2,14 +2,19 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const postcssReporter = require('postcss-reporter');
+const postcssEasyImport = require('postcss-easy-import');
+const postcssSCSS = require('postcss-scss');
+const autoprefixer = require('autoprefixer');
+const stylelint = require('stylelint');
+const doiuse = require('doiuse');
+const precss = require('precss');
+
 module.exports = {
     target: 'web',
     context: path.resolve(__dirname, '..', 'src'),
     entry: {
         app: './index.tsx',
-        shared: [
-            './shared/index.ts',
-        ],
         vendor: [
             'axios',
             'react',
@@ -56,12 +61,35 @@ module.exports = {
                 loader:  ['style-loader', 'css-loader']
             },
             {
-                test: /\.styl$/,
+                test: /\.scss$/,
                 loader: [
                     'style-loader',
-                    'css-loader?modules&importLoaders=1',
-                    'autoprefixer-loader?browsers=last 2 version',
-                    'stylus-loader',
+                    'css-loader?importLoaders=1',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            syntax: postcssSCSS,
+                            plugins: function () {
+                                return [
+                                    postcssEasyImport({
+                                        extensions: '.scss',
+                                    }),
+                                    stylelint(),
+                                    doiuse({
+                                        browsers:['ie >= 11', 'last 2 versions'],
+                                        ignore: ['flexbox', 'rem'],
+                                        ignoreFiles: ['**/normalize.css'],
+                                    }),
+                                    postcssReporter({
+                                        clearReportedMessages: true,
+                                        throwError: true,
+                                    }),
+                                    precss(),
+                                    autoprefixer({browsers: ['last 2 versions']}),
+                                ];
+                            },
+                        },
+                    },
                 ],
             },
             {
@@ -75,16 +103,11 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(), // temporary disabled
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'js/vendor.bundle.js',
             minChunks: Infinity,
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'shared',
-            filename: 'js/shared.bundle.js',
-            chunks: ['app']
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -103,7 +126,7 @@ module.exports = {
         port: 8080,
         inline: true,
         lazy: false,
-        hot: true,
+        hot: false,
         historyApiFallback: true,
         stats: 'errors-only',
     }

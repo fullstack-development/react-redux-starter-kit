@@ -3,7 +3,7 @@ import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
 import { RouterOnContext } from 'react-router';
 import { bind } from 'decko';
 import * as block from 'bem-cn';
-import * as s from './styles.styl';
+import './styles.scss';
 import SyntheticEvent = React.SyntheticEvent;
 
 interface IProps {
@@ -28,7 +28,7 @@ class Header extends React.PureComponent<IProps, {}> {
     return (
       <Navbar>
         <Navbar.Header>
-          <Navbar.Brand onClick={this.onBrandClick} className={s[b('brand')()]}>
+          <Navbar.Brand onClick={this.onBrandClick} className={b('brand')()}>
             FSD Starter kit
           </Navbar.Brand>
         </Navbar.Header>

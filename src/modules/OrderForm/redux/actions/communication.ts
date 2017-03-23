@@ -1,4 +1,4 @@
-import { IReduxState, IExtraArguments, AsyncActionCreatorResult } from 'shared/types/app';
+import { IReduxState, IDependencies, AsyncActionCreatorResult } from 'shared/types/app';
 import { Dispatch } from 'redux';
 import { IOrderFormResponse, IOrderFormRequest } from '../../namespace';
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
@@ -19,7 +19,7 @@ function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locat
 }
 
 function saveFields(): AsyncActionCreatorResult {
-  return async(dispatch: Dispatch<any>, getState: () => IReduxState, { api }: IExtraArguments) => {
+  return async (dispatch: Dispatch<any>, getState: () => IReduxState, { api }: IDependencies) => {
     dispatch({ type: 'HOME_MODULE:SAVE_FIELDS' });
     const state: IReduxState = getState();
 

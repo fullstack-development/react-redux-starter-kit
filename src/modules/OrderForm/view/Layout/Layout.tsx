@@ -4,7 +4,7 @@ import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bind } from 'decko';
-import { IReduxState, AsyncActionCreatorResult, IReducerData } from 'shared/types/app';
+import { IReduxState, AsyncActionCreatorResult, IReducerData, IModuleEntryData } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import { LocationSelect, Namespace as LocationSelectNamespace } from 'features/locationSelect';
@@ -16,7 +16,7 @@ import {
 import { DynamicFields } from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 import { actions } from './../../redux';
-import * as s from './Layout.styl';
+import './Layout.scss';
 import FormEvent = React.FormEvent;
 
 interface IDispatchProps {
@@ -77,8 +77,8 @@ class OrderFormLayout extends React.Component<IProps, IState> {
         footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}
         headerContent={<Header />}
       >
-        <div className={s[b()]}>
-          <div className={s[b('content')()]}>
+        <div className={b()}>
+          <div className={b('content')}>
             <Form onSubmit={this.onFormSubmit}>
               <Panel header={<LocationSelect onChange={this.onLocationSelected} />} />
               <Panel header={<CategorySelect onCategoryChosen={this.onCategorySelected} />} />
@@ -86,8 +86,8 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
               <FormGroup className="clearfix">
                 {isSubmitting ? <span>Saving...</span> : null}
-                {submittingResult ? <span className={s[b('result')]}>{submittingResult}</span> : null}
-                <Button type="submit" bsStyle="primary" className={s[b('submit')()]} disabled={!canSubmit}>
+                {submittingResult ? <span className={b('result')}>{submittingResult}</span> : null}
+                <Button type="submit" bsStyle="primary" className={b('submit')()} disabled={!canSubmit}>
                   Submit
                 </Button>
               </FormGroup>
@@ -143,11 +143,11 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
 const connectedComponent = connect<IStateProps, IDispatchProps, {}>(mapState, mapDispatch)(OrderFormLayout);
 
-function getView(): { component: typeof OrderFormLayout; reducers: Array<IReducerData<any>>; saga: Function; } {
+function getView(): IModuleEntryData {
   return {
     component: OrderFormLayout,
     reducers: [{ name: 'categorySelect', reducer: categorySelectReducer }],
-    saga: categorySelectActions.saga,
+    sagas: [categorySelectActions.saga],
   };
 }
 

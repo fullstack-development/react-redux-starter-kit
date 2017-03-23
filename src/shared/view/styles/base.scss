@@ -1,0 +1,35 @@
+@import './elements/*';
+
+html {
+  color: #272727;
+  background: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;  // TODO: use rems everywhere in the project
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: #272727;
+
+  &:hover {
+    text-decoration: none;
+    color: #171717;
+  }
+
+  &:focus {
+    text-decoration: none;
+    color: #272727;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}

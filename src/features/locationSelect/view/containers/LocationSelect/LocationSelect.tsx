@@ -9,7 +9,7 @@ import { actions, selectors } from './../../../redux';
 import { SelectedLocationData, IReduxState, IArea, ICity } from '../../../namespace';
 import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
-import * as s from './LocationSelect.styl';
+import './LocationSelect.scss';
 
 interface IOwnProps {
   onChange?: (location: SelectedLocationData) => void;
@@ -89,31 +89,31 @@ class LocationSelect extends React.Component<Props, {}> {
     const showSelectedAreaOnMap: boolean = this.props.showLocation;
 
     return (
-      <div className={s[b()]}>
-        <div className={s[b('form')]}>
-          <label className={s[b('label')()]}><b>Location:</b></label>
+      <div className={b}>
+        <div className={b('form')}>
+          <label className={b('label')}><b>Location:</b></label>
           <SelectInput
-            className={s[b('input')()]}
+            className={b('input')()}
             options={options}
             value={selectedArea ? selectedArea.id : ''}
             onChange={this.onSelectLocation}
           />
           <FormControl
             value={selectedArea ? selectedArea.name : ''}
-            className={s[b('input')()]}
+            className={b('input')()}
             type="text"
             placeholder="Area"
             disabled
           />
           <FormControl
-            className={s[b('input')()]}
+            className={b('input')()}
             value={selectedCity ? selectedCity.name : ''}
             type="text"
             placeholder="City"
             disabled
           />
         </div>
-        <div className={s[b('map')()]}>
+        <div className={b('map')}>
           <GoogleMap
             lat={selectedArea ? selectedArea.point.lat : undefined}
             lng={selectedArea ? selectedArea.point.lng : 0}

@@ -1,0 +1,16 @@
+.input-group {
+  &__label-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  &__label {
+    width: 20%;
+    font-weight: 700;
+  }
+
+  &__input-wrapper {
+    width: 80%;
+  }
+}

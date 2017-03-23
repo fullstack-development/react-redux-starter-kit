@@ -12,18 +12,18 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import * as locationSelectFeature from './features/locationSelect';
 import * as dynamicFieldsFeature from './features/dynamicFields';
-import { IModule, IReduxState, IExtraArguments, IReducerData } from './shared/types/app';
+import { IModule, IReduxState, IDependencies, IReducerData } from './shared/types/app';
 import Api from './shared/api/Api';
-import { Saga } from 'redux-saga';
+import { SagaMiddleware } from 'redux-saga';
 
 interface IStoreData {
   store: Store<IReduxState>;
-  runSaga: (saga: Saga, ...args: any[]) => void;
+  runSaga: SagaMiddleware['run'];
 }
 
 function configureStore(modules: Array<IModule<any>>, api: Api): IStoreData {
   const sagaMiddleware = createSagaMiddleware();
-  const extraArguments: IExtraArguments = { api };
+  const extraArguments: IDependencies = { api };
 
   const middlewares: Middleware[] = [
     sagaMiddleware,

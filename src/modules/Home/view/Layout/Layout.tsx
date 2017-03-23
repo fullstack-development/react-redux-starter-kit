@@ -6,7 +6,7 @@ import Header from '../../../../shared/view/components/Header/index';
 import { SearchRepositoriesInput } from '../../../../features/searchRepositories';
 import Description from './Description';
 import Search from './Search';
-import * as s from './Layout.styl';
+import './Layout.scss';
 
 class HomeLayout extends React.PureComponent<{}, {}> {
   private b = block('index-page');
@@ -25,8 +25,8 @@ class HomeLayout extends React.PureComponent<{}, {}> {
             </Header>
         )}
       >
-        <div className={s[b()]}>
-          <div className={s[b('content')]}>
+        <div className={b()}>
+          <div className={b('content')}>
             <Description />
             <Search />
           </div>

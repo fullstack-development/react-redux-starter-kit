@@ -3,7 +3,7 @@ import * as block from 'bem-cn';
 import { google } from 'google-maps';
 import { bind } from 'decko';
 import MapOptions = google.maps.MapOptions;
-import * as s from './GoogleMap.styl';
+import './GoogleMap.scss';
 
 type GCRequest = google.maps.GeocoderRequest;
 type GCResult = google.maps.GeocoderResult;
@@ -74,8 +74,8 @@ class GoogleMap extends React.Component<IProps, null> {
   public render() {
     const b = this.b;
     return (
-      <div className={s[b()]}>
-        <div className={s[b('map')()]} ref={this.onMapRef} />
+      <div className={b()}>
+        <div className={b('map')} ref={this.onMapRef} />
       </div>
     );
   }

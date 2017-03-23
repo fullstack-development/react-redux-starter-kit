@@ -8,7 +8,7 @@ interface ICategoriesResponse {
 }
 
 interface IFieldsResponse {
-  fields: Object;
+  fields: object;
 }
 
 class Api {

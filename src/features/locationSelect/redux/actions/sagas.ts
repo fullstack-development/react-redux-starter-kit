@@ -1,15 +1,10 @@
-import { takeLatest, Saga } from 'redux-saga';
-import { put, call } from 'redux-saga/effects';
-import { IExtraArguments } from 'shared/types/app';
+import { SagaIterator } from 'redux-saga';
+import { put, call, takeLatest } from 'redux-saga/effects';
+import { IDependencies } from 'shared/types/app';
 import { normalizeCities } from '../data/schema';
 import { INormalizedCitiesResponse } from '../../namespace';
 
-function getSaga({ api }: IExtraArguments): Saga {
-
-  function* watchLoadCities() {
-    yield takeLatest('LOCATION_SELECT:LOAD_CITIES', executeLoadCities);
-  }
-
+function getSaga({ api }: IDependencies): () => SagaIterator {
   function* executeLoadCities() {
     try {
       const response = yield call(api.loadCities);
@@ -21,8 +16,10 @@ function getSaga({ api }: IExtraArguments): Saga {
     }
   }
 
-  function* saga() {
-    yield [watchLoadCities()];
+  function* saga(): SagaIterator {
+    yield [
+      takeLatest('LOCATION_SELECT:LOAD_CITIES', executeLoadCities),
+    ];
   }
 
   return saga;

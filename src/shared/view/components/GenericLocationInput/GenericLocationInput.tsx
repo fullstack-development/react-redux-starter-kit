@@ -13,7 +13,7 @@ interface IGeosuggestOption {
     lng: number;
   };
   gmaps?: {
-    address_components: Object[];
+    address_components: Array<object>;
     formatted_address: string;
     // few other fields; check this https://developers.google.com/maps/documentation/javascript/reference#GeocoderResult
   };

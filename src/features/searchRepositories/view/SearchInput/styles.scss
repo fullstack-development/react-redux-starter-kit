@@ -1,0 +1,13 @@
+.search-repositories-input {
+  position: relative;
+
+  & &__input {
+    padding-right: 55px;
+  }
+
+  &__submit {
+    position: absolute;
+    right: 2px;
+    bottom: 5px;
+  }
+}

@@ -1,11 +1,11 @@
-import { IExtraArguments } from 'shared/types/app';
+import { IDependencies } from 'shared/types/app';
 import { takeLatest } from 'redux-saga';
 import { put } from 'redux-saga/effects';
 import { ICategoriesResponse } from 'shared/api/Api';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { call } from 'redux-saga/effects';
 
-function getSaga({ api }: IExtraArguments) {
+function getSaga({ api }: IDependencies) {
 
   function* watchLoadCategories() {
     yield takeLatest('CATEGORY_SELECT:LOAD_CATEGORIES', executeCategoriesLoading);

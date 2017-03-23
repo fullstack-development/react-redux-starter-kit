@@ -3,11 +3,47 @@ const devConfig = require('./dev.config.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const postcssReporter = require('postcss-reporter');
+const postcssEasyImport = require('postcss-easy-import');
+const postcssSCSS = require('postcss-scss');
+const autoprefixer = require('autoprefixer');
+const stylelint = require('stylelint');
+const doiuse = require('doiuse');
+const precss = require('precss');
+
 const prodConfig = Object.assign({}, devConfig);
 const stylLoader = {
     test: /\.styl$/,
     loader: ExtractTextPlugin.extract({
-        loader: 'css-loader?modules!autoprefixer-loader?browsers=last 2 version!stylus-loader'
+        loader: [
+            'style-loader',
+            'css-loader?importLoaders=1',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    syntax: postcssSCSS,
+                    plugins: function () {
+                        return [
+                            postcssEasyImport({
+                                extensions: '.scss',
+                            }),
+                            stylelint(),
+                            doiuse({
+                                browsers:['ie >= 11', 'last 2 versions'],
+                                ignore: ['flexbox', 'rem'],
+                                ignoreFiles: ['**/normalize.css'],
+                            }),
+                            postcssReporter({
+                                clearReportedMessages: true,
+                                throwError: true,
+                            }),
+                            precss(),
+                            autoprefixer({browsers: ['last 2 versions']}),
+                        ];
+                    },
+                },
+            },
+        ],
     })
 };
 

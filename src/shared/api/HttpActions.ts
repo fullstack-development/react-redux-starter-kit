@@ -15,7 +15,7 @@ class HttpActions {
     this.request = axios.create(config);
   }
 
-  public get<T>(url: string, params?: Object, options?: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
+  public get<T>(url: string, params?: object, options?: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     const config: Axios.AxiosXHRConfigBase<T> = { params, ...options };
     return this.request.get(url, config);
   }
@@ -28,12 +28,12 @@ class HttpActions {
     return this.request.patch(url, data, options);
   }
 
-  public del<T>(url: string, data: any, params: Object, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
+  public del<T>(url: string, data: any, params: object, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     const config: Axios.AxiosXHRConfig<T> = { url, data, params, ...options };
     return this.request.delete(url, config);
   }
 
-  public put<T>(url: string, data: any, params: Object, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
+  public put<T>(url: string, data: any, params: object, options: Axios.AxiosXHRConfigBase<T>): AsyncRequest<T> {
     return this.request.put(url, data, { params, ...options });
   }
 }

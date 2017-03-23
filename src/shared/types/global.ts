@@ -14,7 +14,7 @@ declare module 'react-tap-event-plugin';
 declare module 'react-geosuggest';
 declare module 'bem-cn';
 declare module 'normalizr';
-declare module '*.styl';
+declare module '*.scss';
 declare module '*.png';
 declare module 'shared/*';
 declare module 'decko';
