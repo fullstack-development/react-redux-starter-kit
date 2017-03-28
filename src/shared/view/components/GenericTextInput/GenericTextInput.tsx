@@ -21,7 +21,7 @@ interface IState {
 }
 
 class GenericTextInput extends React.Component<IProps, IState> {
-  public static: IState = {
+  public state: IState = {
     errors: [],
     isEdited: false,
   };

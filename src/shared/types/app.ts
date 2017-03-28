@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Route } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { ThunkAction, ActionCreator, Store } from 'redux';
 import { Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
@@ -24,7 +24,7 @@ abstract class Module<S, C> {
     this._store = store;
   }
 
-  public getRoutes?(): ReactElement<Route.RouteProps> | Array<ReactElement<Route.RouteProps>>;
+  public getRoutes?(): ReactElement<RouteComponentProps<any>> | Array<ReactElement<RouteComponentProps<any>>>;
   public getReducer?(): IReducerData<S>;
   public getSaga?(deps: IDependencies): () => SagaIterator;
 
@@ -67,7 +67,7 @@ interface IReduxState {
 }
 
 interface IModuleEntryData {
-  component: React.ReactType;
+  component: React.ComponentClass<any> | React.StatelessComponent<any>;
   reducers: Array<IReducerData<any>>;
   sagas: RootSaga[];
 }

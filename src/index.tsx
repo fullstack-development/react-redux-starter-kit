@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { BrowserRouter as Router } from 'react-router-dom';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import createRoutes from './routes';
 import { HomeModule, OrderFormModule } from './modules';
@@ -21,24 +21,20 @@ const modules = {
   },
 };
 
-const history = browserHistory;
 const modulesArray = modules.toArray();
 const dependencies = { api: new Api('/api') };
-const { store, runSaga } = configureStore(modulesArray, dependencies);
-const routes = createRoutes(modulesArray);
-
 const connectedSagas: RootSaga[] = [];
 const connectedReducers: Array<IReducerData<any>> = [];
 
+modulesArray.forEach((module: Module<any, any>) => module.onConnectRequest = onModuleConnectRequest);
+
+const { store, runSaga } = configureStore(modulesArray, dependencies);
+const routes = createRoutes(modulesArray);
 const rootComponent = (
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <Router>{routes}</Router>
   </Provider>
 );
-
-modulesArray.forEach((module: Module<any, any>) => {
-  module.onConnectRequest = onModuleConnectRequest;
-});
 
 function onModuleConnectRequest(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
   reducers.forEach((reducer: IReducerData<any>) => {

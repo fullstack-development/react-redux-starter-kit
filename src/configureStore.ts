@@ -69,8 +69,6 @@ function createReducer(
   );
 
   return combineReducers<IReduxState>({
-    locationSelect: locationSelectFeature.reducer,
-    dynamicFields: dynamicFieldsFeature.reducer,
     ...modulesReducers,
   });
 }
