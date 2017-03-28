@@ -9,7 +9,6 @@ const postcssSCSS = require('postcss-scss');
 const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const doiuse = require('doiuse');
-const precss = require('precss');
 
 const prodConfig = Object.assign({}, devConfig);
 const stylLoader = {
@@ -18,6 +17,17 @@ const stylLoader = {
         loader: [
             'style-loader',
             'css-loader?importLoaders=1',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    plugins: function () {
+                        return [
+                            autoprefixer({browsers: ['last 2 versions']}),
+                        ];
+                    },
+                },
+            },
+            'sass-loader',
             {
                 loader: 'postcss-loader',
                 options: {
@@ -37,8 +47,6 @@ const stylLoader = {
                                 clearReportedMessages: true,
                                 throwError: true,
                             }),
-                            precss(),
-                            autoprefixer({browsers: ['last 2 versions']}),
                         ];
                     },
                 },
