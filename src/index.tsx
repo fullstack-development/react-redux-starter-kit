@@ -13,25 +13,49 @@ import Api from './shared/api/Api';
 injectTapEventPlugin();
 
 /* Prepare main app elements */
+const modules = {
+  home: new HomeModule(),
+  tenders: new OrderFormModule(),
+  toArray(): Array<Module<any, any>> {
+    return Object.keys(this).filter(key => key !== 'toArray').map(key => this[key]);
+  },
+};
+
 const history = browserHistory;
-const modules: Array<Module<any>> = [ new HomeModule(), new OrderFormModule() ];
-const api = new Api('/api');
-const { store, runSaga } = configureStore(modules, api);
-const routes = createRoutes(modules);
+const modulesArray = modules.toArray();
+const dependencies = { api: new Api('/api') };
+const { store, runSaga } = configureStore(modulesArray, dependencies);
+const routes = createRoutes(modulesArray);
+
+const connectedSagas: RootSaga[] = [];
+const connectedReducers: Array<IReducerData<any>> = [];
+
 const rootComponent = (
   <Provider store={store}>
     <Router history={history} routes={routes} />
   </Provider>
 );
 
-modules.forEach((module: Module<any>) => {
+modulesArray.forEach((module: Module<any, any>) => {
   module.onConnectRequest = onModuleConnectRequest;
 });
 
 function onModuleConnectRequest(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
-  const newReducer = createReducer(modules, reducers);
+  reducers.forEach((reducer: IReducerData<any>) => {
+    if (!connectedReducers.find((r: IReducerData<any>) => r.name === reducer.name)) {
+      connectedReducers.push(reducer);
+    }
+  });
+
+  sagas.forEach((saga: RootSaga) => {
+    if (!connectedSagas.includes(saga)) {
+      runSaga(saga(dependencies));
+      connectedSagas.push(saga);
+    }
+  });
+
+  const newReducer = createReducer(modulesArray, connectedReducers);
   store.replaceReducer(newReducer);
-  sagas.forEach((saga: RootSaga) => saga({ api }));
 }
 
 /* Start application */

@@ -8,12 +8,8 @@ import { IReduxState, AsyncActionCreatorResult, IReducerData, IModuleEntryData }
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import { LocationSelect, Namespace as LocationSelectNamespace } from 'features/locationSelect';
-import {
-  CategorySelect,
-  reducer as categorySelectReducer,
-  actions as categorySelectActions,
-} from 'features/categorySelect';
-import { DynamicFields } from 'features/dynamicFields';
+import * as categorySelectFeature from 'features/categorySelect';
+import * as dynamicFieldsFeature from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 import { actions } from './../../redux';
 import './Layout.scss';
@@ -51,6 +47,9 @@ function mapState(state: IReduxState): IStateProps {
     submittingResult: state.orderForm.data ? state.orderForm.data.message : '',
   };
 }
+
+const { DynamicFields } = dynamicFieldsFeature;
+const { CategorySelect } = categorySelectFeature;
 
 class OrderFormLayout extends React.Component<IProps, IState> {
 
@@ -146,8 +145,14 @@ const connectedComponent = connect<IStateProps, IDispatchProps, {}>(mapState, ma
 function getView(): IModuleEntryData {
   return {
     component: OrderFormLayout,
-    reducers: [{ name: 'categorySelect', reducer: categorySelectReducer }],
-    sagas: [categorySelectActions.saga],
+    reducers: [
+      { name: 'categorySelect', reducer: categorySelectFeature.reducer },
+      { name: 'dynamicFields', reducer: dynamicFieldsFeature.reducer },
+    ],
+    sagas: [
+      categorySelectFeature.actions.saga,
+      dynamicFieldsFeature.actions.saga,
+    ],
   };
 }
 

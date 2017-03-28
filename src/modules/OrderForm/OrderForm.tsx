@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Route, RouterState, RouteComponent } from 'react-router';
 import { bind } from 'decko';
 import { reducer } from './redux';
-import * as Namespace from './namespace';
+import * as NS from './namespace';
 import { Module, IReducerData, RootSaga, IModuleEntryData } from 'shared/types/app';
 
-class OrderForm extends Module<Namespace.IReduxState> {
+class OrderForm extends Module<NS.IReduxState, {}> {
   public getRoutes() {
     return <Route key="order" path="order" getComponent={this.getLayoutComponent} />;
   }
@@ -14,7 +14,7 @@ class OrderForm extends Module<Namespace.IReduxState> {
     return { name: 'orderForm', reducer };
   }
 
-  private notifyAboutConnection(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
+  protected notifyAboutConnection(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
     if (this.onConnectRequestHandler) {
       this.onConnectRequestHandler(reducers, sagas);
     }
@@ -30,5 +30,5 @@ class OrderForm extends Module<Namespace.IReduxState> {
   }
 }
 
-export { Namespace };
+export { NS as Namespace };
 export default OrderForm;
