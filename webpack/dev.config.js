@@ -8,7 +8,6 @@ const postcssSCSS = require('postcss-scss');
 const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const doiuse = require('doiuse');
-const precss = require('precss');
 
 module.exports = {
     target: 'web',
@@ -68,6 +67,17 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
+                            plugins: function () {
+                                return [
+                                    autoprefixer({browsers: ['last 2 versions']}),
+                                ];
+                            },
+                        },
+                    },
+                    'sass-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
                             syntax: postcssSCSS,
                             plugins: function () {
                                 return [
@@ -84,8 +94,6 @@ module.exports = {
                                         clearReportedMessages: true,
                                         throwError: true,
                                     }),
-                                    precss(),
-                                    autoprefixer({browsers: ['last 2 versions']}),
                                 ];
                             },
                         },

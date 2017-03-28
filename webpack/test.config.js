@@ -7,7 +7,6 @@ const postcssSCSS = require('postcss-scss');
 const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const doiuse = require('doiuse');
-const precss = require('precss');
 
 module.exports = {
     entry: {
@@ -32,24 +31,27 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
+                            plugins: function () {
+                                return [
+                                    autoprefixer({browsers: ['last 2 versions']}),
+                                ];
+                            },
+                        },
+                    },
+                    'sass-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
                             syntax: postcssSCSS,
                             plugins: function () {
                                 return [
                                     postcssEasyImport({
                                         extensions: '.scss',
                                     }),
-                                    stylelint(),
-                                    doiuse({
-                                        browsers:['ie >= 11', 'last 2 versions'],
-                                        ignore: ['flexbox', 'rem'],
-                                        ignoreFiles: ['**/normalize.css'],
-                                    }),
                                     postcssReporter({
                                         clearReportedMessages: true,
                                         throwError: true,
                                     }),
-                                    precss(),
-                                    autoprefixer({browsers: ['last 2 versions']}),
                                 ];
                             },
                         },
@@ -59,10 +61,6 @@ module.exports = {
             {
                 test: /\.(ts|tsx)$/,
                 use: [
-                    {
-                        loader: 'babel-loader',
-                        options: { presets: ['es2015'], plugins: ["transform-regenerator"]}
-                    },
                     {
                         loader: 'ts-loader',
                         options: {
