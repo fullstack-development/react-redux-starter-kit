@@ -160,6 +160,6 @@
     "typescript": "^2.3.0-dev.20170322",
     "typings": "^2.1.0",
     "url-loader": "^0.5.8",
-    "webpack": "^2.3.0"
+    "webpack": "^2.3.2"
   }
 }
