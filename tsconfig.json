@@ -9,7 +9,8 @@
     "jsx": "react",
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "noUnusedLocals": true
   },
   "include": [
     "src/**/*"

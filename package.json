@@ -146,6 +146,7 @@
     "react-bootstrap": "^0.30.8",
     "react-dom": "^15.4.2",
     "react-geosuggest": "^2.1.0",
+    "react-hot-loader": "^3.0.0-beta.6",
     "react-redux": "^4.4.6",
     "react-router-dom": "^4.0.0",
     "react-select": "^1.0.0-rc.3",
@@ -157,7 +158,7 @@
     "stylelint": "^7.9.0",
     "stylelint-order": "^0.4.1",
     "ts-loader": "^2.0.2",
-    "typescript": "^2.3.0-dev.20170322",
+    "typescript": "^2.3.2",
     "typings": "^2.1.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.0"

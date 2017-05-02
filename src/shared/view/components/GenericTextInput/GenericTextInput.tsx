@@ -6,7 +6,6 @@ import TextInput from './../../elements/TextInput/TextInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 
-import SyntheticEvent = React.SyntheticEvent;
 import FormEvent = React.FormEvent;
 import Component = React.Component;
 

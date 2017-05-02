@@ -1,13 +1,11 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import { google } from 'google-maps';
 import { bind } from 'decko';
 import MapOptions = google.maps.MapOptions;
 import './GoogleMap.scss';
 
 type GCRequest = google.maps.GeocoderRequest;
 type GCResult = google.maps.GeocoderResult;
-type GCStatus = google.maps.GeocoderStatus;
 type GCAddressComponent = google.maps.GeocoderAddressComponent;
 
 interface IProps {

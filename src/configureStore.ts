@@ -13,11 +13,11 @@ import createSagaMiddleware from 'redux-saga';
 import * as locationSelectFeature from './features/locationSelect';
 import * as dynamicFieldsFeature from './features/dynamicFields';
 import { Module, IReduxState, IDependencies, IReducerData } from './shared/types/app';
-import Api from './shared/api/Api';
 import { SagaMiddleware } from 'redux-saga';
 
 interface IStoreData {
   store: Store<IReduxState>;
+  reducer: Reducer<IReduxState>;
   runSaga: SagaMiddleware['run'];
 }
 
@@ -50,6 +50,7 @@ function configureStore(modules: Array<Module<any, any>>, deps: IDependencies): 
 
   return {
     store,
+    reducer,
     runSaga: sagaMiddleware.run,
   };
 }

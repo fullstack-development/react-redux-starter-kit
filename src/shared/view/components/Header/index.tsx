@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
-import { StaticRouter } from 'react-router';
 import { bind } from 'decko';
 import * as block from 'bem-cn';
 import './styles.scss';
-import SyntheticEvent = React.SyntheticEvent;
 
 interface IProps {
   children?: React.ReactNode;
@@ -36,7 +34,7 @@ class Header extends React.PureComponent<IProps, {}> {
   }
 
   @bind
-  private onNavItemClick(eventKey: string, e: SyntheticEvent<{}>) {
+  private onNavItemClick(eventKey: string) {
     if (this.props.onLinkClick) {
       switch (eventKey) {
       case 'order':

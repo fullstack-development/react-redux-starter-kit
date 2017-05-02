@@ -5,7 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { bind } from 'decko';
-import { IReduxState, AsyncActionCreatorResult, IReducerData, IModuleEntryData } from 'shared/types/app';
+import { IReduxState, AsyncActionCreatorResult, IModuleEntryData } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import * as locationSelectFeature from 'features/locationSelect';

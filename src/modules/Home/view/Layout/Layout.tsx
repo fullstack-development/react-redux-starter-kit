@@ -30,6 +30,7 @@ class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
         <div className={b()}>
           <div className={b('content')}>
             <Description />
+            12234556
             <Search />
           </div>
         </div>
