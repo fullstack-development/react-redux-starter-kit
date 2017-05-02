@@ -1,38 +1,28 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import createRoutes from './routes';
-import { HomeModule, OrderFormModule } from './modules';
-import configureStore, { createReducer } from './configureStore';
-import { Module, IReducerData, IDependencies, RootSaga } from './shared/types/app';
-import Api from './shared/api/Api';
+import { AppContainer } from 'react-hot-loader';
+import configureApp from './configureApp';
+import App from './App';
 
 // Needed for onTouchTap: http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-/* Prepare main app elements */
-const history = browserHistory;
-const modules: Array<Module<any>> = [ new HomeModule(), new OrderFormModule() ];
-const api = new Api('/api');
-const { store, runSaga } = configureStore(modules, api);
-const routes = createRoutes(modules);
-const rootComponent = (
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
-  </Provider>
+const appData = configureApp();
+const render = (component: React.ReactElement<any>) => ReactDOM.render(
+  <AppContainer>{component}</AppContainer>,
+  document.getElementById('root'),
 );
 
-modules.forEach((module: Module<any>) => {
-  module.onConnectRequest = onModuleConnectRequest;
-});
-
-function onModuleConnectRequest(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
-  const newReducer = createReducer(modules, reducers);
-  store.replaceReducer(newReducer);
-  sagas.forEach((saga: RootSaga) => saga({ api }));
-}
-
 /* Start application */
-ReactDOM.render(rootComponent, document.getElementById('root'));
+render(<App modules={appData.modules} store={appData.store} />);
+
+/* Hot Module Replacement API */
+if ((module as any).hot && process.env.NODE_ENV !== 'production') {
+  (module as any).hot.accept(['./App', './configureApp'], () => {
+    const nextConfigureModules: typeof configureApp = require('./configureApp').default;
+    const NextApp: typeof App = require('./App').default;
+    const nextAppData = nextConfigureModules(appData);
+    render(<NextApp modules={nextAppData.modules} store={nextAppData.store} />);
+  });
+}

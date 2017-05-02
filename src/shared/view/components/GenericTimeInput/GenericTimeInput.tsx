@@ -12,7 +12,6 @@ interface IState {
 }
 
 class GenericTimeInput extends Component<GenericFieldProps, IState> {
-  private pattern = '^([0-1][0-9]|2[0-3]):([0-5]{2})$';
   private errors = {
     invalid: 'Incorrect Time format, expected hh:mm',
   };

@@ -3,7 +3,7 @@ import { expect, AssertionError } from 'chai';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { spy } from 'sinon';
 import GenericDateInput, { IProps, IState } from './../GenericDateInput';
-import TextInput, { IProps as ITextInputProps } from 'shared/view/elements/TextInput/TextInput';
+import { IProps as ITextInputProps } from 'shared/view/elements/TextInput/TextInput';
 
 describe('(Shared) View', () => {
   describe('(Component) GenericDateInput', () => {

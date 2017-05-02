@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Route } from 'react-router';
-import Layout from './view/Layout/Layout';
+import { Route } from 'react-router-dom';
 import { Module } from 'shared/types/app';
 
-class HomeModule extends Module<{}> {
+class HomeModule extends Module<{}, {}> {
   public getRoutes() {
-    return <Route key="home" path="home" component={Layout} />;
+    const Layout = require('./view/Layout/Layout').default;
+    return <Route key="home" path="/home" component={Layout} />;
   }
 }
 

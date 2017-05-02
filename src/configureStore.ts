@@ -12,26 +12,24 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import * as locationSelectFeature from './features/locationSelect';
 import * as dynamicFieldsFeature from './features/dynamicFields';
-import { IModule, IReduxState, IDependencies, IReducerData } from './shared/types/app';
-import Api from './shared/api/Api';
+import { Module, IReduxState, IDependencies, IReducerData } from './shared/types/app';
 import { SagaMiddleware } from 'redux-saga';
 
 interface IStoreData {
   store: Store<IReduxState>;
+  reducer: Reducer<IReduxState>;
   runSaga: SagaMiddleware['run'];
 }
 
-function configureStore(modules: Array<IModule<any>>, api: Api): IStoreData {
+function configureStore(modules: Array<Module<any, any>>, deps: IDependencies): IStoreData {
   const sagaMiddleware = createSagaMiddleware();
-  const extraArguments: IDependencies = { api };
 
   const middlewares: Middleware[] = [
     sagaMiddleware,
-    thunk.withExtraArgument(extraArguments),
+    thunk.withExtraArgument(deps),
   ];
 
   const reducer: Reducer<IReduxState> = createReducer(modules);
-
   const store: Store<IReduxState> = createStore(
     reducer,
     compose(
@@ -41,19 +39,28 @@ function configureStore(modules: Array<IModule<any>>, api: Api): IStoreData {
     ),
   ) as Store<IReduxState>;
 
-  sagaMiddleware.run(locationSelectFeature.actions.saga(extraArguments));
-  sagaMiddleware.run(dynamicFieldsFeature.actions.saga(extraArguments));
+  modules.forEach((module: Module<any, any>) => {
+    if (module.getSaga) {
+      sagaMiddleware.run(module.getSaga(deps));
+    }
+  });
+
+  sagaMiddleware.run(locationSelectFeature.actions.saga(deps));
+  sagaMiddleware.run(dynamicFieldsFeature.actions.saga(deps));
 
   return {
     store,
+    reducer,
     runSaga: sagaMiddleware.run,
   };
 }
 
-function createReducer(modules: Array<IModule<any>>, extraReducers?: Array<IReducerData<any>>): Reducer<IReduxState> {
+function createReducer(
+  modules: Array<Module<any, any>>, extraReducers?: Array<IReducerData<any>>,
+): Reducer<IReduxState> {
   const reducersData = modules
-    .filter((module: IModule<any>) => module.getReducer)
-    .map((module: IModule<any>) => module.getReducer ? module.getReducer() : null)
+    .filter((module: Module<any, any>) => module.getReducer)
+    .map((module: Module<any, any>) => module.getReducer ? module.getReducer() : null)
     .concat(extraReducers || []);
 
   const modulesReducers: ReducersMapObject = reducersData.reduce(
@@ -63,8 +70,6 @@ function createReducer(modules: Array<IModule<any>>, extraReducers?: Array<IRedu
   );
 
   return combineReducers<IReduxState>({
-    locationSelect: locationSelectFeature.reducer,
-    dynamicFields: dynamicFieldsFeature.reducer,
     ...modulesReducers,
   });
 }

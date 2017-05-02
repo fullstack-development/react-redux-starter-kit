@@ -6,7 +6,6 @@ import TextInput from './../../elements/TextInput/TextInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
 import Errors from '../../elements/Errors/Errors';
 
-import SyntheticEvent = React.SyntheticEvent;
 import FormEvent = React.FormEvent;
 import Component = React.Component;
 
@@ -21,7 +20,7 @@ interface IState {
 }
 
 class GenericTextInput extends React.Component<IProps, IState> {
-  public static: IState = {
+  public state: IState = {
     errors: [],
     isEdited: false,
   };

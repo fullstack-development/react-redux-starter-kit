@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 import { IReduxState, SelectedLocation, IArea, ICity } from '../../namespace';
 
 function getFeatureState(state: any): IReduxState {

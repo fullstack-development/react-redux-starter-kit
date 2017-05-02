@@ -1,24 +1,15 @@
 import * as React from 'react';
 import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
-import { RouterOnContext } from 'react-router';
 import { bind } from 'decko';
 import * as block from 'bem-cn';
 import './styles.scss';
-import SyntheticEvent = React.SyntheticEvent;
 
 interface IProps {
   children?: React.ReactNode;
-}
-
-interface IContext {
-  router: RouterOnContext;
+  onLinkClick?(path: string): void;
 }
 
 class Header extends React.PureComponent<IProps, {}> {
-  public static contextTypes = {
-    router: React.PropTypes.object,
-  };
-  public context: IContext;
   private b = block('header');
 
   public render() {
@@ -43,19 +34,22 @@ class Header extends React.PureComponent<IProps, {}> {
   }
 
   @bind
-  private onNavItemClick(eventKey: string, e: SyntheticEvent<{}>) {
-    // TODO: use dynamic url makers
-    switch (eventKey) {
-    case 'order':
-      this.context.router.push('/order');
-      break;
-    default: return;
+  private onNavItemClick(eventKey: string) {
+    if (this.props.onLinkClick) {
+      switch (eventKey) {
+      case 'order':
+        this.props.onLinkClick('/order');
+        break;
+      default: return;
+      }
     }
   }
 
   @bind
   private onBrandClick() {
-    this.context.router.push('/home');
+    if (this.props.onLinkClick) {
+      this.props.onLinkClick('/home');
+    }
   }
 
 }

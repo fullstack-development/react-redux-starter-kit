@@ -13,7 +13,10 @@ module.exports = {
     target: 'web',
     context: path.resolve(__dirname, '..', 'src'),
     entry: {
-        app: './index.tsx',
+        app: [
+          'react-hot-loader/patch',
+          './index.tsx'
+        ],
         vendor: [
             'axios',
             'react',
@@ -46,9 +49,9 @@ module.exports = {
             {
                 test: /\.(ts|tsx)$/,
                 use: [
-                    // { loader: 'react-hot-loader' }, // temporary disabled
+                    { loader: 'react-hot-loader/webpack' },
                     { loader: 'awesome-typescript-loader' },
-                    'tslint-loader'
+                    { loader: 'tslint-loader' }
                 ],
             },
             {
@@ -111,7 +114,7 @@ module.exports = {
         ]
     },
     plugins: [
-        // new webpack.HotModuleReplacementPlugin(), // temporary disabled
+        new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'js/vendor.bundle.js',
@@ -134,7 +137,7 @@ module.exports = {
         port: 8080,
         inline: true,
         lazy: false,
-        hot: false,
+        hot: true,
         historyApiFallback: true,
         stats: 'errors-only',
     }

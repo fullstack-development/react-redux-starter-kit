@@ -1,16 +1,11 @@
 import { IDependencies } from 'shared/types/app';
-import { takeLatest } from 'redux-saga';
+import { takeLatest } from 'redux-saga/effects';
 import { put } from 'redux-saga/effects';
 import { ICategoriesResponse } from 'shared/api/Api';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { call } from 'redux-saga/effects';
 
 function getSaga({ api }: IDependencies) {
-
-  function* watchLoadCategories() {
-    yield takeLatest('CATEGORY_SELECT:LOAD_CATEGORIES', executeCategoriesLoading);
-  }
-
   function* executeCategoriesLoading() {
     try {
       const response: ICategoriesResponse = yield call(api.loadCategories);
@@ -23,7 +18,7 @@ function getSaga({ api }: IDependencies) {
 
   function* saga() {
     yield [
-      watchLoadCategories(),
+      takeLatest('CATEGORY_SELECT:LOAD_CATEGORIES', executeCategoriesLoading),
     ];
   }
 

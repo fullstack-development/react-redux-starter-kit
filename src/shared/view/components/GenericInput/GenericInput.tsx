@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 type FieldValue = string | number | {[key: string]: any};
 interface IProps {
   type?: string;

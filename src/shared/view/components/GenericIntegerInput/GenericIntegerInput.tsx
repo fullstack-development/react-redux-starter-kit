@@ -3,10 +3,6 @@ import { bind } from 'decko';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import TextInput, { EventType } from 'shared/view/elements/TextInput/TextInput';
 import InputGroup from 'shared/view/elements/InputGroup/InputGroup';
-
-import SyntheticEvent = React.SyntheticEvent;
-import FormEvent = React.FormEvent;
-import Component = React.Component;
 import Errors from '../../elements/Errors/Errors';
 
 interface IProps extends GenericFieldProps {
