@@ -26,7 +26,6 @@ module.exports = {
             'immutable',
             'react-dom',
             'react-redux',
-            'redux-thunk',
             'react-router',
             'react-select',
             'react-bootstrap',

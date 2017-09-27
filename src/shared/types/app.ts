@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { ThunkAction, ActionCreator, Store } from 'redux';
+import { Store } from 'redux';
 import { Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
 import Api from '../api/Api';
@@ -12,7 +12,7 @@ import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderF
 abstract class Module<S, C> {
   public components?: C; // available componens to pass in other modules
 
-  protected _store: Store<IReduxState> | null = null;
+  protected _store: Store<IAppReduxState> | null = null;
   protected onConnectRequestHandler?: OnConnectRequestHandler;
   protected extraComponents?: { [key: string]: React.ReactElement<any> | null; };
 
@@ -20,13 +20,13 @@ abstract class Module<S, C> {
     this.onConnectRequestHandler = handler;
   };
 
-  public set store(store: Store<IReduxState>) {
+  public set store(store: Store<IAppReduxState>) {
     this._store = store;
   }
 
   public getRoutes?(): ReactElement<RouteComponentProps<any>> | Array<ReactElement<RouteComponentProps<any>>>;
   public getReducer?(): IReducerData<S>;
-  public getSaga?(deps: IDependencies): () => SagaIterator;
+  public getSaga?(): (deps: IDependencies) => SagaIterator;
 
   public setExtraComponent(key: keyof C, component: React.ReactElement<any>): void {
     if (this.extraComponents) {
@@ -59,7 +59,7 @@ interface IAction {
   type: string;
 }
 
-interface IReduxState {
+interface IAppReduxState {
   categorySelect: CategorySelectNamespace.IReduxState;
   locationSelect: LocationSelectNamespace.IReduxState;
   dynamicFields: DynamicFieldsNamespace.IReduxState;
@@ -73,8 +73,6 @@ interface IModuleEntryData {
 }
 
 type RootSaga = (deps: IDependencies) => () => SagaIterator;
-type AsyncActionCreatorResult = ThunkAction<Promise<void>, IReduxState, IDependencies>;
-type AsyncActionCreator = ActionCreator<AsyncActionCreatorResult>;
 
-export { Module, IReducerData, IAction, IDependencies, IReduxState, IModuleEntryData };
-export { RootSaga, AsyncActionCreator, AsyncActionCreatorResult };
+export { Module, IReducerData, IAction, IDependencies, IAppReduxState, IModuleEntryData };
+export { RootSaga };

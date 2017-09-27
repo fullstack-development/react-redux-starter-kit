@@ -3,11 +3,11 @@ import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import createRoutes from './routes';
-import { Module, IReduxState } from './shared/types/app';
+import { Module, IAppReduxState } from './shared/types/app';
 
 interface IProps {
   modules: Array<Module<any, any>>;
-  store: Store<IReduxState>;
+  store: Store<IAppReduxState>;
 }
 
 function App({ modules, store }: IProps) {

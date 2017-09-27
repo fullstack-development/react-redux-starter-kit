@@ -28,9 +28,29 @@ interface IReduxState {
   data: { message: string; } | null;
 }
 
+interface ISaveFields {
+  type: 'HOME_MODULE:SAVE_FIELDS';
+}
+
+interface ISaveFieldsSuccess {
+  type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS';
+  payload: IOrderFormResponse;
+}
+
+interface ISaveFieldsFail {
+  type: 'HOME_MODULE:SAVE_FIELDS_FAIL';
+  payload: string;
+}
+
+type Action = ISaveFields | ISaveFieldsSuccess | ISaveFieldsFail;
+
 export {
   IOrderFormRequest,
   IOrderFormResponse,
   ICommunication,
   IReduxState,
+  ISaveFields,
+  ISaveFieldsSuccess,
+  ISaveFieldsFail,
+  Action
 };

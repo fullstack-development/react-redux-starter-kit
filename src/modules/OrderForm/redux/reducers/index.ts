@@ -12,13 +12,13 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
       .setIn(['communications', 'saving', 'isRequesting'], true)
       .setIn(['data'], null)
       .toJS();
-  case 'HOME_MODULE:SAVE_FIELDS_COMPLETED':
+  case 'HOME_MODULE:SAVE_FIELDS_SUCCESS':
     return imState
       .setIn(['communications', 'saving', 'isRequesting'], false)
       .setIn(['communications', 'saving', 'error'], '')
       .setIn(['data'], action.payload)
       .toJS();
-  case 'HOME_MODULE:SAVE_FIELDS_FAILED':
+  case 'HOME_MODULE:SAVE_FIELDS_FAIL':
     return imState
       .setIn(['communications', 'saving', 'isRequesting'], false)
       .setIn(['communications', 'saving', 'error'], action.payload)

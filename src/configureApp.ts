@@ -2,13 +2,13 @@ import { SagaMiddleware } from 'redux-saga';
 import { Store, Reducer } from 'redux';
 import { HomeModule, OrderFormModule } from './modules';
 import configureStore, { createReducer } from './configureStore';
-import { Module, IReducerData, IDependencies, RootSaga, IReduxState } from './shared/types/app';
+import { Module, IReducerData, IDependencies, RootSaga, IAppReduxState } from './shared/types/app';
 import Api from './shared/api/Api';
 
 interface IAppData {
   modules: Array<Module<any, any>>;
-  store: Store<IReduxState>;
-  reducer: Reducer<IReduxState>;
+  store: Store<IAppReduxState>;
+  reducer: Reducer<IAppReduxState>;
   reducers: Array<IReducerData<any>>;
   runSaga: SagaMiddleware['run'];
   sagas: RootSaga[];
@@ -29,9 +29,9 @@ function configureApp(appData?: IAppData): IAppData {
   const connectedReducers: Array<IReducerData<any>> = [];
   const dependencies: IDependencies = { api: new Api('/api') };
 
-  let store: Store<IReduxState> | null = null;
+  let store: Store<IAppReduxState> | null = null;
   let runSaga: SagaMiddleware['run'] | null = null;
-  let reducer: Reducer<IReduxState> | null = null;
+  let reducer: Reducer<IAppReduxState> | null = null;
 
   if (!appData) {
     const storeData = configureStore(modulesArray, dependencies);
