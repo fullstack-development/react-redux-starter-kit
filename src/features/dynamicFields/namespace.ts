@@ -2,17 +2,17 @@ import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/G
 
 interface IFormProperties {
   [key: string]: string | number | IGeosuggestOption;
-};
+}
 
 interface IFlatFormProperties {
   [key: string]: string | number;
-};
+}
 
 interface ILocationProperties {
   [key: string]: { lat: number; lng: number; };
   from: { lat: number; lng: number; };
   to: { lat: number; lng: number; };
-};
+}
 
 interface IField {
   type: 'string' | 'integer';
@@ -68,4 +68,4 @@ export {
   IField,
   ICommunication,
   IReduxState,
-}
+};

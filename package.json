@@ -90,10 +90,10 @@
     "source-map-loader": "^0.1.6",
     "sourcemap-istanbul-instrumenter-loader": "^0.2.0",
     "style-loader": "^0.13.2",
-    "tslint": "^4.5.1",
-    "tslint-eslint-rules": "^3.5.1",
+    "tslint": "^5.7.0",
+    "tslint-eslint-rules": "^4.1.1",
     "tslint-loader": "^3.5.3",
-    "tslint-react": "^2.6.0",
+    "tslint-react": "^3.2.0",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {

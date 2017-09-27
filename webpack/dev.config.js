@@ -138,6 +138,7 @@ module.exports = {
         lazy: false,
         hot: true,
         historyApiFallback: true,
+        disableHostCheck: true,
         stats: 'errors-only',
     }
 };

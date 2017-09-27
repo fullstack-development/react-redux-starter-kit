@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Store } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Store } from 'redux';
 import createRoutes from './routes';
-import { Module, IAppReduxState } from './shared/types/app';
+import { IAppReduxState, Module } from './shared/types/app';
 
 interface IProps {
   modules: Array<Module<any, any>>;

@@ -1,7 +1,6 @@
 import { ReactElement } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Store } from 'redux';
-import { Reducer } from 'redux';
+import { Store, Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
 import Api from '../api/Api';
 import { Namespace as CategorySelectNamespace } from 'features/categorySelect';
@@ -18,7 +17,7 @@ abstract class Module<S, C> {
 
   public set onConnectRequest(handler: OnConnectRequestHandler) {
     this.onConnectRequestHandler = handler;
-  };
+  }
 
   public set store(store: Store<IAppReduxState>) {
     this._store = store;
@@ -34,7 +33,7 @@ abstract class Module<S, C> {
     } else {
       throw new Error('Cannot set module extra component: no requirements found for extra component');
     }
-  };
+  }
 
   protected notifyAboutConnection(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
     if (this.onConnectRequestHandler) {

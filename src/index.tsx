@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 // import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { AppContainer } from 'react-hot-loader';
-import configureApp from './configureApp';
 import App from './App';
+import configureApp from './configureApp';
 
 // Needed for onTouchTap: http://stackoverflow.com/a/34015469/988941
 // injectTapEventPlugin();

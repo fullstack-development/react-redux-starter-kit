@@ -6,5 +6,5 @@ function selectLocationByAreaId(location: {areaId: number, point: IPoint | null}
 }
 
 export {
-  selectLocationByAreaId
-}
+  selectLocationByAreaId,
+};

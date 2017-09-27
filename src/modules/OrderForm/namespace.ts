@@ -52,5 +52,5 @@ export {
   ISaveFields,
   ISaveFieldsSuccess,
   ISaveFieldsFail,
-  Action
+  Action,
 };

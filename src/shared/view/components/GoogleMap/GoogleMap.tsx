@@ -19,7 +19,7 @@ interface ILocation {
   locality: string;
   area: string;
   point: google.maps.LatLng | null;
-};
+}
 
 class GoogleMap extends React.Component<IProps> {
   public static defaultProps: IProps = {

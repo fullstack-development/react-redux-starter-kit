@@ -64,14 +64,10 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
   private validateAndChange(rawValue: string): void {
     const { pattern, required, onChange } = this.props;
     const errors: string[] = [];
-    let value: string;
-
-    if ((new RegExp(this.standardHTMLpattern)).test(rawValue)) {
+    const value: string = new RegExp(this.standardHTMLpattern).test(rawValue)
       // current browser support date inputs
-      value = rawValue.split('-').reverse().join('-');
-    } else {
-      value = rawValue;
-    }
+      ? rawValue.split('-').reverse().join('-')
+      : rawValue;
 
     if (pattern && !(new RegExp(pattern)).test(value)) {
       errors.push(this.errors.invalid);

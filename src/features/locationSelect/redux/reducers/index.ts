@@ -15,7 +15,7 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
       .toJS();
   }
   case 'LOCATION_SELECT:SELECT_LOCATION_BY_AREA_ID': {
-    interface IPayload { location: { areaId: number, point: IPoint | null } | null; showOnMap: boolean; };
+    interface IPayload { location: { areaId: number, point: IPoint | null } | null; showOnMap: boolean; }
     const payload = (action.payload as IPayload);
     const showOnMap: boolean = (action.payload as IPayload).showOnMap;
 

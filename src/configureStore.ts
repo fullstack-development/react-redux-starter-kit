@@ -1,18 +1,17 @@
 import {
-  compose,
   applyMiddleware,
   combineReducers,
+  compose,
   createStore,
-  Reducer,
   Middleware,
-  Store,
+  Reducer,
   ReducersMapObject,
+  Store,
 } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import * as locationSelectFeature from './features/locationSelect';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import * as dynamicFieldsFeature from './features/dynamicFields';
-import { Module, IAppReduxState, IDependencies, IReducerData } from './shared/types/app';
-import { SagaMiddleware } from 'redux-saga';
+import * as locationSelectFeature from './features/locationSelect';
+import { IAppReduxState, IDependencies, IReducerData, Module } from './shared/types/app';
 
 interface IStoreData {
   store: Store<IAppReduxState>;
@@ -62,7 +61,7 @@ function createReducer(
   const modulesReducers: ReducersMapObject = reducersData.reduce(
     (reducers: ReducersMapObject, reducerData: IReducerData<any>) => {
       return { ...reducers, [reducerData.name]: reducerData.reducer };
-    }, {} as ReducersMapObject,
+    }, {},
   );
 
   return combineReducers<IAppReduxState>({

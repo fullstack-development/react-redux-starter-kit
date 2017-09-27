@@ -8,5 +8,5 @@ export {
   initialState,
   actions,
   selectors,
-  Namespace
+  Namespace,
 };
