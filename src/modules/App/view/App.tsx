@@ -12,7 +12,7 @@ class App extends React.Component<{}, {}> {
     const { children } = this.props;
 
     return (
-      <div className={b}>
+      <div className={b()}>
         {children}
       </div>
     );

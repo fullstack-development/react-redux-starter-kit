@@ -21,7 +21,7 @@ interface ILocation {
   point: google.maps.LatLng | null;
 };
 
-class GoogleMap extends React.Component<IProps, null> {
+class GoogleMap extends React.Component<IProps> {
   public static defaultProps: IProps = {
     lat: 6.991815,
     lng: 81.055025,
@@ -30,7 +30,7 @@ class GoogleMap extends React.Component<IProps, null> {
   private b = block('google-map');
   private map: google.maps.Map | null;
   private geocoder: google.maps.Geocoder | null;
-  private mapContainer: Element;
+  private mapContainer: HTMLDivElement | null;
 
   public componentWillReceiveProps(nextProps: IProps) {
     const isNew: boolean = nextProps.lat !== this.props.lat || nextProps.lng !== this.props.lng;
@@ -73,7 +73,7 @@ class GoogleMap extends React.Component<IProps, null> {
     const b = this.b;
     return (
       <div className={b()}>
-        <div className={b('map')} ref={this.onMapRef} />
+        <div className={b('map')()} ref={this.onMapRef} />
       </div>
     );
   }
@@ -121,7 +121,7 @@ class GoogleMap extends React.Component<IProps, null> {
   }
 
   @bind
-  private onMapRef(map: Element) {
+  private onMapRef(map: HTMLDivElement | null) {
     this.mapContainer = map;
   }
 }

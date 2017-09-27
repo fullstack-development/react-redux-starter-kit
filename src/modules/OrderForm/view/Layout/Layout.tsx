@@ -81,7 +81,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
         headerContent={<Header onLinkClick={history.push} />}
       >
         <div className={b()}>
-          <div className={b('content')}>
+          <div className={b('content')()}>
             <Form onSubmit={this.onFormSubmit}>
               <Panel header={<LocationSelect onChange={this.onLocationSelected} />} />
               <Panel header={<CategorySelect onCategoryChosen={this.onCategorySelected} />} />
@@ -89,7 +89,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
               <FormGroup className="clearfix">
                 {isSubmitting ? <span>Saving...</span> : null}
-                {submittingResult ? <span className={b('result')}>{submittingResult}</span> : null}
+                {submittingResult ? <span className={b('result')()}>{submittingResult}</span> : null}
                 <Button type="submit" bsStyle="primary" className={b('submit')()} disabled={!canSubmit}>
                   Submit
                 </Button>

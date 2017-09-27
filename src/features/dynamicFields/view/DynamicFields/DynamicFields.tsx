@@ -100,7 +100,7 @@ class DynamicFields extends React.Component<Props, IState> {
     const b = this.b;
 
     return (
-      <div className={b}>
+      <div className={b()}>
         <FormGroup>
           <h4>Dynamic Fields</h4>
           {this.renderFields()}
@@ -153,7 +153,7 @@ class DynamicFields extends React.Component<Props, IState> {
           props.label = isRequired ? `${props.label}*` : props.label;
 
           return (
-            <div className={this.b('field')} key={props.order}>
+            <div className={this.b('field')()} key={props.order}>
               <Component
                 {...props}
                 required={isRequired}

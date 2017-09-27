@@ -89,9 +89,9 @@ class LocationSelect extends React.Component<Props, {}> {
     const showSelectedAreaOnMap: boolean = this.props.showLocation;
 
     return (
-      <div className={b}>
-        <div className={b('form')}>
-          <label className={b('label')}><b>Location:</b></label>
+      <div className={b()}>
+        <div className={b('form')()}>
+          <label className={b('label')()}><b>Location:</b></label>
           <SelectInput
             className={b('input')()}
             options={options}
@@ -113,7 +113,7 @@ class LocationSelect extends React.Component<Props, {}> {
             disabled
           />
         </div>
-        <div className={b('map')}>
+        <div className={b('map')()}>
           <GoogleMap
             lat={selectedArea ? selectedArea.point.lat : undefined}
             lng={selectedArea ? selectedArea.point.lng : 0}

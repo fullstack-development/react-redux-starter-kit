@@ -20,15 +20,15 @@ class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
       <RowsLayout
         footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}
         headerContent={(
-            <Header onLinkClick={history.push}>
-                <Navbar.Form pullRight>
-                    <SearchRepositoriesInput />
-                </Navbar.Form>
-            </Header>
+          <Header onLinkClick={history.push}>
+            <Navbar.Form pullRight>
+              <SearchRepositoriesInput />
+            </Navbar.Form>
+          </Header>
         )}
       >
         <div className={b()}>
-          <div className={b('content')}>
+          <div className={b('content')()}>
             <Description />
             12234556
             <Search />

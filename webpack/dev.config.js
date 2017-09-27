@@ -29,7 +29,7 @@ module.exports = {
             'react-router',
             'react-select',
             'react-bootstrap',
-            'react-tap-event-plugin',
+            // 'react-tap-event-plugin',
             'bootstrap/dist/css/bootstrap.min.css',
             './assets/bootstrap.paper.min.css',
         ]

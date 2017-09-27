@@ -11,10 +11,10 @@ const b = block('errors');
 
 function Errors({ hidden, errors = [] }: IProps) {
   return (
-    <div className={b({ hidden })}>
+    <div className={b({ hidden: Boolean(hidden) })()}>
       {
         errors.map((error: string, index: number) => (
-          <span key={index} className={b('error')}>{error}</span>
+          <span key={index} className={b('error')()}>{error}</span>
         ))
       }
     </div>
