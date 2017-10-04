@@ -13,7 +13,7 @@ interface IGeosuggestOption {
     lng: number;
   };
   gmaps?: {
-    address_components: Array<object>;
+    address_components: object[];
     formatted_address: string;
     // few other fields; check this https://developers.google.com/maps/documentation/javascript/reference#GeocoderResult
   };
@@ -84,5 +84,5 @@ class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
   }
 }
 
-export { IGeosuggestOption, isGeosuggestOption }
+export { IGeosuggestOption, isGeosuggestOption };
 export default GenericLocationInput;

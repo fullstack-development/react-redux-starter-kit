@@ -34,7 +34,7 @@ class GenericRadioInput extends React.Component<GenericFieldProps, IState> {
 
     return (
      <InputGroup label={label}>
-        <FormGroup className={b('radios-group')}>
+        <FormGroup className={b('radios-group')()}>
           {
             options ? options.map((option: string, index: number) => (
                 <Radio

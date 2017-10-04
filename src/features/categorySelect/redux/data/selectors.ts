@@ -9,8 +9,9 @@ function selectChosenCategory(state: IReduxState): number | null {
   return state.data.selected;
 }
 
-const selectChosenCategoryObject: () => ICategory = createSelector(
-  [ selectCategories, selectChosenCategory ],
+const selectChosenCategoryObject = createSelector<IReduxState, ICategory[], number | null, ICategory | undefined>(
+  selectCategories,
+  selectChosenCategory,
   (categories: ICategory[], uid: number) => {
     return categories.find((category: ICategory) => category.uid === uid);
   },

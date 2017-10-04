@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Redirect, RouteComponentProps, Switch } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import { App } from './modules/App';
 import { Module } from './shared/types/app';
 

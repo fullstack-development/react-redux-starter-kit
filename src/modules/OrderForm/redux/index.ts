@@ -1,5 +1,6 @@
-import reducer from './reducers';
-import actions from './actions';
-import initial from './initial';
+import * as actions from './actions';
 
-export { reducer, actions, initial };
+export { actions };
+export { default as reducer } from './reducers';
+export { default as initial } from './initial';
+export { rootSaga as saga } from './sagas';

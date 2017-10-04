@@ -50,13 +50,15 @@
     ]
   },
   "rules": {
-    "jsx-boolean-value": "never",
+    "no-object-literal-type-assertion": false,
+    "ordered-imports": false,
+    "no-submodule-imports": false,
+    "jsx-boolean-value": false,
     "no-var-requires": false,
     "no-console": false,
     "jsx-no-multiline-js": false,
-    "object-literal-sort-keys": 0,
-    "ordered-imports": 0,
-    "arrow-parens": 0,
+    "object-literal-sort-keys": false,
+    "arrow-parens": false,
     "class-name": true,
     "comment-format": [
       true,

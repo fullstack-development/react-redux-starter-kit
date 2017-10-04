@@ -14,7 +14,7 @@ interface ICommunication {
 interface IData {
   options: ICategory[];
   selected: number | null;
-};
+}
 
 interface IReduxState {
   communications: {
@@ -33,5 +33,5 @@ export {
   IReduxState,
   ICommunication,
   ICategory,
-  Action
+  Action,
 };

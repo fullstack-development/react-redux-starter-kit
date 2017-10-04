@@ -10,7 +10,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "baseUrl": "./src",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*"

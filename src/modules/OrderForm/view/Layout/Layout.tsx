@@ -5,7 +5,7 @@ import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { bind } from 'decko';
-import { IReduxState, AsyncActionCreatorResult, IModuleEntryData } from 'shared/types/app';
+import { IAppReduxState, IModuleEntryData } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import * as locationSelectFeature from 'features/locationSelect';
@@ -17,7 +17,7 @@ import './Layout.scss';
 import FormEvent = React.FormEvent;
 
 interface IDispatchProps {
-  saveFields: () => AsyncActionCreatorResult;
+  saveFields: typeof actions.saveFields;
 }
 
 interface IStateProps {
@@ -39,10 +39,12 @@ interface IState {
 type IProps = IStateProps & IDispatchProps & RouteComponentProps<void>;
 
 function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
-  return bindActionCreators(actions, dispatch);
+  return bindActionCreators({
+    saveFields: actions.saveFields,
+  }, dispatch);
 }
 
-function mapState(state: IReduxState): IStateProps {
+function mapState(state: IAppReduxState): IStateProps {
   return {
     isSubmitting: state.orderForm.communications.saving.isRequesting,
     submittingResult: state.orderForm.data ? state.orderForm.data.message : '',
@@ -79,7 +81,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
         headerContent={<Header onLinkClick={history.push} />}
       >
         <div className={b()}>
-          <div className={b('content')}>
+          <div className={b('content')()}>
             <Form onSubmit={this.onFormSubmit}>
               <Panel header={<LocationSelect onChange={this.onLocationSelected} />} />
               <Panel header={<CategorySelect onCategoryChosen={this.onCategorySelected} />} />
@@ -87,7 +89,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
               <FormGroup className="clearfix">
                 {isSubmitting ? <span>Saving...</span> : null}
-                {submittingResult ? <span className={b('result')}>{submittingResult}</span> : null}
+                {submittingResult ? <span className={b('result')()}>{submittingResult}</span> : null}
                 <Button type="submit" bsStyle="primary" className={b('submit')()} disabled={!canSubmit}>
                   Submit
                 </Button>
@@ -146,7 +148,7 @@ const connectedComponent = connect<IStateProps, IDispatchProps, {}>(mapState, ma
 
 function getView(): IModuleEntryData {
   return {
-    component: OrderFormLayout,
+    component: connectedComponent,
     reducers: [
       { name: 'categorySelect', reducer: categorySelectFeature.reducer },
       { name: 'dynamicFields', reducer: dynamicFieldsFeature.reducer },

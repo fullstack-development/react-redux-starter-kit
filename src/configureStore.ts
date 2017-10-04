@@ -1,47 +1,42 @@
 import {
-  compose,
   applyMiddleware,
   combineReducers,
+  compose,
   createStore,
-  Reducer,
   Middleware,
-  Store,
+  Reducer,
   ReducersMapObject,
+  Store,
 } from 'redux';
-import thunk from 'redux-thunk';
-import createSagaMiddleware from 'redux-saga';
-import * as locationSelectFeature from './features/locationSelect';
+import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import * as dynamicFieldsFeature from './features/dynamicFields';
-import { Module, IReduxState, IDependencies, IReducerData } from './shared/types/app';
-import { SagaMiddleware } from 'redux-saga';
+import * as locationSelectFeature from './features/locationSelect';
+import { IAppReduxState, IDependencies, IReducerData, Module } from './shared/types/app';
 
 interface IStoreData {
-  store: Store<IReduxState>;
-  reducer: Reducer<IReduxState>;
+  store: Store<IAppReduxState>;
+  reducer: Reducer<IAppReduxState>;
   runSaga: SagaMiddleware['run'];
 }
 
 function configureStore(modules: Array<Module<any, any>>, deps: IDependencies): IStoreData {
   const sagaMiddleware = createSagaMiddleware();
 
-  const middlewares: Middleware[] = [
-    sagaMiddleware,
-    thunk.withExtraArgument(deps),
-  ];
+  const middlewares: Middleware[] = [ sagaMiddleware ];
 
-  const reducer: Reducer<IReduxState> = createReducer(modules);
-  const store: Store<IReduxState> = createStore(
+  const reducer: Reducer<IAppReduxState> = createReducer(modules);
+  const store: Store<IAppReduxState> = createStore(
     reducer,
     compose(
       applyMiddleware(...middlewares),
       ('development' === process.env.NODE_ENV && window.devToolsExtension)
         ? window.devToolsExtension() : ((arg: any) => arg),
     ),
-  ) as Store<IReduxState>;
+  ) as Store<IAppReduxState>;
 
   modules.forEach((module: Module<any, any>) => {
     if (module.getSaga) {
-      sagaMiddleware.run(module.getSaga(deps));
+      sagaMiddleware.run(module.getSaga(), deps);
     }
   });
 
@@ -57,7 +52,7 @@ function configureStore(modules: Array<Module<any, any>>, deps: IDependencies): 
 
 function createReducer(
   modules: Array<Module<any, any>>, extraReducers?: Array<IReducerData<any>>,
-): Reducer<IReduxState> {
+): Reducer<IAppReduxState> {
   const reducersData = modules
     .filter((module: Module<any, any>) => module.getReducer)
     .map((module: Module<any, any>) => module.getReducer ? module.getReducer() : null)
@@ -66,10 +61,10 @@ function createReducer(
   const modulesReducers: ReducersMapObject = reducersData.reduce(
     (reducers: ReducersMapObject, reducerData: IReducerData<any>) => {
       return { ...reducers, [reducerData.name]: reducerData.reducer };
-    }, {} as ReducersMapObject,
+    }, {},
   );
 
-  return combineReducers<IReduxState>({
+  return combineReducers<IAppReduxState>({
     ...modulesReducers,
   });
 }

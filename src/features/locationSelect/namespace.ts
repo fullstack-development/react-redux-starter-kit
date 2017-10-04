@@ -43,8 +43,8 @@ interface INormalizedCitiesResponse {
   };
 }
 
-interface IAreaEntities { [key: number]: IArea; };
-interface ICityEntities { [key: number]: ICity; };
+interface IAreaEntities { [key: number]: IArea; }
+interface ICityEntities { [key: number]: ICity; }
 type SelectedLocation = null | { city: number, area: number, point: IPoint };
 type SelectedLocationData = null | { city: ICity; area: IArea, point: IPoint };
 
