@@ -31,3 +31,16 @@ Modular starter kit for React+Redux+React Router projects.
 
 2) ```npm run dev-windows```
 
+## To start yeoman generator create-feature
+
+1) sudo npm install -g yo
+
+2) open directory deploying/create-feature
+
+3) npm link
+
+4) npm install
+
+5) go to the back in project
+
+6) yo create-feature
