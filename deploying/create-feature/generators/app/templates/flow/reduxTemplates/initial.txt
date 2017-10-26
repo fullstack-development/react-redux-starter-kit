@@ -1,0 +1,19 @@
+import { IReduxState } from '../namespace';
+
+const communicationState = {
+  error: '',
+  isRequesting: false,
+};
+
+const initialState: IReduxState = {
+  data: {
+    activitiesList: [],
+  },
+  communication: {
+    createActivity: communicationState,
+    getActivities: communicationState,
+  },
+  ui: {},
+};
+
+export default initialState;

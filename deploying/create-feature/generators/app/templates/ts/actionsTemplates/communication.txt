@@ -1,0 +1,5 @@
+import { makeCommunicationActionCreators } from 'shared/helpers/redux';
+
+// example ->
+// export const { execute: createActivity, completed: createActivityCompleted, failed: createActivityFailed } =
+//   makeCommunicationActionCreators<IArgsCreateActivity>('ACTIVITY:CREATE_ACTIVITY');

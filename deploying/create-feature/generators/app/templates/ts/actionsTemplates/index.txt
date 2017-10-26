@@ -1,0 +1,13 @@
+import * as communicationActions from './communication';
+import * as dataActions from './data';
+import * as uiActions from './ui';
+import saga from './sagas';
+
+const actions = {
+  saga,
+  ...communicationActions,
+  ...dataActions,
+  ...uiActions,
+};
+
+export default actions;
