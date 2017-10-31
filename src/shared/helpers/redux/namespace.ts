@@ -27,6 +27,12 @@ export interface IReduxField<T = any, E = string> {
   error: E;
 }
 
+export type FieldsState<F extends string> = {
+  [P in F]: IReduxField<any>;
+};
+
+export type Validator<S> = (nextState: S, prevState: S) => string;
+
 export interface IEditFieldAction<T = any, E = string> extends IAction {
   payload: IReduxField<T, E>;
 }
@@ -34,5 +40,3 @@ export interface IEditFieldAction<T = any, E = string> extends IAction {
 export type ReducersMap<T> = {
   [key in keyof T]: Reducer<T[key]>;
 };
-
-export type FieldValidator<S> = (nextState: S, prevState: S) => string;

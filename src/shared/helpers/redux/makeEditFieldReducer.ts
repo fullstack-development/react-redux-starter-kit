@@ -1,7 +1,7 @@
-import { IEditFieldAction, FieldValidator } from './namespace';
+import { IEditFieldAction, Validator } from './namespace';
 
 export default function makeEditFieldReducer<A extends IEditFieldAction, S = A['payload']>(
-  type: A['type'], initial: S, validator?: FieldValidator<S>,
+  type: A['type'], initial: S, validator?: Validator<S>,
 ) {
   return (state: S = initial, action: A) => {
     if (type === action.type) {

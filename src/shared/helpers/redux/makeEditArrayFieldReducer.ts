@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 
-import { IActionWithPayload, IReduxField, FieldValidator } from './namespace';
+import { IActionWithPayload, IReduxField, Validator } from './namespace';
 
 type ActionType<T> = ActionAdd<T> | ActionRemove | ActionUpdate<T>;
 
@@ -17,7 +17,7 @@ export default function makeArrayFieldReducer<
   removeType: R['type'],
   updateType: U['type'],
   initial: IReduxField<T[]>,
-  validator?: FieldValidator<T[]>,
+  validator?: Validator<T[]>,
 ): Reducer<IReduxField<T[]>> {
   return function arrayFieldReducer(state: IReduxField<T[]> = initial, action: ActionType<T>): IReduxField<T[]> {
     switch (action.type) {
