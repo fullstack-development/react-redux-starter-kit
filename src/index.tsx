@@ -1,28 +1,18 @@
+import 'reflect-metadata';
+import 'babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// import * as injectTapEventPlugin from 'react-tap-event-plugin';
-import { AppContainer } from 'react-hot-loader';
-import App from './App';
-import configureApp from './configureApp';
 
-// Needed for onTouchTap: http://stackoverflow.com/a/34015469/988941
-// injectTapEventPlugin();
+import App from 'core/App';
+import configureApp from 'core/configureApp';
+
+const version: string = '0.0.0';
 
 const appData = configureApp();
-const render = (component: React.ReactElement<any>) => ReactDOM.render(
-  <AppContainer>{component}</AppContainer>,
-  document.getElementById('root'),
-);
 
 /* Start application */
-render(<App modules={appData.modules} store={appData.store} />);
+ReactDOM.render(<App {...appData} />, document.getElementById('root'));
 
-/* Hot Module Replacement API */
-if ((module as any).hot && process.env.NODE_ENV !== 'production') {
-  (module as any).hot.accept(['./App', './configureApp'], () => {
-    const nextConfigureModules: typeof configureApp = require('./configureApp').default;
-    const NextApp: typeof App = require('./App').default;
-    const nextAppData = nextConfigureModules(appData);
-    render(<NextApp modules={nextAppData.modules} store={nextAppData.store} />);
-  });
-}
+/* tslint:disable */
+console.info(`%cApp version: ${version}`, 'background: #EBF5F8; color: gray; font-size: x-medium; border-radius: 5px; padding: 5px;');
+/* tslint:enable */
