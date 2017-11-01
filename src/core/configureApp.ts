@@ -1,0 +1,63 @@
+import configureDeps from './configureDeps';
+import { TYPES, container } from './configureIoc';
+import configureStore, { createReducer } from './configureStore';
+
+import { ReducersMap } from 'shared/helpers/redux';
+import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
+
+function configureApp(): IAppData {
+  /* Prepare main app elements */
+  const modules: Module[] = [];
+  const sharedReduxEntries: IReduxEntry[] = [];
+
+  const connectedSagas: RootSaga[] = [];
+  const connectedReducers: ReducersMap<Partial<IAppReduxState>> = {};
+
+  const { runSaga, store } = configureStore();
+  container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
+
+  const dependencies = configureDeps(store);
+
+  sharedReduxEntries.forEach(connectEntryToStore);
+  modules.forEach((module: Module) => {
+    module.dependencies = dependencies;
+    module.store = store;
+    if (module.getReduxEntry) {
+      connectEntryToStore(module.getReduxEntry());
+    }
+  });
+
+  function connectEntryToStore({ reducers, sagas }: IReduxEntry) {
+    if (!store) {
+      throw new Error('Cannot find store, while connecting module.');
+    }
+
+    if (reducers) {
+      const isNeedReplace: boolean = Object.keys(reducers).reduce<boolean>((prev, key: keyof typeof reducers) => {
+        const featureReducer = reducers[key];
+        if (!connectedReducers[key] && featureReducer) {
+          connectedReducers[key] = featureReducer;
+          return true;
+        }
+        return prev || false;
+      }, false);
+
+      if (isNeedReplace) {
+        store.replaceReducer(createReducer(connectedReducers as ReducersMap<IAppReduxState>));
+      }
+    }
+
+    if (sagas) {
+      sagas.forEach((saga: RootSaga) => {
+        if (!connectedSagas.includes(saga) && runSaga) {
+          runSaga(saga(dependencies));
+          connectedSagas.push(saga);
+        }
+      });
+    }
+  }
+
+  return { modules, store };
+}
+
+export default configureApp;

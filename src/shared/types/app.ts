@@ -48,6 +48,11 @@ export abstract class Module<C = any> {
   }
 }
 
+export interface IAppData {
+  modules: Module[];
+  store: Store<IAppReduxState>;
+}
+
 export interface IDependencies {
   api: Api;
 }
