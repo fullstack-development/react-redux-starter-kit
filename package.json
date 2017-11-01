@@ -68,6 +68,7 @@
     "@types/node": "^6.0.71",
     "@types/redux-mock-store": "^0.0.7",
     "@types/sinon": "^1.16.36",
+    "bundle-loader": "^0.5.5",
     "chai": "^3.5.0",
     "enzyme": "^3.0.0",
     "istanbul-instrumenter-loader": "^1.2.0",

@@ -2664,6 +2664,15 @@
       "resolved": "https://registry.npmjs.org/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz",
       "integrity": "sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug="
     },
+    "bundle-loader": {
+      "version": "0.5.5",
+      "resolved": "https://registry.npmjs.org/bundle-loader/-/bundle-loader-0.5.5.tgz",
+      "integrity": "sha1-Ef17CO34ah1wjvyx7KYspR9sNoo=",
+      "dev": true,
+      "requires": {
+        "loader-utils": "1.1.0"
+      }
+    },
     "bytes": {
       "version": "2.4.0",
       "resolved": "https://registry.npmjs.org/bytes/-/bytes-2.4.0.tgz",

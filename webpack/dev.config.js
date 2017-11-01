@@ -47,8 +47,8 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
+                exclude: /\/entry\.(ts|tsx)$/,
                 use: [
-                    { loader: 'react-hot-loader/webpack' },
                     { loader: 'awesome-typescript-loader' },
                     { loader: 'tslint-loader' }
                 ],
@@ -56,6 +56,17 @@ module.exports = {
             {
                 test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
                 use: 'file-loader?name=fonts/[hash].[ext]',
+            },
+            {
+                test: /\/entry\.(ts|tsx)$/,
+                use: [
+                    {
+                        loader: 'bundle-loader',
+                        options: { lazy: true },
+                    },
+                    { loader: 'awesome-typescript-loader' },
+                    { loader: 'tslint-loader' },
+                ],
             },
             {
                 test: /\.css$/,
