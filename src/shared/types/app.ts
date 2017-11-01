@@ -5,9 +5,10 @@ import { Store, Reducer, ActionCreator, Action } from 'redux';
 import { SagaIterator } from 'redux-saga';
 import {} from 'shared/helpers/redux/multiConnect';
 
-import { Namespace as CategorySelectNamespace } from 'features/categorySelect';
-import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
-import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
+import { namespace as CategorySelectNamespace } from 'features/categorySelect/entry';
+import { namespace as LocationSelectNamespace } from 'features/locationSelect/entry';
+import { namespace as SearchRepositoriesNamespace } from 'features/searchRepositories/entry';
+import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields/entry';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
 import Api from '../api/Api';
@@ -82,6 +83,7 @@ export interface IAppReduxState {
   locationSelect: LocationSelectNamespace.IReduxState;
   dynamicFields: DynamicFieldsNamespace.IReduxState;
   orderForm: HomeModuleNamespace.IReduxState;
+  searchRepositories: SearchRepositoriesNamespace.IReduxState;
 }
 
 export type Diff<T extends string, U extends string> =

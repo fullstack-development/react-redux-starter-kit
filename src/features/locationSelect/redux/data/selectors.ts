@@ -19,7 +19,7 @@ function selectCityById(state: any, id: number): ICity {
   return ownState.data.entities.cities[id];
 }
 
-export default {
+export {
   selectAreaById,
   selectCityById,
   getFeatureState,
