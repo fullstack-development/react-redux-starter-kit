@@ -49,6 +49,11 @@ export abstract class Module<C = any> {
   }
 }
 
+export interface IAction {
+  type: string;
+  payload?: any;
+}
+
 export interface IAppData {
   modules: Module[];
   store: Store<IAppReduxState>;
@@ -71,7 +76,7 @@ export interface IReduxEntry {
 export interface IFeatureEntry<
   C extends IDictionary<ReactComponent<any>> | void,
   A extends IDictionary<ActionCreator<Action>> | void,
-  S extends IDictionary<(state: any, instanceKey?: string) => any> | void,
+  S,
 > extends IReduxEntry {
   actions: A;
   selectors: S;

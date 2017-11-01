@@ -11,19 +11,19 @@ import {
   IFields,
 } from '../../namespace';
 
-function selectFields(state: IReduxState): IFields {
+function selectFields(state: any): IFields {
   return state.data.fields;
 }
 
-function selectCommunication(state: IReduxState): {fetching: ICommunication} {
+function selectCommunication(state: any): {fetching: ICommunication} {
   return state.communications;
 }
 
-function selectValues(state: IReduxState): IFormProperties {
+function selectValues(state: any): IFormProperties {
   return state.data.values;
 }
 
-function selectFlatValues(state: IReduxState): IFlatFormProperties {
+function selectFlatValues(state: any): IFlatFormProperties {
   const fields = selectValues(state);
   return Object
     .keys(fields)
@@ -33,7 +33,7 @@ function selectFlatValues(state: IReduxState): IFlatFormProperties {
     }, {});
 }
 
-function selectLocationValues(state: IReduxState): ILocationProperties {
+function selectLocationValues(state: any): ILocationProperties {
   const fields = selectValues(state);
   return Object
     .keys(fields)
