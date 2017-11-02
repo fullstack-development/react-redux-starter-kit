@@ -2,12 +2,14 @@ import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
 
+import { HomeModule, OrderFormModule } from 'modules';
+
 import { ReducersMap } from 'shared/helpers/redux';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
 function configureApp(): IAppData {
   /* Prepare main app elements */
-  const modules: Module[] = [];
+  const modules: Module[] = [new HomeModule(), new OrderFormModule()];
   const sharedReduxEntries: IReduxEntry[] = [];
 
   const connectedSagas: RootSaga[] = [];

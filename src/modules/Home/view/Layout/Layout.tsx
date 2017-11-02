@@ -40,7 +40,7 @@ class HomeLayout extends React.PureComponent<Props, {}> {
           <div className={b('content')()}>
             <Description />
             12234556
-            <Search />
+            <Search SearchRepositoriesInput={SearchRepositoriesInput} />
           </div>
         </div>
       </RowsLayout>

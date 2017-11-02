@@ -1,3 +1,1 @@
-/**
- * Created by nikita on 12/25/16.
- */
+export default {};

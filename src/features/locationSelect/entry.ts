@@ -1,7 +1,7 @@
 import { IFeatureEntry, BundleLoader } from 'shared/types/app';
 
 import * as namespace from './namespace';
-import sel from './redux/data/selectors';
+import * as sel from './redux/data/selectors';
 import act from './redux/actions';
 import LocationSelect from './view/containers/LocationSelect/LocationSelect';
 import { default as reducer } from './redux/reducers';

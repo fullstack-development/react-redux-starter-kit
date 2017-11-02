@@ -9,8 +9,12 @@ import { SelectedLocation, IPoint, ILocationProperties } from 'shared/types/mode
 
 const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
 
-export function* rootSaga(deps: IDependencies) {
-  yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
+export default function getSaga(deps: IDependencies) {
+  function* saga() {
+    yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
+  }
+
+  return saga;
 }
 
 export function* saveFieldsSaga({ api }: IDependencies, { payload }: ISaveFields) {
