@@ -29,9 +29,11 @@ function featureConnect<L extends IDictionary<BundleLoader<any>>>(loaders: L, pr
         }
 
         public render() {
-          return !!preloader && !this.isAllBundlesLoaded()
-            ? preloader
-            : <WrappedComponent {...this.state.bundles} {...this.props} />;
+          if (!this.isAllBundlesLoaded()) {
+            return preloader || null;
+          } else {
+            return <WrappedComponent {...this.state.bundles} {...this.props} />;
+          }
         }
 
         @bind

@@ -21,3 +21,8 @@ declare module '*.png';
 declare module 'shared/*';
 declare module 'decko';
 declare module 'react-hot-loader';
+declare module '*entry' {
+  type Loader = <T>(callback: (bundle: T) => void) => void
+
+  export = Loader;
+}

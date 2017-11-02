@@ -76,7 +76,7 @@ export interface IReduxEntry {
 export interface IFeatureEntry<
   C extends IDictionary<ReactComponent<any>> | void,
   A extends IDictionary<ActionCreator<Action>> | void,
-  S,
+  S extends IDictionary<(state: any, ...args: any[]) => any> | void,
 > extends IReduxEntry {
   actions: A;
   selectors: S;
