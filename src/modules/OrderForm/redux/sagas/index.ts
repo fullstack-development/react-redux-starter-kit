@@ -5,11 +5,7 @@ import getErrorMsg from 'shared/helpers/getErrorMessage';
 
 import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
 import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
-
-import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
-import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
-type Point = LocationSelect.IPoint;
-type SelectedLocation = LocationSelect.SelectedLocation;
+import { SelectedLocation, IPoint, ILocationProperties } from 'shared/types/models';
 
 const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
 
@@ -17,12 +13,10 @@ export function* rootSaga(deps: IDependencies) {
   yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
 }
 
-export function* saveFieldsSaga({ api }: IDependencies) {
+export function* saveFieldsSaga({ api }: IDependencies, { payload }: ISaveFields) {
   const state: IAppReduxState = yield select();
 
-  const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
-  const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
-  const location =  locationSelectors.selectSelectedLocation(state);
+  const { dynamicValues, locationValues, location } = payload;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
@@ -53,7 +47,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   }
 }
 
-function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: SelectedLocation): Point {
+function getFromLocation(dynamicFields: ILocationProperties, locationSelect: SelectedLocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

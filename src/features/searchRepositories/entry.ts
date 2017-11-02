@@ -15,7 +15,7 @@ const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> 
   actions,
   selectors,
   containers,
-  reducers: { locationSelect: reducer },
+  reducers: { searchRepositories: reducer },
   sagas: [getSaga],
 };
 

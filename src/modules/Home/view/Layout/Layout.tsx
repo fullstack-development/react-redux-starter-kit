@@ -4,17 +4,26 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import RowsLayout from '../../../../shared/view/elements/RowsLayout';
 import Header from '../../../../shared/view/components/Header/index';
-import { SearchRepositoriesInput } from '../../../../features/searchRepositories';
+import * as loadSearchRepositories from '../../../../features/searchRepositories/entry';
 import Description from './Description';
 import Search from './Search';
+import { featureConnect } from 'core';
 import './Layout.scss';
+import { BundleLoader } from 'shared/types/app';
 
-class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
+interface IOwnProps {
+  searchRepositoriesEntry: loadSearchRepositories.Entry;
+}
+
+type Props = IOwnProps & RouteComponentProps<void>;
+
+class HomeLayout extends React.PureComponent<Props, {}> {
   private b = block('index-page');
 
   public render() {
     const b = this.b;
     const { history } = this.props;
+    const { SearchRepositoriesInput } = this.props.searchRepositoriesEntry.containers;
 
     return (
       <RowsLayout
@@ -39,4 +48,8 @@ class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
   }
 }
 
-export default HomeLayout;
+const withFeatures = featureConnect({
+  searchRepositoriesEntry: loadSearchRepositories as any as BundleLoader<any>,
+})(HomeLayout);
+
+export default withFeatures;

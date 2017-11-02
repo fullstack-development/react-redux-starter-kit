@@ -1,4 +1,5 @@
 import { IFormProperties } from '../../features/dynamicFields/namespace';
+import { IFlatFormProperties, ILocationProperties, SelectedLocation } from 'shared/types/models';
 
 interface IOrderFormRequest {
   attributes: IFormProperties;
@@ -30,6 +31,11 @@ interface IReduxState {
 
 interface ISaveFields {
   type: 'HOME_MODULE:SAVE_FIELDS';
+  payload: {
+    dynamicValues: IFlatFormProperties;
+    locationValues: ILocationProperties;
+    location: SelectedLocation;
+  };
 }
 
 interface ISaveFieldsSuccess {

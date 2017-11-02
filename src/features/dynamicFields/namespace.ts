@@ -1,11 +1,8 @@
 import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import { IFlatFormProperties } from 'shared/types/models';
 
 interface IFormProperties {
   [key: string]: string | number | IGeosuggestOption;
-}
-
-interface IFlatFormProperties {
-  [key: string]: string | number;
 }
 
 interface ILocationProperties {

@@ -1,9 +1,12 @@
 import { IOrderFormResponse, ISaveFields, ISaveFieldsSuccess, ISaveFieldsFail } from '../../namespace';
+import { IFlatFormProperties, ILocationProperties, SelectedLocation } from 'shared/types/models';
 
-function saveFields(): ISaveFields {
-  return {
-    type: 'HOME_MODULE:SAVE_FIELDS',
-  };
+function saveFields(
+  dynamicValues: IFlatFormProperties,
+  locationValues: ILocationProperties,
+  location: SelectedLocation,
+): ISaveFields {
+  return { type: 'HOME_MODULE:SAVE_FIELDS', payload: { dynamicValues, locationValues, location } };
 }
 
 function saveFieldsSuccess(response: IOrderFormResponse): ISaveFieldsSuccess {

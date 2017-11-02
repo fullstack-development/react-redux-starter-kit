@@ -1,6 +1,6 @@
 import HttpActions from './HttpActions';
-import { Namespace as LocationsNamespace } from 'features/locationSelect';
 import { IOrderFormResponse, IOrderFormRequest } from '../../modules/OrderForm/namespace';
+import { ICityResponse } from 'shared/types/models';
 import { bind } from 'decko';
 
 interface ICategoriesResponse {
@@ -31,9 +31,9 @@ class Api {
   }
 
   @bind
-  public async loadCities(): Promise<LocationsNamespace.ICityResponse[]> {
-    const response: Axios.AxiosXHR<LocationsNamespace.ICityResponse[]> =
-      await this.actions.get<LocationsNamespace.ICityResponse[]>('/cities/');
+  public async loadCities(): Promise<ICityResponse[]> {
+    const response: Axios.AxiosXHR<ICityResponse[]> =
+      await this.actions.get<ICityResponse[]>('/cities/');
     return response.data;
   }
 

@@ -1,7 +1,8 @@
 import initialState from '../data/initial';
 import { Map, fromJS } from 'immutable';
 import { IAction } from 'shared/types/app';
-import { IReduxState, IPoint, IArea, ICity, INormalizedCitiesResponse } from '../../namespace';
+import { IReduxState } from '../../namespace';
+import { IPoint, IArea, ICity, INormalizedCitiesResponse } from 'shared/types/models';
 
 function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
   const imState: Map<string, any> = fromJS(state);

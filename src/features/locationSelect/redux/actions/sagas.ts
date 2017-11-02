@@ -2,7 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { put, call, takeLatest } from 'redux-saga/effects';
 import { IDependencies } from 'shared/types/app';
 import { normalizeCities } from '../data/schema';
-import { INormalizedCitiesResponse } from '../../namespace';
+import { INormalizedCitiesResponse } from 'shared/types/models';
 
 function getSaga({ api }: IDependencies): () => SagaIterator {
   function* executeLoadCities() {

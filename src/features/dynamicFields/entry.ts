@@ -15,7 +15,7 @@ const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> 
   actions,
   selectors,
   containers,
-  reducers: { categorySelect: reducer },
+  reducers: { dynamicFields: reducer },
   sagas: [getSaga],
 };
 

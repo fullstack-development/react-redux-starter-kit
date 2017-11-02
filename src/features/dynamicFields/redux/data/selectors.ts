@@ -4,7 +4,6 @@ import {
 } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 import {
   ICommunication,
-  IReduxState,
   ILocationProperties,
   IFlatFormProperties,
   IFormProperties,
