@@ -11,6 +11,7 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "noUnusedLocals": true,
+    "noUnusedParameters": false,
     "allowSyntheticDefaultImports": true
   },
   "include": [

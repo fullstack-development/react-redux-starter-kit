@@ -156,7 +156,7 @@
     "stylelint-order": "^0.4.4",
     "ts-loader": "^2.0.3",
     "ts-node": "^3.3.0",
-    "typescript": "^2.5.3",
+    "typescript": "^2.6.1",
     "typings": "^2.1.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.4.1"
