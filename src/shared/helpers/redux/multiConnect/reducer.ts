@@ -19,7 +19,7 @@ export function reducer(state: any, action: Action): any {
   switch (action.type) {
   case '@@MULTI_CONNECT:ADD_INSTANCE': {
     const { initialState, instanceKey, keyPathToState } = action.payload;
-    if (keyPathToState.reduce((prev, cur) => state[cur], state)[instanceKey]) {
+    if (keyPathToState.reduce((prev, cur) => prev[cur], state)[instanceKey]) {
       return state;
     }
     return insertStateByKeyPath(state, keyPathToState, instanceKey, initialState);

@@ -1,4 +1,4 @@
-import { ICommunicationState, IAction, IProtect, IFailAction } from './namespace';
+import { ICommunicationState, IAction, IProtect, IFailAction } from '../namespace';
 
 export default function makeCommunicationReducer<
   E extends IAction = IProtect,

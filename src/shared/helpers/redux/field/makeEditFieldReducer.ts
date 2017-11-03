@@ -1,4 +1,4 @@
-import { IEditFieldAction, Validator } from './namespace';
+import { IEditFieldAction, Validator } from '../namespace';
 
 export default function makeEditFieldReducer<A extends IEditFieldAction, S = A['payload']>(
   type: A['type'], initial: S, validator?: Validator<S>,

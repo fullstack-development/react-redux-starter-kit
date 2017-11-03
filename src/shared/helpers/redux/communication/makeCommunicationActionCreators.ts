@@ -1,12 +1,4 @@
-import { IAction, IActionWithPayload } from './namespace';
-
-interface IFailAction<T = any> extends IAction {
-  error: T;
-}
-
-interface IFailActionWithPayload<T = any, E = any> extends IFailAction<E> {
-  payload: T;
-}
+import { IAction, IActionWithPayload, IFailAction, IFailActionWithPayload } from '../namespace';
 
 type NullaryAC<A extends IAction> = () => A;
 type UnaryAC<A extends IActionWithPayload> = (payload: A['payload']) => A;
@@ -75,28 +67,3 @@ function makeCommunicationActionCreators(executeType: string, completeType: stri
 }
 
 export default makeCommunicationActionCreators;
-
-interface IExampleAction {
-  type: 'example';
-  // payload: { data: number; };
-}
-
-interface IExampleActionSuccess {
-  type: 'example_success';
-  // payload: { data: number; };
-}
-
-interface IExampleActionFail {
-  type: 'example_fail';
-  error: string;
-  payload: { data: number; };
-}
-
-const { execute: example, completed: exampleCompleted, failed: exampleFailed } =
-  makeCommunicationActionCreators<IExampleAction, IExampleActionSuccess, IExampleActionFail>(
-    'example', 'example_success', 'example_fail',
-  );
-
-example();
-exampleCompleted(),
-exampleFailed('error', { data: 5 });
