@@ -3,7 +3,6 @@ import { RouteProps } from 'react-router';
 import { Store, Reducer, ActionCreator, Action } from 'redux';
 
 import { SagaIterator } from 'redux-saga';
-import {} from 'shared/helpers/redux/multiConnect';
 
 import { namespace as CategorySelectNamespace } from 'features/categorySelect/entry';
 import { namespace as LocationSelectNamespace } from 'features/locationSelect/entry';
@@ -29,12 +28,8 @@ export abstract class Module<C = any> {
     this._deps = value;
   }
 
-  protected get deps(): IDependencies {
-    if (!this._deps) {
-      throw new Error('Cannot find dependencies');
-    }
-
-    return this._deps;
+  protected get deps(): IDependencies | null {
+    return this._deps || null;
   }
 
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
@@ -74,9 +69,9 @@ export interface IReduxEntry {
 
 // TODO: add averload for aptional A, S, C
 export interface IFeatureEntry<
-  C extends IDictionary<ReactComponent<any>> | void,
-  A extends IDictionary<ActionCreator<Action>> | void,
-  S extends IDictionary<(state: any, ...args: any[]) => any> | void,
+  C extends IDictionary<ReactComponent<any>, keyof C> | void,
+  A extends IDictionary<ActionCreator<Action>, keyof A> | void,
+  S extends IDictionary<(state: any, ...args: any[]) => any, keyof S> | void,
 > extends IReduxEntry {
   actions: A;
   selectors: S;
