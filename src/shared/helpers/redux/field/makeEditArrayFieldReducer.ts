@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 
-import { IActionWithPayload, IReduxField, Validator } from './namespace';
+import { IActionWithPayload, IReduxField, Validator } from '../namespace';
 
 type ActionType<T> = ActionAdd<T> | ActionRemove | ActionUpdate<T>;
 

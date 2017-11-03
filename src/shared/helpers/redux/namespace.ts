@@ -12,6 +12,10 @@ export interface IFailAction<T = any> extends IAction {
   error: T;
 }
 
+export interface IFailActionWithPayload<T = any, E = any> extends IFailAction<E> {
+  payload: T;
+}
+
 export interface IProtect {
   type: '';
   error: any;
