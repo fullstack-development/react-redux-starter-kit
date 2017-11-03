@@ -12,7 +12,9 @@
     "baseUrl": "./src",
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "strictFunctionTypes": true
   },
   "include": [
     "src/**/*"
