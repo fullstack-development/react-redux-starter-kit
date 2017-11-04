@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { IActionWithPayload, FieldsState } from './namespace';
+import { IActionWithPayload, FieldsState } from '../namespace';
 
 type ToucheFieldAction<F extends string> = IActionWithPayload<string, F>;
 
