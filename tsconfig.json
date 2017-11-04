@@ -11,7 +11,10 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "noUnusedLocals": true,
-    "allowSyntheticDefaultImports": true
+    "noUnusedParameters": false,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "strictFunctionTypes": true
   },
   "include": [
     "src/**/*"
