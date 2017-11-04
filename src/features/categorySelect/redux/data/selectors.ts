@@ -12,7 +12,7 @@ function selectChosenCategory(state: IReduxState): number | null {
 const selectChosenCategoryObject = createSelector<IReduxState, ICategory[], number | null, ICategory | undefined>(
   selectCategories,
   selectChosenCategory,
-  (categories: ICategory[], uid: number) => {
+  (categories: ICategory[], uid: number | null) => {
     return categories.find((category: ICategory) => category.uid === uid);
   },
 );

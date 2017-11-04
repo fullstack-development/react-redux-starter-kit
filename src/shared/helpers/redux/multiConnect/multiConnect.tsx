@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import * as uuid from 'uuid';
 import { bind } from 'decko';
 import { Store, Dispatch, bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, Omit } from 'react-redux';
 import { IAppReduxState } from 'shared/types/app';
 
 import { addInstance, removeInstance } from './actions';
@@ -21,7 +21,6 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
   mapDispatchToProps?: MapDispatchToProps<TDispatchProps, TOwnProps>,
 ) => {
   type IWrappedComponentProps = TStateProps & TDispatchProps & TOwnProps & IMultiConnectProps;
-  // tslint:disable-next-line:max-line-length
   return (WrappedComponent: ReactComponent<IWrappedComponentProps>): MultiComponent<TOwnProps> => {
 
     class MultiConnector extends React.PureComponent<TOwnProps & IMultiConnectProps, {}> {
@@ -31,7 +30,10 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
       public context: { store: Store<IAppReduxState> };
       public displayName: string = `(MultiConnect) ${WrappedComponent.displayName}`;
 
-      private ConnectedComponent: ReactComponent<TOwnProps & IMultiConnectProps>;
+      private ConnectedComponent:
+        React.ComponentClass<
+          Omit<IWrappedComponentProps, keyof (TStateProps & TDispatchProps)> & TOwnProps & IMultiConnectProps
+        >;
       private instanceKey: string;
 
       public componentWillMount() {
@@ -41,10 +43,7 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
         mountedContainersForInstance[this.instanceKey] = mountedContainers + 1;
 
         this.context.store.dispatch(addInstance(this.instanceKey, initialState, keyPathToState));
-        this.ConnectedComponent = connect<TStateProps, TDispatchProps, TOwnProps & IMultiConnectProps>(
-          this.mapStateToProps,
-          mapDispatchToProps ? this.mapDispatchToProps : null as any,
-        )(WrappedComponent);
+        this.ConnectedComponent = connect(this.mapStateToProps, this.mapDispatchToProps)(WrappedComponent);
       }
 
       public componentWillUnmount() {

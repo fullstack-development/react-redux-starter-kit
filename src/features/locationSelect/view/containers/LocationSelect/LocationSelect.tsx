@@ -55,12 +55,8 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
-class LocationSelect extends React.Component<Props, {}> {
+class LocationSelect extends React.Component<Props> {
   private b = block('location-select');
-
-  constructor(props: Props) {
-    super(props);
-  }
 
   public componentWillReceiveProps(nextProps: Props) {
     const { onChange } = this.props;
@@ -126,11 +122,14 @@ class LocationSelect extends React.Component<Props, {}> {
   }
 
   @bind
-  private onSelectLocation(item: Select.Option | null) {
-    if (item === null) {
+  private onSelectLocation(item: Select.Option | Select.Option[] | null) {
+    if (!item || Array.isArray(item)) {
       this.props.selectLocation(null, false);
     } else {
-      this.props.selectLocation({ areaId: item.value as number, point: null }, true);
+      this.props.selectLocation({
+        areaId: +(item.value || 0),
+        point: null,
+      }, true);
     }
   }
 

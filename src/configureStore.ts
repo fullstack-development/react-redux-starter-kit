@@ -7,6 +7,7 @@ import {
   Reducer,
   ReducersMapObject,
   Store,
+  StoreEnhancerStoreCreator,
 } from 'redux';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import * as dynamicFieldsFeature from './features/dynamicFields';
@@ -27,12 +28,12 @@ function configureStore(modules: Array<Module<any, any>>, deps: IDependencies): 
   const reducer: Reducer<IAppReduxState> = createReducer(modules);
   const store: Store<IAppReduxState> = createStore(
     reducer,
-    compose(
+    compose<StoreEnhancerStoreCreator<IAppReduxState>, StoreEnhancerStoreCreator<IAppReduxState>>(
       applyMiddleware(...middlewares),
       ('development' === process.env.NODE_ENV && window.devToolsExtension)
-        ? window.devToolsExtension() : ((arg: any) => arg),
+      ? window.devToolsExtension() : () => void 0,
     ),
-  ) as Store<IAppReduxState>;
+  );
 
   modules.forEach((module: Module<any, any>) => {
     if (module.getSaga) {
@@ -55,7 +56,7 @@ function createReducer(
 ): Reducer<IAppReduxState> {
   const reducersData = modules
     .filter((module: Module<any, any>) => module.getReducer)
-    .map((module: Module<any, any>) => module.getReducer ? module.getReducer() : null)
+    .map((module: Module<any, any>) => module.getReducer!())
     .concat(extraReducers || []);
 
   const modulesReducers: ReducersMapObject = reducersData.reduce(

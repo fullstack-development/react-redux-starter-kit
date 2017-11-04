@@ -49,8 +49,8 @@ class GenericDropdownInput extends React.PureComponent<GenericFieldProps, IState
   }
 
   @bind
-  private onSelect(selected: Select.Option | null) {
-    this.validateAndChangeValue(selected);
+  private onSelect(selected: Select.Option | Select.Option[] | null) {
+    this.validateAndChangeValue(Array.isArray(selected) ? selected[0] : selected);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }
 
