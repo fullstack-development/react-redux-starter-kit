@@ -147,7 +147,7 @@ function getView(): IModuleEntryData {
       { name: 'locationSelect', reducer: locationSelectFeature.reducer },
     ],
     sagas: [
-      categorySelectFeature.actions.saga,
+      categorySelectFeature.getSaga,
       dynamicFieldsFeature.actions.saga,
     ],
   };
