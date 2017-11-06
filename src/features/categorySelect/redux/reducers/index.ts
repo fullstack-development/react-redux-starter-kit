@@ -1,7 +1,8 @@
 import { initialCommunicationState, initialDataState } from '../data/initial';
 import { Map, fromJS } from 'immutable';
 import { IAction } from 'shared/types/app';
-import { IReduxState, ICommunication, IData, Action } from '../../namespace';
+import { ICommunicationState } from 'shared/helpers/redux';
+import { IReduxState, IData, Action } from '../../namespace';
 import { combineReducers, Reducer } from 'redux';
 
 function mainReducer(state: IData = initialDataState, action: Action): IData {
@@ -20,9 +21,9 @@ function mainReducer(state: IData = initialDataState, action: Action): IData {
 
 function getCommunicationReducer(actionType: string) {
   return function communicationReducer(
-    state: ICommunication = initialCommunicationState,
+    state: ICommunicationState = initialCommunicationState,
     { type, payload }: IAction,
-  ): ICommunication {
+  ): ICommunicationState {
     const imState: Map<string, any> = fromJS(state);
 
     switch (type) {

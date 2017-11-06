@@ -1,6 +1,7 @@
-import { IReduxState, ICommunication, IData } from '../../namespace';
+import { ICommunicationState } from 'shared/helpers/redux';
+import { IReduxState, IData } from '../../namespace';
 
-const initialCommunicationState: ICommunication = {
+const initialCommunicationState: ICommunicationState = {
   isRequesting: false,
   error: '',
 };

@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
-import { IReduxState, ICategory, ICommunication } from '../../namespace';
+import { ICommunicationState } from 'shared/helpers/redux';
+import { IReduxState, ICategory } from '../../namespace';
 
 function selectCategories(state: IReduxState): ICategory[] {
   return state.data.options;
@@ -17,7 +18,7 @@ const selectChosenCategoryObject = createSelector<IReduxState, ICategory[], numb
   },
 );
 
-function selectCategoriesFetching(state: IReduxState): ICommunication {
+function selectCategoriesFetching(state: IReduxState): ICommunicationState {
   return state.communications.categoriesFetching;
 }
 

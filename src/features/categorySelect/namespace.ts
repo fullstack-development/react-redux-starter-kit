@@ -1,15 +1,6 @@
+import { ICategory } from 'shared/types/models';
 import { ICategoriesResponse } from 'shared/api/Api';
-
-interface ICategory {
-  uid: number;
-  name: string;
-  id: number;
-}
-
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
+import { ICommunicationState } from 'shared/helpers/redux';
 
 interface IData {
   options: ICategory[];
@@ -18,7 +9,7 @@ interface IData {
 
 interface IReduxState {
   communications: {
-    categoriesFetching: ICommunication;
+    categoriesFetching: ICommunicationState;
   };
   data: IData;
 }
@@ -31,7 +22,6 @@ type Action =
 export {
   IData,
   IReduxState,
-  ICommunication,
   ICategory,
   Action,
 };
