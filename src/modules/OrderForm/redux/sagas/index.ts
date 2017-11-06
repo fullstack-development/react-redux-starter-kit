@@ -6,9 +6,9 @@ import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
 import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
 
+import { IPoint } from 'shared/types/models';
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
-type Point = LocationSelect.IPoint;
 type SelectedLocation = LocationSelect.SelectedLocation;
 
 const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
@@ -53,7 +53,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   }
 }
 
-function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: SelectedLocation): Point {
+function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: SelectedLocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

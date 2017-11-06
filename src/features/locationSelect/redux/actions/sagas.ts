@@ -1,14 +1,13 @@
 import { SagaIterator } from 'redux-saga';
 import { put, call, takeLatest } from 'redux-saga/effects';
+
+import { INormalizedCities } from 'shared/types/models';
 import { IDependencies } from 'shared/types/app';
-import { normalizeCities } from '../data/schema';
-import { INormalizedCitiesResponse } from '../../namespace';
 
 function getSaga({ api }: IDependencies): () => SagaIterator {
   function* executeLoadCities() {
     try {
-      const response = yield call(api.loadCities);
-      const data: INormalizedCitiesResponse = normalizeCities(response);
+      const data: INormalizedCities = yield call(api.loadCities);
 
       yield put({ type: 'LOCATION_SELECT:LOAD_CITIES_SUCCESS', payload: data });
     } catch (error) {

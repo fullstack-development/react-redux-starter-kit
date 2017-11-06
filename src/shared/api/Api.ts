@@ -1,7 +1,10 @@
-import HttpActions from './HttpActions';
-import { Namespace as LocationsNamespace } from 'features/locationSelect';
-import { IOrderFormResponse, IOrderFormRequest } from '../../modules/OrderForm/namespace';
 import { bind } from 'decko';
+import HttpActions from './HttpActions';
+
+import { сonvertCityResponse } from './converters';
+import { ICityResponse } from './types/responses';
+import { INormalizedCities } from 'shared/types/models';
+import { IOrderFormResponse, IOrderFormRequest } from '../../modules/OrderForm/namespace';
 
 interface ICategoriesResponse {
   categories: Array<{ name: string, id: number }>;
@@ -31,10 +34,9 @@ class Api {
   }
 
   @bind
-  public async loadCities(): Promise<LocationsNamespace.ICityResponse[]> {
-    const response: Axios.AxiosXHR<LocationsNamespace.ICityResponse[]> =
-      await this.actions.get<LocationsNamespace.ICityResponse[]>('/cities/');
-    return response.data;
+  public async loadCities(): Promise<INormalizedCities> {
+    const response: Axios.AxiosXHR<ICityResponse[]> = await this.actions.get<ICityResponse[]>('/cities/');
+    return сonvertCityResponse(response.data);
   }
 
   @bind
