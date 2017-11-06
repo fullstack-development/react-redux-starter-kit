@@ -2,7 +2,7 @@ import { Schema, arrayOf, normalize } from 'normalizr';
 import normalizeKey from 'shared/helpers/normalizeKey';
 import { ICityResponse } from '../types/responses';
 import { IOrderFormRequest } from '../types/requests';
-import { INormalizedCities, ITravel } from 'shared/types/models';
+import { INormalizedCities, IOrder } from 'shared/types/models';
 
 /* Define schema for normalizing */
 const city = new Schema('cities');
@@ -26,7 +26,7 @@ export function сonvertCityResponse(response: ICityResponse[]): INormalizedCiti
   );
 }
 
-export function convertTravelToRequest(data: ITravel): IOrderFormRequest {
+export function convertTravelToRequest(data: IOrder): IOrderFormRequest {
   return {
     attributes: data.attributes,
     category: data.selectedCategoryUid,

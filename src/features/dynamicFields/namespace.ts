@@ -1,20 +1,5 @@
-import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
-import { IFields } from 'shared/types/models';
-
-interface IFormProperties {
-  [key: string]: string | number | IGeosuggestOption;
-}
-
-interface ILocationProperties {
-  [key: string]: { lat: number; lng: number; };
-  from: { lat: number; lng: number; };
-  to: { lat: number; lng: number; };
-}
-
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
+import { IFields, IFormProperties } from 'shared/types/models';
+import { ICommunication } from 'modules/OrderForm/namespace';
 
 interface IReduxState {
   communications: {
@@ -26,9 +11,4 @@ interface IReduxState {
   };
 }
 
-export {
-  IFormProperties,
-  ILocationProperties,
-  ICommunication,
-  IReduxState,
-};
+export { IReduxState };

@@ -1,3 +1,3 @@
 export * from './Category';
 export * from './Location';
-export * from './Common';
+export * from './DynamicFields';

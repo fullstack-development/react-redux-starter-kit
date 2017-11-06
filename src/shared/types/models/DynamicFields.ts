@@ -1,3 +1,5 @@
+import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+
 export interface IFields {
   schema?: ISchema;
   id?: number;
@@ -26,4 +28,14 @@ export interface IField {
   maximum: number;
   minLength: number;
   maxLength: number;
+}
+
+export interface IFormProperties {
+  [key: string]: string | number | IGeosuggestOption;
+}
+
+export interface ILocationProperties {
+  [key: string]: { lat: number; lng: number; };
+  from: { lat: number; lng: number; };
+  to: { lat: number; lng: number; };
 }

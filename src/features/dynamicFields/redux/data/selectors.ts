@@ -3,19 +3,15 @@ import {
   IGeosuggestOption,
 } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 
-import {
-  ICommunication,
-  IReduxState,
-  ILocationProperties,
-  IFormProperties,
-} from '../../namespace';
-import { IFields, IAttributes } from 'shared/types/models';
+import { IReduxState } from '../../namespace';
+import { IFields, IFormProperties, ILocationProperties, IAttributes } from 'shared/types/models';
+import { ICommunicationState } from 'shared/helpers/redux';
 
 function selectFields(state: IReduxState): IFields {
   return state.data.fields;
 }
 
-function selectCommunication(state: IReduxState): {fetching: ICommunication} {
+function selectCommunication(state: IReduxState): { fetching: ICommunicationState } {
   return state.communications;
 }
 

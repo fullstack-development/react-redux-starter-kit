@@ -1,4 +1,6 @@
-export interface ITravel {
+import { ILocationProperties } from './DynamicFields';
+
+export interface IOrder {
   attributes: IAttributes;
   fromLocation: IPoint;
   location: ILocation;
@@ -14,12 +16,6 @@ export interface ILocation {
   city: number;
   area: number;
   point: IPoint;
-}
-
-export interface ILocationProperties {
-  [key: string]: { lat: number; lng: number; };
-  from: { lat: number; lng: number; };
-  to: { lat: number; lng: number; };
 }
 
 export interface IArea {

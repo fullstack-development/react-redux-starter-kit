@@ -6,8 +6,8 @@ import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
 import { ISaveFields } from '../../namespace';
 
-import { IPoint, ILocation, ITravel } from 'shared/types/models';
-import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
+import { IPoint, ILocation, IOrder, ILocationProperties } from 'shared/types/models';
+import { selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { selectors as locationSelectors } from 'features/locationSelect';
 
 const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
@@ -35,7 +35,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const fromLocation = getFromLocation(locationValues, location);
 
-  const data: ITravel = {
+  const data: IOrder = {
     fromLocation,
     location,
     locationValues,
@@ -51,7 +51,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   }
 }
 
-function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: ILocation): IPoint {
+function getFromLocation(dynamicFields: ILocationProperties, locationSelect: ILocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

@@ -3,7 +3,7 @@ import HttpActions from './HttpActions';
 
 import { сonvertCityResponse, convertTravelToRequest } from './converters';
 import { ICityResponse, ICategoriesResponse, IFieldsResponse, IOrderFormResponse } from './types/responses';
-import { INormalizedCities, ICategory, IFields, ITravel } from 'shared/types/models';
+import { INormalizedCities, ICategory, IFields, IOrder } from 'shared/types/models';
 
 class Api {
   private actions: HttpActions;
@@ -31,7 +31,7 @@ class Api {
   }
 
   @bind
-  public async saveFields(travel: ITravel): Promise<string> {
+  public async saveFields(travel: IOrder): Promise<string> {
     const request = convertTravelToRequest(travel);
     const response = await this.actions.post<IOrderFormResponse>('/travels/create/', request);
     return response.data.message;
