@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Store, Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
-import Api from '../api/Api';
+import Api from 'services/api/Api';
 import { Namespace as CategorySelectNamespace } from 'features/categorySelect';
 import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
 import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';

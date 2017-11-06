@@ -1,5 +1,4 @@
 import { ICategory } from 'shared/types/models';
-import { ICategoriesResponse } from 'shared/api/Api';
 import { ICommunicationState } from 'shared/helpers/redux';
 
 interface IData {
@@ -17,7 +16,7 @@ interface IReduxState {
 type Action =
   { type: 'CATEGORY_SELECT:CATEGORY_SELECTED'; payload: number } |
   { type: 'CATEGORY_SELECT:LOAD_CATEGORIES'; } |
-  { type: 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED'; payload: ICategoriesResponse; };
+  { type: 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED'; payload: ICategory[]; };
 
 export {
   IData,
