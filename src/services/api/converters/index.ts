@@ -1,7 +1,7 @@
 import { Schema, arrayOf, normalize } from 'normalizr';
 import normalizeKey from 'shared/helpers/normalizeKey';
 import { ICityResponse } from '../types/responses';
-import { IOrderFormRequest } from '../types/requests';
+import { ITravelOrderRequest } from '../types/requests';
 import { INormalizedCities, ITravelOrder } from 'shared/types/models';
 
 /* Define schema for normalizing */
@@ -26,9 +26,9 @@ export function сonvertCityResponse(response: ICityResponse[]): INormalizedCiti
   );
 }
 
-export function convertTravelToRequest(data: ITravelOrder): IOrderFormRequest {
+export function convertTravelToRequest(data: ITravelOrder): ITravelOrderRequest {
   return {
-    attributes: data.dynamicValues,
+    attributes: data.options,
     category: data.selectedCategoryUid,
     location: data.location.area,
     // TODO: fill other properties below

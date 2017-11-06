@@ -11,12 +11,6 @@ export interface ICityResponse {
   id: number;
 }
 
-export interface IFieldsResponse {
-  fields: object;
-}
-
-export interface IOrderFormResponse {
-  message: string;
-}
+export type ITravelOrderResponse = string;
 
 export type ICategoriesResponse = Array<{ id: number; uid: number; name: string }>;

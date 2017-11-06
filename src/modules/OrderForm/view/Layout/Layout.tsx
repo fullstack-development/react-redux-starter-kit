@@ -66,7 +66,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     const canSubmit: boolean = Boolean(typeof categoryUid === 'number') &&
       !isSubmitting && this.isDynamicFieldsValid && Boolean(location);
     const dynamicFieldsComponent = <DynamicFields category={categoryUid} onChange={this.onDynamicValueChanged} />;
-
+    console.log(submittingResult);
     return (
       <RowsLayout
         footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}

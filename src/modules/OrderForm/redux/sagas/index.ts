@@ -31,11 +31,11 @@ export function* saveFieldsSaga({ api }: IDependencies) {
     return;
   }
 
-  const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
+  const options = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const fromLocation = getFromLocation(locationValues, location);
   const travelOrder: ITravelOrder = {
-    dynamicValues,
+    options,
     fromLocation,
     location,
     locationValues,

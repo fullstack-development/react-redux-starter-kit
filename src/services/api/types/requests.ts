@@ -1,6 +1,6 @@
 import { IFlatFormProperties } from 'shared/types/models';
 
-export interface IOrderFormRequest {
+export interface ITravelOrderRequest {
   attributes: IFlatFormProperties;
   notify: boolean;
   description: string;

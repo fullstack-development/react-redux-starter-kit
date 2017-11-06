@@ -16,7 +16,7 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
     return imState
       .setIn(['communications', 'saving', 'isRequesting'], false)
       .setIn(['communications', 'saving', 'error'], '')
-      .setIn(['data'], action.payload)
+      .setIn(['data', 'message'], action.payload)
       .toJS();
   case 'HOME_MODULE:SAVE_FIELDS_FAIL':
     return imState

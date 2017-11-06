@@ -15,6 +15,7 @@ function getSaga({ api }: IDependencies): () => SagaIterator {
     try {
       const uid = action.payload as number;
       const response: IFields = yield call(api.loadFields, uid);
+      console.log(response);
       yield put(loadFieldsSuccessed(response));
     } catch (error) {
       const message = getErrorMsg(error);

@@ -1,7 +1,7 @@
 import { IFlatFormProperties, ILocationProperties } from './DynamicFields';
 
 export interface ITravelOrder {
-  dynamicValues: IFlatFormProperties;
+  options: IFlatFormProperties;
   fromLocation: IPoint;
   location: ILocation;
   locationValues: ILocationProperties;
