@@ -1,14 +1,9 @@
 import { bind } from 'decko';
 import HttpActions from './HttpActions';
 
-import { сonvertCityResponse, convertCategoriesResponse } from './converters';
-import { ICityResponse, ICategoriesResponse } from './types/responses';
-import { INormalizedCities, ICategory } from 'shared/types/models';
-import { IOrderFormResponse, IOrderFormRequest } from '../../modules/OrderForm/namespace';
-
-interface IFieldsResponse {
-  fields: object;
-}
+import { сonvertCityResponse, convertTravelToRequest } from './converters';
+import { ICityResponse, ICategoriesResponse, IFieldsResponse, IOrderFormResponse } from './types/responses';
+import { INormalizedCities, ICategory, IFields, ITravel } from 'shared/types/models';
 
 class Api {
   private actions: HttpActions;
@@ -20,13 +15,13 @@ class Api {
   @bind
   public async loadCategories(): Promise<ICategory[]> {
     const response = await this.actions.get<ICategoriesResponse>('/categories/');
-    return convertCategoriesResponse(response.data);
+    return response.data;
   }
 
   @bind
-  public async loadFields(uid: number): Promise<IFieldsResponse> {
+  public async loadFields(uid: number): Promise<IFields> {
     const response = await this.actions.get<IFieldsResponse>(`/categories/${uid}/`);
-    return response.data;
+    return response.data.fields;
   }
 
   @bind
@@ -36,9 +31,10 @@ class Api {
   }
 
   @bind
-  public async saveFields(data: IOrderFormRequest): Promise<IOrderFormResponse> {
-    const response = await this.actions.post<IOrderFormResponse>('/travels/create/', data);
-    return response.data;
+  public async saveFields(travel: ITravel): Promise<string> {
+    const request = convertTravelToRequest(travel);
+    const response = await this.actions.post<IOrderFormResponse>('/travels/create/', request);
+    return response.data.message;
   }
 }
 

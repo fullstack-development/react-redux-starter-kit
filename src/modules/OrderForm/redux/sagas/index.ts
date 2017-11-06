@@ -4,12 +4,11 @@ import { IDependencies, IAppReduxState } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 
 import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
-import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
+import { ISaveFields } from '../../namespace';
 
-import { IPoint } from 'shared/types/models';
+import { IPoint, ILocation, ITravel } from 'shared/types/models';
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
-import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
-type SelectedLocation = LocationSelect.SelectedLocation;
+import { selectors as locationSelectors } from 'features/locationSelect';
 
 const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
 
@@ -22,38 +21,37 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
-  const location =  locationSelectors.selectSelectedLocation(state);
+  const location = locationSelectors.selectSelectedLocation(state);
+  const selectedCategory = state.categorySelect.data.selected;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
     return;
   }
+  if (!selectedCategory) {
+    yield put(saveFieldsFail('Selected category is null'));
+    return;
+  }
 
   const fromLocation = getFromLocation(locationValues, location);
 
-  const data: IOrderFormRequest = {
+  const data: ITravel = {
+    fromLocation,
+    location,
+    locationValues,
+    selectedCategoryUid: selectedCategory,
     attributes: dynamicValues,
-    category: state.categorySelect.data.selected as number,
-    location: location.area,
-    // TODO: fill other properties below
-    coord_from_lng: fromLocation.lng,
-    coord_from_lat: fromLocation.lat,
-    coord_to_lng: locationValues.to.lng,
-    coord_to_lat: locationValues.to.lat,
-
-    description: '',
-    notify: false,
   };
 
   try {
-    const response: IOrderFormResponse = yield call(api.saveFields, data);
-    yield put(saveFieldsSuccess(response));
+    const message: string = yield call(api.saveFields, data);
+    yield put(saveFieldsSuccess(message));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
   }
 }
 
-function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: SelectedLocation): IPoint {
+function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: ILocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

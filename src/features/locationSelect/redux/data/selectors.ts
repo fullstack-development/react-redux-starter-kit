@@ -1,11 +1,11 @@
-import { IArea, ICity } from 'shared/types/models';
-import { IReduxState, SelectedLocation } from '../../namespace';
+import { IArea, ICity, ILocation } from 'shared/types/models';
+import { IReduxState } from '../../namespace';
 
 function getFeatureState(state: any): IReduxState {
   return state.locationSelect;
 }
 
-function selectSelectedLocation(state: any): SelectedLocation {
+function selectSelectedLocation(state: any): ILocation | null {
   const ownState: IReduxState = getFeatureState(state);
   return ownState.data.selectedLocation;
 }

@@ -1,4 +1,4 @@
-import { IOrderFormResponse, ISaveFields, ISaveFieldsSuccess, ISaveFieldsFail } from '../../namespace';
+import { ISaveFields, ISaveFieldsSuccess, ISaveFieldsFail } from '../../namespace';
 
 function saveFields(): ISaveFields {
   return {
@@ -6,10 +6,10 @@ function saveFields(): ISaveFields {
   };
 }
 
-function saveFieldsSuccess(response: IOrderFormResponse): ISaveFieldsSuccess {
+function saveFieldsSuccess(message: string): ISaveFieldsSuccess {
   return {
     type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS',
-    payload: response,
+    payload: message,
   };
 }
 

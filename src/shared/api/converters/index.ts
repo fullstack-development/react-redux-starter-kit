@@ -1,7 +1,8 @@
 import { Schema, arrayOf, normalize } from 'normalizr';
 import normalizeKey from 'shared/helpers/normalizeKey';
-import { ICityResponse, ICategoriesResponse } from 'shared/api/types/responses';
-import { INormalizedCities, ICategory } from 'shared/types/models';
+import { ICityResponse } from '../types/responses';
+import { IOrderFormRequest } from '../types/requests';
+import { INormalizedCities, ITravel } from 'shared/types/models';
 
 /* Define schema for normalizing */
 const city = new Schema('cities');
@@ -25,6 +26,18 @@ export function сonvertCityResponse(response: ICityResponse[]): INormalizedCiti
   );
 }
 
-export function convertCategoriesResponse(categoriesResponse: ICategoriesResponse): ICategory[] {
-  return categoriesResponse;
+export function convertTravelToRequest(data: ITravel): IOrderFormRequest {
+  return {
+    attributes: data.attributes,
+    category: data.selectedCategoryUid,
+    location: data.location.area,
+    // TODO: fill other properties below
+    coord_from_lng: data.fromLocation.lng,
+    coord_from_lat: data.fromLocation.lat,
+    coord_to_lng: data.locationValues.to.lng,
+    coord_to_lat: data.locationValues.to.lat,
+
+    description: '',
+    notify: false,
+  };
 }

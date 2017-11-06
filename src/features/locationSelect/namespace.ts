@@ -1,7 +1,6 @@
-import { IArea, ICity, IPoint, IAreaEntities, ICityEntities } from 'shared/types/models';
+import { IArea, ICity, IPoint, IAreaEntities, ICityEntities, ILocation } from 'shared/types/models';
 import { ICommunicationState } from 'shared/helpers/redux';
 
-type SelectedLocation = null | { city: number, area: number, point: IPoint };
 type SelectedLocationData = null | { city: ICity; area: IArea, point: IPoint };
 
 interface IReduxState {
@@ -14,7 +13,7 @@ interface IReduxState {
       cities: ICityEntities;
     },
     citiesSet: number[],
-    selectedLocation: SelectedLocation;
+    selectedLocation: ILocation | null;
   };
   ui: {
     showSelectedLocation: boolean;
@@ -23,8 +22,5 @@ interface IReduxState {
 
 export {
   IReduxState,
-  IAreaEntities,
-  ICityEntities,
   SelectedLocationData,
-  SelectedLocation,
 };
