@@ -4,7 +4,7 @@ import {
 } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 
 import { IReduxState } from '../../namespace';
-import { IFields, IFormProperties, ILocationProperties, IAttributes } from 'shared/types/models';
+import { IFields, IFormProperties, ILocationProperties, IFlatFormProperties } from 'shared/types/models';
 import { ICommunicationState } from 'shared/helpers/redux';
 
 function selectFields(state: IReduxState): IFields {
@@ -19,11 +19,11 @@ function selectValues(state: IReduxState): IFormProperties {
   return state.data.values;
 }
 
-function selectFlatValues(state: IReduxState): IAttributes {
+function selectFlatValues(state: IReduxState): IFlatFormProperties {
   const fields = selectValues(state);
   return Object
     .keys(fields)
-    .reduce<IAttributes>((acc: IAttributes, key: string): IAttributes => {
+    .reduce<IFlatFormProperties>((acc: IFlatFormProperties, key: string): IFlatFormProperties => {
       const value: string | number | IGeosuggestOption = fields[key];
       return isGeosuggestOption(value) ? { ...acc, [key]: value.label } : { ...acc, [key]: value };
     }, {});

@@ -28,7 +28,7 @@ export function сonvertCityResponse(response: ICityResponse[]): INormalizedCiti
 
 export function convertTravelToRequest(data: IOrder): IOrderFormRequest {
   return {
-    attributes: data.attributes,
+    attributes: data.dynamicValues,
     category: data.selectedCategoryUid,
     location: data.location.area,
     // TODO: fill other properties below

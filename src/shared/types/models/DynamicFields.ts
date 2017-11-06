@@ -34,6 +34,10 @@ export interface IFormProperties {
   [key: string]: string | number | IGeosuggestOption;
 }
 
+export interface IFlatFormProperties {
+  [key: string]: string | number;
+}
+
 export interface ILocationProperties {
   [key: string]: { lat: number; lng: number; };
   from: { lat: number; lng: number; };

@@ -1,17 +1,3 @@
-import { ILocationProperties } from './DynamicFields';
-
-export interface IOrder {
-  attributes: IAttributes;
-  fromLocation: IPoint;
-  location: ILocation;
-  locationValues: ILocationProperties;
-  selectedCategoryUid: number;
-}
-
-export interface IAttributes {
-  [key: string]: string | number;
-}
-
 export interface ILocation {
   city: number;
   area: number;

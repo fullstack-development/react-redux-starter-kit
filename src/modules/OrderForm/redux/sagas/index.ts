@@ -19,8 +19,6 @@ export function* rootSaga(deps: IDependencies) {
 export function* saveFieldsSaga({ api }: IDependencies) {
   const state: IAppReduxState = yield select();
 
-  const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
-  const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const location = locationSelectors.selectSelectedLocation(state);
   const selectedCategory = state.categorySelect.data.selected;
 
@@ -33,18 +31,19 @@ export function* saveFieldsSaga({ api }: IDependencies) {
     return;
   }
 
+  const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
+  const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const fromLocation = getFromLocation(locationValues, location);
-
-  const data: IOrder = {
+  const order: IOrder = {
+    dynamicValues,
     fromLocation,
     location,
     locationValues,
     selectedCategoryUid: selectedCategory,
-    attributes: dynamicValues,
   };
 
   try {
-    const message: string = yield call(api.saveFields, data);
+    const message: string = yield call(api.saveFields, order);
     yield put(saveFieldsSuccess(message));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));

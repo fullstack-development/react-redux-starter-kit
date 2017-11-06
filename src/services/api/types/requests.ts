@@ -1,7 +1,7 @@
-import { IAttributes } from 'shared/types/models';
+import { IFlatFormProperties } from 'shared/types/models';
 
 export interface IOrderFormRequest {
-  attributes: IAttributes;
+  attributes: IFlatFormProperties;
   notify: boolean;
   description: string;
   location: number;  // area id only - don't need a city id
