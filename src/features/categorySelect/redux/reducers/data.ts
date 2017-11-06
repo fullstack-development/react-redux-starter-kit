@@ -8,7 +8,7 @@ type CategoriesState = NS.IReduxState['data']['categories'];
 function loadCategoriesReducer(state: CategoriesState = initial.data.categories, action: NS.Action): CategoriesState {
   switch (action.type) {
     case 'CATEGORY_SELECT:LOAD_CATEGORIES_SUCCESS': {
-      return action.payload.categories as any;
+      return action.payload.categories;
     }
     default: return state;
   }

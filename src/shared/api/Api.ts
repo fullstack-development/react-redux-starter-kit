@@ -4,7 +4,7 @@ import { IOrderFormResponse, IOrderFormRequest } from '../../modules/OrderForm/n
 import { bind } from 'decko';
 
 interface ICategoriesResponse {
-  categories: Array<{ name: string, id: number }>;
+  categories: Array<{ name: string, id: number, uid: number; }>;
 }
 
 interface IFieldsResponse {
