@@ -73,5 +73,7 @@ interface IModuleEntryData {
 
 type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
+type Uid = number;
+
 export { Module, IReducerData, IAction, IDependencies, IAppReduxState, IModuleEntryData };
-export { RootSaga };
+export { RootSaga, Uid };

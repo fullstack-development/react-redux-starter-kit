@@ -1,37 +1,42 @@
 import { ICategoriesResponse } from 'shared/api/Api';
+import { ICommunicationState, IReduxField } from 'shared/helpers/redux';
+import { Uid } from 'shared/types/app';
 
-interface ICategory {
-  uid: number;
+export interface IReduxState {
+  data: {
+    categories: ICategory[];
+  };
+  edit: {
+    selectedCategoryUid: IReduxField<number | null>;
+  };
+  communications: {
+    categoriesFetching: ICommunicationState;
+  };
+}
+
+export interface ICategory {
+  uid: Uid;
   name: string;
   id: number;
 }
 
-interface ICommunication {
-  isRequesting: boolean;
+export interface ICategorySelected {
+  type: 'CATEGORY_SELECT:CATEGORY_SELECTED';
+  payload: IReduxField<Uid>;
+}
+
+export interface ILoadCategories {
+  type: 'CATEGORY_SELECT:LOAD_CATEGORIES';
+}
+
+export interface ILoadCategoriesSuccess {
+  type: 'CATEGORY_SELECT:LOAD_CATEGORIES_SUCCESS';
+  payload: ICategoriesResponse;
+}
+
+export interface ILoadCategoriesFail {
+  type: 'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL';
   error: string;
 }
 
-interface IData {
-  options: ICategory[];
-  selected: number | null;
-}
-
-interface IReduxState {
-  communications: {
-    categoriesFetching: ICommunication;
-  };
-  data: IData;
-}
-
-type Action =
-  { type: 'CATEGORY_SELECT:CATEGORY_SELECTED'; payload: number } |
-  { type: 'CATEGORY_SELECT:LOAD_CATEGORIES'; } |
-  { type: 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED'; payload: ICategoriesResponse; };
-
-export {
-  IData,
-  IReduxState,
-  ICommunication,
-  ICategory,
-  Action,
-};
+export type Action = ICategorySelected | ILoadCategories | ILoadCategoriesSuccess | ILoadCategoriesFail;
