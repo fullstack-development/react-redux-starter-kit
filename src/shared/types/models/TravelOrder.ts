@@ -1,3 +1,13 @@
+import { IFlatFormProperties, ILocationProperties } from './DynamicFields';
+
+export interface ITravelOrder {
+  dynamicValues: IFlatFormProperties;
+  fromLocation: IPoint;
+  location: ILocation;
+  locationValues: ILocationProperties;
+  selectedCategoryUid: number;
+}
+
 export interface ILocation {
   city: number;
   area: number;
@@ -37,4 +47,10 @@ export interface IAreaEntities {
 
 export interface ICityEntities {
   [key: number]: ICity;
+}
+
+export interface ICategory {
+  uid: number;
+  name: string;
+  id: number;
 }
