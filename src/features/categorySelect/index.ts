@@ -1,5 +1,5 @@
-import CategorySelect from './view/containers/CategorySelect/CategorySelect';
-import { reducer, actions, getSaga, selectors } from './redux';
 import * as Namespace from './namespace';
+import { reducer, actions, getSaga, selectors } from './redux';
 
-export { getSaga, CategorySelect, selectors, reducer, actions, Namespace };
+export * from './view/containers';
+export { getSaga, selectors, reducer, actions, Namespace };
