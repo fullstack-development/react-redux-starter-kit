@@ -31,8 +31,8 @@ class Api {
   }
 
   @bind
-  public async saveFields(travel: ITravelOrder): Promise<string> {
-    const request = convertTravelToRequest(travel);
+  public async createTravelOrder(travelOrder: ITravelOrder): Promise<string> {
+    const request = convertTravelToRequest(travelOrder);
     const response = await this.actions.post<IOrderFormResponse>('/travels/create/', request);
     return response.data.message;
   }

@@ -34,7 +34,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const fromLocation = getFromLocation(locationValues, location);
-  const order: ITravelOrder = {
+  const travelOrder: ITravelOrder = {
     dynamicValues,
     fromLocation,
     location,
@@ -43,7 +43,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   };
 
   try {
-    const message: string = yield call(api.saveFields, order);
+    const message: string = yield call(api.createTravelOrder, travelOrder);
     yield put(saveFieldsSuccess(message));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
