@@ -10,3 +10,5 @@ export interface ICityResponse {
   name: string;
   id: number;
 }
+
+export type ICategoriesResponse = Array<{ id: number; uid: number; name: string }>;

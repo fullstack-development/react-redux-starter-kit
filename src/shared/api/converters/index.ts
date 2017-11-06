@@ -1,14 +1,14 @@
 import { Schema, arrayOf, normalize } from 'normalizr';
 import normalizeKey from 'shared/helpers/normalizeKey';
-import { ICityResponse } from 'shared/api/types/responses';
-import { INormalizedCities } from 'shared/types/models';
+import { ICityResponse, ICategoriesResponse } from 'shared/api/types/responses';
+import { INormalizedCities, ICategory } from 'shared/types/models';
 
 /* Define schema for normalizing */
 const city = new Schema('cities');
 const area = new Schema('areas');
 city.define({ areas: arrayOf(area) });
 
-function сonvertCityResponse(response: ICityResponse[]): INormalizedCities {
+export function сonvertCityResponse(response: ICityResponse[]): INormalizedCities {
   return normalize(
     response,
     arrayOf(city),
@@ -25,4 +25,6 @@ function сonvertCityResponse(response: ICityResponse[]): INormalizedCities {
   );
 }
 
-export { сonvertCityResponse };
+export function convertCategoriesResponse(categoriesResponse: ICategoriesResponse): ICategory[] {
+  return categoriesResponse;
+}
