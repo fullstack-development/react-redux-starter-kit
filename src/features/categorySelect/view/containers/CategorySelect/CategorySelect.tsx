@@ -4,10 +4,10 @@ import * as Select from 'react-select';
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actions, selectors } from '../../redux';
+import { actions, selectors } from '../../../redux';
 import { bind } from 'decko';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
-import { IReduxState } from '../../namespace';
+import { IReduxState } from '../../../namespace';
 import './styles.scss';
 
 interface IOwnProps {
