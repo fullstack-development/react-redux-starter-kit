@@ -6,6 +6,7 @@ import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
 import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
 
+import * as categorySelectFeature from 'features/categorySelect';
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
 type Point = LocationSelect.IPoint;
@@ -23,9 +24,15 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const location =  locationSelectors.selectSelectedLocation(state);
+  const chosenCategory = categorySelectFeature.selectors.selectChosenCategory(state).value;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
+    return;
+  }
+
+  if (!chosenCategory) {
+    yield put(saveFieldsFail('category is null'));
     return;
   }
 
@@ -33,7 +40,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const data: IOrderFormRequest = {
     attributes: dynamicValues,
-    category: state.categorySelect.edit.selectedCategoryUid.value as number,
+    category: chosenCategory,
     location: location.area,
     // TODO: fill other properties below
     coord_from_lng: fromLocation.lng,

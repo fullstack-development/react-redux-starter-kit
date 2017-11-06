@@ -7,7 +7,7 @@ export interface IReduxState {
     categories: ICategory[];
   };
   edit: {
-    selectedCategoryUid: IReduxField<number | null>;
+    selectedCategoryUid: IReduxField<Uid | null>;
   };
   communications: {
     categoriesFetching: ICommunicationState;
