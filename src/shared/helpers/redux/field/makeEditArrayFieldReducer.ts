@@ -1,18 +1,18 @@
 import { Reducer } from 'redux';
 
-import { IActionWithPayload, IReduxField, Validator } from '../namespace';
+import { IAction, IReduxField, Validator } from '../namespace';
 
 type ActionType<T> = ActionAdd<T> | ActionRemove | ActionUpdate<T>;
 
-type ActionAdd<T> = IActionWithPayload<T>;
+type ActionAdd<T> = IAction<T>;
 
-type ActionRemove = IActionWithPayload<number>;
+type ActionRemove = IAction<number>;
 
-type ActionUpdate<T> = IActionWithPayload<{ index: number; item: T }>;
+type ActionUpdate<T> = IAction<{ index: number; item: T }>;
 
 export default function makeArrayFieldReducer<
   A extends ActionAdd<T>, R extends ActionRemove, U extends ActionUpdate<T>, T
->(
+  >(
   addType: A['type'],
   removeType: R['type'],
   updateType: U['type'],

@@ -1,7 +1,7 @@
-import { IAction, IActionWithPayload, IFailAction, IFailActionWithPayload } from '../namespace';
+import { IPlainAction, IAction, IFailAction, IFailActionWithPayload } from '../namespace';
 
-type NullaryAC<A extends IAction> = () => A;
-type UnaryAC<A extends IActionWithPayload> = (payload: A['payload']) => A;
+type NullaryAC<A extends IPlainAction> = () => A;
+type UnaryAC<A extends IAction> = (payload: A['payload']) => A;
 
 type NullaryFailedAC<A extends IFailAction> = (error: A['error']) => A;
 type UnaryFailedAC<A extends IFailActionWithPayload> = (error: A['error'], payload: A['payload']) => A;
@@ -13,42 +13,44 @@ interface ICommunicationActionCreators<E, C, F> {
 }
 
 function makeCommunicationActionCreators<
-  E extends IActionWithPayload, C extends IActionWithPayload, F extends IFailActionWithPayload
->(
+  E extends IAction, C extends IAction, F extends IFailActionWithPayload
+  >(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<UnaryAC<E>, UnaryAC<C>, UnaryFailedAC<F>>;
 
 function makeCommunicationActionCreators<
-  E extends IActionWithPayload, C extends IActionWithPayload, F extends IFailAction
->(
+  E extends IAction, C extends IAction, F extends IFailAction
+  >(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<UnaryAC<E>, UnaryAC<C>, NullaryFailedAC<F>>;
 
 function makeCommunicationActionCreators<
-  E extends IActionWithPayload, C extends IAction, F extends IFailActionWithPayload
->(
+  E extends IAction, C extends IPlainAction, F extends IFailActionWithPayload
+  >(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<UnaryAC<E>, NullaryAC<C>, UnaryFailedAC<F>>;
 
-function makeCommunicationActionCreators<E extends IActionWithPayload, C extends IAction, F extends IFailAction>(
+function makeCommunicationActionCreators<E extends IAction, C extends IPlainAction, F extends IFailAction>(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<UnaryAC<E>, NullaryAC<C>, NullaryFailedAC<F>>;
 
 function makeCommunicationActionCreators<
-  E extends IAction, C extends IActionWithPayload, F extends IFailActionWithPayload
->(
+  E extends IPlainAction, C extends IAction, F extends IFailActionWithPayload
+  >(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<NullaryAC<E>, UnaryAC<C>, UnaryFailedAC<F>>;
 
-function makeCommunicationActionCreators<E extends IAction, C extends IActionWithPayload, F extends IFailAction>(
+function makeCommunicationActionCreators<E extends IPlainAction, C extends IAction, F extends IFailAction>(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<NullaryAC<E>, UnaryAC<C>, NullaryFailedAC<F>>;
 
-function makeCommunicationActionCreators<E extends IAction, C extends IAction, F extends IFailActionWithPayload>(
+function makeCommunicationActionCreators<
+  E extends IPlainAction, C extends IPlainAction, F extends IFailActionWithPayload
+  >(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<NullaryAC<E>, NullaryAC<C>, UnaryFailedAC<F>>;
 
-function makeCommunicationActionCreators<E extends IAction, C extends IAction, F extends IFailAction>(
+function makeCommunicationActionCreators<E extends IPlainAction, C extends IPlainAction, F extends IFailAction>(
   executeType: E['type'], completeType: C['type'], failType: F['type'],
 ): ICommunicationActionCreators<NullaryAC<E>, NullaryAC<C>, NullaryFailedAC<F>>;
 
