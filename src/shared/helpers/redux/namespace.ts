@@ -1,14 +1,14 @@
 import { Reducer } from 'redux';
 
-export interface IPlainAction<T = string> {
+export interface IPlainAction<T> {
   type: T;
 }
 
-export interface IAction<A = string, P = any> extends IPlainAction<A> {
+export interface IAction<T, P> extends IPlainAction<T> {
   payload: P;
 }
 
-export interface IFailAction<T = any> extends IPlainAction {
+export interface IFailAction<T = any> extends IPlainAction<string> {
   error: T;
 }
 
@@ -37,7 +37,7 @@ export type FieldsState<F extends string> = {
 
 export type Validator<S> = (nextState: S, prevState: S) => string;
 
-export interface IEditFieldAction<T = any, E = string> extends IPlainAction {
+export interface IEditFieldAction<T = any, E = string> extends IPlainAction<string> {
   payload: IReduxField<T, E>;
 }
 

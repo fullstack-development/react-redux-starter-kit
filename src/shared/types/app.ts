@@ -53,6 +53,26 @@ interface IDependencies {
   api: Api;
 }
 
+// interface IPlainAction<T> {
+//   type: T;
+// }
+
+// interface IAction<T, P> extends IPlainAction<T> {
+//   payload: P;
+// }
+
+// interface IActionMeta {
+//   updatesSubtitles: boolean;
+// }
+
+// interface IMetaAction<T, P, M> extends IAction<T, P> {
+//   meta: M;
+// }
+
+// export interface IUpdatingSubtitleActionMeta extends IActionMeta {
+//   updatesSubtitles: true;
+// }
+
 interface IAction {
   payload?: { [key: string]: any } | number | string | null;
   type: string;
@@ -73,5 +93,7 @@ interface IModuleEntryData {
 
 type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
-export { Module, IReducerData, IAction, IDependencies, IAppReduxState, IModuleEntryData };
+// export { IPlainAction, IAction, IMetaAction };
+export { IAction };
+export { Module, IReducerData, IDependencies, IAppReduxState, IModuleEntryData };
 export { RootSaga };
