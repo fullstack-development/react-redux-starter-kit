@@ -171,5 +171,5 @@ class DynamicFields extends React.Component<Props, IState> {
   }
 }
 
-export { Props, DynamicFields, FieldValue };
+export { Props, DynamicFields, FieldValue, IState };
 export default connect<IStateProps, IDispatchProps, IOwnProps>(mapStateToProps, mapDispatchToProps)(DynamicFields);

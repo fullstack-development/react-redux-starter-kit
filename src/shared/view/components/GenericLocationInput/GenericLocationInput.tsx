@@ -84,5 +84,5 @@ class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
   }
 }
 
-export { IGeosuggestOption, isGeosuggestOption };
+export { IGeosuggestOption, isGeosuggestOption, IState };
 export default GenericLocationInput;

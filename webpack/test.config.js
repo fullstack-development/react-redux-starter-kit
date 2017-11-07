@@ -8,6 +8,7 @@ const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const doiuse = require('doiuse');
 
+
 module.exports = {
     entry: {
         tests: './../karma.entry.js'
@@ -71,7 +72,7 @@ module.exports = {
                                 module: 'commonjs',
                             }
                         }
-                    }
+                    },
                 ],
             },
             // instrument only testing sources with Istanbul

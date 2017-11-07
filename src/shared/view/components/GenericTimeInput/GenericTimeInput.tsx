@@ -71,4 +71,5 @@ class GenericTimeInput extends Component<GenericFieldProps, IState> {
   }
 }
 
+export { IState };
 export default GenericTimeInput;

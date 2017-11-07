@@ -11,8 +11,9 @@ module.exports = function (config) {
         files: [
             'node_modules/babel-polyfill/dist/polyfill.min.js',
             'karma.entry.js',
+            'https://maps.googleapis.com/maps/api/js?libraries=places',
         ],
-
+        
         exclude: [],
 
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor

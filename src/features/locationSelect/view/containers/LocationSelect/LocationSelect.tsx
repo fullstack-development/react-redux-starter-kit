@@ -151,5 +151,5 @@ class LocationSelect extends React.Component<Props, {}> {
   }
 }
 
-export { Props };
+export { Props, LocationSelect };
 export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(LocationSelect);

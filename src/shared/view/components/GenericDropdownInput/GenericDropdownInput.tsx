@@ -85,4 +85,5 @@ class GenericDropdownInput extends React.PureComponent<GenericFieldProps, IState
 
 }
 
+export { IState };
 export default GenericDropdownInput;

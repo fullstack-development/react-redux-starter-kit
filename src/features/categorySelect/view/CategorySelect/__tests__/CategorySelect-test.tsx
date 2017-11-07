@@ -7,7 +7,7 @@ import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import { FormGroup } from 'react-bootstrap';
 import { categorySelectFixtures } from './fixtures';
 
-describe('<CategorySelect />', () => {
+describe('CategorySelect tests', () => {
   let component: ReactWrapper;
 
   before(() => {
@@ -29,7 +29,7 @@ describe('<CategorySelect />', () => {
   });
 
   it('should call load categories action', () => {
-    expect(component.prop<sinon.SinonSpy>('loadCategories').calledOnce).to.be.true;
+    expect(component.prop<sinon.SinonSpy>('loadCategories').calledOnce).to.equal(true);
   });
 
   it('should simulate change of SelectInput', () => {
@@ -38,8 +38,8 @@ describe('<CategorySelect />', () => {
     if (onChange) {
       onChange({ label: 'label', value: 13 });
     }
-    expect(component.prop<sinon.SinonSpy>('onCategoryChosen').called).to.be.true;
-    expect(component.prop<sinon.SinonSpy>('chooseCategory').called).to.be.true;
+    expect(component.prop<sinon.SinonSpy>('onCategoryChosen').called).to.equal(true);
+    expect(component.prop<sinon.SinonSpy>('chooseCategory').called).to.equal(true);
   });
 
 });
