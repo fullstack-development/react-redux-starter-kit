@@ -1,10 +1,10 @@
-import { IReduxState, SelectedLocation, IArea, ICity } from '../../namespace';
+import { IReduxState, ILocationCode, IArea, ICity } from '../../namespace';
 
 function getFeatureState(state: any): IReduxState {
   return state.locationSelect;
 }
 
-function selectSelectedLocation(state: any): SelectedLocation {
+function selectSelectedLocation(state: any): ILocationCode | undefined {
   const ownState: IReduxState = getFeatureState(state);
   return ownState.data.selectedLocation;
 }

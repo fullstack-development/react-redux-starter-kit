@@ -1,6 +1,7 @@
 import { IFormProperties } from '../../features/dynamicFields/namespace';
+import { IPlainAction, IAction } from 'shared/types/app';
 
-interface IOrderFormRequest {
+export interface IOrderFormRequest {
   attributes: IFormProperties;
   notify: boolean;
   description: string;
@@ -12,45 +13,27 @@ interface IOrderFormRequest {
   coord_to_lat: number;
 }
 
-interface IOrderFormResponse {
+export interface IOrderFormResponse {
   message: string;
 }
 
-interface ICommunication {
+export interface ICommunication {
   isRequesting: boolean;
   error: string;
 }
 
-interface IReduxState {
+export interface IReduxState {
   communications: {
     saving: ICommunication;
   };
   data: { message: string; } | null;
 }
 
-interface ISaveFields {
-  type: 'HOME_MODULE:SAVE_FIELDS';
-}
+export type ISaveFieldsAction = IPlainAction<'ORDER_FORM_MODULE:SAVE_FIELDS'>;
+export type ISaveFieldsCompletedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED', IOrderFormResponse>;
+export type ISaveFieldsFailedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED', string>;
 
-interface ISaveFieldsSuccess {
-  type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS';
-  payload: IOrderFormResponse;
-}
-
-interface ISaveFieldsFail {
-  type: 'HOME_MODULE:SAVE_FIELDS_FAIL';
-  payload: string;
-}
-
-type Action = ISaveFields | ISaveFieldsSuccess | ISaveFieldsFail;
-
-export {
-  IOrderFormRequest,
-  IOrderFormResponse,
-  ICommunication,
-  IReduxState,
-  ISaveFields,
-  ISaveFieldsSuccess,
-  ISaveFieldsFail,
-  Action,
-};
+export type OrderFormAction =
+  | ISaveFieldsAction
+  | ISaveFieldsCompletedAction
+  | ISaveFieldsFailedAction;

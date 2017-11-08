@@ -8,7 +8,7 @@ import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
 import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
-abstract class Module<S, C> {
+export abstract class Module<S, C> {
   public components?: C; // available componens to pass in other modules
 
   protected _store: Store<IAppReduxState> | null = null;
@@ -42,58 +42,30 @@ abstract class Module<S, C> {
   }
 }
 
-type OnConnectRequestHandler = (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void;
+export type OnConnectRequestHandler = (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void;
 
-interface IReducerData<S> {
+export interface IReducerData<S> {
   name: string;
   reducer: Reducer<S>;
 }
 
-interface IDependencies {
+export interface IDependencies {
   api: Api;
 }
 
-// interface IPlainAction<T> {
-//   type: T;
-// }
-
-// interface IAction<T, P> extends IPlainAction<T> {
-//   payload: P;
-// }
-
-// interface IActionMeta {
-//   updatesSubtitles: boolean;
-// }
-
-// interface IMetaAction<T, P, M> extends IAction<T, P> {
-//   meta: M;
-// }
-
-// export interface IUpdatingSubtitleActionMeta extends IActionMeta {
-//   updatesSubtitles: true;
-// }
-
-interface IAction {
-  payload?: { [key: string]: any } | number | string | null;
-  type: string;
-}
-
-interface IAppReduxState {
+export interface IAppReduxState {
   categorySelect: CategorySelectNamespace.IReduxState;
   locationSelect: LocationSelectNamespace.IReduxState;
   dynamicFields: DynamicFieldsNamespace.IReduxState;
   orderForm: HomeModuleNamespace.IReduxState;
 }
 
-interface IModuleEntryData {
+export interface IModuleEntryData {
   component: React.ComponentClass<any> | React.StatelessComponent<any>;
   reducers: Array<IReducerData<any>>;
   sagas: RootSaga[];
 }
 
-type RootSaga = (deps: IDependencies) => () => SagaIterator;
+export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
-// export { IPlainAction, IAction, IMetaAction };
-export { IAction };
-export { Module, IReducerData, IDependencies, IAppReduxState, IModuleEntryData };
-export { RootSaga };
+export * from '../helpers/redux/namespace';

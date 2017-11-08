@@ -26,7 +26,7 @@ interface IStateProps {
 
 interface IState {
   categoryUid?: number;
-  location?: locationSelectFeature.Namespace.SelectedLocationData;
+  location?: locationSelectFeature.Namespace.ILocation;
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
@@ -95,7 +95,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onLocationSelected(location: locationSelectFeature.Namespace.SelectedLocationData): void {
+  private onLocationSelected(location?: locationSelectFeature.Namespace.ILocation): void {
     this.setState({
       ...this.state,
       location,
