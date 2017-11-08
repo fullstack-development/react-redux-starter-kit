@@ -33,7 +33,7 @@ type Props = IOwnProps & IActionProps & IStateProps;
 function mapState(state: IAppReduxState): IStateProps {
   const categories = selectors.selectCategories(state);
   const options = categories.map<Select.Option>(({ name, uid }) => ({ label: name, value: uid }));
-  const chosenCategoryUid = selectors.selectChosenCategory(state).value;
+  const chosenCategoryUid = selectors.selectChosenCategoryUid(state).value;
 
   return { options, chosenCategoryUid };
 }

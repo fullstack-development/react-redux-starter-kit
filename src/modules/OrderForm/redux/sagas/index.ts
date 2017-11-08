@@ -23,15 +23,15 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
-  const location =  locationSelectors.selectSelectedLocation(state);
-  const chosenCategory = categorySelectFeature.selectors.selectChosenCategory(state).value;
+  const location = locationSelectors.selectSelectedLocation(state);
+  const chosenCategoryUid = categorySelectFeature.selectors.selectChosenCategoryUid(state).value;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
     return;
   }
 
-  if (!chosenCategory) {
+  if (!chosenCategoryUid) {
     yield put(saveFieldsFail('category is null'));
     return;
   }
@@ -40,7 +40,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const data: IOrderFormRequest = {
     attributes: dynamicValues,
-    category: chosenCategory,
+    category: chosenCategoryUid,
     location: location.area,
     // TODO: fill other properties below
     coord_from_lng: fromLocation.lng,

@@ -14,7 +14,7 @@ export function selectCategories(state: IAppReduxState): ICategory[] {
   return selectFeatureState(state).data.categories;
 }
 
-export function selectChosenCategory(state: IAppReduxState): IReduxField<number | null> {
+export function selectChosenCategoryUid(state: IAppReduxState): IReduxField<number | null> {
   return selectFeatureState(state).edit.selectedCategoryUid;
 }
 
