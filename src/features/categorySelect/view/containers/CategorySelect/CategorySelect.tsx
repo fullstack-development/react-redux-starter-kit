@@ -15,12 +15,12 @@ import { IAppReduxState } from 'shared/types/app';
 import './styles.scss';
 
 interface IOwnProps {
-  onCategoryChosen(category: number): void;
+  onCategoryChosen(categoryUid: number): void;
 }
 
 interface IStateProps {
   options: Select.Option[];
-  value: number | null;
+  chosenCategoryUid: number | null;
 }
 
 interface IActionProps {
@@ -32,15 +32,10 @@ type Props = IOwnProps & IActionProps & IStateProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   const categories = selectors.selectCategories(state);
-  const chosen = selectors.selectChosenCategory(state);
+  const options = categories.map<Select.Option>(({ name, uid }) => ({ label: name, value: uid }));
+  const chosenCategoryUid = selectors.selectChosenCategory(state).value;
 
-  return {
-    options: categories.map<Select.Option>(category => ({
-      label: category.name,
-      value: category.uid,
-    })),
-    value: chosen.value,
-  };
+  return { options, chosenCategoryUid };
 }
 
 function mapDispatch(dispatch: Dispatch<any>): IActionProps {
@@ -58,7 +53,7 @@ class CategorySelect extends React.PureComponent<Props, {}> {
   }
 
   public render() {
-    const { value, options } = this.props;
+    const { chosenCategoryUid, options } = this.props;
 
     return (
       <FormGroup>
@@ -67,7 +62,7 @@ class CategorySelect extends React.PureComponent<Props, {}> {
         </ControlLabel>
         <SelectInput
           name="category"
-          value={value ? value : undefined}
+          value={chosenCategoryUid || undefined}
           options={options}
           onChange={this.onSelect}
         />
