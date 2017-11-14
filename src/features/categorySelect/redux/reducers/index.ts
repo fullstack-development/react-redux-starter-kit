@@ -44,5 +44,5 @@ const reducer: Reducer<IReduxState> = combineReducers<IReduxState>({
   data: mainReducer,
 });
 
-export { getCommunicationReducer };
+export { getCommunicationReducer, mainReducer };
 export default reducer;

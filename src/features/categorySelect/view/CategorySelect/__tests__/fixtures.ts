@@ -3,4 +3,4 @@ const categorySelectFixtures = {
   value: null,
 };
 
-export { categorySelectFixtures }
+export { categorySelectFixtures };

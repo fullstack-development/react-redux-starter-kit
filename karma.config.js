@@ -28,6 +28,10 @@ module.exports = function (config) {
             },
         },
 
+        karmaTypescriptConfig: {
+            tsconfig: "./tsconfig.json", // this will get rid of all compiler error messages
+        },
+
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter

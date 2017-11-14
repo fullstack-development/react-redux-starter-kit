@@ -9,6 +9,7 @@ function reducer(state: IReduxState = initialState, action: IAction): IReduxStat
   switch (action.type) {
   case 'LOCATION_SELECT:LOAD_CITIES_SUCCESS': {
     const data: INormalizedCitiesResponse = action.payload as INormalizedCitiesResponse;
+    console.log(data);
     return imState
       .setIn(['data', 'entities'], data.entities)
       .setIn(['data', 'citiesSet'], data.result)
