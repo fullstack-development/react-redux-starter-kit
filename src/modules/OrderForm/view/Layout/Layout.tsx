@@ -14,7 +14,6 @@ import * as dynamicFieldsFeature from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 import { actions } from './../../redux';
 import './Layout.scss';
-import FormEvent = React.FormEvent;
 
 interface IDispatchProps {
   saveFields: typeof actions.saveFields;
@@ -57,15 +56,8 @@ const { LocationSelect } = locationSelectFeature;
 
 class OrderFormLayout extends React.Component<IProps, IState> {
 
+  public state: IState = { dynamicFields: {}, categoryUid: void 0 };
   private b = block('home-page');
-
-  constructor(props: IProps) {
-    super(props);
-    this.state = {
-      dynamicFields: {},
-      categoryUid: undefined,
-    };
-  }
 
   public render() {
     const b = this.b;
@@ -120,7 +112,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onFormSubmit(e: FormEvent<Form>): void {
+  private onFormSubmit(e: React.FormEvent<Form>): void {
     e.preventDefault();
     this.props.saveFields();
   }
@@ -144,7 +136,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 }
 
-const connectedComponent = connect<IStateProps, IDispatchProps, {}>(mapState, mapDispatch)(OrderFormLayout);
+const connectedComponent = connect(mapState, mapDispatch)(OrderFormLayout);
 
 function getView(): IModuleEntryData {
   return {

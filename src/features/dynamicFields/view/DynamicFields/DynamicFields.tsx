@@ -64,6 +64,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
 }
 
 class DynamicFields extends React.Component<Props, IState> {
+  public state: IState = { values: {}, errors: [] };
+
   private b = block('dynamic-fields');
   private components: { [key: string]: React.ComponentClass<any> | React.StatelessComponent<any> } = {
     text: GenericTextInput,
@@ -75,14 +77,6 @@ class DynamicFields extends React.Component<Props, IState> {
     dropdown: GenericDropdownInput,
     location: GenericLocationInput,
   };
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      values: {},
-      errors: [],
-    };
-  }
 
   public componentDidMount() {
     if (this.props.category) {

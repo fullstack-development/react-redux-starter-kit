@@ -63,7 +63,7 @@ class CategorySelect extends React.PureComponent<IProps, {}> {
         </ControlLabel>
         <SelectInput
           name="category"
-          value={value ? value : undefined}
+          value={value ? value : void 0}
           options={options}
           onChange={this.onSelect}
         />
@@ -72,8 +72,8 @@ class CategorySelect extends React.PureComponent<IProps, {}> {
   }
 
   @bind
-  private onSelect(selected: Select.Option | null) {
-    if (selected && typeof selected.value === 'number') {
+  private onSelect(selected: Select.Option | Select.Option[] | null) {
+    if (!Array.isArray(selected) && selected && typeof selected.value === 'number') {
       // Type Guards allow you to narrow down the type of an object within a conditional block.
       // TypeScript is aware of the usage of the JavaScript instanceof and typeof operators
       // Read "Type Guards and Differentiating Types" of Typescript's docs
