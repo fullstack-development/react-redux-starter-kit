@@ -23,7 +23,6 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const location =  locationSelectors.selectSelectedLocation(state);
-
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
     return;

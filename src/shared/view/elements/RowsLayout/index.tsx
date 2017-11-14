@@ -28,4 +28,5 @@ function RowsLayout({ children, footerContent, headerContent }: IProps) {
   );
 }
 
+export { IProps };
 export default RowsLayout;

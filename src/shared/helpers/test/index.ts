@@ -1,0 +1,1 @@
+export { runGenerator } from './runGeneratorTo';

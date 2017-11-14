@@ -109,4 +109,5 @@ class GenericIntegerInput extends React.Component<IProps, IState> {
 
 }
 
+export { IState, IProps };
 export default GenericIntegerInput;

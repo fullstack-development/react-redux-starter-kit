@@ -81,4 +81,5 @@ class GenericRadioInput extends React.Component<GenericFieldProps, IState> {
 
 }
 
+export { IState };
 export default GenericRadioInput;

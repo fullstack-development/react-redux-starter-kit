@@ -31,5 +31,5 @@ function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
   );
 }
 
-export { IProps };
+export { IProps, SearchRepositoriesInput };
 export default connect<{}, {}, IProps>(mapState, mapDispatch)(SearchRepositoriesInput);

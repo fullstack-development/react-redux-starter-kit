@@ -30,4 +30,3 @@ Modular starter kit for React+Redux+React Router projects.
 1) ```SET TS_NODE_COMPILER_OPTIONS={"target": "es5", "module": "commonjs"}```
 
 2) ```npm run dev-windows```
-

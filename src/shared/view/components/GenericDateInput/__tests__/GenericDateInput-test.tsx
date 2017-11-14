@@ -27,14 +27,14 @@ describe('(Shared) View', () => {
         throw new AssertionError('OnChange doesn\'t passed to TextInput');
       }
 
-      expect(onChangeSpy.calledOnce).to.be.true;
-      expect(onChangeSpy.firstCall.args).to.deep.equal(['123', []]);
+      expect(onChangeSpy.called).to.be.equal(true);
+      expect(onChangeSpy.lastCall.args).to.deep.equal(['123', []]);
     });
 
     it('should call onChange, when just mounted with \'Field required\' error, if component is required', () => {
       const onChangeSpy = spy();
       mount<IProps, IState>(<GenericDateInput onChange={onChangeSpy} required />);
-      expect(onChangeSpy.calledOnce).to.be.true;
+      expect(onChangeSpy.calledOnce).to.be.equal(true);
       expect(onChangeSpy.firstCall.args).to.deep.equal(['', ['Field is required']]);
     });
   });
