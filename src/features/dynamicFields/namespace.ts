@@ -11,10 +11,15 @@ export interface IFlatFormProperties {
   [key: string]: string | number;
 }
 
+export interface IGeoPoint {
+  lat: number;
+  lng: number;
+}
+
 export interface ILocationProperties {
-  [key: string]: { lat: number; lng: number; };
-  from: { lat: number; lng: number; };
-  to: { lat: number; lng: number; };
+  [key: string]: IGeoPoint;
+  from: IGeoPoint;
+  to: IGeoPoint;
 }
 
 export interface IField {
