@@ -3,15 +3,15 @@ import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { IDependencies, IAppReduxState } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 
-import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
-import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
+import { saveFieldsFail, saveFieldsCompleted } from '../actions/communication';
+import * as NS from '../../namespace';
 
 import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
 type Point = LocationSelect.IPoint;
-type SelectedLocation = LocationSelect.SelectedLocation;
+type SelectedLocation = LocationSelect.ILocationCode;
 
-const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
+const saveFieldsType: NS.ISaveFieldsAction['type'] = 'ORDER_FORM_MODULE:SAVE_FIELDS';
 
 export function* rootSaga(deps: IDependencies) {
   yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
@@ -22,7 +22,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
-  const location =  locationSelectors.selectSelectedLocation(state);
+  const location = locationSelectors.selectSelectedLocation(state);
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
@@ -31,7 +31,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
 
   const fromLocation = getFromLocation(locationValues, location);
 
-  const data: IOrderFormRequest = {
+  const data: NS.IOrderFormRequest = {
     attributes: dynamicValues,
     category: state.categorySelect.data.selected as number,
     location: location.area,
@@ -46,8 +46,8 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   };
 
   try {
-    const response: IOrderFormResponse = yield call(api.saveFields, data);
-    yield put(saveFieldsSuccess(response));
+    const response: NS.IOrderFormResponse = yield call(api.saveFields, data);
+    yield put(saveFieldsCompleted(response));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
   }

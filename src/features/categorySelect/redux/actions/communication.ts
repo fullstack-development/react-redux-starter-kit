@@ -1,17 +1,12 @@
-import { Action } from './../../namespace';
+import * as NS from './../../namespace';
 
-function loadCategories(): Action {
+export function loadCategories(): NS.ILoadCategoriesAction {
   return { type: 'CATEGORY_SELECT:LOAD_CATEGORIES' };
 }
 
-function chooseCategory(categoryUid: number): Action {
+export function chooseCategory(categoryUid: number): NS.IChooseCategoryAction {
   return {
-    type: 'CATEGORY_SELECT:CATEGORY_SELECTED',
+    type: 'CATEGORY_SELECT:CHOOSE_CATEGORY',
     payload: categoryUid,
   };
 }
-
-export {
-  loadCategories,
-  chooseCategory,
-};

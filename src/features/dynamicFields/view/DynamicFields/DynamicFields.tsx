@@ -41,7 +41,7 @@ interface IDispatchProps {
 type Props = IDispatchProps & IStateProps & IOwnProps;
 
 interface IState {
-  values: {[key: string]: string | number | {[key: string]: any}};
+  values: { [key: string]: string | number | { [key: string]: any } };
   errors: string[];
 }
 
@@ -126,7 +126,7 @@ class DynamicFields extends React.Component<Props, IState> {
     const { fields } = this.props;
     if (fields && fields.schema && fields.schema.properties) {
       const requriedFields: string[] = fields.schema.required;
-      const properties: {[key: string]: IField} = fields.schema.properties;
+      const properties: { [key: string]: IField } = fields.schema.properties;
       const fieldsNode = Object
         .keys(properties)
         .filter((fieldName: string) => {

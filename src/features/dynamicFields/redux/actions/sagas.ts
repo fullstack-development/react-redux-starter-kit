@@ -1,12 +1,15 @@
-import { IDependencies, IAction } from 'shared/types/app';
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
+
+import { IDependencies } from 'shared/types/app';
 import { IFieldsResponse } from 'shared/api/Api';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
-import { loadFieldsSuccessed, loadFieldsFailed } from './communication';
+
+import { loadFieldsCompleted, loadFieldsFailed } from './communication';
+import { DynamicFieldsAction } from '../../namespace';
 
 function getSaga({ api }: IDependencies): () => SagaIterator {
-  function* executeLoadFields(action?: IAction) {
+  function* executeLoadFields(action?: DynamicFieldsAction) {
     if (!action) {
       return;
     }
@@ -14,7 +17,7 @@ function getSaga({ api }: IDependencies): () => SagaIterator {
     try {
       const uid = action.payload as number;
       const response: IFieldsResponse = yield call(api.loadFields, uid);
-      yield put(loadFieldsSuccessed(response));
+      yield put(loadFieldsCompleted(response));
     } catch (error) {
       const message = getErrorMsg(error);
       yield put(loadFieldsFailed(message));
