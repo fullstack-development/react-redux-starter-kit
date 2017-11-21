@@ -3,12 +3,18 @@ import { IFlatFormProperties, ILocationProperties } from './DynamicFields';
 export interface ITravelOrder {
   options: IFlatFormProperties;
   fromLocation: IPoint;
-  location: ILocation;
+  location: INormalizedLocation;
   locationValues: ILocationProperties;
   selectedCategoryUid: number;
 }
 
 export interface ILocation {
+  city: ICity;
+  area: IArea;
+  point: IPoint;
+}
+
+export interface INormalizedLocation {
   city: number;
   area: number;
   point: IPoint;
@@ -20,6 +26,11 @@ export interface IArea {
   city: number;
   point: IPoint;
   id: number;
+}
+
+export interface INormalizedArea {
+  areaID: number;
+  point?: IPoint;
 }
 
 export interface ICity {

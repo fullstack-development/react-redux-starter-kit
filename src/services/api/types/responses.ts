@@ -11,6 +11,8 @@ export interface ICityResponse {
   id: number;
 }
 
-export type ITravelOrderResponse = string;
+export interface ITravelOrderResponse {
+  message: string;
+}
 
-export type ICategoriesResponse = Array<{ id: number; uid: number; name: string }>;
+// export type ICategoriesResponse = Array<{ id: number; uid: number; name: string }>;

@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
-import { IActionWithPayload, FieldsState } from './namespace';
+import { IAction, FieldsState } from './namespace';
 
-type ToucheFieldAction<F extends string> = IActionWithPayload<string, F>;
+type ToucheFieldAction<F extends string> = IAction<string, F>;
 
 function makeToucheFieldsReducer<A extends ToucheFieldAction<A['payload']>>(actionName: A['type']) {
   return <T extends FieldsState<A['payload']>>(initial: T) => {

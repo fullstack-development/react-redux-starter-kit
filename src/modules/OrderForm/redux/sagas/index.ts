@@ -3,14 +3,14 @@ import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { IDependencies, IAppReduxState } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 
-import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
-import { ISaveFields } from '../../namespace';
+import { saveFieldsFail, saveFieldsCompleted } from '../actions/communication';
 
-import { IPoint, ILocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
+import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
 import { selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { selectors as locationSelectors } from 'features/locationSelect';
+import * as NS from '../../namespace';
 
-const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
+const saveFieldsType: NS.ISaveFieldsAction['type'] = 'ORDER_FORM_MODULE:SAVE_FIELDS';
 
 export function* rootSaga(deps: IDependencies) {
   yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
@@ -41,16 +41,15 @@ export function* saveFieldsSaga({ api }: IDependencies) {
     locationValues,
     selectedCategoryUid,
   };
-
   try {
     const message: string = yield call(api.createTravelOrder, travelOrder);
-    yield put(saveFieldsSuccess(message));
+    yield put(saveFieldsCompleted(message));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
   }
 }
 
-function getFromLocation(dynamicFields: ILocationProperties, locationSelect: ILocation): IPoint {
+function getFromLocation(dynamicFields: ILocationProperties, locationSelect: INormalizedLocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

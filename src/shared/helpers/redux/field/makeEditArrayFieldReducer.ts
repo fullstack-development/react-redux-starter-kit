@@ -1,34 +1,41 @@
 import { Reducer } from 'redux';
 
-import { IActionWithPayload, IReduxField, Validator } from '../namespace';
+import { IAction, IReduxField, Validator } from '../namespace';
 
-type ActionType<T> = ActionAdd<T> | ActionRemove | ActionUpdate<T>;
+type ActionType<AT, RT, UT, UPI>
+  = IAddAction<AT> | IRemoveAction<RT> | IUpdateAction<UT, UPI>;
 
-type ActionAdd<T> = IActionWithPayload<T>;
+type IAddAction<T> = IAction<T, any>;
 
-type ActionRemove = IActionWithPayload<number>;
+type IRemoveAction<T> = IAction<T, number>;
 
-type ActionUpdate<T> = IActionWithPayload<{ index: number; item: T }>;
+interface IUpdatePayload<T> {
+  index: number;
+  item: T;
+}
 
-export default function makeArrayFieldReducer<
-  A extends ActionAdd<T>, R extends ActionRemove, U extends ActionUpdate<T>, T
->(
-  addType: A['type'],
-  removeType: R['type'],
-  updateType: U['type'],
+type IUpdateAction<T, PI> = IAction<T, IUpdatePayload<PI>>;
+
+export default function makeArrayFieldReducer<AT, UT, RT, T>(
+  addType: AT,
+  removeType: RT,
+  updateType: UT,
   initial: IReduxField<T[]>,
   validator?: Validator<T[]>,
 ): Reducer<IReduxField<T[]>> {
-  return function arrayFieldReducer(state: IReduxField<T[]> = initial, action: ActionType<T>): IReduxField<T[]> {
+  return function arrayFieldReducer(
+    state: IReduxField<T[]> = initial, action: ActionType<AT, RT, UT, T>,
+  ): IReduxField<T[]> {
     switch (action.type) {
       case addType: {
-        const nextValue = [...state.value, action.payload as T];
+
+        const nextValue = [...state.value, action.payload];
         const error = validator ? validator(nextValue, state.value) : '';
 
         return { ...state, error, value: nextValue };
       }
       case removeType: {
-        const payload = action.payload as ActionRemove['payload'];
+        const payload = action.payload as IRemoveAction<RT>['payload'];
         const nextValue = [
           ...state.value.slice(0, payload),
           ...state.value.slice(payload + 1),
@@ -38,7 +45,7 @@ export default function makeArrayFieldReducer<
         return { ...state, error, value: nextValue };
       }
       case updateType: {
-        const { index, item } = action.payload as { index: number; item: T };
+        const { index, item } = action.payload as IUpdatePayload<T>;
         const nextValue = [...state.value.slice(0, index), item, ...state.value.slice(index + 1)];
         const error = validator ? validator(nextValue, state.value) : '';
 

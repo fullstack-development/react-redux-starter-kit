@@ -2,7 +2,7 @@ import { bind } from 'decko';
 import HttpActions from './HttpActions';
 
 import { сonvertCityResponse, convertTravelToRequest } from './converters';
-import { ICityResponse, ICategoriesResponse, ITravelOrderResponse } from './types/responses';
+import { ICityResponse, ITravelOrderResponse } from './types/responses';
 import { INormalizedCities, ICategory, IFields, ITravelOrder } from 'shared/types/models';
 
 class Api {
@@ -14,7 +14,7 @@ class Api {
 
   @bind
   public async loadCategories(): Promise<ICategory[]> {
-    const response = await this.actions.get<ICategoriesResponse>('/categories/');
+    const response = await this.actions.get<ICategory[]>('/categories/');
     return response.data;
   }
 
@@ -34,7 +34,7 @@ class Api {
   public async createTravelOrder(travelOrder: ITravelOrder): Promise<string> {
     const request = convertTravelToRequest(travelOrder);
     const response = await this.actions.post<ITravelOrderResponse>('/travels/create/', request);
-    return response.data;
+    return response.data.message;
   }
 }
 

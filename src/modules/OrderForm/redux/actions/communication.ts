@@ -1,27 +1,21 @@
-import { ISaveFields, ISaveFieldsSuccess, ISaveFieldsFail } from '../../namespace';
+import * as NS from '../../namespace';
 
-function saveFields(): ISaveFields {
+export function saveFields(): NS.ISaveFieldsAction {
   return {
-    type: 'HOME_MODULE:SAVE_FIELDS',
+    type: 'ORDER_FORM_MODULE:SAVE_FIELDS',
   };
 }
 
-function saveFieldsSuccess(message: string): ISaveFieldsSuccess {
+export function saveFieldsCompleted(message: string): NS.ISaveFieldsCompletedAction {
   return {
-    type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS',
+    type: 'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED',
     payload: message,
   };
 }
 
-function saveFieldsFail(error: string): ISaveFieldsFail {
+export function saveFieldsFail(error: string): NS.ISaveFieldsFailedAction {
   return {
-    type: 'HOME_MODULE:SAVE_FIELDS_FAIL',
+    type: 'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED',
     payload: error,
   };
 }
-
-export {
-  saveFields,
-  saveFieldsSuccess,
-  saveFieldsFail,
-};
