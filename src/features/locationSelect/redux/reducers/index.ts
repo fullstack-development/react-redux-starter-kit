@@ -1,14 +1,15 @@
-import initialState from '../data/initial';
 import { Map, fromJS } from 'immutable';
+import initialState from '../data/initial';
 
-import { IReduxState, IPoint, IArea, ICity, INormalizedCitiesResponse, LocationSelectAction } from '../../namespace';
+import { IArea, ICity, IPoint, INormalizedCities } from 'shared/types/models';
+import { IReduxState, LocationSelectAction } from '../../namespace';
 
 function reducer(state: IReduxState = initialState, action: LocationSelectAction): IReduxState {
   const imState: Map<string, any> = fromJS(state);
 
   switch (action.type) {
     case 'LOCATION_SELECT:LOAD_CITIES_COMPLETED': {
-      const data: INormalizedCitiesResponse = action.payload;
+      const data: INormalizedCities = action.payload;
       return imState
         .setIn(['data', 'entities'], data.entities)
         .setIn(['data', 'citiesSet'], data.result)

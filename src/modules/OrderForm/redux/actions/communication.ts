@@ -6,10 +6,10 @@ export function saveFields(): NS.ISaveFieldsAction {
   };
 }
 
-export function saveFieldsCompleted(response: NS.IOrderFormResponse): NS.ISaveFieldsCompletedAction {
+export function saveFieldsCompleted(message: string): NS.ISaveFieldsCompletedAction {
   return {
     type: 'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED',
-    payload: response,
+    payload: message,
   };
 }
 

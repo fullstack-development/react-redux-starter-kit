@@ -1,14 +1,19 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
 import * as Select from 'react-select';
-import { FormControl } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { bind } from 'decko';
+
 import { actions, selectors } from './../../../redux';
-import { ILocation, IReduxState, IArea, ICity } from '../../../namespace';
+
+import { IReduxState } from '../../../namespace';
+import { ILocation, IArea, ICity } from 'shared/types/models';
+
+import { FormControl } from 'react-bootstrap';
 import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
+
 import './LocationSelect.scss';
 
 interface IOwnProps {

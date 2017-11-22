@@ -4,7 +4,9 @@ import { Form, FormGroup } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions, selectors } from '../../redux';
-import { IFields, ICommunication, IReduxState, IField } from '../../namespace';
+import { IReduxState } from '../../namespace';
+import { IFields, IField } from 'shared/types/models';
+import { ICommunicationState } from 'shared/helpers/redux';
 import { bind } from 'decko';
 import GenericTextInput from 'shared/view/components/GenericTextInput/GenericTextInput';
 import GenericIntegerInput from 'shared/view/components/GenericIntegerInput/GenericIntegerInput';
@@ -30,7 +32,7 @@ interface IOwnProps {
 
 interface IStateProps {
   fields: IFields;
-  communications: { fetching: ICommunication };
+  communications: { fetching: ICommunicationState };
 }
 
 interface IDispatchProps {

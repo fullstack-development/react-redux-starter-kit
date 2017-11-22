@@ -1,7 +1,8 @@
+import { IAction } from 'shared/types/app';
+import { IFields, IFormProperties } from 'shared/types/models';
+import { ICommunicationState } from 'shared/helpers/redux';
 import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-import { IAction } from 'shared/types/app';
-import { IFieldsResponse } from 'shared/api/Api';
 
 export interface IFormProperties {
   [key: string]: string | number | IGeosuggestOption;
@@ -37,29 +38,9 @@ export interface IField {
   maxLength: number;
 }
 
-export interface ISchema {
-  properties: { [key: string]: IField };
-  required: string[];
-  type: 'string';
-  title: string;
-}
-
-export interface IFields {
-  schema?: ISchema;
-  id?: number;
-  uid?: number;
-  alert?: boolean;
-  name?: number;
-}
-
-export interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
-
 export interface IReduxState {
   communications: {
-    fetching: ICommunication;
+    fetching: ICommunicationState;
   };
   data: {
     fields: IFields;
@@ -68,7 +49,7 @@ export interface IReduxState {
 }
 
 export type ILoadFieldsAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS', number>;
-export type ILoadFieldsCompletedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', IFieldsResponse>;
+export type ILoadFieldsCompletedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', IFields>;
 export type ILoadFieldsFailedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', string>;
 
 export type IChangeFieldValueAction = IAction<'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', IChangeFieldValueActionPayload>;

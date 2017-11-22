@@ -1,4 +1,4 @@
-import { IFieldsResponse } from 'shared/api/Api';
+import { IFields } from 'shared/types/models';
 
 import * as NS from '../../namespace';
 
@@ -6,7 +6,7 @@ export function loadFields(uid: number): NS.ILoadFieldsAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS', payload: uid };
 }
 
-export function loadFieldsCompleted(data: IFieldsResponse): NS.ILoadFieldsCompletedAction {
+export function loadFieldsCompleted(data: IFields): NS.ILoadFieldsCompletedAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', payload: data };
 }
 

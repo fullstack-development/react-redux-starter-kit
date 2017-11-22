@@ -15,7 +15,7 @@ function reducer(state: IReduxState = initialState, action: OrderFormAction): IR
       return imState
         .setIn(['communications', 'saving', 'isRequesting'], false)
         .setIn(['communications', 'saving', 'error'], '')
-        .setIn(['data'], action.payload)
+        .setIn(['data'], { message: action.payload })
         .toJS();
     case 'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED':
       return imState
