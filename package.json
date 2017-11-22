@@ -11,13 +11,20 @@
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "dev": "node_modules/.bin/concurrently  -k \"npm run start-server\" \"npm run watch:dev\"",
-    "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\""
+    "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\"",
+    "yeoman": "better-npm-run initial:yeoman"
   },
   "betterScripts": {
     "test": {
       "command": "./node_modules/.bin/karma start karma.config.js",
       "env": {
         "PHANTOMJS_BIN": "node_modules/phantomjs-prebuilt/bin/phantomjs"
+      }
+    },
+    "initial:yeoman": {
+      "command": "sh ./deploying/initializationGenerator.sh",
+      "env": {
+        "NODE_ENV": "development"
       }
     },
     "watch:dev": {
