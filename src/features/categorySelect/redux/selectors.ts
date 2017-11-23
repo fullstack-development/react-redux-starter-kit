@@ -1,6 +1,7 @@
-import { IReduxState, ICategory } from '../namespace';
 import { IAppReduxState } from 'shared/types/app';
+import { ICategory } from 'shared/types/models';
 import { ICommunicationState, IReduxField } from 'shared/helpers/redux';
+import { IReduxState } from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): IReduxState {
   if (!state.categorySelect) {

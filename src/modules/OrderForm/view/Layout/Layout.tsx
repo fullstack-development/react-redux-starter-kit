@@ -1,18 +1,23 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
-import { connect, Dispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { RouteComponentProps } from 'react-router-dom';
 import { bind } from 'decko';
+import { bindActionCreators } from 'redux';
+import { connect, Dispatch } from 'react-redux';
+
+import { RouteComponentProps } from 'react-router-dom';
 import { IAppReduxState, IModuleEntryData } from 'shared/types/app';
-import RowsLayout from 'shared/view/elements/RowsLayout';
-import Header from 'shared/view/components/Header';
+import { ILocation } from 'shared/types/models';
+import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
+
 import * as locationSelectFeature from 'features/locationSelect';
 import * as categorySelectFeature from 'features/categorySelect';
 import * as dynamicFieldsFeature from 'features/dynamicFields';
-import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
+
 import { actions } from './../../redux';
+
+import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
+import RowsLayout from 'shared/view/elements/RowsLayout';
+import Header from 'shared/view/components/Header';
 import './Layout.scss';
 
 interface IDispatchProps {
@@ -26,7 +31,7 @@ interface IStateProps {
 
 interface IState {
   categoryUid?: number;
-  location?: locationSelectFeature.Namespace.SelectedLocationData;
+  location?: ILocation;
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
@@ -95,7 +100,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onLocationSelected(location: locationSelectFeature.Namespace.SelectedLocationData): void {
+  private onLocationSelected(location?: ILocation): void {
     this.setState({
       ...this.state,
       location,

@@ -2,7 +2,7 @@ import { Reducer, Store } from 'redux';
 import { SagaMiddleware } from 'redux-saga';
 import configureStore, { createReducer } from './configureStore';
 import { HomeModule, OrderFormModule } from './modules';
-import Api from './shared/api/Api';
+import Api from 'services/api/Api';
 import { IAppReduxState, IDependencies, IReducerData, Module, RootSaga } from './shared/types/app';
 
 interface IAppData {

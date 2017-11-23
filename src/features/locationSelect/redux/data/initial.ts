@@ -13,7 +13,6 @@ const initialState: IReduxState = {
       cities: {},
     },
     citiesSet: [],
-    selectedLocation: null,
   },
   ui: {
     showSelectedLocation: false,

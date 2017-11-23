@@ -1,9 +1,9 @@
-import { IActionWithPayload, Validator, FieldsState } from '../namespace';
+import { IAction, Validator, FieldsState } from '../namespace';
 import { Reducer } from 'redux';
 
-type Validators<S> = Partial<{ [K in keyof S]: Validator<S[K]> }>;
+type Validators<S> = Partial<{[K in keyof S]: Validator<S[K]> }>;
 
-type EditFieldsReducerAction<F = string> = IActionWithPayload<string, { field: F, value: any, error?: string }>;
+type EditFieldsReducerAction<F = string> = IAction<string, { field: F, value: any, error?: string }>;
 
 function makeEditFieldsReducer<A extends EditFieldsReducerAction<A['payload']['field']>>(actionType: A['type']) {
   type Field = A['payload']['field'];

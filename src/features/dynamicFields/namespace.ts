@@ -1,20 +1,29 @@
+import { IAction } from 'shared/types/app';
+import { IFields, IFormProperties } from 'shared/types/models';
+import { ICommunicationState } from 'shared/helpers/redux';
 import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
 
-interface IFormProperties {
+export interface IFormProperties {
   [key: string]: string | number | IGeosuggestOption;
 }
 
-interface IFlatFormProperties {
+export interface IFlatFormProperties {
   [key: string]: string | number;
 }
 
-interface ILocationProperties {
-  [key: string]: { lat: number; lng: number; };
-  from: { lat: number; lng: number; };
-  to: { lat: number; lng: number; };
+export interface IGeoPoint {
+  lat: number;
+  lng: number;
 }
 
-interface IField {
+export interface ILocationProperties {
+  [key: string]: IGeoPoint;
+  from: IGeoPoint;
+  to: IGeoPoint;
+}
+
+export interface IField {
   type: 'string' | 'integer';
   component: 'text' | 'integer' | 'radio' | 'dropdown' | 'location' | 'date' | 'time';
   order: number;
@@ -29,29 +38,9 @@ interface IField {
   maxLength: number;
 }
 
-interface ISchema {
-  properties: {[key: string]: IField};
-  required: string[];
-  type: 'string';
-  title: string;
-}
-
-interface IFields {
-  schema?: ISchema;
-  id?: number;
-  uid?: number;
-  alert?: boolean;
-  name?: number;
-}
-
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
-
-interface IReduxState {
+export interface IReduxState {
   communications: {
-    fetching: ICommunication;
+    fetching: ICommunicationState;
   };
   data: {
     fields: IFields;
@@ -59,13 +48,18 @@ interface IReduxState {
   };
 }
 
-export {
-  IFormProperties,
-  IFlatFormProperties,
-  ILocationProperties,
-  ISchema,
-  IFields,
-  IField,
-  ICommunication,
-  IReduxState,
-};
+export type ILoadFieldsAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS', number>;
+export type ILoadFieldsCompletedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', IFields>;
+export type ILoadFieldsFailedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', string>;
+
+export type IChangeFieldValueAction = IAction<'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', IChangeFieldValueActionPayload>;
+export interface IChangeFieldValueActionPayload {
+  name: string;
+  value: FieldValue;
+}
+
+export type DynamicFieldsAction =
+  | ILoadFieldsAction
+  | ILoadFieldsCompletedAction
+  | ILoadFieldsFailedAction
+  | IChangeFieldValueAction;

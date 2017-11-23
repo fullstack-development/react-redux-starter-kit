@@ -1,31 +1,30 @@
 import initialState from '../initial';
 import { Map, fromJS } from 'immutable';
-import { IAction } from 'shared/types/app';
-import { IReduxState } from '../../namespace';
+import { IReduxState, OrderFormAction } from '../../namespace';
 
-function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
+function reducer(state: IReduxState = initialState, action: OrderFormAction): IReduxState {
   const imState: Map<string, any> = fromJS(state);
 
   switch (action.type) {
-  case 'HOME_MODULE:SAVE_FIELDS':
-    return imState
-      .setIn(['communications', 'saving', 'isRequesting'], true)
-      .setIn(['data'], null)
-      .toJS();
-  case 'HOME_MODULE:SAVE_FIELDS_SUCCESS':
-    return imState
-      .setIn(['communications', 'saving', 'isRequesting'], false)
-      .setIn(['communications', 'saving', 'error'], '')
-      .setIn(['data'], action.payload)
-      .toJS();
-  case 'HOME_MODULE:SAVE_FIELDS_FAIL':
-    return imState
-      .setIn(['communications', 'saving', 'isRequesting'], false)
-      .setIn(['communications', 'saving', 'error'], action.payload)
-      .setIn(['data'], null)
-      .toJS();
-  default:
-    return state;
+    case 'ORDER_FORM_MODULE:SAVE_FIELDS':
+      return imState
+        .setIn(['communications', 'saving', 'isRequesting'], true)
+        .setIn(['data'], null)
+        .toJS();
+    case 'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED':
+      return imState
+        .setIn(['communications', 'saving', 'isRequesting'], false)
+        .setIn(['communications', 'saving', 'error'], '')
+        .setIn(['data'], { message: action.payload })
+        .toJS();
+    case 'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED':
+      return imState
+        .setIn(['communications', 'saving', 'isRequesting'], false)
+        .setIn(['communications', 'saving', 'error'], action.payload)
+        .setIn(['data'], null)
+        .toJS();
+    default:
+      return state;
   }
 }
 

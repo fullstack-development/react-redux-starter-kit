@@ -4,7 +4,7 @@ export const initialCommunicationField: ICommunicationState = { isRequesting: fa
 
 export function initCommunicationFields<S>(
   fieldNames: Array<keyof S>,
-): { [P in keyof S]: ICommunicationState } {
+): {[P in keyof S]: ICommunicationState } {
   return fieldNames.reduce((communicationFields, fieldName) => ({
     ...communicationFields,
     [fieldName]: initialCommunicationField,

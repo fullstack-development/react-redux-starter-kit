@@ -1,6 +1,6 @@
-import { ICategoriesResponse } from 'shared/api/Api';
-import { ICommunicationState, IReduxField } from 'shared/helpers/redux';
-import { Uid } from 'shared/types/app';
+import { ICommunicationState, IReduxField, IPlainFailAction } from 'shared/helpers/redux';
+import { ICategory } from 'shared/types/models';
+import { Uid, IAction, IPlainAction } from 'shared/types/app';
 
 export interface IReduxState {
   data: {
@@ -14,29 +14,9 @@ export interface IReduxState {
   };
 }
 
-export interface ICategory {
-  uid: Uid;
-  name: string;
-  id: number;
-}
-
-export interface ICategorySelected {
-  type: 'CATEGORY_SELECT:CATEGORY_SELECTED';
-  payload: IReduxField<Uid>;
-}
-
-export interface ILoadCategories {
-  type: 'CATEGORY_SELECT:LOAD_CATEGORIES';
-}
-
-export interface ILoadCategoriesSuccess {
-  type: 'CATEGORY_SELECT:LOAD_CATEGORIES_SUCCESS';
-  payload: ICategoriesResponse;
-}
-
-export interface ILoadCategoriesFail {
-  type: 'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL';
-  error: string;
-}
+export type ICategorySelected = IAction<'CATEGORY_SELECT:CATEGORY_SELECTED', IReduxField<Uid>>;
+export type ILoadCategories = IPlainAction<'CATEGORY_SELECT:LOAD_CATEGORIES'>;
+export type ILoadCategoriesSuccess = IAction<'CATEGORY_SELECT:LOAD_CATEGORIES_SUCCESS', ICategory[]>;
+export type ILoadCategoriesFail = IPlainFailAction<'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL'>;
 
 export type Action = ICategorySelected | ILoadCategories | ILoadCategoriesSuccess | ILoadCategoriesFail;

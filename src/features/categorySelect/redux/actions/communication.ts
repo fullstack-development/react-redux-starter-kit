@@ -1,7 +1,7 @@
 import { makeCommunicationActionCreators } from 'shared/helpers/redux';
 
-import * as NS from './../../namespace';
 import { Uid } from 'shared/types/app';
+import * as NS from './../../namespace';
 
 // tslint:disable:max-line-length
 export const { execute: loadCategories, completed: loadCategoriesSuccess, failed: loadCategoriesFail } =

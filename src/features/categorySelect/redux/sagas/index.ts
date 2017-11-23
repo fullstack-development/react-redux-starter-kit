@@ -4,7 +4,7 @@ import getErrorMsg from 'shared/helpers/getErrorMessage';
 import * as actions from '../actions';
 
 import { IDependencies } from 'shared/types/app';
-import { ICategoriesResponse } from 'shared/api/Api';
+import { ICategory } from 'shared/types/models';
 import * as NS from '../../namespace';
 
 const loadCategoriesType: NS.ILoadCategories['type'] = 'CATEGORY_SELECT:LOAD_CATEGORIES';
@@ -17,7 +17,7 @@ export function getSaga(deps: IDependencies) {
 
 export function* executeCategoriesLoading({ api }: IDependencies) {
   try {
-    const response: ICategoriesResponse = yield call(api.loadCategories);
+    const response: ICategory[] = yield call(api.loadCategories);
     yield put(actions.loadCategoriesSuccess(response));
   } catch (error) {
     const message = getErrorMsg(error);

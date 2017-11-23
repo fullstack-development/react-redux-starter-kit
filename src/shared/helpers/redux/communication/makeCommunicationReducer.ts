@@ -1,16 +1,16 @@
-import { ICommunicationState, IAction, IProtect, IFailAction } from '../namespace';
+import { ICommunicationState, IPlainAction, IProtect, IPlainFailAction } from '../namespace';
 
 export default function makeCommunicationReducer<
-  E extends IAction = IProtect,
-  C extends IAction = IProtect,
-  F extends IFailAction = IProtect
->(
+  E extends IPlainAction<string> = IProtect,
+  C extends IPlainAction<string> = IProtect,
+  F extends IPlainFailAction<string> = IProtect
+  >(
   executeType: E['type'],
   completedType: C['type'],
   failedType: F['type'],
   initial: ICommunicationState<F['error']>,
-): (state: ICommunicationState<F['error']>, action: IAction) => ICommunicationState<F['error']> {
-  return (state: ICommunicationState<F['error']> = initial, action: IAction) => {
+): (state: ICommunicationState<F['error']>, action: IPlainAction<string>) => ICommunicationState<F['error']> {
+  return (state: ICommunicationState<F['error']> = initial, action: IPlainAction<string>) => {
     switch (action.type) {
       case executeType: return { error: '', isRequesting: true };
       case completedType: return { error: '', isRequesting: false };
