@@ -1,11 +1,12 @@
 import { IFlatFormProperties, ILocationProperties } from './DynamicFields';
+import { Uid } from '../app';
 
 export interface ITravelOrder {
   options: IFlatFormProperties;
   fromLocation: IPoint;
   location: INormalizedLocation;
   locationValues: ILocationProperties;
-  selectedCategoryUid: number;
+  chosenCategoryUid: number;
 }
 
 export interface ILocation {
@@ -61,7 +62,7 @@ export interface ICityEntities {
 }
 
 export interface ICategory {
-  uid: number;
+  uid: Uid;
   name: string;
   id: number;
 }

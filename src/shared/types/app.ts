@@ -68,4 +68,6 @@ export interface IModuleEntryData {
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
+export type Uid = number;
+
 export * from '../helpers/redux/namespace';

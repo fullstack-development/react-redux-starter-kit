@@ -6,6 +6,7 @@ import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { saveFieldsFail, saveFieldsCompleted } from '../actions/communication';
 
 import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
+import * as categorySelectFeature from 'features/categorySelect';
 import { selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
 import { selectors as locationSelectors } from 'features/locationSelect';
 import * as NS from '../../namespace';
@@ -20,17 +21,16 @@ export function* saveFieldsSaga({ api }: IDependencies) {
   const state: IAppReduxState = yield select();
 
   const location = locationSelectors.selectSelectedLocation(state);
-  const selectedCategoryUid = state.categorySelect.data.selected;
+  const chosenCategoryUid = categorySelectFeature.selectors.selectChosenCategoryUid(state).value;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
     return;
   }
-  if (!selectedCategoryUid) {
-    yield put(saveFieldsFail('Selected category is null'));
+  if (!chosenCategoryUid) {
+    yield put(saveFieldsFail('category is null'));
     return;
   }
-
   const options = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
   const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const fromLocation = getFromLocation(locationValues, location);
@@ -39,7 +39,7 @@ export function* saveFieldsSaga({ api }: IDependencies) {
     fromLocation,
     location,
     locationValues,
-    selectedCategoryUid,
+    chosenCategoryUid,
   };
   try {
     const message: string = yield call(api.createTravelOrder, travelOrder);

@@ -8,12 +8,12 @@ export interface IAction<T, P> extends IPlainAction<T> {
   payload: P;
 }
 
-export interface IFailAction<T = any> extends IPlainAction<string> {
-  error: T;
+export interface IPlainFailAction<T, E = string> extends IPlainAction<T> {
+  error: E;
 }
 
-export interface IFailActionWithPayload<T = any, E = any> extends IFailAction<E> {
-  payload: T;
+export interface IFailAction<T, P, E = string> extends IPlainFailAction<T, E> {
+  payload: P;
 }
 
 export interface IProtect {

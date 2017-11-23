@@ -29,7 +29,7 @@ export function сonvertCityResponse(response: ICityResponse[]): INormalizedCiti
 export function convertTravelToRequest(data: ITravelOrder): ITravelOrderRequest {
   return {
     attributes: data.options,
-    category: data.selectedCategoryUid,
+    category: data.chosenCategoryUid,
     location: data.location.area,
     // TODO: fill other properties below
     coord_from_lng: data.fromLocation.lng,
