@@ -1,62 +1,28 @@
-import { IFormProperties } from '../../features/dynamicFields/namespace';
-import { IFlatFormProperties, ILocationProperties, SelectedLocation } from 'shared/types/models';
+import { IFlatFormProperties, ILocationProperties, INormalizedLocation } from 'shared/types/models';
+import { ICommunicationState, IAction } from 'shared/types/app';
 
-interface IOrderFormRequest {
-  attributes: IFormProperties;
-  notify: boolean;
-  description: string;
-  location: number;  // area id only - don't need a city id
-  category: number;
-  coord_from_lng: number;
-  coord_from_lat: number;
-  coord_to_lng: number;
-  coord_to_lat: number;
-}
-
-interface IOrderFormResponse {
-  message: string;
-}
-
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
-
-interface IReduxState {
+export interface IReduxState {
   communications: {
-    saving: ICommunication;
+    saving: ICommunicationState;
   };
   data: { message: string; } | null;
 }
 
-interface ISaveFields {
-  type: 'HOME_MODULE:SAVE_FIELDS';
-  payload: {
-    dynamicValues: IFlatFormProperties;
-    locationValues: ILocationProperties;
-    location: SelectedLocation;
-  };
+export interface ISaveFieldsRequest {
+  dynamicValues: IFlatFormProperties;
+  locationValues: ILocationProperties;
+  location: INormalizedLocation;
 }
 
-interface ISaveFieldsSuccess {
-  type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS';
-  payload: IOrderFormResponse;
+export interface ISaveFieldsResponse {
+  message: string;
 }
 
-interface ISaveFieldsFail {
-  type: 'HOME_MODULE:SAVE_FIELDS_FAIL';
-  payload: string;
-}
+export type ISaveFieldsAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS', ISaveFieldsRequest>;
+export type ISaveFieldsCompletedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED', ISaveFieldsResponse>;
+export type ISaveFieldsFailedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED', string>;
 
-type Action = ISaveFields | ISaveFieldsSuccess | ISaveFieldsFail;
-
-export {
-  IOrderFormRequest,
-  IOrderFormResponse,
-  ICommunication,
-  IReduxState,
-  ISaveFields,
-  ISaveFieldsSuccess,
-  ISaveFieldsFail,
-  Action,
-};
+export type OrderFormAction =
+  | ISaveFieldsAction
+  | ISaveFieldsCompletedAction
+  | ISaveFieldsFailedAction;

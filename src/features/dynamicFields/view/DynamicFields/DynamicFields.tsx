@@ -4,7 +4,9 @@ import { Form, FormGroup } from 'react-bootstrap';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actions, selectors } from '../../redux';
-import { IFields, ICommunication, IReduxState, IField } from '../../namespace';
+import { IReduxState } from '../../namespace';
+import { IFields, IField } from 'shared/types/models';
+import { ICommunicationState } from 'shared/helpers/redux';
 import { bind } from 'decko';
 import GenericTextInput from 'shared/view/components/GenericTextInput/GenericTextInput';
 import GenericIntegerInput from 'shared/view/components/GenericIntegerInput/GenericIntegerInput';
@@ -30,7 +32,7 @@ interface IOwnProps {
 
 interface IStateProps {
   fields: IFields;
-  communications: { fetching: ICommunication };
+  communications: { fetching: ICommunicationState };
 }
 
 interface IDispatchProps {
@@ -41,7 +43,7 @@ interface IDispatchProps {
 type Props = IDispatchProps & IStateProps & IOwnProps;
 
 interface IState {
-  values: {[key: string]: string | number | {[key: string]: any}};
+  values: { [key: string]: string | number | { [key: string]: any } };
   errors: string[];
 }
 
@@ -64,6 +66,8 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
 }
 
 class DynamicFields extends React.Component<Props, IState> {
+  public state: IState = { values: {}, errors: [] };
+
   private b = block('dynamic-fields');
   private components: { [key: string]: React.ComponentClass<any> | React.StatelessComponent<any> } = {
     text: GenericTextInput,
@@ -75,14 +79,6 @@ class DynamicFields extends React.Component<Props, IState> {
     dropdown: GenericDropdownInput,
     location: GenericLocationInput,
   };
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      values: {},
-      errors: [],
-    };
-  }
 
   public componentDidMount() {
     if (this.props.category) {
@@ -132,7 +128,7 @@ class DynamicFields extends React.Component<Props, IState> {
     const { fields } = this.props;
     if (fields && fields.schema && fields.schema.properties) {
       const requriedFields: string[] = fields.schema.required;
-      const properties: {[key: string]: IField} = fields.schema.properties;
+      const properties: { [key: string]: IField } = fields.schema.properties;
       const fieldsNode = Object
         .keys(properties)
         .filter((fieldName: string) => {

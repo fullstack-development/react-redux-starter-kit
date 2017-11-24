@@ -10,7 +10,7 @@ import { namespace as SearchRepositoriesNamespace } from 'features/searchReposit
 import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields/entry';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
-import Api from '../api/Api';
+import Api from 'services/api/Api';
 
 export abstract class Module<C = any> {
   public components?: C; // available componens to pass in other modules
@@ -44,14 +44,15 @@ export abstract class Module<C = any> {
   }
 }
 
-export interface IAction {
-  type: string;
-  payload?: any;
-}
-
 export interface IAppData {
   modules: Module[];
   store: Store<IAppReduxState>;
+}
+export type OnConnectRequestHandler = (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void;
+
+export interface IReducerData<S> {
+  name: string;
+  reducer: Reducer<S>;
 }
 
 export interface IDependencies {
@@ -72,7 +73,7 @@ export interface IFeatureEntry<
   C extends IDictionary<ReactComponent<any>, keyof C> | void,
   A extends IDictionary<ActionCreator<Action>, keyof A> | void,
   S extends IDictionary<(state: any, ...args: any[]) => any, keyof S> | void,
-> extends IReduxEntry {
+  > extends IReduxEntry {
   actions: A;
   selectors: S;
   containers: C;
@@ -88,6 +89,7 @@ export interface IAppReduxState {
 
 export type Diff<T extends string, U extends string> =
   ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T];
+
 export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
@@ -97,3 +99,12 @@ export type BundleLoader<T> = (callback: (bundle: T) => void) => void;
 export type Lang = 'en' | 'he';
 
 export type ReactComponent<P> = React.ComponentClass<P> | React.StatelessComponent<P>;
+export interface IModuleEntryData {
+  component: React.ComponentClass<any> | React.StatelessComponent<any>;
+  reducers: Array<IReducerData<any>>;
+  sagas: RootSaga[];
+}
+
+export type Uid = number;
+
+export * from '../helpers/redux/namespace';

@@ -1,7 +1,6 @@
 import initial from '../data/initial';
 import { IReduxState } from '../../namespace';
-import { IAction } from 'shared/types/app';
 
-export default function(state: IReduxState = initial, action: IAction) {
+export default function reducer(state: IReduxState = initial, action: { type: string }) {
   return state;
 }

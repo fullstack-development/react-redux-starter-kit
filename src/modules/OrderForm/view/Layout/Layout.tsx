@@ -1,10 +1,10 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
-import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
-import { connect, Dispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { RouteComponentProps } from 'react-router-dom';
 import { bind } from 'decko';
+import { bindActionCreators } from 'redux';
+import { connect, Dispatch } from 'react-redux';
+
+import { RouteComponentProps } from 'react-router-dom';
 import { IAppReduxState, BundleLoader } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
@@ -12,11 +12,14 @@ import * as loadLocationSelect from 'features/locationSelect/entry';
 import * as loadCategorySelect from 'features/categorySelect/entry';
 import * as loadDynamicFields from 'features/dynamicFields/entry';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
+
 import { actions } from './../../redux';
+
+import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
 import './Layout.scss';
 import FormEvent = React.FormEvent;
 import { featureConnect } from 'core';
-import { SelectedLocationData, IFlatFormProperties, ILocationProperties, SelectedLocation } from 'shared/types/models';
+import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
 
 interface IOwnProps {
   locationSelectEntry: loadLocationSelect.Entry;
@@ -33,12 +36,12 @@ interface IStateProps {
   isSubmitting: boolean;
   dynamicValues: IFlatFormProperties;
   locationValues: ILocationProperties;
-  location: SelectedLocation;
+  location?: INormalizedLocation;
 }
 
 interface IState {
   categoryUid?: number;
-  location?: SelectedLocationData;
+  location?: ILocation;
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
@@ -57,7 +60,8 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
 
 function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
   const { dynamicFieldsEntry, locationSelectEntry } = ownProps;
-  console.log(locationSelectEntry);
+  // console.log(locationSelectEntry);
+  // const
   return {
     isSubmitting: state.orderForm.communications.saving.isRequesting,
     submittingResult: state.orderForm.data ? state.orderForm.data.message : '',
@@ -69,15 +73,8 @@ function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
 
 class OrderFormLayout extends React.Component<IProps, IState> {
 
+  public state: IState = { dynamicFields: {}, categoryUid: void 0 };
   private b = block('home-page');
-
-  constructor(props: IProps) {
-    super(props);
-    this.state = {
-      dynamicFields: {},
-      categoryUid: undefined,
-    };
-  }
 
   public render() {
     const b = this.b;
@@ -118,7 +115,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onLocationSelected(location: SelectedLocationData): void {
+  private onLocationSelected(location?: ILocation): void {
     this.setState({
       ...this.state,
       location,
@@ -136,9 +133,15 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
   @bind
   private onFormSubmit(e: FormEvent<Form>): void {
-    const { dynamicValues, locationValues, location, saveFields } = this.props;
+    // const { dynamicValues, locationValues, location, saveFields } = this.props;
+    const { location } = this.props;
     e.preventDefault();
-    saveFields(dynamicValues, locationValues, location);
+    if (location) {
+      // saveFields({ dynamicValues, location, locationValues });
+    } else {
+      console.error('no selected location');
+    }
+
   }
 
   @bind

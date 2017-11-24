@@ -1,30 +1,22 @@
-import { IOrderFormResponse, ISaveFields, ISaveFieldsSuccess, ISaveFieldsFail } from '../../namespace';
-import { IFlatFormProperties, ILocationProperties, SelectedLocation } from 'shared/types/models';
+import * as NS from '../../namespace';
 
-function saveFields(
-  dynamicValues: IFlatFormProperties,
-  locationValues: ILocationProperties,
-  location: SelectedLocation,
-): ISaveFields {
-  return { type: 'HOME_MODULE:SAVE_FIELDS', payload: { dynamicValues, locationValues, location } };
-}
-
-function saveFieldsSuccess(response: IOrderFormResponse): ISaveFieldsSuccess {
+export function saveFields(payload: NS.ISaveFieldsRequest): NS.ISaveFieldsAction {
   return {
-    type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS',
-    payload: response,
+    type: 'ORDER_FORM_MODULE:SAVE_FIELDS',
+    payload,
   };
 }
 
-function saveFieldsFail(error: string): ISaveFieldsFail {
+export function saveFieldsCompleted(payload: NS.ISaveFieldsResponse): NS.ISaveFieldsCompletedAction {
   return {
-    type: 'HOME_MODULE:SAVE_FIELDS_FAIL',
+    type: 'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED',
+    payload,
+  };
+}
+
+export function saveFieldsFail(error: string): NS.ISaveFieldsFailedAction {
+  return {
+    type: 'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED',
     payload: error,
   };
 }
-
-export {
-  saveFields,
-  saveFieldsSuccess,
-  saveFieldsFail,
-};

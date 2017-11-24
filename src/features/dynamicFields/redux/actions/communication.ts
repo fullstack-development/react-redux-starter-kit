@@ -1,20 +1,15 @@
-import { IAction } from 'shared/types/app';
-import { IFieldsResponse } from 'shared/api/Api';
+import { IFields } from 'shared/types/models';
 
-function loadFields(uid: number): IAction {
+import * as NS from '../../namespace';
+
+export function loadFields(uid: number): NS.ILoadFieldsAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS', payload: uid };
 }
 
-function loadFieldsSuccessed(data: IFieldsResponse): IAction {
+export function loadFieldsCompleted(data: IFields): NS.ILoadFieldsCompletedAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', payload: data };
 }
 
-function loadFieldsFailed(message: string): IAction {
+export function loadFieldsFailed(message: string): NS.ILoadFieldsFailedAction {
   return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', payload: message };
 }
-
-export {
-  loadFields,
-  loadFieldsFailed,
-  loadFieldsSuccessed,
-};

@@ -1,13 +1,11 @@
 import { IFeatureEntry, BundleLoader } from 'shared/types/app';
 
 import * as namespace from './namespace';
-import * as selectors from './redux/data/selectors';
+import * as selectors from './redux/selectors';
 import actions from './redux/actions';
-import CategorySelect from './view/CategorySelect/CategorySelect';
+import * as containers from './view/containers';
 import { default as reducer } from './redux/reducers';
 import getSaga from './redux/actions/sagas';
-
-const containers = { CategorySelect };
 
 const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> = {
   actions,

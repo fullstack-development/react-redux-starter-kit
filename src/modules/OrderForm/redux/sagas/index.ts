@@ -2,12 +2,15 @@ import { call, put, takeLatest, select } from 'redux-saga/effects';
 
 import { IDependencies, IAppReduxState } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
+import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
+import * as categorySelectFeature from 'features/categorySelect';
+import { selectors as locationSelectors } from 'features/locationSelect/redux';
+import { selectors as dynamicFieldsSelectors } from 'features/dynamicFields/redux';
 
-import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
-import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
-import { SelectedLocation, IPoint, ILocationProperties } from 'shared/types/models';
+import * as NS from '../../namespace';
+import { saveFieldsFail, saveFieldsCompleted } from '../actions/communication';
 
-const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
+const saveFieldsType: NS.ISaveFieldsAction['type'] = 'ORDER_FORM_MODULE:SAVE_FIELDS';
 
 export default function getSaga(deps: IDependencies) {
   function* saga() {
@@ -17,41 +20,40 @@ export default function getSaga(deps: IDependencies) {
   return saga;
 }
 
-export function* saveFieldsSaga({ api }: IDependencies, { payload }: ISaveFields) {
+export function* saveFieldsSaga({ api }: IDependencies, { payload }: NS.ISaveFieldsAction) {
   const state: IAppReduxState = yield select();
 
-  const { dynamicValues, locationValues, location } = payload;
+  const location = locationSelectors.selectSelectedLocation(state);
+  const chosenCategoryUid = categorySelectFeature.selectors.selectChosenCategoryUid(state).value;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));
     return;
   }
-
+  if (!chosenCategoryUid) {
+    yield put(saveFieldsFail('category is null'));
+    return;
+  }
+  const options = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
+  const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
   const fromLocation = getFromLocation(locationValues, location);
-
-  const data: IOrderFormRequest = {
-    attributes: dynamicValues,
-    category: state.categorySelect.data.selected as number,
-    location: location.area,
-    // TODO: fill other properties below
-    coord_from_lng: fromLocation.lng,
-    coord_from_lat: fromLocation.lat,
-    coord_to_lng: locationValues.to.lng,
-    coord_to_lat: locationValues.to.lat,
-
-    description: '',
-    notify: false,
+  const travelOrder: ITravelOrder = {
+    options,
+    fromLocation,
+    location,
+    locationValues,
+    chosenCategoryUid,
   };
 
   try {
-    const response: IOrderFormResponse = yield call(api.saveFields, data);
-    yield put(saveFieldsSuccess(response));
+    const message: string = yield call(api.createTravelOrder, travelOrder);
+    yield put(saveFieldsCompleted({ message }));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
   }
 }
 
-function getFromLocation(dynamicFields: ILocationProperties, locationSelect: SelectedLocation): IPoint {
+function getFromLocation(dynamicFields: ILocationProperties, locationSelect: INormalizedLocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {
