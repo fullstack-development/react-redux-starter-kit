@@ -4,7 +4,7 @@ import * as uuid from 'uuid';
 import { bind } from 'decko';
 import { Store, Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState, Omit } from 'shared/types/app';
 
 import { addInstance, removeInstance } from './actions';
 import { MapStateToProps, MapDispatchToProps, ReactComponent, IMultiAction, IMultiConnectProps } from './namespace';
@@ -30,8 +30,9 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
       public context: { store: Store<IAppReduxState> };
       public displayName: string = `(MultiConnect) ${WrappedComponent.displayName}`;
 
-      private ConnectedComponent: React.ComponentClass<TOwnProps & IMultiConnectProps>;
-      // Omit<IWrappedComponentProps, keyof (TStateProps & TDispatchProps)> & TOwnProps & IMultiConnectProps
+      private ConnectedComponent: React.ComponentClass<
+        Omit<IWrappedComponentProps, keyof (TStateProps & TDispatchProps)> & TOwnProps & IMultiConnectProps
+        >;
       private instanceKey: string;
 
       public componentWillMount() {
@@ -41,7 +42,8 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
         mountedContainersForInstance[this.instanceKey] = mountedContainers + 1;
 
         this.context.store.dispatch(addInstance(this.instanceKey, initialState, keyPathToState));
-        this.ConnectedComponent = connect(this.mapStateToProps, this.mapDispatchToProps)(WrappedComponent);
+        this.ConnectedComponent = connect<TStateProps, TDispatchProps, TOwnProps>
+          (this.mapStateToProps, this.mapDispatchToProps)(WrappedComponent);
       }
 
       public componentWillUnmount() {

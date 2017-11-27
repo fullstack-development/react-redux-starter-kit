@@ -7,7 +7,7 @@ import { IDependencies } from 'shared/types/app';
 import { ICategory } from 'shared/types/models';
 import * as NS from '../../namespace';
 
-const loadCategoriesType: NS.ILoadCategories['type'] = 'CATEGORY_SELECT:LOAD_CATEGORIES';
+const loadCategoriesType: NS.ILoadCategoriesAction['type'] = 'CATEGORY_SELECT:LOAD_CATEGORIES';
 
 export function getSaga(deps: IDependencies) {
   return function* saga() {
@@ -18,7 +18,7 @@ export function getSaga(deps: IDependencies) {
 export function* executeCategoriesLoading({ api }: IDependencies) {
   try {
     const response: ICategory[] = yield call(api.loadCategories);
-    yield put(actions.loadCategoriesSuccess(response));
+    yield put(actions.loadCategoriesCompleted(response));
   } catch (error) {
     const message = getErrorMsg(error);
     yield put(actions.loadCategoriesFail(message));

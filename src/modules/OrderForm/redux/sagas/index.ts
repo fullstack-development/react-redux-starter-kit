@@ -20,7 +20,7 @@ export default function getSaga(deps: IDependencies) {
   return saga;
 }
 
-export function* saveFieldsSaga({ api }: IDependencies, { payload }: NS.ISaveFieldsAction) {
+export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAction | undefined) {
   const state: IAppReduxState = yield select();
 
   const location = locationSelectors.selectSelectedLocation(state);

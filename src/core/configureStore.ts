@@ -1,7 +1,7 @@
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import {
   compose, applyMiddleware, combineReducers, createStore,
-  Reducer, Middleware, Store, ReducersMapObject,
+  Reducer, Middleware, Store, ReducersMapObject, StoreEnhancer,
 } from 'redux';
 
 import { IAppReduxState } from 'shared/types/app';
@@ -16,14 +16,17 @@ interface IStoreData {
 function configureStore(): IStoreData {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares: Middleware[] = [sagaMiddleware];
+
   const store: Store<IAppReduxState> = createStore(
     state => state,
     compose(
-      applyMiddleware(...middlewares),
-      ('development' === process.env.NODE_ENV && window.devToolsExtension)
-        ? window.devToolsExtension() : ((arg: any) => arg),
-    ),
-  ) as Store<IAppReduxState>;
+      applyMiddleware(...middlewares) as StoreEnhancer<IAppReduxState>,
+      ((): StoreEnhancer<IAppReduxState> =>
+        process.env.NODE_ENV === 'development' && window.devToolsExtension
+          ? window.devToolsExtension()
+          : (x: any) => x
+      )(),
+    ));
 
   return {
     store,

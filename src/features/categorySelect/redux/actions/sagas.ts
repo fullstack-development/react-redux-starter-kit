@@ -1,8 +1,11 @@
 import { IDependencies } from 'shared/types/app';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
-
 import { ICategory } from 'shared/types/models';
+
+import * as NS from '../../namespace';
+
+const loadCategoriesType: NS.ILoadCategoriesAction['type'] = 'CATEGORY_SELECT:LOAD_CATEGORIES';
 
 function getSaga({ api }: IDependencies) {
   function* executeCategoriesLoading() {
@@ -17,7 +20,7 @@ function getSaga({ api }: IDependencies) {
 
   function* saga() {
     yield [
-      takeLatest('CATEGORY_SELECT:LOAD_CATEGORIES', executeCategoriesLoading),
+      takeLatest(loadCategoriesType, executeCategoriesLoading),
     ];
   }
 

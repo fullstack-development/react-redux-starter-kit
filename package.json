@@ -10,7 +10,7 @@
     "watch:prod": "better-npm-run watch:prod",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
-    "dev": "npm run watch:dev",
+    "dev": "node_modules/.bin/concurrently  -k \"npm run start-server\" \"npm run watch:dev\"",
     "prod": "node_modules/.bin/concurrently -k \"npm run start-server\" \"npm run watch:prod\""
   },
   "betterScripts": {
