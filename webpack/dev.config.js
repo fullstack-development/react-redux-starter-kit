@@ -43,7 +43,7 @@ module.exports = {
         publicPath: '/',
         path: path.resolve(__dirname, '..', 'build'),
         filename: 'js/[name]-[hash].bundle.js',
-        chunkFilename: 'js/chunk-[id]-[hash].bundle.js',
+        chunkFilename: 'js/[name]-[hash].bundle.js',
     },
     resolve: {
         modules: ['node_modules', 'src'],
@@ -53,7 +53,6 @@ module.exports = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                exclude: /\/entry\.(ts|tsx)$/,
                 use: [
                     { loader: 'awesome-typescript-loader' },
                     { loader: 'tslint-loader' }
@@ -62,17 +61,6 @@ module.exports = {
             {
                 test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
                 use: 'file-loader?name=fonts/[hash].[ext]',
-            },
-            {
-                test: /\/entry\.(ts|tsx)$/,
-                use: [
-                    {
-                        loader: 'bundle-loader',
-                        options: { lazy: true },
-                    },
-                    { loader: 'awesome-typescript-loader' },
-                    { loader: 'tslint-loader' },
-                ],
             },
             {
                 test: /\.css$/,

@@ -4,9 +4,11 @@ import { bind } from 'decko';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
-import { BundleLoader, IDictionary, IFeatureEntry, Omit } from 'shared/types/app';
+import { IDictionary, IFeatureEntry, Omit } from 'shared/types/app';
 
-function featureConnect<L extends IDictionary<BundleLoader<any>>>(loaders: L, preloader?: React.ReactChild):
+type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
+
+function featureConnect<L extends IDictionary<FeatureLoader>>(loaders: L, preloader?: React.ReactChild):
   // tslint:disable-next-line:max-line-length
   <Props extends {[K in keyof L]: any}>(WrappedComponent: React.ComponentType<Props>) => React.ComponentType<Omit<Props, keyof L>> {
   interface IState {
@@ -38,14 +40,15 @@ function featureConnect<L extends IDictionary<BundleLoader<any>>>(loaders: L, pr
 
       @bind
       private load() {
-        Object.keys(loaders).forEach((key) => {
-          loaders[key](bundle => {
-            this.connectFeatureToStore(bundle.default || bundle);
+        const keys: Array<keyof L> = Object.keys(loaders);
+        keys.forEach((key) => {
+          loaders[key]().then(bundle => {
+            this.connectFeatureToStore(bundle);
             this.setState(state => ({
               ...state,
               bundles: {
                 ...state.bundles,
-                [key]: bundle.default || bundle,
+                [key]: bundle,
               },
             }));
           });

@@ -1,4 +1,4 @@
-import { IFeatureEntry, BundleLoader } from 'shared/types/app';
+import { IFeatureEntry } from 'shared/types/app';
 
 import * as namespace from './namespace';
 import * as selectors from './redux/data/selectors';
@@ -19,5 +19,4 @@ const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> 
 
 type Entry = typeof entry;
 
-export { Entry, namespace };
-export default entry as any as BundleLoader<Entry>;
+export { Entry, namespace, entry };

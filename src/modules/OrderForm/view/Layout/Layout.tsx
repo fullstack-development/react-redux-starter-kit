@@ -5,12 +5,12 @@ import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { IAppReduxState, BundleLoader } from 'shared/types/app';
+import { IAppReduxState } from 'shared/types/app';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
-import * as loadLocationSelect from 'features/locationSelect/entry';
-import * as loadCategorySelect from 'features/categorySelect/entry';
-import * as loadDynamicFields from 'features/dynamicFields/entry';
+import * as locationSelect from 'features/locationSelect';
+import * as categorySelect from 'features/categorySelect';
+import * as dynamicFields from 'features/dynamicFields';
 import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 
 import { actions } from './../../redux';
@@ -22,9 +22,9 @@ import { featureConnect } from 'core';
 import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
 
 interface IOwnProps {
-  locationSelectEntry: loadLocationSelect.Entry;
-  categorySelectEntry: loadCategorySelect.Entry;
-  dynamicFieldsEntry: loadDynamicFields.Entry;
+  locationSelectEntry: locationSelect.Entry;
+  categorySelectEntry: categorySelect.Entry;
+  dynamicFieldsEntry: dynamicFields.Entry;
 }
 
 interface IDispatchProps {
@@ -165,9 +165,9 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
 const connectedComponent = connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(OrderFormLayout);
 const withFeatures = featureConnect({
-  locationSelectEntry: loadLocationSelect as any as BundleLoader<any>,
-  categorySelectEntry: loadCategorySelect as any as BundleLoader<any>,
-  dynamicFieldsEntry: loadDynamicFields as any as BundleLoader<any>,
+  locationSelectEntry: locationSelect.loadEntry,
+  categorySelectEntry: categorySelect.loadEntry,
+  dynamicFieldsEntry: dynamicFields.loadEntry,
 })(connectedComponent);
 
 export default withFeatures;

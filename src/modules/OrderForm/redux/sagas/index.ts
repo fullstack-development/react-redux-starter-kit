@@ -3,7 +3,7 @@ import { call, put, takeLatest, select } from 'redux-saga/effects';
 import { IDependencies, IAppReduxState } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
-import * as categorySelectFeature from 'features/categorySelect';
+import { selectors as categorySelectors } from 'features/categorySelect/redux';
 import { selectors as locationSelectors } from 'features/locationSelect/redux';
 import { selectors as dynamicFieldsSelectors } from 'features/dynamicFields/redux';
 
@@ -24,7 +24,7 @@ export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAc
   const state: IAppReduxState = yield select();
 
   const location = locationSelectors.selectSelectedLocation(state);
-  const chosenCategoryUid = categorySelectFeature.selectors.selectChosenCategoryUid(state).value;
+  const chosenCategoryUid = categorySelectors.selectChosenCategoryUid(state).value;
 
   if (!location) {
     yield put(saveFieldsFail('Location is not set'));

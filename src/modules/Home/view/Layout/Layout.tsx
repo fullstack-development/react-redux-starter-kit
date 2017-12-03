@@ -4,15 +4,14 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import RowsLayout from '../../../../shared/view/elements/RowsLayout';
 import Header from '../../../../shared/view/components/Header/index';
-import * as loadSearchRepositories from '../../../../features/searchRepositories/entry';
+import * as searchRepositories from 'features/searchRepositories';
 import Description from './Description';
 import Search from './Search';
 import { featureConnect } from 'core';
 import './Layout.scss';
-import { BundleLoader } from 'shared/types/app';
 
 interface IOwnProps {
-  searchRepositoriesEntry: loadSearchRepositories.Entry;
+  searchRepositoriesEntry: searchRepositories.Entry;
 }
 
 type Props = IOwnProps & RouteComponentProps<void>;
@@ -49,7 +48,7 @@ class HomeLayout extends React.PureComponent<Props, {}> {
 }
 
 const withFeatures = featureConnect({
-  searchRepositoriesEntry: loadSearchRepositories as any as BundleLoader<any>,
+  searchRepositoriesEntry: searchRepositories.loadEntry,
 })(HomeLayout);
 
 export default withFeatures;
