@@ -3,23 +3,23 @@ import * as block from 'bem-cn';
 import { bind } from 'decko';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
+import { featureConnect } from 'core';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { IAppReduxState } from 'shared/types/app';
-import RowsLayout from 'shared/view/elements/RowsLayout';
-import Header from 'shared/view/components/Header';
+import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+
 import * as locationSelect from 'features/locationSelect';
 import * as categorySelect from 'features/categorySelect';
 import * as dynamicFields from 'features/dynamicFields';
-import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
 
 import { actions } from './../../redux';
 
 import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
+import RowsLayout from 'shared/view/elements/RowsLayout';
+import Header from 'shared/view/components/Header';
 import './Layout.scss';
-import FormEvent = React.FormEvent;
-import { featureConnect } from 'core';
-import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
 
 interface IOwnProps {
   locationSelectEntry: locationSelect.Entry;
@@ -36,12 +36,13 @@ interface IStateProps {
   isSubmitting: boolean;
   dynamicValues: IFlatFormProperties;
   locationValues: ILocationProperties;
-  location?: INormalizedLocation;
+  chosenLocation: INormalizedLocation | null;
+  chosenCategoryUid: number | null;
 }
 
 interface IState {
-  categoryUid?: number;
-  location?: ILocation;
+  categoryUid: number | null;
+  location: ILocation | null;
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
@@ -59,7 +60,7 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
 }
 
 function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
-  const { dynamicFieldsEntry, locationSelectEntry } = ownProps;
+  const { dynamicFieldsEntry, locationSelectEntry, categorySelectEntry } = ownProps;
   // console.log(locationSelectEntry);
   // const
   return {
@@ -67,13 +68,14 @@ function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
     submittingResult: state.orderForm.data ? state.orderForm.data.message : '',
     dynamicValues: dynamicFieldsEntry.selectors.selectFlatValues(state.dynamicFields),
     locationValues: dynamicFieldsEntry.selectors.selectLocationValues(state.dynamicFields),
-    location: locationSelectEntry.selectors.selectSelectedLocation(state),
+    chosenLocation: locationSelectEntry.selectors.selectSelectedLocation(state),
+    chosenCategoryUid: categorySelectEntry.selectors.selectChosenCategoryUid(state).value,
   };
 }
 
 class OrderFormLayout extends React.Component<IProps, IState> {
 
-  public state: IState = { dynamicFields: {}, categoryUid: void 0 };
+  public state: IState = { dynamicFields: {}, categoryUid: null, location: null };
   private b = block('home-page');
 
   public render() {
@@ -115,7 +117,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onLocationSelected(location?: ILocation): void {
+  private onLocationSelected(location: ILocation | null): void {
     this.setState({
       ...this.state,
       location,
@@ -132,16 +134,10 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onFormSubmit(e: FormEvent<Form>): void {
-    // const { dynamicValues, locationValues, location, saveFields } = this.props;
-    const { location } = this.props;
+  private onFormSubmit(e: React.FormEvent<Form>): void {
     e.preventDefault();
-    if (location) {
-      // saveFields({ dynamicValues, location, locationValues });
-    } else {
-      console.error('no selected location');
-    }
-
+    const { dynamicValues, locationValues, chosenLocation, chosenCategoryUid, saveFields } = this.props;
+    saveFields({ dynamicValues, chosenLocation, chosenCategoryUid, locationValues });
   }
 
   @bind

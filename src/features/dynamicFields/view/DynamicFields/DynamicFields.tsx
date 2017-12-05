@@ -24,7 +24,7 @@ import ComponentClass = React.ComponentClass;
 import StatelessComponent = React.StatelessComponent;
 
 interface IOwnProps {
-  category?: number;
+  category: number | null;
   onSetField?: (fieldName: string, fieldValue: FieldValue) => void;
   onSubmit?: EventHandler<FormEvent<Form>>;
   onChange?: (fieldName: string, fieldValue: FieldValue, errors: string[]) => void;

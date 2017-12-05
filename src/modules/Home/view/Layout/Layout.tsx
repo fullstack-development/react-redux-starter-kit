@@ -1,13 +1,16 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
+import { featureConnect } from 'core';
+
 import { RouteComponentProps } from 'react-router-dom';
-import { Navbar } from 'react-bootstrap';
-import RowsLayout from '../../../../shared/view/elements/RowsLayout';
-import Header from '../../../../shared/view/components/Header/index';
+
 import * as searchRepositories from 'features/searchRepositories';
+
+import { Navbar } from 'react-bootstrap';
+import RowsLayout from 'shared/view/elements/RowsLayout';
+import Header from 'shared/view/components/Header/index';
 import Description from './Description';
 import Search from './Search';
-import { featureConnect } from 'core';
 import './Layout.scss';
 
 interface IOwnProps {

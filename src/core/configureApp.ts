@@ -1,5 +1,4 @@
 import configureDeps from './configureDeps';
-import { Reducer } from 'redux';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
 
@@ -7,7 +6,6 @@ import { HomeModule, OrderFormModule } from 'modules';
 
 import { ReducersMap } from 'shared/helpers/redux';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
-import { IReduxState } from 'features/categorySelect/namespace';
 
 function configureApp(): IAppData {
   /* Prepare main app elements */
@@ -41,7 +39,7 @@ function configureApp(): IAppData {
       const isNeedReplace: boolean = keys.reduce<boolean>((acc, key: keyof typeof reducers) => {
         const featureReducer = reducers[key];
         if (!connectedReducers[key] && featureReducer) {
-          connectedReducers[key] = featureReducer as Reducer<IReduxState | undefined>;
+          connectedReducers[key] = featureReducer;
           return true;
         }
         return acc || false;

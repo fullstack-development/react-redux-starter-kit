@@ -4,10 +4,10 @@ import { Store, Reducer, ActionCreator, Action } from 'redux';
 
 import { SagaIterator } from 'redux-saga';
 
-import { namespace as CategorySelectNamespace } from 'features/categorySelect/entry';
-import { namespace as LocationSelectNamespace } from 'features/locationSelect/entry';
-import { namespace as SearchRepositoriesNamespace } from 'features/searchRepositories/entry';
-import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields/entry';
+import { namespace as CategorySelectNamespace } from 'features/categorySelect';
+import { namespace as LocationSelectNamespace } from 'features/locationSelect';
+import { namespace as SearchRepositoriesNamespace } from 'features/searchRepositories';
+import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
 import Api from 'services/api/Api';

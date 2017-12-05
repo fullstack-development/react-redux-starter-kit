@@ -1,6 +1,5 @@
 import { IFeatureEntry } from 'shared/types/app';
 
-import * as namespace from './namespace';
 import selectors from './redux/data/selectors';
 import actions from './redux/actions';
 import DynamicFields from './view/DynamicFields/DynamicFields';
@@ -19,4 +18,4 @@ const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> 
 
 type Entry = typeof entry;
 
-export { Entry, namespace, entry };
+export { Entry, entry };

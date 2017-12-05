@@ -5,7 +5,7 @@ function getFeatureState(state: any): IReduxState {
   return state.locationSelect;
 }
 
-function selectSelectedLocation(state: any): INormalizedLocation | undefined {
+function selectSelectedLocation(state: any): INormalizedLocation | null {
   const ownState: IReduxState = getFeatureState(state);
   return ownState.data.selectedLocation;
 }

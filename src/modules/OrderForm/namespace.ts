@@ -9,9 +9,10 @@ export interface IReduxState {
 }
 
 export interface ISaveFieldsRequest {
+  chosenLocation: INormalizedLocation | null;
+  chosenCategoryUid: number | null;
   dynamicValues: IFlatFormProperties;
   locationValues: ILocationProperties;
-  location: INormalizedLocation;
 }
 
 export interface ISaveFieldsResponse {

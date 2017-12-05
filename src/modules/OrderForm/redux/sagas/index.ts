@@ -1,11 +1,8 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { IDependencies, IAppReduxState } from 'shared/types/app';
+import { IDependencies } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
-import { selectors as categorySelectors } from 'features/categorySelect/redux';
-import { selectors as locationSelectors } from 'features/locationSelect/redux';
-import { selectors as dynamicFieldsSelectors } from 'features/dynamicFields/redux';
 
 import * as NS from '../../namespace';
 import { saveFieldsFail, saveFieldsCompleted } from '../actions/communication';
@@ -20,13 +17,10 @@ export default function getSaga(deps: IDependencies) {
   return saga;
 }
 
-export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAction | undefined) {
-  const state: IAppReduxState = yield select();
+export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAction) {
+  const { chosenCategoryUid, chosenLocation, dynamicValues, locationValues } = action.payload;
 
-  const location = locationSelectors.selectSelectedLocation(state);
-  const chosenCategoryUid = categorySelectors.selectChosenCategoryUid(state).value;
-
-  if (!location) {
+  if (!chosenLocation) {
     yield put(saveFieldsFail('Location is not set'));
     return;
   }
@@ -34,13 +28,11 @@ export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAc
     yield put(saveFieldsFail('category is null'));
     return;
   }
-  const options = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
-  const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
-  const fromLocation = getFromLocation(locationValues, location);
+  const fromLocation = getFromLocation(locationValues, chosenLocation);
   const travelOrder: ITravelOrder = {
-    options,
+    options: dynamicValues,
     fromLocation,
-    location,
+    location: chosenLocation,
     locationValues,
     chosenCategoryUid,
   };

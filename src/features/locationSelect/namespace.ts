@@ -17,7 +17,7 @@ export interface IReduxState {
       cities: ICityEntities;
     },
     citiesSet: number[],
-    selectedLocation?: INormalizedLocation;
+    selectedLocation: INormalizedLocation | null;
   };
   ui: {
     showSelectedLocation: boolean;

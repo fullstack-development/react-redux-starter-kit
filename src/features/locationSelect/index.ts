@@ -1,7 +1,5 @@
-import { Entry, namespace } from './entry';
+import * as namespace from './namespace';
 
-export { Entry, namespace };
-export async function loadEntry(): Promise<Entry> {
-  const feature = await import(/* webpackChunkName: "locationSelect" */ './entry');
-  return feature.entry;
-}
+export { namespace };
+export { Entry } from './entry';
+export { loadEntry } from './loader';
