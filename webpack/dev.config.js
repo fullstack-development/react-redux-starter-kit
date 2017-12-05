@@ -54,6 +54,7 @@ module.exports = {
             {
                 test: /\.(ts|tsx)$/,
                 use: [
+                    { loader: 'react-hot-loader/webpack' },
                     { loader: 'awesome-typescript-loader' },
                     { loader: 'tslint-loader' }
                 ],

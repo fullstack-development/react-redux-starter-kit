@@ -7,9 +7,14 @@ import { HomeModule, OrderFormModule } from 'modules';
 import { ReducersMap } from 'shared/helpers/redux';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
-function configureApp(): IAppData {
+function configureApp(data?: IAppData): IAppData {
   /* Prepare main app elements */
   const modules: Module[] = [new HomeModule(), new OrderFormModule()];
+
+  if (data) {
+    return { ...data, modules };
+  }
+
   const sharedReduxEntries: IReduxEntry[] = [];
 
   const connectedSagas: RootSaga[] = [];
