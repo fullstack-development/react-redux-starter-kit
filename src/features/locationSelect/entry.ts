@@ -1,4 +1,4 @@
-import { IFeatureEntry } from 'shared/types/app';
+import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import * as selectors from './redux/data/selectors';
 import actions from './redux/actions';
@@ -8,13 +8,15 @@ import getSaga from './redux/actions/sagas';
 
 const containers = { LocationSelect };
 
-const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> = {
+const entry = getFeatureEntry(
+  containers,
   actions,
   selectors,
-  containers,
-  reducers: { locationSelect: reducer },
-  sagas: [getSaga],
-};
+  {
+    reducers: { locationSelect: reducer },
+    sagas: [getSaga],
+  },
+);
 
 type Entry = typeof entry;
 

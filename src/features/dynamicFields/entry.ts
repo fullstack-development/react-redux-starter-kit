@@ -1,20 +1,23 @@
-import { IFeatureEntry } from 'shared/types/app';
+
+import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import selectors from './redux/data/selectors';
 import actions from './redux/actions';
 import DynamicFields from './view/DynamicFields/DynamicFields';
-import { default as reducer } from './redux/reducers';
+import reducer from './redux/reducers';
 import getSaga from './redux/actions/sagas';
 
 const containers = { DynamicFields };
 
-const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> = {
+const entry = getFeatureEntry(
+  containers,
   actions,
   selectors,
-  containers,
-  reducers: { dynamicFields: reducer },
-  sagas: [getSaga],
-};
+  {
+    reducers: { dynamicFields: reducer },
+    sagas: [getSaga],
+  },
+);
 
 type Entry = typeof entry;
 

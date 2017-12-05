@@ -1,18 +1,20 @@
-import { IFeatureEntry } from 'shared/types/app';
+import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import * as selectors from './redux/selectors';
 import * as actions from './redux/actions';
 import * as containers from './view/containers';
-import { default as reducer } from './redux/reducers';
+import reducer from './redux/reducers';
 import getSaga from './redux/sagas';
 
-const entry: IFeatureEntry<typeof containers, typeof actions, typeof selectors> = {
+const entry = getFeatureEntry(
+  containers,
   actions,
   selectors,
-  containers,
-  reducers: { categorySelect: reducer },
-  sagas: [getSaga],
-};
+  {
+    reducers: { categorySelect: reducer },
+    sagas: [getSaga],
+  },
+);
 
 type Entry = typeof entry;
 
