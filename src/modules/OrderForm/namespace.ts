@@ -1,4 +1,5 @@
-import { ICommunicationState, IPlainAction, IAction } from 'shared/types/app';
+import { IFlatFormProperties, ILocationProperties, INormalizedLocation } from 'shared/types/models';
+import { ICommunicationState, IAction } from 'shared/types/app';
 
 export interface IReduxState {
   communications: {
@@ -7,8 +8,19 @@ export interface IReduxState {
   data: { message: string; } | null;
 }
 
-export type ISaveFieldsAction = IPlainAction<'ORDER_FORM_MODULE:SAVE_FIELDS'>;
-export type ISaveFieldsCompletedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED', string>;
+export interface ISaveFieldsRequest {
+  chosenLocation: INormalizedLocation | null;
+  chosenCategoryUid: number | null;
+  dynamicValues: IFlatFormProperties;
+  locationValues: ILocationProperties;
+}
+
+export interface ISaveFieldsResponse {
+  message: string;
+}
+
+export type ISaveFieldsAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS', ISaveFieldsRequest>;
+export type ISaveFieldsCompletedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED', ISaveFieldsResponse>;
 export type ISaveFieldsFailedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED', string>;
 
 export type OrderFormAction =

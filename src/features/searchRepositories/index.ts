@@ -1,2 +1,5 @@
-import SearchRepositoriesInput from './view/SearchInput';
-export { SearchRepositoriesInput };
+import * as namespace from './namespace';
+
+export { namespace };
+export { Entry } from './entry';
+export { loadEntry } from './loader';

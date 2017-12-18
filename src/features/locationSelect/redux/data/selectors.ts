@@ -5,7 +5,7 @@ function getFeatureState(state: any): IReduxState {
   return state.locationSelect;
 }
 
-function selectSelectedLocation(state: any): INormalizedLocation | undefined {
+function selectSelectedLocation(state: any): INormalizedLocation | null {
   const ownState: IReduxState = getFeatureState(state);
   return ownState.data.selectedLocation;
 }
@@ -20,7 +20,7 @@ function selectCityById(state: any, id: number): ICity {
   return ownState.data.entities.cities[id];
 }
 
-export default {
+export {
   selectAreaById,
   selectCityById,
   getFeatureState,

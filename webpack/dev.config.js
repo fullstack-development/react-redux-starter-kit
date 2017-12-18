@@ -18,17 +18,22 @@ module.exports = {
           './index.tsx'
         ],
         vendor: [
+            'uuid',
             'axios',
             'react',
             'redux',
             'bem-cn',
             'reselect',
             'immutable',
+            'inversify',
+            'prop-types',
             'react-dom',
             'react-redux',
             'react-router',
             'react-select',
             'react-bootstrap',
+            'reflect-metadata',
+            'inversify-inject-decorators',
             // 'react-tap-event-plugin',
             'bootstrap/dist/css/bootstrap.min.css',
             './assets/bootstrap.paper.min.css',
@@ -37,7 +42,8 @@ module.exports = {
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, '..', 'build'),
-        filename: 'js/app.bundle.js'
+        filename: 'js/[name]-[hash].bundle.js',
+        chunkFilename: 'js/[name]-[hash].bundle.js',
     },
     resolve: {
         modules: ['node_modules', 'src'],
@@ -116,7 +122,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'js/vendor.bundle.js',
+            filename: 'js/[name]-[hash].bundle.js',
             minChunks: Infinity,
         }),
         new HtmlWebpackPlugin({

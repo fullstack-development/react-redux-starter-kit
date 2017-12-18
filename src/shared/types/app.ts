@@ -1,31 +1,39 @@
 import { ReactElement } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { Store, Reducer } from 'redux';
+import { RouteProps } from 'react-router';
+import { Store, Reducer, ActionCreator, Action } from 'redux';
+
 import { SagaIterator } from 'redux-saga';
-import Api from 'services/api/Api';
-import { Namespace as CategorySelectNamespace } from 'features/categorySelect';
-import { Namespace as LocationSelectNamespace } from 'features/locationSelect';
-import { Namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
+
+import { namespace as CategorySelectNamespace } from 'features/categorySelect';
+import { namespace as LocationSelectNamespace } from 'features/locationSelect';
+import { namespace as SearchRepositoriesNamespace } from 'features/searchRepositories';
+import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
 import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
-export abstract class Module<S, C> {
+import Api from 'services/api/Api';
+
+export abstract class Module<C = any> {
   public components?: C; // available componens to pass in other modules
 
   protected _store: Store<IAppReduxState> | null = null;
-  protected onConnectRequestHandler?: OnConnectRequestHandler;
-  protected extraComponents?: { [key: string]: React.ReactElement<any> | null; };
+  protected _deps: IDependencies | null = null;
 
-  public set onConnectRequest(handler: OnConnectRequestHandler) {
-    this.onConnectRequestHandler = handler;
-  }
+  protected extraComponents?: { [key: string]: React.ReactElement<any> | React.ComponentClass<any> | null; };
 
   public set store(store: Store<IAppReduxState>) {
     this._store = store;
   }
 
-  public getRoutes?(): ReactElement<RouteComponentProps<any>> | Array<ReactElement<RouteComponentProps<any>>>;
-  public getReducer?(): IReducerData<S>;
-  public getSaga?(): (deps: IDependencies) => SagaIterator;
+  public set dependencies(value: IDependencies) {
+    this._deps = value;
+  }
+
+  protected get deps(): IDependencies | null {
+    return this._deps || null;
+  }
+
+  public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
+  public getReduxEntry?(): IReduxEntry;
 
   public setExtraComponent(key: keyof C, component: React.ReactElement<any>): void {
     if (this.extraComponents) {
@@ -34,14 +42,12 @@ export abstract class Module<S, C> {
       throw new Error('Cannot set module extra component: no requirements found for extra component');
     }
   }
-
-  protected notifyAboutConnection(reducers: Array<IReducerData<any>>, sagas: RootSaga[]) {
-    if (this.onConnectRequestHandler) {
-      this.onConnectRequestHandler(reducers, sagas);
-    }
-  }
 }
 
+export interface IAppData {
+  modules: Module[];
+  store: Store<IAppReduxState>;
+}
 export type OnConnectRequestHandler = (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void;
 
 export interface IReducerData<S> {
@@ -53,20 +59,49 @@ export interface IDependencies {
   api: Api;
 }
 
+export type IDictionary<T, S extends string = string> = {
+  [key in S]: T;
+};
+
+export interface IReduxEntry {
+  reducers?: {[key in keyof IAppReduxState]?: Reducer<IAppReduxState[key]>};
+  sagas?: RootSaga[];
+}
+
+// TODO: add averload for aptional A, S, C
+export interface IFeatureEntry<
+  C extends IDictionary<ReactComponent<any>, keyof C> | void,
+  A extends IDictionary<ActionCreator<Action>, keyof A> | void,
+  S extends IDictionary<(state: any, ...args: any[]) => any, keyof S> | void,
+  > extends IReduxEntry {
+  actions: A;
+  selectors: S;
+  containers: C;
+}
+
 export interface IAppReduxState {
   categorySelect: CategorySelectNamespace.IReduxState;
   locationSelect: LocationSelectNamespace.IReduxState;
   dynamicFields: DynamicFieldsNamespace.IReduxState;
   orderForm: HomeModuleNamespace.IReduxState;
+  searchRepositories: SearchRepositoriesNamespace.IReduxState;
 }
 
+export type Diff<T extends string, U extends string> =
+  ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T];
+
+export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+
+export type RootSaga = (deps: IDependencies) => () => SagaIterator;
+
+export type Lang = 'en' | 'he';
+
+export type ReactComponent<P> = React.ComponentClass<P> | React.StatelessComponent<P>;
 export interface IModuleEntryData {
   component: React.ComponentClass<any> | React.StatelessComponent<any>;
   reducers: Array<IReducerData<any>>;
   sagas: RootSaga[];
 }
-
-export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
 export type Uid = number;
 

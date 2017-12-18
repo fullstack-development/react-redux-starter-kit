@@ -1,20 +1,31 @@
 import * as React from 'react';
 import * as block from 'bem-cn';
+import { featureConnect } from 'core';
+
 import { RouteComponentProps } from 'react-router-dom';
+
+import * as searchRepositories from 'features/searchRepositories';
+
 import { Navbar } from 'react-bootstrap';
-import RowsLayout from '../../../../shared/view/elements/RowsLayout';
-import Header from '../../../../shared/view/components/Header/index';
-import { SearchRepositoriesInput } from '../../../../features/searchRepositories';
+import RowsLayout from 'shared/view/elements/RowsLayout';
+import Header from 'shared/view/components/Header/index';
 import Description from './Description';
 import Search from './Search';
 import './Layout.scss';
 
-class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
+interface IOwnProps {
+  searchRepositoriesEntry: searchRepositories.Entry;
+}
+
+type Props = IOwnProps & RouteComponentProps<void>;
+
+class HomeLayout extends React.PureComponent<Props, {}> {
   private b = block('index-page');
 
   public render() {
     const b = this.b;
     const { history } = this.props;
+    const { SearchRepositoriesInput } = this.props.searchRepositoriesEntry.containers;
 
     return (
       <RowsLayout
@@ -31,7 +42,7 @@ class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
           <div className={b('content')()}>
             <Description />
             12234556
-            <Search />
+            <Search SearchRepositoriesInput={SearchRepositoriesInput} />
           </div>
         </div>
       </RowsLayout>
@@ -39,4 +50,8 @@ class HomeLayout extends React.PureComponent<RouteComponentProps<void>, void> {
   }
 }
 
-export default HomeLayout;
+const withFeatures = featureConnect({
+  searchRepositoriesEntry: searchRepositories.loadEntry,
+})(HomeLayout);
+
+export default withFeatures;

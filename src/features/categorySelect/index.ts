@@ -1,5 +1,5 @@
-import * as Namespace from './namespace';
-import { reducer, actions, getSaga, selectors } from './redux';
+import * as namespace from './namespace';
 
-export * from './view/containers';
-export { getSaga, selectors, reducer, actions, Namespace };
+export { namespace };
+export { Entry } from './entry';
+export { loadEntry } from './loader';

@@ -17,12 +17,12 @@ import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import './LocationSelect.scss';
 
 interface IOwnProps {
-  onChange?: (location?: ILocation) => void;
+  onChange?(location: ILocation | null): void;
 }
 
 interface IStateProps {
   options: Select.Option[];
-  selectedLocation?: ILocation;
+  selectedLocation: ILocation | null;
   showLocation: boolean;
 }
 
@@ -60,8 +60,9 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
+const b = block('location-select');
+
 class LocationSelect extends React.Component<Props> {
-  private b = block('location-select');
 
   public componentWillReceiveProps(nextProps: Props) {
     const { onChange } = this.props;
@@ -78,13 +79,7 @@ class LocationSelect extends React.Component<Props> {
   }
 
   public render() {
-    interface IRenderData {
-      options: Select.Option[];
-      selectedLocation?: ILocation;
-    }
-
-    const b = this.b;
-    const { options, selectedLocation }: IRenderData = this.props;
+    const { options, selectedLocation } = this.props;
     const selectedArea: IArea | null = selectedLocation ? selectedLocation.area : null;
     const selectedCity: ICity | null = selectedLocation ? selectedLocation.city : null;
     const showSelectedAreaOnMap: boolean = this.props.showLocation;

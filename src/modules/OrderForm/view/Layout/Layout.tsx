@@ -3,15 +3,16 @@ import * as block from 'bem-cn';
 import { bind } from 'decko';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
+import { featureConnect } from 'core';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { IAppReduxState, IModuleEntryData } from 'shared/types/app';
-import { ILocation } from 'shared/types/models';
-import { FieldValue } from 'features/dynamicFields/view/DynamicFields/DynamicFields';
+import { IAppReduxState } from 'shared/types/app';
+import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
 
-import * as locationSelectFeature from 'features/locationSelect';
-import * as categorySelectFeature from 'features/categorySelect';
-import * as dynamicFieldsFeature from 'features/dynamicFields';
+import * as locationSelect from 'features/locationSelect';
+import * as categorySelect from 'features/categorySelect';
+import * as dynamicFields from 'features/dynamicFields';
 
 import { actions } from './../../redux';
 
@@ -20,6 +21,12 @@ import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import './Layout.scss';
 
+interface IOwnProps {
+  locationSelectEntry: locationSelect.Entry;
+  categorySelectEntry: categorySelect.Entry;
+  dynamicFieldsEntry: dynamicFields.Entry;
+}
+
 interface IDispatchProps {
   saveFields: typeof actions.saveFields;
 }
@@ -27,11 +34,15 @@ interface IDispatchProps {
 interface IStateProps {
   submittingResult: string;
   isSubmitting: boolean;
+  dynamicValues: IFlatFormProperties;
+  locationValues: ILocationProperties;
+  chosenLocation: INormalizedLocation | null;
+  chosenCategoryUid: number | null;
 }
 
 interface IState {
-  categoryUid?: number;
-  location?: ILocation;
+  categoryUid: number | null;
+  location: ILocation | null;
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
@@ -40,7 +51,7 @@ interface IState {
   };
 }
 
-type IProps = IStateProps & IDispatchProps & RouteComponentProps<void>;
+type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps;
 
 function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   return bindActionCreators({
@@ -48,24 +59,30 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
-function mapState(state: IAppReduxState): IStateProps {
+function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
+  const { dynamicFieldsEntry, locationSelectEntry, categorySelectEntry } = ownProps;
+  // console.log(locationSelectEntry);
+  // const
   return {
     isSubmitting: state.orderForm.communications.saving.isRequesting,
     submittingResult: state.orderForm.data ? state.orderForm.data.message : '',
+    dynamicValues: dynamicFieldsEntry.selectors.selectFlatValues(state.dynamicFields),
+    locationValues: dynamicFieldsEntry.selectors.selectLocationValues(state.dynamicFields),
+    chosenLocation: locationSelectEntry.selectors.selectSelectedLocation(state),
+    chosenCategoryUid: categorySelectEntry.selectors.selectChosenCategoryUid(state).value,
   };
 }
 
-const { DynamicFields } = dynamicFieldsFeature;
-const { CategorySelect } = categorySelectFeature;
-const { LocationSelect } = locationSelectFeature;
-
 class OrderFormLayout extends React.Component<IProps, IState> {
 
-  public state: IState = { dynamicFields: {}, categoryUid: void 0 };
+  public state: IState = { dynamicFields: {}, categoryUid: null, location: null };
   private b = block('home-page');
 
   public render() {
     const b = this.b;
+    const { CategorySelect } = this.props.categorySelectEntry.containers;
+    const { DynamicFields } = this.props.dynamicFieldsEntry.containers;
+    const { LocationSelect } = this.props.locationSelectEntry.containers;
     const { submittingResult, isSubmitting, history } = this.props;
     const { categoryUid, location } = this.state;
     const canSubmit: boolean = Boolean(typeof categoryUid === 'number') &&
@@ -100,7 +117,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onLocationSelected(location?: ILocation): void {
+  private onLocationSelected(location: ILocation | null): void {
     this.setState({
       ...this.state,
       location,
@@ -119,7 +136,8 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   @bind
   private onFormSubmit(e: React.FormEvent<Form>): void {
     e.preventDefault();
-    this.props.saveFields();
+    const { dynamicValues, locationValues, chosenLocation, chosenCategoryUid, saveFields } = this.props;
+    saveFields({ dynamicValues, chosenLocation, chosenCategoryUid, locationValues });
   }
 
   @bind
@@ -141,22 +159,11 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(OrderFormLayout);
+const connectedComponent = connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(OrderFormLayout);
+const withFeatures = featureConnect({
+  locationSelectEntry: locationSelect.loadEntry,
+  categorySelectEntry: categorySelect.loadEntry,
+  dynamicFieldsEntry: dynamicFields.loadEntry,
+})(connectedComponent);
 
-function getView(): IModuleEntryData {
-  return {
-    component: connectedComponent,
-    reducers: [
-      { name: 'categorySelect', reducer: categorySelectFeature.reducer },
-      { name: 'dynamicFields', reducer: dynamicFieldsFeature.reducer },
-      { name: 'locationSelect', reducer: locationSelectFeature.reducer },
-    ],
-    sagas: [
-      categorySelectFeature.getSaga,
-      dynamicFieldsFeature.actions.saga,
-    ],
-  };
-}
-
-export { IProps, getView };
-export default connectedComponent;
+export default withFeatures;

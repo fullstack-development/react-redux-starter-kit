@@ -1,5 +1,5 @@
-import LocationSelect from './view/containers/LocationSelect/LocationSelect';
-import * as Namespace from './namespace';
-import { reducer, selectors, actions } from './redux';
+import * as namespace from './namespace';
 
-export { LocationSelect, Namespace, reducer, selectors, actions };
+export { namespace };
+export { Entry } from './entry';
+export { loadEntry } from './loader';

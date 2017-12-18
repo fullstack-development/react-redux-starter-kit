@@ -30,6 +30,13 @@ class Api {
     return сonvertCityResponse(response.data);
   }
 
+  // @bind
+  // public async saveFields(data: IOrderFormRequest): Promise<IOrderFormResponse> {
+  //   const response: Axios.AxiosXHR<IOrderFormResponse> =
+  //     await this.actions.post<IOrderFormResponse>('/travels/create/', data);
+  //   return response.data;
+  // }
+
   @bind
   public async createTravelOrder(travelOrder: ITravelOrder): Promise<string> {
     const request = convertTravelToRequest(travelOrder);

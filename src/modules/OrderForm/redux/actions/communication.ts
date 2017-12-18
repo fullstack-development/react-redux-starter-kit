@@ -1,15 +1,16 @@
 import * as NS from '../../namespace';
 
-export function saveFields(): NS.ISaveFieldsAction {
+export function saveFields(payload: NS.ISaveFieldsRequest): NS.ISaveFieldsAction {
   return {
     type: 'ORDER_FORM_MODULE:SAVE_FIELDS',
+    payload,
   };
 }
 
-export function saveFieldsCompleted(message: string): NS.ISaveFieldsCompletedAction {
+export function saveFieldsCompleted(payload: NS.ISaveFieldsResponse): NS.ISaveFieldsCompletedAction {
   return {
     type: 'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED',
-    payload: message,
+    payload,
   };
 }
 
