@@ -17,27 +17,6 @@ module.exports = {
           'react-hot-loader/patch',
           './index.tsx'
         ],
-        vendor: [
-            'uuid',
-            'axios',
-            'react',
-            'redux',
-            'bem-cn',
-            'reselect',
-            'immutable',
-            'inversify',
-            'prop-types',
-            'react-dom',
-            'react-redux',
-            'react-router',
-            'react-select',
-            'react-bootstrap',
-            'reflect-metadata',
-            'inversify-inject-decorators',
-            // 'react-tap-event-plugin',
-            'bootstrap/dist/css/bootstrap.min.css',
-            './assets/bootstrap.paper.min.css',
-        ]
     },
     output: {
         publicPath: '/',
@@ -122,8 +101,12 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'js/[name]-[hash].bundle.js',
-            minChunks: Infinity,
+            minChunks: (module, count) => module.context && module.context.includes("node_modules"),
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'shared',
+            chunks: ['app'],
+            minChunks: (module, count) => module.context && module.context.includes("src/shared"),
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',

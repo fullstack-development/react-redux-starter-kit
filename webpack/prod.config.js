@@ -64,14 +64,7 @@ const cssLoader = {
 const scriptsLoader = {
   test: /\.(ts|tsx)$/,
   use: [
-    {
-      loader: 'babel-loader',
-      options: { presets: ['es2015'], plugins: ["transform-regenerator"] }
-    },
-    {
-      loader: 'ts-loader',
-      options: { logLevel: 'debug' }
-    },
+    'awesome-typescript-loader',
     'tslint-loader'
   ],
 };
@@ -125,13 +118,12 @@ prodConfig.plugins = [
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
-    filename: 'js/vendor.bundle.js',
-    minChunks: Infinity,
+    minChunks: (module, count) => module.context && module.context.includes("node_modules"),
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'shared',
-    filename: 'js/shared.bundle.js',
-    chunks: ['app']
+    chunks: ['app'],
+    minChunks: (module, count) => module.context && module.context.includes("src/shared"),
   }),
 ];
 
