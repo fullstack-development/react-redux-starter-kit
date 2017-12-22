@@ -1,4 +1,5 @@
 export interface IAreaResponse {
+  id: number;
   city: number;
   display_name: string;
   name: string;
@@ -14,5 +15,3 @@ export interface ICityResponse {
 export interface ITravelOrderResponse {
   message: string;
 }
-
-// export type ICategoriesResponse = Array<{ id: number; uid: number; name: string }>;

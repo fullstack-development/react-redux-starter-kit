@@ -1,6 +1,8 @@
 /* tslint:disable */
+import { ICityResponse } from 'services/api/types';
+import { ICategory, IFields } from 'shared/types/models';
 
-const cities: any = [
+export const mockCities: ICityResponse[] = [
   {
     "id": 1,
     "areas": [
@@ -259,7 +261,7 @@ const cities: any = [
   }
 ];
 
-const categories: any = [
+export const mockCategories: ICategory[] = [
   {
     "id": 1,
     "name": "Transport",
@@ -282,7 +284,7 @@ const categories: any = [
   }
 ];
 
-const schemas: any = {
+export const mockSchemas: {[key: number]: IFields} = {
   100: {
     "id": 1,
     "schema": {
@@ -573,5 +575,3 @@ const schemas: any = {
     "alert": true
   }
 };
-
-export {cities, schemas, categories};
