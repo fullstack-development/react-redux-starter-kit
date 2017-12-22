@@ -9,7 +9,7 @@ const city = new Schema('cities');
 const area = new Schema('areas');
 city.define({ areas: arrayOf(area) });
 
-export function сonvertCityResponse(response: ICityResponse[]): INormalizedCities {
+export function convertCityResponse(response: ICityResponse[]): INormalizedCities {
   return normalize(
     response,
     arrayOf(city),

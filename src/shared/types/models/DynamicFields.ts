@@ -5,29 +5,29 @@ export interface IFields {
   id?: number;
   uid?: number;
   alert?: boolean;
-  name?: number;
+  name?: string;
 }
 
 export interface ISchema {
   properties: {[key: string]: IField};
   required: string[];
-  type: 'string';
+  type: 'string' | 'object';
   title: string;
 }
 
 export interface IField {
-  type: 'string' | 'integer';
-  component: 'text' | 'integer' | 'radio' | 'dropdown' | 'location' | 'date' | 'time';
+  type: 'string' | 'integer' | 'number';
+  component: 'text' | 'integer' | 'number' | 'radio' | 'dropdown' | 'location' | 'date' | 'time';
   order: number;
   label: string;
-  pattern: string;
   placeholder: string;
   display: number;
-  'enum': string[];
-  minimum: number;
-  maximum: number;
-  minLength: number;
-  maxLength: number;
+  pattern?: string;
+  enum?: string[];
+  minimum?: number;
+  maximum?: number;
+  minLength?: number;
+  maxLength?: number;
 }
 
 export interface IFormProperties {
