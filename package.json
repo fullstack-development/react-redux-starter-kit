@@ -46,7 +46,7 @@
       }
     },
     "deploy": {
-      "command": "node_modules/.bin/gh-pages -d build -b deploy",
+      "command": "node_modules/.bin/gh-pages -d build",
       "env": {
         "NODE_ENV": "production"
       }
