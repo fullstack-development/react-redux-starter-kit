@@ -1,6 +1,5 @@
 import { Entry } from './entry';
 
-export async function loadEntry(): Promise<Entry> {
-  const feature = await import(/* webpackChunkName: "dynamicFields" */ './entry');
-  return feature.entry;
+export function loadEntry(): Promise<Entry> {
+  return import(/* webpackChunkName: "dynamicFields" */ './entry').then(feature => feature.entry);
 }

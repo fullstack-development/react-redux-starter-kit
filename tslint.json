@@ -47,6 +47,7 @@
     ]
   },
   "rules": {
+    "no-unused-expression": false,
     "no-implicit-dependencies": false,
     "no-object-literal-type-assertion": false,
     "ordered-imports": false,

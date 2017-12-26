@@ -59,29 +59,19 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(ts|tsx)$/,
-                use: [
-                    {
-                        loader: 'ts-loader',
-                        options: {
-                            logLevel: 'debug',
-                            compilerOptions: {
-                                inlineSourceMap: true,
-                                target: 'es5',
-                                module: 'commonjs',
-                            }
-                        }
-                    }
-                ],
+                test: /\.tsx?/,
+                use: {
+                    loader: 'awesome-typescript-loader',
+                },
             },
             // instrument only testing sources with Istanbul
-            {
-                test: /\.tsx?$/,
-                enforce: 'post',
-                include: path.resolve('src'),
-                exclude: [/node_modules/, /-tests?\.tsx?$/],
-                loader: 'sourcemap-istanbul-instrumenter-loader?esModules&produceSourceMap'
-            },
+            // {
+            //     test: /\.tsx?$/,
+            //     enforce: 'post',
+            //     include: path.resolve('src'),
+            //     exclude: [/node_modules/, /-tests?\.tsx?$/, /loader\.ts$/],
+            //     loader: 'sourcemap-istanbul-instrumenter-loader?esModules&produceSourceMap'
+            // },
             {
                 test: /\.(png|svg)/,
                 loader: 'url-loader',
@@ -103,7 +93,7 @@ module.exports = {
         }),
     ],
 
-    devtool: 'inline-source-map',
+    devtool: 'source-map',
 
     // required for enzyme to work properly
     externals: {

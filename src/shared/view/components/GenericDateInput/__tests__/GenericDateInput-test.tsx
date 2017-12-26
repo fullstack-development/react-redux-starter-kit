@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { expect, AssertionError } from 'chai';
+import { expect } from 'chai';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { spy } from 'sinon';
 import GenericDateInput, { IProps, IState } from './../GenericDateInput';
@@ -18,17 +18,13 @@ describe('(Shared) View', () => {
       const onChangeSpy = spy();
       const component = shallow<IProps, IState>(<GenericDateInput onChange={onChangeSpy} />);
       const textInput = component.find('TextInput').first() as ShallowWrapper<ITextInputProps, {}>;
-      const textInputProps: ITextInputProps = textInput.props();
+      // const textInputProps: ITextInputProps = textInput.props();
       const event = { nativeEvent: { target: { value: '123' } } } as any;
+      textInput.simulate('change', event);
 
-      if (textInputProps.onChange) {
-        textInputProps.onChange(event);
-      } else {
-        throw new AssertionError('OnChange doesn\'t passed to TextInput');
-      }
-
-      expect(onChangeSpy.calledOnce).to.be.true;
-      expect(onChangeSpy.firstCall.args).to.deep.equal(['123', []]);
+      expect(onChangeSpy.calledTwice).to.be.true;
+      expect(onChangeSpy.firstCall.args).to.deep.equal(['', []]);
+      expect(onChangeSpy.secondCall.args).to.deep.equal(['123', []]);
     });
 
     it('should call onChange, when just mounted with \'Field required\' error, if component is required', () => {
