@@ -7,11 +7,10 @@ import { IProps as ITextInputProps } from 'shared/view/elements/TextInput/TextIn
 
 describe('(Shared) View', () => {
   describe('(Component) GenericDateInput', () => {
-    it('should render <input> tag', () => {
-      const component = mount(<GenericDateInput />);
-      const header = component.find('input');
+    it('should render', () => {
+      const component = shallow(<GenericDateInput />);
 
-      expect(header.length).to.be.equal(1);
+      expect(component.debug()).to.matchSnapshot();
     });
 
     it('should call onChange prop, if onChange called in TextInput composite component', () => {

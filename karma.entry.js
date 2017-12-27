@@ -1,6 +1,9 @@
-import { config } from 'chai';
+import { use, config } from 'chai';
+import { matchSnapshot } from "chai-karma-snapshot";
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
+use(matchSnapshot);
 
 Enzyme.configure({ adapter: new Adapter() });
 

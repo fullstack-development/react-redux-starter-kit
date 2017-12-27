@@ -1,7 +1,7 @@
 module.exports = function (config) {
     config.set({
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'chai', 'source-map-support'],
+        frameworks: ['mocha', 'chai', 'source-map-support', "snapshot", "mocha-snapshot"],
         client: {
             captureConsole: true,
         },
@@ -10,6 +10,7 @@ module.exports = function (config) {
         // list of files / patterns to load in the browser
         files: [
             'node_modules/babel-polyfill/dist/polyfill.min.js',
+            "**/__snapshots__/**/*.md",
             'karma.entry.js',
         ],
 
@@ -17,6 +18,7 @@ module.exports = function (config) {
 
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
+            "**/__snapshots__/**/*.md": ["snapshot"],
             'karma.entry.js': ['webpack'],
         },
 
@@ -31,6 +33,9 @@ module.exports = function (config) {
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ['mocha', 'karma-remap-istanbul'],
+        mochaReporter: {
+            showDiff: true,
+        },
 
         // web server port
         port: 9876,
@@ -53,6 +58,8 @@ module.exports = function (config) {
             "karma-mocha",
             "karma-webpack",
             "karma-coverage",
+            "karma-snapshot",
+            "karma-mocha-snapshot",
             "karma-remap-istanbul",
             "karma-mocha-reporter",
             "karma-chrome-launcher",
@@ -67,6 +74,12 @@ module.exports = function (config) {
         concurrency: Infinity,
         webpackMiddleware: {
             noInfo: true
-        }
+        },
+
+        // Snapshots https://github.com/localvoid/karma-snapshot
+        snapshot: {
+            update: !!process.env.UPDATE,
+            prune: !!process.env.PRUNE,
+        },
     })
 };

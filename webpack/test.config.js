@@ -58,6 +58,11 @@ module.exports = {
                     },
                 ],
             },
+            // 'ansy-styles' in node_modules is not compiled, this results in a PhantomJS error
+            {
+                test: /\/ansi-styles\/.+?\.js$/,
+                loader: 'babel-loader',
+            },
             {
                 test: /\.tsx?/,
                 use: {
