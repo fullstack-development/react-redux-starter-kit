@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PageHeader, Label } from 'react-bootstrap';
 import './Layout.scss';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 
 function Description(): React.ReactElement<object> {
   const b = block('index-page');
