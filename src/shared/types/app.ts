@@ -92,6 +92,8 @@ export type Diff<T extends string, U extends string> =
 
 export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 
+export type Key<T> = {[key in keyof T]: T[key]};
+
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
 export type Lang = 'en' | 'he';

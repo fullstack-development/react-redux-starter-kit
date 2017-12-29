@@ -5,12 +5,12 @@ import { IDependencies } from 'shared/types/app';
 import getErrorMsg from 'shared/helpers/getErrorMessage';
 
 import { loadFieldsCompleted, loadFieldsFailed } from './communication';
-import { DynamicFieldsAction } from '../../namespace';
+import { Action } from '../../namespace';
 
 import { IFields } from 'shared/types/models';
 
 function getSaga({ api }: IDependencies): () => SagaIterator {
-  function* executeLoadFields(action?: DynamicFieldsAction) {
+  function* executeLoadFields(action?: Action) {
     if (!action) {
       return;
     }

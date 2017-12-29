@@ -1,4 +1,4 @@
-import { Dispatch } from 'react-redux';
+import { Dispatch } from 'redux';
 import { IAppReduxState } from 'shared/types/app';
 
 export interface IMultiConnectProps {

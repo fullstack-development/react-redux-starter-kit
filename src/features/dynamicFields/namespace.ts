@@ -1,12 +1,7 @@
-import { IAction } from 'shared/types/app';
 import { IFields, IFormProperties } from 'shared/types/models';
-import { ICommunicationState } from 'shared/helpers/redux';
-import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import { ICommunicationState, IFailAction } from 'shared/helpers/redux';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-
-export interface IFormProperties {
-  [key: string]: string | number | IGeosuggestOption;
-}
+import { IAction } from 'shared/types/redux';
 
 export interface IFlatFormProperties {
   [key: string]: string | number;
@@ -39,7 +34,7 @@ export interface IField {
 }
 
 export interface IReduxState {
-  communications: {
+  communication: {
     fetching: ICommunicationState;
   };
   data: {
@@ -48,9 +43,9 @@ export interface IReduxState {
   };
 }
 
-export type ILoadFieldsAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS', number>;
-export type ILoadFieldsCompletedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', IFields>;
-export type ILoadFieldsFailedAction = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', string>;
+export type ILoadFields = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS', number>;
+export type ILoadFieldsSuccess = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS', IFields>;
+export type ILoadFieldsFail = IFailAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL', string>;
 
 export type IChangeFieldValueAction = IAction<'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', IChangeFieldValueActionPayload>;
 export interface IChangeFieldValueActionPayload {
@@ -58,8 +53,5 @@ export interface IChangeFieldValueActionPayload {
   value: FieldValue;
 }
 
-export type DynamicFieldsAction =
-  | ILoadFieldsAction
-  | ILoadFieldsCompletedAction
-  | ILoadFieldsFailedAction
-  | IChangeFieldValueAction;
+export type Action =
+  | ILoadFields | ILoadFieldsSuccess | ILoadFieldsFail | IChangeFieldValueAction;

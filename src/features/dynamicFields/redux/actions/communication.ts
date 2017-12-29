@@ -1,15 +1,7 @@
-import { IFields } from 'shared/types/models';
-
 import * as NS from '../../namespace';
+import { makeCommunicationActionCreators } from 'shared/helpers/redux';
 
-export function loadFields(uid: number): NS.ILoadFieldsAction {
-  return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS', payload: uid };
-}
-
-export function loadFieldsCompleted(data: IFields): NS.ILoadFieldsCompletedAction {
-  return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', payload: data };
-}
-
-export function loadFieldsFailed(message: string): NS.ILoadFieldsFailedAction {
-  return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', payload: message };
-}
+export const { execute: loadFields, completed: loadFieldsSuccess, failed: loadFieldsFail } =
+  makeCommunicationActionCreators<NS.ILoadFields, NS.ILoadFieldsSuccess, NS.ILoadFieldsFail>(
+    'DYNAMIC_FIELDS:LOAD_FIELDS', 'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS', 'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL',
+  );

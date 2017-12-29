@@ -12,7 +12,7 @@ function selectFields(state: IReduxState): IFields {
 }
 
 function selectCommunication(state: IReduxState): { fetching: ICommunicationState } {
-  return state.communications;
+  return state.communication;
 }
 
 function selectValues(state: IReduxState): IFormProperties {
