@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Select from 'react-select';
 import { bind } from 'decko';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 
 import { ControlLabel, FormGroup } from 'react-bootstrap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';

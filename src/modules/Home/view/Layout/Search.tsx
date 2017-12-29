@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import { PageHeader } from 'react-bootstrap';
 
 import * as GitHubIcon from './images/github-icon.png';

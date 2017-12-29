@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import * as Select from 'react-select';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';

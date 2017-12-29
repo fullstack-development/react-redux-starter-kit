@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import { featureConnect } from 'core';
 
 import { RouteComponentProps } from 'react-router-dom';

@@ -4,7 +4,9 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
-    "test": "better-npm-run test",
+    "test": "./node_modules/.bin/jest --watch",
+    "test-debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch",
+    "test-coverage": "node_modules/.bin/jest --coverage --watch",
     "start-server": "node_modules/.bin/ts-node --compiler typescript --compilerOptions '{\"target\": \"es5\", \"module\": \"commonjs\"}' server/index.ts",
     "watch:dev": "better-npm-run watch:dev",
     "watch:prod": "better-npm-run watch:prod",
@@ -15,12 +17,6 @@
     "deploy": "npm run build:prod && better-npm-run deploy"
   },
   "betterScripts": {
-    "test": {
-      "command": "./node_modules/.bin/karma start karma.config.js",
-      "env": {
-        "PHANTOMJS_BIN": "node_modules/phantomjs-prebuilt/bin/phantomjs"
-      }
-    },
     "watch:dev": {
       "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
       "env": {
@@ -68,35 +64,18 @@
   },
   "homepage": "https://github.com/fullstack-development/react-redux-starter-kit#readme",
   "devDependencies": {
-    "@types/chai": "^3.5.2",
-    "@types/enzyme": "^2.8.8",
+    "@types/enzyme": "^3.1.6",
     "@types/express": "^4.0.35",
-    "@types/mocha": "^2.2.41",
+    "@types/jest": "^21.1.10",
     "@types/node": "^6.0.71",
-    "@types/redux-mock-store": "^0.0.7",
     "@types/sinon": "^1.16.36",
-    "chai": "^3.5.0",
-    "enzyme": "^3.0.0",
-    "istanbul-instrumenter-loader": "^1.2.0",
-    "karma": "^1.6.0",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-coverage": "^1.1.1",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.3",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-remap-istanbul": "^0.4.0",
-    "karma-sinon": "^1.0.5",
-    "karma-source-map-support": "^1.2.0",
-    "karma-webpack": "^1.8.1",
-    "mocha": "^3.3.0",
-    "phantomjs-prebuilt": "^2.1.14",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.0.4",
     "react-hot-loader": "^3.0.0-beta.7",
-    "redux-mock-store": "^1.2.3",
     "sinon": "^2.2.0",
-    "source-map-loader": "^0.1.6",
-    "sourcemap-istanbul-instrumenter-loader": "^0.2.0",
     "style-loader": "^0.13.2",
+    "ts-jest": "^22.0.0",
     "tslint": "^5.7.0",
     "tslint-eslint-rules": "^4.1.1",
     "tslint-loader": "^3.5.3",
@@ -153,7 +132,6 @@
     "postcss-scss": "^0.4.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-addons-shallow-compare": "^15.5.2",
     "react-bootstrap": "^0.31.3",
     "react-dom": "^16.2.0",
     "react-geosuggest": "^2.5.0",
