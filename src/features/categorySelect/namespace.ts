@@ -14,10 +14,10 @@ export interface IReduxState {
   };
 }
 
-export type IChooseCategoryAction = IAction<'CATEGORY_SELECT:CHOOSE_CATEGORY', IReduxField<Uid>>;
-export type ILoadCategoriesAction = IPlainAction<'CATEGORY_SELECT:LOAD_CATEGORIES'>;
-export type ILoadCategoriesCompletedAction = IAction<'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED', ICategory[]>;
-export type ILoadCategoriesFailAction = IPlainFailAction<'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL'>;
+export type IChooseCategory = IAction<'CATEGORY_SELECT:CHOOSE_CATEGORY', IReduxField<Uid>>;
+export type ILoadCategories = IPlainAction<'CATEGORY_SELECT:LOAD_CATEGORIES'>;
+export type ILoadCategoriesSuccess = IAction<'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED', ICategory[]>;
+export type ILoadCategoriesFail = IPlainFailAction<'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL'>;
 
 export type Action =
-  | IChooseCategoryAction | ILoadCategoriesAction | ILoadCategoriesCompletedAction | ILoadCategoriesFailAction;
+  | IChooseCategory | ILoadCategories | ILoadCategoriesSuccess | ILoadCategoriesFail;

@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { IDependencies } from 'shared/types/app';
-import getErrorMsg from 'shared/helpers/getErrorMessage';
+import getErrorMsg from 'shared/helpers/getErrorMsg';
 import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
 
 import * as NS from '../../namespace';

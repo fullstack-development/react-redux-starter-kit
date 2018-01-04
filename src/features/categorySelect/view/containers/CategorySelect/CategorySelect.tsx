@@ -12,7 +12,7 @@ import { actions, selectors } from '../../../redux';
 
 import { IAppReduxState } from 'shared/types/app';
 
-import './styles.scss';
+import './CategorySelect.scss';
 
 interface IOwnProps {
   onCategoryChosen(categoryUid: number): void;
@@ -47,7 +47,7 @@ function mapDispatch(dispatch: Dispatch<any>): IActionProps {
 
 const b = block('categories-select');
 
-class CategorySelect extends React.PureComponent<Props, {}> {
+class CategorySelect extends React.PureComponent<Props> {
   public componentDidMount() {
     this.props.loadCategories();
   }

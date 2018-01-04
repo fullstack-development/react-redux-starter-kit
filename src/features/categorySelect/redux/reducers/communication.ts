@@ -7,9 +7,7 @@ import * as NS from '../../namespace';
 import initial from '../initial';
 
 export default combineReducers({
-  categoriesFetching: makeCommunicationReducer<
-    NS.ILoadCategoriesAction, NS.ILoadCategoriesCompletedAction, NS.ILoadCategoriesFailAction
-    >(
+  categoriesFetching: makeCommunicationReducer<NS.ILoadCategories, NS.ILoadCategoriesSuccess, NS.ILoadCategoriesFail>(
     'CATEGORY_SELECT:LOAD_CATEGORIES',
     'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED',
     'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL',

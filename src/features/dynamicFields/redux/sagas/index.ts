@@ -1,6 +1,6 @@
 import { SagaIterator } from 'redux-saga';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import getErrorMsg from 'shared/helpers/getErrorMessage';
+import getErrorMsg from 'shared/helpers/getErrorMsg';
 
 import { IDependencies } from 'shared/types/app';
 import { IFields } from 'shared/types/models';

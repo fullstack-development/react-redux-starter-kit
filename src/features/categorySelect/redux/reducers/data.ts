@@ -7,7 +7,7 @@ import initial from '../initial';
 
 type CategoriesState = NS.IReduxState['data']['categories'];
 
-function loadCategoriesReducer(state: CategoriesState = initial.data.categories, action: NS.Action): CategoriesState {
+function categoriesReducer(state: CategoriesState = initial.data.categories, action: NS.Action): CategoriesState {
   switch (action.type) {
     case 'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED': {
       return action.payload;
@@ -17,5 +17,5 @@ function loadCategoriesReducer(state: CategoriesState = initial.data.categories,
 }
 
 export default combineReducers({
-  categories: loadCategoriesReducer,
+  categories: categoriesReducer,
 } as ReducersMap<NS.IReduxState['data']>);

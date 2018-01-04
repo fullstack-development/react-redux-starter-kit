@@ -6,11 +6,8 @@ import * as NS from '../../namespace';
 
 import initial from '../initial';
 
-const selectedCategoryReducer =
-  makeEditFieldReducer<NS.IChooseCategoryAction, NS.IReduxState['edit']['selectedCategoryUid']>(
-    'CATEGORY_SELECT:CHOOSE_CATEGORY', initial.edit.selectedCategoryUid,
-  );
-
 export default combineReducers({
-  selectedCategoryUid: selectedCategoryReducer,
+  selectedCategoryUid: makeEditFieldReducer<NS.IChooseCategory, NS.IReduxState['edit']['selectedCategoryUid']>(
+    'CATEGORY_SELECT:CHOOSE_CATEGORY', initial.edit.selectedCategoryUid,
+  ),
 } as ReducersMap<NS.IReduxState['edit']>);
