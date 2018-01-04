@@ -7,7 +7,9 @@ const initialState: IReduxState = {
       error: '',
     },
   },
-  data: null,
+  data: {
+    message: null,
+  },
 };
 
 export default initialState;
