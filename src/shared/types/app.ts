@@ -62,15 +62,14 @@ export interface IReduxEntry {
   sagas?: RootSaga[];
 }
 
-// TODO: add averload for aptional A, S, C
 export interface IFeatureEntry<
   C extends IDictionary<React.ReactType<any>, keyof C> | void,
   A extends IDictionary<ActionCreator<Action>, keyof A> | void,
   S extends IDictionary<(state: any, ...args: any[]) => any, keyof S> | void,
   > extends IReduxEntry {
-  actions: A;
-  selectors: S;
-  containers: C;
+  actions?: A;
+  selectors?: S;
+  containers?: C;
 }
 
 export interface IAppReduxState {
