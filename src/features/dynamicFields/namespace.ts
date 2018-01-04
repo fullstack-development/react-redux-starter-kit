@@ -1,7 +1,6 @@
 import { IFields, IFormProperties } from 'shared/types/models';
-import { ICommunicationState, IFailAction } from 'shared/helpers/redux';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-import { IAction } from 'shared/types/redux';
+import { IAction, IPlainFailAction, ICommunication } from 'shared/types/redux';
 
 export interface IFlatFormProperties {
   [key: string]: string | number;
@@ -35,7 +34,7 @@ export interface IField {
 
 export interface IReduxState {
   communication: {
-    fetching: ICommunicationState;
+    fetching: ICommunication;
   };
   data: {
     fields: IFields;
@@ -45,13 +44,9 @@ export interface IReduxState {
 
 export type ILoadFields = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS', number>;
 export type ILoadFieldsSuccess = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS', IFields>;
-export type ILoadFieldsFail = IFailAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL', string>;
+export type ILoadFieldsFail = IPlainFailAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL'>;
 
-export type IChangeFieldValueAction = IAction<'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', IChangeFieldValueActionPayload>;
-export interface IChangeFieldValueActionPayload {
-  name: string;
-  value: FieldValue;
-}
+export type IChangeFieldValueAction = IAction<'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', { name: string; value: FieldValue }>;
 
 export type Action =
   | ILoadFields | ILoadFieldsSuccess | ILoadFieldsFail | IChangeFieldValueAction;

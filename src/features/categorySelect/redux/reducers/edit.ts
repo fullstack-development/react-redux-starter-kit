@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
-import { makeEditFieldReducer, ReducersMap } from 'shared/helpers/redux';
-import initial from '../initial';
+import { makeEditFieldReducer } from 'shared/helpers/redux';
+
+import { ReducersMap } from 'shared/types/redux';
 import * as NS from '../../namespace';
+
+import initial from '../initial';
 
 const selectedCategoryReducer =
   makeEditFieldReducer<NS.IChooseCategoryAction, NS.IReduxState['edit']['selectedCategoryUid']>(

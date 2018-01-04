@@ -1,6 +1,6 @@
-import { ICommunicationState, IReduxField, IPlainFailAction } from 'shared/helpers/redux';
+import { ICommunication, IReduxField, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 import { ICategory } from 'shared/types/models';
-import { Uid, IAction, IPlainAction } from 'shared/types/app';
+import { Uid } from 'shared/types/app';
 
 export interface IReduxState {
   data: {
@@ -10,7 +10,7 @@ export interface IReduxState {
     selectedCategoryUid: IReduxField<Uid | null>;
   };
   communications: {
-    categoriesFetching: ICommunicationState;
+    categoriesFetching: ICommunication;
   };
 }
 
@@ -20,7 +20,4 @@ export type ILoadCategoriesCompletedAction = IAction<'CATEGORY_SELECT:LOAD_CATEG
 export type ILoadCategoriesFailAction = IPlainFailAction<'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL'>;
 
 export type Action =
-  | IChooseCategoryAction
-  | ILoadCategoriesAction
-  | ILoadCategoriesCompletedAction
-  | ILoadCategoriesFailAction;
+  | IChooseCategoryAction | ILoadCategoriesAction | ILoadCategoriesCompletedAction | ILoadCategoriesFailAction;

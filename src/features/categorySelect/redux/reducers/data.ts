@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
+
+import { ReducersMap } from 'shared/types/redux';
 import * as NS from '../../namespace';
-import { ReducersMap } from 'shared/helpers/redux';
+
 import initial from '../initial';
 
 type CategoriesState = NS.IReduxState['data']['categories'];

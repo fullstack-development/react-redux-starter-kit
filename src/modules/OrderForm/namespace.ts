@@ -1,9 +1,9 @@
 import { IFlatFormProperties, ILocationProperties, INormalizedLocation } from 'shared/types/models';
-import { ICommunicationState, IAction } from 'shared/types/app';
+import { ICommunication, IAction } from 'shared/types/redux';
 
 export interface IReduxState {
   communications: {
-    saving: ICommunicationState;
+    saving: ICommunication;
   };
   data: { message: string; } | null;
 }

@@ -1,25 +1,24 @@
 import {
-  isGeosuggestOption,
-  IGeosuggestOption,
+  isGeosuggestOption, IGeosuggestOption,
 } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
 
-import { IReduxState } from '../../namespace';
 import { IFields, IFormProperties, ILocationProperties, IFlatFormProperties } from 'shared/types/models';
-import { ICommunicationState } from 'shared/helpers/redux';
+import { ICommunication } from 'shared/types/redux';
+import { IReduxState } from '../../namespace';
 
-function selectFields(state: IReduxState): IFields {
+export function selectFields(state: IReduxState): IFields {
   return state.data.fields;
 }
 
-function selectCommunication(state: IReduxState): { fetching: ICommunicationState } {
+export function selectCommunication(state: IReduxState): { fetching: ICommunication } {
   return state.communication;
 }
 
-function selectValues(state: IReduxState): IFormProperties {
+export function selectValues(state: IReduxState): IFormProperties {
   return state.data.values;
 }
 
-function selectFlatValues(state: IReduxState): IFlatFormProperties {
+export function selectFlatValues(state: IReduxState): IFlatFormProperties {
   const fields = selectValues(state);
   return Object
     .keys(fields)
@@ -29,7 +28,7 @@ function selectFlatValues(state: IReduxState): IFlatFormProperties {
     }, {});
 }
 
-function selectLocationValues(state: IReduxState): ILocationProperties {
+export function selectLocationValues(state: IReduxState): ILocationProperties {
   const fields = selectValues(state);
   return Object
     .keys(fields)
@@ -45,19 +44,3 @@ function selectLocationValues(state: IReduxState): ILocationProperties {
       }
     }, {} as ILocationProperties);
 }
-
-export {
-  selectFields,
-  selectValues,
-  selectFlatValues,
-  selectLocationValues,
-  selectCommunication,
-};
-
-export default {
-  selectFields,
-  selectValues,
-  selectFlatValues,
-  selectLocationValues,
-  selectCommunication,
-};

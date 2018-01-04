@@ -1,10 +1,10 @@
-import { ICommunicationState } from '../namespace';
+import { ICommunication } from 'shared/types/redux';
 
-export const initialCommunicationField: ICommunicationState = { isRequesting: false, error: '' };
+export const initialCommunicationField: ICommunication = { isRequesting: false, error: '' };
 
 export function initCommunicationFields<S>(
   fieldNames: Array<keyof S>,
-): {[P in keyof S]: ICommunicationState } {
+): {[P in keyof S]: ICommunication } {
   return fieldNames.reduce((communicationFields, fieldName) => ({
     ...communicationFields,
     [fieldName]: initialCommunicationField,

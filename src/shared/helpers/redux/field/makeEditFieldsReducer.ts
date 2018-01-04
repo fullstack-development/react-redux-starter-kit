@@ -1,4 +1,5 @@
-import { IAction, Validator, FieldsState } from '../namespace';
+import { IAction } from 'shared/types/redux';
+import { Validator, FieldsState } from '../namespace';
 import { Reducer } from 'redux';
 
 type Validators<S> = Partial<{[K in keyof S]: Validator<S[K]> }>;

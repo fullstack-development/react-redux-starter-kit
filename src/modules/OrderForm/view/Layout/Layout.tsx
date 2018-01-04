@@ -6,7 +6,7 @@ import { connect, Dispatch } from 'react-redux';
 import { featureConnect } from 'core';
 
 import { RouteComponentProps } from 'react-router-dom';
-import { IAppReduxState, Key } from 'shared/types/app';
+import { IAppReduxState } from 'shared/types/app';
 import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
 
@@ -20,7 +20,6 @@ import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
 import RowsLayout from 'shared/view/elements/RowsLayout';
 import Header from 'shared/view/components/Header';
 import './Layout.scss';
-import { AnyAction } from 'react-redux/node_modules/redux';
 
 interface IOwnProps {
   locationSelectEntry: locationSelect.Entry;
@@ -54,8 +53,8 @@ interface IState {
 
 type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps;
 
-function mapDispatch(dispatch: Dispatch<AnyAction>): IDispatchProps {
-  return bindActionCreators<AnyAction, Key<IDispatchProps>>({
+function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
+  return bindActionCreators({
     saveFields: actions.saveFields,
   }, dispatch);
 }

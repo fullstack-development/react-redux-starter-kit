@@ -1,6 +1,7 @@
-import { IEditFieldAction, Validator } from '../namespace';
+import { IEditFieldAction } from 'shared/types/redux';
+import { Validator } from '../namespace';
 
-export default function makeEditFieldReducer<A extends IEditFieldAction, S = A['payload']>(
+export default function makeEditFieldReducer<A extends IEditFieldAction<string, any>, S = A['payload']>(
   type: A['type'], initial: S, validator?: Validator<S>,
 ) {
   return (state: S = initial, action: A) => {

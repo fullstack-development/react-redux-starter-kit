@@ -1,3 +1,5 @@
+import { Reducer } from 'redux';
+
 export interface IPlainAction<T> {
   type: T;
 }
@@ -34,3 +36,8 @@ export interface IReduxField<T> {
   error: string;
   touched?: boolean;
 }
+
+// TODO: remove
+export type ReducersMap<T> = {
+  [key in keyof T]: Reducer<T[key]>;
+};

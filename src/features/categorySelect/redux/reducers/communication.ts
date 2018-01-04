@@ -1,7 +1,10 @@
-import { makeCommunicationReducer, ReducersMap } from 'shared/helpers/redux';
 import { combineReducers } from 'redux';
-import initial from '../initial';
+import { makeCommunicationReducer } from 'shared/helpers/redux';
+
+import { ReducersMap } from 'shared/types/redux';
 import * as NS from '../../namespace';
+
+import initial from '../initial';
 
 export default combineReducers({
   categoriesFetching: makeCommunicationReducer<

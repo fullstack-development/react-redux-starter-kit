@@ -1,15 +1,14 @@
 import {
   IArea, ICity, IAreaEntities, ICityEntities, INormalizedLocation, INormalizedCities, INormalizedArea,
 } from 'shared/types/models';
-import { ICommunicationState } from 'shared/helpers/redux';
-import { IPlainAction, IAction } from 'shared/types/app';
+import { ICommunication, IPlainAction, IAction } from 'shared/types/redux';
 
 export interface IAreaEntities { [key: number]: IArea; }
 export interface ICityEntities { [key: number]: ICity; }
 
 export interface IReduxState {
   communications: {
-    citiesFetching: ICommunicationState;
+    citiesFetching: ICommunication;
   };
   data: {
     entities: {
