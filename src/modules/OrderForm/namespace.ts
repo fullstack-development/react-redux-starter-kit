@@ -1,11 +1,13 @@
 import { IFlatFormProperties, ILocationProperties, INormalizedLocation } from 'shared/types/models';
-import { ICommunicationState, IAction } from 'shared/types/app';
+import { ICommunication, IAction, IPlainFailAction } from 'shared/types/redux';
 
 export interface IReduxState {
   communications: {
-    saving: ICommunicationState;
+    saving: ICommunication;
   };
-  data: { message: string; } | null;
+  data: {
+    message: string | null;
+  };
 }
 
 export interface ISaveFieldsRequest {
@@ -19,11 +21,8 @@ export interface ISaveFieldsResponse {
   message: string;
 }
 
-export type ISaveFieldsAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS', ISaveFieldsRequest>;
-export type ISaveFieldsCompletedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_COMPLETED', ISaveFieldsResponse>;
-export type ISaveFieldsFailedAction = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_FAILED', string>;
+export type ISaveFields = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS', ISaveFieldsRequest>;
+export type ISaveFieldsSuccess = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_SUCCESS', ISaveFieldsResponse>;
+export type ISaveFieldsFail = IPlainFailAction<'ORDER_FORM_MODULE:SAVE_FIELDS_FAIL'>;
 
-export type OrderFormAction =
-  | ISaveFieldsAction
-  | ISaveFieldsCompletedAction
-  | ISaveFieldsFailedAction;
+export type Action = ISaveFields | ISaveFieldsSuccess | ISaveFieldsFail;

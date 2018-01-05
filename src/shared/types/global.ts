@@ -1,7 +1,7 @@
 // Global definitions (you shouldn't import it, it is global scope)
 /* tslint:disable */
 interface Window {
-  devToolsExtension?(): any;
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?(): any;
 }
 
 interface SinonStub {

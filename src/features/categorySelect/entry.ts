@@ -7,9 +7,7 @@ import reducer from './redux/reducers';
 import getSaga from './redux/sagas';
 
 const entry = getFeatureEntry(
-  containers,
-  actions,
-  selectors,
+  containers, actions, selectors,
   {
     reducers: { categorySelect: reducer },
     sagas: [getSaga],

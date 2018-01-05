@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
-import { makeEditFieldReducer, ReducersMap } from 'shared/helpers/redux';
-import initial from '../initial';
+import { makeEditFieldReducer } from 'shared/helpers/redux';
+
+import { ReducersMap } from 'shared/types/redux';
 import * as NS from '../../namespace';
 
-const selectedCategoryReducer =
-  makeEditFieldReducer<NS.IChooseCategoryAction, NS.IReduxState['edit']['selectedCategoryUid']>(
-    'CATEGORY_SELECT:CHOOSE_CATEGORY', initial.edit.selectedCategoryUid,
-  );
+import initial from '../initial';
 
 export default combineReducers({
-  selectedCategoryUid: selectedCategoryReducer,
+  selectedCategoryUid: makeEditFieldReducer<NS.IChooseCategory, NS.IReduxState['edit']['selectedCategoryUid']>(
+    'CATEGORY_SELECT:CHOOSE_CATEGORY', initial.edit.selectedCategoryUid,
+  ),
 } as ReducersMap<NS.IReduxState['edit']>);

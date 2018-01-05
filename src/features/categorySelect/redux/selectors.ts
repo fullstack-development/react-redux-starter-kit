@@ -1,6 +1,6 @@
 import { IAppReduxState } from 'shared/types/app';
 import { ICategory } from 'shared/types/models';
-import { ICommunicationState, IReduxField } from 'shared/helpers/redux';
+import { ICommunication, IReduxField } from 'shared/types/redux';
 import { IReduxState } from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): IReduxState {
@@ -19,6 +19,6 @@ export function selectChosenCategoryUid(state: IAppReduxState): IReduxField<numb
   return selectFeatureState(state).edit.selectedCategoryUid;
 }
 
-export function selectCategoriesFetching(state: IAppReduxState): ICommunicationState {
+export function selectCategoriesFetching(state: IAppReduxState): ICommunication {
   return selectFeatureState(state).communications.categoriesFetching;
 }

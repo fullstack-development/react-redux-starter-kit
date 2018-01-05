@@ -1,23 +1,21 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import getErrorMsg from 'shared/helpers/getErrorMsg';
 
 import { IDependencies } from 'shared/types/app';
-import getErrorMsg from 'shared/helpers/getErrorMessage';
 import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
-
 import * as NS from '../../namespace';
-import { saveFieldsFail, saveFieldsCompleted } from '../actions/communication';
 
-const saveFieldsType: NS.ISaveFieldsAction['type'] = 'ORDER_FORM_MODULE:SAVE_FIELDS';
+import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
+
+const saveFieldsType: NS.ISaveFields['type'] = 'ORDER_FORM_MODULE:SAVE_FIELDS';
 
 export default function getSaga(deps: IDependencies) {
-  function* saga() {
+  return function* saga() {
     yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
-  }
-
-  return saga;
+  };
 }
 
-export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAction) {
+export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFields) {
   const { chosenCategoryUid, chosenLocation, dynamicValues, locationValues } = action.payload;
 
   if (!chosenLocation) {
@@ -39,7 +37,7 @@ export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFieldsAc
 
   try {
     const message: string = yield call(api.createTravelOrder, travelOrder);
-    yield put(saveFieldsCompleted({ message }));
+    yield put(saveFieldsSuccess({ message }));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
   }

@@ -1,7 +1,7 @@
 import { IReduxState } from '../../namespace';
 
 const initialState: IReduxState = {
-  communications: {
+  communication: {
     fetching: {
       isRequesting: false,
       error: '',

@@ -7,13 +7,13 @@ import { bind } from 'decko';
 
 import { actions, selectors } from './../../../redux';
 
-import { IReduxState } from '../../../namespace';
+import { IAppReduxState } from 'shared/types/app';
 import { ILocation, IArea, ICity } from 'shared/types/models';
+import { IReduxState } from '../../../namespace';
 
 import { FormControl } from 'react-bootstrap';
 import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
-
 import './LocationSelect.scss';
 
 interface IOwnProps {
@@ -33,7 +33,7 @@ interface IDispatchProps {
 
 type Props = IStateProps & IDispatchProps & IOwnProps;
 
-function mapState(state: any): IStateProps {
+function mapState(state: IAppReduxState): IStateProps {
   const ownState: IReduxState = selectors.getFeatureState(state);
   const selectedLocation = selectors.selectSelectedLocation(state);
 
@@ -63,7 +63,6 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
 const b = block('location-select');
 
 class LocationSelect extends React.Component<Props> {
-
   public componentWillReceiveProps(nextProps: Props) {
     const { onChange } = this.props;
     // notify subscribed components (if they are exist), if selected location changed
@@ -156,4 +155,4 @@ class LocationSelect extends React.Component<Props> {
 }
 
 export { Props };
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(LocationSelect);
+export default connect(mapState, mapDispatch)(LocationSelect);

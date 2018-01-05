@@ -1,21 +1,11 @@
 import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
-import selectors from './redux/data/selectors';
-import actions from './redux/actions';
-import SearchRepositoriesInput from './view/SearchInput';
-import { default as reducer } from './redux/reducers';
-import getSaga from './redux/actions/sagas';
+import SearchRepositoriesInput from './view/SearchInput/SearchInput';
 
 const containers = { SearchRepositoriesInput };
 
 const entry = getFeatureEntry(
-  containers,
-  actions,
-  selectors,
-  {
-    reducers: { searchRepositories: reducer },
-    sagas: [getSaga],
-  },
+  containers, null, null,
 );
 
 type Entry = typeof entry;

@@ -1,15 +1,14 @@
 import {
   IArea, ICity, IAreaEntities, ICityEntities, INormalizedLocation, INormalizedCities, INormalizedArea,
 } from 'shared/types/models';
-import { ICommunicationState } from 'shared/helpers/redux';
-import { IPlainAction, IAction } from 'shared/types/app';
+import { ICommunication, IPlainAction, IAction, IPlainFailAction } from 'shared/types/redux';
 
 export interface IAreaEntities { [key: number]: IArea; }
 export interface ICityEntities { [key: number]: ICity; }
 
 export interface IReduxState {
   communications: {
-    citiesFetching: ICommunicationState;
+    citiesFetching: ICommunication;
   };
   data: {
     entities: {
@@ -24,11 +23,11 @@ export interface IReduxState {
   };
 }
 
-export type ILoadCitiesAction = IPlainAction<'LOCATION_SELECT:LOAD_CITIES'>;
-export type ILoadCitiesCompletedAction = IAction<'LOCATION_SELECT:LOAD_CITIES_COMPLETED', INormalizedCities>;
-export type ILoadCitiesFailedAction = IPlainAction<'LOCATION_SELECT:LOAD_CITIES_FAILED'>;
+export type ILoadCities = IPlainAction<'LOCATION_SELECT:LOAD_CITIES'>;
+export type ILoadCitiesSuccess = IAction<'LOCATION_SELECT:LOAD_CITIES_SUCCESS', INormalizedCities>;
+export type ILoadCitiesFail = IPlainFailAction<'LOCATION_SELECT:LOAD_CITIES_FAIL'>;
 
-export type ISelectLocationByAreaIDAction
+export type ISelectLocationByAreaID
   = IAction<'LOCATION_SELECT:SELECT_LOCATION_BY_AREA_ID', ISelectLocationByAreaIDActionPayload>;
 
 export interface ISelectLocationByAreaIDActionPayload {
@@ -36,8 +35,5 @@ export interface ISelectLocationByAreaIDActionPayload {
   showOnMap: boolean;
 }
 
-export type LocationSelectAction =
-  | ILoadCitiesAction
-  | ILoadCitiesCompletedAction
-  | ILoadCitiesFailedAction
-  | ISelectLocationByAreaIDAction;
+export type Action =
+  | ILoadCities | ILoadCitiesSuccess | ILoadCitiesFail | ISelectLocationByAreaID;

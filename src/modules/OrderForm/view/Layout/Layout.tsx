@@ -61,11 +61,10 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
 
 function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
   const { dynamicFieldsEntry, locationSelectEntry, categorySelectEntry } = ownProps;
-  // console.log(locationSelectEntry);
-  // const
+
   return {
     isSubmitting: state.orderForm.communications.saving.isRequesting,
-    submittingResult: state.orderForm.data ? state.orderForm.data.message : '',
+    submittingResult: state.orderForm.data.message || '',
     dynamicValues: dynamicFieldsEntry.selectors.selectFlatValues(state.dynamicFields),
     locationValues: dynamicFieldsEntry.selectors.selectLocationValues(state.dynamicFields),
     chosenLocation: locationSelectEntry.selectors.selectSelectedLocation(state),

@@ -1,13 +1,17 @@
 import * as React from 'react';
-import block from 'bem-cn';
-import { Form, FormGroup } from 'react-bootstrap';
-import { connect, Dispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actions, selectors } from '../../redux';
-import { IReduxState } from '../../namespace';
-import { IFields, IField } from 'shared/types/models';
-import { ICommunicationState } from 'shared/helpers/redux';
 import { bind } from 'decko';
+import block from 'bem-cn';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+
+import { IFields, IField } from 'shared/types/models';
+import { ICommunication } from 'shared/types/redux';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { IReduxState } from '../../namespace';
+
+import { actions, selectors } from '../../redux';
+
+import { Form, FormGroup } from 'react-bootstrap';
 import GenericTextInput from 'shared/view/components/GenericTextInput/GenericTextInput';
 import GenericIntegerInput from 'shared/view/components/GenericIntegerInput/GenericIntegerInput';
 import GenericRadioInput from 'shared/view/components/GenericRadioInput/GenericRadioInput';
@@ -15,7 +19,6 @@ import GenericDropdownInput from 'shared/view/components/GenericDropdownInput/Ge
 import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDateInput';
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
-import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
 import './DynamicFields.scss';
 
 import EventHandler = React.EventHandler;
@@ -32,7 +35,7 @@ interface IOwnProps {
 
 interface IStateProps {
   fields: IFields;
-  communications: { fetching: ICommunicationState };
+  communications: { fetching: ICommunication };
 }
 
 interface IDispatchProps {
@@ -65,10 +68,11 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
+const b = block('dynamic-fields');
+
 class DynamicFields extends React.Component<Props, IState> {
   public state: IState = { values: {}, errors: [] };
 
-  private b = block('dynamic-fields');
   private components: { [key: string]: React.ComponentClass<any> | React.StatelessComponent<any> } = {
     text: GenericTextInput,
     integer: GenericIntegerInput,
@@ -93,8 +97,6 @@ class DynamicFields extends React.Component<Props, IState> {
   }
 
   public render() {
-    const b = this.b;
-
     return (
       <div className={b()}>
         <FormGroup>
@@ -149,7 +151,7 @@ class DynamicFields extends React.Component<Props, IState> {
           props.label = isRequired ? `${props.label}*` : props.label;
 
           return (
-            <div className={this.b('field')()} key={props.order}>
+            <div className={b('field')()} key={props.order}>
               <Component
                 {...props}
                 required={isRequired}

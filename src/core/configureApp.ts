@@ -4,7 +4,7 @@ import configureStore, { createReducer } from './configureStore';
 
 import { HomeModule, OrderFormModule } from 'modules';
 
-import { ReducersMap } from 'shared/helpers/redux';
+import { ReducersMap } from 'shared/types/redux';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
 function configureApp(data?: IAppData): IAppData {

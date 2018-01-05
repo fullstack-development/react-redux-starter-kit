@@ -1,4 +1,4 @@
-import { IPlainAction, IAction, IPlainFailAction, IFailAction } from '../namespace';
+import { IPlainAction, IAction, IPlainFailAction, IFailAction } from 'shared/types/redux';
 
 type IGenericPlainAction = IPlainAction<string>;
 type IGenericAction = IAction<string, any>;

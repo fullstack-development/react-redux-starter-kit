@@ -48,8 +48,8 @@ export interface IPoint {
 export interface INormalizedCities {
   result: number[];
   entities: {
-    cities: IAreaEntities;
-    areas: ICityEntities;
+    cities: ICityEntities;
+    areas: IAreaEntities;
   };
 }
 

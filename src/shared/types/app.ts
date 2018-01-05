@@ -48,12 +48,6 @@ export interface IAppData {
   modules: Module[];
   store: Store<IAppReduxState>;
 }
-export type OnConnectRequestHandler = (reducers: Array<IReducerData<any>>, sagas: RootSaga[]) => void;
-
-export interface IReducerData<S> {
-  name: string;
-  reducer: Reducer<S>;
-}
 
 export interface IDependencies {
   api: Api;
@@ -68,15 +62,14 @@ export interface IReduxEntry {
   sagas?: RootSaga[];
 }
 
-// TODO: add averload for aptional A, S, C
 export interface IFeatureEntry<
-  C extends IDictionary<ReactComponent<any>, keyof C> | void,
+  C extends IDictionary<React.ReactType<any>, keyof C> | void,
   A extends IDictionary<ActionCreator<Action>, keyof A> | void,
   S extends IDictionary<(state: any, ...args: any[]) => any, keyof S> | void,
   > extends IReduxEntry {
-  actions: A;
-  selectors: S;
-  containers: C;
+  actions?: A;
+  selectors?: S;
+  containers?: C;
 }
 
 export interface IAppReduxState {
@@ -95,13 +88,6 @@ export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
 export type Lang = 'en' | 'he';
-
-export type ReactComponent<P> = React.ComponentClass<P> | React.StatelessComponent<P>;
-export interface IModuleEntryData {
-  component: React.ComponentClass<any> | React.StatelessComponent<any>;
-  reducers: Array<IReducerData<any>>;
-  sagas: RootSaga[];
-}
 
 export type Uid = number;
 

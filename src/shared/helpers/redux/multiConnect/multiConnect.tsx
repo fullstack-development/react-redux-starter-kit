@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import * as uuid from 'uuid';
 import { bind } from 'decko';
-import { Store, Dispatch, bindActionCreators } from 'redux';
+import { Store, Dispatch, bindActionCreators, Action } from 'redux';
 import { connect } from 'react-redux';
 import { IAppReduxState, Omit } from 'shared/types/app';
 
@@ -68,7 +68,7 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
       }
 
       @bind
-      private mapDispatchToProps(dispatch: Dispatch<any>, ownProps?: TOwnProps): TDispatchProps {
+      private mapDispatchToProps(dispatch: Dispatch<Action>, ownProps?: TOwnProps): TDispatchProps {
         if (!mapDispatchToProps) { return ({} as TDispatchProps); }
 
         const actions = mapDispatchToProps(this.actionDecorator as any, ownProps);

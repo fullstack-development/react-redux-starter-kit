@@ -1,10 +1,12 @@
 import * as React from 'react';
 import block from 'bem-cn';
-import { FormControl, Form, Button, Glyphicon } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
+
 import { IAppReduxState as IAppReduxState } from 'shared/types/app';
-import './styles.scss';
+
+import { FormControl, Form, Button, Glyphicon } from 'react-bootstrap';
+import './SearchInput.scss';
 
 interface IProps {
   value?: string;
@@ -18,9 +20,9 @@ function mapDispatch(dispatch: Dispatch<IAppReduxState>): {} {
   return bindActionCreators({}, dispatch);
 }
 
-function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
-  const b = block('search-repositories-input');
+const b = block('search-repositories-input');
 
+function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
   return (
     <Form className={b()}>
       <FormControl className={b('input')()} type="text" placeholder="Repository name"/>
