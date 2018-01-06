@@ -117,6 +117,9 @@ prodConfig.plugins = [
     },
   }),
   new webpack.optimize.CommonsChunkPlugin({
+    name: 'meta',
+  }),
+  new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     minChunks: (module, count) => module.context && module.context.includes("node_modules"),
   }),
