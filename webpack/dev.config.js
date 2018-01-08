@@ -9,6 +9,8 @@ const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const doiuse = require('doiuse');
 
+const chunkhash = process.env.NODE_ENV === 'production' ? 'chunkhash' : 'hash';
+
 module.exports = {
     target: 'web',
     context: path.resolve(__dirname, '..', 'src'),
@@ -21,8 +23,8 @@ module.exports = {
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, '..', 'build'),
-        filename: 'js/[name]-[hash].bundle.js',
-        chunkFilename: 'js/[name]-[hash].bundle.js',
+        filename: 'js/[name]-[' + chunkhash + '].bundle.js',
+        chunkFilename: 'js/[name]-[' + chunkhash + '].bundle.js',
     },
     resolve: {
         modules: ['node_modules', 'src'],
@@ -99,6 +101,9 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'meta',
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             minChunks: (module, count) => module.context && module.context.includes("node_modules"),

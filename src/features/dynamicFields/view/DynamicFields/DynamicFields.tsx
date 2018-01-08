@@ -145,10 +145,13 @@ class DynamicFields extends React.Component<Props, IState> {
         .map((fieldName: string) => {
           const type: string = properties[fieldName].component;
           const Component: ComponentClass<any> | StatelessComponent<any> = this.components[type];
-          const props = { ...properties[fieldName] }; // avoid mutations in future
           const isRequired: boolean = Boolean(requriedFields.find((f: string) => f === fieldName));
+          const baseProps = properties[fieldName];
+          const props = {
+            ...baseProps,
+            label: isRequired ? `${baseProps.label}*` : baseProps.label,
+           };
           const fieldErrors = this.state.errors.indexOf(fieldName) > -1 ? ['Required Field'] : [];
-          props.label = isRequired ? `${props.label}*` : props.label;
 
           return (
             <div className={b('field')()} key={props.order}>
