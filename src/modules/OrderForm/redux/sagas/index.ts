@@ -1,59 +1,49 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import getErrorMsg from 'shared/helpers/getErrorMsg';
 
-import { IDependencies, IAppReduxState } from 'shared/types/app';
-import getErrorMsg from 'shared/helpers/getErrorMessage';
+import { IDependencies } from 'shared/types/app';
+import { IPoint, INormalizedLocation, ITravelOrder, ILocationProperties } from 'shared/types/models';
+import * as NS from '../../namespace';
 
 import { saveFieldsFail, saveFieldsSuccess } from '../actions/communication';
-import { ISaveFields, IOrderFormRequest, IOrderFormResponse } from '../../namespace';
 
-import { Namespace as DynamicFields, selectors as dynamicFieldsSelectors } from 'features/dynamicFields';
-import { Namespace as LocationSelect, selectors as locationSelectors } from 'features/locationSelect';
-type Point = LocationSelect.IPoint;
-type SelectedLocation = LocationSelect.SelectedLocation;
+const saveFieldsType: NS.ISaveFields['type'] = 'ORDER_FORM_MODULE:SAVE_FIELDS';
 
-const saveFieldsType: ISaveFields['type'] = 'HOME_MODULE:SAVE_FIELDS';
-
-export function* rootSaga(deps: IDependencies) {
-  yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
+export default function getSaga(deps: IDependencies) {
+  return function* saga() {
+    yield takeLatest(saveFieldsType, saveFieldsSaga, deps);
+  };
 }
 
-export function* saveFieldsSaga({ api }: IDependencies) {
-  const state: IAppReduxState = yield select();
+export function* saveFieldsSaga({ api }: IDependencies, action: NS.ISaveFields) {
+  const { chosenCategoryUid, chosenLocation, dynamicValues, locationValues } = action.payload;
 
-  const dynamicValues = dynamicFieldsSelectors.selectFlatValues(state.dynamicFields);
-  const locationValues = dynamicFieldsSelectors.selectLocationValues(state.dynamicFields);
-  const location =  locationSelectors.selectSelectedLocation(state);
-
-  if (!location) {
+  if (!chosenLocation) {
     yield put(saveFieldsFail('Location is not set'));
     return;
   }
-
-  const fromLocation = getFromLocation(locationValues, location);
-
-  const data: IOrderFormRequest = {
-    attributes: dynamicValues,
-    category: state.categorySelect.data.selected as number,
-    location: location.area,
-    // TODO: fill other properties below
-    coord_from_lng: fromLocation.lng,
-    coord_from_lat: fromLocation.lat,
-    coord_to_lng: locationValues.to.lng,
-    coord_to_lat: locationValues.to.lat,
-
-    description: '',
-    notify: false,
+  if (!chosenCategoryUid) {
+    yield put(saveFieldsFail('category is null'));
+    return;
+  }
+  const fromLocation = getFromLocation(locationValues, chosenLocation);
+  const travelOrder: ITravelOrder = {
+    options: dynamicValues,
+    fromLocation,
+    location: chosenLocation,
+    locationValues,
+    chosenCategoryUid,
   };
 
   try {
-    const response: IOrderFormResponse = yield call(api.saveFields, data);
-    yield put(saveFieldsSuccess(response));
+    const message: string = yield call(api.createTravelOrder, travelOrder);
+    yield put(saveFieldsSuccess({ message }));
   } catch (err) {
     yield put(saveFieldsFail(getErrorMsg(err)));
   }
 }
 
-function getFromLocation(dynamicFields: DynamicFields.ILocationProperties, locationSelect: SelectedLocation): Point {
+function getFromLocation(dynamicFields: ILocationProperties, locationSelect: INormalizedLocation): IPoint {
   if (dynamicFields.from && dynamicFields.from.lat && dynamicFields.from.lng) {
     return dynamicFields.from;
   } else if (locationSelect && locationSelect.point && locationSelect.point.lat && locationSelect.point.lng) {

@@ -1,17 +1,15 @@
-import { Action } from './../../namespace';
+import { makeCommunicationActionCreators } from 'shared/helpers/redux';
 
-function loadCategories(): Action {
-  return { type: 'CATEGORY_SELECT:LOAD_CATEGORIES' };
+import { Uid } from 'shared/types/app';
+import * as NS from './../../namespace';
+
+export const { execute: loadCategories, completed: loadCategoriesSuccess, failed: loadCategoriesFail } =
+  makeCommunicationActionCreators<NS.ILoadCategories, NS.ILoadCategoriesSuccess, NS.ILoadCategoriesFail>(
+    'CATEGORY_SELECT:LOAD_CATEGORIES',
+    'CATEGORY_SELECT:LOAD_CATEGORIES_COMPLETED',
+    'CATEGORY_SELECT:LOAD_CATEGORIES_FAIL',
+  );
+
+export function chooseCategory(categoryUid: Uid): NS.IChooseCategory {
+  return { type: 'CATEGORY_SELECT:CHOOSE_CATEGORY', payload: { value: categoryUid, error: '' } };
 }
-
-function chooseCategory(categoryUid: number): Action {
-  return {
-    type: 'CATEGORY_SELECT:CATEGORY_SELECTED',
-    payload: categoryUid,
-  };
-}
-
-export {
-  loadCategories,
-  chooseCategory,
-};

@@ -1,37 +1,46 @@
-import initialState from '../data/initial';
-import { Map, fromJS } from 'immutable';
-import { IAction } from 'shared/types/app';
-import { IReduxState } from '../../namespace';
+import initial from '../data/initial';
+import * as NS from '../../namespace';
+import { combineReducers } from 'redux';
+import { makeCommunicationReducer } from 'shared/helpers/redux';
 
-function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
-  const imState: Map<string, any> = fromJS(state);
-
+function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.Action): NS.IReduxState['data'] {
   switch (action.type) {
-  case ('DYNAMIC_FIELDS:LOAD_FIELDS'):
-    return imState
-      .setIn(['communications', 'fetching', 'isRequesting'], true)
-      .setIn(['data', 'fields', 'uid'], action.payload)
-      .setIn(['data', 'fields', 'values'], {})
-      .toJS();
-  case ('DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED'):
-    return imState
-      .setIn(['communications', 'fetching', 'isRequesting'], false)
-      .setIn(['communications', 'fetching', 'error'], '')
-      .setIn(['data', 'fields'], action.payload)
-      .toJS();
-  case ('DYNAMIC_FIELDS:LOAD_CATEGORIES_FAILED'):
-    return imState
-      .setIn(['communications', 'fetching', 'isRequesting'], false)
-      .setIn(['communications', 'fetching', 'error'], action.payload)
-      .toJS();
-  case 'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE': {
-    interface IData { name: string; value: string; }
-    const payload = action.payload as IData;
-    return imState.setIn(['data', 'values', payload.name], payload.value).toJS();
-  }
-  default:
-    return state;
+    case 'DYNAMIC_FIELDS:LOAD_FIELDS':
+      return {
+        ...state,
+        values: {},
+        fields: {
+          ...state.fields,
+          uid: action.payload,
+        },
+      };
+    case 'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS':
+      return {
+        ...state,
+        fields: action.payload,
+      };
+    case 'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE': {
+      interface IData { name: string; value: string; }
+      const payload = action.payload as IData;
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [payload.name]: payload.value,
+        },
+      };
+    }
+    default:
+      return state;
   }
 }
 
-export default reducer;
+export default combineReducers<NS.IReduxState>({
+  communication: combineReducers({
+    fetching: makeCommunicationReducer<NS.ILoadFields, NS.ILoadFieldsSuccess, NS.ILoadFieldsFail>(
+      'DYNAMIC_FIELDS:LOAD_FIELDS', 'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS', 'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL',
+      initial.communication.fetching,
+    ),
+  }),
+  data: dataReducer,
+});

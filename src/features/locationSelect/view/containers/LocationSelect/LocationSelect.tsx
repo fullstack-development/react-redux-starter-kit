@@ -1,23 +1,28 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import * as Select from 'react-select';
-import { FormControl } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { bind } from 'decko';
+
 import { actions, selectors } from './../../../redux';
-import { SelectedLocationData, IReduxState, IArea, ICity } from '../../../namespace';
+
+import { IAppReduxState } from 'shared/types/app';
+import { ILocation, IArea, ICity } from 'shared/types/models';
+import { IReduxState } from '../../../namespace';
+
+import { FormControl } from 'react-bootstrap';
 import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import SelectInput from 'shared/view/elements/SelectInput/SelectInput';
 import './LocationSelect.scss';
 
 interface IOwnProps {
-  onChange?: (location: SelectedLocationData) => void;
+  onChange?(location: ILocation | null): void;
 }
 
 interface IStateProps {
   options: Select.Option[];
-  selectedLocation: SelectedLocationData;
+  selectedLocation: ILocation | null;
   showLocation: boolean;
 }
 
@@ -28,7 +33,7 @@ interface IDispatchProps {
 
 type Props = IStateProps & IDispatchProps & IOwnProps;
 
-function mapState(state: any): IStateProps {
+function mapState(state: IAppReduxState): IStateProps {
   const ownState: IReduxState = selectors.getFeatureState(state);
   const selectedLocation = selectors.selectSelectedLocation(state);
 
@@ -39,11 +44,11 @@ function mapState(state: any): IStateProps {
         return { label: area.displayName, value: area.id };
       },
     ),
-    selectedLocation: selectedLocation !== null ? {
+    selectedLocation: selectedLocation && {
       point: selectedLocation.point,
       area: selectors.selectAreaById(state, selectedLocation.area),
       city: selectors.selectCityById(state, selectedLocation.city),
-    } : null,
+    },
     showLocation: ownState.ui.showSelectedLocation,
   };
 }
@@ -55,13 +60,9 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
-class LocationSelect extends React.Component<Props, {}> {
-  private b = block('location-select');
+const b = block('location-select');
 
-  constructor(props: Props) {
-    super(props);
-  }
-
+class LocationSelect extends React.Component<Props> {
   public componentWillReceiveProps(nextProps: Props) {
     const { onChange } = this.props;
     // notify subscribed components (if they are exist), if selected location changed
@@ -77,13 +78,7 @@ class LocationSelect extends React.Component<Props, {}> {
   }
 
   public render() {
-    interface IRenderData {
-      options: Select.Option[];
-      selectedLocation: SelectedLocationData;
-    }
-
-    const b = this.b;
-    const { options, selectedLocation }: IRenderData = this.props;
+    const { options, selectedLocation } = this.props;
     const selectedArea: IArea | null = selectedLocation ? selectedLocation.area : null;
     const selectedCity: ICity | null = selectedLocation ? selectedLocation.city : null;
     const showSelectedAreaOnMap: boolean = this.props.showLocation;
@@ -126,11 +121,16 @@ class LocationSelect extends React.Component<Props, {}> {
   }
 
   @bind
-  private onSelectLocation(item: Select.Option | null) {
-    if (item === null) {
-      this.props.selectLocation(null, false);
+  private onSelectLocation(item: Select.Option | Select.Option[] | null) {
+    if (!item || Array.isArray(item)) {
+      this.props.selectLocation({ showOnMap: false });
     } else {
-      this.props.selectLocation({ areaId: item.value as number, point: null }, true);
+      this.props.selectLocation({
+        location: {
+          areaID: +(item.value || 0),
+        },
+        showOnMap: true,
+      });
     }
   }
 
@@ -143,13 +143,16 @@ class LocationSelect extends React.Component<Props, {}> {
       areas.find((area: Select.Option) => area.label === selectedAreaName);
 
     if (selectedAreaOption) {
-      const point = location.point ? { lat: location.point.lat(), lng: location.point.lng() } : null;
-      this.props.selectLocation({ areaId: selectedAreaOption.value as number, point }, false);
+      const point = location.point ? { lat: location.point.lat(), lng: location.point.lng() } : undefined;
+      this.props.selectLocation({
+        location: { areaID: selectedAreaOption.value as number, point },
+        showOnMap: false,
+      });
     } else {
-      this.props.selectLocation(null, false);
+      this.props.selectLocation({ showOnMap: false });
     }
   }
 }
 
 export { Props };
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(LocationSelect);
+export default connect(mapState, mapDispatch)(LocationSelect);

@@ -1,27 +1,7 @@
-import { IOrderFormResponse, ISaveFields, ISaveFieldsSuccess, ISaveFieldsFail } from '../../namespace';
+import { makeCommunicationActionCreators } from 'shared/helpers/redux';
+import * as NS from '../../namespace';
 
-function saveFields(): ISaveFields {
-  return {
-    type: 'HOME_MODULE:SAVE_FIELDS',
-  };
-}
-
-function saveFieldsSuccess(response: IOrderFormResponse): ISaveFieldsSuccess {
-  return {
-    type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS',
-    payload: response,
-  };
-}
-
-function saveFieldsFail(error: string): ISaveFieldsFail {
-  return {
-    type: 'HOME_MODULE:SAVE_FIELDS_FAIL',
-    payload: error,
-  };
-}
-
-export {
-  saveFields,
-  saveFieldsSuccess,
-  saveFieldsFail,
-};
+export const { execute: saveFields, completed: saveFieldsSuccess, failed: saveFieldsFail } =
+  makeCommunicationActionCreators<NS.ISaveFields, NS.ISaveFieldsSuccess, NS.ISaveFieldsFail>(
+    'ORDER_FORM_MODULE:SAVE_FIELDS', 'ORDER_FORM_MODULE:SAVE_FIELDS_SUCCESS', 'ORDER_FORM_MODULE:SAVE_FIELDS_FAIL',
+  );

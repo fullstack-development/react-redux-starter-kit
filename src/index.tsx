@@ -1,14 +1,15 @@
+import 'reflect-metadata';
+import 'babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-// import * as injectTapEventPlugin from 'react-tap-event-plugin';
+import configureApp from 'core/configureApp';
+
 import { AppContainer } from 'react-hot-loader';
-import App from './App';
-import configureApp from './configureApp';
+import App from 'core/App';
 
-// Needed for onTouchTap: http://stackoverflow.com/a/34015469/988941
-// injectTapEventPlugin();
+const version: string = '0.0.0';
 
-const appData = configureApp();
+let appData = configureApp();
 const render = (component: React.ReactElement<any>) => ReactDOM.render(
   <AppContainer>{component}</AppContainer>,
   document.getElementById('root'),
@@ -19,10 +20,14 @@ render(<App modules={appData.modules} store={appData.store} />);
 
 /* Hot Module Replacement API */
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
-  (module as any).hot.accept(['./App', './configureApp'], () => {
-    const nextConfigureModules: typeof configureApp = require('./configureApp').default;
-    const NextApp: typeof App = require('./App').default;
-    const nextAppData = nextConfigureModules(appData);
-    render(<NextApp modules={nextAppData.modules} store={nextAppData.store} />);
+  (module as any).hot.accept(['./core/App', './core/configureApp'], () => {
+    const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
+    const NextApp: typeof App = require('./core/App').default;
+    appData = nextConfigureApp(appData);
+    render(<NextApp modules={appData.modules} store={appData.store} />);
   });
 }
+
+/* tslint:disable */
+console.info(`%cApp version: ${version}`, 'background: #EBF5F8; color: gray; font-size: x-medium; border-radius: 5px; padding: 5px;');
+/* tslint:enable */

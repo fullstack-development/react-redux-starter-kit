@@ -1,20 +1,23 @@
-import { IGeosuggestOption } from 'shared/view/components/GenericLocationInput/GenericLocationInput';
+import { IFields, IFormProperties } from 'shared/types/models';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { IAction, IPlainFailAction, ICommunication } from 'shared/types/redux';
 
-interface IFormProperties {
-  [key: string]: string | number | IGeosuggestOption;
-}
-
-interface IFlatFormProperties {
+export interface IFlatFormProperties {
   [key: string]: string | number;
 }
 
-interface ILocationProperties {
-  [key: string]: { lat: number; lng: number; };
-  from: { lat: number; lng: number; };
-  to: { lat: number; lng: number; };
+export interface IGeoPoint {
+  lat: number;
+  lng: number;
 }
 
-interface IField {
+export interface ILocationProperties {
+  [key: string]: IGeoPoint;
+  from: IGeoPoint;
+  to: IGeoPoint;
+}
+
+export interface IField {
   type: 'string' | 'integer';
   component: 'text' | 'integer' | 'radio' | 'dropdown' | 'location' | 'date' | 'time';
   order: number;
@@ -29,28 +32,8 @@ interface IField {
   maxLength: number;
 }
 
-interface ISchema {
-  properties: {[key: string]: IField};
-  required: string[];
-  type: 'string';
-  title: string;
-}
-
-interface IFields {
-  schema?: ISchema;
-  id?: number;
-  uid?: number;
-  alert?: boolean;
-  name?: number;
-}
-
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
-
-interface IReduxState {
-  communications: {
+export interface IReduxState {
+  communication: {
     fetching: ICommunication;
   };
   data: {
@@ -59,13 +42,11 @@ interface IReduxState {
   };
 }
 
-export {
-  IFormProperties,
-  IFlatFormProperties,
-  ILocationProperties,
-  ISchema,
-  IFields,
-  IField,
-  ICommunication,
-  IReduxState,
-};
+export type ILoadFields = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS', number>;
+export type ILoadFieldsSuccess = IAction<'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS', IFields>;
+export type ILoadFieldsFail = IPlainFailAction<'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL'>;
+
+export type IChangeFieldValueAction = IAction<'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', { name: string; value: FieldValue }>;
+
+export type Action =
+  | ILoadFields | ILoadFieldsSuccess | ILoadFieldsFail | IChangeFieldValueAction;

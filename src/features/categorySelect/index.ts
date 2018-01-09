@@ -1,5 +1,5 @@
-import CategorySelect from './view/CategorySelect/CategorySelect';
-import { reducer, actions, initial as initialState } from './redux';
-import * as Namespace from './namespace';
+import * as namespace from './namespace';
 
-export { CategorySelect, reducer, initialState, actions, Namespace };
+export { namespace };
+export { Entry } from './entry';
+export { loadEntry } from './loader';

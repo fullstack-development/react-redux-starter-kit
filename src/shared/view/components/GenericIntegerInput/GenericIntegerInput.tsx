@@ -17,6 +17,7 @@ interface IState {
 }
 
 class GenericIntegerInput extends React.Component<IProps, IState> {
+
   private errors = {
     required: 'Field is required',
     tooLow: 'Number value is too low',

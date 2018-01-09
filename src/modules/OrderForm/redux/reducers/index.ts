@@ -1,32 +1,29 @@
-import initialState from '../initial';
-import { Map, fromJS } from 'immutable';
-import { IAction } from 'shared/types/app';
-import { IReduxState } from '../../namespace';
+import { combineReducers } from 'redux';
+import { makeCommunicationReducer } from 'shared/helpers/redux';
 
-function reducer(state: IReduxState = initialState, action: IAction): IReduxState {
-  const imState: Map<string, any> = fromJS(state);
+import { ReducersMap } from 'shared/types/redux';
+import * as NS from '../../namespace';
 
+import initial from '../initial';
+
+function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.Action): NS.IReduxState['data'] {
   switch (action.type) {
-  case 'HOME_MODULE:SAVE_FIELDS':
-    return imState
-      .setIn(['communications', 'saving', 'isRequesting'], true)
-      .setIn(['data'], null)
-      .toJS();
-  case 'HOME_MODULE:SAVE_FIELDS_SUCCESS':
-    return imState
-      .setIn(['communications', 'saving', 'isRequesting'], false)
-      .setIn(['communications', 'saving', 'error'], '')
-      .setIn(['data'], action.payload)
-      .toJS();
-  case 'HOME_MODULE:SAVE_FIELDS_FAIL':
-    return imState
-      .setIn(['communications', 'saving', 'isRequesting'], false)
-      .setIn(['communications', 'saving', 'error'], action.payload)
-      .setIn(['data'], null)
-      .toJS();
-  default:
-    return state;
+    case 'ORDER_FORM_MODULE:SAVE_FIELDS':
+      return { ...state, message: null };
+    case 'ORDER_FORM_MODULE:SAVE_FIELDS_SUCCESS':
+      return { ...state, message: action.payload.message };
+    case 'ORDER_FORM_MODULE:SAVE_FIELDS_FAIL':
+      return { ...state, message: null };
+    default: return state;
   }
 }
 
-export default reducer;
+export default combineReducers<NS.IReduxState>({
+  data: dataReducer,
+  communications: combineReducers<NS.IReduxState['communications']>({
+    saving: makeCommunicationReducer<NS.ISaveFields, NS.ISaveFieldsSuccess, NS.ISaveFieldsFail>(
+      'ORDER_FORM_MODULE:SAVE_FIELDS', 'ORDER_FORM_MODULE:SAVE_FIELDS_SUCCESS', 'ORDER_FORM_MODULE:SAVE_FIELDS_FAIL',
+      initial.communications.saving,
+    ),
+  } as ReducersMap<NS.IReduxState['communications']>),
+} as ReducersMap<NS.IReduxState>);

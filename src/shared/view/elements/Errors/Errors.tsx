@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import './Errors.scss';
 
 interface IProps {

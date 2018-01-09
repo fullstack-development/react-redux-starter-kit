@@ -1,54 +1,12 @@
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
+import {
+  IArea, ICity, IAreaEntities, ICityEntities, INormalizedLocation, INormalizedCities, INormalizedArea,
+} from 'shared/types/models';
+import { ICommunication, IPlainAction, IAction, IPlainFailAction } from 'shared/types/redux';
 
-interface IAreaResponse {
-  city: number;
-  display_name: string;
-  name: string;
-  point: string;
-}
+export interface IAreaEntities { [key: number]: IArea; }
+export interface ICityEntities { [key: number]: ICity; }
 
-interface ICityResponse {
-  areas: IAreaResponse[];
-  name: string;
-  id: number;
-}
-
-interface IPoint {
-  lat: number;
-  lng: number;
-}
-
-interface IArea {
-  displayName: string;
-  name: string;
-  city: number;
-  point: IPoint;
-  id: number;
-}
-
-interface ICity {
-  areas: number[];
-  name: string;
-  id: number;
-}
-
-interface INormalizedCitiesResponse {
-  result: number[];
-  entities: {
-    cities: IAreaEntities;
-    areas: ICityEntities;
-  };
-}
-
-interface IAreaEntities { [key: number]: IArea; }
-interface ICityEntities { [key: number]: ICity; }
-type SelectedLocation = null | { city: number, area: number, point: IPoint };
-type SelectedLocationData = null | { city: ICity; area: IArea, point: IPoint };
-
-interface IReduxState {
+export interface IReduxState {
   communications: {
     citiesFetching: ICommunication;
   };
@@ -58,24 +16,24 @@ interface IReduxState {
       cities: ICityEntities;
     },
     citiesSet: number[],
-    selectedLocation: SelectedLocation;
+    selectedLocation: INormalizedLocation | null;
   };
   ui: {
     showSelectedLocation: boolean;
   };
 }
 
-export {
-  ICommunication,
-  IReduxState,
-  IAreaResponse,
-  ICityResponse,
-  IPoint,
-  IArea,
-  ICity,
-  IAreaEntities,
-  ICityEntities,
-  INormalizedCitiesResponse,
-  SelectedLocationData,
-  SelectedLocation,
-};
+export type ILoadCities = IPlainAction<'LOCATION_SELECT:LOAD_CITIES'>;
+export type ILoadCitiesSuccess = IAction<'LOCATION_SELECT:LOAD_CITIES_SUCCESS', INormalizedCities>;
+export type ILoadCitiesFail = IPlainFailAction<'LOCATION_SELECT:LOAD_CITIES_FAIL'>;
+
+export type ISelectLocationByAreaID
+  = IAction<'LOCATION_SELECT:SELECT_LOCATION_BY_AREA_ID', ISelectLocationByAreaIDActionPayload>;
+
+export interface ISelectLocationByAreaIDActionPayload {
+  location?: INormalizedArea;
+  showOnMap: boolean;
+}
+
+export type Action =
+  | ILoadCities | ILoadCitiesSuccess | ILoadCitiesFail | ISelectLocationByAreaID;

@@ -1,8 +1,6 @@
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-import { IAction } from 'shared/types/app';
+import * as NS from '../../namespace';
 
-function changeFieldValue(name: string, value: FieldValue): IAction {
+export function changeFieldValue(name: string, value: FieldValue): NS.IChangeFieldValueAction {
   return { type: 'DYNAMIC_FIELDS:CHANGE_FIELD_VALUE', payload: { name, value } };
 }
-
-export { changeFieldValue };

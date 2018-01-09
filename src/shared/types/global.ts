@@ -1,7 +1,7 @@
 // Global definitions (you shouldn't import it, it is global scope)
 /* tslint:disable */
 interface Window {
-  devToolsExtension: Function;
+  __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?(): any;
 }
 
 interface SinonStub {
@@ -21,3 +21,4 @@ declare module '*.png';
 declare module 'shared/*';
 declare module 'decko';
 declare module 'react-hot-loader';
+declare module 'enzyme-adapter-react-16';

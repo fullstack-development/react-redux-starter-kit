@@ -9,6 +9,8 @@ const autoprefixer = require('autoprefixer');
 const stylelint = require('stylelint');
 const doiuse = require('doiuse');
 
+const chunkhash = process.env.NODE_ENV === 'production' ? 'chunkhash' : 'hash';
+
 module.exports = {
     target: 'web',
     context: path.resolve(__dirname, '..', 'src'),
@@ -17,27 +19,12 @@ module.exports = {
           'react-hot-loader/patch',
           './index.tsx'
         ],
-        vendor: [
-            'axios',
-            'react',
-            'redux',
-            'bem-cn',
-            'reselect',
-            'immutable',
-            'react-dom',
-            'react-redux',
-            'react-router',
-            'react-select',
-            'react-bootstrap',
-            // 'react-tap-event-plugin',
-            'bootstrap/dist/css/bootstrap.min.css',
-            './assets/bootstrap.paper.min.css',
-        ]
     },
     output: {
         publicPath: '/',
         path: path.resolve(__dirname, '..', 'build'),
-        filename: 'js/app.bundle.js'
+        filename: 'js/[name]-[' + chunkhash + '].bundle.js',
+        chunkFilename: 'js/[name]-[' + chunkhash + '].bundle.js',
     },
     resolve: {
         modules: ['node_modules', 'src'],
@@ -115,9 +102,16 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
+            name: 'meta',
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'js/vendor.bundle.js',
-            minChunks: Infinity,
+            minChunks: (module, count) => module.context && module.context.includes("node_modules"),
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'shared',
+            chunks: ['app'],
+            minChunks: (module, count) => module.context && module.context.includes("src/shared"),
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',

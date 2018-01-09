@@ -1,56 +1,28 @@
-import { IFormProperties } from '../../features/dynamicFields/namespace';
+import { IFlatFormProperties, ILocationProperties, INormalizedLocation } from 'shared/types/models';
+import { ICommunication, IAction, IPlainFailAction } from 'shared/types/redux';
 
-interface IOrderFormRequest {
-  attributes: IFormProperties;
-  notify: boolean;
-  description: string;
-  location: number;  // area id only - don't need a city id
-  category: number;
-  coord_from_lng: number;
-  coord_from_lat: number;
-  coord_to_lng: number;
-  coord_to_lat: number;
-}
-
-interface IOrderFormResponse {
-  message: string;
-}
-
-interface ICommunication {
-  isRequesting: boolean;
-  error: string;
-}
-
-interface IReduxState {
+export interface IReduxState {
   communications: {
     saving: ICommunication;
   };
-  data: { message: string; } | null;
+  data: {
+    message: string | null;
+  };
 }
 
-interface ISaveFields {
-  type: 'HOME_MODULE:SAVE_FIELDS';
+export interface ISaveFieldsRequest {
+  chosenLocation: INormalizedLocation | null;
+  chosenCategoryUid: number | null;
+  dynamicValues: IFlatFormProperties;
+  locationValues: ILocationProperties;
 }
 
-interface ISaveFieldsSuccess {
-  type: 'HOME_MODULE:SAVE_FIELDS_SUCCESS';
-  payload: IOrderFormResponse;
+export interface ISaveFieldsResponse {
+  message: string;
 }
 
-interface ISaveFieldsFail {
-  type: 'HOME_MODULE:SAVE_FIELDS_FAIL';
-  payload: string;
-}
+export type ISaveFields = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS', ISaveFieldsRequest>;
+export type ISaveFieldsSuccess = IAction<'ORDER_FORM_MODULE:SAVE_FIELDS_SUCCESS', ISaveFieldsResponse>;
+export type ISaveFieldsFail = IPlainFailAction<'ORDER_FORM_MODULE:SAVE_FIELDS_FAIL'>;
 
-type Action = ISaveFields | ISaveFieldsSuccess | ISaveFieldsFail;
-
-export {
-  IOrderFormRequest,
-  IOrderFormResponse,
-  ICommunication,
-  IReduxState,
-  ISaveFields,
-  ISaveFieldsSuccess,
-  ISaveFieldsFail,
-  Action,
-};
+export type Action = ISaveFields | ISaveFieldsSuccess | ISaveFieldsFail;

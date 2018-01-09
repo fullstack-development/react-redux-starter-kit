@@ -1,20 +1,7 @@
-import { IAction } from 'shared/types/app';
-import { IFieldsResponse } from 'shared/api/Api';
+import * as NS from '../../namespace';
+import { makeCommunicationActionCreators } from 'shared/helpers/redux';
 
-function loadFields(uid: number): IAction {
-  return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS', payload: uid };
-}
-
-function loadFieldsSuccessed(data: IFieldsResponse): IAction {
-  return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_COMPLETED', payload: data };
-}
-
-function loadFieldsFailed(message: string): IAction {
-  return { type: 'DYNAMIC_FIELDS:LOAD_FIELDS_FAILED', payload: message };
-}
-
-export {
-  loadFields,
-  loadFieldsFailed,
-  loadFieldsSuccessed,
-};
+export const { execute: loadFields, completed: loadFieldsSuccess, failed: loadFieldsFail } =
+  makeCommunicationActionCreators<NS.ILoadFields, NS.ILoadFieldsSuccess, NS.ILoadFieldsFail>(
+    'DYNAMIC_FIELDS:LOAD_FIELDS', 'DYNAMIC_FIELDS:LOAD_FIELDS_SUCCESS', 'DYNAMIC_FIELDS:LOAD_FIELDS_FAIL',
+  );

@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { Route } from 'react-router-dom';
-import { reducer, saga } from './redux';
+
 import * as NS from './namespace';
-import { getView } from './view/Layout/Layout';
-import { Module, IModuleEntryData } from 'shared/types/app';
+import { Module, IReduxEntry } from 'shared/types/app';
 
-class OrderForm extends Module<NS.IReduxState, {}> {
+import { reducer, saga } from './redux';
+
+import Layout from './view/Layout/Layout';
+
+class OrderForm extends Module {
   public getRoutes() {
-    const entry: IModuleEntryData = getView();
-    this.notifyAboutConnection(entry.reducers, entry.sagas);
-    return <Route key="order" exact path="/order" component={entry.component} />;
+    return <Route key="order" exact path="/order" component={Layout} />;
   }
 
-  public getReducer() {
-    return { name: 'orderForm', reducer };
-  }
-
-  public getSaga() {
-    return saga;
+  public getReduxEntry(): IReduxEntry {
+    return {
+      reducers: { orderForm: reducer },
+      sagas: [saga],
+    };
   }
 }
 

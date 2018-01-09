@@ -1,11 +1,17 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
-import { Form, FormGroup } from 'react-bootstrap';
-import { connect, Dispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actions, selectors } from '../../redux';
-import { IFields, ICommunication, IReduxState, IField } from '../../namespace';
 import { bind } from 'decko';
+import block from 'bem-cn';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+
+import { IFields, IField } from 'shared/types/models';
+import { ICommunication } from 'shared/types/redux';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { IReduxState } from '../../namespace';
+
+import { actions, selectors } from '../../redux';
+
+import { Form, FormGroup } from 'react-bootstrap';
 import GenericTextInput from 'shared/view/components/GenericTextInput/GenericTextInput';
 import GenericIntegerInput from 'shared/view/components/GenericIntegerInput/GenericIntegerInput';
 import GenericRadioInput from 'shared/view/components/GenericRadioInput/GenericRadioInput';
@@ -13,7 +19,6 @@ import GenericDropdownInput from 'shared/view/components/GenericDropdownInput/Ge
 import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDateInput';
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
-import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
 import './DynamicFields.scss';
 
 import EventHandler = React.EventHandler;
@@ -22,7 +27,7 @@ import ComponentClass = React.ComponentClass;
 import StatelessComponent = React.StatelessComponent;
 
 interface IOwnProps {
-  category?: number;
+  category: number | null;
   onSetField?: (fieldName: string, fieldValue: FieldValue) => void;
   onSubmit?: EventHandler<FormEvent<Form>>;
   onChange?: (fieldName: string, fieldValue: FieldValue, errors: string[]) => void;
@@ -41,7 +46,7 @@ interface IDispatchProps {
 type Props = IDispatchProps & IStateProps & IOwnProps;
 
 interface IState {
-  values: {[key: string]: string | number | {[key: string]: any}};
+  values: { [key: string]: string | number | { [key: string]: any } };
   errors: string[];
 }
 
@@ -63,8 +68,11 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
   }, dispatch);
 }
 
+const b = block('dynamic-fields');
+
 class DynamicFields extends React.Component<Props, IState> {
-  private b = block('dynamic-fields');
+  public state: IState = { values: {}, errors: [] };
+
   private components: { [key: string]: React.ComponentClass<any> | React.StatelessComponent<any> } = {
     text: GenericTextInput,
     integer: GenericIntegerInput,
@@ -75,14 +83,6 @@ class DynamicFields extends React.Component<Props, IState> {
     dropdown: GenericDropdownInput,
     location: GenericLocationInput,
   };
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      values: {},
-      errors: [],
-    };
-  }
 
   public componentDidMount() {
     if (this.props.category) {
@@ -97,8 +97,6 @@ class DynamicFields extends React.Component<Props, IState> {
   }
 
   public render() {
-    const b = this.b;
-
     return (
       <div className={b()}>
         <FormGroup>
@@ -132,7 +130,7 @@ class DynamicFields extends React.Component<Props, IState> {
     const { fields } = this.props;
     if (fields && fields.schema && fields.schema.properties) {
       const requriedFields: string[] = fields.schema.required;
-      const properties: {[key: string]: IField} = fields.schema.properties;
+      const properties: { [key: string]: IField } = fields.schema.properties;
       const fieldsNode = Object
         .keys(properties)
         .filter((fieldName: string) => {
@@ -147,13 +145,16 @@ class DynamicFields extends React.Component<Props, IState> {
         .map((fieldName: string) => {
           const type: string = properties[fieldName].component;
           const Component: ComponentClass<any> | StatelessComponent<any> = this.components[type];
-          const props = { ...properties[fieldName] }; // avoid mutations in future
           const isRequired: boolean = Boolean(requriedFields.find((f: string) => f === fieldName));
+          const baseProps = properties[fieldName];
+          const props = {
+            ...baseProps,
+            label: isRequired ? `${baseProps.label}*` : baseProps.label,
+           };
           const fieldErrors = this.state.errors.indexOf(fieldName) > -1 ? ['Required Field'] : [];
-          props.label = isRequired ? `${props.label}*` : props.label;
 
           return (
-            <div className={this.b('field')()} key={props.order}>
+            <div className={b('field')()} key={props.order}>
               <Component
                 {...props}
                 required={isRequired}
