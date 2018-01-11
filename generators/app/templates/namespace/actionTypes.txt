@@ -1,0 +1,3 @@
+import { IEmptyAction, IAction } from 'shared/types/app';
+
+export {};

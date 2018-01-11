@@ -1,0 +1,9 @@
+import { reducer, actions, initial as initialState } from './redux';
+import * as Namespace from './namespace';
+
+export {
+  reducer,
+  initialState,
+  actions,
+  Namespace,
+};

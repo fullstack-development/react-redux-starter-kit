@@ -7,6 +7,9 @@ Modular starter kit for React+Redux+React Router projects.
 ## To build localy
 ```npm run build``` for development purposes without watch mode (see build folder)
 
+## To start yeoman generator create-feature
+```npm run yeoman```
+
 ## Features
 - [x] Typescript 2.x
 - [x] React 16.x

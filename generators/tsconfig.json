@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "traceResolution": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es6",
+    "lib": ["es2015", "es2017", "es6", "es7", "es5", "scripthost"],
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowSyntheticDefaultImports": false,
+    "importHelpers": false,
+    "strictFunctionTypes": false
+  }
+}

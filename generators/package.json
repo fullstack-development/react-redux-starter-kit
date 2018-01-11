@@ -1,0 +1,41 @@
+{
+  "name": "generator-create-feature",
+  "version": "0.0.0",
+  "description": "create feature structure",
+  "homepage": "",
+  "author": {
+    "name": "DYAPIK",
+    "email": "dmyudin_2008@mail.ru",
+    "url": ""
+  },
+  "files": [
+    "app"
+  ],
+  "main": "generators/index.js",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "devDependencies": {
+    "jest": "^21.0.0",
+    "jest-cli": "^21.0.0",
+    "nsp": "^2.6.3",
+    "yeoman-assert": "^3.0.0",
+    "yeoman-test": "^1.6.0"
+  },
+  "dependencies": {
+    "@types/mkdirp": "^0.5.2",
+    "@types/yeoman-generator": "^2.0.1",
+    "@types/yosay": "0.0.29",
+    "chalk": "^1.1.3",
+    "yeoman-generator": "^1.0.0",
+    "yosay": "^2.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": "DYAPIK/generator-create-feature",
+  "license": "MIT"
+}

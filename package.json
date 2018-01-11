@@ -14,9 +14,16 @@
     "build:prod": "better-npm-run build:prod",
     "dev": "npm run watch:dev",
     "prod": "npm run watch:prod",
-    "deploy": "npm run build:prod && better-npm-run deploy"
+    "deploy": "npm run build:prod && better-npm-run deploy",
+    "yeoman": "better-npm-run initial:yeoman"
   },
   "betterScripts": {
+    "initial:yeoman": {
+      "command": "sh ./generators/initializationGenerator.sh",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
     "watch:dev": {
       "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.js",
       "env": {
@@ -81,7 +88,8 @@
     "tslint-eslint-rules": "^4.1.1",
     "tslint-loader": "^3.5.3",
     "tslint-react": "^3.2.0",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "yo": "^2.0.0"
   },
   "dependencies": {
     "@types/axios": "0.9.36",
