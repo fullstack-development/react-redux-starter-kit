@@ -1,14 +1,22 @@
 import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
+<% if (viewConfig && viewConfig.parts.includes('containers')) { -%>
 import * as containers from './view/containers';
-import { actions, selectors, reducer, getSaga } from './redux';
+<% } -%>
+<% if (reduxConfig) { -%>
+import { actions, selectors, reducer<%= (reduxConfig.withSaga) ? ', getSaga' : '' %> } from './redux';
+<% } -%>
 
 const entry = getFeatureEntry(
-  containers, actions, selectors,
+  <%= (viewConfig && viewConfig.parts.includes('containers')) ? 'containers' : 'null' %>, <%= reduxConfig ? 'actions, selectors,' : 'null, null,' %>
+<% if (reduxConfig) { -%>
   {
-    reducers: { locationSelect: reducer },
+    reducers: { <%= featureName %>: reducer },
+<% if (reduxConfig && reduxConfig.withSaga) { -%>
     sagas: [getSaga],
+<% } -%>
   },
+<% } -%>
 );
 
 type Entry = typeof entry;

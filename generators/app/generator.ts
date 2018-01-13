@@ -1,38 +1,15 @@
 import yosay = require('yosay');
 import * as Generator from 'yeoman-generator';
+
 import { ChoiceType } from 'inquirer';
-
-interface IUserAnswers {
-  featureName: string;
-  featureParts: FeaturePart[];
-  reduxConfig: IReduxConfig | null;
-  viewConfig: IViewConfig | null;
-}
-
-type FeaturePart = 'redux' | 'view';
-
-interface IViewConfig {
-  parts: ViewPart[];
-}
-
-type ViewPart = 'containers' | 'components';
-
-interface IReduxConfig {
-  withSaga: boolean;
-  parts: ReduxPart[];
-}
-
-type ReduxPart = 'communication' | 'edit' | 'data' | 'ui';
-
-interface ICreateFileConfig {
-  templateUrl: string;
-  newFileUrl: string;
-  context?: object;
-}
+import {
+  IBaseConfig, ICreateFileConfig, IReduxConfig, IViewConfig, IUserAnswers, FeaturePart, ReduxPart, ViewPart,
+} from './namespace';
 
 class CreateFeatureGenerator extends Generator {
   private userAnswers: IUserAnswers = {
     featureName: '',
+    isLazy: false,
     featureParts: [],
     reduxConfig: null,
     viewConfig: null,
@@ -48,15 +25,13 @@ class CreateFeatureGenerator extends Generator {
   }
 
   public async prompting() {
-    const featureName = await this._promptFeatureName();
-    const featureParts = await this._promptFeatureParts();
+    const baseConfig = await this._promptBaseConfig();
 
-    this.featurePath = this.destinationPath(`src/features/${featureName}`);
+    this.featurePath = this.destinationPath(`src/features/${baseConfig.featureName}`);
     this.userAnswers = {
-      featureName,
-      featureParts,
-      reduxConfig: featureParts.includes('redux') ? await this._promptReduxConfig() : null,
-      viewConfig: featureParts.includes('view') ? await this._promptViewConfig() : null,
+      ...baseConfig,
+      reduxConfig: baseConfig.featureParts.includes('redux') ? await this._promptReduxConfig() : null,
+      viewConfig: baseConfig.featureParts.includes('view') ? await this._promptViewConfig() : null,
     };
   }
 
@@ -68,38 +43,47 @@ class CreateFeatureGenerator extends Generator {
     reduxConfig && this._createReduxFiles(reduxConfig);
   }
 
-  private async _promptFeatureName(): Promise<string> {
-    const questions: Generator.Question = {
-      type: 'input',
-      name: 'value',
-      message: 'Your feature name',
-      validate(value) {
-        return !!value || 'Feature name should be not empty';
+  private async _promptBaseConfig(): Promise<IBaseConfig> {
+    const availableFeatureParts: FeaturePart[] = (['redux', 'view']);
+    const questions: Generator.Question[] = [
+      {
+        type: 'input',
+        name: 'featureName',
+        message: 'Your feature name',
+        validate(value) {
+          return !!value || 'Feature name should be not empty';
+        },
+      }, {
+        type: 'list',
+        name: 'isLazy',
+        message: 'Your feature will use lazy loading',
+        choices: [
+          {
+            name: 'Yes',
+            value: true as any,
+          },
+          {
+            name: 'No',
+            value: false as any,
+          },
+        ],
+      }, {
+        type: 'checkbox',
+        name: 'featureParts',
+        message: 'Select feature parts',
+        choices: availableFeatureParts.map<ChoiceType>(choice => ({
+          name: choice,
+          value: choice,
+          checked: true,
+        })),
+        validate(value) {
+          return !!value || 'Feature name should be not empty';
+        },
       },
-    };
+    ];
 
-    const answer = await this.prompt(questions) as { value: string };
-    return answer.value;
-  }
-
-  private async _promptFeatureParts(): Promise<FeaturePart[]> {
-    const choices: FeaturePart[] = (['redux', 'view']);
-    const questions: Generator.Question = {
-      type: 'checkbox',
-      name: 'value',
-      message: 'Select feature parts',
-      choices: choices.map<ChoiceType>(choice => ({
-        name: choice,
-        value: choice,
-        checked: true,
-      })),
-      validate(value) {
-        return !!value || 'Feature name should be not empty';
-      },
-    };
-
-    const answer = await this.prompt(questions) as { value: FeaturePart[] };
-    return answer.value;
+    const answer = await this.prompt(questions) as IBaseConfig;
+    return answer;
   }
 
   private async _promptReduxConfig(): Promise<IReduxConfig> {
@@ -142,6 +126,9 @@ class CreateFeatureGenerator extends Generator {
         value: choice,
         checked: true,
       })),
+      validate(value) {
+        return !!value.length || 'You can not select less than one option';
+      },
     };
 
     const answer = await this.prompt(questions) as IViewConfig;
@@ -195,6 +182,9 @@ class CreateFeatureGenerator extends Generator {
       }, {
         templateUrl: 'redux/selectors.ts',
         newFileUrl: `${reduxPath}/selectors.ts`,
+      }, {
+        templateUrl: 'namespace.ts',
+        newFileUrl: `${this.featurePath}/namespace.ts`,
       },
     ];
     const actions: ICreateFileConfig[] = parts
@@ -232,21 +222,21 @@ class CreateFeatureGenerator extends Generator {
   }
 
   private _createIndexFiles() {
-    const files: ICreateFileConfig[] = [
-      {
-        templateUrl: 'entry.ts',
-        newFileUrl: `${this.featurePath}/entry.ts`,
-      }, {
-        templateUrl: 'index.ts',
+    const { isLazy } = this.userAnswers;
+    const files: ICreateFileConfig[] = ([] as ICreateFileConfig[])
+      .concat({
+        templateUrl: isLazy ? 'lazyIndex.ts' : 'index.ts',
         newFileUrl: `${this.featurePath}/index.ts`,
-      }, {
-        templateUrl: 'loader.ts',
-        newFileUrl: `${this.featurePath}/loader.ts`,
-      },
-    ].concat(this.userAnswers.featureParts.includes('redux') ? {
-      templateUrl: 'namespace.ts',
-      newFileUrl: `${this.featurePath}/namespace.ts`,
-    } : []);
+      })
+      .concat(isLazy ? [
+        {
+          templateUrl: 'entry.ts',
+          newFileUrl: `${this.featurePath}/entry.ts`,
+        }, {
+          templateUrl: 'loader.ts',
+          newFileUrl: `${this.featurePath}/loader.ts`,
+        },
+      ] : []);
 
     files.forEach(file => this._createFileFromTemplate(file));
   }

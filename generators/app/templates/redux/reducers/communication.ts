@@ -6,6 +6,6 @@ import * as NS from '../../namespace';
 
 import { initial } from '../initial';
 
-export const communicationReducer = combineReducers<NS.IReduxState['communications']>({
+export const communicationReducer = combineReducers<NS.IReduxState['communication']>({
 
-} as ReducersMap<NS.IReduxState['communications']>);
+} as ReducersMap<NS.IReduxState['communication']>);

@@ -1,18 +1,11 @@
-import { ICommunication, IPlainAction } from 'shared/types/redux';
+import { <%= (reduxConfig && reduxConfig.parts.includes('communication')) ? 'ICommunication, ' : '' %>IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
-  communication: {
-    executing: ICommunication;
+<% (reduxConfig ? reduxConfig.parts : []).forEach(part => { -%>
+  <%= part %>: {
+
   };
-  edit: {
-    //
-  };
-  data: {
-    //
-  };
-  ui: {
-    //
-  };
+<% }) -%>
 }
 
 export type ISomeAction = IPlainAction<'FEATURE_NAME:SOME_ACTION'>;
