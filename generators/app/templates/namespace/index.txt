@@ -1,8 +1,0 @@
-export * from './actionTypes';
-import { ICommunicationState } from 'shared/types/app';
-
-export interface IReduxState {
-  data: {};
-  communication: {};
-  ui: {};
-}
