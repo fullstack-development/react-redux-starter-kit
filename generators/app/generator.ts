@@ -76,9 +76,6 @@ class CreateFeatureGenerator extends Generator {
           value: choice,
           checked: true,
         })),
-        validate(value) {
-          return !!value || 'Feature name should be not empty';
-        },
       },
     ];
 
