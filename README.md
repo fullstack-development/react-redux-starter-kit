@@ -65,3 +65,9 @@ it('renders correctly', () => {
 не совпадающие с эталонными!`
 
 > Чтобы обновить снепшот для конкретного теста можно воспользоваться [it.only(name, fn, timeout)](http://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout) или [describe.only(name, fn)](http://facebook.github.io/jest/docs/en/api.html#describeonlyname-fn), если мы хотим обновить снепшоты для группы тестов.
+
+При возникновении ошибок при тестировании в watch моде:
+
+Для MacOS (`Error: watch EMFILE`): Удалить watchman, глобально установленный через npm или yarn( `yarn global remove watchman`/ `npm uninstall -g watchman` ), если таковой был, и установить повторно через brew.
+
+Для Linux (`Error ENOSPC`): воспользоваться данной командой `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`. [ссылка на issue](https://github.com/facebook/jest/issues/3254)
