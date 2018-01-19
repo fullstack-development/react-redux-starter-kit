@@ -18,15 +18,15 @@ Modular starter kit for React+Redux+React Router projects.
 - [x] Redux-saga for side-effects
 - [x] SCSS
 - [x] BEM methodology
+- [x] Webpack 3.x
 - [x] Tests (Jest, sinon, enzyme)
 - [x] Hot reload
-- [ ] Yeoman blocks generator tasks (features, modules, ... )
-- [ ] ANT Design
-- [ ] Webpack 3.x
-- [ ] Isomorphic
+- [x] Yeoman blocks generator tasks (features, modules, ... )
 - [x] Code splitting (async chunks loading)
 - [x] Code coverage
-- [ ] ~100% tests coverage
+- [ ] ANT Design
+- [ ] Isomorphic
+
 
 ## Тестирование
 
