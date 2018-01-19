@@ -21,7 +21,9 @@ const scssLoader = {
         options: {
           plugins: function () {
             return [
-              autoprefixer({browsers: ['last 2 versions']}),
+              autoprefixer({
+                browsers: ['last 2 versions']
+              }),
             ];
           },
         },
@@ -90,7 +92,11 @@ prodConfig.plugins = [
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    template: 'assets/index.html'
+    template: 'assets/index.html',
+    chunksSortMode: function (a, b) {
+      var order = ["app", "shared", "vendor", "meta"];
+      return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
+    },
   }),
   new webpack.DefinePlugin({
     "process.env": {
@@ -121,6 +127,7 @@ prodConfig.plugins = [
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
+    chunks: ['app'],
     minChunks: (module, count) => module.context && module.context.includes("node_modules"),
   }),
   new webpack.optimize.CommonsChunkPlugin({

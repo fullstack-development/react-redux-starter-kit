@@ -14,7 +14,7 @@
     "build:prod": "better-npm-run build:prod",
     "dev": "npm run watch:dev",
     "prod": "npm run watch:prod",
-    "deploy": "npm run build:prod && better-npm-run deploy",
+    "deploy": "better-npm-run build:gh-pages && better-npm-run deploy",
     "yeoman": "better-npm-run initial:yeoman"
   },
   "betterScripts": {
@@ -48,11 +48,15 @@
         "NODE_ENV": "production"
       }
     },
-    "deploy": {
-      "command": "node_modules/.bin/gh-pages -d build",
+    "build:gh-pages": {
+      "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.js",
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "NODE_ENV_MODE": "gh-pages"
       }
+    },
+    "deploy": {
+      "command": "node_modules/.bin/gh-pages -d build"
     }
   },
   "repository": {

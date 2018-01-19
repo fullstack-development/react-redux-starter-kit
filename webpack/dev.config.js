@@ -10,18 +10,19 @@ const stylelint = require('stylelint');
 const doiuse = require('doiuse');
 
 const chunkhash = process.env.NODE_ENV === 'production' ? 'chunkhash' : 'hash';
+const packageName = process.env.NODE_ENV_MODE === 'gh-pages' ? '/react-redux-starter-kit' : '';
 
 module.exports = {
     target: 'web',
     context: path.resolve(__dirname, '..', 'src'),
     entry: {
         app: [
-          'react-hot-loader/patch',
-          './index.tsx'
+            'react-hot-loader/patch',
+            './index.tsx'
         ],
     },
     output: {
-        publicPath: '/',
+        publicPath: packageName + '/',
         path: path.resolve(__dirname, '..', 'build'),
         filename: 'js/[name]-[' + chunkhash + '].bundle.js',
         chunkFilename: 'js/[name]-[' + chunkhash + '].bundle.js',
@@ -31,13 +32,17 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.(ts|tsx)$/,
-                use: [
-                    { loader: 'react-hot-loader/webpack' },
-                    { loader: 'awesome-typescript-loader' },
-                    { loader: 'tslint-loader' }
+                use: [{
+                        loader: 'react-hot-loader/webpack'
+                    },
+                    {
+                        loader: 'awesome-typescript-loader'
+                    },
+                    {
+                        loader: 'tslint-loader'
+                    }
                 ],
             },
             {
@@ -46,7 +51,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader:  ['style-loader', 'css-loader']
+                loader: ['style-loader', 'css-loader']
             },
             {
                 test: /\.scss$/,
@@ -58,7 +63,9 @@ module.exports = {
                         options: {
                             plugins: function () {
                                 return [
-                                    autoprefixer({browsers: ['last 2 versions']}),
+                                    autoprefixer({
+                                        browsers: ['last 2 versions']
+                                    }),
                                 ];
                             },
                         },
@@ -75,7 +82,7 @@ module.exports = {
                                     }),
                                     stylelint(),
                                     doiuse({
-                                        browsers:['ie >= 11', 'last 2 versions'],
+                                        browsers: ['ie >= 11', 'last 2 versions'],
                                         ignore: ['flexbox', 'rem'],
                                         ignoreFiles: ['**/normalize.css'],
                                     }),
@@ -106,6 +113,7 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
+            chunks: ['app'],
             minChunks: (module, count) => module.context && module.context.includes("node_modules"),
         }),
         new webpack.optimize.CommonsChunkPlugin({
@@ -115,7 +123,11 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'assets/index.html'
+            template: 'assets/index.html',
+            chunksSortMode: function (a, b) {
+                var order = ["app", "shared", "vendor", "meta"];
+                return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
+            },
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('development'),
