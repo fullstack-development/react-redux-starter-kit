@@ -5,7 +5,15 @@
     "noImplicitAny": true,
     "module": "esnext",
     "target": "es5",
-    "lib": ["es2015", "es2017", "es6", "es7", "es5", "dom", "scripthost"],
+    "lib": [
+      "es2015",
+      "es2017",
+      "es6",
+      "es7",
+      "es5",
+      "dom",
+      "scripthost"
+    ],
     "jsx": "react",
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -17,7 +25,8 @@
     "strictFunctionTypes": false
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "webpack/**/*"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": false
