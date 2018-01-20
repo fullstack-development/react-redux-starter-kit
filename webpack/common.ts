@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -15,6 +16,7 @@ const chunkHash = process.env.NODE_ENV === 'production' ? 'chunkhash' : 'hash';
 const hot: boolean = process.env.NODE_ENV === 'production' ? false : true;
 
 export const commonPlugins: webpack.Plugin[] = [
+  new CleanWebpackPlugin(['build'], { root: path.resolve(__dirname, '..') }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'meta',
   }),
@@ -37,6 +39,7 @@ export const commonPlugins: webpack.Plugin[] = [
     },
   }),
   new webpack.DefinePlugin({
+    'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
     'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
   }),
 ];

@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
 import { bind } from 'decko';
 import block from 'bem-cn';
+import { ROUTES_PREFIX } from 'core/constants';
+
+import { Navbar, Nav, NavItem, SelectCallback } from 'react-bootstrap';
 import './styles.scss';
 
 interface IProps {
@@ -37,10 +39,10 @@ class Header extends React.PureComponent<IProps, {}> {
   private onNavItemClick(eventKey: string) {
     if (this.props.onLinkClick) {
       switch (eventKey) {
-      case 'order':
-        this.props.onLinkClick('/order');
-        break;
-      default: return;
+        case 'order':
+          this.props.onLinkClick(`${ROUTES_PREFIX}/order`);
+          break;
+        default: return;
       }
     }
   }
@@ -48,7 +50,7 @@ class Header extends React.PureComponent<IProps, {}> {
   @bind
   private onBrandClick() {
     if (this.props.onLinkClick) {
-      this.props.onLinkClick('/home');
+      this.props.onLinkClick(`${ROUTES_PREFIX}/home`);
     }
   }
 

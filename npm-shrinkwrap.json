@@ -83,6 +83,15 @@
       "integrity": "sha1-AFLBNvUkgAJCjjY4s33ko5gYZB0=",
       "dev": true
     },
+    "@types/clean-webpack-plugin": {
+      "version": "0.1.0",
+      "resolved": "https://registry.npmjs.org/@types/clean-webpack-plugin/-/clean-webpack-plugin-0.1.0.tgz",
+      "integrity": "sha512-IRBc1bH7owKMcuxb0B7pFYEAp7uqWzBjmjO0m8Feh7qiXY7ezzLL3cFOC8KWPxPOP81qyB4yoVJA1EvZ9kiLVg==",
+      "dev": true,
+      "requires": {
+        "@types/webpack": "3.8.3"
+      }
+    },
     "@types/enzyme": {
       "version": "3.1.6",
       "resolved": "https://registry.npmjs.org/@types/enzyme/-/enzyme-3.1.6.tgz",
@@ -3194,6 +3203,15 @@
       "resolved": "https://registry.npmjs.org/clean-stack/-/clean-stack-1.3.0.tgz",
       "integrity": "sha1-noIVAa6XmYbEax1m0tQy2y/UrjE=",
       "dev": true
+    },
+    "clean-webpack-plugin": {
+      "version": "0.1.17",
+      "resolved": "https://registry.npmjs.org/clean-webpack-plugin/-/clean-webpack-plugin-0.1.17.tgz",
+      "integrity": "sha512-Bts/V725v8Ijosp4K1cqppQXgXcrohxoMsg0CV2xL4y/vua1G5pAfHEW/eJIiKF+GNNG72mdjbipxMRFEms7yg==",
+      "dev": true,
+      "requires": {
+        "rimraf": "2.6.1"
+      }
     },
     "cli-boxes": {
       "version": "1.0.0",
