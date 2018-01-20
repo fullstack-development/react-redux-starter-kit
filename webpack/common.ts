@@ -15,6 +15,9 @@ import { ROUTES_PREFIX } from '../src/core/constants';
 const chunkHash = process.env.NODE_ENV === 'production' ? 'chunkhash' : 'hash';
 const hot: boolean = process.env.NODE_ENV === 'production' ? false : true;
 
+// http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
+const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
+
 export const commonPlugins: webpack.Plugin[] = [
   new CleanWebpackPlugin(['build'], { root: path.resolve(__dirname, '..') }),
   new webpack.optimize.CommonsChunkPlugin({
@@ -42,7 +45,16 @@ export const commonPlugins: webpack.Plugin[] = [
     'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
     'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
   }),
-];
+].concat(isNeed404Page ? (
+  new HtmlWebpackPlugin({
+    filename: '404.html',
+    template: 'assets/index.html',
+    chunksSortMode(a, b) {
+      const order = ['app', 'shared', 'vendor', 'meta'];
+      return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
+    },
+  })
+) : []);
 
 export const commonRules: webpack.Rule[] = [
   {
