@@ -12,17 +12,16 @@ import * as doiuse from 'doiuse';
 
 import { ROUTES_PREFIX } from '../src/core/constants';
 
-const chunkHash = process.env.NODE_ENV === 'production' ? 'chunkhash' : 'hash';
-const hot: boolean = process.env.NODE_ENV === 'production' ? false : true;
+const chunkName = process.env.NODE_ENV === 'production' ? 'id' : 'name';
+const chunkHash = process.env.WATCH_MODE ? 'hash' : 'chunkhash';
+const hot = !!process.env.WATCH_MODE;
 
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
 
 export const commonPlugins: webpack.Plugin[] = [
   new CleanWebpackPlugin(['build'], { root: path.resolve(__dirname, '..') }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'meta',
-  }),
+  new webpack.HashedModuleIdsPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     chunks: ['app'],
@@ -33,15 +32,20 @@ export const commonPlugins: webpack.Plugin[] = [
     chunks: ['app'],
     minChunks: (module, count) => module.context && module.context.includes('src/shared'),
   }),
+  new webpack.optimize.CommonsChunkPlugin({
+    name: 'manifest',
+    minChunks: Infinity,
+  }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     template: 'assets/index.html',
     chunksSortMode(a, b) {
-      const order = ['app', 'shared', 'vendor', 'meta'];
+      const order = ['app', 'shared', 'vendor', 'manifest'];
       return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
     },
   }),
   new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
     'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
   }),
@@ -117,8 +121,8 @@ export const commonConfig: webpack.Configuration = {
   output: {
     publicPath: ROUTES_PREFIX + '/',
     path: path.resolve(__dirname, '..', 'build'),
-    filename: 'js/[name]-[' + chunkHash + '].bundle.js',
-    chunkFilename: 'js/[name]-[' + chunkHash + '].bundle.js',
+    filename: `js/[name]-[${chunkHash}].bundle.js`,
+    chunkFilename: `js/[${chunkName}]-[${chunkHash}].bundle.js`,
   },
   resolve: {
     modules: ['node_modules', 'src'],

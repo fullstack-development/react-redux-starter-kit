@@ -28,6 +28,7 @@
       "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.ts",
       "env": {
         "NODE_ENV": "development",
+        "WATCH_MODE": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
@@ -35,6 +36,7 @@
       "command": "node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.ts",
       "env": {
         "NODE_ENV": "production",
+        "WATCH_MODE": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
@@ -53,11 +55,9 @@
       }
     },
     "build:gh-pages": {
-      "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.ts",
+      "command": "npm-better-run build:prod",
       "env": {
-        "NODE_ENV": "production",
-        "NODE_ENV_MODE": "gh-pages",
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "NODE_ENV_MODE": "gh-pages"
       }
     },
     "deploy": {

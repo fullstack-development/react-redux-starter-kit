@@ -2,14 +2,17 @@ import * as webpack from 'webpack';
 
 import { commonPlugins, commonScssLoaders, commonRules, commonConfig } from './common';
 
+const withHot = !!process.env.WATCH_MODE;
+
 const rules: webpack.Rule[] = commonRules.concat([
   {
     test: /\.(ts|tsx)$/,
-    use: [
-      'react-hot-loader/webpack',
-      'awesome-typescript-loader',
-      'tslint-loader',
-    ],
+    use: ([] as string[])
+      .concat(withHot ? 'react-hot-loader/webpack' : [])
+      .concat([
+        'awesome-typescript-loader',
+        'tslint-loader',
+      ]),
   },
   {
     test: /\.css$/,
@@ -21,21 +24,16 @@ const rules: webpack.Rule[] = commonRules.concat([
   },
 ]);
 
-const plugins: webpack.Plugin[] = commonPlugins.concat([
-  new webpack.HotModuleReplacementPlugin(),
-  new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify('development'),
-  }),
-  new webpack.NamedModulesPlugin(),
-]);
+const plugins: webpack.Plugin[] = commonPlugins
+  .concat(withHot ? new webpack.HotModuleReplacementPlugin() : [])
+  .concat(new webpack.NamedModulesPlugin());
 
 const devConfig: webpack.Configuration = {
   ...commonConfig,
   entry: {
-    app: [
-      'react-hot-loader/patch',
-      './index.tsx',
-    ],
+    app: ([] as string[])
+      .concat(withHot ? 'react-hot-loader/patch' : [])
+      .concat('./index.tsx'),
   },
   module: {
     rules,
