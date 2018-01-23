@@ -22,3 +22,8 @@ declare module 'shared/*';
 declare module 'decko';
 declare module 'react-hot-loader';
 declare module 'enzyme-adapter-react-16';
+declare module 'postcss-reporter';
+declare module 'postcss-easy-import';
+declare module 'postcss-scss';
+declare module 'stylelint';
+declare module 'doiuse';
