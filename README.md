@@ -68,6 +68,10 @@ it('renders correctly', () => {
 
 При возникновении ошибок при тестировании в watch моде:
 
-Для MacOS (`Error: watch EMFILE`): Удалить watchman, глобально установленный через npm или yarn( `yarn global remove watchman`/ `npm uninstall -g watchman` ), если таковой был, и установить повторно через brew.
+Для MacOS (`Error: watch EMFILE`): Удалить watchman, глобально установленный через npm или yarn, если таковой был, и установить повторно через brew.
 
-Для Linux (`Error ENOSPC`): воспользоваться данной командой `echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`. [ссылка на issue](https://github.com/facebook/jest/issues/3254)
+Для Linux (`Error ENOSPC`): воспользоваться данной командой:
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+``` 
+[ссылка на issue](https://github.com/facebook/jest/issues/3254)
