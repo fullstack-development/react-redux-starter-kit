@@ -1,10 +1,10 @@
-import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
+import { makeFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import SearchRepositoriesInput from './view/SearchInput/SearchInput';
 
 const containers = { SearchRepositoriesInput };
 
-const entry = getFeatureEntry(
+const entry = makeFeatureEntry(
   containers, null, null,
 );
 

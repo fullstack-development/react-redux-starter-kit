@@ -11,31 +11,31 @@ interface ISPart<S> { selectors: S; }
 
 type ResultEntry<C, A, S> = C & A & S & IReduxEntry;
 
-function getFeatureEntry<C extends Containers<C>, A extends ActionCreators<A>, S extends Selectors<S>>(
+function makeFeatureEntry<C extends Containers<C>, A extends ActionCreators<A>, S extends Selectors<S>>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<ICPart<C>, IAPart<A>, ISPart<S>>;
 
-function getFeatureEntry<C extends Containers<C>, A extends ActionCreators<A>, S extends null>(
+function makeFeatureEntry<C extends Containers<C>, A extends ActionCreators<A>, S extends null>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<ICPart<C>, IAPart<A>, {}>;
 
-function getFeatureEntry<C extends Containers<C>, A extends null, S extends Selectors<S>>(
+function makeFeatureEntry<C extends Containers<C>, A extends null, S extends Selectors<S>>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<ICPart<C>, {}, ISPart<S>>;
 
-function getFeatureEntry<C extends Containers<C>, A extends null, S extends null>(
+function makeFeatureEntry<C extends Containers<C>, A extends null, S extends null>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<ICPart<C>, {}, {}>;
 
-function getFeatureEntry<C extends null, A extends ActionCreators<A>, S extends Selectors<S>>(
+function makeFeatureEntry<C extends null, A extends ActionCreators<A>, S extends Selectors<S>>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<{}, IAPart<A>, ISPart<S>>;
 
-function getFeatureEntry<C extends null, A extends ActionCreators<A>, S extends null>(
+function makeFeatureEntry<C extends null, A extends ActionCreators<A>, S extends null>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<{}, IAPart<A>, {}>;
 
-function getFeatureEntry<C extends null, A extends null, S extends Selectors<S>>(
+function makeFeatureEntry<C extends null, A extends null, S extends Selectors<S>>(
   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<{}, {}, ISPart<S>>;
 
 // function getFeatureEntry<C extends null, A extends null, S extends null>(
 //   containers: C, actions: A, selectors: S, redux?: IReduxEntry): ResultEntry<{}, {}, {}>;
 
-function getFeatureEntry(
+function makeFeatureEntry(
   containers: Containers<any> | null,
   actions: ActionCreators<any> | null,
   selectors: Selectors<any> | null,
@@ -44,4 +44,4 @@ function getFeatureEntry(
   return { actions, selectors, containers, ...redux };
 }
 
-export { getFeatureEntry };
+export { makeFeatureEntry };
