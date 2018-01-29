@@ -7,7 +7,7 @@ import { IProps as ITextInputProps } from 'shared/view/elements/TextInput/TextIn
 describe('(Shared) View', () => {
   describe('(Component) GenericDateInput', () => {
     it('should match snapshot', () => {
-      expect(shallow(<GenericDateInput />).debug()).toMatchSnapshot();
+      expect(shallow(<GenericDateInput />)).toMatchSnapshot();
     });
 
     it('should call onChange prop, if onChange called in TextInput composite component', () => {

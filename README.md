@@ -34,19 +34,19 @@ Modular starter kit for React+Redux+React Router projects.
 
 ### Запуск
 
-Все перечисленные команды запускают тесты в watch-режиме.  
-`npm test` или `npm t` - запуск тестов.  
-`npm run test-debug` - запуск с возможностью подключения для отладки
+* `npm test` или `npm t` - разовый прогон тестов
+* `npm run test:watch` - запуск тестов в watch-режиме
+* `npm run test:debug` - запуск с возможностью подключения для отладки
 (
   [Chrome](http://facebook.github.io/jest/docs/en/troubleshooting.html#content) /
   [VSCode](http://facebook.github.io/jest/docs/en/troubleshooting.html#debugging-in-vs-code) /
   [Webstorm](http://facebook.github.io/jest/docs/en/troubleshooting.html#debugging-in-webstorm)
-).  
-`npm run test-coverage` - запуск с генерацией карты покрытия кода. Результаты можно открыть в браузере `<projectDir>/coverage/lcov-report/index.html`.
+).
+* `npm run test:coverage` - запуск с генерацией карты покрытия кода. Результаты можно открыть в браузере `<projectDir>/coverage/lcov-report/index.html`.
 
 ### [Snapshot Testing](http://facebook.github.io/jest/docs/en/snapshot-testing.html#content)
 
-```
+```typescript
 import React from 'react';
 import { shallow } from 'enzyme';
 import GenericDateInput from './../GenericDateInput';
