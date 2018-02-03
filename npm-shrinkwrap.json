@@ -14373,22 +14373,23 @@
       "dev": true
     },
     "tslint": {
-      "version": "5.8.0",
-      "resolved": "https://registry.npmjs.org/tslint/-/tslint-5.8.0.tgz",
-      "integrity": "sha1-H0mtWy53x2w69N3K5VKuTjYS6xM=",
+      "version": "5.9.1",
+      "resolved": "https://registry.npmjs.org/tslint/-/tslint-5.9.1.tgz",
+      "integrity": "sha1-ElX4ej/1frCw4fDmEKi0dIBGya4=",
       "dev": true,
       "requires": {
         "babel-code-frame": "6.22.0",
         "builtin-modules": "1.1.1",
         "chalk": "2.3.0",
-        "commander": "2.9.0",
+        "commander": "2.13.0",
         "diff": "3.2.0",
         "glob": "7.1.1",
+        "js-yaml": "3.7.0",
         "minimatch": "3.0.4",
         "resolve": "1.3.2",
         "semver": "5.3.0",
         "tslib": "1.8.1",
-        "tsutils": "2.13.1"
+        "tsutils": "2.21.0"
       },
       "dependencies": {
         "ansi-styles": {
@@ -14426,6 +14427,12 @@
             "escape-string-regexp": "1.0.5",
             "supports-color": "4.5.0"
           }
+        },
+        "commander": {
+          "version": "2.13.0",
+          "resolved": "https://registry.npmjs.org/commander/-/commander-2.13.0.tgz",
+          "integrity": "sha512-MVuS359B+YzaWqjCL/c+22gfryv+mCBPHAv3zyVI2GN8EY6IRP8VwtasXn8jyyhvvq84R4ImN1OKRtcbIasjYA==",
+          "dev": true
         },
         "has-flag": {
           "version": "2.0.0",
@@ -14486,18 +14493,18 @@
       }
     },
     "tslint-react": {
-      "version": "3.2.0",
-      "resolved": "https://registry.npmjs.org/tslint-react/-/tslint-react-3.2.0.tgz",
-      "integrity": "sha1-hR+1BSAcY9A0PFFybmNk9+mtLpk=",
+      "version": "3.4.0",
+      "resolved": "https://registry.npmjs.org/tslint-react/-/tslint-react-3.4.0.tgz",
+      "integrity": "sha512-zs4UgLmKfKuXuUh976QBV1zyZ/41gcKfww4IHXrgDpNkvFKl9AiDvYH6CgcqT8yH1DKqfv8KHlHqa0hStEoMxA==",
       "dev": true,
       "requires": {
-        "tsutils": "2.13.1"
+        "tsutils": "2.21.0"
       }
     },
     "tsutils": {
-      "version": "2.13.1",
-      "resolved": "https://registry.npmjs.org/tsutils/-/tsutils-2.13.1.tgz",
-      "integrity": "sha512-XMOEvc2TiYesVSOJMI7OYPnBMSgcvERuGW5Li/J+2A0TuH607BPQnOLQ82oSPZCssB8c9+QGi6qhTBa/f1xQRA==",
+      "version": "2.21.0",
+      "resolved": "https://registry.npmjs.org/tsutils/-/tsutils-2.21.0.tgz",
+      "integrity": "sha512-zlOHTYtTwvTiKxUyAU8wiKzPpAgwZrGjb7AY18VUlxuCgBiTMVorIl5HjrCT8V64Hm34RI1BZITJMVQpBLMxVg==",
       "dev": true,
       "requires": {
         "tslib": "1.8.1"
@@ -14554,9 +14561,9 @@
       "integrity": "sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c="
     },
     "typescript": {
-      "version": "2.6.2",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.6.2.tgz",
-      "integrity": "sha1-PFtv1/beCRQmkCfwPAlGdY92c6Q="
+      "version": "2.7.1",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-2.7.1.tgz",
+      "integrity": "sha512-bqB1yS6o9TNA9ZC/MJxM0FZzPnZdtHj0xWK/IZ5khzVqdpGul/R/EIiHRgFXlwTD7PSIaYVnGKq1QgMCu2mnqw=="
     },
     "typings": {
       "version": "2.1.1",
@@ -14626,7 +14633,7 @@
         "thenify": "3.2.1",
         "throat": "3.0.0",
         "touch": "1.0.0",
-        "typescript": "2.6.2",
+        "typescript": "2.7.1",
         "xtend": "4.0.1",
         "zip-object": "0.1.0"
       },

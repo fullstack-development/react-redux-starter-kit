@@ -27,7 +27,7 @@ function featureConnect<L extends IDictionary<FeatureLoader>>(loaders: L, preloa
       public state: IState = { bundles: {} };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore: (entry: IFeatureEntry<any, any, any>) => void;
+      private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
       public componentWillMount() {
         this.load();

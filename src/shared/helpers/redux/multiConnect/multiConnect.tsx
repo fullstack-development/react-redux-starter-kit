@@ -27,13 +27,13 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
       public static contextTypes = {
         store: PropTypes.object,
       };
-      public context: { store: Store<IAppReduxState> };
+      public context!: { store: Store<IAppReduxState> };
       public displayName: string = `(MultiConnect) ${WrappedComponent.displayName}`;
 
-      private ConnectedComponent: React.ComponentClass<
+      private ConnectedComponent!: React.ComponentClass<
         Omit<IWrappedComponentProps, keyof (TStateProps & TDispatchProps)> & TOwnProps & IMultiConnectProps
         >;
-      private instanceKey: string;
+      private instanceKey!: string;
 
       public componentWillMount() {
         this.instanceKey = (this.props.instanceKey as string) || uuid();

@@ -22,6 +22,7 @@
     "noUnusedParameters": false,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
+    "strictPropertyInitialization": true,
     "strictFunctionTypes": false
   },
   "include": [

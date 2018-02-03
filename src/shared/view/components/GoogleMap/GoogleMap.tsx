@@ -28,9 +28,9 @@ class GoogleMap extends React.Component<IProps> {
     showNewPoint: true,
   };
   private b = block('google-map');
-  private map: google.maps.Map | null;
-  private geocoder: google.maps.Geocoder | null;
-  private mapContainer: HTMLDivElement | null;
+  private map: google.maps.Map | null = null;
+  private geocoder: google.maps.Geocoder | null = null;
+  private mapContainer: HTMLDivElement | null = null;
 
   public componentWillReceiveProps(nextProps: IProps) {
     const isNew: boolean = nextProps.lat !== this.props.lat || nextProps.lng !== this.props.lng;
