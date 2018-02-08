@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as block from 'bem-cn';
 import { bind } from 'decko';
 
-import './SomeComponent.styl';
+import './SomeComponent.scss';
 
 interface IProps {
   

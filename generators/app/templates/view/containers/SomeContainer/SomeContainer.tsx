@@ -9,7 +9,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IReduxState } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
 
-import './SomeContainer.styl';
+import './SomeContainer.scss';
 
 interface IOwnProps {
   
