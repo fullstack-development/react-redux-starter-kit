@@ -158,11 +158,16 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 }
 
-const connectedComponent = connect<IStateProps, IDispatchProps, IOwnProps>(mapState, mapDispatch)(OrderFormLayout);
-const withFeatures = featureConnect({
+const featureLoaders = {
   locationSelectEntry: locationSelect.loadEntry,
   categorySelectEntry: categorySelect.loadEntry,
   dynamicFieldsEntry: dynamicFields.loadEntry,
-})(connectedComponent);
+};
 
-export default withFeatures;
+export default (
+  featureConnect(featureLoaders)(
+    connect(mapState, mapDispatch)(
+      OrderFormLayout,
+    ),
+  )
+);
