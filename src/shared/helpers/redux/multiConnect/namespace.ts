@@ -9,11 +9,6 @@ export interface IMultiInstanceState<TReduxState> {
   [instanceKey: string]: TReduxState;
 }
 
-export interface IMultiAction {
-  _instanceKey?: string;
-  type: any;
-}
-
 export interface IAddInstance {
   type: '@@MULTI_CONNECT:ADD_INSTANCE';
   payload: {
