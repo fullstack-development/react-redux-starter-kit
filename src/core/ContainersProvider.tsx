@@ -18,12 +18,14 @@ interface IEntryWithContainer<K extends string, T> {
   containers: {[D in K]: T };
 }
 
+type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
+
 type LoadersMap = {
-  [P in Container]: () => Promise<IEntryWithContainer<P, IContainerTypes[P]>>;
+  [P in Container]: Loader<P>;
 };
 
 type GenericLoadersMap = {
-  [P in Container]: () => Promise<IEntryWithContainer<Container, IContainerTypes[Container]>>;
+  [P in Container]: Loader<Container>;
 };
 
 const containerLoadersDictionary: LoadersMap = {
@@ -66,17 +68,21 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       }
 
       @bind
-      private load() {
-        containers.forEach((key) => {
-          (containerLoadersDictionary as GenericLoadersMap)[key]().then(bundle => {
-            this.connectFeatureToStore(bundle);
-            const container = bundle.containers[key];
-            if (!container) {
-              throw new Error(`ContainersProvider did not find the container "${key}"`);
-            }
-            this.saveContainerToState && this.saveContainerToState(container, key);
-          });
-        });
+      private async load(): Promise<void> {
+        await Promise.all(containers.map(key => this.loadFeatureContainer(key)));
+      }
+
+      @bind
+      private async loadFeatureContainer(containerKey: Container): Promise<void> {
+        const bundle = await (containerLoadersDictionary as GenericLoadersMap)[containerKey]();
+        const container = bundle.containers[containerKey];
+
+        this.connectFeatureToStore(bundle);
+        if (!container) {
+          throw new Error(`ContainersProvider did not find the container "${containerKey}"`);
+        }
+
+        this.saveContainerToState && this.saveContainerToState(container, containerKey);
       }
 
       private saveContainerToState: null | ((container: React.ComponentType<any>, key: string) => void) =
