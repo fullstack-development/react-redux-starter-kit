@@ -2,7 +2,7 @@
 
 * Сборщик проекта: [webpack](https://webpack.js.org/)  
 * Основной язык: [typescript](https://www.typescriptlang.org/)  
-* CSS-препроцессор: [stylus](http://stylus-lang.com/)  
+* CSS-препроцессор: [SCSS](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)  
 * Для построения интерфейсов используется связка [React](https://reactjs.org/)+[Redux](https://redux.js.org/)+[React-Router](https://reacttraining.com/react-router/web) и методология [BEM](https://en.bem.info/)  
 * Для обработки сайд-эффектов [redux-saga](https://redux-saga.js.org/) (в основном это асинхронные действия требующие логирования в редакс-стейте)  
 * Для взаимодействия с сервером написан сервис Api на базе библиотеки [axios](https://github.com/axios/axios)  
