@@ -1,4 +1,4 @@
-import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
+import { makeFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import * as actions from './redux/actions';
 import * as selectors from './redux/data/selectors';
@@ -8,7 +8,7 @@ import getSaga from './redux/sagas';
 
 const containers = { DynamicFields };
 
-const entry = getFeatureEntry(
+const entry = makeFeatureEntry(
   containers, actions, selectors,
   {
     reducers: { dynamicFields: reducer },

@@ -1,4 +1,4 @@
-import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
+import { makeFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import * as selectors from './redux/data/selectors';
 import * as actions from './redux/actions';
@@ -8,7 +8,7 @@ import LocationSelect from './view/containers/LocationSelect/LocationSelect';
 
 const containers = { LocationSelect };
 
-const entry = getFeatureEntry(
+const entry = makeFeatureEntry(
   containers, actions, selectors,
   {
     reducers: { locationSelect: reducer },

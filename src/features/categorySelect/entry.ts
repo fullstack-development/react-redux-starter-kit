@@ -1,4 +1,4 @@
-import { getFeatureEntry } from 'shared/helpers/makeFeatureEntry';
+import { makeFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import * as selectors from './redux/selectors';
 import * as actions from './redux/actions';
@@ -6,7 +6,7 @@ import * as containers from './view/containers';
 import reducer from './redux/reducers';
 import getSaga from './redux/sagas';
 
-const entry = getFeatureEntry(
+const entry = makeFeatureEntry(
   containers, actions, selectors,
   {
     reducers: { categorySelect: reducer },
