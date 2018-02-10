@@ -18,7 +18,8 @@ function makeEditFieldsReducer<A extends EditFieldsReducerAction<A['payload']['f
             if (error) {
               return error;
             } else {
-              const validator = validators && validators[field];
+              const validator = validators ? validators[field] : void 0;
+
               return validator ? validator({ ...state[field] as any, value }, state[field]) : '';
             }
           })();

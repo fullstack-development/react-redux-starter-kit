@@ -5,7 +5,7 @@
   ],
   "rulesDirectory": "./node_modules/tslint-eslint-rules/dist/rules",
   "jsRules": {
-    "indent": [ true, "spaces", 2],
+    "indent": [true, "spaces", 2],
     "class-name": true,
     "comment-format": [
       true,
@@ -47,7 +47,7 @@
     ]
   },
   "rules": {
-    "no-unused-expression": false,
+    "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-implicit-dependencies": false,
     "no-object-literal-type-assertion": false,
     "ordered-imports": false,

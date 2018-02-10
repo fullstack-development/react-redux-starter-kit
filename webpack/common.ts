@@ -137,6 +137,13 @@ export const commonConfig: webpack.Configuration = {
     lazy: false,
     historyApiFallback: true,
     disableHostCheck: true,
-    stats: 'errors-only',
+    stats: {
+      colors: true,
+      errors: true,
+      errorDetails: true,
+      warnings: true,
+      assets: false,
+      modules: false,
+    },
   },
 };

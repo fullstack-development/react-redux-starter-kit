@@ -50,8 +50,8 @@ class HomeLayout extends React.PureComponent<Props, {}> {
   }
 }
 
-const withFeatures = featureConnect({
-  searchRepositoriesEntry: searchRepositories.loadEntry,
-})(HomeLayout);
-
-export default withFeatures;
+export default (
+  featureConnect({ searchRepositoriesEntry: searchRepositories.loadEntry })(
+    HomeLayout,
+  )
+);
