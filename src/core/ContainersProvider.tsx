@@ -51,7 +51,7 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       public state: IState = { containers: {} };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore: (entry: IFeatureEntry<any, any, any>) => void;
+      private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
       public componentWillMount() {
         this.load();

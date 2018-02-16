@@ -173,8 +173,8 @@
     "stylelint": "^7.10.1",
     "stylelint-order": "^0.4.4",
     "ts-loader": "^2.0.3",
-    "ts-node": "^3.3.0",
-    "typescript": "^2.7.1",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.7.2",
     "typings": "^2.1.1",
     "url-loader": "^0.5.8",
     "uuid": "^3.1.0"

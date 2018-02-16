@@ -24,8 +24,8 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
   type IWrappedComponentProps = TStateProps & TDispatchProps;
   // tslint:disable-next-line:max-line-length
   return function HOC<TOwn extends TOwnProps & IWrappedComponentProps>(WrappedComponent: React.ComponentType<TOwn>): MultiComponent<Omit<TOwn, keyof IWrappedComponentProps>> {
-
-    class MultiConnector extends React.PureComponent<Omit<TOwn, keyof IWrappedComponentProps> & IMultiConnectProps> {
+    type Props = Omit<TOwn, keyof IWrappedComponentProps> & IMultiConnectProps;
+    class MultiConnector extends React.PureComponent<Props> {
       public static contextTypes = {
         store: PropTypes.object,
       };
@@ -35,7 +35,7 @@ const multiConnect = <TReduxState, TStateProps, TDispatchProps, TOwnProps>(
       private ConnectedComponent: MultiComponent<TOwn>;
       private instanceKey: string;
 
-      constructor(props: TOwnProps & IMultiConnectProps, context?: any) {
+      constructor(props: Props, context?: any) {
         super(props, context);
 
         this.instanceKey = (this.props.instanceKey as string) || uuid();
