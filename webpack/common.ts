@@ -13,8 +13,8 @@ import * as doiuse from 'doiuse';
 import { ROUTES_PREFIX } from '../src/core/constants';
 
 const chunkName = process.env.NODE_ENV === 'production' ? 'id' : 'name';
-const chunkHash = process.env.WATCH_MODE ? 'hash' : 'chunkhash';
-const hot = !!process.env.WATCH_MODE;
+const chunkHash = process.env.WATCH_MODE === 'true' ? 'hash' : 'chunkhash';
+const hot = process.env.WATCH_MODE === 'true';
 
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;

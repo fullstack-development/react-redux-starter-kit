@@ -2,7 +2,7 @@ import * as webpack from 'webpack';
 
 import { commonPlugins, commonScssLoaders, commonRules, commonConfig } from './common';
 
-const withHot = !!process.env.WATCH_MODE;
+const withHot = process.env.WATCH_MODE === 'true';
 
 const rules: webpack.Rule[] = commonRules.concat([
   {
