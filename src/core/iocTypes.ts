@@ -1,6 +1,6 @@
 const TYPES = {
-  Store: Symbol('Store'),
-  connectEntryToStore: Symbol('connectFeatureToStore'),
+  Store: 'Store',
+  connectEntryToStore: 'connectFeatureToStore',
 };
 
 export default TYPES;

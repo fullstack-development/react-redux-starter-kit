@@ -1,6 +1,11 @@
 import * as webpack from 'webpack';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import { commonPlugins, commonScssLoaders, commonRules, commonConfig } from './common';
+import {
+  commonPlugins,
+  commonScssLoaders,
+  commonRules, commonConfig,
+} from './common';
 
 const withHot = process.env.WATCH_MODE === 'true';
 
@@ -23,17 +28,22 @@ const rules: webpack.Rule[] = commonRules.concat([
     use: (['style-loader'] as webpack.Loader[]).concat(commonScssLoaders),
   },
 ]);
+// .concat(extractedStyleRules);
 
 const plugins: webpack.Plugin[] = commonPlugins
   .concat(withHot ? new webpack.HotModuleReplacementPlugin() : [])
-  .concat(new webpack.NamedModulesPlugin());
+  .concat(new webpack.NamedModulesPlugin())
+  .concat(new ExtractTextPlugin({
+    filename: 'css/[name]-[chunkhash].css',
+    allChunks: true,
+  }));
 
 const devConfig: webpack.Configuration = {
   ...commonConfig,
   entry: {
     app: ([] as string[])
       .concat(withHot ? 'react-hot-loader/patch' : [])
-      .concat('./index.tsx'),
+      .concat('./client.tsx'),
   },
   module: {
     rules,

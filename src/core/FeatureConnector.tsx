@@ -9,6 +9,7 @@ import { IDictionary, IFeatureEntry, Omit } from 'shared/types/app';
 type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
 
 interface IState {
+  bootstrapped: boolean;
   bundles: {
     [key: string]: IFeatureEntry<any, any, any>;
   };
@@ -24,13 +25,20 @@ function featureConnect<L extends IDictionary<FeatureLoader>>(loaders: L, preloa
 
     @injectable()
     class FeatureConnector extends React.PureComponent<Omit<Props, keyof L>, IState> {
-      public state: IState = { bundles: {} };
+      public state: IState = { bundles: {}, bootstrapped: false };
 
       @inject(TYPES.connectEntryToStore)
       private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
-      public componentWillMount() {
-        this.load();
+      public async bootstrap() {
+        await this.load();
+        this.setState({ bootstrapped: true });
+      }
+
+      public componentDidMount() {
+        if (!this.state.bootstrapped) {
+          this.load();
+        }
       }
 
       public componentWillUnmount() {
@@ -46,16 +54,19 @@ function featureConnect<L extends IDictionary<FeatureLoader>>(loaders: L, preloa
       }
 
       @bind
-      private load() {
+      private async load() {
         const keys: Array<keyof L> = Object.keys(loaders);
-        keys.forEach((key) => {
-          loaders[key]().then(bundle => {
-            this.connectFeatureToStore(bundle);
-            if (this.saveBundleToState) {
-              this.saveBundleToState(bundle, key);
-            }
-          });
-        });
+
+        await Promise.all(
+          keys.map((key) => {
+            return loaders[key]().then(bundle => {
+              this.connectFeatureToStore(bundle);
+              if (this.saveBundleToState) {
+                this.saveBundleToState(bundle, key);
+              }
+            });
+          }),
+        );
       }
 
       private saveBundleToState: null | ((bundle: IFeatureEntry<any, any, any>, key: string) => void) =

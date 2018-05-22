@@ -55,7 +55,7 @@ function configureApp(data?: IAppData): IAppData {
       }
     }
 
-    if (sagas) {
+    if (sagas && __CLIENT__) {
       sagas.forEach((saga: RootSaga) => {
         if (!connectedSagas.includes(saga) && runSaga) {
           runSaga(saga(dependencies));

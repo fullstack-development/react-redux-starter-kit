@@ -2,6 +2,7 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -17,10 +18,10 @@ const chunkHash = process.env.WATCH_MODE === 'true' ? 'hash' : 'chunkhash';
 const hot = process.env.WATCH_MODE === 'true';
 
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
-const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
+// const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
 
 export const commonPlugins: webpack.Plugin[] = [
-  new CleanWebpackPlugin(['build'], { root: path.resolve(__dirname, '..') }),
+  new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new webpack.HashedModuleIdsPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -47,18 +48,20 @@ export const commonPlugins: webpack.Plugin[] = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
-    'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
+    '__HOST__': JSON.stringify('http://localhost:3000'),
+    '__LANG__': JSON.stringify(process.env.LANG || 'en'),
   }),
-].concat(isNeed404Page ? (
-  new HtmlWebpackPlugin({
-    filename: '404.html',
-    template: 'assets/index.html',
-    chunksSortMode(a, b) {
-      const order = ['app', 'shared', 'vendor', 'meta'];
-      return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
-    },
-  })
-) : []);
+];
+// .concat(isNeed404Page ? (
+//   new HtmlWebpackPlugin({
+//     filename: '404.html',
+//     template: 'assets/index.html',
+//     chunksSortMode(a, b) {
+//       const order = ['app', 'shared', 'vendor', 'manifest'];
+//       return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
+//     },
+//   })
+// ) : []);
 
 export const commonRules: webpack.Rule[] = [
   {
@@ -115,12 +118,29 @@ export const commonScssLoaders: webpack.Loader[] = [
   },
 ];
 
+export const extractedStyleRules: webpack.Rule[] = [
+  {
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: 'css-loader',
+    }),
+  },
+  {
+    test: /\.scss$/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: commonScssLoaders,
+    }),
+  },
+];
+
 export const commonConfig: webpack.Configuration = {
   target: 'web',
   context: path.resolve(__dirname, '..', 'src'),
   output: {
     publicPath: ROUTES_PREFIX + '/',
-    path: path.resolve(__dirname, '..', 'build'),
+    path: path.resolve(__dirname, '../static/client'),
     filename: `js/[name]-[${chunkHash}].bundle.js`,
     chunkFilename: `js/[${chunkName}]-[${chunkHash}].bundle.js`,
   },

@@ -1,33 +1,23 @@
 import * as webpack from 'webpack';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import { commonPlugins, commonScssLoaders, commonRules, commonConfig } from './common';
+import { commonPlugins, extractedStyleRules, commonRules, commonConfig } from './common';
 
-const rules = commonRules.concat([
-  {
-    test: /\.(ts|tsx)$/,
-    use: [
-      'awesome-typescript-loader',
-      'tslint-loader',
-    ],
-  },
-  {
-    test: /\.css$/,
-    use: ExtractTextPlugin.extract({
-      use: 'css-loader',
-    }),
-  },
-  {
-    test: /\.scss$/,
-    use: ExtractTextPlugin.extract({
-      use: commonScssLoaders,
-    }),
-  },
-]);
+const rules = commonRules
+  .concat(extractedStyleRules)
+  .concat([
+    {
+      test: /\.(ts|tsx)$/,
+      use: [
+        'awesome-typescript-loader',
+        'tslint-loader',
+      ],
+    },
+  ]);
 
 const plugins = commonPlugins.concat([
   new ExtractTextPlugin({
-    filename: 'css/[name].css',
+    filename: 'css/[name]-[chunkhash].css',
     allChunks: true,
   }),
   new webpack.optimize.UglifyJsPlugin({
@@ -49,7 +39,7 @@ const plugins = commonPlugins.concat([
 const prodConfig: webpack.Configuration = {
   ...commonConfig,
   entry: {
-    app: './index.tsx',
+    app: './client.tsx',
   },
   module: {
     rules,

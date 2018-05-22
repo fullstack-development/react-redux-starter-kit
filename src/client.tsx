@@ -2,18 +2,21 @@ import 'reflect-metadata';
 import 'babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import bootstrapper from 'react-async-bootstrapper';
 import configureApp from 'core/configureApp';
 
 import { AppContainer } from 'react-hot-loader';
-import App from 'core/App';
+import { App } from 'core/App';
 
 const version: string = '0.0.1';
 
 let appData = configureApp();
-const render = (component: React.ReactElement<any>) => ReactDOM.render(
-  <AppContainer>{component}</AppContainer>,
-  document.getElementById('root'),
-);
+function render(component: React.ReactElement<any>) {
+  const app = <AppContainer>{component}</AppContainer>;
+  bootstrapper(app)
+    .then(() => ReactDOM.hydrate(app, document.getElementById('root')))
+    .catch((err: any) => console.log('Eek, error!', err));
+}
 
 /* Start application */
 render(<App modules={appData.modules} store={appData.store} />);
