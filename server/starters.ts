@@ -16,6 +16,10 @@ function startDevelopmentMode(
   server.use(hotMiddleware(clientCompiler));
 
   server.get('*', (req, res, next) => {
+    if (/\.(js|css|ico)\b/.test(req.path)) {
+      return;
+    }
+
     // res.isomorphic contains `compilation` & `exports` properties:
     // - `compilation` contains the webpack-isomorphic-compiler compilation result
     // - `exports` contains the server exports, usually one or more render functions
@@ -35,21 +39,22 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   );
   if (err || stats.hasErrors()) {
     process.stdout.write(`${err}\n`);
-    // process.stdout.write(`${stats.errors}\n`);
+    process.stdout.write(`${stats.toString('errors-only')}\n`);
     return;
   }
 
   process.stdout.write(stats.toString({ colors: true }) + '\n');
 
-  // const clientStats = stats.stats.find(stat => stat.compilation.name === 'client-web');
-  // const serverStats = stats.stats.find(stat => stat.compilation.name === 'server-web');
-  // const assets = extractAssets(clientStats.compilation);
-  // const render = require('../static/server').default;
+  const clientStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'client-web');
+  // const serverStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'server-web');
+  const assets = extractAssets(clientStats.compilation);
+  const render = require('../static/client').default;
 
-  // server.get('*', (req, res) =>
-  //   render({ req, res, assets })
-  //     .catch(err => res.sendStatus(500).write('Server error'))
-  // );
+  server.get('*', (req, res) => {
+    console.log('>>>', req.path);
+
+    render({ req, res, assets }).catch((error: any) => res.sendStatus(500).write('Server error'));
+  });
 }
 
 type Asset = 'javascript' | 'styles' | 'assets';

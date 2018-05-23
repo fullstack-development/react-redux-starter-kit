@@ -27,7 +27,8 @@
   },
   "include": [
     "src/**/*",
-    "webpack/**/*"
+    "webpack/**/*",
+    "server/**/*"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": false

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom/server';
 import * as serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 
@@ -38,19 +37,26 @@ export default class Html extends React.PureComponent<IHtmlProps> {
 
   public render() {
     const { assets, component, store } = this.props;
-    const content = component ? ReactDOM.renderToString(component) : '';
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
     // const favicon = Html.getCorrectFavicon();
 
     const mainChunks = ['app', 'shared', 'vendor', 'manifest'];
-    const scripts = Object
+    const scriptsFromAssets = Object
       .keys(assets.javascript)
       .filter(item => mainChunks.some(name => item.includes(`js/${name}`)))
       .sort((a, b) => {
         const indexA = mainChunks.findIndex(name => a.includes(`js/${name}`));
         const indexB = mainChunks.findIndex(name => b.includes(`js/${name}`));
+        return indexB - indexA;
+      });
+
+    const stylesFromAssets = Object
+      .keys(assets.styles)
+      .sort((a, b) => {
+        const indexA = mainChunks.findIndex(name => a.includes(name));
+        const indexB = mainChunks.findIndex(name => b.includes(name));
         return indexB - indexA;
       });
 
@@ -67,14 +73,14 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
-          {Object.keys(assets.styles).map((key, idx) => (
+          {stylesFromAssets.map((key, idx) => (
             <link href={assets.styles[key]} key={idx} media="screen, projection" rel="stylesheet" type="text/css" />
           ))}
         </head>
 
         <body style={styles}>
 
-          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: content }} />
+          <div id="root" style={styles}>{component}</div>
 
           <div>
             {/* Other code */}
@@ -85,7 +91,8 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           <div>
             <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(state)};` }} charSet="UTF-8" />
             <script dangerouslySetInnerHTML={{ __html: `window.__assets=${serialize(assets)};` }} charSet="UTF-8" />
-            {scripts.map((item, index) => <script defer src={item} charSet="UTF-8" key={index} />)}
+            <script src="https://maps.googleapis.com/maps/api/js?libraries=places" />
+            {scriptsFromAssets.map((item, index) => <script defer src={item} charSet="UTF-8" key={index} />)}
           </div>
 
         </body>

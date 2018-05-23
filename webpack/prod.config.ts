@@ -9,7 +9,10 @@ const rules = commonRules
     {
       test: /\.(ts|tsx)$/,
       use: [
-        'awesome-typescript-loader',
+        {
+          loader: 'awesome-typescript-loader',
+          options: { target: 'es5' },
+        },
         'tslint-loader',
       ],
     },

@@ -26,7 +26,12 @@ const serverConfig: webpack.Configuration = {
     rules: prodConfig.module ? (prodConfig.module as webpack.NewModule).rules : [],
   },
   externals: [
-    nodeExternals({ whitelist: ['bootstrap/dist/css/bootstrap.min.css'] }),
+    nodeExternals({
+      whitelist: [
+        'bootstrap/dist/css/bootstrap.min.css',
+        'react-select/dist/react-select.min.css',
+      ],
+    }),
   ],
   plugins: [
     ...(config.plugins || []).filter(item => !(item instanceof webpack.optimize.CommonsChunkPlugin)),

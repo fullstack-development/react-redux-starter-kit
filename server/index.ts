@@ -4,6 +4,7 @@ import * as express from 'express';
 import clientConfig from '../webpack/isomorphic/client.config';
 import serverConfig from '../webpack/isomorphic/server.config';
 import { startDevelopmentMode, startProductionMode } from './starters';
+import middleware from './middleware';
 
 interface IEnv {
   NODE_ENV: 'development' | 'production';
@@ -12,7 +13,7 @@ interface IEnv {
 
 const { NODE_ENV, PORT } = process.env as IEnv;
 
-const app = express();
+const app = middleware(express());
 
 const starters = {
   development: startDevelopmentMode,
