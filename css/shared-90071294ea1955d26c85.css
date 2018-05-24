@@ -1,16 +1,3 @@
-.rows-layout {
-  position: relative;
-  width: 100%;
-  min-height: 100%;
-  padding-bottom: 50px; }
-  .rows-layout__footer-row {
-    position: absolute;
-    bottom: 0;
-    width: 100%; }
-  .rows-layout__footer-content {
-    margin: 0; }
-.header__brand {
-  cursor: pointer; }
 .geosuggest {
   position: relative;
   width: 100%;
@@ -89,3 +76,16 @@ html,
 body,
 #root {
   height: 100%; }
+.rows-layout {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  padding-bottom: 50px; }
+  .rows-layout__footer-row {
+    position: absolute;
+    bottom: 0;
+    width: 100%; }
+  .rows-layout__footer-content {
+    margin: 0; }
+.header__brand {
+  cursor: pointer; }
