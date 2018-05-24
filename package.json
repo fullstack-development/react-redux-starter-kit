@@ -8,22 +8,17 @@
     "prod": "npm run watch:prod",
     "watch:dev": "better-npm-run watch:dev",
     "watch:prod": "better-npm-run watch:prod",
-
     "server:dev": "better-npm-run server:dev",
     "server:dev:debug": "better-npm-run server:dev:debug",
     "server:prod": "better-npm-run server:prod",
-
     "test": "./node_modules/.bin/jest",
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch",
     "test:coverage": "node_modules/.bin/jest --coverage --watch",
-
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "build:gh-pages": "better-npm-run build:gh-pages",
-
     "deploy:gh-pages": "better-npm-run build:gh-pages && better-npm-run deploy:gh-pages",
-
     "yeoman": "better-npm-run initial:yeoman"
   },
   "betterScripts": {
@@ -142,7 +137,9 @@
     "tslint-react": "^3.4.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.5.1",
+    "webpack-hot-middleware": "^2.21.0",
     "webpack-isomorphic-dev-middleware": "^4.0.3",
+    "webpack-node-externals": "^1.6.0",
     "yo": "^2.0.0"
   },
   "dependencies": {
@@ -225,8 +222,6 @@
     "typescript": "^2.8.3",
     "typings": "^2.1.1",
     "url-loader": "^0.5.8",
-    "uuid": "^3.1.0",
-    "webpack-hot-middleware": "^2.21.0",
-    "webpack-node-externals": "^1.6.0"
+    "uuid": "^3.1.0"
   }
 }

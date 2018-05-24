@@ -10,8 +10,6 @@ import Html from 'assets/Html';
 import configureApp from 'core/configureApp';
 import { ServerApp } from 'core/App';
 
-// const pretty = new PrettyError();
-
 async function render({ req, res, assets }: { req: express.Request; res: express.Response; assets: IAssets }) {
   try {
     await handleAppRequest(req, res, assets);
@@ -23,28 +21,6 @@ async function render({ req, res, assets }: { req: express.Request; res: express
 /**
  * Server render functions below
  */
-function hydrateOnClient(appData: IAppData, assets: IAssets) {
-  const html = <Html assets={assets} store={appData.store} />;
-  const document = `
-    <!doctype html>
-    ${renderToString(html)}
-  `;
-
-  return document;
-}
-
-async function renderOnServer(appData: IAppData, assets: IAssets, location: string, context: object) {
-  const component = <ServerApp {...appData} location={location} context={context} />;
-  await bootstrapper(component);
-  const html = <Html assets={assets} component={component} store={appData.store} />;
-  const document = `
-    <!doctype html>
-    ${renderToString(html)}
-  `;
-
-  return document;
-}
-
 async function handleAppRequest(req: express.Request, res: express.Response, assets: IAssets) {
   const appData = configureApp();
 
@@ -60,6 +36,28 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
   } catch (error) {
     return res.status(500).send(renderToString(<pre>{error.stack}</pre>));
   }
+}
+
+async function renderOnServer(appData: IAppData, assets: IAssets, location: string, context: object) {
+  const component = <ServerApp {...appData} location={location} context={context} />;
+  await bootstrapper(component);
+  const html = <Html assets={assets} component={component} store={appData.store} />;
+  const document = `
+    <!doctype html>
+    ${renderToString(html)}
+  `;
+
+  return document;
+}
+
+function hydrateOnClient(appData: IAppData, assets: IAssets) {
+  const html = <Html assets={assets} store={appData.store} />;
+  const document = `
+    <!doctype html>
+    ${renderToString(html)}
+  `;
+
+  return document;
 }
 
 export default render;

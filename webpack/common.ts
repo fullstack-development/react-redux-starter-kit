@@ -26,10 +26,7 @@ export const commonPlugins: webpack.Plugin[] = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
     chunks: ['app'],
-    minChunks: (module, count) => module.context && (
-      module.context.includes('node_modules') ||
-      module.context.includes('bootstrap.paper.min.css')
-    ),
+    minChunks: (module, count) => module.context && module.context.includes('node_modules'),
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'shared',

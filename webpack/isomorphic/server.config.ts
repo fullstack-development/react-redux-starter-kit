@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
+import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import devConfig from '../dev.config';
 import prodConfig from '../prod.config';
@@ -39,6 +40,10 @@ const serverConfig: webpack.Configuration = {
       __DISABLE_SSR__: process.env.DISABLE_SSR,
     }),
     ...(config.plugins || []).filter(item => !(item instanceof webpack.optimize.CommonsChunkPlugin)),
+    new ExtractTextPlugin({
+      filename: 'css/[name]-[chunkhash].css',
+      allChunks: true,
+    }),
   ],
 };
 

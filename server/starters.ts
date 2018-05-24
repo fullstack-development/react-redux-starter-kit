@@ -1,8 +1,9 @@
 import * as webpack from 'webpack';
+import { Express } from 'express';
 import * as hotMiddleware from 'webpack-hot-middleware';
 import * as SSRMiddleware from 'webpack-isomorphic-dev-middleware';
 
-import { Express } from 'express';
+import { IAssets } from '../src/shared/types/app';
 
 function startDevelopmentMode(
   server: Express, clientConfig: webpack.Configuration, serverConfig: webpack.Configuration,
@@ -51,11 +52,11 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   });
 }
 
-type Asset = 'javascript' | 'styles' | 'assets';
+type Asset = keyof IAssets;
 
 function extractAssets(compilation: any) {
   const publicPath = compilation.options.output.publicPath;
-  let assets: Record<Asset, Record<string, string>> = { javascript: {}, styles: {}, assets: {} };
+  let assets: IAssets = { javascript: {}, styles: {}, assets: {} };
 
   assets = (Object
     .keys(compilation.assets) as Asset[])
