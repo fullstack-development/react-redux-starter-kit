@@ -2,7 +2,6 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -116,23 +115,6 @@ export const commonScssLoaders: webpack.Loader[] = [
         ];
       },
     },
-  },
-];
-
-export const extractedStyleRules: webpack.Rule[] = [
-  {
-    test: /\.css$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: 'css-loader',
-    }),
-  },
-  {
-    test: /\.scss$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: commonScssLoaders,
-    }),
   },
 ];
 

@@ -1,7 +1,24 @@
 import * as webpack from 'webpack';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import { commonPlugins, extractedStyleRules, commonRules, commonConfig } from './common';
+import { commonPlugins, commonRules, commonConfig, commonScssLoaders } from './common';
+
+const extractedStyleRules: webpack.Rule[] = [
+  {
+    test: /\.css$/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: 'css-loader',
+    }),
+  },
+  {
+    test: /\.scss$/,
+    use: ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: commonScssLoaders,
+    }),
+  },
+];
 
 const rules = commonRules
   .concat(extractedStyleRules)
@@ -50,4 +67,5 @@ const prodConfig: webpack.Configuration = {
   plugins,
 };
 
+export { extractedStyleRules };
 export default prodConfig;

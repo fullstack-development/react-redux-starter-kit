@@ -25,7 +25,7 @@ render(<App modules={appData.modules} store={appData.store} />);
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
   (module as any).hot.accept(['./core/App', './core/configureApp'], () => {
     const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
-    const NextApp: typeof App = require('./core/App').default;
+    const NextApp: typeof App = require('./core/App').App;
     appData = nextConfigureApp(appData);
     render(<NextApp modules={appData.modules} store={appData.store} />);
   });

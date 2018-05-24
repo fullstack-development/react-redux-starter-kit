@@ -11,8 +11,8 @@ Modular starter kit for React+Redux+React Router projects.
 ```npm run build:gh-pages``` for building production bundle for gh-pages
 
 ## To start isomorphic server
-```npm run build:dev``` for development environment in watch mode
-```npm run build:prod``` for production environment without watch mode
+```npm run server:dev``` for development environment in watch mode
+```npm run server:prod``` for production environment without watch mode
 
 ## To deploy
 ```npm run deploy:gh-pages``` for gh-pages

@@ -34,7 +34,11 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
       ? res.redirect(context.url)
       : res.status(200).send(document);
   } catch (error) {
-    return res.status(500).send(renderToString(<pre>{error.stack}</pre>));
+    return res.status(500).send(
+      process.env.NODE_ENV === 'production'
+        ? hydrateOnClient(appData, assets)
+        : renderToString(<pre>{error.stack}</pre>),
+    );
   }
 }
 
