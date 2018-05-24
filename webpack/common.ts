@@ -20,7 +20,7 @@ const hot = process.env.WATCH_MODE === 'true';
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
 
 export const commonPlugins: webpack.Plugin[] = [
-  new CleanWebpackPlugin(['build'], { root: path.resolve(__dirname, '..') }),
+  new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new webpack.HashedModuleIdsPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor',
@@ -47,14 +47,17 @@ export const commonPlugins: webpack.Plugin[] = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
-    'process.env.__HOST__': JSON.stringify('http://localhost:3000'),
+    '__HOST__': JSON.stringify('http://localhost:3000'),
+    '__LANG__': JSON.stringify(process.env.LANG || 'en'),
+    '__CLIENT__': true,
+    '__SERVER__': false,
   }),
 ].concat(isNeed404Page ? (
   new HtmlWebpackPlugin({
     filename: '404.html',
     template: 'assets/index.html',
     chunksSortMode(a, b) {
-      const order = ['app', 'shared', 'vendor', 'meta'];
+      const order = ['app', 'shared', 'vendor', 'manifest'];
       return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
     },
   })

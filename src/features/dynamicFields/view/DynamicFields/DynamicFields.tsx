@@ -150,7 +150,7 @@ class DynamicFields extends React.Component<Props, IState> {
           const props = {
             ...baseProps,
             label: isRequired ? `${baseProps.label}*` : baseProps.label,
-           };
+          };
           const fieldErrors = this.state.errors.indexOf(fieldName) > -1 ? ['Required Field'] : [];
 
           return (

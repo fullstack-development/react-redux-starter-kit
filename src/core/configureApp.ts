@@ -21,7 +21,14 @@ function configureApp(data?: IAppData): IAppData {
   const connectedReducers: ReducersMap<Partial<IAppReduxState>> = {};
 
   const { runSaga, store } = configureStore();
-  container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
+  try {
+    container.getAll(TYPES.Store);
+    container.rebind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
+    container.rebind(TYPES.Store).toConstantValue(store);
+  } catch {
+    container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
+    container.bind(TYPES.Store).toConstantValue(store);
+  }
 
   const dependencies = configureDeps(store);
 
@@ -55,7 +62,7 @@ function configureApp(data?: IAppData): IAppData {
       }
     }
 
-    if (sagas) {
+    if (sagas && __CLIENT__) {
       sagas.forEach((saga: RootSaga) => {
         if (!connectedSagas.includes(saga) && runSaga) {
           runSaga(saga(dependencies));

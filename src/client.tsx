@@ -1,19 +1,22 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
+import { App } from 'core/App';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import bootstrapper from 'react-async-bootstrapper';
 import configureApp from 'core/configureApp';
 
 import { AppContainer } from 'react-hot-loader';
-import App from 'core/App';
 
-const version: string = '0.0.1';
+const version: string = '0.0.2';
 
 let appData = configureApp();
-const render = (component: React.ReactElement<any>) => ReactDOM.render(
-  <AppContainer>{component}</AppContainer>,
-  document.getElementById('root'),
-);
+function render(component: React.ReactElement<any>) {
+  const app = <AppContainer>{component}</AppContainer>;
+  bootstrapper(app)
+    .then(() => ReactDOM.hydrate(app, document.getElementById('root')))
+    .catch((err: any) => console.log('Eek, error!', err));
+}
 
 /* Start application */
 render(<App modules={appData.modules} store={appData.store} />);
@@ -22,7 +25,7 @@ render(<App modules={appData.modules} store={appData.store} />);
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
   (module as any).hot.accept(['./core/App', './core/configureApp'], () => {
     const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
-    const NextApp: typeof App = require('./core/App').default;
+    const NextApp: typeof App = require('./core/App').App;
     appData = nextConfigureApp(appData);
     render(<NextApp modules={appData.modules} store={appData.store} />);
   });

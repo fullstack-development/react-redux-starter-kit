@@ -25,9 +25,9 @@ const b = block('search-repositories-input');
 function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
   return (
     <Form className={b()}>
-      <FormControl className={b('input')()} type="text" placeholder="Repository name"/>
+      <FormControl className={b('input')()} type="text" placeholder="Repository name" />
       <Button className={b('submit')()}>
-        <Glyphicon glyph="search"/>
+        <Glyphicon glyph="search" />
       </Button>
     </Form>
   );

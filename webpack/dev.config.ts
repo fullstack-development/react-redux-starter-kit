@@ -4,16 +4,18 @@ import { commonPlugins, commonScssLoaders, commonRules, commonConfig } from './c
 
 const withHot = process.env.WATCH_MODE === 'true';
 
+const typescriptRule: webpack.Rule = {
+  test: /\.(ts|tsx)$/,
+  use: ([] as string[])
+    .concat(withHot ? 'react-hot-loader/webpack' : [])
+    .concat([
+      'awesome-typescript-loader',
+      'tslint-loader',
+    ]),
+};
+
 const rules: webpack.Rule[] = commonRules.concat([
-  {
-    test: /\.(ts|tsx)$/,
-    use: ([] as string[])
-      .concat(withHot ? 'react-hot-loader/webpack' : [])
-      .concat([
-        'awesome-typescript-loader',
-        'tslint-loader',
-      ]),
-  },
+  typescriptRule,
   {
     test: /\.css$/,
     use: ['style-loader', 'css-loader'],
@@ -33,7 +35,7 @@ const devConfig: webpack.Configuration = {
   entry: {
     app: ([] as string[])
       .concat(withHot ? 'react-hot-loader/patch' : [])
-      .concat('./index.tsx'),
+      .concat('./client.tsx'),
   },
   module: {
     rules,
@@ -41,4 +43,5 @@ const devConfig: webpack.Configuration = {
   plugins,
 };
 
+export { typescriptRule };
 export default devConfig;

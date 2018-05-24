@@ -2,10 +2,20 @@
 Modular starter kit for React+Redux+React Router projects.
 
 ## To start localy
-```npm run dev``` for development purposes in watch mode
+```npm run dev``` for development environment in watch mode
+```npm run prod``` for production environment in watch mode
 
-## To build localy
-```npm run build``` for development purposes without watch mode (see build folder)
+## To build localy (see build folder)
+```npm run build:dev``` for development environment without watch mode
+```npm run build:prod``` for production environment without watch mode
+```npm run build:gh-pages``` for building production bundle for gh-pages
+
+## To start isomorphic server
+```npm run server:dev``` for development environment in watch mode
+```npm run server:prod``` for production environment without watch mode
+
+## To deploy
+```npm run deploy:gh-pages``` for gh-pages
 
 ## To start yeoman generator create-feature
 ```npm run yeoman```
@@ -24,8 +34,8 @@ Modular starter kit for React+Redux+React Router projects.
 - [x] Yeoman blocks generator tasks (features, modules, ... )
 - [x] Code splitting (async chunks loading)
 - [x] Code coverage
+- [x] Isomorphic
 - [ ] ANT Design
-- [ ] Isomorphic
 
 
 ## Тестирование

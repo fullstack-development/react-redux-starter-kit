@@ -41,7 +41,6 @@ class HomeLayout extends React.PureComponent<Props, {}> {
         <div className={b()}>
           <div className={b('content')()}>
             <Description />
-            12234556
             <Search SearchRepositoriesInput={SearchRepositoriesInput} />
           </div>
         </div>

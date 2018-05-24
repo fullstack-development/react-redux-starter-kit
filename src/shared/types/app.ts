@@ -59,7 +59,7 @@ export type IDictionary<T, S extends string = string> = {
 
 export interface IReduxEntry {
   reducers?: {[key in keyof IAppReduxState]?: Reducer<IAppReduxState[key]>};
-  sagas?: RootSaga[];
+  sagas?: Array<(deps: IDependencies) => () => SagaIterator>;
 }
 
 export interface IFeatureEntry<
@@ -90,5 +90,11 @@ export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 export type Lang = 'en' | 'he';
 
 export type Uid = number;
+
+export interface IAssets {
+  javascript: Record<string, string>;
+  styles: Record<string, string>;
+  assets: Record<string, string>;
+}
 
 export * from '../helpers/redux/namespace';
