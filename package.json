@@ -4,21 +4,26 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
-    "server": "better-npm-run server:dev",
+    "dev": "npm run watch:dev",
+    "prod": "npm run watch:prod",
+    "watch:dev": "better-npm-run watch:dev",
+    "watch:prod": "better-npm-run watch:prod",
+
+    "server:dev": "better-npm-run server:dev",
+    "server:dev:debug": "better-npm-run server:dev:debug",
     "server:prod": "better-npm-run server:prod",
+
     "test": "./node_modules/.bin/jest",
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch",
     "test:coverage": "node_modules/.bin/jest --coverage --watch",
-    "start-server": "node_modules/.bin/ts-node --compiler typescript --compilerOptions '{\"target\": \"es5\", \"module\": \"commonjs\"}' server/index.ts",
-    "watch:dev": "better-npm-run watch:dev",
-    "watch:prod": "better-npm-run watch:prod",
-    "build": "better-npm-run build",
+
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
-    "dev": "npm run watch:dev",
-    "prod": "npm run watch:prod",
-    "deploy": "better-npm-run build:gh-pages && better-npm-run deploy",
+    "build:gh-pages": "better-npm-run build:gh-pages",
+
+    "deploy:gh-pages": "better-npm-run build:gh-pages && better-npm-run deploy:gh-pages",
+
     "yeoman": "better-npm-run initial:yeoman"
   },
   "betterScripts": {
@@ -54,14 +59,6 @@
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
-    "build": {
-      "command": "ts-node ./webpack/build.ts",
-      "env": {
-        "PORT": 8080,
-        "NODE_ENV": "development",
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
-      }
-    },
     "watch:dev": {
       "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.ts",
       "env": {
@@ -93,12 +90,12 @@
       }
     },
     "build:gh-pages": {
-      "command": "npm-better-run build:prod",
+      "command": "better-npm-run build:prod",
       "env": {
         "NODE_ENV_MODE": "gh-pages"
       }
     },
-    "deploy": {
+    "deploy:gh-pages": {
       "command": "node_modules/.bin/gh-pages -d build"
     }
   },

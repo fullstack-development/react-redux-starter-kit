@@ -1,7 +1,6 @@
-// import * as path from 'path';
+import * as path from 'path';
 import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import devConfig from '../dev.config';
 import prodConfig from '../prod.config';
@@ -18,7 +17,7 @@ const serverConfig: webpack.Configuration = {
   output: {
     ...config.output,
     filename: 'index.js',
-    // path: path.resolve(__dirname, '../../static/server'),
+    path: path.resolve(__dirname, '..', '..', 'static'),
     libraryTarget: 'commonjs2',
   },
   module: {
@@ -34,16 +33,12 @@ const serverConfig: webpack.Configuration = {
     }),
   ],
   plugins: [
-    ...(config.plugins || []).filter(item => !(item instanceof webpack.optimize.CommonsChunkPlugin)),
     new webpack.DefinePlugin({
       __CLIENT__: false,
       __SERVER__: true,
-      __DISABLE_SSR__: process.env.DISABLE_SSR === 'true',
+      __DISABLE_SSR__: process.env.DISABLE_SSR,
     }),
-    new ExtractTextPlugin({
-      filename: 'css/[name]-[chunkhash].css',
-      allChunks: true,
-    }),
+    ...(config.plugins || []).filter(item => !(item instanceof webpack.optimize.CommonsChunkPlugin)),
   ],
 };
 

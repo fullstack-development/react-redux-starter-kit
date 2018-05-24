@@ -16,10 +16,6 @@ function startDevelopmentMode(
   server.use(hotMiddleware(clientCompiler));
 
   server.get('*', (req, res, next) => {
-    if (/\.(js|css|ico)\b/.test(req.path)) {
-      return;
-    }
-
     // res.isomorphic contains `compilation` & `exports` properties:
     // - `compilation` contains the webpack-isomorphic-compiler compilation result
     // - `exports` contains the server exports, usually one or more render functions
@@ -48,11 +44,9 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   const clientStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'client-web');
   // const serverStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'server-web');
   const assets = extractAssets(clientStats.compilation);
-  const render = require('../static/client').default;
+  const render = require('../static').default;
 
   server.get('*', (req, res) => {
-    console.log('>>>', req.path);
-
     render({ req, res, assets }).catch((error: any) => res.sendStatus(500).write('Server error'));
   });
 }
