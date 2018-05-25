@@ -1,3 +1,29 @@
+.Select {
+  &-control,
+  &-placeholder,
+  &:focus &-placeholder {
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  }
+
+  &-control {
+    border-color: #ddd;
+    border-bottom: 1px solid;
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: #66afe9;
+    border-bottom-width: 2px;
+  }
+
+  &:hover {
+    box-shadow: none;
+  }
+}
+
 .is-open > .Select-control {
   border: 0;
   border-color: #66afe9;
@@ -9,30 +35,4 @@
   border-color: #66afe9;
   border-bottom-width: 2px;
   box-shadow: none;
-}
-
-.Select {
-  &-control,
-  &-placeholder,
-  &:focus &-placeholder {
-    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-    border: 0;
-    border-radius: 0;
-    background-color: transparent;
-  }
-
-  &-control {
-    border-color: #ddd;
-    border-bottom: 1px solid;
-  }
-
-  &:focus {
-    border-color: #66afe9;
-    border-bottom-width: 2px;
-    outline: 0;
-  }
-
-  &:hover {
-    box-shadow: none;
-  }
 }
