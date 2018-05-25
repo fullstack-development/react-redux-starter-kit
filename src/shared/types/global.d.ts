@@ -25,7 +25,6 @@ declare module 'react-geosuggest';
 declare module 'normalizr';
 declare module '*.scss';
 declare module '*.png';
-declare module 'shared/*';
 declare module 'decko';
 declare module 'react-hot-loader';
 declare module 'react-async-bootstrapper';
