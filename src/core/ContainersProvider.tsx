@@ -15,7 +15,7 @@ interface IContainerTypes {
 type Container = keyof IContainerTypes;
 
 interface IEntryWithContainer<K extends string, T> {
-  containers: {[D in K]: T };
+  containers: { [D in K]: T };
 }
 
 type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
@@ -40,9 +40,9 @@ interface IState {
 
 function containersProvider<L extends Container>(containers: L[], preloader?: React.ReactChild):
   // tslint:disable-next-line:max-line-length
-  <Props extends {[K in L]: IContainerTypes[K]}>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
+  <Props extends { [K in L]: IContainerTypes[K] }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
 
-  return <Props extends {[K in L]: IContainerTypes[K]}>(
+  return <Props extends { [K in L]: IContainerTypes[K] }>(
     WrappedComponent: React.ComponentType<Props>,
   ): React.ComponentClass<Omit<Props, L>> => {
 
@@ -53,7 +53,7 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       @inject(TYPES.connectEntryToStore)
       private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
-      public componentWillMount() {
+      public componentDidMount() {
         this.load();
       }
 
