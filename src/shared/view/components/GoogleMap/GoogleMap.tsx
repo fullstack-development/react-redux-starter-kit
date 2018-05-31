@@ -32,12 +32,12 @@ class GoogleMap extends React.Component<IProps> {
   private geocoder: google.maps.Geocoder | null = null;
   private mapContainer: HTMLDivElement | null = null;
 
-  public componentWillReceiveProps(nextProps: IProps) {
-    const isNew: boolean = nextProps.lat !== this.props.lat || nextProps.lng !== this.props.lng;
-    const isNumbers: boolean = typeof nextProps.lat === 'number' && typeof nextProps.lng === 'number';
+  public componentDidUpdate(prevProps: IProps) {
+    const isNew: boolean = this.props.lat !== prevProps.lat || this.props.lng !== prevProps.lng;
+    const isNumbers: boolean = typeof this.props.lat === 'number' && typeof this.props.lng === 'number';
 
-    if (isNumbers && isNew && nextProps.showNewPoint) {
-      this.setPoint(nextProps.lat as number, nextProps.lng as number);
+    if (isNumbers && isNew && this.props.showNewPoint) {
+      this.setPoint(this.props.lat as number, this.props.lng as number);
     }
   }
 

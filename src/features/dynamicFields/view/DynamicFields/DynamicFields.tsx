@@ -90,9 +90,9 @@ class DynamicFields extends React.Component<Props, IState> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.category && this.props.category !== nextProps.category) {
-      this.changeCategory(nextProps.category);
+  public componentDidUpdate(prevProps: Props) {
+    if (this.props.category && prevProps.category !== this.props.category) {
+      this.changeCategory(this.props.category);
     }
   }
 

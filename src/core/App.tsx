@@ -9,7 +9,11 @@ import createRoutes from './routes';
 export function App({ modules, store }: IAppData) {
   return (
     <Provider store={store}>
-      <BrowserRouter>{createRoutes(modules)}</BrowserRouter>
+      <BrowserRouter>
+        <React.StrictMode>
+          {createRoutes(modules)}
+        </React.StrictMode>
+      </BrowserRouter>
     </Provider>
   );
 }
@@ -17,7 +21,11 @@ export function App({ modules, store }: IAppData) {
 export function ServerApp({ modules, store, ...routerProps }: IAppData & StaticRouter['props']) {
   return (
     <Provider store={store}>
-      <StaticRouter {...routerProps}>{createRoutes(modules)}</StaticRouter>
+      <StaticRouter {...routerProps}>
+        <React.StrictMode>
+          {createRoutes(modules)}
+        </React.StrictMode>
+      </StaticRouter>
     </Provider>
   );
 }

@@ -63,12 +63,12 @@ function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
 const b = block('location-select');
 
 class LocationSelect extends React.Component<Props> {
-  public componentWillReceiveProps(nextProps: Props) {
+  public componentDidUpdate(prevProps: Props) {
     const { onChange } = this.props;
     // notify subscribed components (if they are exist), if selected location changed
-    if (nextProps.selectedLocation !== this.props.selectedLocation) {
+    if (this.props.selectedLocation !== prevProps.selectedLocation) {
       if (onChange) {
-        onChange(nextProps.selectedLocation);
+        onChange(this.props.selectedLocation);
       }
     }
   }

@@ -1,10 +1,10 @@
 @import './elements/*';
 
 html {
-  color: #272727;
   background: white;
-  font-family: Arial, sans-serif;
+  color: #272727;
   font-size: 14px;  // TODO: use rems everywhere in the project
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -14,17 +14,17 @@ body {
 }
 
 a {
-  text-decoration: none;
   color: #272727;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: none;
     color: #171717;
+    text-decoration: none;
   }
 
   &:focus {
-    text-decoration: none;
     color: #272727;
+    text-decoration: none;
   }
 }
 
