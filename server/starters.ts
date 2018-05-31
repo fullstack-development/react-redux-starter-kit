@@ -52,37 +52,16 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   });
 }
 
-type Asset = keyof IAssets;
+function extractAssets(compilation: any): IAssets {
+  const appChunkGroup = compilation.chunkGroups.find((group: any) => group.name === 'app');
+  const files: string[] = !appChunkGroup ? [] : appChunkGroup.chunks
+    .map((item: any) => item.files)
+    .reduce((acc: string[], cur: string[]) => acc.concat(cur), []);
 
-function extractAssets(compilation: any) {
-  const publicPath = compilation.options.output.publicPath;
-  let assets: IAssets = { javascript: {}, styles: {}, assets: {} };
-
-  assets = (Object
-    .keys(compilation.assets) as Asset[])
-    .reduce((res, key) => {
-      const parts = key.split('.');
-      const ext = parts[parts.length - 1] as 'js' | 'css';
-      const assetTypeByExt: Record<'js' | 'css', Asset> = { js: 'javascript', css: 'styles' };
-      const assetType: Asset = assetTypeByExt[ext] || 'assets';
-      res[assetType][key] = publicPath + key;
-
-      return res;
-    }, assets);
-
-  assets = Object
-    .keys(compilation.entrypoints)
-    .reduce((res, key) => {
-      const entry = compilation.entrypoints[key];
-      const files = entry.getFiles();
-      const paths = files.map((p: any) => assets.javascript[p]);
-
-      res.javascript[entry.name] = paths[0];
-
-      return res;
-    }, assets);
-
-  return assets;
+  return {
+    javascript: files.filter(file => /\.js$/.test(file)),
+    styles: files.filter(file => /\.css$/.test(file)),
+  };
 }
 
 export {

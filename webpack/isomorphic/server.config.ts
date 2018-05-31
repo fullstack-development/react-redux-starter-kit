@@ -1,10 +1,10 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import devConfig from '../dev.config';
-import prodConfig from '../prod.config';
+import prodConfig, { typescriptRule } from '../prod.config';
+import { commonRules, getStyleRules } from '../common';
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 
@@ -23,7 +23,11 @@ const serverConfig: webpack.Configuration = {
   },
   module: {
     ...config.module,
-    rules: prodConfig.module ? (prodConfig.module as webpack.NewModule).rules : [],
+    rules: [
+      typescriptRule,
+      ...commonRules,
+      ...getStyleRules('server'),
+    ],
   },
   externals: [
     nodeExternals({
@@ -39,12 +43,13 @@ const serverConfig: webpack.Configuration = {
       __SERVER__: true,
       __DISABLE_SSR__: process.env.DISABLE_SSR,
     }),
-    ...(config.plugins || []).filter(item => !(item instanceof webpack.optimize.CommonsChunkPlugin)),
-    new ExtractTextPlugin({
-      filename: 'css/[name]-[chunkhash].css',
-      allChunks: true,
-    }),
+    ...config.plugins || [],
   ],
+  optimization: {
+    ...config.optimization,
+    splitChunks: false,
+    runtimeChunk: false,
+  },
 };
 
 export default serverConfig;

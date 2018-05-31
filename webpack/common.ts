@@ -2,6 +2,8 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -11,57 +13,47 @@ import * as stylelint from 'stylelint';
 import * as doiuse from 'doiuse';
 
 import { ROUTES_PREFIX } from '../src/core/constants';
+import getEnvParams from '../src/core/getEnvParams';
 
-const chunkName = process.env.NODE_ENV === 'production' ? 'id' : 'name';
-const chunkHash = process.env.WATCH_MODE === 'true' ? 'hash' : 'chunkhash';
-const hot = process.env.WATCH_MODE === 'true';
+const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
 
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
 
 export const commonPlugins: webpack.Plugin[] = [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
-  new webpack.HashedModuleIdsPlugin(),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    chunks: ['app'],
-    minChunks: (module, count) => module.context && module.context.includes('node_modules'),
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'shared',
-    chunks: ['app'],
-    minChunks: (module, count) => module.context && module.context.includes('src/shared'),
-  }),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'manifest',
-    minChunks: Infinity,
+  new MiniCssExtractPlugin({
+    filename: `css/[name].[${chunkHash}].css`,
+    chunkFilename: `css/[id].[${chunkHash}].css`,
   }),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     template: 'assets/index.html',
-    chunksSortMode(a, b) {
-      const order = ['app', 'shared', 'vendor', 'manifest'];
-      return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
-    },
+    chunksSortMode: sortChunks,
   }),
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
     '__HOST__': JSON.stringify('http://localhost:3000'),
     '__LANG__': JSON.stringify(process.env.LANG || 'en'),
     '__CLIENT__': true,
     '__SERVER__': false,
   }),
-].concat(isNeed404Page ? (
-  new HtmlWebpackPlugin({
-    filename: '404.html',
-    template: 'assets/index.html',
-    chunksSortMode(a, b) {
-      const order = ['app', 'shared', 'vendor', 'manifest'];
-      return order.indexOf(b.names[0]) - order.indexOf(a.names[0]);
-    },
-  })
-) : []);
+]
+  .concat(withAnalyze ? (
+    new BundleAnalyzerPlugin()
+  ) : [])
+  .concat(isNeed404Page ? (
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: 'assets/index.html',
+      chunksSortMode: sortChunks,
+    })
+  ) : []);
+
+function sortChunks(a: HtmlWebpackPlugin.Chunk, b: HtmlWebpackPlugin.Chunk) {
+  const order = ['app', 'vendors', 'manifest'];
+  return order.findIndex(item => b.names[0].includes(item)) - order.findIndex(item => a.names[0].includes(item));
+}
 
 export const commonRules: webpack.Rule[] = [
   {
@@ -78,8 +70,31 @@ export const commonRules: webpack.Rule[] = [
   },
 ];
 
-export const commonScssLoaders: webpack.Loader[] = [
-  'css-loader?importLoaders=1',
+export function getStyleRules(type: 'dev' | 'prod' | 'server') {
+  const cssLoaders: Record<typeof type, webpack.Loader[]> = {
+    dev: ['style-loader', 'css-loader'],
+    prod: [MiniCssExtractPlugin.loader, 'css-loader'],
+    server: ['css-loader/locals'],
+  };
+  const scssFirstLoaders: Record<typeof type, webpack.Loader[]> = {
+    dev: ['style-loader', 'css-loader?importLoaders=1'],
+    prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
+    server: ['css-loader/locals?importLoaders=1'],
+  };
+
+  return [
+    {
+      test: /\.css$/,
+      use: cssLoaders[type],
+    },
+    {
+      test: /\.scss$/,
+      use: scssFirstLoaders[type].concat(commonScssLoaders),
+    },
+  ];
+}
+
+const commonScssLoaders: webpack.Loader[] = [
   {
     loader: 'postcss-loader',
     options: {
@@ -133,8 +148,16 @@ export const commonConfig: webpack.Configuration = {
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+    runtimeChunk: {
+      name: 'manifest',
+    },
+  },
   devServer: {
-    hot,
+    hot: withHot,
     contentBase: path.resolve('..', 'build'),
     host: '0.0.0.0',
     port: 8080,

@@ -1,8 +1,9 @@
 import * as webpack from 'webpack';
 
-import { commonPlugins, commonScssLoaders, commonRules, commonConfig } from './common';
+import getEnvParams from '../src/core/getEnvParams';
+import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
 
-const withHot = process.env.WATCH_MODE === 'true';
+const { withHot } = getEnvParams();
 
 const typescriptRule: webpack.Rule = {
   test: /\.(ts|tsx)$/,
@@ -14,24 +15,18 @@ const typescriptRule: webpack.Rule = {
     ]),
 };
 
-const rules: webpack.Rule[] = commonRules.concat([
+const rules: webpack.Rule[] = [
   typescriptRule,
-  {
-    test: /\.css$/,
-    use: ['style-loader', 'css-loader'],
-  },
-  {
-    test: /\.scss$/,
-    use: (['style-loader'] as webpack.Loader[]).concat(commonScssLoaders),
-  },
-]);
+  ...commonRules,
+  ...getStyleRules('dev'),
+];
 
 const plugins: webpack.Plugin[] = commonPlugins
-  .concat(withHot ? new webpack.HotModuleReplacementPlugin() : [])
-  .concat(new webpack.NamedModulesPlugin());
+  .concat(withHot ? new webpack.HotModuleReplacementPlugin() : []);
 
 const devConfig: webpack.Configuration = {
   ...commonConfig,
+  mode: 'development',
   entry: {
     app: ([] as string[])
       .concat(withHot ? 'react-hot-loader/patch' : [])

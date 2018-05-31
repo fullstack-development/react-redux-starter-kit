@@ -1,71 +1,35 @@
 import * as webpack from 'webpack';
-import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-import { commonPlugins, commonRules, commonConfig, commonScssLoaders } from './common';
+import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
 
-const extractedStyleRules: webpack.Rule[] = [
-  {
-    test: /\.css$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: 'css-loader',
-    }),
-  },
-  {
-    test: /\.scss$/,
-    use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: commonScssLoaders,
-    }),
-  },
-];
-
-const rules = commonRules
-  .concat(extractedStyleRules)
-  .concat([
+const typescriptRule: webpack.Rule = {
+  test: /\.(ts|tsx)$/,
+  use: [
     {
-      test: /\.(ts|tsx)$/,
-      use: [
-        {
-          loader: 'awesome-typescript-loader',
-          options: { target: 'es5' },
-        },
-        'tslint-loader',
-      ],
+      loader: 'awesome-typescript-loader',
+      options: { target: 'es5' },
     },
-  ]);
+    'tslint-loader',
+  ],
+};
 
-const plugins = commonPlugins.concat([
-  new ExtractTextPlugin({
-    filename: 'css/[name]-[chunkhash].css',
-    allChunks: true,
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false,
-      screw_ie8: true,
-      conditionals: true,
-      unused: true,
-      comparisons: true,
-      sequences: true,
-      dead_code: true,
-      evaluate: true,
-      if_return: true,
-      join_vars: true,
-    },
-  }),
-]);
+const rules = [
+  typescriptRule,
+  ...commonRules,
+  ...getStyleRules('prod'),
+];
 
 const prodConfig: webpack.Configuration = {
   ...commonConfig,
+  mode: 'production',
   entry: {
     app: './client.tsx',
   },
   module: {
     rules,
   },
-  plugins,
+  plugins: commonPlugins,
 };
 
-export { extractedStyleRules };
+export { typescriptRule };
 export default prodConfig;
