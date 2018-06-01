@@ -7,8 +7,17 @@ const { withHot } = getEnvParams();
 
 const typescriptRule: webpack.Rule = {
   test: /\.(ts|tsx)$/,
-  use: ([] as string[])
-    .concat(withHot ? 'react-hot-loader/webpack' : [])
+  use: ([] as webpack.Loader[])
+    .concat(withHot ? {
+      loader: 'babel-loader',
+      options: {
+        babelrc: false,
+        plugins: [
+          'react-hot-loader/babel',
+          'syntax-dynamic-import',
+        ],
+      },
+    } : [])
     .concat([
       'awesome-typescript-loader',
       'tslint-loader',
@@ -28,9 +37,7 @@ const devConfig: webpack.Configuration = {
   ...commonConfig,
   mode: 'development',
   entry: {
-    app: ([] as string[])
-      .concat(withHot ? 'react-hot-loader/patch' : [])
-      .concat('./client.tsx'),
+    app: './client.tsx',
   },
   module: {
     rules,

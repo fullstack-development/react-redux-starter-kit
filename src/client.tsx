@@ -8,7 +8,7 @@ import configureApp from 'core/configureApp';
 
 import { AppContainer } from 'react-hot-loader';
 
-const version: string = '0.0.2';
+const version: string = '0.0.3';
 
 let appData = configureApp();
 function render(component: React.ReactElement<any>) {
