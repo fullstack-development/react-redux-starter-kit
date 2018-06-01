@@ -1,0 +1,76 @@
+.Select-control, .Select-placeholder,
+.Select:focus .Select-placeholder {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
+
+.Select-control {
+  border-color: #ddd;
+  border-bottom: 1px solid; }
+
+.Select:focus {
+  outline: 0;
+  border-color: #66afe9;
+  border-bottom-width: 2px; }
+
+.Select:hover {
+  box-shadow: none; }
+
+.is-open > .Select-control {
+  border: 0;
+  border-color: #66afe9;
+  border-bottom: 2px solid;
+  background-color: transparent; }
+
+.is-focused:not(.is-open) > .Select-control {
+  border-color: #66afe9;
+  border-bottom-width: 2px;
+  box-shadow: none; }
+
+.input-group {
+  width: 100%; }
+  .input-group__label-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 100%; }
+  .input-group__label {
+    width: 20%;
+    font-weight: 700; }
+  .input-group__input-wrapper {
+    width: 80%; }
+
+.errors {
+  display: block;
+  -ms-flex-order: 1;
+      order: 1;
+  min-height: 25px; }
+  .errors_hidden {
+    visibility: collapse; }
+  .errors__error {
+    display: block;
+    color: red; }
+
+.radio-inline + .radio-inline {
+  margin-left: 0; }
+
+.generic-radio-input {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%; }
+  .generic-radio-input__radios-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+  .generic-radio-input__radio-button {
+    margin-right: 2rem;
+    margin-bottom: 0.5rem; }
+
+.dynamic-fields__field {
+  margin-top: 30px; }
+
