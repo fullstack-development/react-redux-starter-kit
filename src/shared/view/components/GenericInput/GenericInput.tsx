@@ -1,4 +1,4 @@
-type FieldValue = string | number | {[key: string]: any};
+type FieldValue = string | number | { [key: string]: any };
 interface IProps {
   type?: string;
   component?: string;
@@ -6,7 +6,7 @@ interface IProps {
   name?: string;
   required?: boolean;
 
-  'enum'?: string[];
+  enum?: string[];
   label?: string;
   pattern?: string;
   placeholder?: string;

@@ -1,21 +1,13 @@
 import * as React from 'react';
-import block from 'bem-cn';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'assets/bootstrap.paper.min.css';
+import 'normalize.css';
 import 'shared/view/styles/base.scss';
-import './styles.scss';
 import './fonts';
 
-class App extends React.Component<{}, {}> {
+class App extends React.Component {
   public render() {
-    const b = block('application');
     const { children } = this.props;
 
-    return (
-      <div className={b()}>
-        {children}
-      </div>
-    );
+    return children;
   }
 }
 

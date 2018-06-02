@@ -4,21 +4,21 @@ import { bind } from 'decko';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { featureConnect } from 'core';
-
 import { RouteComponentProps } from 'react-router-dom';
-import { IAppReduxState } from 'shared/types/app';
-import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
-import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
 
 import * as locationSelect from 'features/locationSelect';
 import * as categorySelect from 'features/categorySelect';
 import * as dynamicFields from 'features/dynamicFields';
 
-import { actions } from './../../redux';
+import { IAppReduxState } from 'shared/types/app';
+import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { RowsLayout } from 'shared/view/elements';
+import { Header, Footer } from 'shared/view/components';
 
-import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
-import RowsLayout from 'shared/view/elements/RowsLayout';
-import Header from 'shared/view/components/Header';
+import { homeRedirectPath, orderRedirectPath } from '../../../routes';
+import { actions } from '../../redux';
 import './Layout.scss';
 
 interface IOwnProps {
@@ -82,7 +82,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     const { CategorySelect } = this.props.categorySelectEntry.containers;
     const { DynamicFields } = this.props.dynamicFieldsEntry.containers;
     const { LocationSelect } = this.props.locationSelectEntry.containers;
-    const { submittingResult, isSubmitting, history } = this.props;
+    const { submittingResult, isSubmitting } = this.props;
     const { categoryUid, location } = this.state;
     const canSubmit: boolean = Boolean(typeof categoryUid === 'number') &&
       !isSubmitting && this.isDynamicFieldsValid && Boolean(location);
@@ -90,8 +90,13 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
     return (
       <RowsLayout
-        footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}
-        headerContent={<Header onLinkClick={history.push} />}
+        footerContent={<Footer />}
+        headerContent={(
+          <Header
+            brandRedirectPath={homeRedirectPath}
+            menuRedirectPaths={{ order: orderRedirectPath }}
+          />
+        )}
       >
         <div className={b()}>
           <div className={b('content')()}>

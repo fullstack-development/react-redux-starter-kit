@@ -181,6 +181,8 @@
     "yo": "^2.0.2"
   },
   "dependencies": {
+    "@material-ui/core": "^1.1.0",
+    "@material-ui/icons": "^1.1.0",
     "@types/axios": "0.9.36",
     "@types/bem-cn": "^2.1.1",
     "@types/compression": "0.0.36",
@@ -219,7 +221,9 @@
     "gh-pages": "^1.1.0",
     "inversify": "^4.5.0",
     "inversify-inject-decorators": "^3.0.1",
+    "jss": "^9.8.1",
     "node-sass": "^4.9.0",
+    "normalize.css": "^8.0.0",
     "normalizr": "^2.3.1",
     "postcss-easy-import": "^3.0.0",
     "postcss-loader": "^2.1.5",
@@ -233,6 +237,7 @@
     "react-dom": "^16.4.0",
     "react-geosuggest": "^2.5.0",
     "react-helmet": "^5.2.0",
+    "react-jss": "^8.4.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",

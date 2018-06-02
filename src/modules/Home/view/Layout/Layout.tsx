@@ -1,14 +1,15 @@
 import * as React from 'react';
 import block from 'bem-cn';
 import { featureConnect } from 'core';
-
+import { Navbar } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 
 import * as searchRepositories from 'features/searchRepositories';
 
-import { Navbar } from 'react-bootstrap';
-import RowsLayout from 'shared/view/elements/RowsLayout';
-import Header from 'shared/view/components/Header/index';
+import { RowsLayout } from 'shared/view/elements';
+import { Header, Footer } from 'shared/view/components';
+
+import { homeRedirectPath, orderRedirectPath } from '../../../routes';
 import Description from './Description';
 import Search from './Search';
 import './Layout.scss';
@@ -24,14 +25,16 @@ class HomeLayout extends React.PureComponent<Props, {}> {
 
   public render() {
     const b = this.b;
-    const { history } = this.props;
     const { SearchRepositoriesInput } = this.props.searchRepositoriesEntry.containers;
 
     return (
       <RowsLayout
-        footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}
+        footerContent={<Footer />}
         headerContent={(
-          <Header onLinkClick={history.push}>
+          <Header
+            brandRedirectPath={homeRedirectPath}
+            menuRedirectPaths={{ order: orderRedirectPath }}
+          >
             <Navbar.Form pullRight>
               <SearchRepositoriesInput />
             </Navbar.Form>

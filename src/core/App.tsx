@@ -2,7 +2,12 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 
-import { IAppData } from 'shared/types/app';
+import { create } from 'jss';
+import JssProvider from 'react-jss/lib/JssProvider';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { createGenerateClassName, jssPreset, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+import { IAppData, Module } from 'shared/types/app';
 
 import createRoutes from './routes';
 
@@ -10,9 +15,7 @@ export function App({ modules, store }: IAppData) {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <React.StrictMode>
-          {createRoutes(modules)}
-        </React.StrictMode>
+        {renderSharedPart(modules)}
       </BrowserRouter>
     </Provider>
   );
@@ -22,10 +25,27 @@ export function ServerApp({ modules, store, ...routerProps }: IAppData & StaticR
   return (
     <Provider store={store}>
       <StaticRouter {...routerProps}>
-        <React.StrictMode>
-          {createRoutes(modules)}
-        </React.StrictMode>
+        {renderSharedPart(modules)}
       </StaticRouter>
     </Provider>
+  );
+}
+
+// Place to add jss-plugins [https://material-ui.com/customization/css-in-js/#plugins]
+const jss = create({ plugins: [...jssPreset().plugins] });
+const generateClassName = createGenerateClassName();
+
+const theme = createMuiTheme();
+
+function renderSharedPart(modules: Array<Module<any>>) {
+  return (
+    <JssProvider jss={jss} generateClassName={generateClassName}>
+      <MuiThemeProvider theme={theme}>
+        <React.StrictMode>
+          <CssBaseline />
+          {createRoutes(modules)}
+        </React.StrictMode>
+      </MuiThemeProvider>
+    </JssProvider>
   );
 }

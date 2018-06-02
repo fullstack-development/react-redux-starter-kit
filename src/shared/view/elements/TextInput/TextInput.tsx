@@ -1,8 +1,5 @@
 import * as React from 'react';
 import { FormControl, FormControlProps } from 'react-bootstrap';
-import FormEventHandler = React.FormEventHandler;
-import Component = React.Component;
-import FormEvent = React.FormEvent;
 
 interface IProps {
   type: string;
@@ -15,10 +12,10 @@ interface IProps {
   step?: number;
   pattern?: string;
   hidden?: boolean;
-  onChange?: FormEventHandler<Component<FormControlProps, {}>>;
+  onChange?: React.FormEventHandler<React.Component<FormControlProps, {}>>;
 }
 
-type EventType = FormEvent<Component<ControlProps, {}>>;
+type EventType = React.FormEvent<React.Component<ControlProps, {}>>;
 type ControlProps = FormControlProps;
 
 function TextInput(props: IProps) {

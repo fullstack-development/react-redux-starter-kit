@@ -85,6 +85,10 @@ export type Diff<T extends string, U extends string> =
 
 export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 
+export type GetProps<T extends React.ComponentType<any>> =
+  T extends React.StatelessComponent<infer SP> ? SP :
+  T extends React.ComponentClass<infer CP> ? CP : never;
+
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
 export type Lang = 'en' | 'he';

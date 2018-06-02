@@ -32,7 +32,7 @@ const serverConfig: webpack.Configuration = {
   externals: [
     nodeExternals({
       whitelist: [
-        'bootstrap/dist/css/bootstrap.min.css',
+        'normalize.css',
         'react-select/dist/react-select.min.css',
       ],
     }),

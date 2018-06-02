@@ -29,6 +29,7 @@ declare module 'decko';
 declare module 'react-hot-loader';
 declare module 'react-async-bootstrapper';
 declare module 'enzyme-adapter-react-16';
+declare module 'react-jss/*';
 declare module 'postcss-reporter';
 declare module 'postcss-easy-import';
 declare module 'postcss-scss';
