@@ -5,6 +5,7 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { create } from 'jss';
 import JssProvider from 'react-jss/lib/JssProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { blue } from '@material-ui/core/colors';
 import { createGenerateClassName, jssPreset, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { IAppData, Module } from 'shared/types/app';
@@ -35,7 +36,14 @@ export function ServerApp({ modules, store, ...routerProps }: IAppData & StaticR
 const jss = create({ plugins: [...jssPreset().plugins] });
 const generateClassName = createGenerateClassName();
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+  },
+  typography: {
+    fontSize: 16,
+  },
+});
 
 function renderSharedPart(modules: Array<Module<any>>) {
   return (

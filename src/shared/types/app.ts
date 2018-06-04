@@ -89,6 +89,10 @@ export type GetProps<T extends React.ComponentType<any>> =
   T extends React.StatelessComponent<infer SP> ? SP :
   T extends React.ComponentClass<infer CP> ? CP : never;
 
+export type GetClassKey<T extends object | ((...args: any[]) => any)> =
+  T extends (...args: any[]) => any ? keyof ReturnType<T> :
+  T extends object ? keyof T : never;
+
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
 export type Lang = 'en' | 'he';

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import block from 'bem-cn';
 import { featureConnect } from 'core';
 import { Navbar } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
@@ -9,23 +8,20 @@ import * as searchRepositories from 'features/searchRepositories';
 import { RowsLayout } from 'shared/view/elements';
 import { Header, Footer } from 'shared/view/components';
 
-import { homeRedirectPath, orderRedirectPath } from '../../../routes';
-import Description from './Description';
-import Search from './Search';
-import './Layout.scss';
+import { homeRedirectPath, orderRedirectPath } from '../../../../routes';
+import { Description, Search } from '../../components';
+import { StylesProps, provideStyles } from './Layout.style';
 
 interface IOwnProps {
   searchRepositoriesEntry: searchRepositories.Entry;
 }
 
-type Props = IOwnProps & RouteComponentProps<void>;
+type Props = IOwnProps & StylesProps & RouteComponentProps<void>;
 
-class HomeLayout extends React.PureComponent<Props, {}> {
-  private b = block('index-page');
-
+class HomeLayout extends React.PureComponent<Props> {
   public render() {
-    const b = this.b;
-    const { SearchRepositoriesInput } = this.props.searchRepositoriesEntry.containers;
+    const { classes, searchRepositoriesEntry } = this.props;
+    const { SearchRepositoriesInput } = searchRepositoriesEntry.containers;
 
     return (
       <RowsLayout
@@ -41,11 +37,9 @@ class HomeLayout extends React.PureComponent<Props, {}> {
           </Header>
         )}
       >
-        <div className={b()}>
-          <div className={b('content')()}>
-            <Description />
-            <Search SearchRepositoriesInput={SearchRepositoriesInput} />
-          </div>
+        <div className={classes.content}>
+          <div className={classes.description}><Description /></div>
+          <Search SearchRepositoriesInput={SearchRepositoriesInput} />
         </div>
       </RowsLayout>
     );
@@ -54,6 +48,6 @@ class HomeLayout extends React.PureComponent<Props, {}> {
 
 export default (
   featureConnect({ searchRepositoriesEntry: searchRepositories.loadEntry })(
-    HomeLayout,
+    provideStyles(HomeLayout),
   )
 );

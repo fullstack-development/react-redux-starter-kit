@@ -1,14 +1,14 @@
 import * as React from 'react';
-import block from 'bem-cn';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
+import { FormControl, Input, InputAdornment } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 
 import { IAppReduxState as IAppReduxState } from 'shared/types/app';
 
-import { FormControl, Form, Button, Glyphicon } from 'react-bootstrap';
-import './SearchInput.scss';
+import { provideStyles, StylesProps } from './SearchInput.style';
 
-interface IProps {
+interface IOwnProps {
   value?: string;
 }
 
@@ -20,18 +20,29 @@ function mapDispatch(dispatch: Dispatch<IAppReduxState>): {} {
   return bindActionCreators({}, dispatch);
 }
 
-const b = block('search-repositories-input');
+type IProps = IOwnProps & StylesProps;
 
 function SearchRepositoriesInput(props: IProps): React.ReactElement<IProps> {
   return (
-    <Form className={b()}>
-      <FormControl className={b('input')()} type="text" placeholder="Repository name" />
-      <Button className={b('submit')()}>
-        <Glyphicon glyph="search" />
-      </Button>
-    </Form>
+    <FormControl>
+      <Input
+        type="search"
+        placeholder="Repository name"
+        color="secondary"
+        classes={{ root: props.classes.inputRoot }}
+        startAdornment={
+          <InputAdornment position="start">
+            <Search />
+          </InputAdornment>
+        }
+      />
+    </FormControl>
   );
 }
 
 export { IProps };
-export default connect<{}, {}, IProps>(mapState, mapDispatch)(SearchRepositoriesInput);
+export default (
+  connect(mapState, mapDispatch)(
+    provideStyles(SearchRepositoriesInput),
+  )
+);

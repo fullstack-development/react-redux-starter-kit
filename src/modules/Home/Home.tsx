@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { Route } from 'react-router-dom';
 import { ROUTES_PREFIX } from 'core/constants';
+
 import { Module } from 'shared/types/app';
 
-import { Route } from 'react-router-dom';
-import Layout from './view/Layout/Layout';
+import { Layout } from './view/containers';
 
 class HomeModule extends Module {
   public getRoutes() {
