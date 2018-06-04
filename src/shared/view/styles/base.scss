@@ -1,15 +1,12 @@
 @import './elements/*';
 
 html {
-  background: white;
-  color: #272727;
-  font-size: 14px;  // TODO: use rems everywhere in the project
+  font-size: 16px;  // TODO: use rems everywhere in the project
   font-family: Arial, sans-serif;
 }
 
 body {
   margin: 0;
-  padding: 0;
   font-size: 1rem;
 }
 

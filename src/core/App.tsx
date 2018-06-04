@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 
 import { create } from 'jss';
+import jssCompose from 'jss-compose';
 import JssProvider from 'react-jss/lib/JssProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { blue } from '@material-ui/core/colors';
@@ -33,15 +34,12 @@ export function ServerApp({ modules, store, ...routerProps }: IAppData & StaticR
 }
 
 // Place to add jss-plugins [https://material-ui.com/customization/css-in-js/#plugins]
-const jss = create({ plugins: [...jssPreset().plugins] });
+const jss = create({ plugins: [...jssPreset().plugins, jssCompose()] });
 const generateClassName = createGenerateClassName();
 
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-  },
-  typography: {
-    fontSize: 16,
   },
 });
 

@@ -1,5 +1,9 @@
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
-export function rule(props: CSSProperties) {
-  return props;
+type ExtendedCSSProperties = {
+  [key in keyof CSSProperties]: CSSProperties[key] | ((props: any) => CSSProperties[key]) | ExtendedCSSProperties;
+};
+
+export function rule(props: ExtendedCSSProperties): CSSProperties {
+  return props as CSSProperties;
 }

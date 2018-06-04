@@ -33,7 +33,13 @@ class Header extends React.PureComponent<IProps & StylesProps> {
           </TypographyLink>
           <div className={classes.content}>{children}</div>
           {Object.keys(menuRedirectPaths).map((key: LinkName) => (
-            <ButtonLink className={classes.link} to={menuRedirectPaths[key]} variant="outlined" color="inherit">
+            <ButtonLink
+              key={key}
+              className={classes.link}
+              to={menuRedirectPaths[key]}
+              variant="outlined"
+              color="inherit"
+            >
               {textForMenuItem[key]}
             </ButtonLink>
           ))}

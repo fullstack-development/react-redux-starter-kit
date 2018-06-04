@@ -14,9 +14,8 @@ function Description({ classes }: StylesProps) {
         <Label className={classes.label}>TypeScript 2.x</Label>
         <Label className={classes.label}>React</Label>
         <Label className={classes.label}>Redux</Label>
-        <Label className={classes.label}>Stylus</Label>
-        <Label className={classes.label}>Bem</Label>
-        <Label className={classes.label}>Webpack 2.x</Label>
+        <Label className={classes.label}>JSS</Label>
+        <Label className={classes.label}>Webpack 4.x</Label>
       </Typography>
       <Typography gutterBottom>
         For demonstrating purposes we implemented simple web-app using GitHub api for exploring

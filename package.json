@@ -222,6 +222,7 @@
     "inversify": "^4.5.0",
     "inversify-inject-decorators": "^3.0.1",
     "jss": "^9.8.1",
+    "jss-compose": "^5.0.0",
     "node-sass": "^4.9.0",
     "normalize.css": "^8.0.0",
     "normalizr": "^2.3.1",

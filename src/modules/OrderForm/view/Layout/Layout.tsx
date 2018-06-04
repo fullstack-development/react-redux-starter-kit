@@ -1,11 +1,11 @@
 import * as React from 'react';
-import block from 'bem-cn';
 import { bind } from 'decko';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { featureConnect } from 'core';
 import { RouteComponentProps } from 'react-router-dom';
-import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
+import { Form, FormGroup, Button } from 'react-bootstrap';
+import { Card, CardContent } from '@material-ui/core';
 
 import * as locationSelect from 'features/locationSelect';
 import * as categorySelect from 'features/categorySelect';
@@ -14,12 +14,10 @@ import * as dynamicFields from 'features/dynamicFields';
 import { IAppReduxState } from 'shared/types/app';
 import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-import { RowsLayout } from 'shared/view/elements';
-import { Header, Footer } from 'shared/view/components';
+import { SimpleList } from 'shared/view/elements';
 
-import { homeRedirectPath, orderRedirectPath } from '../../../routes';
 import { actions } from '../../redux';
-import './Layout.scss';
+import { StylesProps, provideStyles } from './Layout.style';
 
 interface IOwnProps {
   locationSelectEntry: locationSelect.Entry;
@@ -51,7 +49,7 @@ interface IState {
   };
 }
 
-type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps;
+type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps & StylesProps;
 
 function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
   return bindActionCreators({
@@ -75,10 +73,7 @@ function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
 class OrderFormLayout extends React.Component<IProps, IState> {
 
   public state: IState = { dynamicFields: {}, categoryUid: null, location: null };
-  private b = block('home-page');
-
   public render() {
-    const b = this.b;
     const { CategorySelect } = this.props.categorySelectEntry.containers;
     const { DynamicFields } = this.props.dynamicFieldsEntry.containers;
     const { LocationSelect } = this.props.locationSelectEntry.containers;
@@ -89,34 +84,26 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     const dynamicFieldsComponent = <DynamicFields category={categoryUid} onChange={this.onDynamicValueChanged} />;
 
     return (
-      <RowsLayout
-        footerContent={<Footer />}
-        headerContent={(
-          <Header
-            brandRedirectPath={homeRedirectPath}
-            menuRedirectPaths={{ order: orderRedirectPath }}
-          />
-        )}
-      >
-        <div className={b()}>
-          <div className={b('content')()}>
-            <Form onSubmit={this.onFormSubmit}>
-              <Panel header={<LocationSelect onChange={this.onLocationSelected} />} />
-              <Panel header={<CategorySelect onCategoryChosen={this.onCategorySelected} />} />
-              <Panel header={categoryUid ? dynamicFieldsComponent : null} />
+      <Form onSubmit={this.onFormSubmit}>
+        <SimpleList marginFactor={3}>
+          <SimpleCard>
+            <LocationSelect onChange={this.onLocationSelected} />
+          </SimpleCard>
+          <SimpleCard>
+            <CategorySelect onCategoryChosen={this.onCategorySelected} />
+          </SimpleCard>
+          {categoryUid ? <SimpleCard>{dynamicFieldsComponent}</SimpleCard> : null}
+        </SimpleList>
 
-              <FormGroup className="clearfix">
-                {isSubmitting ? <span>Saving...</span> : null}
-                {submittingResult ? <span className={b('result')()}>{submittingResult}</span> : null}
-                <Button type="submit" bsStyle="primary" className={b('submit')()} disabled={!canSubmit}>
-                  Submit
-                </Button>
-              </FormGroup>
+        <FormGroup className="clearfix">
+          {isSubmitting ? <span>Saving...</span> : null}
+          {submittingResult ? <span className={'result'}>{submittingResult}</span> : null}
+          <Button type="submit" bsStyle="primary" className={'submit'} disabled={!canSubmit}>
+            Submit
+            </Button>
+        </FormGroup>
 
-            </Form>
-          </div>
-        </div>
-      </RowsLayout>
+      </Form >
     );
   }
 
@@ -163,6 +150,16 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 }
 
+function SimpleCard({ children }: { children: React.ReactNode }) {
+  return (
+    <Card>
+      <CardContent>
+        {children}
+      </CardContent>
+    </Card>
+  );
+}
+
 const featureLoaders = {
   locationSelectEntry: locationSelect.loadEntry,
   categorySelectEntry: categorySelect.loadEntry,
@@ -172,7 +169,7 @@ const featureLoaders = {
 export default (
   featureConnect(featureLoaders)(
     connect(mapState, mapDispatch)(
-      OrderFormLayout,
+      provideStyles(OrderFormLayout),
     ),
   )
 );
