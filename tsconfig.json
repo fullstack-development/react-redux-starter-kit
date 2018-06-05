@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "typeRoots": ["./node_modules/@types", "./@types"],
     "traceResolution": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -20,7 +21,7 @@
     "baseUrl": "./src",
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "importHelpers": true,
     "strictPropertyInitialization": true,
     "strictFunctionTypes": false
@@ -28,7 +29,8 @@
   "include": [
     "src/**/*",
     "webpack/**/*",
-    "server/**/*"
+    "server/**/*",
+    "@types/**/*"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useBabel": false

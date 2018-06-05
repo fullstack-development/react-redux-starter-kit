@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import block from 'bem-cn';
+import * as block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 

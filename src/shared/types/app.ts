@@ -13,35 +13,8 @@ import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderF
 import Api from 'services/api/Api';
 
 export abstract class Module<C = any> {
-  public components?: C; // available componens to pass in other modules
-
-  protected _store: Store<IAppReduxState> | null = null;
-  protected _deps: IDependencies | null = null;
-
-  protected extraComponents?: { [key: string]: React.ReactElement<any> | React.ComponentClass<any> | null; };
-
-  public set store(store: Store<IAppReduxState>) {
-    this._store = store;
-  }
-
-  public set dependencies(value: IDependencies) {
-    this._deps = value;
-  }
-
-  protected get deps(): IDependencies | null {
-    return this._deps || null;
-  }
-
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
   public getReduxEntry?(): IReduxEntry;
-
-  public setExtraComponent(key: keyof C, component: React.ReactElement<any>): void {
-    if (this.extraComponents) {
-      this.extraComponents[key] = component;
-    } else {
-      throw new Error('Cannot set module extra component: no requirements found for extra component');
-    }
-  }
 }
 
 export interface IAppData {

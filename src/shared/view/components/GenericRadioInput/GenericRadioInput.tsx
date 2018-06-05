@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Radio, FormGroup } from 'react-bootstrap';
 import { bind } from 'decko';
-import block from 'bem-cn';
+import * as block from 'bem-cn';
 import Errors from 'shared/view/elements/Errors/Errors';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 import InputGroup from './../../elements/InputGroup/InputGroup';
@@ -33,25 +33,25 @@ class GenericRadioInput extends React.Component<GenericFieldProps, IState> {
     const { errors, isEdited } = this.state;
 
     return (
-     <InputGroup label={label}>
+      <InputGroup label={label}>
         <FormGroup className={b('radios-group')()}>
           {
             options ? options.map((option: string, index: number) => (
-                <Radio
-                  inline
-                  key={index}
-                  name={name}
-                  className={b('radio-button')()}
-                  onChange={this.onChange(name, option)}
-                >
-                  {option}
-                </Radio>
-              ),
+              <Radio
+                inline
+                key={index}
+                name={name}
+                className={b('radio-button')()}
+                onChange={this.onChange(name, option)}
+              >
+                {option}
+              </Radio>
+            ),
             ) : 'No choices'
           }
         </FormGroup>
         <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
-     </InputGroup>
+      </InputGroup>
     );
   }
 

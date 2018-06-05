@@ -1,5 +1,5 @@
 import * as React from 'react';
-import block from 'bem-cn';
+import * as block from 'bem-cn';
 import { bind } from 'decko';
 import MapOptions = google.maps.MapOptions;
 import './GoogleMap.scss';

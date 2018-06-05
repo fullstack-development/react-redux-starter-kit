@@ -1,9 +1,7 @@
-import { WithStyles, Theme } from '@material-ui/core/styles';
+import injectSheet, { Theme, WithStyles } from 'react-jss';
 import { GetClassKey } from 'shared/types/app';
 import { rule } from 'shared/helpers/style';
 import { IProps } from './SimpleList';
-
-import injectSheet from 'react-jss/lib/injectSheet';
 
 const styles = (theme: Theme) => ({
   root: rule({

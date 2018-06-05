@@ -4,7 +4,7 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 
 import { create } from 'jss';
 import jssCompose from 'jss-compose';
-import JssProvider from 'react-jss/lib/JssProvider';
+import { JssProvider } from 'react-jss';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { blue } from '@material-ui/core/colors';
 import { createGenerateClassName, jssPreset, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';

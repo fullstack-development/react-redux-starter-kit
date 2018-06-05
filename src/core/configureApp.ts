@@ -34,8 +34,6 @@ function configureApp(data?: IAppData): IAppData {
 
   sharedReduxEntries.forEach(connectEntryToStore);
   modules.forEach((module: Module) => {
-    module.dependencies = dependencies;
-    module.store = store;
     if (module.getReduxEntry) {
       connectEntryToStore(module.getReduxEntry());
     }
