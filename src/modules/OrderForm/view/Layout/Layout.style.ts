@@ -3,10 +3,7 @@ import { GetClassKey } from 'shared/types/app';
 import { rule } from 'shared/helpers/style';
 
 const styles = (theme: Theme) => ({
-  gridListTile_root: rule({
-    height: 'auto',
-  }),
-  gridListTile_tile: rule({
+  card_root: rule({
     overflow: 'unset',
   }),
 });

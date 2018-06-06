@@ -77,7 +77,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     const { CategorySelect } = this.props.categorySelectEntry.containers;
     const { DynamicFields } = this.props.dynamicFieldsEntry.containers;
     const { LocationSelect } = this.props.locationSelectEntry.containers;
-    const { submittingResult, isSubmitting } = this.props;
+    const { submittingResult, isSubmitting, classes } = this.props;
     const { categoryUid, location } = this.state;
     const canSubmit: boolean = Boolean(typeof categoryUid === 'number') &&
       !isSubmitting && this.isDynamicFieldsValid && Boolean(location);
@@ -85,14 +85,14 @@ class OrderFormLayout extends React.Component<IProps, IState> {
 
     return (
       <Form onSubmit={this.onFormSubmit}>
-        <SimpleList marginFactor={3}>
-          <SimpleCard>
+        <SimpleList marginFactor={3} gutterBottom>
+          <SimpleCard classes={classes}>
             <LocationSelect onChange={this.onLocationSelected} />
           </SimpleCard>
-          <SimpleCard>
+          <SimpleCard classes={classes}>
             <CategorySelect onCategoryChosen={this.onCategorySelected} />
           </SimpleCard>
-          {categoryUid ? <SimpleCard>{dynamicFieldsComponent}</SimpleCard> : null}
+          {categoryUid ? <SimpleCard classes={classes}>{dynamicFieldsComponent}</SimpleCard> : null}
         </SimpleList>
 
         <FormGroup className="clearfix">
@@ -150,9 +150,9 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 }
 
-function SimpleCard({ children }: { children: React.ReactNode }) {
+function SimpleCard({ children, classes }: { children: React.ReactNode } & StylesProps) {
   return (
-    <Card>
+    <Card classes={{ root: classes.card_root }}>
       <CardContent>
         {children}
       </CardContent>

@@ -195,6 +195,11 @@
       "integrity": "sha512-+T9qBbqe/jXtTjzVddArZExahoPPmt8eq3O1ZuCKZXjBVxf/ciUYNXrIDZJEVgYvpELnv6VlPRCfLzufRxpAag==",
       "dev": true
     },
+    "@types/classnames": {
+      "version": "2.2.4",
+      "resolved": "https://registry.npmjs.org/@types/classnames/-/classnames-2.2.4.tgz",
+      "integrity": "sha512-UWUmNYhaIGDx8Kv0NSqFRwP6HWnBMXam4nBacOrjIiPBKKCdWMCe77+Nbn6rI9+Us9c+BhE26u84xeYQv2bKeA=="
+    },
     "@types/clean-css": {
       "version": "3.4.30",
       "resolved": "https://registry.npmjs.org/@types/clean-css/-/clean-css-3.4.30.tgz",

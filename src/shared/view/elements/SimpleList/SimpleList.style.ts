@@ -3,6 +3,8 @@ import { GetClassKey } from 'shared/types/app';
 import { rule } from 'shared/helpers/style';
 import { IProps } from './SimpleList';
 
+const getMarginBottom = (theme: Theme) => (props: IProps) => theme.spacing.unit * (props.marginFactor || 1);
+
 const styles = (theme: Theme) => ({
   root: rule({
     margin: 0,
@@ -10,11 +12,14 @@ const styles = (theme: Theme) => ({
   }),
   item: rule({
     listStyle: 'none',
-    marginBottom: (props: IProps) => theme.spacing.unit * (props.marginFactor || 1),
+    marginBottom: getMarginBottom(theme),
 
-    '&:empty': {
+    '&:empty, &:last-child': {
       marginBottom: 0,
     },
+  }),
+  gutterBottom: rule({
+    marginBottom: getMarginBottom(theme),
   }),
 });
 
