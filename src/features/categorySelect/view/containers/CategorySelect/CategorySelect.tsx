@@ -38,7 +38,7 @@ function mapState(state: IAppReduxState): IStateProps {
   return { options, chosenCategoryUid };
 }
 
-function mapDispatch(dispatch: Dispatch<any>): IActionProps {
+function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
     loadCategories: actions.loadCategories,
     chooseCategory: actions.chooseCategory,
@@ -83,4 +83,4 @@ class CategorySelect extends React.PureComponent<Props> {
 }
 
 export { Props, CategorySelect };
-export default connect<IStateProps, IActionProps, IOwnProps>(mapState, mapDispatch)(CategorySelect);
+export default connect(mapState, mapDispatch)(CategorySelect);

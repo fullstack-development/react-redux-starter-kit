@@ -53,7 +53,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
+function mapDispatch(dispatch: Dispatch): IDispatchProps {
   return bindActionCreators({
     loadCities: actions.loadCities,
     selectLocation: actions.selectLocationByAreaId,

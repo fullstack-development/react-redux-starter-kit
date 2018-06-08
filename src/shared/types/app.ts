@@ -26,7 +26,7 @@ export interface IDependencies {
   api: Api;
 }
 
-export type IDictionary<T, S extends string = string> = {
+export type IDictionary<T, S extends keyof any = string> = {
   [key in S]: T;
 };
 
@@ -53,7 +53,7 @@ export interface IAppReduxState {
   searchRepositories: SearchRepositoriesNamespace.IReduxState;
 }
 
-export type Diff<T extends string, U extends string> =
+export type Diff<T extends keyof any, U extends keyof any> =
   ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
 
 export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
@@ -61,10 +61,6 @@ export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export type GetProps<T extends React.ComponentType<any>> =
   T extends React.StatelessComponent<infer SP> ? SP :
   T extends React.ComponentClass<infer CP> ? CP : never;
-
-export type GetClassKey<T extends object | ((...args: any[]) => any)> =
-  T extends (...args: any[]) => any ? keyof ReturnType<T> :
-  T extends object ? keyof T : never;
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 

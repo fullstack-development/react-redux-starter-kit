@@ -74,7 +74,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         this.saveBundle && this.state.mounted && this.forceUpdate();
       }
 
-      private saveBundle: null | ((bundle: IFeatureEntry<any, any, any>, key: string) => void) = (bundle, key) => {
+      private saveBundle: null | ((bundle: IFeatureEntry<any, any, any>, key: keyof L) => void) = (bundle, key) => {
         bundles.set(loaders[key], bundle);
       }
 

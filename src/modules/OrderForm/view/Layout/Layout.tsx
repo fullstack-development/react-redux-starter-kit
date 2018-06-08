@@ -51,7 +51,7 @@ interface IState {
 
 type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps & StylesProps;
 
-function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
+function mapDispatch(dispatch: Dispatch): IDispatchProps {
   return bindActionCreators({
     saveFields: actions.saveFields,
   }, dispatch);

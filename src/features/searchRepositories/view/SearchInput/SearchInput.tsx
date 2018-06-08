@@ -16,7 +16,7 @@ function mapState(state: IAppReduxState): {} {
   return {};
 }
 
-function mapDispatch(dispatch: Dispatch<IAppReduxState>): {} {
+function mapDispatch(dispatch: Dispatch): {} {
   return bindActionCreators({}, dispatch);
 }
 
