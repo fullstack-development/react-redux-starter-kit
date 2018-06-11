@@ -2,15 +2,12 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { bind } from 'decko';
-import * as block from 'bem-cn';
-import { ControlLabel, FormGroup } from 'react-bootstrap';
 
 import { IAppReduxState } from 'shared/types/app';
+import { isNumber } from 'shared/types/guards';
 import { SelectInput, Option } from 'shared/view/elements';
 
 import { actions, selectors } from '../../../redux';
-import './CategorySelect.scss';
-import { isNumber } from 'shared/types/guards';
 
 interface IOwnProps {
   onCategoryChosen(categoryUid: number): void;
@@ -43,8 +40,6 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
   }, dispatch);
 }
 
-const b = block('categories-select');
-
 class CategorySelect extends React.PureComponent<Props> {
   public componentDidMount() {
     this.props.loadCategories();
@@ -54,17 +49,16 @@ class CategorySelect extends React.PureComponent<Props> {
     const { chosenCategoryUid, options } = this.props;
 
     return (
-      <FormGroup>
-        <ControlLabel className={b('select-label')()}>
-          <b>Choose category:</b>
-        </ControlLabel>
-        <SelectInput
-          name="category"
-          value={chosenCategoryUid || undefined}
-          options={options}
-          onChange={this.onSelect}
-        />
-      </FormGroup>
+      <SelectInput
+        name="category"
+        value={chosenCategoryUid || undefined}
+        options={options}
+        onChange={this.onSelect}
+        label="Choose category:"
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
     );
   }
 

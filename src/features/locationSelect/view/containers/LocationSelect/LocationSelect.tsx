@@ -1,17 +1,17 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { bind } from 'decko';
+import { Typography } from '@material-ui/core';
 
 import { IAppReduxState } from 'shared/types/app';
 import { ILocation, IArea, ICity } from 'shared/types/models';
-import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 import { SelectInput, Option, TextInput } from 'shared/view/elements';
+import GoogleMap, { ILocation as MapLocation } from 'shared/view/components/GoogleMap/GoogleMap';
 
 import { IReduxState } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
-import './LocationSelect.scss';
+import { StylesProps, provideStyles } from './LocationSelect.style';
 
 interface IOwnProps {
   onChange?(location: ILocation | null): void;
@@ -28,7 +28,7 @@ interface IDispatchProps {
   selectLocation: typeof actions.selectLocationByAreaId;
 }
 
-type Props = IStateProps & IDispatchProps & IOwnProps;
+type Props = IStateProps & IDispatchProps & IOwnProps & StylesProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   const ownState: IReduxState = selectors.getFeatureState(state);
@@ -57,8 +57,6 @@ function mapDispatch(dispatch: Dispatch): IDispatchProps {
   }, dispatch);
 }
 
-const b = block('location-select');
-
 class LocationSelect extends React.Component<Props> {
   public componentDidUpdate(prevProps: Props) {
     const { onChange } = this.props;
@@ -75,30 +73,30 @@ class LocationSelect extends React.Component<Props> {
   }
 
   public render() {
-    const { options, selectedLocation } = this.props;
+    const { options, selectedLocation, classes } = this.props;
     const selectedArea: IArea | null = selectedLocation ? selectedLocation.area : null;
     const selectedCity: ICity | null = selectedLocation ? selectedLocation.city : null;
     const showSelectedAreaOnMap: boolean = this.props.showLocation;
 
     return (
-      <div className={b()}>
-        <div className={b('form')()}>
-          <label className={b('label')()}><b>Location:</b></label>
-          <div className={b('input')()}>
+      <div>
+        <div className={classes.form}>
+          <Typography component="label" variant="subheading" className={classes.label}><b>Location:</b></Typography>
+          <div className={classes.input}>
             <SelectInput
               options={options}
               value={selectedArea ? selectedArea.id : ''}
               onChange={this.onSelectLocation}
             />
           </div>
-          <div className={b('input')()}>
+          <div className={classes.input}>
             <TextInput
               value={selectedArea ? selectedArea.name : ''}
               placeholder="Area"
               disabled
             />
           </div>
-          <div className={b('input')()}>
+          <div className={classes.input}>
             <TextInput
               value={selectedCity ? selectedCity.name : ''}
               placeholder="City"
@@ -106,7 +104,7 @@ class LocationSelect extends React.Component<Props> {
             />
           </div>
         </div>
-        <div className={b('map')()}>
+        <div className={classes.map}>
           <GoogleMap
             lat={selectedArea ? selectedArea.point.lat : undefined}
             lng={selectedArea ? selectedArea.point.lng : 0}
@@ -153,4 +151,8 @@ class LocationSelect extends React.Component<Props> {
 }
 
 export { Props };
-export default connect(mapState, mapDispatch)(LocationSelect);
+export default (
+  connect(mapState, mapDispatch)(
+    provideStyles(LocationSelect),
+  )
+);

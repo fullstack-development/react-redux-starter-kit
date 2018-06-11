@@ -4,8 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { featureConnect } from 'core';
 import { RouteComponentProps } from 'react-router-dom';
-import { Form, FormGroup, Button } from 'react-bootstrap';
-import { Card, CardContent } from '@material-ui/core';
+import { Card, CardContent, Button } from '@material-ui/core';
 
 import * as locationSelect from 'features/locationSelect';
 import * as categorySelect from 'features/categorySelect';
@@ -44,7 +43,7 @@ interface IState {
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
-      errors: string[],
+      error: string,
     },
   };
 }
@@ -84,7 +83,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
     const dynamicFieldsComponent = <DynamicFields category={categoryUid} onChange={this.onDynamicValueChanged} />;
 
     return (
-      <Form onSubmit={this.onFormSubmit}>
+      <form onSubmit={this.onFormSubmit}>
         <SimpleList marginFactor={3} gutterBottom>
           <SimpleCard classes={classes}>
             <LocationSelect onChange={this.onLocationSelected} />
@@ -95,15 +94,14 @@ class OrderFormLayout extends React.Component<IProps, IState> {
           {categoryUid ? <SimpleCard classes={classes}>{dynamicFieldsComponent}</SimpleCard> : null}
         </SimpleList>
 
-        <FormGroup className="clearfix">
+        <div>
           {isSubmitting ? <span>Saving...</span> : null}
           {submittingResult ? <span className={'result'}>{submittingResult}</span> : null}
-          <Button type="submit" bsStyle="primary" className={'submit'} disabled={!canSubmit}>
+          <Button type="submit" color="primary" variant="raised" disabled={!canSubmit}>
             Submit
-            </Button>
-        </FormGroup>
-
-      </Form >
+          </Button>
+        </div>
+      </form >
     );
   }
 
@@ -125,19 +123,19 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onFormSubmit(e: React.FormEvent<Form>): void {
+  private onFormSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     const { dynamicValues, locationValues, chosenLocation, chosenCategoryUid, saveFields } = this.props;
     saveFields({ dynamicValues, chosenLocation, chosenCategoryUid, locationValues });
   }
 
   @bind
-  private onDynamicValueChanged(name: string, value: FieldValue, errors: string[]) {
+  private onDynamicValueChanged(name: string, value: FieldValue, error: string) {
     this.setState((prevState: IState) => ({
       ...prevState,
       dynamicFields: {
         ...prevState.dynamicFields,
-        [name]: { value, errors },
+        [name]: { value, error },
       },
     }));
   }
@@ -145,7 +143,7 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   get isDynamicFieldsValid(): boolean {
     const fields = this.state.dynamicFields;
     return !Object.keys(fields).some(
-      (key: string) => Boolean(fields[key].errors.length),
+      (key: string) => Boolean(fields[key].error),
     );
   }
 }

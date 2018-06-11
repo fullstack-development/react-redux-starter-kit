@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
 import { bind } from 'decko';
+import { StylesProps, provideStyles } from './GoogleMap.style';
+
 import MapOptions = google.maps.MapOptions;
-import './GoogleMap.scss';
 
 type GCRequest = google.maps.GeocoderRequest;
 type GCResult = google.maps.GeocoderResult;
@@ -21,13 +21,12 @@ interface ILocation {
   point: google.maps.LatLng | null;
 }
 
-class GoogleMap extends React.Component<IProps> {
+class GoogleMap extends React.Component<IProps & StylesProps> {
   public static defaultProps: IProps = {
     lat: 6.991815,
     lng: 81.055025,
     showNewPoint: true,
   };
-  private b = block('google-map');
   private map: google.maps.Map | null = null;
   private geocoder: google.maps.Geocoder | null = null;
   private mapContainer: HTMLDivElement | null = null;
@@ -70,11 +69,9 @@ class GoogleMap extends React.Component<IProps> {
   }
 
   public render() {
-    const b = this.b;
+    const { classes } = this.props;
     return (
-      <div className={b()}>
-        <div className={b('map')()} ref={this.onMapRef} />
-      </div>
+      <div className={classes.root} ref={this.onMapRef} />
     );
   }
 
@@ -127,4 +124,4 @@ class GoogleMap extends React.Component<IProps> {
 }
 
 export { IProps, ILocation };
-export default GoogleMap;
+export default provideStyles(GoogleMap);

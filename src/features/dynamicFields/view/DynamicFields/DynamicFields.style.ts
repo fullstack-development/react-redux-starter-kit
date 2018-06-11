@@ -1,13 +1,9 @@
-import injectSheet, { Theme, WithStyles } from 'react-jss';
+import injectSheet, { WithStyles, Theme } from 'react-jss';
 import { rule } from 'shared/helpers/style';
 
 const styles = (theme: Theme) => ({
-  card_root: rule({
-    overflow: 'unset',
-  }),
-  actions: rule({
-    display: 'flex',
-    alignItems: 'center',
+  field: rule({
+    marginTop: theme.spacing.unit * 3,
   }),
 });
 
