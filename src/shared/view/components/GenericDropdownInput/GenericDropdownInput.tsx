@@ -1,14 +1,15 @@
 import * as React from 'react';
-import * as Select from 'react-select';
 import { bind } from 'decko';
-import Errors from 'shared/view/elements/Errors/Errors';
+
+import { isNumber, isString } from 'shared/types/guards';
+
+import { SelectInput, Option } from '../../elements';
+import InputGroup from '../../elements/InputGroup/InputGroup';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
-import SelectInput from '../../elements/SelectInput/SelectInput';
-import InputGroup from './../../elements/InputGroup/InputGroup';
 
 interface IState {
-  errors: string[];
-  selected: Select.Option | null;
+  error: string;
+  selected: Option<string> | null;
   isEdited: boolean;
 }
 
@@ -16,7 +17,7 @@ class GenericDropdownInput extends React.PureComponent<GenericFieldProps, IState
   constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
-      errors: [],
+      error: '',
       selected: null,
       isEdited: false,
     };
@@ -28,9 +29,11 @@ class GenericDropdownInput extends React.PureComponent<GenericFieldProps, IState
 
   public render() {
     const { name, label, 'enum': options = [] } = this.props;
-    const { errors, selected, isEdited } = this.state;
+    const { selected, isEdited } = this.state;
 
-    const dropdownOptions = options.map<Select.Option>(option => ({
+    const error = this.props.error || this.state.error;
+
+    const dropdownOptions = options.map<Option<string>>(option => ({
       label: option,
       value: option,
     }));
@@ -41,46 +44,33 @@ class GenericDropdownInput extends React.PureComponent<GenericFieldProps, IState
           name={name}
           options={dropdownOptions}
           onChange={this.onSelect}
-          value={selected ? selected : ''}
+          value={selected && selected.value || ''}
+          error={isEdited && !!error}
+          helperText={isEdited && error}
         />
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
       </InputGroup>
     );
   }
 
   @bind
-  private onSelect(selected: Select.Option | Select.Option[] | null) {
+  private onSelect(selected: Option<string> | null) {
     this.validateAndChangeValue(Array.isArray(selected) ? selected[0] : selected);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
   }
 
-  private validateAndChangeValue(selected: Select.Option | null) {
+  private validateAndChangeValue(selected: Option<string> | null) {
     const { required, onChange } = this.props;
-    const errors = [];
-    let value: string | number = '';
-
-    if (!selected && required) {
-      errors.push('Field is required');
-    }
-
-    if (selected) {
-      if (typeof selected.value === 'string' || typeof selected.value === 'number') {
-        // Type Guards allow you to narrow down the type of an object within a conditional block.
-        // TypeScript is aware of the usage of the JavaScript instanceof and typeof operators
-        // Read "Type Guards and Differentiating Types" of Typescript's docs
-        value = selected.value;
-      }
-    }
+    const error = !selected && required ? 'Field is required' : '';
 
     if (onChange) {
-      onChange(value, errors);
+      const value: string | number =
+        selected && (isNumber(selected.value) || isString(selected.value))
+          ? selected.value
+          : '';
+      onChange(value, error);
     }
 
-    this.setState({
-      ...this.state,
-      selected,
-      errors,
-    });
+    this.setState({ ...this.state, selected, error });
   }
 
 }

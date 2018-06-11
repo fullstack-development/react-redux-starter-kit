@@ -11,9 +11,9 @@ interface IProps {
   pattern?: string;
   placeholder?: string;
 
-  errors?: string[];
+  error?: string;
 
-  onChange?: (value: FieldValue, errors: string[]) => void;
+  onChange?: (value: FieldValue, error: string) => void;
 }
 
 export { FieldValue, IProps };

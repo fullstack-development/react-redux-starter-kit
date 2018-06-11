@@ -129,7 +129,7 @@ class DynamicFields extends React.Component<Props, IState> {
   private renderFields(): React.ReactNode {
     const { fields } = this.props;
     if (fields && fields.schema && fields.schema.properties) {
-      const requriedFields: string[] = fields.schema.required;
+      const requiredFields: string[] = fields.schema.required;
       const properties: { [key: string]: IField } = fields.schema.properties;
       const fieldsNode = Object
         .keys(properties)
@@ -145,7 +145,7 @@ class DynamicFields extends React.Component<Props, IState> {
         .map((fieldName: string) => {
           const type: string = properties[fieldName].component;
           const Component: ComponentClass<any> | StatelessComponent<any> = this.components[type];
-          const isRequired: boolean = Boolean(requriedFields.find((f: string) => f === fieldName));
+          const isRequired: boolean = Boolean(requiredFields.find((f: string) => f === fieldName));
           const baseProps = properties[fieldName];
           const props = {
             ...baseProps,
