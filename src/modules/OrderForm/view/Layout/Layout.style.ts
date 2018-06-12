@@ -1,5 +1,6 @@
 import injectSheet, { Theme, WithStyles } from 'react-jss';
 import { rule } from 'shared/helpers/style';
+import { green } from '@material-ui/core/colors';
 
 const styles = (theme: Theme) => ({
   card_root: rule({
@@ -7,7 +8,12 @@ const styles = (theme: Theme) => ({
   }),
   actions: rule({
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
+  }),
+  result: rule({
+    color: green['500'],
   }),
 });
 

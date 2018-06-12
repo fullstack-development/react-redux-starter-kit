@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { featureConnect } from 'core';
 import { RouteComponentProps } from 'react-router-dom';
-import { Card, CardContent, Button } from '@material-ui/core';
+import { Card, CardContent, Button, Typography } from '@material-ui/core';
 
 import * as locationSelect from 'features/locationSelect';
 import * as categorySelect from 'features/categorySelect';
@@ -94,9 +94,11 @@ class OrderFormLayout extends React.Component<IProps, IState> {
           {categoryUid ? <SimpleCard classes={classes}>{dynamicFieldsComponent}</SimpleCard> : null}
         </SimpleList>
 
-        <div>
-          {isSubmitting ? <span>Saving...</span> : null}
-          {submittingResult ? <span className={'result'}>{submittingResult}</span> : null}
+        <div className={classes.actions}>
+          {isSubmitting ? <Typography component="span" gutterBottom>Saving...</Typography> : null}
+          {submittingResult ? (
+            <Typography component="span" className={classes.result} gutterBottom>{submittingResult}</Typography>
+          ) : null}
           <Button type="submit" color="primary" variant="raised" disabled={!canSubmit}>
             Submit
           </Button>

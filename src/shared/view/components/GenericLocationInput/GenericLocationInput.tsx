@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Geosuggest from 'react-geosuggest';
 import { bind } from 'decko';
+import { FormHelperText } from '@material-ui/core';
 
 import InputGroup from '../../elements/InputGroup/InputGroup';
-import Errors from '../../elements/Errors/Errors';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 
 interface IGeosuggestOption {
@@ -45,19 +45,19 @@ class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
   public render() {
     const { placeholder, label } = this.props;
     const { error, isEdited } = this.state;
-    const shriLankaLatLng = new google.maps.LatLng(7.75000, 80.76667);
+    const sriLankaLatLng = new google.maps.LatLng(7.75000, 80.76667);
 
     return (
       <InputGroup label={label}>
         <Geosuggest
           placeholder={placeholder}
-          location={shriLankaLatLng}
+          location={sriLankaLatLng}
           queryDelay={1000}
           radius="330"
           inputClassName="form-control"
           onSuggestSelect={this.onSelect}
         />
-        <Errors errors={[error]} hidden={!isEdited} />
+        {isEdited && !!error && <FormHelperText error>{error}</FormHelperText>}
       </InputGroup>
     );
   }

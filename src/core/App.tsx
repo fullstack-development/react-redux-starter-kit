@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
+import 'normalize.css';
 
 import { create } from 'jss';
 import jssCompose from 'jss-compose';
@@ -10,6 +11,7 @@ import { blue } from '@material-ui/core/colors';
 import { createGenerateClassName, jssPreset, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import { IAppData, Module } from 'shared/types/app';
+import BaseStyles from 'shared/view/styles/BaseStyles';
 
 import createRoutes from './routes';
 
@@ -49,6 +51,7 @@ function renderSharedPart(modules: Array<Module<any>>) {
       <MuiThemeProvider theme={theme}>
         <React.StrictMode>
           <CssBaseline />
+          <BaseStyles />
           {createRoutes(modules)}
         </React.StrictMode>
       </MuiThemeProvider>
