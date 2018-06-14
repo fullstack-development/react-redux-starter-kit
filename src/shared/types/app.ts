@@ -58,7 +58,7 @@ export type IDictionary<T, S extends string = string> = {
 };
 
 export interface IReduxEntry {
-  reducers?: {[key in keyof IAppReduxState]?: Reducer<IAppReduxState[key]>};
+  reducers?: { [key in keyof IAppReduxState]?: Reducer<IAppReduxState[key]> };
   sagas?: Array<(deps: IDependencies) => () => SagaIterator>;
 }
 
@@ -81,7 +81,7 @@ export interface IAppReduxState {
 }
 
 export type Diff<T extends string, U extends string> =
-  ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T];
+  ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
 
 export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 
@@ -92,9 +92,8 @@ export type Lang = 'en' | 'he';
 export type Uid = number;
 
 export interface IAssets {
-  javascript: Record<string, string>;
-  styles: Record<string, string>;
-  assets: Record<string, string>;
+  javascript: string[];
+  styles: string[];
 }
 
 export * from '../helpers/redux/namespace';
