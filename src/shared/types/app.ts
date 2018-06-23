@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 import { RouteProps } from 'react-router';
 import { Store, Reducer, ActionCreator, Action } from 'redux';
-
 import { SagaIterator } from 'redux-saga';
+import { GenerateClassName } from 'jss';
+import { JSS, Theme } from 'react-jss';
 
 import { namespace as CategorySelectNamespace } from 'features/categorySelect';
 import { namespace as LocationSelectNamespace } from 'features/locationSelect';
@@ -20,6 +21,12 @@ export abstract class Module<C = any> {
 export interface IAppData {
   modules: Module[];
   store: Store<IAppReduxState>;
+}
+
+export interface IJssDependencies {
+  jss: JSS;
+  generateClassName: GenerateClassName<any>;
+  theme: Theme;
 }
 
 export interface IDependencies {

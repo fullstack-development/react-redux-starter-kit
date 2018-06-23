@@ -7,19 +7,24 @@ import bootstrapper from 'react-async-bootstrapper';
 import configureApp from 'core/configureApp';
 
 import { AppContainer } from 'react-hot-loader';
+import { configureJss } from 'core/configureJss';
 
 const version: string = '0.0.3';
 
 let appData = configureApp();
-function render(component: React.ReactElement<any>) {
-  const app = <AppContainer>{component}</AppContainer>;
-  bootstrapper(app)
-    .then(() => ReactDOM.hydrate(app, document.getElementById('root')))
-    .catch((err: any) => console.log('Eek, error!', err));
+
+const jssDeps = configureJss();
+
+async function main() {
+  const appForBootstrap = <App {...appData} jssDeps={jssDeps} disableStylesGeneration />;
+  await bootstrapper(appForBootstrap);
+  const app = <App {...appData} jssDeps={jssDeps} />;
+
+  render(app);
 }
 
 /* Start application */
-render(<App modules={appData.modules} store={appData.store} />);
+main();
 
 /* Hot Module Replacement API */
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
@@ -27,8 +32,22 @@ if ((module as any).hot && process.env.NODE_ENV !== 'production') {
     const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
     const NextApp: typeof App = require('./core/App').App;
     appData = nextConfigureApp(appData);
-    render(<NextApp modules={appData.modules} store={appData.store} />);
+    render(<NextApp {...appData} jssDeps={jssDeps} />);
   });
+}
+
+function render(component: React.ReactElement<any>) {
+  ReactDOM.hydrate(
+    <AppContainer>{component}</AppContainer>,
+    document.getElementById('root'),
+    () => {
+      // We don't need the static css any more once we have launched our application.
+      const ssStyles = document.getElementById('server-side-styles');
+      if (ssStyles && ssStyles.parentNode) {
+        ssStyles.parentNode.removeChild(ssStyles);
+      }
+    },
+  );
 }
 
 /* tslint:disable */

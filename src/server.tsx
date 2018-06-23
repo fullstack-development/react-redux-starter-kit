@@ -9,6 +9,8 @@ import Html from 'assets/Html';
 
 import configureApp from 'core/configureApp';
 import { ServerApp } from 'core/App';
+import { SheetsRegistry } from 'react-jss';
+import { configureJss } from 'core/configureJss';
 
 async function render({ req, res, assets }: { req: express.Request; res: express.Response; assets: IAssets }) {
   try {
@@ -43,13 +45,29 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
 }
 
 async function renderOnServer(appData: IAppData, assets: IAssets, location: string, context: object) {
-  const component = <ServerApp {...appData} location={location} context={context} />;
-  await bootstrapper(component);
-  const html = <Html assets={assets} component={component} store={appData.store} />;
+  console.log('>>> START RENDER');
+  const jssDeps = configureJss();
+  const sheets = new SheetsRegistry();
+  const componentForBootstrap = (
+    <ServerApp
+      {...appData}
+      jssDeps={jssDeps}
+      location={location}
+      context={{}}
+      registry={sheets}
+      disableStylesGeneration
+    />
+  );
+  console.log('>>> START BOOTSTRAP');
+  await bootstrapper(componentForBootstrap);
+  console.log('>>> STOP BOOTSTRAP');
+  const app = <ServerApp {...appData} jssDeps={jssDeps} location={location} context={context} registry={sheets} />;
+  const html = <Html assets={assets} component={app} store={appData.store} styleSheets={sheets} />;
   const document = `
     <!doctype html>
     ${renderToString(html)}
   `;
+  console.log('>>> STOP RENDER');
 
   return document;
 }

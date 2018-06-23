@@ -3,52 +3,58 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
-import { create } from 'jss';
-import jssCompose from 'jss-compose';
-import { JssProvider } from 'react-jss';
+import { JssProvider, SheetsRegistry } from 'react-jss';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { blue } from '@material-ui/core/colors';
-import { createGenerateClassName, jssPreset, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import { IAppData, Module } from 'shared/types/app';
+import { IAppData, Module, IJssDependencies } from 'shared/types/app';
 import BaseStyles from 'shared/view/styles/BaseStyles';
 
 import createRoutes from './routes';
 
-export function App({ modules, store }: IAppData) {
+interface IAppProps {
+  jssDeps: IJssDependencies;
+  registry?: SheetsRegistry;
+  disableStylesGeneration?: boolean;
+}
+
+export function App({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {renderSharedPart(modules)}
+        {renderSharedPart(modules, jssDeps, disableStylesGeneration)}
       </BrowserRouter>
     </Provider>
   );
 }
 
-export function ServerApp({ modules, store, ...routerProps }: IAppData & StaticRouter['props']) {
+interface IServerAppProps {
+  jssDeps: IJssDependencies;
+  registry?: SheetsRegistry;
+  disableStylesGeneration?: boolean;
+}
+
+export function ServerApp(props: IAppData & IServerAppProps & StaticRouter['props']) {
+  const { modules, store, registry, jssDeps, disableStylesGeneration, ...routerProps } = props;
   return (
     <Provider store={store}>
       <StaticRouter {...routerProps}>
-        {renderSharedPart(modules)}
+        {renderSharedPart(modules, jssDeps, disableStylesGeneration, registry)}
       </StaticRouter>
     </Provider>
   );
 }
 
-// Place to add jss-plugins [https://material-ui.com/customization/css-in-js/#plugins]
-const jss = create({ plugins: [...jssPreset().plugins, jssCompose()] });
-const generateClassName = createGenerateClassName();
+function renderSharedPart(
+  modules: Array<Module<any>>, jssDeps: IJssDependencies,
+  disableStylesGeneration?: boolean,
+  registry?: SheetsRegistry,
+) {
+  const { generateClassName, jss, theme } = jssDeps;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-  },
-});
-
-function renderSharedPart(modules: Array<Module<any>>) {
   return (
-    <JssProvider jss={jss} generateClassName={generateClassName}>
-      <MuiThemeProvider theme={theme}>
+    <JssProvider jss={jss} generateClassName={generateClassName} registry={registry}>
+      <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
         <React.StrictMode>
           <CssBaseline />
           <BaseStyles />

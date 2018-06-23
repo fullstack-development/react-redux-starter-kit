@@ -10,7 +10,6 @@ import { IFeatureEntry, Omit, GetProps } from 'shared/types/app';
 type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
 
 interface IState {
-  bootstrapped: boolean;
   mounted: boolean;
 }
 
@@ -26,18 +25,19 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
 
     @injectable()
     class FeatureConnector extends React.PureComponent<Omit<Props, keyof L>, IState> {
-      public state: IState = { bootstrapped: false, mounted: false };
+      public state: IState = { mounted: false };
 
       @inject(TYPES.connectEntryToStore)
       private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
       public async bootstrap() {
-        await this.load();
-        this.setState({ bootstrapped: true });
+        if (!this.isAllBundlesLoaded()) {
+          await this.load();
+        }
       }
 
       public componentDidMount() {
-        if (!this.state.bootstrapped) {
+        if (!this.isAllBundlesLoaded()) {
           this.load();
         }
         this.setState({ mounted: true });
