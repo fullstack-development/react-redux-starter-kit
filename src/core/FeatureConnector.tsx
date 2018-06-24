@@ -31,9 +31,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
       private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
       public async bootstrap() {
-        if (!this.isAllBundlesLoaded()) {
-          await this.load();
-        }
+        await this.load();
       }
 
       public componentDidMount() {

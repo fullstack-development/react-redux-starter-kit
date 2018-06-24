@@ -14,7 +14,6 @@ import createRoutes from './routes';
 
 interface IAppProps {
   jssDeps: IJssDependencies;
-  registry?: SheetsRegistry;
   disableStylesGeneration?: boolean;
 }
 
@@ -53,7 +52,12 @@ function renderSharedPart(
   const { generateClassName, jss, theme } = jssDeps;
 
   return (
-    <JssProvider jss={jss} generateClassName={generateClassName} registry={registry}>
+    <JssProvider
+      jss={jss}
+      registry={registry}
+      generateClassName={generateClassName}
+      disableStylesGeneration={disableStylesGeneration}
+    >
       <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
         <React.StrictMode>
           <CssBaseline />

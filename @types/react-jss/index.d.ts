@@ -11,6 +11,7 @@ declare module 'react-jss' {
     jss: JSS;
     generateClassName: GenerateClassName<any>;
     registry?: SheetsRegistry;
+    disableStylesGeneration?: boolean;
   }
 
   export class JssProvider extends React.Component<IProviderProps> { }

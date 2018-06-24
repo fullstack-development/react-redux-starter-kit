@@ -45,30 +45,24 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
 }
 
 async function renderOnServer(appData: IAppData, assets: IAssets, location: string, context: object) {
-  console.log('>>> START RENDER');
   const jssDeps = configureJss();
   const sheets = new SheetsRegistry();
-  const componentForBootstrap = (
+  const appForBootstrap = (
     <ServerApp
       {...appData}
       jssDeps={jssDeps}
       location={location}
       context={{}}
-      registry={sheets}
       disableStylesGeneration
     />
   );
-  console.log('>>> START BOOTSTRAP');
-  await bootstrapper(componentForBootstrap);
-  console.log('>>> STOP BOOTSTRAP');
+  await bootstrapper(appForBootstrap);
   const app = <ServerApp {...appData} jssDeps={jssDeps} location={location} context={context} registry={sheets} />;
   const html = <Html assets={assets} component={app} store={appData.store} styleSheets={sheets} />;
   const document = `
     <!doctype html>
     ${renderToString(html)}
   `;
-  console.log('>>> STOP RENDER');
-
   return document;
 }
 
