@@ -1,6 +1,5 @@
 import injectSheet from 'react-jss';
 import { rule } from 'shared/helpers/style';
-import * as React from 'react';
 
 const styles = {
   '@global': rule({
@@ -18,4 +17,4 @@ const styles = {
   }),
 };
 
-export default injectSheet(styles)(() => <noscript />);
+export default injectSheet(styles)();

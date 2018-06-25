@@ -8,8 +8,8 @@ declare module 'react-jss' {
   export type JSS = ReturnType<typeof create>;
 
   interface IProviderProps {
-    jss: JSS;
-    generateClassName: GenerateClassName<any>;
+    jss?: JSS;
+    generateClassName?: GenerateClassName<any>;
     registry?: SheetsRegistry;
     disableStylesGeneration?: boolean;
   }

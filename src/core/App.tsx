@@ -59,11 +59,11 @@ function renderSharedPart(
       disableStylesGeneration={disableStylesGeneration}
     >
       <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
-        <React.StrictMode>
-          <CssBaseline />
-          <BaseStyles />
-          {createRoutes(modules)}
-        </React.StrictMode>
+        {/* <React.StrictMode> */}
+        <CssBaseline />
+        <BaseStyles />
+        {createRoutes(modules)}
+        {/* </React.StrictMode> */}
       </MuiThemeProvider>
     </JssProvider>
   );

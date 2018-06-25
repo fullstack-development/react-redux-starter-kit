@@ -49,7 +49,7 @@ declare module 'react-jss/lib/injectSheet' {
     style: StyleRulesCallback<ClassKey> | StyleRules<ClassKey>,
   ): {
       <P extends ConsistentWith<P, StyledComponentProps<ClassKey>>>(
-        component: React.ComponentType<P & WithStyles<ClassKey>>,
+        component?: React.ComponentType<P & WithStyles<ClassKey>>,
       ): React.ComponentType<Overwrite<P, StyledComponentProps<ClassKey>>>;
     };
 }
