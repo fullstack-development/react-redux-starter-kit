@@ -5,6 +5,13 @@ import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
+import * as postcssReporter from 'postcss-reporter';
+import * as postcssEasyImport from 'postcss-easy-import';
+import * as postcssSCSS from 'postcss-scss';
+import * as autoprefixer from 'autoprefixer';
+import * as stylelint from 'stylelint';
+import * as doiuse from 'doiuse';
+
 import { ROUTES_PREFIX } from '../src/core/constants';
 import getEnvParams from '../src/core/getEnvParams';
 
@@ -69,14 +76,64 @@ export function getStyleRules(type: 'dev' | 'prod' | 'server') {
     prod: [MiniCssExtractPlugin.loader, 'css-loader'],
     server: ['css-loader/locals'],
   };
+  const scssFirstLoaders: Record<typeof type, webpack.Loader[]> = {
+    dev: ['style-loader', 'css-loader?importLoaders=1'],
+    prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
+    server: ['css-loader/locals?importLoaders=1'],
+  };
 
   return [
     {
       test: /\.css$/,
       use: cssLoaders[type],
     },
+    {
+      test: /\.scss$/,
+      use: scssFirstLoaders[type].concat(commonScssLoaders),
+    },
   ];
 }
+
+const commonScssLoaders: webpack.Loader[] = [
+  {
+    loader: 'postcss-loader',
+    options: {
+      plugins: () => {
+        return [
+          autoprefixer({
+            browsers: ['last 2 versions'],
+          }),
+        ];
+      },
+    },
+  },
+  'sass-loader',
+  {
+    loader: 'postcss-loader',
+    options: {
+      syntax: postcssSCSS,
+      plugins: () => {
+        return [
+          postcssEasyImport({
+            extensions: '.scss',
+          }),
+          stylelint(),
+          doiuse({
+            // https://github.com/browserslist/browserslist
+            // to view resulting browsers list, use the command in terminal `npx browserslist "defaults, not ie > 0"`
+            browsers: ['defaults', 'not op_mini all', 'not ie > 0', 'not ie_mob > 0'],
+            ignore: [],
+            ignoreFiles: ['**/normalize.css'],
+          }),
+          postcssReporter({
+            clearReportedMessages: true,
+            throwError: true,
+          }),
+        ];
+      },
+    },
+  },
+];
 
 export const commonConfig: webpack.Configuration = {
   target: 'web',
