@@ -1,8 +1,8 @@
 declare module 'theming' {
   import { ConsistentWith } from '_helpers';
-  import { Theme as MaterialTheme } from '@material-ui/core/styles';
+  import { Theme } from 'theming/@externals';
 
-  export type Theme = MaterialTheme;
+  export type Theme = Theme;
 
   export interface WithTheme {
     theme: Theme;

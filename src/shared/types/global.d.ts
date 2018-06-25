@@ -20,6 +20,11 @@ interface WebpackModule {
   accept: Function;
 }
 
+declare module 'theming/@externals' {
+  import { Theme } from '@material-ui/core';
+  export type Theme = Theme;
+}
+
 declare module 'redux-async-connect';
 declare module 'react-geosuggest';
 declare module 'normalizr';
