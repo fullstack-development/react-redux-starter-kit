@@ -7,18 +7,15 @@ import bootstrapper from 'react-async-bootstrapper';
 import configureApp from 'core/configureApp';
 
 import { AppContainer } from 'react-hot-loader';
-import { configureJss } from 'core/configureJss';
 
 const version: string = '0.0.3';
 
-let appData = configureApp();
-
-const jssDeps = configureJss();
+const appData = configureApp();
 
 async function main() {
-  const appForBootstrap = <App {...appData} jssDeps={jssDeps} disableStylesGeneration />;
+  const appForBootstrap = <App {...appData} disableStylesGeneration />;
   await bootstrapper(appForBootstrap);
-  const app = <App {...appData} jssDeps={jssDeps} />;
+  const app = <App {...appData} />;
 
   render(app);
 }
@@ -31,8 +28,8 @@ if ((module as any).hot && process.env.NODE_ENV !== 'production') {
   (module as any).hot.accept(['./core/App', './core/configureApp'], () => {
     const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
     const NextApp: typeof App = require('./core/App').App;
-    appData = nextConfigureApp(appData);
-    render(<NextApp {...appData} jssDeps={jssDeps} />);
+    const nextAppData = nextConfigureApp(appData);
+    render(<NextApp {...nextAppData} jssDeps={appData.jssDeps} />);
   });
 }
 

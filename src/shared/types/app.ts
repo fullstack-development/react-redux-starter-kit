@@ -21,6 +21,7 @@ export abstract class Module<C = any> {
 export interface IAppData {
   modules: Module[];
   store: Store<IAppReduxState>;
+  jssDeps: IJssDependencies;
 }
 
 export interface IJssDependencies {

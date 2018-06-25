@@ -1,6 +1,7 @@
 import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
+import { configureJss } from 'core/configureJss';
 
 import { HomeModule, OrderFormModule } from 'modules';
 
@@ -31,6 +32,7 @@ function configureApp(data?: IAppData): IAppData {
   }
 
   const dependencies = configureDeps(store);
+  const jssDeps = configureJss();
 
   sharedReduxEntries.forEach(connectEntryToStore);
   modules.forEach((module: Module) => {
@@ -70,7 +72,7 @@ function configureApp(data?: IAppData): IAppData {
     }
   }
 
-  return { modules, store };
+  return { modules, store, jssDeps };
 }
 
 export default configureApp;
