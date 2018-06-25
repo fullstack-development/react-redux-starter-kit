@@ -1,25 +1,22 @@
 import * as React from 'react';
-import block from 'bem-cn';
 import { bind } from 'decko';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { featureConnect } from 'core';
-
 import { RouteComponentProps } from 'react-router-dom';
-import { IAppReduxState } from 'shared/types/app';
-import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
-import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { Card, CardContent, Button, Typography } from '@material-ui/core';
 
 import * as locationSelect from 'features/locationSelect';
 import * as categorySelect from 'features/categorySelect';
 import * as dynamicFields from 'features/dynamicFields';
 
-import { actions } from './../../redux';
+import { IAppReduxState } from 'shared/types/app';
+import { IFlatFormProperties, ILocationProperties, ILocation, INormalizedLocation } from 'shared/types/models';
+import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
+import { SimpleList } from 'shared/view/elements';
 
-import { Panel, Form, FormGroup, Button } from 'react-bootstrap';
-import RowsLayout from 'shared/view/elements/RowsLayout';
-import Header from 'shared/view/components/Header';
-import './Layout.scss';
+import { actions } from '../../redux';
+import { StylesProps, provideStyles } from './Layout.style';
 
 interface IOwnProps {
   locationSelectEntry: locationSelect.Entry;
@@ -46,14 +43,14 @@ interface IState {
   dynamicFields: {
     [key: string]: {
       value: FieldValue,
-      errors: string[],
+      error: string,
     },
   };
 }
 
-type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps;
+type IProps = IStateProps & IDispatchProps & RouteComponentProps<{}> & IOwnProps & StylesProps;
 
-function mapDispatch(dispatch: Dispatch<any>): IDispatchProps {
+function mapDispatch(dispatch: Dispatch): IDispatchProps {
   return bindActionCreators({
     saveFields: actions.saveFields,
   }, dispatch);
@@ -75,43 +72,38 @@ function mapState(state: IAppReduxState, ownProps: IOwnProps): IStateProps {
 class OrderFormLayout extends React.Component<IProps, IState> {
 
   public state: IState = { dynamicFields: {}, categoryUid: null, location: null };
-  private b = block('home-page');
-
   public render() {
-    const b = this.b;
     const { CategorySelect } = this.props.categorySelectEntry.containers;
     const { DynamicFields } = this.props.dynamicFieldsEntry.containers;
     const { LocationSelect } = this.props.locationSelectEntry.containers;
-    const { submittingResult, isSubmitting, history } = this.props;
+    const { submittingResult, isSubmitting, classes } = this.props;
     const { categoryUid, location } = this.state;
     const canSubmit: boolean = Boolean(typeof categoryUid === 'number') &&
       !isSubmitting && this.isDynamicFieldsValid && Boolean(location);
     const dynamicFieldsComponent = <DynamicFields category={categoryUid} onChange={this.onDynamicValueChanged} />;
 
     return (
-      <RowsLayout
-        footerContent={<a href="http://fullstack-development.com/">FullStackDevelopment</a>}
-        headerContent={<Header onLinkClick={history.push} />}
-      >
-        <div className={b()}>
-          <div className={b('content')()}>
-            <Form onSubmit={this.onFormSubmit}>
-              <Panel header={<LocationSelect onChange={this.onLocationSelected} />} />
-              <Panel header={<CategorySelect onCategoryChosen={this.onCategorySelected} />} />
-              <Panel header={categoryUid ? dynamicFieldsComponent : null} />
+      <form onSubmit={this.onFormSubmit}>
+        <SimpleList marginFactor={3} gutterBottom>
+          <SimpleCard classes={classes}>
+            <LocationSelect onChange={this.onLocationSelected} />
+          </SimpleCard>
+          <SimpleCard classes={classes}>
+            <CategorySelect onCategoryChosen={this.onCategorySelected} />
+          </SimpleCard>
+          {categoryUid ? <SimpleCard classes={classes}>{dynamicFieldsComponent}</SimpleCard> : null}
+        </SimpleList>
 
-              <FormGroup className="clearfix">
-                {isSubmitting ? <span>Saving...</span> : null}
-                {submittingResult ? <span className={b('result')()}>{submittingResult}</span> : null}
-                <Button type="submit" bsStyle="primary" className={b('submit')()} disabled={!canSubmit}>
-                  Submit
-                </Button>
-              </FormGroup>
-
-            </Form>
-          </div>
+        <div className={classes.actions}>
+          {isSubmitting ? <Typography component="span" gutterBottom>Saving...</Typography> : null}
+          {submittingResult ? (
+            <Typography component="span" className={classes.result} gutterBottom>{submittingResult}</Typography>
+          ) : null}
+          <Button type="submit" color="primary" variant="raised" disabled={!canSubmit}>
+            Submit
+          </Button>
         </div>
-      </RowsLayout>
+      </form >
     );
   }
 
@@ -133,19 +125,19 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   }
 
   @bind
-  private onFormSubmit(e: React.FormEvent<Form>): void {
+  private onFormSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     const { dynamicValues, locationValues, chosenLocation, chosenCategoryUid, saveFields } = this.props;
     saveFields({ dynamicValues, chosenLocation, chosenCategoryUid, locationValues });
   }
 
   @bind
-  private onDynamicValueChanged(name: string, value: FieldValue, errors: string[]) {
+  private onDynamicValueChanged(name: string, value: FieldValue, error: string) {
     this.setState((prevState: IState) => ({
       ...prevState,
       dynamicFields: {
         ...prevState.dynamicFields,
-        [name]: { value, errors },
+        [name]: { value, error },
       },
     }));
   }
@@ -153,9 +145,19 @@ class OrderFormLayout extends React.Component<IProps, IState> {
   get isDynamicFieldsValid(): boolean {
     const fields = this.state.dynamicFields;
     return !Object.keys(fields).some(
-      (key: string) => Boolean(fields[key].errors.length),
+      (key: string) => Boolean(fields[key].error),
     );
   }
+}
+
+function SimpleCard({ children, classes }: { children: React.ReactNode } & StylesProps) {
+  return (
+    <Card classes={{ root: classes.card_root }}>
+      <CardContent>
+        {children}
+      </CardContent>
+    </Card>
+  );
 }
 
 const featureLoaders = {
@@ -167,7 +169,7 @@ const featureLoaders = {
 export default (
   featureConnect(featureLoaders)(
     connect(mapState, mapDispatch)(
-      OrderFormLayout,
+      provideStyles(OrderFormLayout),
     ),
   )
 );

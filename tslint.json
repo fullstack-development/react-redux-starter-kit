@@ -47,6 +47,7 @@
     ]
   },
   "rules": {
+    "object-literal-key-quotes": false,
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-implicit-dependencies": false,
     "no-object-literal-type-assertion": false,

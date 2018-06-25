@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 import { RouteProps } from 'react-router';
 import { Store, Reducer, ActionCreator, Action } from 'redux';
-
 import { SagaIterator } from 'redux-saga';
+import { GenerateClassName } from 'jss';
+import { JSS, Theme } from 'react-jss';
 
 import { namespace as CategorySelectNamespace } from 'features/categorySelect';
 import { namespace as LocationSelectNamespace } from 'features/locationSelect';
@@ -13,47 +14,27 @@ import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderF
 import Api from 'services/api/Api';
 
 export abstract class Module<C = any> {
-  public components?: C; // available componens to pass in other modules
-
-  protected _store: Store<IAppReduxState> | null = null;
-  protected _deps: IDependencies | null = null;
-
-  protected extraComponents?: { [key: string]: React.ReactElement<any> | React.ComponentClass<any> | null; };
-
-  public set store(store: Store<IAppReduxState>) {
-    this._store = store;
-  }
-
-  public set dependencies(value: IDependencies) {
-    this._deps = value;
-  }
-
-  protected get deps(): IDependencies | null {
-    return this._deps || null;
-  }
-
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
   public getReduxEntry?(): IReduxEntry;
-
-  public setExtraComponent(key: keyof C, component: React.ReactElement<any>): void {
-    if (this.extraComponents) {
-      this.extraComponents[key] = component;
-    } else {
-      throw new Error('Cannot set module extra component: no requirements found for extra component');
-    }
-  }
 }
 
 export interface IAppData {
   modules: Module[];
   store: Store<IAppReduxState>;
+  jssDeps: IJssDependencies;
+}
+
+export interface IJssDependencies {
+  jss: JSS;
+  generateClassName: GenerateClassName<any>;
+  theme: Theme;
 }
 
 export interface IDependencies {
   api: Api;
 }
 
-export type IDictionary<T, S extends string = string> = {
+export type IDictionary<T, S extends keyof any = string> = {
   [key in S]: T;
 };
 
@@ -80,10 +61,14 @@ export interface IAppReduxState {
   searchRepositories: SearchRepositoriesNamespace.IReduxState;
 }
 
-export type Diff<T extends string, U extends string> =
+export type Diff<T extends keyof any, U extends keyof any> =
   ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
 
 export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+
+export type GetProps<T extends React.ComponentType<any>> =
+  T extends React.StatelessComponent<infer SP> ? SP :
+  T extends React.ComponentClass<infer CP> ? CP : never;
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 

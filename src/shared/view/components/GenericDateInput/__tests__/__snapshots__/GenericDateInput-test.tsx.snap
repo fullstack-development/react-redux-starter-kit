@@ -1,14 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`(Shared) View (Component) GenericDateInput should match snapshot 1`] = `
-<InputGroup>
+<Jss(InputGroup)>
   <TextInput
+    error={false}
+    helperText={false}
+    inputProps={
+      Object {
+        "pattern": undefined,
+      }
+    }
     onChange={[Function]}
     type="date"
   />
-  <Errors
-    errors={Array []}
-    hidden={true}
-  />
-</InputGroup>
+</Jss(InputGroup)>
 `;

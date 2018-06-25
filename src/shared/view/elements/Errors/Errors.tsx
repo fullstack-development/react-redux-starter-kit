@@ -1,20 +1,26 @@
 import * as React from 'react';
-import block from 'bem-cn';
-import './Errors.scss';
+import { Typography } from '@material-ui/core';
+import { StylesProps } from './Errors.style';
 
 interface IProps {
   errors?: string[];
   hidden?: boolean;
 }
 
-const b = block('errors');
-
-function Errors({ hidden, errors = [] }: IProps) {
+function Errors({ hidden, errors = [], classes }: IProps & StylesProps) {
   return (
-    <div className={b({ hidden: Boolean(hidden) })()}>
+    <div className={classes.root}>
       {
         errors.map((error: string, index: number) => (
-          <span key={index} className={b('error')()}>{error}</span>
+          <Typography
+            key={index}
+            gutterBottom
+            color="error"
+            component="span"
+            className={classes.error}
+          >
+            {error}
+          </Typography>
         ))
       }
     </div>

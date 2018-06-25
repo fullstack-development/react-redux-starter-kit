@@ -1,27 +1,20 @@
 import * as React from 'react';
-import { FormControlProps } from 'react-bootstrap';
 import { bind } from 'decko';
+
+import { TextInput } from '../../elements';
+import InputGroup from '../../elements/InputGroup/InputGroup';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
-import TextInput from './../../elements/TextInput/TextInput';
-import InputGroup from './../../elements/InputGroup/InputGroup';
-import Errors from '../../elements/Errors/Errors';
 
 import FormEvent = React.FormEvent;
-import Component = React.Component;
-
-interface IProps extends GenericFieldProps {
-  minLength: number;
-  maxLength: number;
-}
 
 interface IState {
   isEdited: boolean;
-  errors: string[];
+  error: string;
 }
 
-class GenericTextInput extends React.Component<IProps, IState> {
+class GenericTextInput extends React.Component<GenericFieldProps, IState> {
   public state: IState = {
-    errors: [],
+    error: '',
     isEdited: false,
   };
 
@@ -34,10 +27,8 @@ class GenericTextInput extends React.Component<IProps, IState> {
       name,
       label,
       placeholder,
-      minLength,
-      maxLength,
     } = this.props;
-    const { errors, isEdited } = this.state;
+    const { error, isEdited } = this.state;
 
     return (
       <InputGroup label={label}>
@@ -45,38 +36,33 @@ class GenericTextInput extends React.Component<IProps, IState> {
           type="text"
           name={name}
           placeholder={placeholder}
-          minLength={minLength}
-          maxLength={maxLength}
           onChange={this.onChange}
+          error={isEdited && !!error}
+          helperText={isEdited && error}
         />
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
       </InputGroup>
     );
   }
 
   @bind
-  private onChange(event: FormEvent<Component<FormControlProps, {}>>): void {
+  private onChange(event: FormEvent<HTMLInputElement>): void {
     const value = (event.nativeEvent.target as HTMLInputElement).value;
     this.changeValue(value);
 
     if (!this.state.isEdited) {
-      this.setState((prevState: IState, props: IProps) => ({ ...prevState, isEdited: true }));
+      this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
     }
   }
 
   @bind
   private changeValue(value: string): void {
     const { required, onChange } = this.props;
-    const errors: string[] = [];
+    const error: string = required && !value.length ? 'Field is required' : '';
 
-    if (required && !value.length) {
-      errors.push('Field is required');
-    }
-
-    this.setState({ ...this.state, errors });
+    this.setState({ ...this.state, error });
 
     if (onChange) {
-      onChange(value, errors);
+      onChange(value, error);
     }
   }
 

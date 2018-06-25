@@ -1,9 +1,10 @@
 import * as React from 'react';
 import Geosuggest from 'react-geosuggest';
 import { bind } from 'decko';
+import { FormHelperText } from '@material-ui/core';
+
+import InputGroup from '../../elements/InputGroup/InputGroup';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
-import InputGroup from './../../elements/InputGroup/InputGroup';
-import Errors from '../../elements/Errors/Errors';
 
 interface IGeosuggestOption {
   label: string;
@@ -20,7 +21,7 @@ interface IGeosuggestOption {
 }
 
 interface IState {
-  errors: string[];
+  error: string;
   isEdited: boolean;
 }
 
@@ -32,7 +33,7 @@ class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
   constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
-      errors: [],
+      error: '',
       isEdited: false,
     };
   }
@@ -43,20 +44,20 @@ class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
 
   public render() {
     const { placeholder, label } = this.props;
-    const { errors, isEdited } = this.state;
-    const shriLankaLatLng = new google.maps.LatLng(7.75000, 80.76667);
+    const { error, isEdited } = this.state;
+    const sriLankaLatLng = new google.maps.LatLng(7.75000, 80.76667);
 
     return (
       <InputGroup label={label}>
         <Geosuggest
           placeholder={placeholder}
-          location={shriLankaLatLng}
+          location={sriLankaLatLng}
           queryDelay={1000}
           radius="330"
           inputClassName="form-control"
           onSuggestSelect={this.onSelect}
         />
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
+        {isEdited && !!error && <FormHelperText error>{error}</FormHelperText>}
       </InputGroup>
     );
   }
@@ -70,17 +71,13 @@ class GenericLocationInput extends React.Component<GenericFieldProps, IState> {
   @bind
   private validateAndChange(value: IGeosuggestOption) {
     const { onChange, required } = this.props;
-    const errors: string[] = [];
-
-    if (required && (!value.label || !value.placeId)) {
-      errors.push('Field is required');
-    }
+    const error: string = required && (!value.label || !value.placeId) ? 'Field is required' : '';
 
     if (onChange) {
-      onChange(value, errors);
+      onChange(value, error);
     }
 
-    this.setState({ ...this.state, errors });
+    this.setState({ ...this.state, error });
   }
 }
 

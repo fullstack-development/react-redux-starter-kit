@@ -9,6 +9,7 @@ import Html from 'assets/Html';
 
 import configureApp from 'core/configureApp';
 import { ServerApp } from 'core/App';
+import { SheetsRegistry } from 'react-jss';
 
 async function render({ req, res, assets }: { req: express.Request; res: express.Response; assets: IAssets }) {
   try {
@@ -43,14 +44,15 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
 }
 
 async function renderOnServer(appData: IAppData, assets: IAssets, location: string, context: object) {
-  const component = <ServerApp {...appData} location={location} context={context} />;
-  await bootstrapper(component);
-  const html = <Html assets={assets} component={component} store={appData.store} />;
+  const sheets = new SheetsRegistry();
+  const appForBootstrap = <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />;
+  await bootstrapper(appForBootstrap);
+  const app = <ServerApp {...appData} location={location} context={context} registry={sheets} />;
+  const html = <Html assets={assets} component={app} store={appData.store} styleSheets={sheets} />;
   const document = `
     <!doctype html>
     ${renderToString(html)}
   `;
-
   return document;
 }
 

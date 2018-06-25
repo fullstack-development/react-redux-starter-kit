@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { bind } from 'decko';
+
+import { TextInput } from '../../elements';
+import InputGroup from '../../elements/InputGroup/InputGroup';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
-import TextInput, { EventType } from './../../elements/TextInput/TextInput';
-import InputGroup from './../../elements/InputGroup/InputGroup';
-import Errors from '../../elements/Errors/Errors';
 
 type IProps = GenericFieldProps;
 interface IState {
-  errors: string[];
+  error: string;
   isEdited: boolean;
 }
 
@@ -21,7 +21,7 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
   constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
-      errors: [],
+      error: '',
       isEdited: false,
     };
   }
@@ -37,7 +37,7 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
       pattern,
       placeholder,
     } = this.props;
-    const { errors, isEdited } = this.state;
+    const { error, isEdited } = this.state;
 
     return (
       <InputGroup label={label}>
@@ -45,16 +45,17 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
           type="date"
           name={name}
           placeholder={placeholder}
-          pattern={pattern}
           onChange={this.onChange}
+          inputProps={{ pattern }}
+          error={isEdited && !!error}
+          helperText={isEdited && error}
         />
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
       </InputGroup>
     );
   }
 
   @bind
-  private onChange(event: EventType) {
+  private onChange(event: React.FormEvent<HTMLInputElement>) {
     const value: string = (event.nativeEvent.target as HTMLInputElement).value;
     this.validateAndChange(value);
     this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
@@ -63,24 +64,24 @@ class GenericDateInput extends React.PureComponent<IProps, IState> {
   @bind
   private validateAndChange(rawValue: string): void {
     const { pattern, required, onChange } = this.props;
-    const errors: string[] = [];
     const value: string = new RegExp(this.standardHTMLpattern).test(rawValue)
       // current browser support date inputs
       ? rawValue.split('-').reverse().join('-')
       : rawValue;
+    const error: string = (() => {
+      if (pattern && !(new RegExp(pattern)).test(value)) {
+        return this.errors.invalid;
+      }
+      if (required && !value.length) {
+        return this.errors.required;
+      }
+      return '';
+    })();
 
-    if (pattern && !(new RegExp(pattern)).test(value)) {
-      errors.push(this.errors.invalid);
-    }
-
-    if (required && !value.length) {
-      errors.push(this.errors.required);
-    }
-
-    this.setState({ ...this.state, errors });
+    this.setState({ ...this.state, error });
 
     if (onChange) {
-      onChange(value, errors);
+      onChange(value, error);
     }
   }
 }

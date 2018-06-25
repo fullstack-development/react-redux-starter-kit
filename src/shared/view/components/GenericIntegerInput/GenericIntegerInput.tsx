@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
-import TextInput, { EventType } from 'shared/view/elements/TextInput/TextInput';
+
+import { TextInput } from 'shared/view/elements';
 import InputGroup from 'shared/view/elements/InputGroup/InputGroup';
-import Errors from '../../elements/Errors/Errors';
+
+import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
 
 interface IProps extends GenericFieldProps {
   minimum: number;
@@ -12,7 +13,7 @@ interface IProps extends GenericFieldProps {
 }
 
 interface IState {
-  errors: string[];
+  error: string;
   isEdited: boolean;
 }
 
@@ -28,48 +29,43 @@ class GenericIntegerInput extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      errors: [],
+      error: '',
       isEdited: false,
     };
   }
 
   public componentDidMount() {
     const value: string = '';
-    const errors: string[] = this.validate(value);
-    this.change(value, errors);
+    const error: string = this.validate(value);
+    this.change(value, error);
   }
 
   public render() {
-    const {
-      name,
-      isFloat,
-      label,
-      pattern,
-      placeholder,
-      minimum,
-      maximum,
-    } = this.props;
-    const { errors, isEdited } = this.state;
+    const { name, isFloat, label, pattern, placeholder, minimum, maximum } = this.props;
+    const { error, isEdited } = this.state;
 
     return (
       <InputGroup label={label}>
         <TextInput
           name={name}
           type="number"
-          step={isFloat ? 0.01 : undefined}
-          pattern={pattern}
           placeholder={placeholder}
-          min={minimum}
-          max={maximum}
           onChange={this.onChange}
+          inputProps={{
+            pattern,
+            step: isFloat ? 0.01 : undefined,
+            min: minimum,
+            max: maximum,
+          }}
+          error={isEdited && !!error}
+          helperText={isEdited && error}
         />
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
       </InputGroup>
     );
   }
 
   @bind
-  private onChange(event: EventType): void {
+  private onChange(event: React.FormEvent<HTMLInputElement>): void {
     const value = (event.nativeEvent.target as HTMLInputElement).value;
     const errors = this.validate(value);
     this.change(value, errors);
@@ -77,34 +73,35 @@ class GenericIntegerInput extends React.Component<IProps, IState> {
   }
 
   @bind
-  private validate(value: string): string[] {
+  private validate(value: string): string {
     const { isFloat, minimum, maximum, required } = this.props;
     const parsedValue: number = isFloat ? parseFloat(value) : parseInt(value, 10);
-    const errors = [];
-
-    if (required && !value) {
-      errors.push(this.errors.required);
-    } else if (isNaN(parsedValue)) {
-      errors.push(this.errors.invalid);
-    } else {
-      if (minimum && parsedValue < minimum) {
-        errors.push(this.errors.tooLow);
+    const error = (() => {
+      if (required && !value) {
+        return this.errors.required;
+      } else if (isNaN(parsedValue)) {
+        return this.errors.invalid;
+      } else {
+        if (minimum && parsedValue < minimum) {
+          return this.errors.tooLow;
+        }
+        if (maximum && parsedValue > maximum) {
+          return this.errors.tooBig;
+        }
       }
-      if (maximum && parsedValue > maximum) {
-        errors.push(this.errors.tooBig);
-      }
-    }
+      return '';
+    })();
 
-    this.setState({ ...this.state, errors });
+    this.setState({ ...this.state, error });
 
-    return errors;
+    return error;
   }
 
   @bind
-  private change(value: string, errors: string[]) {
+  private change(value: string, error: string) {
     const handler = this.props.onChange;
     if (handler) {
-      handler(value.toString(), errors);
+      handler(value.toString(), error);
     }
   }
 

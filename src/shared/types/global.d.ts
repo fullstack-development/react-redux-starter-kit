@@ -11,13 +11,14 @@ declare var __CLIENT__: boolean;
 declare var __LANG__: 'en' | 'he';
 declare var __HOST__: string;
 
-interface SinonStub {
-  callsFake: Function;
+declare module 'theming/@externals' {
+  import { Theme } from '@material-ui/core';
+  export type Theme = Theme;
 }
 
-interface WebpackModule {
-  hot: boolean;
-  accept: Function;
+declare module "*.svg" {
+  const content: string;
+  export default content;
 }
 
 declare module 'redux-async-connect';
@@ -29,6 +30,8 @@ declare module 'decko';
 declare module 'react-hot-loader';
 declare module 'react-async-bootstrapper';
 declare module 'enzyme-adapter-react-16';
+declare module 'jss-compose';
+
 declare module 'postcss-reporter';
 declare module 'postcss-easy-import';
 declare module 'postcss-scss';

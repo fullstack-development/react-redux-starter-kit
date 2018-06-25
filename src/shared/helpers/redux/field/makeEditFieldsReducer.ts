@@ -2,7 +2,7 @@ import { IAction } from 'shared/types/redux';
 import { Validator, FieldsState } from '../namespace';
 import { Reducer } from 'redux';
 
-type Validators<S> = Partial<{[K in keyof S]: Validator<S[K]> }>;
+type Validators<S> = Partial<{ [K in keyof S]: Validator<S[K]> }>;
 
 type EditFieldsReducerAction<F = string> = IAction<string, { field: F, value: any, error?: string }>;
 
@@ -20,7 +20,8 @@ function makeEditFieldsReducer<A extends EditFieldsReducerAction<A['payload']['f
             } else {
               const validator = validators ? validators[field] : void 0;
 
-              return validator ? validator({ ...state[field] as any, value }, state[field]) : '';
+              // TODO: нужно доработать типы и избавиться от 'any'
+              return validator ? validator({ ...state[field] as any, value }, state[field] as any) : '';
             }
           })();
 

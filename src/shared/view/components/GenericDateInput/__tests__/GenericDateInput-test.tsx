@@ -18,15 +18,15 @@ describe('(Shared) View', () => {
       textInput.simulate('change', event);
 
       expect(onChangeSpy.calledTwice).toBe(true);
-      expect(onChangeSpy.firstCall.args).toEqual(['', []]);
-      expect(onChangeSpy.secondCall.args).toEqual(['123', []]);
+      expect(onChangeSpy.firstCall.args).toEqual(['', '']);
+      expect(onChangeSpy.secondCall.args).toEqual(['123', '']);
     });
 
     it('should call onChange, when just mounted with \'Field required\' error, if component is required', () => {
       const onChangeSpy = spy();
       shallow<IProps, IState>(<GenericDateInput onChange={onChangeSpy} required />);
       expect(onChangeSpy.calledOnce).toBe(true);
-      expect(onChangeSpy.firstCall.args).toEqual(['', ['Field is required']]);
+      expect(onChangeSpy.firstCall.args).toEqual(['', 'Field is required']);
     });
   });
 });

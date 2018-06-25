@@ -4,11 +4,14 @@ import Helmet from 'react-helmet';
 
 import * as redux from 'redux';
 import { IAssets } from 'shared/types/app';
+import { SheetsRegistry } from 'react-jss';
+import { renderToString } from 'react-dom/server';
 
 interface IHtmlProps {
   assets: IAssets;
   component?: JSX.Element;
   store: redux.Store<any>;
+  styleSheets?: SheetsRegistry;
 }
 
 /**
@@ -26,10 +29,13 @@ export default class Html extends React.PureComponent<IHtmlProps> {
   }
 
   public render() {
-    const { assets, component, store } = this.props;
+    const { assets, component, store, styleSheets } = this.props;
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
+
+    // component rendering for injecting styles to jss registry
+    const renderedComponent = component ? renderToString(component) : '';
 
     return (
       <html lang={__LANG__} style={styles}>
@@ -45,11 +51,14 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           {assets.styles.map((filePath, idx) => (
             <link href={filePath} key={idx} media="screen, projection" rel="stylesheet" type="text/css" />
           ))}
+          {!!styleSheets && (
+            <style type="text/css" id="server-side-styles">{styleSheets.toString()}</style>
+          )}
         </head>
 
         <body style={styles}>
 
-          <div id="root" style={styles}>{component}</div>
+          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: renderedComponent }} />
 
           <div>
             {/* Other code */}

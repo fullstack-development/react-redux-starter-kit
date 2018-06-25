@@ -1,81 +1,70 @@
 import * as React from 'react';
-import { Radio, FormGroup } from 'react-bootstrap';
 import { bind } from 'decko';
-import block from 'bem-cn';
-import Errors from 'shared/view/elements/Errors/Errors';
+
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+
+import InputGroup from '../../elements/InputGroup/InputGroup';
 import { IProps as GenericFieldProps } from '../GenericInput/GenericInput';
-import InputGroup from './../../elements/InputGroup/InputGroup';
-import './GenericRadioInput.scss';
 
 interface IState {
-  errors: string[];
+  error: string;
   isEdited: boolean;
+  value: string;
 }
 
 class GenericRadioInput extends React.Component<GenericFieldProps, IState> {
-  private b = block('generic-radio-input');
-
   constructor(props: GenericFieldProps) {
     super(props);
     this.state = {
-      errors: [],
+      error: '',
       isEdited: false,
+      value: '',
     };
   }
 
   public componentDidMount() {
-    this.validateAndChange('', '');
+    if (this.props.required) {
+      this.setState({ error: 'Field is required' });
+    }
   }
 
   public render() {
-    const b = this.b;
-    const { name = '', label, 'enum': options } = this.props;
-    const { errors, isEdited } = this.state;
+    const { name = '', label, enum: options } = this.props;
+    const { error, isEdited, value } = this.state;
 
     return (
-     <InputGroup label={label}>
-        <FormGroup className={b('radios-group')()}>
-          {
-            options ? options.map((option: string, index: number) => (
-                <Radio
-                  inline
-                  key={index}
-                  name={name}
-                  className={b('radio-button')()}
-                  onChange={this.onChange(name, option)}
-                >
-                  {option}
-                </Radio>
-              ),
-            ) : 'No choices'
+      <InputGroup label={label}>
+        <RadioGroup
+          row
+          name={name}
+          value={value}
+          onChange={this.onChange}
+        >
+          {options
+            ? options.map((option: string, index: number) => (
+              <FormControlLabel key={index} value={option} control={<Radio />} label={option} />
+            ))
+            : 'No choices'
           }
-        </FormGroup>
-        <Errors errors={this.props.errors ? errors.concat(this.props.errors) : errors} hidden={!isEdited} />
-     </InputGroup>
+        </RadioGroup>
+        {isEdited && !!error && <FormHelperText error>{error}</FormHelperText>}
+      </InputGroup>
     );
   }
 
   @bind
-  private onChange(fieldName: string, value: string): () => void {
-    return () => {
-      this.validateAndChange(fieldName, value);
-      this.setState((prevState: IState) => ({ ...prevState, isEdited: true }));
-    };
-  }
-
-  @bind
-  private validateAndChange(fieldName: string, value: string): void {
+  private onChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const { required, onChange } = this.props;
-    const errors: string[] = [];
+    const { value } = event.target;
+    const error: string = required && !value.length ? 'Field is required' : '';
 
-    if (required && !value.length) {
-      errors.push('Field is required');
-    }
-
-    this.setState({ ...this.state, errors });
+    this.setState({ isEdited: true, error, value });
 
     if (onChange) {
-      onChange(value, errors);
+      onChange(value, error);
     }
   }
 

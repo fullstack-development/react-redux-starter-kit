@@ -5,12 +5,11 @@ import * as R from 'ramda';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry, Omit } from 'shared/types/app';
+import { IFeatureEntry, Omit, GetProps } from 'shared/types/app';
 
 type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
 
 interface IState {
-  bootstrapped: boolean;
   mounted: boolean;
 }
 
@@ -26,18 +25,17 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
 
     @injectable()
     class FeatureConnector extends React.PureComponent<Omit<Props, keyof L>, IState> {
-      public state: IState = { bootstrapped: false, mounted: false };
+      public state: IState = { mounted: false };
 
       @inject(TYPES.connectEntryToStore)
       private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
 
       public async bootstrap() {
         await this.load();
-        this.setState({ bootstrapped: true });
       }
 
       public componentDidMount() {
-        if (!this.state.bootstrapped) {
+        if (!this.isAllBundlesLoaded()) {
           this.load();
         }
         this.setState({ mounted: true });
@@ -74,7 +72,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         this.saveBundle && this.state.mounted && this.forceUpdate();
       }
 
-      private saveBundle: null | ((bundle: IFeatureEntry<any, any, any>, key: string) => void) = (bundle, key) => {
+      private saveBundle: null | ((bundle: IFeatureEntry<any, any, any>, key: keyof L) => void) = (bundle, key) => {
         bundles.set(loaders[key], bundle);
       }
 
@@ -90,6 +88,22 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
 
     return FeatureConnector;
   };
+}
+
+export function getAsyncContainer<C extends Record<string, React.ComponentType<any>>, K extends keyof C>(
+  loader: () => Promise<IFeatureEntry<C, any, any>>, componentName: K,
+): React.ComponentClass<GetProps<C[K]>> {
+  interface IRenderProps {
+    _entry?: IFeatureEntry<C, any, any>;
+  }
+
+  function render({ _entry, ...props }: IRenderProps) {
+    if (!_entry || !_entry.containers) { return null; }
+    const Container: React.ComponentType<any> = _entry.containers[componentName];
+    return <Container {...props} />;
+  }
+
+  return featureConnect({ _entry: loader })(render) as React.ComponentClass<GetProps<C[K]>>;
 }
 
 export default featureConnect;

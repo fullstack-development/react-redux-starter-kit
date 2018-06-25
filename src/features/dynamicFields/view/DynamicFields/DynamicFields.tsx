@@ -1,17 +1,13 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import { Typography } from '@material-ui/core';
 
 import { IFields, IField } from 'shared/types/models';
 import { ICommunication } from 'shared/types/redux';
+import { IGenericInputProps } from 'shared/view/components';
 import { FieldValue } from 'shared/view/components/GenericInput/GenericInput';
-import { IReduxState } from '../../namespace';
-
-import { actions, selectors } from '../../redux';
-
-import { Form, FormGroup } from 'react-bootstrap';
 import GenericTextInput from 'shared/view/components/GenericTextInput/GenericTextInput';
 import GenericIntegerInput from 'shared/view/components/GenericIntegerInput/GenericIntegerInput';
 import GenericRadioInput from 'shared/view/components/GenericRadioInput/GenericRadioInput';
@@ -19,18 +15,14 @@ import GenericDropdownInput from 'shared/view/components/GenericDropdownInput/Ge
 import GenericDateInput from 'shared/view/components/GenericDateInput/GenericDateInput';
 import GenericTimeInput from 'shared/view/components/GenericTimeInput/GenericTimeInput';
 import GenericLocationInput from 'shared/view/components/GenericLocationInput/GenericLocationInput';
-import './DynamicFields.scss';
 
-import EventHandler = React.EventHandler;
-import FormEvent = React.FormEvent;
-import ComponentClass = React.ComponentClass;
-import StatelessComponent = React.StatelessComponent;
+import { IReduxState } from '../../namespace';
+import { actions, selectors } from '../../redux';
+import { StylesProps, provideStyles } from './DynamicFields.style';
 
 interface IOwnProps {
   category: number | null;
-  onSetField?: (fieldName: string, fieldValue: FieldValue) => void;
-  onSubmit?: EventHandler<FormEvent<Form>>;
-  onChange?: (fieldName: string, fieldValue: FieldValue, errors: string[]) => void;
+  onChange?: (fieldName: string, fieldValue: FieldValue, error: string) => void;
 }
 
 interface IStateProps {
@@ -43,7 +35,7 @@ interface IDispatchProps {
   changeFieldValue: typeof actions.changeFieldValue;
 }
 
-type Props = IDispatchProps & IStateProps & IOwnProps;
+type Props = IDispatchProps & IStateProps & IOwnProps & StylesProps;
 
 interface IState {
   values: { [key: string]: string | number | { [key: string]: any } };
@@ -67,8 +59,6 @@ function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
     changeFieldValue: actions.changeFieldValue,
   }, dispatch);
 }
-
-const b = block('dynamic-fields');
 
 class DynamicFields extends React.Component<Props, IState> {
   public state: IState = { values: {}, errors: [] };
@@ -98,11 +88,9 @@ class DynamicFields extends React.Component<Props, IState> {
 
   public render() {
     return (
-      <div className={b()}>
-        <FormGroup>
-          <h4>Dynamic Fields</h4>
-          {this.renderFields()}
-        </FormGroup>
+      <div>
+        <Typography variant="title">Dynamic Fields</Typography>
+        {this.renderFields()}
       </div>
     );
   }
@@ -115,11 +103,11 @@ class DynamicFields extends React.Component<Props, IState> {
 
   @bind
   private onFieldChange(fieldName: string) {
-    return (value: FieldValue, errors: string[]) => {
+    return (value: FieldValue, error: string) => {
       const { changeFieldValue, onChange } = this.props;
 
       if (onChange) {
-        onChange(fieldName, value, errors);
+        onChange(fieldName, value, error);
       }
 
       changeFieldValue(fieldName, value);
@@ -127,9 +115,9 @@ class DynamicFields extends React.Component<Props, IState> {
   }
 
   private renderFields(): React.ReactNode {
-    const { fields } = this.props;
+    const { fields, classes } = this.props;
     if (fields && fields.schema && fields.schema.properties) {
-      const requriedFields: string[] = fields.schema.required;
+      const requiredFields: string[] = fields.schema.required;
       const properties: { [key: string]: IField } = fields.schema.properties;
       const fieldsNode = Object
         .keys(properties)
@@ -144,21 +132,21 @@ class DynamicFields extends React.Component<Props, IState> {
         })
         .map((fieldName: string) => {
           const type: string = properties[fieldName].component;
-          const Component: ComponentClass<any> | StatelessComponent<any> = this.components[type];
-          const isRequired: boolean = Boolean(requriedFields.find((f: string) => f === fieldName));
+          const Component: React.ComponentType<IGenericInputProps> = this.components[type];
+          const isRequired: boolean = Boolean(requiredFields.find((f: string) => f === fieldName));
           const baseProps = properties[fieldName];
           const props = {
             ...baseProps,
             label: isRequired ? `${baseProps.label}*` : baseProps.label,
           };
-          const fieldErrors = this.state.errors.indexOf(fieldName) > -1 ? ['Required Field'] : [];
+          const fieldError = this.state.errors.indexOf(fieldName) > -1 ? 'Required Field' : '';
 
           return (
-            <div className={b('field')()} key={props.order}>
+            <div className={classes.field} key={props.order}>
               <Component
                 {...props}
                 required={isRequired}
-                errors={fieldErrors}
+                error={fieldError}
                 name={fieldName}
                 onChange={this.onFieldChange(fieldName)}
               />
@@ -173,4 +161,8 @@ class DynamicFields extends React.Component<Props, IState> {
 }
 
 export { Props, DynamicFields, FieldValue };
-export default connect<IStateProps, IDispatchProps, IOwnProps>(mapStateToProps, mapDispatchToProps)(DynamicFields);
+export default (
+  connect(mapStateToProps, mapDispatchToProps)(
+    provideStyles(DynamicFields),
+  )
+);

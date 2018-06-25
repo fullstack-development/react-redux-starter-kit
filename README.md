@@ -1,27 +1,33 @@
 # react-redux-starter-kit
 Modular starter kit for React+Redux+React Router projects.
 
-## To start localy
+* [NPM scripts](#NPM-scripts)
+* [Features](#Features)
+* [Тестирование](#Тестирование)
+* [Документация](./docs/ru/main.md)
+
+## NPM scripts
+### To start localy
 - ```npm run dev``` for development environment in watch mode
 - ```npm run prod``` for production environment in watch mode
 
-## To build localy (see build folder)
+### To build localy (see build folder)
 - ```npm run build:dev``` for development environment without watch mode
 - ```npm run build:prod``` for production environment without watch mode
 - ```npm run build:gh-pages``` for building production bundle for gh-pages
 
-## To start bundle analyzer
+### To start bundle analyzer
 - ```npm run analyze:dev``` for development environment
 - ```npm run analyze:prod``` for production environment
 
-## To start isomorphic server
+### To start isomorphic server
 - ```npm run server:dev``` for development environment in watch mode
 - ```npm run server:prod``` for production environment without watch mode
 
-## To deploy
+### To deploy
 - ```npm run deploy:gh-pages``` for gh-pages
 
-## To start yeoman generator create-feature
+### To start yeoman generator create-feature
 - ```npm run yeoman```
 
 ## Features
@@ -30,16 +36,16 @@ Modular starter kit for React+Redux+React Router projects.
 - [x] React-router 4.x
 - [x] Redux
 - [x] Redux-saga for side-effects
-- [x] SCSS
+- [x] React-JSS
 - [x] BEM methodology
-- [x] Webpack 3.x
+- [x] Webpack 4.x
 - [x] Tests (Jest, sinon, enzyme)
+- [x] Test coverage
 - [x] Hot reload
 - [x] Yeoman blocks generator tasks (features, modules, ... )
 - [x] Code splitting (async chunks loading)
-- [x] Code coverage
 - [x] Isomorphic
-- [ ] ANT Design
+- [x] Material-UI
 
 
 ## Тестирование
