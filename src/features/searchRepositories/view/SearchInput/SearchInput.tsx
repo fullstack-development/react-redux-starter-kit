@@ -2,7 +2,7 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect, Dispatch } from 'react-redux';
 import { FormControl, Input, InputAdornment } from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import Search from '@material-ui/icons/Search';
 
 import { IAppReduxState as IAppReduxState } from 'shared/types/app';
 

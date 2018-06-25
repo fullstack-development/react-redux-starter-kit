@@ -11,38 +11,24 @@ declare var __CLIENT__: boolean;
 declare var __LANG__: 'en' | 'he';
 declare var __HOST__: string;
 
-interface SinonStub {
-  callsFake: Function;
-}
-
-interface WebpackModule {
-  hot: boolean;
-  accept: Function;
-}
-
 declare module 'theming/@externals' {
   import { Theme } from '@material-ui/core';
   export type Theme = Theme;
 }
 
-declare module 'redux-async-connect';
-declare module 'react-geosuggest';
-declare module 'normalizr';
-declare module '*.scss';
-declare module '*.png';
 declare module "*.svg" {
   const content: string;
   export default content;
 }
+
+declare module 'redux-async-connect';
+declare module 'react-geosuggest';
+declare module 'normalizr';
+declare module '*.png';
 declare module 'decko';
 declare module 'react-hot-loader';
 declare module 'react-async-bootstrapper';
 declare module 'enzyme-adapter-react-16';
 declare module 'jss-compose';
-declare module 'postcss-reporter';
-declare module 'postcss-easy-import';
-declare module 'postcss-scss';
-declare module 'stylelint';
-declare module 'doiuse';
 
 declare module 'webpack-isomorphic-dev-middleware';
