@@ -1,9 +1,0 @@
-.search-repositories-input {
-  position: relative; }
-  .search-repositories-input .search-repositories-input__input {
-    padding-right: 55px; }
-  .search-repositories-input__submit {
-    position: absolute;
-    right: 2px;
-    bottom: 5px; }
-
