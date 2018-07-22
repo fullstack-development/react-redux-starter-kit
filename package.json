@@ -178,7 +178,7 @@
     "webpack-hot-middleware": "^2.22.2",
     "webpack-isomorphic-dev-middleware": "^4.0.3",
     "webpack-node-externals": "^1.7.2",
-    "yo": "^2.0.2"
+    "yo": "^2.0.4"
   },
   "dependencies": {
     "@material-ui/core": "^1.2.1",
@@ -219,12 +219,12 @@
     "doiuse": "^4.1.0",
     "express": "^4.16.3",
     "file-loader": "^1.1.11",
-    "gh-pages": "^1.1.0",
+    "gh-pages": "^1.2.0",
     "inversify": "^4.5.0",
     "inversify-inject-decorators": "^3.0.1",
     "jss": "^9.8.3",
     "jss-compose": "^5.0.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.9.2",
     "normalize.css": "^8.0.0",
     "normalizr": "^2.3.1",
     "postcss-easy-import": "^3.0.0",
@@ -238,7 +238,7 @@
     "react-dom": "^16.4.0",
     "react-geosuggest": "^2.5.0",
     "react-helmet": "^5.2.0",
-    "react-jss": "^8.5.1",
+    "react-jss": "^8.6.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.2.2",

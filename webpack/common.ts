@@ -51,7 +51,7 @@ export const commonPlugins: webpack.Plugin[] = [
   ) : []);
 
 function sortChunks(a: HtmlWebpackPlugin.Chunk, b: HtmlWebpackPlugin.Chunk) {
-  const order = ['app', 'vendors', 'manifest'];
+  const order = ['app', 'vendors', 'runtime'];
   return order.findIndex(item => b.names[0].includes(item)) - order.findIndex(item => a.names[0].includes(item));
 }
 
@@ -149,11 +149,9 @@ export const commonConfig: webpack.Configuration = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   optimization: {
+    runtimeChunk: 'single',
     splitChunks: {
       chunks: 'all',
-    },
-    runtimeChunk: {
-      name: 'manifest',
     },
   },
   devServer: {

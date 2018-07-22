@@ -1440,7 +1440,6 @@
           "version": "1.0.5",
           "bundled": true,
           "dev": true,
-          "optional": true,
           "requires": {
             "delayed-stream": "~1.0.0"
           }
@@ -1503,8 +1502,7 @@
         "delayed-stream": {
           "version": "1.0.0",
           "bundled": true,
-          "dev": true,
-          "optional": true
+          "dev": true
         },
         "delegates": {
           "version": "1.0.0",
@@ -1550,9 +1548,9 @@
           "dev": true,
           "optional": true,
           "requires": {
-            "asynckit": "0.4.0",
-            "combined-stream": "1.0.5",
-            "mime-types": "2.1.15"
+            "asynckit": "^0.4.0",
+            "combined-stream": "^1.0.5",
+            "mime-types": "^2.1.12"
           }
         },
         "fs.realpath": {
@@ -1645,8 +1643,8 @@
           "dev": true,
           "optional": true,
           "requires": {
-            "ajv": "4.11.8",
-            "har-schema": "1.0.5"
+            "ajv": "^4.9.1",
+            "har-schema": "^1.0.5"
           }
         },
         "has-unicode": {
@@ -1707,7 +1705,7 @@
           "bundled": true,
           "dev": true,
           "requires": {
-            "number-is-nan": "1.0.1"
+            "number-is-nan": "^1.0.0"
           }
         },
         "is-typedarray": {
@@ -1792,16 +1790,14 @@
         "mime-db": {
           "version": "1.27.0",
           "bundled": true,
-          "dev": true,
-          "optional": true
+          "dev": true
         },
         "mime-types": {
           "version": "2.1.15",
           "bundled": true,
           "dev": true,
-          "optional": true,
           "requires": {
-            "mime-db": "1.27.0"
+            "mime-db": "~1.27.0"
           }
         },
         "minimatch": {
@@ -1809,7 +1805,7 @@
           "bundled": true,
           "dev": true,
           "requires": {
-            "brace-expansion": "1.1.7"
+            "brace-expansion": "^1.1.7"
           }
         },
         "minimist": {
@@ -1875,8 +1871,7 @@
         "number-is-nan": {
           "version": "1.0.1",
           "bundled": true,
-          "dev": true,
-          "optional": true
+          "dev": true
         },
         "oauth-sign": {
           "version": "0.8.2",
