@@ -36,6 +36,7 @@ Modular starter kit for React+Redux+React Router projects.
 - [x] React-router 4.x
 - [x] Redux
 - [x] Redux-saga for side-effects
+- [x] SCSS
 - [x] React-JSS
 - [x] BEM methodology
 - [x] Webpack 4.x

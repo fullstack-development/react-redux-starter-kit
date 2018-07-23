@@ -2,7 +2,7 @@
 
 * [Используемые технологии](#используемые-технологии)
 * [Базовый пример стилизации](#базовый-пример-стилизации)
-* [Сниппеты для VSCode](#Сниппеты-для-VSCode)
+* [Сниппеты и экстеншены для VSCode](#Сниппеты-и-экстеншены-для-VSCode)
 * [Как добавить свою тему](#как-добавить-свою-тему)
 
 ## Используемые технологии
@@ -66,7 +66,12 @@ function MyComponent({ content, classes }: IProps & StylesProps) {
 export default provideStyles(MyComponent);
 ```
 
-## Сниппеты для VSCode
+## Сниппеты и экстеншены для VSCode
+
+### Экстеншены
+- Для конвертации CSS стилей в JSS формат и обратно используйте экстеншен [CSS to JSS](https://marketplace.visualstudio.com/items?itemName=infarkt.css-to-jss)
+
+### Сниппеты
 ```
 "Styles": {
   "prefix": "styl",
