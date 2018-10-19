@@ -53,7 +53,7 @@ function mapStateToProps(state: any): IStateProps {
   };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<any>): IDispatchProps {
+function mapDispatchToProps(dispatch: Dispatch): IDispatchProps {
   return bindActionCreators({
     loadFields: actions.loadFields,
     changeFieldValue: actions.changeFieldValue,
