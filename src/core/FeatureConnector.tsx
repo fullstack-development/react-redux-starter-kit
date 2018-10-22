@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { bind } from 'decko';
 import * as R from 'ramda';
+import { Omit } from '_helpers';
 
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry, Omit, GetProps } from 'shared/types/app';
+import { IFeatureEntry, GetProps } from 'shared/types/app';
 
 type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
 
@@ -59,7 +60,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         const keys: Array<keyof L> = Object.keys(loaders);
 
         await Promise.all(
-          keys.map((key) => {
+          keys.map(key => {
             return loaders[key]().then(bundle => {
               this.connectFeatureToStore(bundle);
               if (this.saveBundle) {
