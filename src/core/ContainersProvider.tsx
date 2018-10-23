@@ -39,8 +39,8 @@ interface IState {
   };
 }
 
+// tslint:disable:max-line-length
 function containersProvider<L extends Container>(containers: L[], preloader?: React.ReactChild):
-  // tslint:disable-next-line:max-line-length
   <Props extends { [K in L]: IContainerTypes[K] }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
 
   return <Props extends { [K in L]: IContainerTypes[K] }>(

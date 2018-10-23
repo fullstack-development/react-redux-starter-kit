@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { bind } from 'decko';
 import * as R from 'ramda';
-import { Omit } from '_helpers';
 
+import { Omit } from '_helpers';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
@@ -16,8 +16,8 @@ interface IState {
 
 const bundles = new Map<FeatureLoader, IFeatureEntry<any, any, any>>();
 
+// tslint:disable:max-line-length
 function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, preloader?: React.ReactChild):
-  // tslint:disable-next-line:max-line-length
   <Props extends { [K in keyof L]: any }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentType<Omit<Props, keyof L>> {
 
   return <Props extends { [K in keyof L]: any }>(
@@ -60,7 +60,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         const keys: Array<keyof L> = Object.keys(loaders);
 
         await Promise.all(
-          keys.map(key => {
+          keys.map((key) => {
             return loaders[key]().then(bundle => {
               this.connectFeatureToStore(bundle);
               if (this.saveBundle) {
