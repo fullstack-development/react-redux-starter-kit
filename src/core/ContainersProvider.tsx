@@ -45,10 +45,10 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
 
   return <Props extends { [K in L]: IContainerTypes[K] }>(
     WrappedComponent: React.ComponentType<Props>,
-  ): React.ComponentClass<Omit<Props, L>> => {
+  ): React.ComponentClass<Props> => {
 
     @injectable()
-    class ContainersProvider extends React.PureComponent<Omit<Props, L>, IState> {
+    class ContainersProvider extends React.PureComponent<Props, IState> {
       public state: IState = { containers: {} };
 
       @inject(TYPES.connectEntryToStore)

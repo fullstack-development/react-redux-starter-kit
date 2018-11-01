@@ -25,7 +25,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
   ): React.ComponentClass<Omit<Props, keyof L>> => {
 
     @injectable()
-    class FeatureConnector extends React.PureComponent<Omit<Props, keyof L>, IState> {
+    class FeatureConnector extends React.PureComponent<Props, IState> {
       public state: IState = { mounted: false };
 
       @inject(TYPES.connectEntryToStore)

@@ -42,3 +42,6 @@ jspm_packages
 # Other
 build
 static
+
+# MacOS deps
+.DS_Store
