@@ -50,9 +50,9 @@ export const commonPlugins: webpack.Plugin[] = [
     })
   ) : []);
 
-function sortChunks(a: HtmlWebpackPlugin.Chunk, b: HtmlWebpackPlugin.Chunk) {
+function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
-  return order.findIndex(item => b.names[0].includes(item)) - order.findIndex(item => a.names[0].includes(item));
+  return order.findIndex(item => b.name === item) - order.findIndex(item => a.name === item);
 }
 
 export const commonRules: webpack.Rule[] = [
