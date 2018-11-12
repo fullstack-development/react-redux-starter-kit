@@ -9,7 +9,7 @@ import { ReducersMap } from 'shared/types/redux';
 
 interface IStoreData {
   store: Store<IAppReduxState>;
-  runSaga: SagaMiddleware['run'];
+  runSaga: SagaMiddleware<any>['run'];
 }
 
 function configureStore(): IStoreData {
