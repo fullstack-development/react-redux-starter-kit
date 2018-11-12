@@ -3,7 +3,7 @@ import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
 
 import devConfig from '../dev.config';
-import prodConfig, { typescriptRule } from '../prod.config';
+import prodConfig from '../prod.config';
 import { commonRules, getStyleRules } from '../common';
 
 const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
@@ -24,7 +24,6 @@ const serverConfig: webpack.Configuration = {
   module: {
     ...config.module,
     rules: [
-      typescriptRule,
       ...commonRules,
       ...getStyleRules('server'),
     ],

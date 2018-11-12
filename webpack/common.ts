@@ -4,6 +4,7 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -38,6 +39,12 @@ export const commonPlugins: webpack.Plugin[] = [
     '__CLIENT__': true,
     '__SERVER__': false,
   }),
+  new ForkTsCheckerWebpackPlugin({
+    checkSyntacticErrors: true,
+    async: false,
+    tsconfig: path.resolve('./tsconfig.json'),
+    tslint: path.resolve('./tslint.json'),
+  }),
 ]
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
@@ -56,6 +63,28 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
 }
 
 export const commonRules: webpack.Rule[] = [
+  {
+    test: /\.(ts|tsx)$/,
+    use: ([] as any[])
+      .concat([
+        'cache-loader',
+        {
+          loader: 'thread-loader',
+          options: {
+            workers: require('os').cpus().length - 1,
+            poolTimeout: withHot ? Infinity : 2000,
+          },
+        },
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            happyPackMode: true,
+            logLevel: 'error',
+          },
+        },
+      ]),
+  },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
     use: 'file-loader?name=fonts/[hash].[ext]',
@@ -154,6 +183,11 @@ export const commonConfig: webpack.Configuration = {
       chunks: 'all',
     },
   },
+  stats: {
+    /* typescript would remove the interfaces but also remove the imports of typings
+      and because of this, warnings are shown https://github.com/TypeStrong/ts-loader/issues/653 */
+    warningsFilter: /export .* was not found in/,
+  },
   devServer: {
     hot: withHot,
     contentBase: path.resolve('..', 'build'),
@@ -170,6 +204,7 @@ export const commonConfig: webpack.Configuration = {
       warnings: true,
       assets: false,
       modules: false,
+      warningsFilter: /export .* was not found in/,
     },
   },
 };

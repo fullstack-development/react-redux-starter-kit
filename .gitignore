@@ -45,3 +45,6 @@ static
 
 # MacOS deps
 .DS_Store
+
+# Webpack cache
+.cache-loader

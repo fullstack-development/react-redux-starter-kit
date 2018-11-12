@@ -2,19 +2,7 @@ import * as webpack from 'webpack';
 
 import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
 
-const typescriptRule: webpack.Rule = {
-  test: /\.(ts|tsx)$/,
-  use: [
-    {
-      loader: 'awesome-typescript-loader',
-      options: { target: 'es5' },
-    },
-    'tslint-loader',
-  ],
-};
-
 const rules = [
-  typescriptRule,
   ...commonRules,
   ...getStyleRules('prod'),
 ];
@@ -31,5 +19,4 @@ const prodConfig: webpack.Configuration = {
   plugins: commonPlugins,
 };
 
-export { typescriptRule };
 export default prodConfig;

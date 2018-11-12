@@ -17,11 +17,7 @@ const typescriptRule: webpack.Rule = {
           'syntax-dynamic-import',
         ],
       },
-    } : [])
-    .concat([
-      'awesome-typescript-loader',
-      'tslint-loader',
-    ]),
+    } : []),
 };
 
 const rules: webpack.Rule[] = [

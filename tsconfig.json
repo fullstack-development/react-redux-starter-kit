@@ -24,7 +24,8 @@
     "allowSyntheticDefaultImports": false,
     "importHelpers": true,
     "strictPropertyInitialization": true,
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "sourceMap": true
   },
   "include": [
     "src/**/*",
