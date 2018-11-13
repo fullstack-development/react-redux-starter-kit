@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';

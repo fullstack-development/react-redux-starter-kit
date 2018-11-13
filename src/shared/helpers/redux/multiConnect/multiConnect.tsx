@@ -4,11 +4,13 @@ import * as uuid from 'uuid';
 import { bind } from 'decko';
 import { Store, Dispatch, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { IAppReduxState, Omit } from 'shared/types/app';
+import { Omit } from '_helpers';
+
+import { IAppReduxState } from 'shared/types/app';
+import { IMultiAction } from 'shared/types/redux';
 
 import { addInstance, removeInstance } from './actions';
 import { MapStateToProps, MapDispatchToProps, IMultiConnectProps } from './namespace';
-import { IMultiAction } from 'shared/types/redux';
 
 type FeatureName = keyof IAppReduxState;
 type MultiComponent<P> = React.ComponentClass<P & IMultiConnectProps>;

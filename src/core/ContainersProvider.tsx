@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { bind } from 'decko';
+import { Omit } from '_helpers';
 
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry, Omit } from 'shared/types/app';
+import { IFeatureEntry } from 'shared/types/app';
 
 import * as categorySelectFeature from 'features/categorySelect';
 
@@ -38,16 +39,16 @@ interface IState {
   };
 }
 
+// tslint:disable:max-line-length
 function containersProvider<L extends Container>(containers: L[], preloader?: React.ReactChild):
-  // tslint:disable-next-line:max-line-length
   <Props extends { [K in L]: IContainerTypes[K] }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
 
   return <Props extends { [K in L]: IContainerTypes[K] }>(
     WrappedComponent: React.ComponentType<Props>,
-  ): React.ComponentClass<Omit<Props, L>> => {
+  ): React.ComponentClass<Props> => {
 
     @injectable()
-    class ContainersProvider extends React.PureComponent<Omit<Props, L>, IState> {
+    class ContainersProvider extends React.PureComponent<Props, IState> {
       public state: IState = { containers: {} };
 
       @inject(TYPES.connectEntryToStore)
