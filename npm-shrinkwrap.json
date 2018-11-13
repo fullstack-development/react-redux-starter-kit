@@ -652,9 +652,9 @@
       "integrity": "sha512-fWuYGHXie0IfRMh7zh90fsbgEvAfPt+SBmg1eNhTVecnjDQujP4npzJJFZdron9RwxfKmZ2PWmcfa1oKln4yfA=="
     },
     "@types/react": {
-      "version": "16.7.3",
-      "resolved": "https://registry.npmjs.org/@types/react/-/react-16.7.3.tgz",
-      "integrity": "sha512-ve/2lnXuLNaTDR1SPvsEX25m+NoNW3PMJxL2jd372UR8oJPwR5+jgtcheUoN27O+qKLFmQy0y0YKRwZcwtny3w==",
+      "version": "16.7.4",
+      "resolved": "https://registry.npmjs.org/@types/react/-/react-16.7.4.tgz",
+      "integrity": "sha512-+voCjvVBp0G9I5cu/6u3LxPpXsZDwV3E20ifyq3t6XDsK7Mx+WoRgzGsQ9XSalLf9XqK/Be0bWzhLbFxzof3Kg==",
       "requires": {
         "@types/prop-types": "*",
         "csstype": "^2.2.0"
@@ -768,9 +768,9 @@
       }
     },
     "@types/uuid": {
-      "version": "3.4.3",
-      "resolved": "https://registry.npmjs.org/@types/uuid/-/uuid-3.4.3.tgz",
-      "integrity": "sha512-5fRLCYhLtDb3hMWqQyH10qtF+Ud2JnNCXTCZ+9ktNdCcgslcuXkDTkFcJNk++MT29yDntDnlF1+jD+uVGumsbw==",
+      "version": "3.4.4",
+      "resolved": "https://registry.npmjs.org/@types/uuid/-/uuid-3.4.4.tgz",
+      "integrity": "sha512-tPIgT0GUmdJQNSHxp0X2jnpQfBSTfGxUMc/2CXBU2mnyTFVYVa2ojpoQ74w0U2yn2vw3jnC640+77lkFFpdVDw==",
       "requires": {
         "@types/node": "*"
       }
@@ -3322,17 +3322,6 @@
           "resolved": "https://registry.npmjs.org/isobject/-/isobject-3.0.1.tgz",
           "integrity": "sha1-TkMekrEalzFjaqH5yNHMvP2reN8="
         }
-      }
-    },
-    "cache-loader": {
-      "version": "1.2.5",
-      "resolved": "https://registry.npmjs.org/cache-loader/-/cache-loader-1.2.5.tgz",
-      "integrity": "sha512-enWKEQ4kO3YreDFd7AtVRjtJBmNiqh/X9hVDReu0C4qm8gsGmySkwuWtdc+N5O+vq5FzxL1mIZc30NyXCB7o/Q==",
-      "requires": {
-        "loader-utils": "^1.1.0",
-        "mkdirp": "^0.5.1",
-        "neo-async": "^2.5.0",
-        "schema-utils": "^0.4.2"
       }
     },
     "cacheable-request": {
@@ -15957,6 +15946,7 @@
       "version": "0.4.5",
       "resolved": "https://registry.npmjs.org/schema-utils/-/schema-utils-0.4.5.tgz",
       "integrity": "sha512-yYrjb9TX2k/J1Y5UNy3KYdZq10xhYcF8nMpAW6o3hy6Q8WSIEf9lJHG/ePnOBfziPM3fvQwfOwa13U/Fh8qTfA==",
+      "dev": true,
       "requires": {
         "ajv": "^6.1.0",
         "ajv-keywords": "^3.1.0"

@@ -66,7 +66,6 @@ export const commonRules: webpack.Rule[] = [
   {
     test: /\.tsx?$/,
     use: [
-      'cache-loader',
       {
         loader: 'thread-loader',
         options: {

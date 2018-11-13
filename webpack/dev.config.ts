@@ -6,7 +6,7 @@ import { commonPlugins, commonRules, commonConfig, getStyleRules } from './commo
 const { withHot } = getEnvParams();
 
 const typescriptRule: webpack.Rule = {
-  test: /\.(ts|tsx)$/,
+  test: /\.tsx?$/,
   use: ([] as webpack.Loader[])
     .concat(withHot ? {
       loader: 'babel-loader',
