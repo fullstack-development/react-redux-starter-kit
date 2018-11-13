@@ -32,6 +32,7 @@ const plugins: webpack.Plugin[] = commonPlugins
 const devConfig: webpack.Configuration = {
   ...commonConfig,
   mode: 'development',
+  devtool: 'source-map',
   entry: {
     app: './client.tsx',
   },
