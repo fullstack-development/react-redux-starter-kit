@@ -64,26 +64,25 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
 
 export const commonRules: webpack.Rule[] = [
   {
-    test: /\.(ts|tsx)$/,
-    use: ([] as any[])
-      .concat([
-        'cache-loader',
-        {
-          loader: 'thread-loader',
-          options: {
-            workers: require('os').cpus().length - 1,
-            poolTimeout: withHot ? Infinity : 2000,
-          },
+    test: /\.tsx?$/,
+    use: [
+      'cache-loader',
+      {
+        loader: 'thread-loader',
+        options: {
+          workers: require('os').cpus().length - 1,
+          poolTimeout: withHot ? Infinity : 2000,
         },
-        {
-          loader: 'ts-loader',
-          options: {
-            transpileOnly: true,
-            happyPackMode: true,
-            logLevel: 'error',
-          },
+      },
+      {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          happyPackMode: true,
+          logLevel: 'error',
         },
-      ]),
+      },
+    ],
   },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
