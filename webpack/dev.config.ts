@@ -5,24 +5,8 @@ import { commonPlugins, commonRules, commonConfig, getStyleRules } from './commo
 
 const { withHot } = getEnvParams();
 
-const typescriptRule: webpack.Rule = {
-  test: /\.tsx?$/,
-  use: ([] as webpack.Loader[])
-    .concat(withHot ? {
-      loader: 'babel-loader',
-      options: {
-        babelrc: false,
-        plugins: [
-          'react-hot-loader/babel',
-          'syntax-dynamic-import',
-        ],
-      },
-    } : []),
-};
-
 const rules: webpack.Rule[] = [
-  typescriptRule,
-  ...commonRules,
+  ...commonRules('dev'),
   ...getStyleRules('dev'),
 ];
 
@@ -42,5 +26,4 @@ const devConfig: webpack.Configuration = {
   plugins,
 };
 
-export { typescriptRule };
 export default devConfig;

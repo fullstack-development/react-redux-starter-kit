@@ -5,6 +5,7 @@ import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import * as threadLoader from 'thread-loader';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -17,9 +18,19 @@ import { ROUTES_PREFIX } from '../src/core/constants';
 import getEnvParams from '../src/core/getEnvParams';
 
 const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
-
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
+const workerPool = {
+  workers: require('os').cpus().length - 1,
+  poolTimeout: withHot ? Infinity : 2000,
+};
+
+threadLoader.warmup(workerPool, [
+  'babel-loader',
+  'ts-loader',
+  'postcss-loader',
+  'sass-loader',
+]);
 
 export const commonPlugins: webpack.Plugin[] = [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
@@ -62,16 +73,13 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
   return order.findIndex(item => b.name === item) - order.findIndex(item => a.name === item);
 }
 
-export const commonRules: webpack.Rule[] = [
+export const commonRules: (type: 'dev' | 'prod' | 'server') => webpack.Rule[] = (type) => [
   {
     test: /\.tsx?$/,
     use: [
       {
         loader: 'thread-loader',
-        options: {
-          workers: require('os').cpus().length - 1,
-          poolTimeout: withHot ? Infinity : 2000,
-        },
+        options: workerPool,
       },
       {
         loader: 'ts-loader',
@@ -122,6 +130,10 @@ export function getStyleRules(type: 'dev' | 'prod' | 'server') {
 }
 
 const commonScssLoaders: webpack.Loader[] = [
+  {
+    loader: 'thread-loader',
+    options: workerPool,
+  },
   {
     loader: 'postcss-loader',
     options: {

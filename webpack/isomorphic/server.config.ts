@@ -24,7 +24,7 @@ const serverConfig: webpack.Configuration = {
   module: {
     ...config.module,
     rules: [
-      ...commonRules,
+      ...commonRules('server'),
       ...getStyleRules('server'),
     ],
   },

@@ -3,7 +3,7 @@ import * as webpack from 'webpack';
 import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
 
 const rules = [
-  ...commonRules,
+  ...commonRules('prod'),
   ...getStyleRules('prod'),
 ];
 
