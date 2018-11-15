@@ -76,20 +76,29 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
 export const commonRules: (type: 'dev' | 'prod' | 'server') => webpack.Rule[] = (type) => [
   {
     test: /\.tsx?$/,
-    use: [
+    use: ([
       {
         loader: 'thread-loader',
         options: workerPool,
-      },
-      {
+      }] as webpack.Loader[])
+      .concat(withHot && type === 'dev' ? {
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          plugins: [
+            'react-hot-loader/babel',
+            'syntax-dynamic-import',
+          ],
+        },
+      } : [])
+      .concat({
         loader: 'ts-loader',
         options: {
           transpileOnly: true,
           happyPackMode: true,
           logLevel: 'error',
         },
-      },
-    ],
+      }),
   },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
