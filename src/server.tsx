@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import * as express from 'express';
 import * as React from 'react';
-import bootstrapper from 'react-async-bootstrapper';
+import * as bootstrapper from 'react-async-bootstrapper';
 import { renderToString } from 'react-dom/server';
 
 import { IAssets, IAppData } from 'shared/types/app';

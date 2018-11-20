@@ -6,7 +6,7 @@ import devConfig from '../dev.config';
 import prodConfig from '../prod.config';
 import { commonRules, getStyleRules } from '../common';
 
-const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? prodConfig('server') : devConfig('server');
 
 const serverConfig: webpack.Configuration = {
   ...config,

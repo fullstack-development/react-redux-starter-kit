@@ -17,6 +17,8 @@ import * as doiuse from 'doiuse';
 import { ROUTES_PREFIX } from '../src/core/constants';
 import getEnvParams from '../src/core/getEnvParams';
 
+export type BuildType = 'dev' | 'prod' | 'server';
+
 const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
@@ -32,7 +34,7 @@ threadLoader.warmup(workerPool, [
   'sass-loader',
 ]);
 
-export const commonPlugins: webpack.Plugin[] = [
+export const commonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new MiniCssExtractPlugin({
     filename: `css/[name].[${chunkHash}].css`,
@@ -50,13 +52,14 @@ export const commonPlugins: webpack.Plugin[] = [
     '__CLIENT__': true,
     '__SERVER__': false,
   }),
-  new ForkTsCheckerWebpackPlugin({
-    checkSyntacticErrors: true,
-    async: false,
-    tsconfig: path.resolve('./tsconfig.json'),
-    tslint: path.resolve('./tslint.json'),
-  }),
 ]
+  .concat(type !== 'server' ? (
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      async: false,
+      tsconfig: path.resolve('./tsconfig.json'),
+      tslint: path.resolve('./tslint.json'),
+    })) : [])
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
   ) : [])
@@ -73,7 +76,7 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
   return order.findIndex(item => b.name === item) - order.findIndex(item => a.name === item);
 }
 
-export const commonRules: (type: 'dev' | 'prod' | 'server') => webpack.Rule[] = (type) => [
+export const commonRules: (type: BuildType) => webpack.Rule[] = (type) => [
   {
     test: /\.tsx?$/,
     use: ([
@@ -114,13 +117,13 @@ export const commonRules: (type: 'dev' | 'prod' | 'server') => webpack.Rule[] = 
   },
 ];
 
-export function getStyleRules(type: 'dev' | 'prod' | 'server') {
-  const cssLoaders: Record<typeof type, webpack.Loader[]> = {
+export function getStyleRules(type: BuildType) {
+  const cssLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader'],
     server: ['css-loader/locals'],
   };
-  const scssFirstLoaders: Record<typeof type, webpack.Loader[]> = {
+  const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader?importLoaders=1'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
     server: ['css-loader/locals?importLoaders=1'],
@@ -133,7 +136,7 @@ export function getStyleRules(type: 'dev' | 'prod' | 'server') {
     },
     {
       test: /\.scss$/,
-      use: scssFirstLoaders[type].concat(commonScssLoaders),
+      use: (scssFirstLoaders[type]).concat(commonScssLoaders),
     },
   ];
 }

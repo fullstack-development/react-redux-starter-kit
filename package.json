@@ -4,6 +4,7 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
+    "check-types": "node_modules/.bin/tsc -p . --noEmit",
     "dev": "npm run watch:dev",
     "prod": "npm run watch:prod",
     "watch:dev": "better-npm-run watch:dev",
@@ -36,6 +37,7 @@
       "command": "node -r ts-node/register ./server/index.ts",
       "env": {
         "PORT": 8080,
+        "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "NODE_ENV": "development",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}"
@@ -45,6 +47,7 @@
       "command": "node --inspect --inspect-brk -r ts-node/register ./server/index.ts",
       "env": {
         "PORT": 8080,
+        "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "NODE_ENV": "development",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}"
@@ -70,6 +73,7 @@
       "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.ts",
       "env": {
         "NODE_ENV": "development",
+        "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
@@ -78,6 +82,7 @@
       "command": "node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.ts",
       "env": {
         "NODE_ENV": "production",
+        "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
@@ -102,6 +107,7 @@
       "command": "node_modules/.bin/webpack --progress --colors --config webpack/dev.config.ts",
       "env": {
         "NODE_ENV": "development",
+        "TS_NODE_FILES": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
@@ -109,6 +115,7 @@
       "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.ts",
       "env": {
         "NODE_ENV": "production",
+        "TS_NODE_FILES": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
@@ -140,14 +147,15 @@
   "devDependencies": {
     "@types/clean-webpack-plugin": "^0.1.2",
     "@types/enzyme": "^3.1.10",
-    "@types/express": "^4.11.1",
+    "@types/express": "^4.16.0",
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/jest": "^23.3.9",
     "@types/mini-css-extract-plugin": "^0.2.0",
-    "@types/node": "^6.0.111",
+    "@types/node": "^10.12.9",
     "@types/sinon": "^5.0.5",
-    "@types/webpack": "^4.4.0",
+    "@types/webpack": "^4.4.19",
     "@types/webpack-bundle-analyzer": "^2.9.2",
+    "@types/webpack-dev-server": "^3.1.1",
     "babel-loader": "^8.0.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^1.0.0",
@@ -167,6 +175,7 @@
     "stylelint-order": "^1.0.0",
     "stylelint-scss": "^3.3.2",
     "ts-jest": "^23.10.4",
+    "tsconfig-paths": "^3.7.0",
     "tslint": "^5.11.0",
     "tslint-eslint-rules": "^5.4.0",
     "tslint-loader": "^3.5.4",
@@ -198,7 +207,8 @@
     "@types/react-router": "^4.4.1",
     "@types/react-router-dom": "^4.3.1",
     "@types/react-select": "^1.2.6",
-    "@types/serialize-javascript": "^1.3.2",
+    "@types/serialize-javascript": "^1.5.0",
+    "@types/stylelint": "^9.4.1",
     "@types/uuid": "^3.4.4",
     "@types/webpack-hot-middleware": "^2.16.2",
     "@types/webpack-node-externals": "^1.6.2",
@@ -250,7 +260,7 @@
     "serialize-javascript": "^1.5.0",
     "thread-loader": "^1.2.0",
     "ts-loader": "^5.3.0",
-    "ts-node": "^6.0.3",
+    "ts-node": "^7.0.1",
     "typescript": "^3.1.6",
     "url-loader": "^1.1.2",
     "uuid": "^3.3.2"

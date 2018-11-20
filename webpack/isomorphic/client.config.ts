@@ -3,7 +3,7 @@ import * as webpack from 'webpack';
 import devConfig from '../dev.config';
 import prodConfig from '../prod.config';
 
-const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? prodConfig('server') : devConfig('server');
 const withHot = process.env.WATCH_MODE === 'true';
 
 const clientConfig: webpack.Configuration = {

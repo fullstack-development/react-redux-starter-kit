@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "typeRoots": ["./node_modules/@types", "./@types"],
-    "traceResolution": true,
+    "traceResolution": false,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
     "lib": [
       "es2015",
@@ -21,7 +21,7 @@
     "baseUrl": "./src",
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "strictPropertyInitialization": true,
     "strictFunctionTypes": false,

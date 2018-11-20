@@ -1,22 +1,24 @@
 import * as webpack from 'webpack';
 
-import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
+import { commonPlugins, commonRules, commonConfig, getStyleRules, BuildType } from './common';
 
-const rules = [
-  ...commonRules('prod'),
-  ...getStyleRules('prod'),
-];
+const prodConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+  const rules = [
+    ...commonRules(type || 'prod'),
+    ...getStyleRules(type || 'prod'),
+  ];
 
-const prodConfig: webpack.Configuration = {
-  ...commonConfig,
-  mode: 'production',
-  entry: {
-    app: './client.tsx',
-  },
-  module: {
-    rules,
-  },
-  plugins: commonPlugins,
+  return {
+    ...commonConfig,
+    mode: 'production',
+    entry: {
+      app: './client.tsx',
+    },
+    module: {
+      rules,
+    },
+    plugins: commonPlugins(type || 'prod'),
+  };
 };
 
 export default prodConfig;
