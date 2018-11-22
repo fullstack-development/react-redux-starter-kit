@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { Route, RouteComponentProps, Redirect, Switch } from 'react-router-dom';
+
 import { ROUTES_PREFIX } from 'core/constants';
 import { Module } from 'shared/types/app';
-
-import { Route, RouteComponentProps, Redirect, Switch } from 'react-router-dom';
 import { App } from 'modules/App';
+
+import { routes as homeRoutes } from '../modules/Home/constants';
 
 function getRoutes(modules: Module[]): React.ReactElement<RouteComponentProps<any>> {
   return (
@@ -11,7 +13,7 @@ function getRoutes(modules: Module[]): React.ReactElement<RouteComponentProps<an
       <App>
         <Switch>
           {modules.map(module => module.getRoutes ? module.getRoutes() : null)}
-          <Redirect exact from={ROUTES_PREFIX} to={`${ROUTES_PREFIX}/home`} />
+          <Redirect exact from={ROUTES_PREFIX} to={homeRoutes.home.getRoutePath()} />
         </Switch>
       </App>
     </Route>

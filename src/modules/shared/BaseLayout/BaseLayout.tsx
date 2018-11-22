@@ -4,10 +4,11 @@ import * as searchRepositories from 'features/searchRepositories';
 
 import { RowsLayout } from 'shared/view/elements';
 import { Header, Footer } from 'shared/view/components';
-
-import { homeRedirectPath, orderRedirectPath } from '../../routes';
-import { StylesProps, provideStyles } from './BaseLayout.style';
 import { getAsyncContainer } from 'core/FeatureConnector';
+
+import { routes as homeRoutes } from '../../Home/constants';
+import { routes as orderRoutes } from '../../OrderForm/constants';
+import { StylesProps, provideStyles } from './BaseLayout.style';
 
 interface IOwnProps {
   withSearch?: boolean;
@@ -27,8 +28,8 @@ class BaseLayout extends React.PureComponent<Props> {
         footerContent={<Footer />}
         headerContent={(
           <Header
-            brandRedirectPath={homeRedirectPath}
-            menuRedirectPaths={{ order: orderRedirectPath }}
+            brandRedirectPath={homeRoutes.home.getRoutePath()}
+            menuRedirectPaths={{ order: orderRoutes.order.getRoutePath() }}
           >
             {withSearch && <AsyncSearchInput />}
           </Header>
