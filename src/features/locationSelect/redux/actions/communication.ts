@@ -1,4 +1,4 @@
-import { makeCommunicationActionCreators } from 'shared/helpers/redux';
+import { makeCommunicationActionCreators } from 'redux-make-communication';
 import * as NS from '../../namespace';
 
 export const { execute: loadCities, completed: loadCitiesSuccess, failed: loadCitiesFail } =

@@ -625,6 +625,11 @@
       "resolved": "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.5.6.tgz",
       "integrity": "sha512-ZBFR7TROLVzCkswA3Fmqq+IIJt62/T7aY/Dmz+QkU7CaW2QFqAitCE8Ups7IzmGhcN1YWMBT4Qcoc07jU9hOJQ=="
     },
+    "@types/query-string": {
+      "version": "6.1.1",
+      "resolved": "https://registry.npmjs.org/@types/query-string/-/query-string-6.1.1.tgz",
+      "integrity": "sha512-wRUeF7KN2yxCMw4VoXzPh3GWStbGaiyVjyX22fG7mpSzt6etLvsA2S0g0IuGeXGwVNIlztzVmGP6AxZMmYTQhw=="
+    },
     "@types/ramda": {
       "version": "0.25.29",
       "resolved": "https://registry.npmjs.org/@types/ramda/-/ramda-0.25.29.tgz",
@@ -3239,10 +3244,86 @@
         "babel-runtime": "^6.22.0"
       }
     },
+<<<<<<< Updated upstream
     "babel-plugin-transform-es2015-block-scoping": {
       "version": "6.26.0",
       "resolved": "https://registry.npmjs.org/babel-plugin-transform-es2015-block-scoping/-/babel-plugin-transform-es2015-block-scoping-6.26.0.tgz",
       "integrity": "sha1-1w9SmcEwjQXBL0Y4E7CgnnOxiV8=",
+=======
+    "buffer-from": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/buffer-from/-/buffer-from-1.0.0.tgz",
+      "integrity": "sha512-83apNb8KK0Se60UE1+4Ukbe3HbfELJ6UlI4ldtOGs7So4KD26orJM8hIY9lxdzP+UpItH1Yh/Y8GUvNFWFFRxA=="
+    },
+    "buffer-indexof": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/buffer-indexof/-/buffer-indexof-1.1.1.tgz",
+      "integrity": "sha512-4/rOEg86jivtPTeOUUT61jJO1Ya1TrR/OkqCSZDyq84WJh3LuuiphBYJN+fm5xufIk4XAFcEwte/8WzC8If/1g==",
+      "dev": true
+    },
+    "buffer-shims": {
+      "version": "1.0.0",
+      "resolved": "https://registry.npmjs.org/buffer-shims/-/buffer-shims-1.0.0.tgz",
+      "integrity": "sha1-mXjOMXOIxkmth5MCjDR37wRKi1E="
+    },
+    "buffer-xor": {
+      "version": "1.0.3",
+      "resolved": "https://registry.npmjs.org/buffer-xor/-/buffer-xor-1.0.3.tgz",
+      "integrity": "sha1-JuYe0UIvtw3ULm42cp7VHYVf6Nk=",
+      "dev": true
+    },
+    "build-route-tree": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/build-route-tree/-/build-route-tree-1.0.1.tgz",
+      "integrity": "sha512-HVdKyvDlf6GF2WIacXzjQzRsgkgjfnfkVOh4pFtUD1CX8HVjU61JMJiMJljs1YYodcRmuiV/dYQqkRY4VWX5QA==",
+      "requires": {
+        "@types/query-string": "^6.1.1",
+        "path-to-regexp": "^2.4.0",
+        "query-string": "^6.2.0"
+      },
+      "dependencies": {
+        "path-to-regexp": {
+          "version": "2.4.0",
+          "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-2.4.0.tgz",
+          "integrity": "sha512-G6zHoVqC6GGTQkZwF4lkuEyMbVOjoBKAEybQUypI1WTkqinCOrq2x6U2+phkJ1XsEMTy4LjtwPI7HW+NVrRR2w=="
+        },
+        "query-string": {
+          "version": "6.2.0",
+          "resolved": "https://registry.npmjs.org/query-string/-/query-string-6.2.0.tgz",
+          "integrity": "sha512-5wupExkIt8RYL4h/FE+WTg3JHk62e6fFPWtAZA9J5IWK1PfTfKkMS93HBUHcFpeYi9KsY5pFbh+ldvEyaz5MyA==",
+          "requires": {
+            "decode-uri-component": "^0.2.0",
+            "strict-uri-encode": "^2.0.0"
+          }
+        },
+        "strict-uri-encode": {
+          "version": "2.0.0",
+          "resolved": "https://registry.npmjs.org/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz",
+          "integrity": "sha1-ucczDHBChi9rFC3CdLvMWGbONUY="
+        }
+      }
+    },
+    "builtin-modules": {
+      "version": "1.1.1",
+      "resolved": "https://registry.npmjs.org/builtin-modules/-/builtin-modules-1.1.1.tgz",
+      "integrity": "sha1-Jw8HbFpywC9bZaR9+Uxf46J4iS8="
+    },
+    "builtin-status-codes": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz",
+      "integrity": "sha1-hZgoeOIbmOHGZCXgPQF0eI9Wnug=",
+      "dev": true
+    },
+    "bytes": {
+      "version": "3.0.0",
+      "resolved": "https://registry.npmjs.org/bytes/-/bytes-3.0.0.tgz",
+      "integrity": "sha1-0ygVQE1olpn4Wk6k+odV3ROpYEg="
+    },
+    "cacache": {
+      "version": "10.0.4",
+      "resolved": "https://registry.npmjs.org/cacache/-/cacache-10.0.4.tgz",
+      "integrity": "sha512-Dph0MzuH+rTQzGPNT9fAnrPmMmjKfST6trxJeK7NQuHRaVw24VzPRWTmg9MpcwOVQZO0E1FBICUlFeNaKPIfHA==",
+>>>>>>> Stashed changes
       "dev": true,
       "requires": {
         "babel-runtime": "^6.26.0",
@@ -16919,6 +17000,14 @@
       "resolved": "https://registry.npmjs.org/redux-devtools-extension/-/redux-devtools-extension-2.13.5.tgz",
       "integrity": "sha512-QQ9BRy77oURHMdGys9rfQcCQDzXZ1T4oW+eUyE5Cg7DNVau69HJzc4YNDMOmpi0Dzpi1zOQgQ2rUpgJta4Lfqg==",
       "dev": true
+    },
+    "redux-make-communication": {
+      "version": "1.0.1",
+      "resolved": "https://registry.npmjs.org/redux-make-communication/-/redux-make-communication-1.0.1.tgz",
+      "integrity": "sha512-c0OWEso6D8ZefZlHs85uUV3OwXW1rQNyPvjcxUrnAvkrfDDVlsCCIFdnsL0C0P5R+LtaEYaRlUjBkalGz5d4BQ==",
+      "requires": {
+        "react-redux": "^5.1.1"
+      }
     },
     "redux-saga": {
       "version": "0.16.2",

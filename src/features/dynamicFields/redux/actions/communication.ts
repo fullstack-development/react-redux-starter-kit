@@ -1,5 +1,5 @@
 import * as NS from '../../namespace';
-import { makeCommunicationActionCreators } from 'shared/helpers/redux';
+import { makeCommunicationActionCreators } from 'redux-make-communication';
 
 export const { execute: loadFields, completed: loadFieldsSuccess, failed: loadFieldsFail } =
   makeCommunicationActionCreators<NS.ILoadFields, NS.ILoadFieldsSuccess, NS.ILoadFieldsFail>(
