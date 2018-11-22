@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { makeCommunicationReducer } from 'shared/helpers/redux';
+import { makeCommunicationReducer } from 'redux-make-communication';
 
 import { IPoint, INormalizedLocation } from 'shared/types/models';
 import { ReducersMap } from 'shared/types/redux';
