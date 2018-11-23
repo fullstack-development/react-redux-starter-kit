@@ -2,11 +2,11 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
 
-import devConfig from '../dev.config';
-import prodConfig from '../prod.config';
+import getDevConfig from '../dev.config';
+import getProdConfig from '../prod.config';
 import { commonRules, getStyleRules } from '../common';
 
-const config = process.env.NODE_ENV === 'production' ? prodConfig('server') : devConfig('server');
+const config = process.env.NODE_ENV === 'production' ? getProdConfig('server') : getDevConfig('server');
 
 const serverConfig: webpack.Configuration = {
   ...config,

@@ -25,7 +25,6 @@ function startDevelopmentMode(
 
     const { clientStats } = compilation;
     const assets = extractAssets(clientStats.compilation);
-    process.stdout.write('request');
     render({ req, res, assets })
       .catch((err: any) => {
         process.stdout.write(err);

@@ -5,7 +5,7 @@ import { commonPlugins, commonRules, commonConfig, getStyleRules, BuildType } fr
 
 const { withHot } = getEnvParams();
 
-const devConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
   const rules: webpack.Rule[] = [
     ...commonRules(type || 'dev'),
     ...getStyleRules(type || 'dev'),
@@ -27,4 +27,4 @@ const devConfig: (type?: BuildType) => webpack.Configuration = (type) => {
   };
 };
 
-export default devConfig;
+export default getDevConfig;

@@ -2,7 +2,7 @@ import * as webpack from 'webpack';
 
 import { commonPlugins, commonRules, commonConfig, getStyleRules, BuildType } from './common';
 
-const prodConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+const getProdConfig: (type?: BuildType) => webpack.Configuration = (type) => {
   const rules = [
     ...commonRules(type || 'prod'),
     ...getStyleRules(type || 'prod'),
@@ -21,4 +21,4 @@ const prodConfig: (type?: BuildType) => webpack.Configuration = (type) => {
   };
 };
 
-export default prodConfig;
+export default getProdConfig;
