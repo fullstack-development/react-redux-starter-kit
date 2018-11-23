@@ -1,7 +1,7 @@
 import initial from '../data/initial';
 import * as NS from '../../namespace';
 import { combineReducers } from 'redux';
-import { makeCommunicationReducer } from 'shared/helpers/redux';
+import { makeCommunicationReducer } from 'redux-make-communication';
 
 function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.Action): NS.IReduxState['data'] {
   switch (action.type) {

@@ -1,5 +1,4 @@
-import { makeCommunicationActionCreators } from 'shared/helpers/redux';
-
+import { makeCommunicationActionCreators } from 'redux-make-communication';
 import { Uid } from 'shared/types/app';
 import * as NS from './../../namespace';
 

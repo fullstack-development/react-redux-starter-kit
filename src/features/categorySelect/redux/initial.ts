@@ -1,5 +1,5 @@
 import { IReduxState } from '../namespace';
-import { initialCommunicationField } from 'shared/helpers/redux';
+import { initialCommunicationField } from 'redux-make-communication';
 
 const initialState: IReduxState = {
   data: {
