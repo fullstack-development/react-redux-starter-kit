@@ -51,8 +51,7 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     '__LANG__': JSON.stringify(process.env.LANG || 'en'),
     '__CLIENT__': true,
     '__SERVER__': false,
-  }),
-]
+  })]
   .concat(type !== 'server' ? (
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
@@ -70,10 +69,9 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
       chunksSortMode: sortChunks,
     })
   ) : [])
-  .concat(withHot && type === 'dev' ?
+  .concat(withHot && type === 'dev' ? (
     new webpack.HotModuleReplacementPlugin()
-    : [])
-  ;
+  ) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
