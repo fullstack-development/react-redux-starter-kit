@@ -1,21 +1,16 @@
 #!/usr/bin/env node
 
 import * as express from 'express';
-import * as webpack from 'webpack';
 import clientConfig from '../webpack/isomorphic/client.config';
 import serverConfig from '../webpack/isomorphic/server.config';
 import { startDevelopmentMode, startProductionMode } from './starters';
 import middleware from './middleware';
 
-type Starter = (
-  server: express.Express, clientConfig: webpack.Configuration, serverConfig: webpack.Configuration,
-) => void;
-
 const { NODE_ENV, PORT } = process.env;
 
 const app = middleware(express());
 
-const starters: Record<string, Starter> = {
+const starters: Record<string, typeof startDevelopmentMode> = {
   development: startDevelopmentMode,
   production: startProductionMode,
 };

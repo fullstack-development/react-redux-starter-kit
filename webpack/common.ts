@@ -34,7 +34,7 @@ threadLoader.warmup(workerPool, [
   'sass-loader',
 ]);
 
-export const commonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
+export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new MiniCssExtractPlugin({
     filename: `css/[name].[${chunkHash}].css`,
@@ -69,14 +69,18 @@ export const commonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
       template: 'assets/index.html',
       chunksSortMode: sortChunks,
     })
-  ) : []);
+  ) : [])
+  .concat(withHot && type === 'dev' ?
+    new webpack.HotModuleReplacementPlugin()
+    : [])
+  ;
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
   return order.findIndex(item => b.name === item) - order.findIndex(item => a.name === item);
 }
 
-export const commonRules: (type: BuildType) => webpack.Rule[] = (type) => [
+export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
   {
     test: /\.tsx?$/,
     use: ([

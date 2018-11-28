@@ -1,17 +1,12 @@
 import * as webpack from 'webpack';
 
-import getEnvParams from '../src/core/getEnvParams';
-import { commonPlugins, commonRules, commonConfig, getStyleRules, BuildType } from './common';
-
-const { withHot } = getEnvParams();
+import { getCommonRules, commonConfig, getStyleRules, BuildType, getCommonPlugins } from './common';
 
 const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
   const rules: webpack.Rule[] = [
-    ...commonRules(type || 'dev'),
+    ...getCommonRules(type || 'dev'),
     ...getStyleRules(type || 'dev'),
   ];
-  const plugins: webpack.Plugin[] = commonPlugins(type || 'dev')
-    .concat(withHot ? new webpack.HotModuleReplacementPlugin() : []);
 
   return {
     ...commonConfig,
@@ -23,7 +18,7 @@ const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
     module: {
       rules,
     },
-    plugins,
+    plugins: getCommonPlugins(type || 'prod'),
   };
 };
 

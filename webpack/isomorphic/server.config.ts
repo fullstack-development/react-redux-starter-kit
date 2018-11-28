@@ -4,7 +4,7 @@ import * as nodeExternals from 'webpack-node-externals';
 
 import getDevConfig from '../dev.config';
 import getProdConfig from '../prod.config';
-import { commonRules, getStyleRules } from '../common';
+import { getCommonRules, getStyleRules } from '../common';
 
 const config = process.env.NODE_ENV === 'production' ? getProdConfig('server') : getDevConfig('server');
 
@@ -24,7 +24,7 @@ const serverConfig: webpack.Configuration = {
   module: {
     ...config.module,
     rules: [
-      ...commonRules('server'),
+      ...getCommonRules('server'),
       ...getStyleRules('server'),
     ],
   },
