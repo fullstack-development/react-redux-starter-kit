@@ -1,49 +1,25 @@
 import * as webpack from 'webpack';
 
-import getEnvParams from '../src/core/getEnvParams';
-import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
+import { getCommonRules, commonConfig, getStyleRules, BuildType, getCommonPlugins } from './common';
 
-const { withHot } = getEnvParams();
+const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+  const rules: webpack.Rule[] = [
+    ...getCommonRules(type || 'dev'),
+    ...getStyleRules(type || 'dev'),
+  ];
 
-const typescriptRule: webpack.Rule = {
-  test: /\.(ts|tsx)$/,
-  use: ([] as webpack.Loader[])
-    .concat(withHot ? {
-      loader: 'babel-loader',
-      options: {
-        babelrc: false,
-        plugins: [
-          'react-hot-loader/babel',
-          'syntax-dynamic-import',
-        ],
-      },
-    } : [])
-    .concat([
-      'awesome-typescript-loader',
-      'tslint-loader',
-    ]),
+  return {
+    ...commonConfig,
+    mode: 'development',
+    devtool: 'source-map',
+    entry: {
+      app: './client.tsx',
+    },
+    module: {
+      rules,
+    },
+    plugins: getCommonPlugins(type || 'dev'),
+  };
 };
 
-const rules: webpack.Rule[] = [
-  typescriptRule,
-  ...commonRules,
-  ...getStyleRules('dev'),
-];
-
-const plugins: webpack.Plugin[] = commonPlugins
-  .concat(withHot ? new webpack.HotModuleReplacementPlugin() : []);
-
-const devConfig: webpack.Configuration = {
-  ...commonConfig,
-  mode: 'development',
-  entry: {
-    app: './client.tsx',
-  },
-  module: {
-    rules,
-  },
-  plugins,
-};
-
-export { typescriptRule };
-export default devConfig;
+export default getDevConfig;

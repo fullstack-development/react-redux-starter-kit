@@ -4,6 +4,8 @@ import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import * as threadLoader from 'thread-loader';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -15,12 +17,24 @@ import * as doiuse from 'doiuse';
 import { ROUTES_PREFIX } from '../src/core/constants';
 import getEnvParams from '../src/core/getEnvParams';
 
-const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
+export type BuildType = 'dev' | 'prod' | 'server';
 
+const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
 // http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
 const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
+const workerPool = {
+  workers: require('os').cpus().length - 1,
+  poolTimeout: withHot ? Infinity : 2000,
+};
 
-export const commonPlugins: webpack.Plugin[] = [
+threadLoader.warmup(workerPool, [
+  'babel-loader',
+  'ts-loader',
+  'postcss-loader',
+  'sass-loader',
+]);
+
+export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new MiniCssExtractPlugin({
     filename: `css/[name].[${chunkHash}].css`,
@@ -37,10 +51,19 @@ export const commonPlugins: webpack.Plugin[] = [
     '__LANG__': JSON.stringify(process.env.LANG || 'en'),
     '__CLIENT__': true,
     '__SERVER__': false,
-  }),
-]
+  })]
+  .concat(type !== 'server' ? (
+    new ForkTsCheckerWebpackPlugin({
+      checkSyntacticErrors: true,
+      async: false,
+      tsconfig: path.resolve('./tsconfig.json'),
+      tslint: path.resolve('./tslint.json'),
+    })) : [])
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
+  ) : [])
+  .concat(withHot && type !== 'prod' ? (
+    new webpack.HotModuleReplacementPlugin()
   ) : [])
   .concat(isNeed404Page ? (
     new HtmlWebpackPlugin({
@@ -50,12 +73,41 @@ export const commonPlugins: webpack.Plugin[] = [
     })
   ) : []);
 
-function sortChunks(a: HtmlWebpackPlugin.Chunk, b: HtmlWebpackPlugin.Chunk) {
+function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
-  return order.findIndex(item => b.names[0].includes(item)) - order.findIndex(item => a.names[0].includes(item));
+  return order.findIndex(
+    // webpack typings for Chunk are not correct wait for type updates for webpack.compilation.Chunk
+    item => (b as any).names[0].includes(item)) - order.findIndex(item => (a as any).names[0].includes(item),
+    );
 }
 
-export const commonRules: webpack.Rule[] = [
+export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
+  {
+    test: /\.tsx?$/,
+    use: ([
+      {
+        loader: 'thread-loader',
+        options: workerPool,
+      }] as webpack.Loader[])
+      .concat(withHot && type === 'dev' ? {
+        loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          plugins: [
+            'react-hot-loader/babel',
+            'syntax-dynamic-import',
+          ],
+        },
+      } : [])
+      .concat({
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+          happyPackMode: true,
+          logLevel: 'error',
+        },
+      }),
+  },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
     use: 'file-loader?name=fonts/[hash].[ext]',
@@ -70,13 +122,13 @@ export const commonRules: webpack.Rule[] = [
   },
 ];
 
-export function getStyleRules(type: 'dev' | 'prod' | 'server') {
-  const cssLoaders: Record<typeof type, webpack.Loader[]> = {
+export function getStyleRules(type: BuildType) {
+  const cssLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader'],
     server: ['css-loader/locals'],
   };
-  const scssFirstLoaders: Record<typeof type, webpack.Loader[]> = {
+  const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader?importLoaders=1'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
     server: ['css-loader/locals?importLoaders=1'],
@@ -89,12 +141,16 @@ export function getStyleRules(type: 'dev' | 'prod' | 'server') {
     },
     {
       test: /\.scss$/,
-      use: scssFirstLoaders[type].concat(commonScssLoaders),
+      use: (scssFirstLoaders[type]).concat(commonScssLoaders),
     },
   ];
 }
 
 const commonScssLoaders: webpack.Loader[] = [
+  {
+    loader: 'thread-loader',
+    options: workerPool,
+  },
   {
     loader: 'postcss-loader',
     options: {
@@ -154,6 +210,11 @@ export const commonConfig: webpack.Configuration = {
       chunks: 'all',
     },
   },
+  stats: {
+    // typescript would remove the interfaces but also remove the imports of typings
+    // and because of this, warnings are shown https://github.com/TypeStrong/ts-loader/issues/653
+    warningsFilter: /export .* was not found in/,
+  },
   devServer: {
     hot: withHot,
     contentBase: path.resolve('..', 'build'),
@@ -170,6 +231,7 @@ export const commonConfig: webpack.Configuration = {
       warnings: true,
       assets: false,
       modules: false,
+      warningsFilter: /export .* was not found in/,
     },
   },
 };

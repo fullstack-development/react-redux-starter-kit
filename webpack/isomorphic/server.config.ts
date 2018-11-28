@@ -2,11 +2,10 @@ import * as path from 'path';
 import * as webpack from 'webpack';
 import * as nodeExternals from 'webpack-node-externals';
 
-import devConfig from '../dev.config';
-import prodConfig, { typescriptRule } from '../prod.config';
-import { commonRules, getStyleRules } from '../common';
+import getDevConfig from '../dev.config';
+import getProdConfig from '../prod.config';
 
-const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? getProdConfig('server') : getDevConfig('server');
 
 const serverConfig: webpack.Configuration = {
   ...config,
@@ -20,14 +19,6 @@ const serverConfig: webpack.Configuration = {
     filename: 'index.js',
     path: path.resolve(__dirname, '..', '..', 'static'),
     libraryTarget: 'commonjs2',
-  },
-  module: {
-    ...config.module,
-    rules: [
-      typescriptRule,
-      ...commonRules,
-      ...getStyleRules('server'),
-    ],
   },
   externals: [
     nodeExternals({

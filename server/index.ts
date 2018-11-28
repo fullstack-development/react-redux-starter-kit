@@ -6,24 +6,19 @@ import serverConfig from '../webpack/isomorphic/server.config';
 import { startDevelopmentMode, startProductionMode } from './starters';
 import middleware from './middleware';
 
-interface IEnv {
-  NODE_ENV: 'development' | 'production';
-  PORT: number;
-}
-
-const { NODE_ENV, PORT } = process.env as IEnv;
+const { NODE_ENV, PORT } = process.env;
 
 const app = middleware(express());
 
-const starters = {
+const starters: Record<string, typeof startDevelopmentMode> = {
   development: startDevelopmentMode,
   production: startProductionMode,
 };
-const starter = starters[NODE_ENV] || startDevelopmentMode;
+const starter = NODE_ENV && starters[NODE_ENV] || startDevelopmentMode;
 
 starter(app, clientConfig, serverConfig);
 
-app.listen(PORT, '0.0.0.0', (err: any) => {
+PORT && app.listen(+PORT, '0.0.0.0', (err: any) => {
   if (err) {
     console.error(err);
   } else {

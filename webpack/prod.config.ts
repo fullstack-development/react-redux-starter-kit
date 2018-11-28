@@ -1,35 +1,24 @@
 import * as webpack from 'webpack';
 
-import { commonPlugins, commonRules, commonConfig, getStyleRules } from './common';
+import { getCommonPlugins, getCommonRules, commonConfig, getStyleRules, BuildType } from './common';
 
-const typescriptRule: webpack.Rule = {
-  test: /\.(ts|tsx)$/,
-  use: [
-    {
-      loader: 'awesome-typescript-loader',
-      options: { target: 'es5' },
+const getProdConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+  const rules = [
+    ...getCommonRules(type || 'prod'),
+    ...getStyleRules(type || 'prod'),
+  ];
+
+  return {
+    ...commonConfig,
+    mode: 'production',
+    entry: {
+      app: './client.tsx',
     },
-    'tslint-loader',
-  ],
+    module: {
+      rules,
+    },
+    plugins: getCommonPlugins(type || 'prod'),
+  };
 };
 
-const rules = [
-  typescriptRule,
-  ...commonRules,
-  ...getStyleRules('prod'),
-];
-
-const prodConfig: webpack.Configuration = {
-  ...commonConfig,
-  mode: 'production',
-  entry: {
-    app: './client.tsx',
-  },
-  module: {
-    rules,
-  },
-  plugins: commonPlugins,
-};
-
-export { typescriptRule };
-export default prodConfig;
+export default getProdConfig;

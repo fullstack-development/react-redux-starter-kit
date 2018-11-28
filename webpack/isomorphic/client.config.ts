@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import devConfig from '../dev.config';
-import prodConfig from '../prod.config';
+import getDevConfig from '../dev.config';
+import getProdConfig from '../prod.config';
 
-const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? getProdConfig('server') : getDevConfig('server');
 const withHot = process.env.WATCH_MODE === 'true';
 
 const clientConfig: webpack.Configuration = {
