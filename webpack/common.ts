@@ -75,7 +75,10 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
-  return order.findIndex(item => b.name === item) - order.findIndex(item => a.name === item);
+  return order.findIndex(
+    // webpack typings for Chunk is not are not correct wait for type updates for webpack.compilation.Chunk
+    item => (b as any).names[0].includes(item)) - order.findIndex(item => (a as any).names[0].includes(item),
+    );
 }
 
 export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
