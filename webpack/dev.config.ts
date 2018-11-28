@@ -18,7 +18,7 @@ const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
     module: {
       rules,
     },
-    plugins: getCommonPlugins(type || 'prod'),
+    plugins: getCommonPlugins(type || 'dev'),
   };
 };
 

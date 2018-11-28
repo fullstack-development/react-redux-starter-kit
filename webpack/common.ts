@@ -62,15 +62,15 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
   ) : [])
+  .concat(withHot && type !== 'prod' ? (
+    new webpack.HotModuleReplacementPlugin()
+  ) : [])
   .concat(isNeed404Page ? (
     new HtmlWebpackPlugin({
       filename: '404.html',
       template: 'assets/index.html',
       chunksSortMode: sortChunks,
     })
-  ) : [])
-  .concat(withHot && type === 'dev' ? (
-    new webpack.HotModuleReplacementPlugin()
   ) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
