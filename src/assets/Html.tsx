@@ -49,7 +49,7 @@ export default class Html extends React.PureComponent<IHtmlProps> {
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
           {assets.styles.map((filePath, idx) => (
-            <link href={filePath} key={idx} media="screen, projection" rel="stylesheet" type="text/css" />
+            <link href={`/${filePath}`} key={idx} media="screen, projection" rel="stylesheet" type="text/css" />
           ))}
           {!!styleSheets && (
             <style type="text/css" id="server-side-styles">{styleSheets.toString()}</style>
