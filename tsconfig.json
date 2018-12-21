@@ -6,6 +6,7 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es5",
+    "resolveJsonModule": true,
     "lib": [
       "es2015",
       "es2017",

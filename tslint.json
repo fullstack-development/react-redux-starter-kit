@@ -3,6 +3,11 @@
     "./node_modules/tslint-react/tslint-react.json",
     "tslint:latest"
   ],
+  "linterOptions": {
+    "exclude": [
+        "*.json"
+    ]
+  },
   "rulesDirectory": "./node_modules/tslint-eslint-rules/dist/rules",
   "jsRules": {
     "indent": [true, "spaces", 2],
