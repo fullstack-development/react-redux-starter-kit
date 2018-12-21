@@ -57,6 +57,7 @@
       "command": "node -r ts-node/register ./server/index.ts",
       "env": {
         "PORT": 8080,
+        "TS_NODE_FILES": true,
         "NODE_ENV": "production",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
@@ -65,6 +66,7 @@
       "command": "node --inspect --inspect-brk -r ts-node/register ./server/index.ts",
       "env": {
         "PORT": 8080,
+        "TS_NODE_FILES": true,
         "NODE_ENV": "production",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }

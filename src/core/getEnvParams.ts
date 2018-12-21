@@ -1,3 +1,5 @@
+import * as appInfo from '../../package.json';
+
 export default function getEnvParams() {
   const isProduction = process.env.NODE_ENV === 'production';
   const isDevelopment = process.env.NODE_ENV === 'development';
@@ -7,6 +9,7 @@ export default function getEnvParams() {
   const chunkName = isProduction ? 'id' : 'name';
   const chunkHash = isWatchMode && !isProduction ? 'hash' : 'chunkhash';
   const withHot = isWatchMode && isDevelopment;
+  const appVersion = appInfo.version;
 
-  return { isProduction, isDevelopment, isWatchMode, withAnalyze, chunkName, chunkHash, withHot };
+  return { isProduction, isDevelopment, isWatchMode, withAnalyze, chunkName, chunkHash, withHot, appVersion };
 }
