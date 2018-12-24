@@ -5,12 +5,6 @@ import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
 import { JSS, Theme } from 'react-jss';
 
-import { namespace as CategorySelectNamespace } from 'features/categorySelect';
-import { namespace as LocationSelectNamespace } from 'features/locationSelect';
-import { namespace as SearchRepositoriesNamespace } from 'features/searchRepositories';
-import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
-import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
-
 import Api from 'services/api/Api';
 
 export abstract class Module<C = any> {
@@ -54,19 +48,8 @@ export interface IFeatureEntry<
 }
 
 export interface IAppReduxState {
-  categorySelect: CategorySelectNamespace.IReduxState;
-  locationSelect: LocationSelectNamespace.IReduxState;
-  dynamicFields: DynamicFieldsNamespace.IReduxState;
-  orderForm: HomeModuleNamespace.IReduxState;
-  searchRepositories: SearchRepositoriesNamespace.IReduxState;
+  app: any; // TODO update this
 }
-
-export type Diff<T extends keyof any, U extends keyof any> =
-  ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
-
-export type GetProps<T extends React.ComponentType<any>> =
-  T extends React.StatelessComponent<infer SP> ? SP :
-  T extends React.ComponentClass<infer CP> ? CP : never;
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
