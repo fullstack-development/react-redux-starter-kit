@@ -9,13 +9,13 @@ import { IFeatureEntry } from 'shared/types/app';
 
 interface IContainerTypes {
   MockContainer: any; // TODO update this with containers type
+  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
 }
 
 type Container = keyof IContainerTypes;
 
 interface IEntryWithContainer<K extends string, T> {
   containers: { [D in K]: T };
-  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
 }
 
 type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
