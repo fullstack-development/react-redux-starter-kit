@@ -25,7 +25,4 @@ declare module '_helpers' {
   export type GetProps<T extends React.ComponentType<any>> =
     T extends React.StatelessComponent<infer SP> ? SP :
     T extends React.ComponentClass<infer CP> ? CP : never;
-
-  export type Diff<T extends keyof any, U extends keyof any> =
-    ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
 }

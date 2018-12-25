@@ -29,6 +29,7 @@ type GenericLoadersMap = {
 
 const containerLoadersDictionary: LoadersMap = {
   MockContainer: [] as any, // TODO update this with containers entry
+  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
 };
 
 interface IState {
