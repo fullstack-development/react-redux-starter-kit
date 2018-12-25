@@ -19515,9 +19515,9 @@
       "integrity": "sha512-avfPS28HmGLLc2o4elcc2EIq2FcH++Yo5YxpBZi9Yw93BCTGFthI4HPE4Rpep6vSYQaK8e69PelM44tPj+RaQg=="
     },
     "tslint": {
-      "version": "5.11.0",
-      "resolved": "https://registry.npmjs.org/tslint/-/tslint-5.11.0.tgz",
-      "integrity": "sha1-mPMMAurjzecAYgHkwzywi0hYHu0=",
+      "version": "5.12.0",
+      "resolved": "https://registry.npmjs.org/tslint/-/tslint-5.12.0.tgz",
+      "integrity": "sha512-CKEcH1MHUBhoV43SA/Jmy1l24HJJgI0eyLbBNSRyFlsQvb9v6Zdq+Nz2vEOH00nC5SUx4SneJ59PZUS/ARcokQ==",
       "dev": true,
       "requires": {
         "babel-code-frame": "^6.22.0",
@@ -19553,12 +19553,6 @@
             "escape-string-regexp": "^1.0.5",
             "supports-color": "^5.3.0"
           }
-        },
-        "commander": {
-          "version": "2.19.0",
-          "resolved": "https://registry.npmjs.org/commander/-/commander-2.19.0.tgz",
-          "integrity": "sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==",
-          "dev": true
         },
         "has-flag": {
           "version": "3.0.0",
@@ -19712,9 +19706,9 @@
       "integrity": "sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c="
     },
     "typescript": {
-      "version": "3.1.6",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-3.1.6.tgz",
-      "integrity": "sha512-tDMYfVtvpb96msS1lDX9MEdHrW4yOuZ4Kdc4Him9oU796XldPYF/t2+uKoX0BBa0hXXwDlqYQbXY5Rzjzc5hBA=="
+      "version": "3.2.2",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-3.2.2.tgz",
+      "integrity": "sha512-VCj5UiSyHBjwfYacmDuc/NOk4QQixbE+Wn7MFJuS0nRuPQbof132Pw4u53dm264O8LPc2MVsc7RJNml5szurkg=="
     },
     "ua-parser-js": {
       "version": "0.7.12",
