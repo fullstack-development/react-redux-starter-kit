@@ -60,6 +60,7 @@ export type Uid = number;
 export interface IAssets {
   javascript: string[];
   styles: string[];
+  favicons: CheerioElement[];
 }
 
 export * from '../helpers/redux/namespace';
