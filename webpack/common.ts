@@ -6,6 +6,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as threadLoader from 'thread-loader';
+import * as FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 
 import * as postcssReporter from 'postcss-reporter';
 import * as postcssEasyImport from 'postcss-easy-import';
@@ -14,14 +15,12 @@ import * as autoprefixer from 'autoprefixer';
 import * as stylelint from 'stylelint';
 import * as doiuse from 'doiuse';
 
-import { ROUTES_PREFIX } from '../src/core/constants';
 import getEnvParams from '../src/core/getEnvParams';
 
 export type BuildType = 'dev' | 'prod' | 'server';
 
 const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
-// http://www.backalleycoder.com/2016/05/13/sghpa-the-single-page-app-hack-for-github-pages/
-const isNeed404Page: boolean = process.env.NODE_ENV_MODE === 'gh-pages' ? true : false;
+
 const workerPool = {
   workers: require('os').cpus().length - 1,
   poolTimeout: withHot ? Infinity : 2000,
@@ -51,7 +50,9 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     '__LANG__': JSON.stringify(process.env.LANG || 'en'),
     '__CLIENT__': true,
     '__SERVER__': false,
-  })]
+  }),
+  new FaviconsWebpackPlugin(path.resolve(__dirname, '..', 'src', 'assets', 'favicon.png')),
+]
   .concat(type !== 'server' ? (
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
@@ -64,13 +65,6 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   ) : [])
   .concat(withHot && type !== 'prod' ? (
     new webpack.HotModuleReplacementPlugin()
-  ) : [])
-  .concat(isNeed404Page ? (
-    new HtmlWebpackPlugin({
-      filename: '404.html',
-      template: 'assets/index.html',
-      chunksSortMode: sortChunks,
-    })
   ) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
@@ -195,7 +189,7 @@ export const commonConfig: webpack.Configuration = {
   target: 'web',
   context: path.resolve(__dirname, '..', 'src'),
   output: {
-    publicPath: ROUTES_PREFIX + '/',
+    publicPath: '/',
     path: path.resolve(__dirname, '..', 'build'),
     filename: `js/[name]-[${chunkHash}].bundle.js`,
     chunkFilename: `js/[${chunkName}]-[${chunkHash}].bundle.js`,

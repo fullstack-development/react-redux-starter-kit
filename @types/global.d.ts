@@ -44,3 +44,4 @@ declare module 'postcss-reporter';
 declare module 'postcss-easy-import';
 declare module 'postcss-scss';
 declare module 'doiuse';
+declare module 'favicons-webpack-plugin';
