@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Omit } from 'react-redux';
-import { GetProps } from 'shared/types/app';
+import { GetProps } from '_helpers';
 
 interface IBaseProps {
   component?: React.ReactType<any>;

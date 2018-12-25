@@ -1,4 +1,10 @@
-import { ROUTES_PREFIX } from 'core/constants';
+import build from 'build-route-tree';
 
-export const homeRedirectPath = `${ROUTES_PREFIX}/home`;
-export const orderRedirectPath = `${ROUTES_PREFIX}/order`;
+const rawTree = {
+  demo: {
+    gui: null,
+    translations: null,
+  },
+};
+
+export default build(rawTree);

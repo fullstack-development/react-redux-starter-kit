@@ -7,10 +7,9 @@ import { inject, TYPES } from './configureIoc';
 
 import { IFeatureEntry } from 'shared/types/app';
 
-import * as categorySelectFeature from 'features/categorySelect';
-
 interface IContainerTypes {
-  CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
+  MockContainer: any; // TODO update this with containers type
+  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
 }
 
 type Container = keyof IContainerTypes;
@@ -30,7 +29,8 @@ type GenericLoadersMap = {
 };
 
 const containerLoadersDictionary: LoadersMap = {
-  CategorySelect: categorySelectFeature.loadEntry,
+  MockContainer: [] as any, // TODO update this with containers entry
+  // CategorySelect: categorySelectFeature.loadEntry,
 };
 
 interface IState {
