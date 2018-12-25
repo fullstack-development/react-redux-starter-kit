@@ -15,6 +15,7 @@ type Container = keyof IContainerTypes;
 
 interface IEntryWithContainer<K extends string, T> {
   containers: { [D in K]: T };
+  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
 }
 
 type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
@@ -29,7 +30,7 @@ type GenericLoadersMap = {
 
 const containerLoadersDictionary: LoadersMap = {
   MockContainer: [] as any, // TODO update this with containers entry
-  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
+  // CategorySelect: categorySelectFeature.loadEntry,
 };
 
 interface IState {
