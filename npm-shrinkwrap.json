@@ -847,6 +847,15 @@
         "@types/react": "*"
       }
     },
+    "@types/redux-form": {
+      "version": "7.4.13",
+      "resolved": "https://registry.npmjs.org/@types/redux-form/-/redux-form-7.4.13.tgz",
+      "integrity": "sha512-bdmAb0FmO/yKRohPtDZR+OWNel8c4hM9ZAQW0C17h3bUZvJpt7pjgkVXNIJn6E4GwGnlbSWPGJUL5dAN+o31oQ==",
+      "requires": {
+        "@types/react": "*",
+        "redux": "^3.6.0 || ^4.0.0"
+      }
+    },
     "@types/relateurl": {
       "version": "0.2.28",
       "resolved": "https://registry.npmjs.org/@types/relateurl/-/relateurl-0.2.28.tgz",
@@ -5694,6 +5703,11 @@
         "es6-symbol": "~3.1.1"
       }
     },
+    "es6-error": {
+      "version": "4.1.1",
+      "resolved": "https://registry.npmjs.org/es6-error/-/es6-error-4.1.1.tgz",
+      "integrity": "sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg=="
+    },
     "es6-iterator": {
       "version": "2.0.3",
       "resolved": "https://registry.npmjs.org/es6-iterator/-/es6-iterator-2.0.3.tgz",
@@ -9897,8 +9911,7 @@
     "is-promise": {
       "version": "2.1.0",
       "resolved": "https://registry.npmjs.org/is-promise/-/is-promise-2.1.0.tgz",
-      "integrity": "sha1-eaKp7OfwlugPNtKy87wWwf9L8/o=",
-      "dev": true
+      "integrity": "sha1-eaKp7OfwlugPNtKy87wWwf9L8/o="
     },
     "is-redirect": {
       "version": "1.0.0",
@@ -11909,6 +11922,11 @@
       "version": "4.17.10",
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.10.tgz",
       "integrity": "sha512-UejweD1pDoXu+AD825lWwp4ZGtSwgnpZxb3JDViD7StjQz+Nb/6l093lx4OQ0foGWNRoc19mWy7BzL+UAK2iVg=="
+    },
+    "lodash-es": {
+      "version": "4.17.11",
+      "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.11.tgz",
+      "integrity": "sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q=="
     },
     "lodash.assign": {
       "version": "4.2.0",
@@ -15724,6 +15742,43 @@
       "resolved": "https://registry.npmjs.org/redux-devtools-extension/-/redux-devtools-extension-2.13.5.tgz",
       "integrity": "sha512-QQ9BRy77oURHMdGys9rfQcCQDzXZ1T4oW+eUyE5Cg7DNVau69HJzc4YNDMOmpi0Dzpi1zOQgQ2rUpgJta4Lfqg==",
       "dev": true
+    },
+    "redux-form": {
+      "version": "8.1.0",
+      "resolved": "https://registry.npmjs.org/redux-form/-/redux-form-8.1.0.tgz",
+      "integrity": "sha512-d2+0OaJpSq3kwkbPtFlG3W/HENWLxX8NqqTHSOnfgIrID/9faH/rxejLa1X3HChilCTm71zWe/g9zaLPCMCofQ==",
+      "requires": {
+        "@babel/runtime": "^7.2.0",
+        "es6-error": "^4.1.1",
+        "hoist-non-react-statics": "^3.2.1",
+        "invariant": "^2.2.4",
+        "is-promise": "^2.1.0",
+        "lodash": "^4.17.11",
+        "lodash-es": "^4.17.11",
+        "prop-types": "^15.6.1",
+        "react-is": "^16.7.0",
+        "react-lifecycles-compat": "^3.0.4"
+      },
+      "dependencies": {
+        "invariant": {
+          "version": "2.2.4",
+          "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz",
+          "integrity": "sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==",
+          "requires": {
+            "loose-envify": "^1.0.0"
+          }
+        },
+        "lodash": {
+          "version": "4.17.11",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz",
+          "integrity": "sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg=="
+        },
+        "react-is": {
+          "version": "16.7.0",
+          "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.7.0.tgz",
+          "integrity": "sha512-Z0VRQdF4NPDoI0tsXVMLkJLiwEBa+RP66g0xDHxgxysxSoCUccSten4RTF/UFvZF1dZvZ9Zu1sx+MDXwcOR34g=="
+        }
+      }
     },
     "redux-make-communication": {
       "version": "1.0.1",

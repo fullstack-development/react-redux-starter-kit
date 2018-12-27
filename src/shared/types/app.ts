@@ -62,5 +62,3 @@ export interface IAssets {
   styles: string[];
   favicons: CheerioElement[];
 }
-
-export * from '../helpers/redux/namespace';

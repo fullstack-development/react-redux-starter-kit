@@ -44,4 +44,4 @@ function makeFeatureEntry(
   return { actions, selectors, containers, ...redux };
 }
 
-export { makeFeatureEntry };
+export default makeFeatureEntry;
