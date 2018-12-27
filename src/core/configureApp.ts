@@ -1,8 +1,10 @@
+import { reducer as formReducer } from 'redux-form';
+
 import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
-import { configureJss } from 'core/configureJss';
 
+import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
@@ -14,7 +16,9 @@ function configureApp(data?: IAppData): IAppData {
     return { ...data, modules };
   }
 
-  const sharedReduxEntries: IReduxEntry[] = [];
+  const sharedReduxEntries: IReduxEntry[] = [
+    { reducers: { form: formReducer } },
+  ];
 
   const connectedSagas: RootSaga[] = [];
   const connectedReducers: ReducersMap<Partial<IAppReduxState>> = {};

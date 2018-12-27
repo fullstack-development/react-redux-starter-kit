@@ -5,6 +5,8 @@ import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
 import { JSS, Theme } from 'react-jss';
 
+import { FormStateMap } from 'redux-form';
+
 import Api from 'services/api/Api';
 
 export abstract class Module<C = any> {
@@ -48,6 +50,7 @@ export interface IFeatureEntry<
 }
 
 export interface IAppReduxState {
+  form: FormStateMap;
   app: any; // TODO update this
 }
 
