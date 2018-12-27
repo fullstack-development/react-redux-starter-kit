@@ -12,8 +12,7 @@ declare var __LANG__: 'en' | 'he';
 declare var __HOST__: string;
 
 declare module 'theming/@externals' {
-  import { Theme } from '@material-ui/core';
-  export type Theme = Theme;
+  export { Theme } from 'shared/styles/theme';
 }
 
 declare module "*.svg" {
