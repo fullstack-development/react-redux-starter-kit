@@ -675,9 +675,9 @@
       "integrity": "sha512-eajkMXG812/w3w4a1OcBlaTwsFPO5F7fJ/amy+tieQxEMWBlbV1JGSjkFM+zkHNf81Cad+dfIRA+IBkvmvdAeA=="
     },
     "@types/node-polyglot": {
-      "version": "0.4.32",
-      "resolved": "https://registry.npmjs.org/@types/node-polyglot/-/node-polyglot-0.4.32.tgz",
-      "integrity": "sha512-vkEgZoQ13OKXoeEbsIsLfUz19TiadpmzTIc1r7qAzQ4Y7pr8nrhHzEk30JxvGsT22sd0xPGq4mMioTIIavesDA=="
+      "version": "0.4.31",
+      "resolved": "http://registry.npmjs.org/@types/node-polyglot/-/node-polyglot-0.4.31.tgz",
+      "integrity": "sha512-Rt0lyfbZtbqonGHgtCK+p7bJFXrJSppSag09NAfbE5MrC3oyjB5ssQ1fCfilR9R38iX/TzRkaDU/wRlzDCeDDA=="
     },
     "@types/prop-types": {
       "version": "15.5.6",
