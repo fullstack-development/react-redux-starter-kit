@@ -8,7 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import { IAppData, Module, IJssDependencies } from 'shared/types/app';
-import BaseStyles from 'shared/view/styles/BaseStyles';
+import BaseStyles from 'shared/styles/BaseStyles';
 
 import createRoutes from './routes';
 
