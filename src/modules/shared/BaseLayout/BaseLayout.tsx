@@ -13,11 +13,8 @@ class BaseLayout extends React.PureComponent<StylesProps> {
       <RowsLayout
         footerContent={<Footer />}
         headerContent={(
-          <Header
-            brandRedirectPath={'homeRedirectPath'}
-            menuRedirectPaths={{ order: 'orderRedirectPath' }}
-          >
-            Some header text
+          <Header>
+            Full stack development
           </Header>
         )}
       >
