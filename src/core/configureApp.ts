@@ -7,11 +7,11 @@ import configureStore, { createReducer } from './configureStore';
 import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as i18nRE, I18n } from 'services/i18n';
-import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
+import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
 function configureApp(data?: IAppData): IAppData {
   /* Prepare main app elements */
-  const modules: Module[] = [];
+  const modules: IModule[] = [];
 
   if (data) {
     return { ...data, modules };
@@ -41,7 +41,7 @@ function configureApp(data?: IAppData): IAppData {
   const jssDeps = configureJss();
 
   sharedReduxEntries.forEach(connectEntryToStore);
-  modules.forEach((module: Module) => {
+  modules.forEach((module: IModule) => {
     if (module.getReduxEntry) {
       connectEntryToStore(module.getReduxEntry());
     }

@@ -7,7 +7,7 @@ import { JssProvider, SheetsRegistry } from 'react-jss';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import { IAppData, Module, IJssDependencies } from 'shared/types/app';
+import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import BaseStyles from 'shared/styles/BaseStyles';
 
 import createRoutes from './routes';
@@ -45,7 +45,7 @@ export function ServerApp(props: IAppData & IServerAppProps & StaticRouter['prop
 }
 
 function renderSharedPart(
-  modules: Array<Module<any>>, jssDeps: IJssDependencies,
+  modules: IModule[], jssDeps: IJssDependencies,
   disableStylesGeneration?: boolean,
   registry?: SheetsRegistry,
 ) {

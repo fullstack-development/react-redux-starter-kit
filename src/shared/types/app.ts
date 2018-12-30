@@ -11,13 +11,13 @@ import Api from 'services/api/Api';
 
 import * as i18nNS from 'services/i18n/namespace';
 
-export abstract class Module<C = any> {
+export abstract class IModule {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
   public getReduxEntry?(): IReduxEntry;
 }
 
 export interface IAppData {
-  modules: Module[];
+  modules: IModule[];
   store: Store<IAppReduxState>;
   jssDeps: IJssDependencies;
 }

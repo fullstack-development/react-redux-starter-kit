@@ -1,16 +1,18 @@
 import * as React from 'react';
-import { Module } from 'shared/types/app';
-
 import { Route, RouteComponentProps, Redirect, Switch } from 'react-router-dom';
-import { App } from 'modules/App';
 
-function getRoutes(modules: Module[]): React.ReactElement<RouteComponentProps<any>> {
+import { App } from 'modules/App';
+import routes from 'modules/routes';
+
+import { IModule } from 'shared/types/app';
+
+function getRoutes(modules: IModule[]): React.ReactElement<RouteComponentProps<any>> {
   return (
-    <Route>
+    <Route path="/">
       <App>
         <Switch>
-          {/* {modules.map(module => module.getRoutes ? module.getRoutes() : null)} */}
-          <Redirect exact to="/" />
+          {modules.map(module => module.getRoutes ? module.getRoutes() : null)}
+          <Redirect exact from="/" to={routes.demo.getRedirectPath()} />
         </Switch>
       </App>
     </Route>
