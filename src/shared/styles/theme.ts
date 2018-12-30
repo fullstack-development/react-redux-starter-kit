@@ -4,7 +4,7 @@ import { hexToRGBA } from './helpers';
 // Find color name http://chir.ag/projects/name-that-color
 // https://github.com/insomnious0x01/ntc-js
 const colors = {
-  royalBlue: '#6161ED',
+  dodgerBlue: '#2376F5',
   governorBay: '##3631B6',
   anakiwa: '#7BDEFF',
   wildSand: '#f4f4f4',
@@ -26,7 +26,7 @@ export const theme = {
       primaryInverted: colors.white,
       secondary: hexToRGBA(colors.codGray, 0.58),
       warning: colors.saffron,
-      positive: colors.royalBlue,
+      positive: colors.dodgerBlue,
       negative: colors.monza,
       disabled: hexToRGBA(colors.codGray, 0.55),
     },
@@ -34,13 +34,13 @@ export const theme = {
       border: {
         normal: colors.mercury,
         hover: colors.governorBay,
-        focus: colors.royalBlue,
+        focus: colors.dodgerBlue,
         disabled: colors.mercury,
       },
       bg: {
         normal: colors.white,
         hover: colors.governorBay,
-        focus: colors.royalBlue,
+        focus: colors.dodgerBlue,
         disabled: colors.mercury,
       },
     },

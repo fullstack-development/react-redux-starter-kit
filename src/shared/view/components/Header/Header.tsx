@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, AppBar, Toolbar } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
 
 import { provideStyles, StylesProps } from './Header.style';
 
@@ -14,7 +14,7 @@ class Header extends React.PureComponent<IProps & StylesProps> {
     return (
       <AppBar position="static">
         <Toolbar>
-          <Typography>{children}</Typography>
+          {children}
         </Toolbar>
       </AppBar>
     );
