@@ -13,9 +13,9 @@ export function configureJss(virtual?: boolean): IJssDependencies {
     ...(createMuiTheme({
       palette: {
         primary: {
-          main: extraTheme.colors.mediumPurple,
-          light: extraTheme.colors.heliotrope,
-          dark: extraTheme.colors.purpleHeart,
+          main: extraTheme.colors.royalBlue,
+          light: extraTheme.colors.anakiwa,
+          dark: extraTheme.colors.governorBay,
           contrastText: extraTheme.colors.white,
         },
         error: {
