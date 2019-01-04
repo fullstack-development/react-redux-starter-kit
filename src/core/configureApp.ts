@@ -4,6 +4,7 @@ import configureStore, { createReducer } from './configureStore';
 import { configureJss } from 'core/configureJss';
 
 import { ReducersMap } from 'shared/types/redux';
+import { reduxEntry as i18nRE, I18n } from 'services/i18n';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
 function configureApp(data?: IAppData): IAppData {
@@ -14,7 +15,9 @@ function configureApp(data?: IAppData): IAppData {
     return { ...data, modules };
   }
 
-  const sharedReduxEntries: IReduxEntry[] = [];
+  const sharedReduxEntries: IReduxEntry[] = [
+    i18nRE,
+  ];
 
   const connectedSagas: RootSaga[] = [];
   const connectedReducers: ReducersMap<Partial<IAppReduxState>> = {};
@@ -24,9 +27,11 @@ function configureApp(data?: IAppData): IAppData {
     container.getAll(TYPES.Store);
     container.rebind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
     container.rebind(TYPES.Store).toConstantValue(store);
+    container.rebind(TYPES.I18n).to(I18n).inSingletonScope();
   } catch {
     container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
     container.bind(TYPES.Store).toConstantValue(store);
+    container.bind(TYPES.I18n).to(I18n).inSingletonScope();
   }
 
   const dependencies = configureDeps(store);
