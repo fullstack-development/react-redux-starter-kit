@@ -9,6 +9,8 @@ import { FormStateMap } from 'redux-form';
 
 import Api from 'services/api/Api';
 
+import * as i18nNS from 'services/i18n/namespace';
+
 export abstract class Module<C = any> {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
   public getReduxEntry?(): IReduxEntry;
@@ -51,7 +53,8 @@ export interface IFeatureEntry<
 
 export interface IAppReduxState {
   form: FormStateMap;
-  app: any; // TODO update this
+  // services
+  i18n: i18nNS.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
