@@ -13,6 +13,7 @@ export function configureJss(virtual?: boolean): IJssDependencies {
     ...(createMuiTheme({
       palette: {
         primary: {
+<<<<<<< HEAD
           main: extraTheme.colors.dodgerBlue,
           light: extraTheme.colors.anakiwa,
           dark: extraTheme.colors.governorBay,
@@ -20,6 +21,15 @@ export function configureJss(virtual?: boolean): IJssDependencies {
         },
         error: {
           main: extraTheme.colors.redRibbon,
+=======
+          main: extraTheme.colors.mediumPurple,
+          light: extraTheme.colors.heliotrope,
+          dark: extraTheme.colors.purpleHeart,
+          contrastText: extraTheme.colors.white,
+        },
+        error: {
+          main: extraTheme.colors.monza,
+>>>>>>> 87c1e1fe9e03f331738a95ffd05234e217a29d08
         },
       },
       typography: {
