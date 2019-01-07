@@ -13,13 +13,13 @@ export function configureJss(virtual?: boolean): IJssDependencies {
     ...(createMuiTheme({
       palette: {
         primary: {
-          main: extraTheme.colors.mediumPurple,
-          light: extraTheme.colors.heliotrope,
-          dark: extraTheme.colors.purpleHeart,
+          main: extraTheme.colors.dodgerBlue,
+          light: extraTheme.colors.anakiwa,
+          dark: extraTheme.colors.governorBay,
           contrastText: extraTheme.colors.white,
         },
         error: {
-          main: extraTheme.colors.monza,
+          main: extraTheme.colors.redRibbon,
         },
       },
       typography: {
