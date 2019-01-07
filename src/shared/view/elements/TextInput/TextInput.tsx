@@ -2,14 +2,14 @@ import * as React from 'react';
 import * as R from 'ramda';
 import { GetProps, MarkAsPartial, SubSet } from '_helpers';
 import MaskedInput from 'react-text-mask';
+import { bind } from 'decko';
 
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-
-import { EyeIcon, MoneyIcon } from '../Icons';
-import { bind } from 'decko';
+import AttachMoney from '@material-ui/icons/AttachMoney';
+import Adjust from '@material-ui/icons/Adjust';
 
 type MaskType = 'visa';
 
@@ -83,7 +83,7 @@ class TextInput extends React.PureComponent<IProps, IState> {
             aria-label="Toggle password visibility"
             onClick={this.handleClickShowPassword}
           >
-            <EyeIcon />
+            <Adjust />
           </IconButton>
         </InputAdornment>
       );
@@ -91,7 +91,7 @@ class TextInput extends React.PureComponent<IProps, IState> {
     if (maskType === 'visa') {
       return (
         <InputAdornment position="end">
-          <MoneyIcon />
+          <AttachMoney />
         </InputAdornment>
       );
     }
