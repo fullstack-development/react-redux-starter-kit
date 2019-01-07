@@ -1,10 +1,3 @@
-import * as React from 'react';
-import MuiMenuItem, { MenuItemProps } from '@material-ui/core/MenuItem';
+import MuiMenuItem from '@material-ui/core/MenuItem';
 
-function MenuItem(props: MenuItemProps) {
-  return (
-    <MuiMenuItem color="primary" {...props} />
-  );
-}
-
-export default MenuItem;
+export default MuiMenuItem;

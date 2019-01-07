@@ -5,7 +5,7 @@ import { hexToRGBA } from './helpers';
 // https://github.com/insomnious0x01/ntc-js
 const colors = {
   dodgerBlue: '#2376F5',
-  governorBay: '##3631B6',
+  governorBay: '#3631B6',
   anakiwa: '#7BDEFF',
   redRibbon: '#E90C14',
   corn: '#F7BA08',
