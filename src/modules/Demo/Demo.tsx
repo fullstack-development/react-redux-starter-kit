@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
@@ -16,7 +16,6 @@ const DemoModule: IModule = {
           <BaseLayout>
             <Route path={routes.demo.gui.getRoutePath()} component={DemoGUI} />
             <Route path={routes.demo.translations.getRoutePath()} component={DemoTranslations} />
-            <Redirect to={routes.demo.gui.getRedirectPath()} />
           </BaseLayout>
         </Switch>
       </Route>
