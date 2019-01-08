@@ -1,4 +1,4 @@
-import injectSheet, { WithStyles, Theme, CSSProperties } from 'react-jss';
+import { withStyles, WithStyles, Theme, CSSProperties } from 'shared/styles';
 import { rule } from 'shared/helpers/style';
 
 function arrowGenerator(color: string): CSSProperties {
@@ -49,7 +49,11 @@ function arrowGenerator(color: string): CSSProperties {
 }
 
 const styles = (theme: Theme) => ({
-  arrowPopper: arrowGenerator(theme.palette.grey[700]),
+  arrowPopper: {
+    ...arrowGenerator(theme.palette.grey[700]),
+    maxWidth: '180px',
+    textAlign: 'center',
+  } as CSSProperties,
   arrow: rule({
     position: 'absolute',
     fontSize: 7,
@@ -64,8 +68,13 @@ const styles = (theme: Theme) => ({
       borderStyle: 'solid',
     },
   }),
+
+  title: rule({
+    fontFamily: theme.extra.typography.primaryFont,
+    fontSize: '0.8125rem',
+  }),
 });
 
-export const provideStyles = injectSheet(styles);
+export const provideStyles = withStyles(styles);
 
 export type StylesProps = WithStyles<typeof styles>;

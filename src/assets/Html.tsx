@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
-
 import * as redux from 'redux';
-import { IAssets } from 'shared/types/app';
-import { SheetsRegistry } from 'react-jss';
 import { renderToString } from 'react-dom/server';
+
+import { IAssets } from 'shared/types/app';
+import { SheetsRegistry } from 'shared/styles';
 
 interface IHtmlProps {
   assets: IAssets;

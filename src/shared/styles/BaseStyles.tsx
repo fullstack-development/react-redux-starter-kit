@@ -1,4 +1,4 @@
-import injectSheet from 'react-jss';
+import { withStyles } from 'shared/styles';
 import { rule } from 'shared/helpers/style';
 
 const styles = {
@@ -17,4 +17,4 @@ const styles = {
   }),
 };
 
-export default injectSheet(styles)();
+export default withStyles(styles)();

@@ -1,8 +1,8 @@
 import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
-import { configureJss } from 'core/configureJss';
 
+import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as i18nRE, I18n } from 'services/i18n';
 import { IAppData, Module, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';

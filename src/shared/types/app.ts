@@ -3,11 +3,11 @@ import { RouteProps } from 'react-router';
 import { Store, Reducer, ActionCreator, Action } from 'redux';
 import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
-import { JSS, Theme } from 'react-jss';
 
 import Api from 'services/api/Api';
-
 import * as i18nNS from 'services/i18n/namespace';
+
+import { JSS, Theme } from 'shared/styles';
 
 export abstract class Module<C = any> {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
@@ -65,5 +65,3 @@ export interface IAssets {
   styles: string[];
   favicons: CheerioElement[];
 }
-
-export * from '../helpers/redux/namespace';
