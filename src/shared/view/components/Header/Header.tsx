@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { AppBar, Toolbar } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 import { provideStyles, StylesProps } from './Header.style';
 

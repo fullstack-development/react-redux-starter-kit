@@ -21,7 +21,7 @@ class Tooltip extends React.Component<IProps> {
     return (
       <MuiTooltip
         title={<>
-          {title}
+          <span className={classes.title}>{title}</span>
           <span className={classes.arrow} ref={this.handleArrowRef} />
         </>}
         classes={{ popper: classes.arrowPopper }}
