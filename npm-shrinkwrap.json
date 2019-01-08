@@ -398,17 +398,6 @@
         }
       }
     },
-    "@material-ui/lab": {
-      "version": "3.0.0-alpha.26",
-      "resolved": "https://registry.npmjs.org/@material-ui/lab/-/lab-3.0.0-alpha.26.tgz",
-      "integrity": "sha512-vyR6yU2OBueWXLe1cIBQGxf3/HTFrn2kiD2aXFttGEtgRzO9+79N5SdmUNHNPa2TpFbd3Tyo1Sg6sYSrorvmdA==",
-      "requires": {
-        "@babel/runtime": "7.2.0",
-        "@material-ui/utils": "^3.0.0-alpha.1",
-        "classnames": "^2.2.5",
-        "keycode": "^2.1.9"
-      }
-    },
     "@material-ui/utils": {
       "version": "3.0.0-alpha.1",
       "resolved": "https://registry.npmjs.org/@material-ui/utils/-/utils-3.0.0-alpha.1.tgz",
@@ -15465,6 +15454,14 @@
       "version": "3.0.4",
       "resolved": "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz",
       "integrity": "sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA=="
+    },
+    "react-number-format": {
+      "version": "4.0.6",
+      "resolved": "https://registry.npmjs.org/react-number-format/-/react-number-format-4.0.6.tgz",
+      "integrity": "sha512-WfBlqYRD0fGZpQxRy1apxsPeaqtxhzo7CnUVFKBoGDsQbc89+DQNhjG/D3IxgGYM47oKB+W/Su9ol/vVS6Wc2Q==",
+      "requires": {
+        "prop-types": "^15.6.0"
+      }
     },
     "react-redux": {
       "version": "5.1.1",

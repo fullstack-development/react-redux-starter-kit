@@ -8,7 +8,7 @@ import { getFieldWithComponent } from 'shared/helpers/react';
 type IProps = GetProps<typeof RadioGroupInput> & FieldRenderProps;
 
 function RadioGroupInputField(props: IProps) {
-  const { classes, input, meta, ...rest } = props;
+  const { input, meta, ...rest } = props;
   const error = typeof rest.error === 'boolean'
     ? rest.error && meta.error
     : meta.touched && meta.error;

@@ -196,7 +196,6 @@
   "dependencies": {
     "@material-ui/core": "^3.7.1",
     "@material-ui/icons": "^3.0.1",
-    "@material-ui/lab": "^3.0.0-alpha.26",
     "@types/autoprefixer": "^9.1.1",
     "@types/bem-cn": "^2.1.1",
     "@types/classnames": "^2.2.6",
@@ -261,6 +260,7 @@
     "react-geosuggest": "^2.5.0",
     "react-helmet": "^5.2.0",
     "react-jss": "^8.6.1",
+    "react-number-format": "^4.0.6",
     "react-redux": "^5.1.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",

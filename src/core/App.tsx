@@ -3,12 +3,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
-import { JssProvider, SheetsRegistry } from 'react-jss';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import { IAppData, Module, IJssDependencies } from 'shared/types/app';
-import BaseStyles from 'shared/styles/BaseStyles';
+import { JssProvider, SheetsRegistry, BaseStyles } from 'shared/styles';
 
 import createRoutes from './routes';
 
