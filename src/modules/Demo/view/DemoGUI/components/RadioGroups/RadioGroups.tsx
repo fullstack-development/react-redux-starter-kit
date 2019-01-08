@@ -1,18 +1,10 @@
 import * as React from 'react';
+
 import { SimpleList, Typography, FormControlLabel, Radio } from 'shared/view/elements';
-import { RadioGroupInputField } from 'shared/view/redux-form';
+import { RadioGroupInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
-import { reduxForm, InjectedFormProps } from 'redux-form';
-import uuid = require('uuid');
 
-type Value = 'female' | 'male' | 'disabled' | 'other';
-
-interface IFormData {
-  radio1: Value;
-  radio2: Value;
-}
-
-function RadioGroups(_props: InjectedFormProps<IFormData>) {
+function RadioGroups(_props: {}) {
   return (
     <SimpleList marginFactor={4} direction="row">
       <SimpleList marginFactor={2} gutter>
@@ -37,8 +29,4 @@ function RadioGroups(_props: InjectedFormProps<IFormData>) {
   );
 }
 
-export default (
-  reduxForm<IFormData>({ form: uuid(), initialValues: { radio1: 'other' } })(
-    RadioGroups,
-  )
-);
+export default RadioGroups;

@@ -2,13 +2,11 @@ import * as React from 'react';
 import { SimpleList, Button, Typography, CircleProgressBar } from 'shared/view/elements';
 
 import { StylesProps, provideStyles } from './DemoGUI.style';
-import { ToggleButtons, TextInputs, RadioGroups, Checkboxes } from './components';
+import { TextInputs, RadioGroups, Checkboxes } from './components';
 
 function DemoGUI(_props: StylesProps) {
   return (
     <div style={{ padding: 20 }}>
-      <ToggleButtons />
-
       <SimpleList marginFactor={4} direction="row">
         <SimpleList marginFactor={2} gutter>
           <Typography variant="h4">Default color</Typography>

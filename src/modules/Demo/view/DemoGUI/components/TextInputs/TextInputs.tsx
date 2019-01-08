@@ -1,15 +1,9 @@
 import * as React from 'react';
-import { InjectedFormProps, reduxForm } from 'redux-form';
-import uuid = require('uuid');
 import { SimpleList, Typography, MenuItem } from 'shared/view/elements';
-import { TextInputField } from 'shared/view/redux-form';
+import { TextInputField, MaskedInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
 
-interface IFormData {
-  selectedGroup: string;
-}
-
-function TextInputs(_props: InjectedFormProps<IFormData>) {
+function TextInputs(_props: {}) {
   return (
     <SimpleList marginFactor={4} direction="row">
       <SimpleList marginFactor={2} alignItems="stretch" gutter>
@@ -69,15 +63,11 @@ function TextInputs(_props: InjectedFormProps<IFormData>) {
 
       <SimpleList marginFactor={2} gutter>
         <Typography variant="h4">Other inputs</Typography>
-        <TextInputField name="inp13" label="Visa input" variant="outlined" maskType="visa" />
+        <MaskedInputField name="inp13" label="Visa input" variant="outlined" maskType="visa" />
         <TextInputField name="inp14" label="Password input" variant="outlined" type="password" />
       </SimpleList>
     </SimpleList>
   );
 }
 
-export default (
-  reduxForm<IFormData>({ form: uuid(), initialValues: {} })(
-    TextInputs,
-  )
-);
+export default TextInputs;

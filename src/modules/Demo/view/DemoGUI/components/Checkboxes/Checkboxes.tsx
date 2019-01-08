@@ -1,17 +1,10 @@
 import * as React from 'react';
-import { reduxForm, InjectedFormProps } from 'redux-form';
-import uuid = require('uuid');
+
 import { SimpleList, Typography } from 'shared/view/elements';
-import { CheckboxInputField } from 'shared/view/redux-form';
+import { CheckboxInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
 
-interface IFormData {
-  box1: boolean;
-  box2: boolean;
-  box3: boolean;
-}
-
-function Checkboxes(_props: InjectedFormProps<IFormData>) {
+function Checkboxes(_props: {}) {
   return (
     <SimpleList marginFactor={0} gutter>
       <Typography variant="h4">CheckBoxes</Typography>
@@ -22,8 +15,4 @@ function Checkboxes(_props: InjectedFormProps<IFormData>) {
   );
 }
 
-export default (
-  reduxForm<IFormData>({ form: uuid(), initialValues: {} })(
-    Checkboxes,
-  )
-);
+export default Checkboxes;
