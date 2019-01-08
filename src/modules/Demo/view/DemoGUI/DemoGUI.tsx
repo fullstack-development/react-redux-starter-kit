@@ -1,12 +1,15 @@
 import * as React from 'react';
+import { Form, FormRenderProps } from 'react-final-form';
+
 import { SimpleList, Button, Typography, CircleProgressBar } from 'shared/view/elements';
 
 import { StylesProps, provideStyles } from './DemoGUI.style';
 import { TextInputs, RadioGroups, Checkboxes } from './components';
 
 function DemoGUI(_props: StylesProps) {
-  return (
-    <div style={{ padding: 20 }}>
+  const onSubmit = (values: Record<string, string | number>) => console.log(values);
+  const renderSimpleListForm = ({ handleSubmit }: FormRenderProps) => (
+    <form onSubmit={handleSubmit}>
       <SimpleList marginFactor={4} direction="row">
         <SimpleList marginFactor={2} gutter>
           <Typography variant="h4">Default color</Typography>
@@ -36,6 +39,17 @@ function DemoGUI(_props: StylesProps) {
         <RadioGroups />
         <Checkboxes />
       </SimpleList>
+      <Button variant="outlined" type="submit">Submit</Button>
+    </form>
+  );
+
+  return (
+    <div style={{ padding: 20 }}>
+      <Form
+        onSubmit={onSubmit}
+        subscription={{ submitting: true, pristine: true }}
+        render={renderSimpleListForm}
+      />
     </div>
   );
 }

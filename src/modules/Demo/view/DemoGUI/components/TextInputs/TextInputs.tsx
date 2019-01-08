@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { SimpleList, Typography, MenuItem } from 'shared/view/elements';
 import { TextInputField, MaskedInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
