@@ -1,5 +1,3 @@
-import { reducer as formReducer } from 'redux-form';
-
 import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
@@ -18,7 +16,6 @@ function configureApp(data?: IAppData): IAppData {
   }
 
   const sharedReduxEntries: IReduxEntry[] = [
-    { reducers: { form: formReducer } },
     i18nRE,
   ];
 

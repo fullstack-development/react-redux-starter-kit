@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { WrappedFieldProps } from 'redux-form';
+import { FieldRenderProps } from 'react-final-form';
 import { GetProps } from '_helpers';
 import { bind } from 'decko';
 
 import { ToggleButtonGroup } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 
-type IProps = GetProps<typeof ToggleButtonGroup> & WrappedFieldProps;
+type IProps = GetProps<typeof ToggleButtonGroup> & FieldRenderProps;
 
 class ToggleButtonGroupField extends React.Component<IProps> {
   public render() {

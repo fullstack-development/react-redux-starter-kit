@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { WrappedFieldProps } from 'redux-form';
+import { FieldRenderProps } from 'react-final-form';
 import { GetProps } from '_helpers';
 
 import { CheckboxInput } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 
-type IProps = GetProps<typeof CheckboxInput> & WrappedFieldProps;
+type IProps = GetProps<typeof CheckboxInput> & FieldRenderProps;
 
 function CheckboxInputField(props: IProps) {
   const { classes, input, meta, ...rest } = props;

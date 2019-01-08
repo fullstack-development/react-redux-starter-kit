@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { WrappedFieldProps } from 'redux-form';
+import { FieldRenderProps } from 'react-final-form';
 import { GetProps } from '_helpers';
 
 import { TextInput } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 
-type IProps = GetProps<typeof TextInput> & WrappedFieldProps;
+type IProps = GetProps<typeof TextInput> & FieldRenderProps;
 
 function TextInputField(props: IProps) {
   const { classes, input, meta, ...rest } = props;
