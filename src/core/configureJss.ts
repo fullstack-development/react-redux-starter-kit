@@ -19,7 +19,7 @@ export function configureJss(virtual?: boolean): IJssDependencies {
           contrastText: extraTheme.colors.white,
         },
         error: {
-          main: extraTheme.colors.monza,
+          main: extraTheme.colors.redRibbon,
         },
       },
       typography: {

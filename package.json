@@ -214,7 +214,10 @@
     "@types/react-router-dom": "^4.3.1",
     "@types/react-select": "^1.2.6",
     "@types/react-text-mask": "^5.4.3",
+<<<<<<< HEAD
     "@types/redux-form": "^7.4.13",
+=======
+>>>>>>> mvp-base
     "@types/serialize-javascript": "^1.5.0",
     "@types/stylelint": "^9.4.1",
     "@types/uuid": "^3.4.4",

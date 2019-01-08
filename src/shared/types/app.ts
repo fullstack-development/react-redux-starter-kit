@@ -5,8 +5,6 @@ import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
 import { JSS, Theme } from 'react-jss';
 
-import { FormStateMap } from 'redux-form';
-
 import Api from 'services/api/Api';
 
 import * as i18nNS from 'services/i18n/namespace';
@@ -52,7 +50,6 @@ export interface IFeatureEntry<
 }
 
 export interface IAppReduxState {
-  form: FormStateMap;
   // services
   i18n: i18nNS.IReduxState;
 }
