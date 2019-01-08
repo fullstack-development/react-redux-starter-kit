@@ -18,7 +18,7 @@ function getFieldWithComponent<P extends BaseWrappedFieldProps>(Component: React
   type ResultProps = MergeRight<OwnProps, FieldProps>;
 
   const result: React.StatelessComponent<ResultProps> = (props: ResultProps) =>
-    <Field type={type} {...props as any} component={Component} />;
+    <Field type={type} {...props} component={Component} />;
   result.displayName = `FieldWithComponent(${Component.displayName || Component.name || 'Component'})`;
   return result;
 }
