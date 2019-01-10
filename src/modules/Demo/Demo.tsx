@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
@@ -12,12 +12,13 @@ const DemoModule: IModule = {
   getRoutes() {
     return (
       <Route key={routes.demo.getElementKey()} path={routes.demo.getRoutePath()}>
-        <Switch>
-          <BaseLayout>
+        <BaseLayout>
+          <Switch>
             <Route path={routes.demo.gui.getRoutePath()} component={DemoGUI} />
             <Route path={routes.demo.translations.getRoutePath()} component={DemoTranslations} />
-          </BaseLayout>
-        </Switch>
+            <Redirect push to={routes.demo.translations.getRoutePath()} />
+          </Switch>
+        </BaseLayout>
       </Route>
     );
   },

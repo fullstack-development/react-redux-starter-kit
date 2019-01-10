@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { SimpleList, Typography, MenuItem } from 'shared/view/elements';
-import { TextInputField, MaskedInputField } from 'shared/view/form';
+import { TextInputField, MaskedInputField, NumberInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
 
 function TextInputs(_props: {}) {
@@ -18,8 +18,8 @@ function TextInputs(_props: {}) {
           required
           validate={isRequired}
         />
-        <TextInputField name="inp3" label="Your email" value="disabled" variant="standard" disabled />
-        <TextInputField name="inp4" label="Select" value={1} variant="standard" select fullWidth>
+        <TextInputField name="inp3" label="Your email" variant="standard" disabled />
+        <TextInputField name="inp4" label="Select" variant="standard" select fullWidth>
           {[1, 2, 3, 4, 5].map(item => (
             <MenuItem key={item} value={item}>Item #{item}</MenuItem>
           ))}
@@ -37,8 +37,8 @@ function TextInputs(_props: {}) {
           required
           validate={isRequired}
         />
-        <TextInputField name="inp7" label="Your email" value="disabled" variant="outlined" disabled />
-        <TextInputField name="inp8" label="Select" value={1} variant="outlined" select fullWidth>
+        <TextInputField name="inp7" label="Your email" variant="outlined" disabled />
+        <TextInputField name="inp8" label="Select" variant="outlined" select fullWidth>
           {[1, 2, 3, 4, 5].map(item => (
             <MenuItem key={item} value={item}>Item #{item}</MenuItem>
           ))}
@@ -66,6 +66,14 @@ function TextInputs(_props: {}) {
         <Typography variant="h4">Other inputs</Typography>
         <MaskedInputField name="inp13" label="Visa input" variant="outlined" maskType="visa" />
         <TextInputField name="inp14" label="Password input" variant="outlined" type="password" />
+        <NumberInputField
+          name="inp15"
+          label="Number input"
+          variant="outlined"
+          thousandSeparator
+          prefix="$"
+          decimalScale={2}
+        />
       </SimpleList>
     </SimpleList>
   );
