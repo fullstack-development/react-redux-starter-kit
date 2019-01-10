@@ -11,7 +11,7 @@ import DemoTranslations from './view/DemoTranslations/DemoTranslations';
 const DemoModule: IModule = {
   getRoutes() {
     return (
-      <Route key="demo" path={routes.demo.getRoutePath()}>
+      <Route key={routes.demo.getElementKey()} path={routes.demo.getRoutePath()}>
         <Switch>
           <BaseLayout>
             <Route path={routes.demo.gui.getRoutePath()} component={DemoGUI} />
