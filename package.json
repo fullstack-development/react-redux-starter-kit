@@ -195,7 +195,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^3.7.1",
-    "@material-ui/icons": "^3.0.1",
+    "@material-ui/icons": "^3.0.2",
     "@types/autoprefixer": "^9.1.1",
     "@types/bem-cn": "^2.1.1",
     "@types/classnames": "^2.2.6",

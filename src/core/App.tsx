@@ -6,7 +6,7 @@ import 'normalize.css';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import { IAppData, Module, IJssDependencies } from 'shared/types/app';
+import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { JssProvider, SheetsRegistry, BaseStyles } from 'shared/styles';
 
 import createRoutes from './routes';
@@ -44,7 +44,7 @@ export function ServerApp(props: IAppData & IServerAppProps & StaticRouter['prop
 }
 
 function renderSharedPart(
-  modules: Array<Module<any>>, jssDeps: IJssDependencies,
+  modules: IModule[], jssDeps: IJssDependencies,
   disableStylesGeneration?: boolean,
   registry?: SheetsRegistry,
 ) {

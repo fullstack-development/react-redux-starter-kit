@@ -50,7 +50,7 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   const assets = extractAssets(clientStats.compilation);
   const render = require('../static').default;
   server.get('*', (req, res) => {
-    render({ req, res, assets }).catch((error: any) => res.sendStatus(500).write('Server error'));
+    render({ req, res, assets }).catch((_error: any) => res.sendStatus(500).write('Server error'));
   });
 }
 

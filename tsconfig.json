@@ -4,9 +4,8 @@
     "traceResolution": false,
     "strictNullChecks": true,
     "noImplicitAny": true,
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
-    "resolveJsonModule": true,
     "lib": [
       "es2015",
       "es2017",
@@ -21,12 +20,14 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "strictPropertyInitialization": true,
     "strictFunctionTypes": false,
-    "sourceMap": true
+    "strictBindCallApply": true,
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*",
