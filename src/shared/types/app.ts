@@ -6,6 +6,7 @@ import { GenerateClassName } from 'jss';
 
 import Api from 'services/api/Api';
 import * as i18nNS from 'services/i18n/namespace';
+import * as ThemeProviderNS from 'services/themeProvider/namespace';
 import { JSS, Theme } from 'shared/styles';
 
 export abstract class IModule {
@@ -51,6 +52,7 @@ export interface IFeatureEntry<
 export interface IAppReduxState {
   // services
   i18n: i18nNS.IReduxState;
+  theme: ThemeProviderNS.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;

@@ -13,10 +13,10 @@ export function configureJss(virtual?: boolean): IJssDependencies {
     ...(createMuiTheme({
       palette: {
         primary: {
-          main: extraTheme.colors.dodgerBlue,
-          light: extraTheme.colors.anakiwa,
-          dark: extraTheme.colors.governorBay,
-          contrastText: extraTheme.colors.white,
+          main: extraTheme.primary.main,
+          light: extraTheme.primary.light,
+          dark: extraTheme.primary.dark,
+          contrastText: extraTheme.primary.contrastText,
         },
         error: {
           main: extraTheme.colors.redRibbon,
@@ -31,19 +31,6 @@ export function configureJss(virtual?: boolean): IJssDependencies {
       },
       spacing: {
         unit: extraTheme.spacing.unit,
-      },
-      overrides: {
-        MuiButton: {
-          root: {
-            textTransform: 'initial',
-            minHeight: extraTheme.sizes.control.minHeight,
-          },
-        },
-        MuiSvgIcon: {
-          root: {
-            fontSize: 22,
-          },
-        },
       },
     })),
     extra: extraTheme,

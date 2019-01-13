@@ -1,5 +1,4 @@
 import { Theme as MaterialTheme } from '@material-ui/core/styles';
-import { hexToRGBA } from './helpers';
 
 // Find color name http://chir.ag/projects/name-that-color
 // https://github.com/insomnious0x01/ntc-js
@@ -18,35 +17,15 @@ const colors = {
 
 export const theme = {
   colors,
-  palette: {
-    text: {
-      primary: colors.codGray,
-      primaryInverted: colors.white,
-      secondary: hexToRGBA(colors.codGray, 0.58),
-      warning: colors.corn,
-      positive: colors.dodgerBlue,
-      negative: colors.redRibbon,
-      disabled: hexToRGBA(colors.codGray, 0.55),
-    },
-    control: {
-      border: {
-        normal: colors.gallery,
-        hover: colors.governorBay,
-        focus: colors.dodgerBlue,
-        disabled: colors.gallery,
-      },
-      bg: {
-        normal: colors.white,
-        hover: colors.governorBay,
-        focus: colors.dodgerBlue,
-        disabled: colors.gallery,
-      },
-    },
+  primary: {
+    main: colors.dodgerBlue,
+    light: colors.anakiwa,
+    dark: colors.governorBay,
+    contrastText: colors.white,
   },
   sizes: {
     control: {
       borderRadius: 4,
-      minHeight: 40,
     },
   },
   spacing: {
@@ -56,11 +35,7 @@ export const theme = {
     primaryFont: ['OpenSans', 'Arial', 'sans-serif'].join(','),
   },
   zIndex: {
-    newContext: 0,
-    modal: 1400,
     tooltip: 1500,
-    beforeContext: (zIndex: number) => --zIndex,
-    afterContext: (zIndex: number) => ++zIndex,
   },
   defaultTransitionDuration: '0.4s',
 };

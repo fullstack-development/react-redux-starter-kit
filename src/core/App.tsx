@@ -4,7 +4,7 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { JssProvider, SheetsRegistry, BaseStyles } from 'shared/styles';
