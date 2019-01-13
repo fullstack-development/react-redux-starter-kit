@@ -6,29 +6,30 @@ import { IAppReduxState } from 'shared/types/app';
 
 import { UITheme } from '../../namespace';
 import { selectors } from '../../redux';
+import { theme } from '../../themeFactory/themeFactory';
 
-interface IProps {
+interface IOwnProps {
+  disableStylesGeneration?: boolean;
+}
+
+interface IStateProps {
   uiTheme: UITheme;
 }
 
-interface IState {
-  dark: any;
-  blue: any;
-}
-
-function mapState(state: IAppReduxState): IProps {
+function mapState(state: IAppReduxState): IStateProps {
   return {
     uiTheme: selectors.selectUITheme(state),
   };
 }
 
-class ThemeProvider extends React.PureComponent<IProps, IState> {
+type Props = IStateProps & IOwnProps;
+
+class ThemeProvider extends React.PureComponent<Props> {
   public render() {
-    const { children, uiTheme } = this.props;
-    const theme = this.state[uiTheme];
+    const { children, disableStylesGeneration } = this.props;
 
     return (
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
         {children}
       </MuiThemeProvider>
     );

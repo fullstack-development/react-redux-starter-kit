@@ -7,7 +7,7 @@ import { GenerateClassName } from 'jss';
 import Api from 'services/api/Api';
 import * as i18nNS from 'services/i18n/namespace';
 import * as ThemeProviderNS from 'services/themeProvider/namespace';
-import { JSS, Theme } from 'shared/styles';
+import { JSS } from 'shared/styles';
 
 export abstract class IModule {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
@@ -23,7 +23,6 @@ export interface IAppData {
 export interface IJssDependencies {
   jss: JSS;
   generateClassName: GenerateClassName<any>;
-  theme: Theme;
 }
 
 export interface IDependencies {
