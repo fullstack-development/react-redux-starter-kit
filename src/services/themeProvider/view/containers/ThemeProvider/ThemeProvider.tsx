@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 import { IAppReduxState } from 'shared/types/app';
 import { BaseStyles } from 'shared/styles';
@@ -20,7 +21,7 @@ interface IStateProps {
 
 type Props = IStateProps & IOwnProps;
 
-class ThemeProvider extends React.PureComponent<Props> {
+class ThemeProvider extends React.PureComponent<Props & RouteComponentProps> {
   public render() {
     const { children, uiTheme, disableStylesGeneration } = this.props;
 
@@ -40,4 +41,4 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-export default connect(mapState)(ThemeProvider);
+export default withRouter(connect(mapState)(ThemeProvider));
