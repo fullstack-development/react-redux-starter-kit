@@ -27,7 +27,7 @@ type Props = IStateProps & IActionProps;
 class ThemeSelector extends React.PureComponent<Props> {
   public static options: IOption[] = [
     { value: 'blue', label: 'blue' },
-    { value: 'dark', label: 'dark' },
+    { value: 'darkBlue', label: 'darkBlue' },
   ];
 
   public render() {

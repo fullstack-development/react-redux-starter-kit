@@ -19,7 +19,7 @@ const colors = {
   black: '#000',
 };
 
-export const darkThemePalette = {
+export const darkBlueThemePalette = {
   palette: {
     primary: {
       main: colors.biscay,
@@ -49,7 +49,7 @@ export const blueThemePalette = {
 
 export const themePalettesMap = {
   blue: blueThemePalette,
-  dark: darkThemePalette,
+  darkBlue: darkBlueThemePalette,
 };
 
 export const baseThemeStyles = {

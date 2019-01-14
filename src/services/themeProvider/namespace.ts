@@ -1,6 +1,6 @@
 import { IAction } from 'shared/types/redux';
 
-export type UITheme = 'blue' | 'dark';
+export type UITheme = 'blue' | 'darkBlue';
 
 export interface IReduxState {
   data: {

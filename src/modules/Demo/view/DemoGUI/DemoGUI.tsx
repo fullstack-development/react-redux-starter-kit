@@ -18,7 +18,7 @@ function DemoGUI(_props: StylesProps) {
       >
         {({ handleSubmit }: FormRenderProps) => (
           <form onSubmit={handleSubmit}>
-            <ThemeSelector />
+            <Typography variant="h6">Select theme <ThemeSelector /></Typography>
             <SimpleList marginFactor={4} direction="row">
               <SimpleList marginFactor={2} gutter>
                 <Typography variant="h4">Default color</Typography>
