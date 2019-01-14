@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 
 import { IAppReduxState } from 'shared/types/app';
+import { BaseStyles } from 'shared/styles';
 
 import { UITheme } from '../../../namespace';
 import { selectors } from '../../../redux';
@@ -24,6 +26,8 @@ class ThemeProvider extends React.PureComponent<Props> {
 
     return (
       <MuiThemeProvider theme={getTheme(uiTheme)} disableStylesGeneration={disableStylesGeneration}>
+        <CssBaseline />
+        <BaseStyles />
         {children}
       </MuiThemeProvider>
     );

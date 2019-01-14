@@ -3,11 +3,9 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-
 import { ThemeProvider } from 'services/themeProvider';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
-import { JssProvider, SheetsRegistry, BaseStyles } from 'shared/styles';
+import { JssProvider, SheetsRegistry } from 'shared/styles';
 
 import createRoutes from './routes';
 
@@ -59,8 +57,6 @@ function renderSharedPart(
     >
       <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
         {/* <React.StrictMode> */}
-        <CssBaseline />
-        <BaseStyles />
         {createRoutes(modules)}
         {/* </React.StrictMode> */}
       </ThemeProvider>
