@@ -77,9 +77,7 @@ export const baseThemeStyles = {
 };
 
 export const themeFactory = (themeName: UITheme) => ({
-  palette: {
-    ...themePalettesMap[themeName],
-  },
+  palette: themePalettesMap[themeName],
   ...baseThemeStyles,
 });
 

@@ -20,25 +20,28 @@ interface IStateProps {
 }
 
 interface IState {
-  themes: Record<UITheme, Theme>;
+  theme: Theme;
 }
 
 type Props = IStateProps & IOwnProps;
 
 class ThemeProvider extends React.Component<Props & RouteComponentProps, IState> {
   public state: IState = {
-    themes: {
-      blue: getTheme('blue'),
-      darkBlue: getTheme('darkBlue'),
-    },
+    theme: getTheme(this.props.uiTheme),
   };
 
+  public componentDidUpdate(prevProps: Props) {
+    if (this.props.uiTheme !== prevProps.uiTheme) {
+      this.setState({ theme: getTheme(this.props.uiTheme) });
+    }
+  }
+
   public render() {
-    const { children, uiTheme, disableStylesGeneration } = this.props;
-    const { themes } = this.state;
+    const { children, disableStylesGeneration } = this.props;
+    const { theme } = this.state;
 
     return (
-      <MuiThemeProvider theme={themes[uiTheme]} disableStylesGeneration={disableStylesGeneration}>
+      <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
         <CssBaseline />
         <BaseStyles />
         {children}
