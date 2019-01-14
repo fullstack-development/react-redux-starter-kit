@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
-import { bindActionCreators, Dispatch } from 'redux';
 
 import { IAppReduxState } from 'shared/types/app';
 
@@ -56,11 +55,9 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function mapDispatch(dispatch: Dispatch): IActionProps {
-  return bindActionCreators({
-    setTheme: actions.setTheme,
-  }, dispatch);
-}
+const mapDispatch: IActionProps = {
+  setTheme: actions.setTheme,
+};
 
 export { ThemeSelector };
 export default connect(mapState, mapDispatch)(ThemeSelector);

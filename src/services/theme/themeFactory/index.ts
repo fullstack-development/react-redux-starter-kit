@@ -1,4 +1,4 @@
-import { theme as themeFactory, Theme } from 'shared/styles/theme';
+import { themeFactory, Theme } from 'shared/styles/theme';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { UITheme } from '../namespace';
 
@@ -15,7 +15,7 @@ export const getTheme = (themeName: UITheme): Theme => {
           contrastText: extraTheme.palette.primary.contrastText,
         },
         error: {
-          main: extraTheme.colors.redRibbon,
+          main: extraTheme.palette.error.main,
         },
       },
       typography: {

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
-import { ThemeProvider } from 'services/themeProvider';
+import { ThemeProvider } from 'services/theme';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { JssProvider, SheetsRegistry } from 'shared/styles';
 

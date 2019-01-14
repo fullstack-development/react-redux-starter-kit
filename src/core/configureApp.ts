@@ -6,7 +6,7 @@ import { DemoModule } from 'modules';
 import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as i18nRE, I18n } from 'services/i18n';
-import { reduxEntry as themeProviderRE } from 'services/themeProvider';
+import { reduxEntry as themeProviderRE } from 'services/theme';
 import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
 function configureApp(data?: IAppData): IAppData {

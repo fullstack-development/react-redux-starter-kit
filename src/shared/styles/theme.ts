@@ -1,5 +1,8 @@
 import { Theme as MaterialTheme } from '@material-ui/core/styles';
-import { UITheme } from 'services/themeProvider/namespace';
+import { UITheme } from 'services/theme/namespace';
+import { PaletteColor } from '@material-ui/core/styles/createPalette';
+
+type PaletteTypes = 'primary' | 'error';
 
 // Find color name http://chir.ag/projects/name-that-color
 // https://github.com/insomnious0x01/ntc-js
@@ -19,31 +22,33 @@ const colors = {
   black: '#000',
 };
 
-export const darkBlueThemePalette = {
-  palette: {
-    primary: {
-      main: colors.biscay,
-      light: colors.dodgerBlue,
-      dark: colors.downriver,
-      contrastText: colors.white,
-    },
-    error: {
-      main: colors.redRibbon,
-    },
+export const darkBlueThemePalette: Record<PaletteTypes, PaletteColor> = {
+  primary: {
+    main: colors.biscay,
+    light: colors.dodgerBlue,
+    dark: colors.downriver,
+    contrastText: colors.white,
+  },
+  error: {
+    main: colors.redRibbon,
+    light: colors.corn,
+    dark: colors.redRibbon,
+    contrastText: colors.redRibbon,
   },
 };
 
-export const blueThemePalette = {
-  palette: {
-    primary: {
-      main: colors.dodgerBlue,
-      light: colors.anakiwa,
-      dark: colors.governorBay,
-      contrastText: colors.white,
-    },
-    error: {
-      main: colors.redRibbon,
-    },
+export const blueThemePalette: Record<PaletteTypes, PaletteColor> = {
+  primary: {
+    main: colors.dodgerBlue,
+    light: colors.anakiwa,
+    dark: colors.governorBay,
+    contrastText: colors.white,
+  },
+  error: {
+    main: colors.redRibbon,
+    light: colors.corn,
+    dark: colors.redRibbon,
+    contrastText: colors.redRibbon,
   },
 };
 
@@ -71,9 +76,11 @@ export const baseThemeStyles = {
   defaultTransitionDuration: '0.4s',
 };
 
-export const theme = (themeName: UITheme) => ({
-  ...themePalettesMap[themeName],
+export const themeFactory = (themeName: UITheme) => ({
+  palette: {
+    ...themePalettesMap[themeName],
+  },
   ...baseThemeStyles,
 });
 
-export type Theme = MaterialTheme & { extra: ReturnType<typeof theme> };
+export type Theme = MaterialTheme & { extra: ReturnType<typeof themeFactory> };
