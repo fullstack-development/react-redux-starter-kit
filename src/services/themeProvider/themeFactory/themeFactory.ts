@@ -1,29 +1,34 @@
-import { theme as extraTheme, Theme } from 'shared/styles/theme';
+import { theme as themeFactory, Theme } from 'shared/styles/theme';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { UITheme } from '../namespace';
 
-export const theme: Theme = {
-  ...(createMuiTheme({
-    palette: {
-      primary: {
-        main: extraTheme.primary.main,
-        light: extraTheme.primary.light,
-        dark: extraTheme.primary.dark,
-        contrastText: extraTheme.primary.contrastText,
+export const getTheme = (themeName: UITheme): Theme => {
+  const extraTheme = themeFactory(themeName);
+
+  return {
+    ...(createMuiTheme({
+      palette: {
+        primary: {
+          main: extraTheme.palette.primary.main,
+          light: extraTheme.palette.primary.light,
+          dark: extraTheme.palette.primary.dark,
+          contrastText: extraTheme.palette.primary.contrastText,
+        },
+        error: {
+          main: extraTheme.colors.redRibbon,
+        },
       },
-      error: {
-        main: extraTheme.colors.redRibbon,
+      typography: {
+        useNextVariants: true, // https://material-ui.com/style/typography/#migration-to-typography-v2
+        fontFamily: extraTheme.typography.primaryFont,
       },
-    },
-    typography: {
-      useNextVariants: true, // https://material-ui.com/style/typography/#migration-to-typography-v2
-      fontFamily: extraTheme.typography.primaryFont,
-    },
-    shape: {
-      borderRadius: extraTheme.sizes.control.borderRadius,
-    },
-    spacing: {
-      unit: extraTheme.spacing.unit,
-    },
-  })),
-  extra: extraTheme,
+      shape: {
+        borderRadius: extraTheme.sizes.control.borderRadius,
+      },
+      spacing: {
+        unit: extraTheme.spacing.unit,
+      },
+    })),
+    extra: extraTheme,
+  };
 };

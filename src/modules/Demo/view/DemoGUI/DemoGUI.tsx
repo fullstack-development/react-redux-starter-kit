@@ -5,6 +5,7 @@ import { SimpleList, Button, Typography, CircleProgressBar } from 'shared/view/e
 
 import { StylesProps, provideStyles } from './DemoGUI.style';
 import { TextInputs, RadioGroups, Checkboxes } from './components';
+import { ThemeSelector } from 'services/themeProvider';
 
 function DemoGUI(_props: StylesProps) {
   const onSubmit = (values: Record<string, string | number>) => console.log(values);
@@ -17,6 +18,7 @@ function DemoGUI(_props: StylesProps) {
       >
         {({ handleSubmit }: FormRenderProps) => (
           <form onSubmit={handleSubmit}>
+            <ThemeSelector />
             <SimpleList marginFactor={4} direction="row">
               <SimpleList marginFactor={2} gutter>
                 <Typography variant="h4">Default color</Typography>
