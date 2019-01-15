@@ -53,7 +53,7 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     '__SERVER__': false,
   }),
   new CircularDependencyPlugin({
-    exclude: /a\.js|node_modules/,
+    exclude: /node_modules/,
     failOnError: true,
     cwd: process.cwd(),
   }),
