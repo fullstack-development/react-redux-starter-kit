@@ -1,5 +1,5 @@
-import { withStyles } from 'shared/styles';
 import { rule } from 'shared/helpers/style';
+import { withStyles } from './jss';
 
 const styles = {
   '@global': rule({

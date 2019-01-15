@@ -3,6 +3,7 @@ import * as webpack from 'webpack';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CleanWebpackPlugin from 'clean-webpack-plugin';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import * as threadLoader from 'thread-loader';
@@ -50,6 +51,11 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     '__LANG__': JSON.stringify(process.env.LANG || 'en'),
     '__CLIENT__': true,
     '__SERVER__': false,
+  }),
+  new CircularDependencyPlugin({
+    exclude: /a\.js|node_modules/,
+    failOnError: true,
+    cwd: process.cwd(),
   }),
   new FaviconsWebpackPlugin(path.resolve(__dirname, '..', 'src', 'assets', 'favicon.png')),
 ]
