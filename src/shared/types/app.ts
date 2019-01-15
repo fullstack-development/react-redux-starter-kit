@@ -6,7 +6,8 @@ import { GenerateClassName } from 'jss';
 
 import Api from 'services/api/Api';
 import * as i18nNS from 'services/i18n/namespace';
-import { JSS, Theme } from 'shared/styles';
+import * as ThemeProviderNS from 'services/theme/namespace';
+import { JSS } from 'shared/styles';
 
 export abstract class IModule {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
@@ -22,7 +23,6 @@ export interface IAppData {
 export interface IJssDependencies {
   jss: JSS;
   generateClassName: GenerateClassName<any>;
-  theme: Theme;
 }
 
 export interface IDependencies {
@@ -51,6 +51,7 @@ export interface IFeatureEntry<
 export interface IAppReduxState {
   // services
   i18n: i18nNS.IReduxState;
+  theme: ThemeProviderNS.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;

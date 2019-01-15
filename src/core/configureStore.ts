@@ -1,8 +1,8 @@
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { compose, applyMiddleware, combineReducers, createStore, Reducer, Middleware, Store } from 'redux';
-import { composeReducers } from 'shared/helpers/redux';
 
+import { composeReducers } from 'shared/helpers/redux';
 import { IAppReduxState } from 'shared/types/app';
 import { ReducersMap } from 'shared/types/redux';
 

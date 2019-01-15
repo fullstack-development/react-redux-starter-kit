@@ -1,5 +1,8 @@
 import { Theme as MaterialTheme } from '@material-ui/core/styles';
-import { hexToRGBA } from './helpers';
+import { UITheme } from 'services/theme/namespace';
+import { PaletteColor } from '@material-ui/core/styles/createPalette';
+
+type PaletteTypes = 'primary' | 'error';    // TODO: add 'secondary' palette type if you need secondary color
 
 // Find color name http://chir.ag/projects/name-that-color
 // https://github.com/insomnious0x01/ntc-js
@@ -8,6 +11,9 @@ const colors = {
   governorBay: '#3631B6',
   anakiwa: '#7BDEFF',
   redRibbon: '#E90C14',
+  biscay: '#202B72',
+  downriver: '#0F195B',
+  sail: '#BBDEFB',
   corn: '#F7BA08',
   gallery: '#ECEAEA',
   silver: '#c9c9c9',
@@ -16,37 +22,46 @@ const colors = {
   black: '#000',
 };
 
-export const theme = {
-  colors,
-  palette: {
-    text: {
-      primary: colors.codGray,
-      primaryInverted: colors.white,
-      secondary: hexToRGBA(colors.codGray, 0.58),
-      warning: colors.corn,
-      positive: colors.dodgerBlue,
-      negative: colors.redRibbon,
-      disabled: hexToRGBA(colors.codGray, 0.55),
-    },
-    control: {
-      border: {
-        normal: colors.gallery,
-        hover: colors.governorBay,
-        focus: colors.dodgerBlue,
-        disabled: colors.gallery,
-      },
-      bg: {
-        normal: colors.white,
-        hover: colors.governorBay,
-        focus: colors.dodgerBlue,
-        disabled: colors.gallery,
-      },
-    },
+export const darkBlueThemePalette: Record<PaletteTypes, PaletteColor> = {
+  primary: {
+    main: colors.biscay,
+    light: colors.dodgerBlue,
+    dark: colors.downriver,
+    contrastText: colors.white,
   },
+  error: {
+    main: colors.redRibbon,
+    light: colors.corn,
+    dark: colors.redRibbon,
+    contrastText: colors.redRibbon,
+  },
+};
+
+export const blueThemePalette: Record<PaletteTypes, PaletteColor> = {
+  primary: {
+    main: colors.dodgerBlue,
+    light: colors.anakiwa,
+    dark: colors.governorBay,
+    contrastText: colors.white,
+  },
+  error: {
+    main: colors.redRibbon,
+    light: colors.corn,
+    dark: colors.redRibbon,
+    contrastText: colors.redRibbon,
+  },
+};
+
+export const themePalettesMap = {
+  blue: blueThemePalette,
+  darkBlue: darkBlueThemePalette,
+};
+
+export const baseThemeStyles = {
+  colors,
   sizes: {
     control: {
       borderRadius: 4,
-      minHeight: 40,
     },
   },
   spacing: {
@@ -56,13 +71,14 @@ export const theme = {
     primaryFont: ['OpenSans', 'Arial', 'sans-serif'].join(','),
   },
   zIndex: {
-    newContext: 0,
-    modal: 1400,
     tooltip: 1500,
-    beforeContext: (zIndex: number) => --zIndex,
-    afterContext: (zIndex: number) => ++zIndex,
   },
   defaultTransitionDuration: '0.4s',
 };
 
-export type Theme = MaterialTheme & { extra: typeof theme };
+export const themeFactory = (themeName: UITheme) => ({
+  palette: themePalettesMap[themeName],
+  ...baseThemeStyles,
+});
+
+export type Theme = MaterialTheme & { extra: ReturnType<typeof themeFactory> };
