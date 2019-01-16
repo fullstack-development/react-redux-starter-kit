@@ -227,6 +227,7 @@
     "bootstrap": "^3.3.7",
     "build-route-tree": "^1.0.1",
     "cheerio": "^1.0.0-rc.2",
+    "circular-dependency-plugin": "^5.0.2",
     "classnames": "^2.2.6",
     "compression": "^1.7.2",
     "concurrently": "^4.0.1",
