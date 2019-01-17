@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { i18nConnect, ITranslateProps, tKeys, LanguageSelector } from 'services/i18n';
+import { i18nConsumer, ITranslateProps, tKeys, LanguageSelector } from 'services/i18n';
 
 function DemoTranslations(props: ITranslateProps) {
   const { locale, t } = props;
@@ -20,4 +20,4 @@ function DemoTranslations(props: ITranslateProps) {
   );
 }
 
-export default i18nConnect(DemoTranslations);
+export default i18nConsumer(DemoTranslations);

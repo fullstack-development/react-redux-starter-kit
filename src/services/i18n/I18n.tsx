@@ -1,16 +1,16 @@
 import { Store } from 'redux';
 import { bind } from 'decko';
+import { injectable, inject } from 'inversify';
 import * as Polyglot from 'node-polyglot';
 
 import { IAppReduxState } from 'shared/types/app';
+import TYPES from 'core/iocTypes';
 
 import { ITranslateFunction, Lang } from './namespace';
 import * as actions from './redux/actions';
 import * as selectors from './redux/selectors';
 import { DEFAULT_LANGUAGE } from './constants';
 import { phrasesByLocale } from './locales';
-import { injectable, inject } from 'inversify';
-import TYPES from 'core/iocTypes';
 
 /**
  * It is a localization service for whole app.
