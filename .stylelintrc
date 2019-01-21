@@ -6,6 +6,10 @@
     "stylelint-order",
     "stylelint-scss"
   ],
+  "ignoreFiles": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "rules": {
     "scss/dollar-variable-empty-line-before": [
       "always",
@@ -17,7 +21,6 @@
         ],
       }
     ],
-    "declaration-block-trailing-semicolon": "never",
     "scss/dollar-variable-colon-newline-after": "always-multi-line",
     "scss/dollar-variable-colon-space-after": "always-single-line",
     "scss/dollar-variable-colon-space-before": "never",
@@ -260,5 +263,7 @@
         "unspecified": "bottom",
       },
     ],
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
   }
 }
