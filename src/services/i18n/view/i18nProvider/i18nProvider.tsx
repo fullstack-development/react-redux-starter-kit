@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { bind } from 'decko';
 import * as Polyglot from 'node-polyglot';
 
 import { withProps } from 'shared/helpers/react';
@@ -51,10 +52,12 @@ class I18nProvider extends React.Component<IProps, IState> {
     );
   }
 
+  @bind
   private changeLanguage(value: Lang) {
     this.setState({ locale: value });
   }
 
+  @bind
   private makeTranslator(polyglot: Polyglot): ITranslateFunction {
     return (phrase: ITranslateKey, smartCountOrInterpolationOptions?: number | Polyglot.InterpolationOptions) => {
       if (typeof phrase === 'string') {
