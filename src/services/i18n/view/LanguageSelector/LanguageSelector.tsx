@@ -2,7 +2,7 @@ import * as React from 'react';
 import { bind } from 'decko';
 
 import { Lang, ITranslateProps } from '../../namespace';
-import { withI18n } from '../i18nConsumer/i18nConsumer';
+import { withI18n } from '../withI18n/withI18n';
 
 interface IOption {
   value: Lang;

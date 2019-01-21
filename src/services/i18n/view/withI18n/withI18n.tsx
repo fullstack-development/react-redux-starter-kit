@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { Omit } from '_helpers';
 
 import { ITranslateProps } from '../../namespace';
 import { I18nContext } from '../../constants';
-import { Omit } from '_helpers';
 
-function i18nConsumer<TProps extends ITranslateProps>(
+function withI18n<TProps extends ITranslateProps>(
   WrappedComponent: React.ComponentType<TProps>,
 ): React.ComponentClass<Omit<TProps, keyof ITranslateProps>> {
   const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
@@ -24,4 +24,4 @@ function i18nConsumer<TProps extends ITranslateProps>(
   return I18nConnector;
 }
 
-export { i18nConsumer as withI18n };
+export { withI18n };
