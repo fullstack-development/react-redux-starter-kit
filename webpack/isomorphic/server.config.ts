@@ -20,14 +20,6 @@ const serverConfig: webpack.Configuration = {
     path: path.resolve(__dirname, '..', '..', 'static'),
     libraryTarget: 'commonjs2',
   },
-  externals: [
-    nodeExternals({
-      whitelist: [
-        'normalize.css',
-        'react-select/dist/react-select.css',
-      ],
-    }),
-  ],
   plugins: [
     new webpack.DefinePlugin({
       __CLIENT__: false,
