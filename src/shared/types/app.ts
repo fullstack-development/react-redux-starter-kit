@@ -5,7 +5,6 @@ import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
 
 import Api from 'services/api/Api';
-import * as i18nNS from 'services/i18n/namespace';
 import * as ThemeProviderNS from 'services/theme/namespace';
 import { JSS } from 'shared/styles';
 
@@ -50,7 +49,6 @@ export interface IFeatureEntry<
 
 export interface IAppReduxState {
   // services
-  i18n: i18nNS.IReduxState;
   theme: ThemeProviderNS.IReduxState;
 }
 
