@@ -12,8 +12,7 @@ declare var __LANG__: 'en' | 'he';
 declare var __HOST__: string;
 
 declare module 'theming/@externals' {
-  import { Theme } from '@material-ui/core';
-  export type Theme = Theme;
+  export { Theme } from 'shared/styles/theme';
 }
 
 declare module "*.svg" {
@@ -44,3 +43,5 @@ declare module 'postcss-reporter';
 declare module 'postcss-easy-import';
 declare module 'postcss-scss';
 declare module 'doiuse';
+declare module 'favicons-webpack-plugin';
+declare module 'circular-dependency-plugin';

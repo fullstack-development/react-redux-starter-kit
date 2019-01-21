@@ -1,36 +1,21 @@
 import * as React from 'react';
-
-import * as searchRepositories from 'features/searchRepositories';
+import { withRouter, RouteComponentProps } from 'react-router';
 
 import { RowsLayout } from 'shared/view/elements';
 import { Header, Footer } from 'shared/view/components';
 
-import { homeRedirectPath, orderRedirectPath } from '../../routes';
 import { StylesProps, provideStyles } from './BaseLayout.style';
-import { getAsyncContainer } from 'core/FeatureConnector';
 
-interface IOwnProps {
-  withSearch?: boolean;
-  children: React.ReactNode;
-}
-
-type Props = IOwnProps & StylesProps;
-
-const AsyncSearchInput = getAsyncContainer(searchRepositories.loadEntry, 'SearchRepositoriesInput');
-
-class BaseLayout extends React.PureComponent<Props> {
+class BaseLayout extends React.PureComponent<StylesProps & RouteComponentProps<any>> {
   public render() {
-    const { classes, children, withSearch } = this.props;
+    const { classes, children } = this.props;
 
     return (
       <RowsLayout
         footerContent={<Footer />}
         headerContent={(
-          <Header
-            brandRedirectPath={homeRedirectPath}
-            menuRedirectPaths={{ order: orderRedirectPath }}
-          >
-            {withSearch && <AsyncSearchInput />}
+          <Header>
+            Full stack development
           </Header>
         )}
       >
@@ -42,4 +27,4 @@ class BaseLayout extends React.PureComponent<Props> {
   }
 }
 
-export default provideStyles(BaseLayout);
+export default withRouter(provideStyles(BaseLayout));

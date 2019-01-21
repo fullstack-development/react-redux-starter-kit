@@ -20,8 +20,8 @@ starter(app, clientConfig, serverConfig);
 
 PORT && app.listen(+PORT, '0.0.0.0', (err: any) => {
   if (err) {
-    console.error(err);
+    process.stdout.write(err);
   } else {
-    console.info(`Listening at http://localhost:${PORT}`.bold);
+    process.stdout.write(`\nListening at http://localhost:${PORT.bold}\n`);
   }
 });

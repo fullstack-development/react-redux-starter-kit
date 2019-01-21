@@ -1,5 +1,5 @@
 declare module 'react-jss' {
-  import * as React from "react";
+  import * as React from 'react';
   import { create, GenerateClassName } from 'jss';
 
   export { default as withTheme, Theme, WithTheme } from 'theming';

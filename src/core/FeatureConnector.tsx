@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { bind } from 'decko';
 import * as R from 'ramda';
-
-import { Omit } from '_helpers';
 import { injectable } from 'inversify';
+
+import { Omit, GetProps } from '_helpers';
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry, GetProps } from 'shared/types/app';
+import { IFeatureEntry } from 'shared/types/app';
 
 type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
 

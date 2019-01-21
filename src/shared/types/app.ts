@@ -3,23 +3,19 @@ import { RouteProps } from 'react-router';
 import { Store, Reducer, ActionCreator, Action } from 'redux';
 import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
-import { JSS, Theme } from 'react-jss';
-
-import { namespace as CategorySelectNamespace } from 'features/categorySelect';
-import { namespace as LocationSelectNamespace } from 'features/locationSelect';
-import { namespace as SearchRepositoriesNamespace } from 'features/searchRepositories';
-import { namespace as DynamicFieldsNamespace } from 'features/dynamicFields';
-import { Namespace as HomeModuleNamespace } from '../../modules/OrderForm/OrderForm';
 
 import Api from 'services/api/Api';
+import * as i18nNS from 'services/i18n/namespace';
+import * as ThemeProviderNS from 'services/theme/namespace';
+import { JSS } from 'shared/styles';
 
-export abstract class Module<C = any> {
+export abstract class IModule {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
   public getReduxEntry?(): IReduxEntry;
 }
 
 export interface IAppData {
-  modules: Module[];
+  modules: IModule[];
   store: Store<IAppReduxState>;
   jssDeps: IJssDependencies;
 }
@@ -27,7 +23,6 @@ export interface IAppData {
 export interface IJssDependencies {
   jss: JSS;
   generateClassName: GenerateClassName<any>;
-  theme: Theme;
 }
 
 export interface IDependencies {
@@ -54,19 +49,10 @@ export interface IFeatureEntry<
 }
 
 export interface IAppReduxState {
-  categorySelect: CategorySelectNamespace.IReduxState;
-  locationSelect: LocationSelectNamespace.IReduxState;
-  dynamicFields: DynamicFieldsNamespace.IReduxState;
-  orderForm: HomeModuleNamespace.IReduxState;
-  searchRepositories: SearchRepositoriesNamespace.IReduxState;
+  // services
+  i18n: i18nNS.IReduxState;
+  theme: ThemeProviderNS.IReduxState;
 }
-
-export type Diff<T extends keyof any, U extends keyof any> =
-  ({ [P in T]: P } & { [P in U]: never } & { [x: string]: never })[T];
-
-export type GetProps<T extends React.ComponentType<any>> =
-  T extends React.StatelessComponent<infer SP> ? SP :
-  T extends React.ComponentClass<infer CP> ? CP : never;
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
@@ -77,6 +63,5 @@ export type Uid = number;
 export interface IAssets {
   javascript: string[];
   styles: string[];
+  favicons: CheerioElement[];
 }
-
-export * from '../helpers/redux/namespace';

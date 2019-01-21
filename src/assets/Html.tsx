@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
-
 import * as redux from 'redux';
-import { IAssets } from 'shared/types/app';
-import { SheetsRegistry } from 'react-jss';
 import { renderToString } from 'react-dom/server';
+
+import { IAssets } from 'shared/types/app';
+import { SheetsRegistry } from 'shared/styles';
 
 interface IHtmlProps {
   assets: IAssets;
@@ -33,10 +33,9 @@ export default class Html extends React.PureComponent<IHtmlProps> {
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
-
     // component rendering for injecting styles to jss registry
     const renderedComponent = component ? renderToString(component) : '';
-
+    const windowAssets = serialize({ styles: assets.styles, javascript: assets.javascript });
     return (
       <html lang={__LANG__} style={styles}>
         <head>
@@ -45,11 +44,12 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           {head && head.meta && head.meta.toComponent()}
           {head && head.link && head.link.toComponent()}
 
+          {assets.favicons.map((el, index) => <link key={index} {...el.attribs} />)}
           <meta name="viewport" content="width=device-width, initial-scale=1" />
 
           {/* styles (will be present only in production with webpack extract text plugin) */}
-          {assets.styles.map((filePath, idx) => (
-            <link href={`/${filePath}`} key={idx} media="screen, projection" rel="stylesheet" type="text/css" />
+          {assets.styles.map((filePath, index) => (
+            <link href={`/${filePath}`} key={index} media="screen, projection" rel="stylesheet" type="text/css" />
           ))}
           {!!styleSheets && (
             <style type="text/css" id="server-side-styles">{styleSheets.toString()}</style>
@@ -68,8 +68,7 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           {/* App code and 3d party services code */}
           <div>
             <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(state)};` }} charSet="UTF-8" />
-            <script dangerouslySetInnerHTML={{ __html: `window.__assets=${serialize(assets)};` }} charSet="UTF-8" />
-            <script src="https://maps.googleapis.com/maps/api/js?libraries=places" />
+            <script dangerouslySetInnerHTML={{ __html: `window.__assets=${windowAssets};` }} charSet="UTF-8" />
             {assets.javascript.map((filePath, index) =>
               <script defer src={`/${filePath}`} charSet="UTF-8" key={index} />)
             }

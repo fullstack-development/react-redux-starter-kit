@@ -4,15 +4,17 @@ import { StylesProps, provideStyles } from './SimpleList.style';
 
 interface IProps {
   marginFactor?: number;
-  gutterBottom?: boolean;
+  gutter?: boolean;
   children: React.ReactNode;
+  direction?: 'column' | 'row';
+  alignItems?: 'stretch' | 'flex-start';
 }
 
 class SimpleList extends React.PureComponent<IProps & StylesProps> {
   public render() {
-    const { classes, children, gutterBottom } = this.props;
+    const { classes, children, gutter } = this.props;
     const rootClasses = classNames(classes.root, {
-      [classes.gutterBottom]: gutterBottom,
+      [classes.withoutGutterRoot]: !gutter,
     });
 
     return (
