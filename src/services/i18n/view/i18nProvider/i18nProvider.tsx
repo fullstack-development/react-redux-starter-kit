@@ -1,13 +1,9 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router';
 import * as Polyglot from 'node-polyglot';
 
-import { IAppReduxState } from 'shared/types/app';
 import { withProps } from 'shared/helpers/react';
 
 import { ITranslateFunction, Lang, ITranslateKey } from '../../namespace';
-import * as selectors from '../../redux/selectors';
 import { DEFAULT_LANGUAGE, I18nContext } from '../../constants';
 import { phrasesByLocale as phrases } from '../../locales';
 
@@ -15,54 +11,58 @@ interface IOwnProps {
   phrasesByLocale: typeof phrases;
 }
 
-interface IStateProps {
+interface IState {
   locale: Lang;
+  translator: ITranslateFunction;
+  changeLanguage(lang: Lang): void;
 }
 
-type IProps = IStateProps & IOwnProps & RouteComponentProps;
+type IProps = IOwnProps;
 
-class I18nProvider extends React.Component<IProps> {
+class I18nProvider extends React.Component<IProps, IState> {
   public polyglot: Polyglot = new Polyglot({
     locale: DEFAULT_LANGUAGE,
     phrases: this.props.phrasesByLocale[DEFAULT_LANGUAGE],
   });
 
-  public state = { translator: makeTranslator(this.polyglot) };
+  public state: IState = {
+    locale: DEFAULT_LANGUAGE,
+    translator: this.makeTranslator(this.polyglot),
+    changeLanguage: this.changeLanguage,
+  };
 
-  public componentDidUpdate(prevProps: IProps) {
-    const { locale, phrasesByLocale } = this.props;
-    if (prevProps.locale !== locale || prevProps.phrasesByLocale !== phrasesByLocale) {
+  public componentDidUpdate(prevProps: IProps, prevState: IState) {
+    const { phrasesByLocale } = this.props;
+    const { locale } = this.state;
+    if (prevState.locale !== locale || prevProps.phrasesByLocale !== phrasesByLocale) {
       this.polyglot.locale(locale);
       this.polyglot.replace(phrasesByLocale[locale]);
-      this.setState({ translator: makeTranslator(this.polyglot) });
+      this.setState({ translator: this.makeTranslator(this.polyglot) });
     }
   }
 
   public render() {
-    const { children, locale } = this.props;
-    return <I18nContext.Provider value={{ t: this.state.translator, locale }}>{children}</I18nContext.Provider>;
+    const { children } = this.props;
+    const { locale, translator, changeLanguage } = this.state;
+    return (
+      <I18nContext.Provider value={{ t: translator, locale, changeLanguage }}>
+        {children}
+      </I18nContext.Provider>
+    );
+  }
+
+  private changeLanguage(value: Lang) {
+    this.setState({ locale: value });
+  }
+
+  private makeTranslator(polyglot: Polyglot): ITranslateFunction {
+    return (phrase: ITranslateKey, smartCountOrInterpolationOptions?: number | Polyglot.InterpolationOptions) => {
+      if (typeof phrase === 'string') {
+        return polyglot.t(phrase, smartCountOrInterpolationOptions as any);
+      }
+      return polyglot.t(phrase.key, phrase.params);
+    };
   }
 }
 
-function makeTranslator(polyglot: Polyglot): ITranslateFunction {
-  return (phrase: ITranslateKey, smartCountOrInterpolationOptions?: number | Polyglot.InterpolationOptions) => {
-    if (typeof phrase === 'string') {
-      return polyglot.t(phrase, smartCountOrInterpolationOptions as any);
-    }
-    return polyglot.t(phrase.key, phrase.params);
-  };
-}
-
-function mapState(state: IAppReduxState) {
-  return {
-    locale: selectors.selectCurrentLocale(state),
-  };
-}
-
-export default (
-  withRouter(
-    withProps(
-      connect(mapState)(I18nProvider), { phrasesByLocale: phrases },
-    ),
-  )
-);
+export default withProps(I18nProvider, { phrasesByLocale: phrases });

@@ -1,11 +1,4 @@
-import { IAction } from 'shared/types/redux';
 import * as Polyglot from 'node-polyglot';
-
-export interface IReduxState {
-  data: {
-    currentLocale: Lang;
-  };
-}
 
 type CustomTranslateFunction = (phrase: IPhraseWithOptions) => string;
 interface IPhraseWithOptions {
@@ -21,8 +14,5 @@ export type Lang = 'en' | 'ru';
 export interface ITranslateProps {
   locale: Lang;
   t: ITranslateFunction;
+  changeLanguage(lang: Lang): void;
 }
-
-export type IChangeLanguage = IAction<'I18N_SERVICE:CHANGE_LANGUAGE', Lang>;
-
-export type Action = IChangeLanguage;

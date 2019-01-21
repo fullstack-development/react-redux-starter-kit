@@ -20,4 +20,5 @@ const polyglot: Polyglot = new Polyglot({
 export const I18nContext = React.createContext<ITranslateProps>({
   t: polyglot.t.bind(polyglot) as ITranslateFunction,
   locale: DEFAULT_LANGUAGE,
+  changeLanguage: () => null,
 });

@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import { ITranslateProps } from '../../namespace';
 import { I18nContext } from '../../constants';
+import { Omit } from '_helpers';
 
-function i18nConsumer<TProps>(
-  WrappedComponent: React.ComponentType<TProps & ITranslateProps>,
-): React.ComponentClass<TProps> {
+function i18nConsumer<TProps extends ITranslateProps>(
+  WrappedComponent: React.ComponentType<TProps>,
+): React.ComponentClass<Omit<TProps, keyof ITranslateProps>> {
   const wrappedComponentName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
   class I18nConnector extends React.Component<TProps> {
@@ -19,7 +20,8 @@ function i18nConsumer<TProps>(
       );
     }
   }
+
   return I18nConnector;
 }
 
-export { i18nConsumer };
+export { i18nConsumer as withI18n };
