@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 
 import { SimpleList, Button, Typography, CircleProgressBar } from 'shared/view/elements';
+import { ThemeSelector } from 'services/theme';
 
 import { StylesProps, provideStyles } from './DemoGUI.style';
 import { TextInputs, RadioGroups, Checkboxes } from './components';
-import { ThemeSelector } from 'services/theme';
 
 function DemoGUI(_props: StylesProps) {
   const onSubmit = (values: Record<string, string | number>) => console.log(values);
