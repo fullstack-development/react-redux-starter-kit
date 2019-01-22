@@ -58,6 +58,7 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     cwd: process.cwd(),
   }),
   new FaviconsWebpackPlugin(path.resolve(__dirname, '..', 'src', 'assets', 'favicon.png')),
+  new webpack.NamedModulesPlugin(),
 ]
   .concat(type !== 'server' ? (
     new ForkTsCheckerWebpackPlugin({
@@ -93,6 +94,7 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
         loader: 'babel-loader',
         options: {
           babelrc: false,
+          cacheDirectory: true,
           plugins: [
             'react-hot-loader/babel',
             'syntax-dynamic-import',

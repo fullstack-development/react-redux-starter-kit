@@ -1,6 +1,5 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import * as nodeExternals from 'webpack-node-externals';
 
 import getDevConfig from '../dev.config';
 import getProdConfig from '../prod.config';

@@ -4,11 +4,11 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
 import { ThemeProvider } from 'services/theme';
+import { I18nProvider } from 'services/i18n';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { JssProvider, SheetsRegistry } from 'shared/styles';
 
 import createRoutes from './routes';
-import { I18nProvider } from 'services/i18n';
 
 interface IAppProps {
   jssDeps: IJssDependencies;
