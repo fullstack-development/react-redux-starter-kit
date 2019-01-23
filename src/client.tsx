@@ -6,15 +6,9 @@ import * as ReactDOM from 'react-dom';
 import * as bootstrapper from 'react-async-bootstrapper';
 import configureApp from 'core/configureApp';
 
-import { hot, setConfig } from 'react-hot-loader';
 import getEnvParams from './core/getEnvParams';
 
 const { appVersion } = getEnvParams();
-
-setConfig({
-  ignoreSFC: true,
-  pureRender: true,
-});
 
 const appData = configureApp();
 
@@ -41,7 +35,7 @@ if ((module as any).hot && process.env.NODE_ENV !== 'production') {
 
 function render(component: React.ReactElement<any>) {
   ReactDOM.hydrate(
-    hot(component),
+    component,
     document.getElementById('root'),
     () => {
       // We don't need the static css any more once we have launched our application.

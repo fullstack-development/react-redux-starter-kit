@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
+import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'services/theme';
 import { I18nProvider } from 'services/i18n';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
@@ -15,7 +16,9 @@ interface IAppProps {
   disableStylesGeneration?: boolean;
 }
 
-export function App({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
+export const App = hot(Application);
+
+function Application({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
   return (
     <Provider store={store}>
       <BrowserRouter>

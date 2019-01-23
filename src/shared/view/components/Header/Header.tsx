@@ -10,10 +10,10 @@ interface IProps {
 
 class Header extends React.PureComponent<IProps & StylesProps> {
   public render() {
-    const { children } = this.props;
+    const { children, classes } = this.props;
 
     return (
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           {children}
         </Toolbar>
