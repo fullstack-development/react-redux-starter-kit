@@ -1,10 +1,7 @@
-import build from 'build-route-tree';
+import { routes as homeRoutes } from './Home/routes';
+import { routes as demoRoutes } from './Demo/routes';
 
-const rawTree = {
-  demo: {
-    gui: null,
-    translations: null,
-  },
+export default {
+  ...homeRoutes,
+  ...demoRoutes,
 };
-
-export default build(rawTree);

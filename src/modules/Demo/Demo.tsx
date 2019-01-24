@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
-import BaseLayout from '../shared/BaseLayout/BaseLayout';
 
-import DemoGUI from './view/DemoGUI/DemoGUI';
+import BaseLayout from '../shared/BaseLayout/BaseLayout';
 import DemoTranslations from './view/DemoTranslations/DemoTranslations';
+import DemoGUI from './view/DemoGUI/DemoGUI';
+import { routes } from './routes';
 
 const DemoModule: IModule = {
   getRoutes() {
