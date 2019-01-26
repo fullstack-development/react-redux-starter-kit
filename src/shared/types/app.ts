@@ -4,6 +4,7 @@ import { Store, Reducer, ActionCreator, Action } from 'redux';
 import { SagaIterator } from 'redux-saga';
 import { GenerateClassName } from 'jss';
 
+import * as features from 'features';
 import Api from 'services/api/Api';
 import * as ThemeProviderNS from 'services/theme/namespace';
 import { JSS } from 'shared/styles';
@@ -50,6 +51,8 @@ export interface IFeatureEntry<
 export interface IAppReduxState {
   // services
   theme: ThemeProviderNS.IReduxState;
+  // features
+  buyCakes: features.buyCakesFeature.namespace.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
