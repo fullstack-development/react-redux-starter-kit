@@ -2,7 +2,7 @@ import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
 
-import { DemoModule, HomeModule } from 'modules';
+import * as allModules from 'modules';
 import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as themeProviderRE } from 'services/theme';
@@ -10,7 +10,7 @@ import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared
 
 function configureApp(data?: IAppData): IAppData {
   /* Prepare main app elements */
-  const modules: IModule[] = [DemoModule, HomeModule];
+  const modules: IModule[] =  Object.values(allModules);
 
   if (data) {
     return { ...data, modules };
