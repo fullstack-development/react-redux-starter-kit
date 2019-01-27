@@ -1,7 +1,8 @@
 import { bind } from 'decko';
 
-import { IUser } from 'shared/types/models';
+import { IUser, ISearchUserResponse } from 'shared/types/models';
 
+import { convertUser } from './converters';
 import HttpActions from './HttpActions';
 
 class Api {
@@ -14,11 +15,9 @@ class Api {
 
   @bind
   public async searchUser(userName: string): Promise<IUser[]> {
-    const response = await this.actions.get(`https://api.github.com/search/users?q=${userName}`);
-    console.log(response);
-    // const { responseURL } = response.request;
-    // const imageID = responseURL.match(/\?image=(\d+)/)[1];
-    return response.data as any;
+    const response = await this.actions.get<ISearchUserResponse>(`https://api.github.com/search/users?q=${userName}`);
+    const users = response.data.items;
+    return users.map(x => convertUser(x));
   }
 }
 
