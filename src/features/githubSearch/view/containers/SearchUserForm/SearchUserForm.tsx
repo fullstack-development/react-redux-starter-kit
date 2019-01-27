@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import { Form, FormRenderProps } from 'react-final-form';
 
+import { makeFormFieldNames } from 'shared/helpers';
 import { TextInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 
 import { actions } from './../../../redux';
+import { IFormFields } from '../../../namespace';
 
 interface IActionProps {
   searchUser: typeof actions.searchUser;
@@ -20,6 +22,8 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
     searchUser: actions.searchUser,
   }, dispatch);
 }
+
+const fieldNames = makeFormFieldNames<IFormFields>(['search']);
 
 class SearchUserForm extends React.PureComponent<IProps> {
   public render() {
@@ -35,15 +39,15 @@ class SearchUserForm extends React.PureComponent<IProps> {
   private renderForm({ handleSubmit, submitting }: FormRenderProps) {
     return (
       <form onSubmit={handleSubmit} className="search-form">
-        <TextInputField name="search-field"/>
+        <TextInputField name={fieldNames.search}/>
         <Button type="submit" disabled={submitting}>Search</Button>
       </form>
     );
   }
 
   @bind
-  private handleSearchUserFormSubmit(values: any) {
-    this.props.searchUser(values['search-field']);
+  private handleSearchUserFormSubmit(values: IFormFields) {
+    this.props.searchUser(values.search);
   }
 }
 

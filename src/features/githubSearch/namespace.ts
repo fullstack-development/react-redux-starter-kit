@@ -10,6 +10,10 @@ export interface IReduxState {
   };
 }
 
+export interface IFormFields {
+  search: string;
+}
+
 export type ISearchUser = IAction<'GITHUB_SEARCH:SEARCH_USER', string>;
 export type ISearchUserSuccess = IAction<'GITHUB_SEARCH:SEARCH_USER_SUCCESS', any>;
 export type ISearchUserFail = IPlainFailAction<'GITHUB_SEARCH:SEARCH_USER_FAIL'>;
