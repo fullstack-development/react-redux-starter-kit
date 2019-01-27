@@ -1,3 +1,3 @@
-import * as buyCakesFeature from './buyCakes';
+import * as githubSearch from './githubSearch';
 
-export { buyCakesFeature };
+export { githubSearch };

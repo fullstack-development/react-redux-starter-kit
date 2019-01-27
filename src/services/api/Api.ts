@@ -1,20 +1,24 @@
-import { delay } from 'redux-saga';
+import { bind } from 'decko';
 
-import { ICakePreview } from 'shared/types/models';
+import { IUser } from 'shared/types/models';
 
-// import HttpActions from './HttpActions';
-import { cakesPreview } from './mocks';
+import HttpActions from './HttpActions';
 
 class Api {
-  // private actions: HttpActions;
+  private actions: HttpActions;
 
   constructor(public baseUrl: string, public version: string = 'v1') {
     // this.actions = new HttpActions(`${baseUrl}/${version}`);
+    this.actions = new HttpActions('');
   }
 
-  public async loadCakesPreview(): Promise<ICakePreview[]> {
-    await delay(500);
-    return cakesPreview;
+  @bind
+  public async searchUser(userName: string): Promise<IUser[]> {
+    const response = await this.actions.get(`https://api.github.com/search/users?q=${userName}`);
+    console.log(response);
+    // const { responseURL } = response.request;
+    // const imageID = responseURL.match(/\?image=(\d+)/)[1];
+    return response.data as any;
   }
 }
 

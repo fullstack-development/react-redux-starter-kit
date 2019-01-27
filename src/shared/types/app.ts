@@ -52,7 +52,7 @@ export interface IAppReduxState {
   // services
   theme: ThemeProviderNS.IReduxState;
   // features
-  buyCakes: features.buyCakesFeature.namespace.IReduxState;
+  githubSearch: features.githubSearch.namespace.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;

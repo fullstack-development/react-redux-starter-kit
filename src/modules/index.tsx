@@ -1,3 +1,1 @@
-export { default as DemoModule } from './Demo/Demo';
-export { default as HomeModule } from './Home/Home';
-export { default as StoreModule } from './Store/Store';
+export { default as SearchModule } from './Search/Search';
