@@ -1,1 +1,1 @@
-// export { default as CakePreview } from './CakePreview/CakePreview';
+export { default as UserAvatarsWall } from './UserAvatarsWall/UserAvatarsWall';

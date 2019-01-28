@@ -1,1 +1,2 @@
-export { default as SearchUserForm } from './SearchUserForm/SearchUserForm';
+export { default as UserSearchForm } from './UserSearchForm/UserSearchForm';
+export { default as UserSearchResults } from './UserSearchResults/UserSearchResults';

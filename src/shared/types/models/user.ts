@@ -4,6 +4,8 @@ export interface ISearchUserResponse {
 }
 
 export interface IServerUser {
+  id: number;
+  login: string;
   avatar_url: string;
   followers_url: string;
   following_url: string;
@@ -16,6 +18,8 @@ export interface IServerUser {
 }
 
 export interface IUser {
+  id: number;
+  login: string;
   avatarURL: string;
   followersURL: string;
   followingURL: string;

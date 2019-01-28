@@ -2,6 +2,8 @@ import { IServerUser } from 'shared/types/models';
 
 export function convertUser(user: IServerUser) {
   return {
+    id: user.id,
+    login: user.login,
     avatarURL: user.avatar_url,
     followersURL: user.followers_url,
     followingURL: user.following_url,

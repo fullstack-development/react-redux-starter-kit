@@ -14,7 +14,8 @@ class SearchLayout extends React.PureComponent<IProps> {
     const { githubSearchFeatureEntry } = this.props;
     return (
       <div className="">
-        <githubSearchFeatureEntry.containers.SearchUserForm />
+        <githubSearchFeatureEntry.containers.UserSearchForm />
+        <githubSearchFeatureEntry.containers.UserSearchResults />
       </div>
     );
   }

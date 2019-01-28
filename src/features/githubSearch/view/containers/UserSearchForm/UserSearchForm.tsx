@@ -25,11 +25,11 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 
 const fieldNames = makeFormFieldNames<IFormFields>(['search']);
 
-class SearchUserForm extends React.PureComponent<IProps> {
+class UserSearchForm extends React.PureComponent<IProps> {
   public render() {
     return (
       <Form
-        onSubmit={this.handleSearchUserFormSubmit}
+        onSubmit={this.handleUserSearchFormSubmit}
         render={this.renderForm}
       />
     );
@@ -46,9 +46,9 @@ class SearchUserForm extends React.PureComponent<IProps> {
   }
 
   @bind
-  private handleSearchUserFormSubmit(values: IFormFields) {
+  private handleUserSearchFormSubmit(values: IFormFields) {
     this.props.searchUser(values.search);
   }
 }
 
-export default connect(null, mapDispatch)(SearchUserForm);
+export default connect(null, mapDispatch)(UserSearchForm);

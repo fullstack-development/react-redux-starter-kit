@@ -15,7 +15,9 @@ class Api {
 
   @bind
   public async searchUser(userName: string): Promise<IUser[]> {
-    const response = await this.actions.get<ISearchUserResponse>(`https://api.github.com/search/users?q=${userName}`);
+    const URL = `https://api.github.com/search/users?q=${userName}&per_page=100`;
+    const response = await this.actions.get<ISearchUserResponse>(URL);
+    console.log(response.data);
     const users = response.data.items;
     return users.map(x => convertUser(x));
   }
