@@ -22,22 +22,22 @@ export type BuildType = 'dev' | 'prod' | 'server';
 
 const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
 
-const workerPool = {
-  workers: require('os').cpus().length - 1,
-  poolTimeout: withHot ? Infinity : 2000,
-};
-
-threadLoaderLib.warmup(workerPool, [
-  'babel-loader',
-  'ts-loader',
-  'postcss-loader',
-  'sass-loader',
-]);
-
-const threadLoader: webpack.Loader = {
-  loader: 'thread-loader',
-  options: workerPool,
-};
+const threadLoader: webpack.Loader[] = (() => {
+  if (process.env.ENABLE_THREAD_LOADER) {
+    const workerPool = {
+      workers: require('os').cpus().length - 1,
+      poolTimeout: withHot ? Infinity : 2000,
+    };
+    threadLoaderLib.warmup(workerPool, [
+      'babel-loader',
+      'ts-loader',
+      'postcss-loader',
+      'sass-loader',
+    ]);
+    return [{ loader: 'thread-loader', options: workerPool }];
+  }
+  return [];
+})();
 
 export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
@@ -90,7 +90,7 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
   {
     test: /\.tsx?$/,
     use:
-      [threadLoader]
+      threadLoader
       .concat(withHot && type === 'dev' ? {
         loader: 'babel-loader',
         options: {
@@ -144,7 +144,7 @@ export function getStyleRules(type: BuildType) {
     },
     {
       test: /\.scss$/,
-      use: [threadLoader].concat(scssFirstLoaders[type]).concat(commonScssLoaders),
+      use: threadLoader.concat(scssFirstLoaders[type]).concat(commonScssLoaders),
     },
   ];
 }
