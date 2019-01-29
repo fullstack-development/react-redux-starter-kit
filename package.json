@@ -41,7 +41,7 @@
         "WATCH_MODE": true,
         "NODE_ENV": "development",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "server:dev:debug": {
@@ -52,7 +52,7 @@
         "WATCH_MODE": true,
         "NODE_ENV": "development",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "server:prod": {
@@ -62,7 +62,7 @@
         "TS_NODE_FILES": true,
         "NODE_ENV": "production",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": true
+        "THREADED": true
       }
     },
     "server:prod:debug": {
@@ -72,7 +72,7 @@
         "TS_NODE_FILES": true,
         "NODE_ENV": "production",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": true
+        "THREADED": true
       }
     },
     "watch:dev": {
@@ -82,7 +82,7 @@
         "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "watch:prod": {
@@ -92,7 +92,7 @@
         "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "analyze:dev": {
@@ -119,7 +119,7 @@
         "NODE_ENV": "development",
         "TS_NODE_FILES": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "build:prod": {
@@ -128,14 +128,14 @@
         "NODE_ENV": "production",
         "TS_NODE_FILES": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "build:gh-pages": {
       "command": "better-npm-run build:prod",
       "env": {
         "NODE_ENV_MODE": "gh-pages",
-        "ENABLE_THREAD_LOADER": false
+        "THREADED": false
       }
     },
     "deploy:gh-pages": {
