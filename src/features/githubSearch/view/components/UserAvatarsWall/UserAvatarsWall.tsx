@@ -1,28 +1,61 @@
 import * as React from 'react';
 import { bind } from 'decko';
+import block from 'bem-cn';
+import * as R from 'ramda';
 
 import { IUser } from 'shared/types/models';
+
+import './UserAvatarsWall.scss';
+
+interface IState {
+  areAllAvatarsLoaded: boolean;
+}
 
 interface IProps {
   users: IUser[];
   onAvatarClick(user: IUser): void;
 }
 
+const b = block('users-avatars-wall');
+
 class UserAvatarsWall extends React.PureComponent<IProps> {
+  public state: IState = {
+    areAllAvatarsLoaded: false,
+  };
+
+  private get areAllAvatarsLoaded() {
+    return Object.values(this.avatarsLoadingStatus).every(x => x === true);
+  }
+
+  private avatarsLoadingStatus: Record<string, boolean> = {}; // { avatarURL: true/false };
+
+  public componentDidUpdate({ users: prevUsers }: IProps) {
+    const { users } = this.props;
+    if (users !== prevUsers) {
+      const currentAvatarsURLs = users.map(x => x.avatarURL);
+      const prevAvatarsURLs = prevUsers.map(x => x.avatarURL);
+
+      const addedAvatarsURLs = R.difference(currentAvatarsURLs, prevAvatarsURLs);
+      const existingAvatarsURLs = R.without(addedAvatarsURLs, currentAvatarsURLs);
+
+      this.avatarsLoadingStatus = {
+        ...R.zipObj(existingAvatarsURLs, existingAvatarsURLs.map(x => this.avatarsLoadingStatus[x])),
+        ...R.zipObj(addedAvatarsURLs, Array(addedAvatarsURLs.length).fill(false)),
+      };
+
+      if (!this.areAllAvatarsLoaded) {
+        this.setState({ areAllAvatarsLoaded: false });
+      }
+    }
+  }
+
   public render() {
     const { users } = this.props;
-    return (
-      <div className="user-avatars-wall" style={{ cursor: 'pointer' }}>
-        <ul
-          className="avatars"
-          style={{
-            listStyle: 'none',
-            padding: 0,
-            display: 'flex',
-            width: '90rem',
-            flexWrap: 'wrap',
-          }}
-        >
+    const { areAllAvatarsLoaded } = this.state;
+    return users.length > 0 && (
+      <div className={b()}>
+        <ul className={b('avatars')}>
+          {!areAllAvatarsLoaded && this.renderPreloader()}
           {users.map(this.renderUserAvatar)}
         </ul>
       </div>
@@ -35,18 +68,36 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     return (
       <li
         key={i}
-        className="avatar"
+        className={b('avatar')}
         onClick={this.makeAvatarClickHandler(user)}
-        style={{ textAlign: 'center', fontSize: '0.7rem', margin: '0.25rem', width: '4rem' }}
       >
-        <img src={avatarURL} style={{ width: '100%' }}/>
+        <img className={b('image')} src={avatarURL} onLoad={this.makeImageOnLoadHandler(user.avatarURL)}/>
       </li>
+    );
+  }
+
+  private renderPreloader() {
+    return (
+      <div className={b('preloder')}>
+        THIS IS PRELOADER
+      </div>
     );
   }
 
   @bind
   private makeAvatarClickHandler(user: IUser) {
     return () => this.props.onAvatarClick(user);
+  }
+
+  @bind
+  private makeImageOnLoadHandler(avatarURL: string) {
+    return () => {
+      this.avatarsLoadingStatus = { ...this.avatarsLoadingStatus, [avatarURL]: true };
+
+      if (this.areAllAvatarsLoaded) {
+        this.setState({ areAllAvatarsLoaded: true });
+      }
+    };
   }
 }
 

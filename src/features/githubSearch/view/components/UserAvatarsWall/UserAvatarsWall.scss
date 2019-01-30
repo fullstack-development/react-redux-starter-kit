@@ -1,0 +1,19 @@
+.users-avatars-wall {
+  &__avatars {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    width: 90rem;
+    list-style: none;
+  }
+
+  &__avatar {
+    margin: 0.25rem;
+    width: 4rem;
+    cursor: pointer;
+  }
+
+  &__image {
+    width: 100%;
+  }
+}
