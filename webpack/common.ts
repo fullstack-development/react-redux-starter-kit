@@ -6,7 +6,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as CircularDependencyPlugin from 'circular-dependency-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import * as threadLoader from 'thread-loader';
+import * as threadLoaderLib from 'thread-loader';
 import * as FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 
 import * as postcssReporter from 'postcss-reporter';
@@ -22,17 +22,22 @@ export type BuildType = 'dev' | 'prod' | 'server';
 
 const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
 
-const workerPool = {
-  workers: require('os').cpus().length - 1,
-  poolTimeout: withHot ? Infinity : 2000,
-};
-
-threadLoader.warmup(workerPool, [
-  'babel-loader',
-  'ts-loader',
-  'postcss-loader',
-  'sass-loader',
-]);
+const threadLoader: webpack.Loader[] = (() => {
+  if (process.env.THREADED === 'true') {
+    const workerPool = {
+      workers: require('os').cpus().length - 1,
+      poolTimeout: withHot ? Infinity : 2000,
+    };
+    threadLoaderLib.warmup(workerPool, [
+      'babel-loader',
+      'ts-loader',
+      'postcss-loader',
+      'sass-loader',
+    ]);
+    return [{ loader: 'thread-loader', options: workerPool }];
+  }
+  return [];
+})();
 
 export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
@@ -84,11 +89,8 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
 export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
   {
     test: /\.tsx?$/,
-    use: ([
-      {
-        loader: 'thread-loader',
-        options: workerPool,
-      }] as webpack.Loader[])
+    use:
+      threadLoader
       .concat(withHot && type === 'dev' ? {
         loader: 'babel-loader',
         options: {
@@ -129,6 +131,7 @@ export function getStyleRules(type: BuildType) {
     prod: [MiniCssExtractPlugin.loader, 'css-loader'],
     server: ['css-loader/locals'],
   };
+
   const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader?importLoaders=1'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
@@ -142,16 +145,12 @@ export function getStyleRules(type: BuildType) {
     },
     {
       test: /\.scss$/,
-      use: (scssFirstLoaders[type]).concat(commonScssLoaders),
+      use: threadLoader.concat(scssFirstLoaders[type]).concat(commonScssLoaders),
     },
   ];
 }
 
 const commonScssLoaders: webpack.Loader[] = [
-  {
-    loader: 'thread-loader',
-    options: workerPool,
-  },
   {
     loader: 'postcss-loader',
     options: {

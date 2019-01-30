@@ -38,7 +38,8 @@
         "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "NODE_ENV": "development",
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}",
+        "THREADED": false
       }
     },
     "server:dev:debug": {
@@ -48,7 +49,8 @@
         "TS_NODE_FILES": true,
         "WATCH_MODE": true,
         "NODE_ENV": "development",
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es6\", \"module\": \"commonjs\"}",
+        "THREADED": false
       }
     },
     "server:prod": {
@@ -57,7 +59,8 @@
         "PORT": 8080,
         "TS_NODE_FILES": true,
         "NODE_ENV": "production",
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": true
       }
     },
     "server:prod:debug": {
@@ -66,7 +69,8 @@
         "PORT": 8080,
         "TS_NODE_FILES": true,
         "NODE_ENV": "production",
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": true
       }
     },
     "watch:dev": {
@@ -75,7 +79,8 @@
         "NODE_ENV": "development",
         "TS_NODE_FILES": true,
         "WATCH_MODE": true,
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": false
       }
     },
     "watch:prod": {
@@ -84,7 +89,8 @@
         "NODE_ENV": "production",
         "TS_NODE_FILES": true,
         "WATCH_MODE": true,
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": false
       }
     },
     "analyze:dev": {
@@ -110,7 +116,8 @@
       "env": {
         "NODE_ENV": "development",
         "TS_NODE_FILES": true,
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": false
       }
     },
     "build:prod": {
@@ -118,7 +125,8 @@
       "env": {
         "NODE_ENV": "production",
         "TS_NODE_FILES": true,
-        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": false
       }
     }
   },
