@@ -1,13 +1,15 @@
 import * as React from 'react';
+import Grid from '@material-ui/core/Grid';
 
-import { SimpleList, Typography, FormControlLabel, Radio } from 'shared/view/elements';
+import { Typography, FormControlLabel, Radio } from 'shared/view/elements';
 import { RadioGroupInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
+import { provideStyles, StylesProps } from './RadioGroups.style';
 
-function RadioGroups(_props: {}) {
+function RadioGroups({ classes }: StylesProps) {
   return (
-    <SimpleList marginFactor={4} direction="row">
-      <SimpleList marginFactor={2} gutter>
+    <>
+      <Grid item className={classes.gridItem}>
         <Typography variant="h4">Radio button</Typography>
         <RadioGroupInputField name="radio1" label="Radio buttons">
           <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -15,8 +17,8 @@ function RadioGroups(_props: {}) {
           <FormControlLabel disabled value="disabled" control={<Radio />} label="Disabled" />
           <FormControlLabel value="other" control={<Radio />} label="Other" />
         </RadioGroupInputField>
-      </SimpleList>
-      <SimpleList marginFactor={2}>
+      </Grid>
+      <Grid item className={classes.gridItem}>
         <Typography variant="h4">Radio with error</Typography>
         <RadioGroupInputField error name="radio2" label="Required radio buttons" required validate={isRequired}>
           <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -24,9 +26,9 @@ function RadioGroups(_props: {}) {
           <FormControlLabel disabled value="disabled" control={<Radio />} label="Disabled" />
           <FormControlLabel value="other" control={<Radio />} label="Other" />
         </RadioGroupInputField>
-      </SimpleList>
-    </SimpleList>
+      </Grid>
+    </>
   );
 }
 
-export default RadioGroups;
+export default provideStyles(RadioGroups);

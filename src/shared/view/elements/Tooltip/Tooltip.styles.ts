@@ -1,4 +1,4 @@
-import { withStyles, WithStyles, Theme, CSSProperties } from 'shared/styles';
+import { withStyleSheet, WithStyles, Theme, CSSProperties } from 'shared/styles';
 import { rule } from 'shared/helpers/style';
 
 function arrowGenerator(color: string): CSSProperties {
@@ -75,6 +75,6 @@ const styles = (theme: Theme) => ({
   }),
 });
 
-export const provideStyles = withStyles(styles);
+export const provideStyles = withStyleSheet(styles);
 
 export type StylesProps = WithStyles<typeof styles>;

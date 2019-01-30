@@ -1,5 +1,6 @@
+// tslint:disable-next-line:import-blacklist
+import injectSheet from 'react-jss';
 import { rule } from 'shared/helpers/style';
-import { withStyles } from './jss';
 
 const styles = {
   '@global': rule({
@@ -17,4 +18,4 @@ const styles = {
   }),
 };
 
-export default withStyles(styles)();
+export default injectSheet(styles)();

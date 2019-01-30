@@ -1,4 +1,4 @@
-import { withStyles, WithStyles, Theme } from 'shared/styles';
+import { withStyleSheet, WithStyles, Theme } from 'shared/styles';
 import { rule } from 'shared/helpers/style';
 
 const styles = (theme: Theme) => ({
@@ -15,6 +15,6 @@ const styles = (theme: Theme) => ({
   }),
 });
 
-export const provideStyles = withStyles(styles);
+export const provideStyles = withStyleSheet(styles);
 
 export type StylesProps = WithStyles<typeof styles>;

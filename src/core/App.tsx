@@ -16,9 +16,7 @@ interface IAppProps {
   disableStylesGeneration?: boolean;
 }
 
-export const App = hot(Application);
-
-function Application({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
+function ClientApp({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -27,6 +25,8 @@ function Application({ modules, store, jssDeps, disableStylesGeneration }: IAppD
     </Provider>
   );
 }
+
+export const App = hot(ClientApp);
 
 interface IServerAppProps {
   jssDeps: IJssDependencies;
