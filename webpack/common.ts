@@ -23,7 +23,7 @@ export type BuildType = 'dev' | 'prod' | 'server';
 const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
 
 const threadLoader: webpack.Loader[] = (() => {
-  if (process.env.THREADED) {
+  if (process.env.THREADED === 'true') {
     const workerPool = {
       workers: require('os').cpus().length - 1,
       poolTimeout: withHot ? Infinity : 2000,
