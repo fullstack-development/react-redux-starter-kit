@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import { bind } from 'decko';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -12,15 +12,15 @@ import { actions, selectors } from './../../../redux';
 import './SomeContainer.scss';
 
 interface IOwnProps {
-  
+
 }
 
 interface IStateProps {
-  
+
 }
 
 interface IActionProps {
-  
+
 }
 
 type IProps = IStateProps & IActionProps & IOwnProps;
