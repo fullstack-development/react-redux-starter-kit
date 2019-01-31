@@ -6,7 +6,7 @@ import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
 
 import { makeFormFieldNames } from 'shared/helpers';
-import { TextInputField, SelectField } from 'shared/view/form';
+import { TextInputField, SelectField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { Dialog } from 'shared/view/components';
 
@@ -31,7 +31,7 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
   }, dispatch);
 }
 
-const fieldNames = makeFormFieldNames<IFormFields>(['search', 'searchBy']);
+const fieldNames = makeFormFieldNames<IFormFields>(['search', 'searchBy', 'minRepos', 'maxRepos']);
 
 const b = block('user-search-form');
 
@@ -88,6 +88,22 @@ class UserSearchForm extends React.PureComponent<IProps> {
           <div className={b('settings-input')}>
             <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} fullWidth />
           </div>
+          <div className={b('repos-number')}>
+            <div className={b('settings-input')}>
+              <NumberInputField
+                name={fieldNames.minRepos}
+                label="Min repos number"
+                fullWidth
+              />
+            </div>
+            <div className={b('settings-input')}>
+              <NumberInputField
+                name={fieldNames.maxRepos}
+                label="Max repos number"
+                fullWidth
+              />
+            </div>
+          </div>
         </div>
       </Dialog>
     );
@@ -105,8 +121,8 @@ class UserSearchForm extends React.PureComponent<IProps> {
   @bind
   private handleUserSearchFormSubmit(values: IFormFields) {
     console.log(values);
-    const { search, searchBy } = values;
-    this.props.searchUser({ queryText: search, options: { searchBy }});
+    const { search, searchBy, minRepos, maxRepos } = values;
+    this.props.searchUser({ queryText: search, options: { searchBy, minRepos, maxRepos }});
   }
 
   @bind

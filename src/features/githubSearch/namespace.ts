@@ -14,6 +14,8 @@ export interface IReduxState {
 export interface IFormFields {
   search: string;
   searchBy: IUserSearchOptions['searchBy'];
+  minRepos?: number;
+  maxRepos?: number;
 }
 
 export interface ISearchUserPayload {
