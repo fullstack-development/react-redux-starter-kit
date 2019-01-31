@@ -1,7 +1,9 @@
 import { bind } from 'decko';
 
+import { IUserSearchOptions } from 'shared/types/github';
 import { IUser, ISearchUserResponse } from 'shared/types/models';
 
+import { constructUserSearchQuery } from './helpers';
 import { convertUser } from './converters';
 import HttpActions from './HttpActions';
 
@@ -14,8 +16,8 @@ class Api {
   }
 
   @bind
-  public async searchUser(userName: string): Promise<IUser[]> {
-    const URL = `https://api.github.com/search/users?q=${userName}&per_page=100`;
+  public async searchUser(queryText: string, options: IUserSearchOptions): Promise<IUser[]> {
+    const URL = `https://api.github.com/search/users?q=${constructUserSearchQuery(queryText, options)}`;
     const response = await this.actions.get<ISearchUserResponse>(URL);
     console.log(response.data);
     const users = response.data.items;

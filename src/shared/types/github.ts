@@ -1,3 +1,3 @@
-export interface IUserSearchQualifiers {
-  searchBy: 'login' | 'fullname' | 'email';
+export interface IUserSearchOptions {
+  searchBy: 'login' | 'fullname' | 'email' | 'login-email';
 }

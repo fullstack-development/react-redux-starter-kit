@@ -1,5 +1,6 @@
 import { IUser } from 'shared/types/models';
 import { ICommunication, IPlainFailAction, IAction } from 'shared/types/redux';
+import { IUserSearchOptions } from 'shared/types/github';
 
 export interface IReduxState {
   data: {
@@ -12,11 +13,16 @@ export interface IReduxState {
 
 export interface IFormFields {
   search: string;
-  test: string;
+  searchBy: IUserSearchOptions['searchBy'];
 }
 
-export type ISearchUser = IAction<'GITHUB_SEARCH:SEARCH_USER', string>;
-export type ISearchUserSuccess = IAction<'GITHUB_SEARCH:SEARCH_USER_SUCCESS', any>;
+export interface ISearchUserPayload {
+  queryText: string;
+  options: IUserSearchOptions;
+}
+
+export type ISearchUser = IAction<'GITHUB_SEARCH:SEARCH_USER', ISearchUserPayload>;
+export type ISearchUserSuccess = IAction<'GITHUB_SEARCH:SEARCH_USER_SUCCESS', any>; // TODO ???
 export type ISearchUserFail = IPlainFailAction<'GITHUB_SEARCH:SEARCH_USER_FAIL'>;
 
 export type IAction = ISearchUser | ISearchUserSuccess | ISearchUserFail;

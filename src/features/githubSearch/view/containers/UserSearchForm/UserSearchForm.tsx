@@ -6,13 +6,14 @@ import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
 
 import { makeFormFieldNames } from 'shared/helpers';
-import { TextInputField } from 'shared/view/form';
-import { Button, Select } from 'shared/view/elements';
+import { TextInputField, SelectField } from 'shared/view/form';
+import { Button } from 'shared/view/elements';
 import { Dialog } from 'shared/view/components';
 
 import { actions } from './../../../redux';
 import { IFormFields } from '../../../namespace';
 import { searchByOptions } from './constants';
+import './UserSearchForm.scss';
 
 interface IState {
   isSettingsDialogOpen: boolean;
@@ -30,7 +31,7 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
   }, dispatch);
 }
 
-const fieldNames = makeFormFieldNames<IFormFields>(['search', 'test']);
+const fieldNames = makeFormFieldNames<IFormFields>(['search', 'searchBy']);
 
 const b = block('user-search-form');
 
@@ -39,29 +40,38 @@ class UserSearchForm extends React.PureComponent<IProps> {
     isSettingsDialogOpen: false,
   };
 
-  private searchSettings: any; // TODO: !!!!!1111
-
   public render() {
     return (
       <Form
         onSubmit={this.handleUserSearchFormSubmit}
         render={this.renderForm}
+        initialValues={{
+          searchBy: searchByOptions[0].value,
+        }}
       />
     );
   }
 
   // TODO: add 18n everywhere
   @bind
-  private renderForm({ handleSubmit, values }: FormRenderProps) {
+  private renderForm({ handleSubmit }: FormRenderProps) {
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <TextInputField name={fieldNames.search} />
-        <Button type="submit" variant="outlined">Search</Button>
-        <div className={b('settings-button')} onClick={this.makeSettingsButtonClickHandler(values as IFormFields)}>
-          <Button variant="outlined">Settings</Button>
-        </div>
+        {this.renderTextFieldAndButtons()}
         {this.renderSettingsDialog()}
       </form>
+    );
+  }
+
+  private renderTextFieldAndButtons() {
+    return (
+      <>
+        <TextInputField name={fieldNames.search} />
+        <Button type="submit" variant="outlined">Search</Button>
+        <div className={b('settings-button')} onClick={this.handleSettingsButtonClick}>
+          <Button variant="outlined">Settings</Button>
+        </div>
+      </>
     );
   }
 
@@ -75,7 +85,9 @@ class UserSearchForm extends React.PureComponent<IProps> {
         renderActions={this.renderSettingsDialogActions}
       >
         <div className={b('settings-dialog')}>
-          <Select options={searchByOptions} label="Search by" name="search-by" fullWidth />
+          <div className={b('settings-input')}>
+            <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} fullWidth />
+          </div>
         </div>
       </Dialog>
     );
@@ -84,38 +96,26 @@ class UserSearchForm extends React.PureComponent<IProps> {
   @bind
   private renderSettingsDialogActions() {
     return (
-      <div className={b('settings-dialog-buttons')}>
-        <Button variant="outlined" onClick={this.handleSettingsApplyButtonClick}>Apply</Button>
-        <Button variant="outlined" onClick={this.handleSettingsDialogClose}>Cancel</Button>
+      <div className={b('settings-actions')}>
+        <Button variant="outlined" onClick={this.handleSettingsDialogClose}>Ok</Button>
       </div>
     );
   }
 
   @bind
   private handleUserSearchFormSubmit(values: IFormFields) {
-    console.log(values, this.searchSettings);
-    this.props.searchUser(values.search);
+    console.log(values);
+    const { search, searchBy } = values;
+    this.props.searchUser({ queryText: search, options: { searchBy }});
   }
 
   @bind
-  private makeSettingsButtonClickHandler(values: IFormFields) {
-    return () => {
-      this.searchSettings = {
-        ...values,
-      };
-      this.setState({ isSettingsDialogOpen: true });
-    };
+  private handleSettingsButtonClick() {
+    this.setState({ isSettingsDialogOpen: true });
   }
 
   @bind
   private handleSettingsDialogClose() {
-    this.setState({ isSettingsDialogOpen: false });
-  }
-
-  @bind
-  private handleSettingsApplyButtonClick() {
-    // const { saveSearchSettings } = this.props;
-    // saveSearchSettings();
     this.setState({ isSettingsDialogOpen: false });
   }
 }

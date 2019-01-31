@@ -19,7 +19,8 @@ function getSaga(deps: IDependencies) {
 
 function* executeSearchUser({ api }: IDependencies, { payload }: NS.ISearchUser) {
   try {
-    const foundUsers: IUser[] = yield call(api.searchUser, payload);
+    const { queryText, options } = payload;
+    const foundUsers: IUser[] = yield call(api.searchUser, queryText, options);
     yield put(actions.searchUserSuccess(foundUsers));
   } catch (error) {
     yield put(actions.searchUserFail(getErrorMsg(error)));
