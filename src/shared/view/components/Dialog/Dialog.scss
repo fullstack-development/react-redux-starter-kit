@@ -1,0 +1,15 @@
+.dialog {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0.7rem;
+  }
+
+  &__content {
+    $border-style: 0.1rem solid #e5e5e5;
+
+    border-top: $border-style;
+    border-bottom: $border-style;
+  }
+}
