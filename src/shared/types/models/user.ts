@@ -3,6 +3,8 @@ export interface ISearchUserResponse {
   total_count: number;
 }
 
+// TODO: think about github types placement
+
 export interface IServerUser {
   id: number;
   login: string;

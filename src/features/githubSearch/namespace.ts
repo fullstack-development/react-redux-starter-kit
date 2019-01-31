@@ -12,6 +12,7 @@ export interface IReduxState {
 
 export interface IFormFields {
   search: string;
+  test: string;
 }
 
 export type ISearchUser = IAction<'GITHUB_SEARCH:SEARCH_USER', string>;
