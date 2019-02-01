@@ -31,10 +31,9 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 }
 
 const fieldNames = makeFormFieldNames<IFormFields>([
-  'search', 'searchBy', 'minRepos', 'maxRepos', 'searchType', 'reposLanguage',
+  'search', 'searchBy', 'minRepos', 'maxRepos', 'searchType', 'reposLanguage', 'perPage',
 ]);
-const formInitialValues: Partial<IFormFields> = { searchBy: 'login-email', searchType: 'both' };
-
+const formInitialValues: Partial<IFormFields> = { searchBy: 'login-email', searchType: 'both', perPage: 30 };
 const b = block('user-search-form');
 
 class UserSearchForm extends React.PureComponent<IProps> {

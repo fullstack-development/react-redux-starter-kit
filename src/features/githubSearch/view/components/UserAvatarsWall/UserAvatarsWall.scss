@@ -1,10 +1,16 @@
 .users-avatars-wall {
   &__avatars {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     padding: 0;
     width: 90rem;
+    height: 21rem;
     list-style: none;
+
+    &_loading {
+      background: #fff;
+    }
   }
 
   &__avatar {

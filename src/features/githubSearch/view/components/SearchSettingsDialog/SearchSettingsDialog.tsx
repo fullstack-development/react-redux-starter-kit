@@ -8,7 +8,7 @@ import { TextInputField, SelectField, NumberInputField, RadioGroupInputField } f
 import { Dialog } from 'shared/view/components';
 
 import { IFormFields } from '../../../namespace';
-import { searchByOptions } from './constants';
+import { searchByOptions, perPageOptions } from './constants';
 import './SearchSettingsDialog.scss';
 
 interface IProps {
@@ -19,7 +19,7 @@ interface IProps {
 
 const b = block('search-settings-dialog');
 
-class SearchSettingsDialog extends React.PureComponent<IProps, {}> {
+class SearchSettingsDialog extends React.PureComponent<IProps> {
   public render() {
     const { isOpen, onClose } = this.props;
     return (
@@ -62,13 +62,19 @@ class SearchSettingsDialog extends React.PureComponent<IProps, {}> {
   }
 
   private renderSecondRowSettings() {
+    const { fieldNames } = this.props;
     return (
       <div className={b('row')}>
         <div className={b('item')}>
           {this.renderSearchTypeSettings()}
         </div>
-        <div className={b('item')}>
-          {this.renderRepositoriesNumberSettings()}
+        <div className={b('settings-group')}>
+          <div className={b('item')}>
+            {this.renderRepositoriesNumberSettings()}
+          </div>
+          <div className={b('item')}>
+            <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} fullWidth />
+          </div>
         </div>
       </div>
     );
@@ -77,7 +83,7 @@ class SearchSettingsDialog extends React.PureComponent<IProps, {}> {
   private renderSearchTypeSettings() {
     const { fieldNames } = this.props;
     return (
-      <RadioGroupInputField name={fieldNames.searchType} label="Search type">
+      <RadioGroupInputField name={fieldNames.searchType} label="Search type" defaultValue="both">
         <FormControlLabel value="user" control={<Radio />} label="Only users" />
         <FormControlLabel value="org" control={<Radio />} label="Only organizations" />
         <FormControlLabel value="both" control={<Radio />} label="Both" />

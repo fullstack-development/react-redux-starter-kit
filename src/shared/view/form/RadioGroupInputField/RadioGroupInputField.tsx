@@ -17,4 +17,4 @@ function RadioGroupInputField(props: IProps) {
   );
 }
 
-export default getFieldWithComponent(RadioGroupInputField);
+export default getFieldWithComponent(RadioGroupInputField, 'radio');

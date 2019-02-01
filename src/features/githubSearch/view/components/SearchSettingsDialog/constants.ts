@@ -7,3 +7,9 @@ export const searchByOptions: Array<ISelectOption<IUserSearchOptions['searchBy']
   { value: 'email', label: 'Email' },
   { value: 'fullname', label: 'Full name' },
 ];
+
+export const perPageOptions: Array<ISelectOption<IUserSearchOptions['perPage']>> = [
+  { value: 30, label: 30 },
+  { value: 60, label: 60 },
+  { value: 100, label: 100 },
+];

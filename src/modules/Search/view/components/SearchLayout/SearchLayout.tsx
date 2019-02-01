@@ -20,7 +20,7 @@ class SearchLayout extends React.PureComponent<IProps> {
     const { githubSearchFeatureEntry } = this.props;
     return (
       <div className={b()}>
-        <Typography variant="display1">
+        <Typography variant="h4">
           GitHub user search
         </Typography>
         <div className={b('search-form')}>

@@ -12,12 +12,12 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
 }
 
 export function constructUserSearchQuery(queryString: string, options: IUserSearchOptions) {
-  const { searchBy, searchType, minRepos, maxRepos, reposLanguage } = options;
+  const { searchBy, searchType, minRepos, maxRepos, reposLanguage, perPage } = options;
   return queryString.concat(
     searchBy !== 'login-email' ? `+in:${searchBy}` : '',
     searchType !== 'both' ? `+type:${searchType}` : '',
     reposLanguage ? `+language:${reposLanguage}` : '',
     constructReposNumberQuery(minRepos, maxRepos),
-    '&per_page=100',
+    `&per_page=${perPage}`,
   );
 }

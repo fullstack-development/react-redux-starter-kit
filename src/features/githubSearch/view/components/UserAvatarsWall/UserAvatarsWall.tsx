@@ -4,6 +4,7 @@ import block from 'bem-cn';
 import * as R from 'ramda';
 
 import { IUser } from 'shared/types/models';
+import { Preloader } from 'shared/view/elements';
 
 import './UserAvatarsWall.scss';
 
@@ -54,8 +55,8 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     const { areAllAvatarsLoaded } = this.state;
     return users.length > 0 && (
       <div className={b()}>
-        <ul className={b('avatars')}>
-          {!areAllAvatarsLoaded && this.renderPreloader()}
+        <ul className={b('avatars', { loading: !areAllAvatarsLoaded })}>
+          <Preloader isShown={!areAllAvatarsLoaded} size={100}/>
           {users.map(this.renderUserAvatar)}
         </ul>
       </div>
@@ -73,14 +74,6 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
       >
         <img className={b('image')} src={avatarURL} onLoad={this.makeImageOnLoadHandler(user.avatarURL)}/>
       </li>
-    );
-  }
-
-  private renderPreloader() {
-    return (
-      <div className={b('preloder')}>
-        THIS IS PRELOADER
-      </div>
     );
   }
 

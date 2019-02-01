@@ -27,6 +27,12 @@
     }
   }
 
+  &__settings-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   &__actions {
     text-align: end;
   }
