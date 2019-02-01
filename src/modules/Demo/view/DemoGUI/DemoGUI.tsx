@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 
-import { Button, Typography, CircleProgressBar } from 'shared/view/elements';
+import { Button, Typography, CircleProgressBar, Grid } from 'shared/view/elements';
 import { ThemeSelector } from 'services/theme';
 
 import { StylesProps, provideStyles } from './DemoGUI.style';
 import { TextInputs, RadioGroups, Checkboxes } from './components';
-import Grid from '@material-ui/core/Grid';
 
 function DemoGUI({ classes }: StylesProps) {
   const onSubmit = (values: Record<string, string | number>) => console.log(values);

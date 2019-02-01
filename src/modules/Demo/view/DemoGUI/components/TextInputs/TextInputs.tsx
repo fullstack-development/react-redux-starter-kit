@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Grid from '@material-ui/core/Grid';
 
-import { Typography, MenuItem } from 'shared/view/elements';
+import { Typography, MenuItem, Grid } from 'shared/view/elements';
 import { TextInputField, MaskedInputField, NumberInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
 import { provideStyles, StylesProps } from './TextInputs.style';

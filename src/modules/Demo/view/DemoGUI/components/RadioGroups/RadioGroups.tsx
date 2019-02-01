@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Grid from '@material-ui/core/Grid';
 
-import { Typography, FormControlLabel, Radio } from 'shared/view/elements';
+import { Typography, FormControlLabel, Radio, Grid } from 'shared/view/elements';
 import { RadioGroupInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
 import { provideStyles, StylesProps } from './RadioGroups.style';

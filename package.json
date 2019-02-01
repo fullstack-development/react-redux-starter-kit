@@ -19,10 +19,8 @@
     "test:coverage": "node_modules/.bin/jest --coverage --watch",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
-    "build:gh-pages": "better-npm-run build:gh-pages",
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
-    "deploy:gh-pages": "better-npm-run build:gh-pages && better-npm-run deploy:gh-pages",
     "yeoman": "better-npm-run initial:yeoman",
     "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix"
   },
@@ -122,15 +120,6 @@
         "TS_NODE_FILES": true,
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
-    },
-    "build:gh-pages": {
-      "command": "better-npm-run build:prod",
-      "env": {
-        "NODE_ENV_MODE": "gh-pages"
-      }
-    },
-    "deploy:gh-pages": {
-      "command": "node_modules/.bin/gh-pages -d build"
     }
   },
   "repository": {
