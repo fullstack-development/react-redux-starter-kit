@@ -58,7 +58,6 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     cwd: process.cwd(),
   }),
   new FaviconsWebpackPlugin(path.resolve(__dirname, '..', 'src', 'assets', 'favicon.png')),
-  new webpack.NamedModulesPlugin(),
 ]
   .concat(type !== 'server' ? (
     new ForkTsCheckerWebpackPlugin({

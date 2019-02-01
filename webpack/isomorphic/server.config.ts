@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
+import * as nodeExternals from 'webpack-node-externals';
 
 import getDevConfig from '../dev.config';
 import getProdConfig from '../prod.config';
@@ -19,6 +20,13 @@ const serverConfig: webpack.Configuration = {
     path: path.resolve(__dirname, '..', '..', 'static'),
     libraryTarget: 'commonjs2',
   },
+  externals: [
+    nodeExternals({
+      whitelist: [
+        'normalize.css',
+      ],
+    }),
+  ],
   plugins: [
     new webpack.DefinePlugin({
       __CLIENT__: false,
