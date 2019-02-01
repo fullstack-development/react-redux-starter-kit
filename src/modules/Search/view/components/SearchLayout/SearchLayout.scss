@@ -1,0 +1,12 @@
+.search-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  &__search-form {
+    margin-top: 0.8rem;
+    width: 30rem;
+  }
+}

@@ -24,7 +24,6 @@ class UserSearchResults extends React.PureComponent<IProps> {
     const { users } = this.props;
     return (
       <div className="user-search-results" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h2>Results</h2>
         <UserAvatarsWall users={users} onAvatarClick={(() => () => 0)()}/>
       </div>
     );

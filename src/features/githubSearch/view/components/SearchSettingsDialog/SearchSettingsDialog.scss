@@ -1,0 +1,33 @@
+.search-settings-dialog {
+  max-height: 15rem;
+  width: 27rem;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+
+    &:last-child {
+      margin-bottom: initial;
+    }
+  }
+
+  &__item {
+    width: 11rem;
+  }
+
+  &__repos-number {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+    width: 11rem;
+
+    &-input {
+      width: 5rem;
+    }
+  }
+
+  &__actions {
+    text-align: end;
+  }
+}

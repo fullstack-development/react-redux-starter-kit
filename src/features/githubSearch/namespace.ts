@@ -11,12 +11,8 @@ export interface IReduxState {
   };
 }
 
-export interface IFormFields {
+export interface IFormFields extends IUserSearchOptions {
   search: string;
-  searchBy: IUserSearchOptions['searchBy'];
-  searchType: IUserSearchOptions['searchType'];
-  minRepos?: number;
-  maxRepos?: number;
 }
 
 export interface ISearchUserPayload {

@@ -1,28 +1,11 @@
 .user-search-form {
-  &__settings-dialog {
-    display: flex;
-    flex-flow: wrap column;
-    justify-content: space-between;
-    width: 33rem;
-    height: 15rem;
+  &__buttons {
+    margin-top: 0.8rem;
+    text-align: center;
   }
 
-  &__search-by {
-    width: 11rem;
-  }
-
-  &__repos-number {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.7rem;
-    width: 11rem;
-
-    &-input {
-      width: 5rem;
-    }
-  }
-
-  &__settings-actions {
-    text-align: end;
+  &__settings-button {
+    display: inline-block;
+    margin-right: 0.7rem;
   }
 }

@@ -1,19 +1,5 @@
 import { IUserSearchOptions } from 'shared/types/github';
 
-function constructSearchByQuery(searchBy: IUserSearchOptions['searchBy']) {
-  if (searchBy !== 'login-email') {
-    return `+in:${searchBy}`;
-  }
-  return '';
-}
-
-function constructSearchTypeQuery(type: IUserSearchOptions['searchType']) {
-  if (type !== 'both') {
-    return `+type:${type}`;
-  }
-  return '';
-}
-
 function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
   if (maxRepos === void 0 && (minRepos && minRepos > 0)) {
     return `+repos:>${minRepos}`;
@@ -26,11 +12,12 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
 }
 
 export function constructUserSearchQuery(queryString: string, options: IUserSearchOptions) {
-  const { searchBy, searchType, minRepos, maxRepos } = options;
+  const { searchBy, searchType, minRepos, maxRepos, reposLanguage } = options;
   return queryString.concat(
-    constructSearchByQuery(searchBy),
+    searchBy !== 'login-email' ? `+in:${searchBy}` : '',
+    searchType !== 'both' ? `+type:${searchType}` : '',
+    reposLanguage ? `+language:${reposLanguage}` : '',
     constructReposNumberQuery(minRepos, maxRepos),
-    constructSearchTypeQuery(searchType),
     '&per_page=100',
   );
 }
