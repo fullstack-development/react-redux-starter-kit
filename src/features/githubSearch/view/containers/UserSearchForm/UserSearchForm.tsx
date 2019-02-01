@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
+import FormLabel from '@material-ui/core/FormLabel';
 
 import { makeFormFieldNames } from 'shared/helpers';
-import { TextInputField, SelectField, NumberInputField } from 'shared/view/form';
-import { Button } from 'shared/view/elements';
+import { TextInputField, SelectField, NumberInputField, RadioGroupInputField } from 'shared/view/form';
+import { Button, FormControlLabel, Radio } from 'shared/view/elements';
 import { Dialog } from 'shared/view/components';
 
 import { actions } from './../../../redux';
@@ -31,7 +32,7 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
   }, dispatch);
 }
 
-const fieldNames = makeFormFieldNames<IFormFields>(['search', 'searchBy', 'minRepos', 'maxRepos']);
+const fieldNames = makeFormFieldNames<IFormFields>(['search', 'searchBy', 'minRepos', 'maxRepos', 'searchType']);
 
 const b = block('user-search-form');
 
@@ -47,6 +48,7 @@ class UserSearchForm extends React.PureComponent<IProps> {
         render={this.renderForm}
         initialValues={{
           searchBy: searchByOptions[0].value,
+          searchType: 'both',
         }}
       />
     );
@@ -85,25 +87,36 @@ class UserSearchForm extends React.PureComponent<IProps> {
         renderActions={this.renderSettingsDialogActions}
       >
         <div className={b('settings-dialog')}>
-          <div className={b('settings-input')}>
+          <div className={b('search-by')}>
             <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} fullWidth />
           </div>
-          <div className={b('repos-number')}>
-            <div className={b('settings-input')}>
-              <NumberInputField
-                name={fieldNames.minRepos}
-                label="Min repos number"
-                fullWidth
-              />
-            </div>
-            <div className={b('settings-input')}>
-              <NumberInputField
-                name={fieldNames.maxRepos}
-                label="Max repos number"
-                fullWidth
-              />
-            </div>
+          <div className={b('search-type')}>
+            <RadioGroupInputField name={fieldNames.searchType} label="Search type">
+              <FormControlLabel value="user" control={<Radio />} label="Only users" />
+              <FormControlLabel value="org" control={<Radio />} label="Only organizations" />
+              <FormControlLabel value="both" control={<Radio />} label="Both" />
+            </RadioGroupInputField>
           </div>
+          {/* TODO: Create component for it? */}
+          <FormLabel>
+            Repositories number
+              <div className={b('repos-number')}>
+              <div className={b('repos-number-input')}>
+                <NumberInputField
+                  name={fieldNames.minRepos}
+                  label="min"
+                  fullWidth
+                />
+              </div>
+              <div className={b('repos-number-input')}>
+                <NumberInputField
+                  name={fieldNames.maxRepos}
+                  label="max"
+                  fullWidth
+                />
+              </div>
+            </div>
+          </FormLabel>
         </div>
       </Dialog>
     );
@@ -121,8 +134,8 @@ class UserSearchForm extends React.PureComponent<IProps> {
   @bind
   private handleUserSearchFormSubmit(values: IFormFields) {
     console.log(values);
-    const { search, searchBy, minRepos, maxRepos } = values;
-    this.props.searchUser({ queryText: search, options: { searchBy, minRepos, maxRepos }});
+    const { search, searchBy, minRepos, maxRepos, searchType } = values;
+    this.props.searchUser({ queryText: search, options: { searchBy, minRepos, maxRepos, searchType }});
   }
 
   @bind
