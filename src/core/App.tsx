@@ -7,7 +7,7 @@ import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'services/theme';
 import { I18nProvider } from 'services/i18n';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
-import { JssProvider, SheetsRegistry } from 'shared/styles';
+import { BaseStyles, JssProvider, SheetsRegistry } from 'shared/styles';
 
 import createRoutes from './routes';
 
@@ -61,9 +61,9 @@ function renderSharedPart(
     >
       <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
         <I18nProvider>
-          {/* <React.StrictMode> */}
-          {createRoutes(modules)}
-          {/* </React.StrictMode> */}
+          <BaseStyles>
+            {createRoutes(modules)}
+          </BaseStyles>
         </I18nProvider>
       </ThemeProvider>
     </JssProvider>

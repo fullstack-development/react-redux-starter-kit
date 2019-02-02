@@ -183,7 +183,7 @@
     "yo": "^2.0.5"
   },
   "dependencies": {
-    "@material-ui/core": "^3.8.3",
+    "@material-ui/core": "^3.9.1",
     "@material-ui/icons": "^3.0.2",
     "@types/autoprefixer": "^9.1.1",
     "@types/bem-cn": "^2.1.1",
