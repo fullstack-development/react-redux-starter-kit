@@ -1,17 +1,9 @@
 import { withStyles, Theme, WithStyles } from 'shared/styles';
 import { rule } from 'shared/helpers/style';
 
-const styles = (theme: Theme) => ({
-  link: rule({
-    margin: theme.spacing.unit,
-    '&:hover, &:active, &:visited': {
-      color: 'inherit',
-    },
-  }),
-  content: rule({
-    margin: theme.spacing.unit,
-    marginLeft: 'auto',
-    paddingLeft: theme.spacing.unit,
+const styles = (_theme: Theme) => ({
+  root: rule({
+    padding: 5,
   }),
 });
 

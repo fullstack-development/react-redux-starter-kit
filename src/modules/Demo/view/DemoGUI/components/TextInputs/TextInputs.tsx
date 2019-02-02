@@ -1,13 +1,14 @@
 import * as React from 'react';
 
-import { SimpleList, Typography, MenuItem } from 'shared/view/elements';
+import { Typography, MenuItem, Grid } from 'shared/view/elements';
 import { TextInputField, MaskedInputField, NumberInputField } from 'shared/view/form';
 import { isRequired } from 'shared/validators';
+import { provideStyles, StylesProps } from './TextInputs.style';
 
-function TextInputs(_props: {}) {
+function TextInputs({ classes }: StylesProps) {
   return (
-    <SimpleList marginFactor={4} direction="row">
-      <SimpleList marginFactor={2} alignItems="stretch" gutter>
+    <>
+      <Grid item className={classes.gridItem}>
         <Typography variant="h4">Underlined input</Typography>
         <TextInputField name="inp1" label="Your email" variant="standard" />
         <TextInputField
@@ -24,9 +25,9 @@ function TextInputs(_props: {}) {
             <MenuItem key={item} value={item}>Item #{item}</MenuItem>
           ))}
         </TextInputField>
-      </SimpleList>
+      </Grid>
 
-      <SimpleList marginFactor={2} alignItems="stretch" gutter>
+      <Grid item className={classes.gridItem}>
         <Typography variant="h4">Outlined input</Typography>
         <TextInputField name="inp5" label="Your email" variant="outlined" />
         <TextInputField
@@ -43,9 +44,9 @@ function TextInputs(_props: {}) {
             <MenuItem key={item} value={item}>Item #{item}</MenuItem>
           ))}
         </TextInputField>
-      </SimpleList>
+      </Grid>
 
-      <SimpleList marginFactor={2} gutter>
+      <Grid item className={classes.gridItem}>
         <Typography variant="h4">Multiline inputs</Typography>
         <TextInputField name="inp9" label="Static input" variant="outlined" multiline rows={3} />
         <TextInputField
@@ -60,9 +61,9 @@ function TextInputs(_props: {}) {
         />
         <TextInputField name="inp11" label="Dynamic input" variant="outlined" multiline rowsMax={4} />
         <TextInputField name="inp12" label="Dynamic underlined" variant="standard" multiline rowsMax={4} />
-      </SimpleList>
+      </Grid>
 
-      <SimpleList marginFactor={2} gutter>
+      <Grid item className={classes.gridItem}>
         <Typography variant="h4">Other inputs</Typography>
         <MaskedInputField name="inp13" label="Visa input" variant="outlined" maskType="visa" />
         <TextInputField name="inp14" label="Password input" variant="outlined" type="password" />
@@ -74,9 +75,9 @@ function TextInputs(_props: {}) {
           prefix="$"
           decimalScale={2}
         />
-      </SimpleList>
-    </SimpleList>
+      </Grid>
+    </>
   );
 }
 
-export default TextInputs;
+export default provideStyles(TextInputs);
