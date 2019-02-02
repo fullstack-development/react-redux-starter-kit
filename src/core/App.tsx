@@ -3,19 +3,20 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
+import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'services/theme';
+import { I18nProvider } from 'services/i18n';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
-import { JssProvider, SheetsRegistry } from 'shared/styles';
+import { BaseStyles, JssProvider, SheetsRegistry } from 'shared/styles';
 
 import createRoutes from './routes';
-import { I18nProvider } from 'services/i18n';
 
 interface IAppProps {
   jssDeps: IJssDependencies;
   disableStylesGeneration?: boolean;
 }
 
-export function App({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
+function ClientApp({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -24,6 +25,8 @@ export function App({ modules, store, jssDeps, disableStylesGeneration }: IAppDa
     </Provider>
   );
 }
+
+export const App = hot(ClientApp);
 
 interface IServerAppProps {
   jssDeps: IJssDependencies;
@@ -58,9 +61,9 @@ function renderSharedPart(
     >
       <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
         <I18nProvider>
-          {/* <React.StrictMode> */}
-          {createRoutes(modules)}
-          {/* </React.StrictMode> */}
+          <BaseStyles>
+            {createRoutes(modules)}
+          </BaseStyles>
         </I18nProvider>
       </ThemeProvider>
     </JssProvider>
