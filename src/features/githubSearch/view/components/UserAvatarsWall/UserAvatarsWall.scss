@@ -3,13 +3,25 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     padding: 0;
-    width: 90rem;
-    height: 21rem;
     list-style: none;
 
-    &_loading {
-      background: #fff;
+    &_size {
+      &_big {
+        width: 90rem;
+        height: 29rem;
+      }
+
+      &_medium {
+        width: 45rem;
+        height: 28rem;
+      }
+
+      &_small {
+        width: 45rem;
+        height: 14rem;
+      }
     }
   }
 

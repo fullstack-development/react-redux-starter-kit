@@ -24,6 +24,19 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     areAllAvatarsLoaded: false,
   };
 
+  private avatarSize = 70;
+
+  private get wallSize() {
+    const usersNumber = this.props.users.length;
+    if (usersNumber <= 30) {
+      return 'small';
+    }
+    if (usersNumber <= 60) {
+      return 'medium';
+    }
+    return 'big';
+  }
+
   private get areAllAvatarsLoaded() {
     return Object.values(this.avatarsLoadingStatus).every(x => x === true);
   }
@@ -55,7 +68,7 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     const { areAllAvatarsLoaded } = this.state;
     return users.length > 0 && (
       <div className={b()}>
-        <ul className={b('avatars', { loading: !areAllAvatarsLoaded })}>
+        <ul className={b('avatars', { size: this.wallSize })}>
           <Preloader isShown={!areAllAvatarsLoaded} size={100}/>
           {users.map(this.renderUserAvatar)}
         </ul>
@@ -72,9 +85,17 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
         className={b('avatar')}
         onClick={this.makeAvatarClickHandler(user)}
       >
-        <img className={b('image')} src={avatarURL} onLoad={this.makeImageOnLoadHandler(user.avatarURL)}/>
+        <img
+          className={b('image')}
+          src={this.injectSizeToAvatarURL(avatarURL)}
+          onLoad={this.makeImageOnLoadHandler(user.avatarURL)}
+        />
       </li>
     );
+  }
+
+  private injectSizeToAvatarURL(URL: string) {
+    return `${URL}&s=${this.avatarSize}`;
   }
 
   @bind
