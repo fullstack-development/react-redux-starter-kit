@@ -1,24 +1,23 @@
 import * as React from 'react';
 import block from 'bem-cn';
-import Dialog from '@material-ui/core/Dialog';
+import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import Typography from '@material-ui/core/Typography';
 
 import './Dialog.scss';
 
-interface IProps {
+interface IProps extends DialogProps {
   title: string;
-  isOpen: boolean;
-  renderActions(): JSX.Element;
   onClose(): void;
+  renderActions?(): JSX.Element;
 }
 
 const b = block('dialog');
 
 class DialogComponent extends React.PureComponent<IProps> {
   public render() {
-    const { title, isOpen, children, renderActions, onClose } = this.props;
+    const { title, children, renderActions, onClose, ...dialogProps } = this.props;
     return (
-      <Dialog open={isOpen} onClose={onClose}>
+      <Dialog onClose={onClose} {...dialogProps}>
         <div className={b()}>
           <div className={b('header')}>
             <Typography variant="h6">{title}</Typography>
@@ -26,9 +25,11 @@ class DialogComponent extends React.PureComponent<IProps> {
           <div className={b('content')}>
             {children}
           </div>
-          <div className={b('actions')}>
-            {renderActions()}
-          </div>
+          {renderActions &&
+            <div className={b('actions')}>
+              {renderActions()}
+            </div>
+          }
         </div>
       </Dialog>
     );

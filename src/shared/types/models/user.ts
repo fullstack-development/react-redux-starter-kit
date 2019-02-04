@@ -19,6 +19,15 @@ export interface IServerUser {
   score: number;
 }
 
+export interface IServerUserDetails extends IServerUser {
+  followers: number;
+  following: number;
+  public_repos: number;
+  name: string;
+  type: string;
+  location: null | string;
+}
+
 export interface IUser {
   id: number;
   login: string;
@@ -31,4 +40,13 @@ export interface IUser {
   starredURL: string;
   subscriptionsURL: string;
   score: number;
+}
+
+export interface IUserDetails extends IUser {
+  followers: number;
+  following: number;
+  publicRepos: number;
+  name: string;
+  type: string;
+  location: null | string;
 }

@@ -26,7 +26,7 @@ class SearchSettingsDialog extends React.PureComponent<IProps> {
       <Dialog
         title="Search settings"
         onClose={onClose}
-        isOpen={isOpen}
+        open={isOpen}
         renderActions={this.renderActions}
       >
         <div className={b()}>

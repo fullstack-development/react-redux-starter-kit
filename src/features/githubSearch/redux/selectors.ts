@@ -1,5 +1,5 @@
 import { IAppReduxState } from 'shared/types/app';
-import { IUser } from 'shared/types/models';
+import { IUser, IUserDetails } from 'shared/types/models';
 import * as NS from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): NS.IReduxState {
@@ -8,4 +8,8 @@ function selectFeatureState(state: IAppReduxState): NS.IReduxState {
 
 export function selectFoundUsers(state: IAppReduxState): IUser[] {
   return selectFeatureState(state).data.foundUsers;
+}
+
+export function selectUserDetails(state: IAppReduxState): IUserDetails | null {
+  return selectFeatureState(state).data.userDetails;
 }

@@ -10,7 +10,7 @@
     &_size {
       &_big {
         width: 90rem;
-        height: 29rem;
+        height: 24rem;
       }
 
       &_medium {
@@ -29,6 +29,11 @@
     margin: 0.25rem;
     width: 4rem;
     cursor: pointer;
+    transition: transform 0.15s;
+
+    &:hover {
+      transform: scale(1.15);
+    }
   }
 
   &__image {
