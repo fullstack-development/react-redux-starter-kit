@@ -9,14 +9,7 @@ export interface IServerUser {
   id: number;
   login: string;
   avatar_url: string;
-  followers_url: string;
-  following_url: string;
   html_url: string;
-  organizations_url: string;
-  repos_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  score: number;
 }
 
 export interface IServerUserDetails extends IServerUser {
@@ -24,29 +17,20 @@ export interface IServerUserDetails extends IServerUser {
   following: number;
   public_repos: number;
   name: string;
-  type: string;
   location: null | string;
 }
 
 export interface IUser {
   id: number;
-  login: string;
+  username: string;
   avatarURL: string;
-  followersURL: string;
-  followingURL: string;
   htmlURL: string;
-  organizationsURL: string;
-  reposURL: string;
-  starredURL: string;
-  subscriptionsURL: string;
-  score: number;
 }
 
 export interface IUserDetails extends IUser {
-  followers: number;
-  following: number;
-  publicRepos: number;
-  name: string;
-  type: string;
+  followersNumber: number;
+  followingNumber: number;
+  reposNumber: number;
+  realName: string;
   location: null | string;
 }

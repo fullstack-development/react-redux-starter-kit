@@ -31,6 +31,7 @@ function* executeSearchUser({ api }: IDependencies, { payload }: NS.ISearchUser)
 
 function* executeLoadUserDetails({ api }: IDependencies, { payload }: NS.ILoadUserDetails) {
   try {
+    yield put(actions.resetUserDetails());
     const userDetails: IUserDetails = yield call(api.loadUserDetails, payload);
     yield put(actions.loadUserDetailsSuccess(userDetails));
   } catch (error) {

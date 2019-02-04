@@ -5,19 +5,22 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
 import { IAppReduxState } from 'shared/types/app';
-import { IUser } from 'shared/types/models';
+import { IUserDetails } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
+import { Typography, Preloader } from 'shared/view/elements';
 
+import { injectSizeToAvatarURL } from '../../../helpers';
 import { actions, selectors } from './../../../redux';
 import './UserDetails.scss';
 
 interface IOwnProps {
-  userLogin: string | null; // think of login or username everywhere
+  username: string | null;
   onClose(): void;
 }
 
 interface IStateProps {
-  userDetails: IUser | null;
+  userDetails: IUserDetails | null;
+  isLoadUserDetailsRequesting: boolean;
 }
 
 interface IActionProps {
@@ -29,6 +32,7 @@ type IProps = IStateProps & IActionProps & IOwnProps;
 function mapState(state: IAppReduxState): IStateProps {
   return {
     userDetails: selectors.selectUserDetails(state),
+    isLoadUserDetailsRequesting: selectors.selectCommunication(state, 'loadUserDetails').isRequesting,
   };
 }
 
@@ -41,25 +45,78 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 const b = block('user-details');
 
 class UserDetails extends React.PureComponent<IProps> {
+  private avatarSize = 230;
+
   public render() {
-    const { userLogin } = this.props;
+    const { username, isLoadUserDetailsRequesting } = this.props;
     return (
       <Dialog
-        open={userLogin !== null}
+        open={username !== null}
         title="User details"
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
       >
-        <div className={b()}>content</div>
+        <div className={b()}>
+          <Preloader size={80} isShown={isLoadUserDetailsRequesting} backgroundColor="#fff" />
+          {this.renderContent()}
+        </div>
       </Dialog>
+    );
+  }
+
+  private renderContent() {
+    const { userDetails } = this.props;
+    if (userDetails) {
+      return (
+        <>
+          {this.renderMain(userDetails)}
+          {this.renderAttributes(userDetails)}
+        </>
+      );
+    }
+    return null;
+  }
+
+  private renderMain(userDetails: IUserDetails) {
+    const { htmlURL, avatarURL, realName, username, location } = userDetails;
+    return (
+      <a href={htmlURL} className={b('main')} target="_blank">
+        <img
+          className={b('avatar')}
+          src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
+        />
+        <Typography variant="h5">{realName}</Typography>
+        <Typography variant="subtitle1">{username}</Typography>
+        {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
+      </a>
+    );
+  }
+
+  private renderAttributes(userDetails: IUserDetails) {
+    const { followersNumber, followingNumber, reposNumber, htmlURL } = userDetails;
+    return (
+      <div className={b('attributes')}>
+        <a href={`${htmlURL}/followers`} target="_blank" className={b('attribute')}>
+          Followers
+          <span className={b('value')}>{followersNumber}</span>
+        </a>
+        <a href={`${htmlURL}/following`} target="_blank" className={b('attribute')}>
+          Following
+          <span className={b('value')}>{followingNumber}</span>
+        </a>
+        <a href={`${htmlURL}/repositories`} target="_blank" className={b('attribute')}>
+          Repositories
+          <span className={b('value')}>{reposNumber}</span>
+        </a>
+        </div>
     );
   }
 
   @bind
   private handleDialogEnter() {
-    const { userLogin, loadUserDetails } = this.props;
-    if (userLogin) {
-      loadUserDetails(userLogin);
+    const { username, loadUserDetails } = this.props;
+    if (username) {
+      loadUserDetails(username);
     }
   }
 

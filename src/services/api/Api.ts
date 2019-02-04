@@ -19,10 +19,7 @@ class Api {
   public async searchUser(queryText: string, options: IUserSearchOptions): Promise<IUser[]> {
     const URL = `https://api.github.com/search/users?q=${constructUserSearchQuery(queryText, options)}`;
     const response = await this.actions.get<ISearchUserResponse>(URL);
-    console.log(response.data);
     const users = response.data.items;
-    const b = await this.actions.get<any>('https://api.github.com/users/chmnkh');
-    console.log(b);
     return users.map(x => convertUser(x));
   }
 
@@ -30,6 +27,7 @@ class Api {
   public async loadUserDetails(username: string) {
     const URL = `https://api.github.com/users/${username}`;
     const response = await this.actions.get<IServerUserDetails>(URL);
+    console.log(response.data);
     return convertUserDetails(response.data);
   }
 }

@@ -12,7 +12,7 @@ import { selectors } from './../../../redux';
 import './UserSearchResults.scss';
 
 interface IState {
-  selectedUserLogin: string | null;
+  selectedUserUsername: string | null;
 }
 
 interface IStateProps {
@@ -31,28 +31,28 @@ const b = block('user-search-results');
 
 class UserSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
-    selectedUserLogin: null,
+    selectedUserUsername: null,
   };
 
   public render() {
     const { users } = this.props;
-    const { selectedUserLogin } = this.state;
+    const { selectedUserUsername } = this.state;
     return (
       <div className={b()}>
         <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick}/>
-        <UserDetails userLogin={selectedUserLogin} onClose={this.handleUserDetailsClose}/>
+        <UserDetails username={selectedUserUsername} onClose={this.handleUserDetailsClose}/>
       </div>
     );
   }
 
   @bind
-  private handleUserAvatarClick({ login }: IUser) {
-    this.setState({ selectedUserLogin: login });
+  private handleUserAvatarClick({ username }: IUser) {
+    this.setState({ selectedUserUsername: username });
   }
 
   @bind
   private handleUserDetailsClose() {
-    this.setState({ selectedUserLogin: null });
+    this.setState({ selectedUserUsername: null });
   }
 }
 

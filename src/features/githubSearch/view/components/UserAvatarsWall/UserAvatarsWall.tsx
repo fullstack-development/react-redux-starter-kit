@@ -6,6 +6,7 @@ import * as R from 'ramda';
 import { IUser } from 'shared/types/models';
 import { Preloader } from 'shared/view/elements';
 
+import { injectSizeToAvatarURL } from '../../../helpers';
 import './UserAvatarsWall.scss';
 
 interface IState {
@@ -69,7 +70,7 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     return users.length > 0 && (
       <div className={b()}>
         <ul className={b('avatars', { size: this.wallSize })}>
-          <Preloader isShown={!areAllAvatarsLoaded} size={100}/>
+          <Preloader isShown={!areAllAvatarsLoaded} size={100} backgroundColor="#fafafa"/>
           {users.map(this.renderUserAvatar)}
         </ul>
       </div>
@@ -87,15 +88,11 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
       >
         <img
           className={b('image')}
-          src={this.injectSizeToAvatarURL(avatarURL)}
+          src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
           onLoad={this.makeImageOnLoadHandler(user.avatarURL)}
         />
       </li>
     );
-  }
-
-  private injectSizeToAvatarURL(URL: string) {
-    return `${URL}&s=${this.avatarSize}`;
   }
 
   @bind

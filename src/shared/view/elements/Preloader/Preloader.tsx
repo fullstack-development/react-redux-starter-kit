@@ -7,15 +7,16 @@ import './Preloader.scss';
 interface IProps {
   isShown: boolean;
   size?: number;
+  backgroundColor?: string;
 }
 
 const b = block('preloader');
 
 function Preloader(props: IProps) {
-  const { isShown, size } = props;
+  const { isShown, size, backgroundColor} = props;
   return isShown
     ? (
-      <div className={b()}>
+      <div className={b()} style={{ backgroundColor }}>
         <CircleProgressBar size={size} />
       </div>
     )

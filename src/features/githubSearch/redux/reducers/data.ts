@@ -7,6 +7,8 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IA
       return { ...state, foundUsers: action.payload };
     case 'GITHUB_SEARCH:LOAD_USER_DETAILS_SUCCESS':
       return { ...state, userDetails: action.payload };
+    case 'GITHUB_SEARCH:RESET_USER_DETAILS':
+      return { ...state, userDetails: initial.data.userDetails };
     default:
       return state;
   }
