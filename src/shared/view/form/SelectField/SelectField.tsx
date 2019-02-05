@@ -8,8 +8,6 @@ import { getFieldWithComponent } from 'shared/helpers/react';
 
 type IProps = GetProps<typeof Select> & FieldRenderProps;
 
-// TODO: копипаста во всех филдах((((
-
 function SelectField(props: IProps) {
   const { input, meta, ...rest } = props;
   const error = typeof rest.error === 'boolean'

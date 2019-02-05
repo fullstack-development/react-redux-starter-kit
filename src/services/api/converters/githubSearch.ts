@@ -1,4 +1,4 @@
-import { IServerUser, IServerUserDetails, IUser, IUserDetails } from 'shared/types/models';
+import { IServerUser, IDetailedServerUser, IUser, IDetailedUser } from 'shared/types/models';
 
 export function convertUser(user: IServerUser): IUser {
   return {
@@ -9,7 +9,7 @@ export function convertUser(user: IServerUser): IUser {
   };
 }
 
-export function convertUserDetails(details: IServerUserDetails): IUserDetails {
+export function convertUserDetails(details: IDetailedServerUser): IDetailedUser {
   return {
     ...convertUser(details),
     followersNumber: details.followers,

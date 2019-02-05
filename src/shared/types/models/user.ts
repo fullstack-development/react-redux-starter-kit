@@ -3,8 +3,6 @@ export interface ISearchUserResponse {
   total_count: number;
 }
 
-// TODO: think about github types placement
-
 export interface IServerUser {
   id: number;
   login: string;
@@ -12,7 +10,7 @@ export interface IServerUser {
   html_url: string;
 }
 
-export interface IServerUserDetails extends IServerUser {
+export interface IDetailedServerUser extends IServerUser {
   followers: number;
   following: number;
   public_repos: number;
@@ -27,7 +25,7 @@ export interface IUser {
   htmlURL: string;
 }
 
-export interface IUserDetails extends IUser {
+export interface IDetailedUser extends IUser {
   followersNumber: number;
   followingNumber: number;
   reposNumber: number;

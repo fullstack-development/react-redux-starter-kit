@@ -32,7 +32,7 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 }
 
 const fieldNames = makeFormFieldNames<IUserSearchFormFields>([
-  'search', 'searchBy', 'minRepos', 'maxRepos', 'searchType', 'reposLanguage', 'perPage',
+  'searchString', 'searchBy', 'minRepos', 'maxRepos', 'searchType', 'reposLanguage', 'perPage',
 ]);
 const b = block('user-search-form');
 
@@ -57,7 +57,7 @@ class UserSearchForm extends React.PureComponent<IProps> {
     const { isSettingsDialogOpen } = this.state;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <TextInputField name={fieldNames.search} fullWidth />
+        <TextInputField name={fieldNames.searchString} fullWidth />
         <div className={b('buttons')}>
           <div className={b('settings-button')}>
             <Button variant="outlined" onClick={this.handleSettingsButtonClick}>Settings</Button>
@@ -75,8 +75,7 @@ class UserSearchForm extends React.PureComponent<IProps> {
 
   @bind
   private handleUserSearchFormSubmit(values: IUserSearchFormFields) {
-    const { search, ...options } = values;
-    this.props.searchUser({ queryText: search, options });
+    this.props.searchUser(values);
   }
 
   @bind
