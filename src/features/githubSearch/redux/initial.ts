@@ -4,6 +4,7 @@ import { IReduxState } from '../namespace';
 const initial: IReduxState = {
   data: {
     foundUsers: [],
+    totalUsers: null,
     userDetails: null,
   },
   communication: {

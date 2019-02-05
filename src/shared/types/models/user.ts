@@ -32,3 +32,8 @@ export interface IDetailedUser extends IUser {
   realName: string;
   location: null | string;
 }
+
+export interface IUserSearchResults {
+  totalUsers: number;
+  users: IUser[];
+}

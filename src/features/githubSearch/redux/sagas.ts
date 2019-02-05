@@ -2,7 +2,7 @@ import { put, call, all, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 
 import { IDependencies } from 'shared/types/app';
-import { IUser, IDetailedUser } from 'shared/types/models';
+import { IDetailedUser, IUserSearchResults } from 'shared/types/models';
 import { getErrorMsg } from 'shared/helpers';
 
 import * as NS from '../namespace';
@@ -22,8 +22,8 @@ function getSaga(deps: IDependencies) {
 function* executeSearchUser({ api }: IDependencies, { payload }: NS.ISearchUser) {
   try {
     const { searchString, ...options } = payload;
-    const foundUsers: IUser[] = yield call(api.searchUser, searchString, options);
-    yield put(actions.searchUserSuccess(foundUsers));
+    const searchUsersResults: IUserSearchResults = yield call(api.searchUser, searchString, options);
+    yield put(actions.searchUserSuccess(searchUsersResults));
   } catch (error) {
     yield put(actions.searchUserFail(getErrorMsg(error)));
   }

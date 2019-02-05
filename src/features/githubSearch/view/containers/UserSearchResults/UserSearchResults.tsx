@@ -33,7 +33,7 @@ class UserSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
     selectedUserUsername: null,
   };
-
+  // ADD NO RESULTS COMPONENT and spin preloaer on requesting too
   public render() {
     const { users } = this.props;
     const { selectedUserUsername } = this.state;
