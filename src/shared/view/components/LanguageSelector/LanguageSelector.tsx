@@ -1,26 +1,25 @@
 import * as React from 'react';
 import { bind } from 'decko';
-
-import { Lang, ITranslateProps } from '../../namespace';
-import { withI18n } from '../withI18n/withI18n';
+import { withNamespaces as withI18n, WithNamespaces } from 'react-i18next';
+import { Lang } from 'shared/types/app';
 
 interface IOption {
   value: Lang;
   label: string;
 }
 
-class LanguageSelector extends React.PureComponent<ITranslateProps> {
+class LanguageSelector extends React.PureComponent<WithNamespaces> {
   public static options: IOption[] = [
     { value: 'en', label: 'en' },
     { value: 'ru', label: 'ru' },
   ];
 
   public render() {
-    const { locale } = this.props;
+    const { lng } = this.props;
 
     return (
       <div>
-        <select value={locale} onChange={this.changeLanguage}>
+        <select value={lng} onChange={this.changeLanguage}>
           {LanguageSelector.options.map(({ value, label }, i) => (
             <option value={value} key={i}>{label}</option>
           ))}
@@ -31,8 +30,9 @@ class LanguageSelector extends React.PureComponent<ITranslateProps> {
 
   @bind
   private changeLanguage({ target: { value } }: React.ChangeEvent<HTMLSelectElement>) {
-    this.props.changeLanguage(value as Lang);
+    const { i18n } = this.props;
+    i18n.changeLanguage(value);
   }
 }
 
-export default withI18n(LanguageSelector);
+export default withI18n()(LanguageSelector);

@@ -1,9 +1,10 @@
 import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
+import { configureJss } from './configureJss';
+import './configurationI18n';
 
 import { DemoModule } from 'modules';
-import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as themeProviderRE } from 'services/theme';
 import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';

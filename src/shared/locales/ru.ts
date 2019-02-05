@@ -6,10 +6,12 @@ export default {
   modules: {},
   modules1: {},
   demo: {
-    selectedLang: 'Выбран язык %{locale}',
+    selectedLang: 'Выбран язык {{lng, uppercase}}',
     selectorLabel: 'Селектор языка:',
     somethingText: 'Какой-то текст',
     pluralLabel: 'Демонстрация множественных переводов:',
-    pluralTest: '%{smart_count} объект |||| %{smart_count} объекта |||| %{smart_count} объектов',
+    pluralTest: '{{count}} объект',
+    pluralTest_1: '{{count}} объекта',
+    pluralTest_2: '{{count}} объектов',
   },
 };

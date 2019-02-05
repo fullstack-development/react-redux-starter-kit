@@ -5,10 +5,11 @@ export default {
   documents: {},
   modules: {},
   demo: {
-    selectedLang: 'Selected language is %{locale}',
+    selectedLang: 'Selected language is {{lng, uppercase}}',
     selectorLabel: 'Language selector:',
     somethingText: 'Something text',
     pluralLabel: 'Pluralize demonstration:',
-    pluralTest: '%{smart_count} object |||| %{smart_count} objects',
+    pluralTest: '{{count}} object',
+    pluralTest_plural: '{{count}} objects',
   },
 };

@@ -8,7 +8,6 @@ import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { JssProvider, SheetsRegistry } from 'shared/styles';
 
 import createRoutes from './routes';
-import { I18nProvider } from 'services/i18n';
 
 interface IAppProps {
   jssDeps: IJssDependencies;
@@ -57,11 +56,7 @@ function renderSharedPart(
       disableStylesGeneration={disableStylesGeneration}
     >
       <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
-        <I18nProvider>
-          {/* <React.StrictMode> */}
-          {createRoutes(modules)}
-          {/* </React.StrictMode> */}
-        </I18nProvider>
+        {createRoutes(modules)}
       </ThemeProvider>
     </JssProvider>
   );

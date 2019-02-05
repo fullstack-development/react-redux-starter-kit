@@ -1,13 +1,13 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
-import { App } from 'core/App';
+import { AppContainer } from 'react-hot-loader';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as bootstrapper from 'react-async-bootstrapper';
-import configureApp from 'core/configureApp';
 
-import { AppContainer } from 'react-hot-loader';
-import getEnvParams from './core/getEnvParams';
+import configureApp from 'core/configureApp';
+import { App } from 'core/App';
+import getEnvParams from 'core/getEnvParams';
 
 const { appVersion } = getEnvParams();
 
