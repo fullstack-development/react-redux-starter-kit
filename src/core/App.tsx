@@ -3,9 +3,10 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
+import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'services/theme';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
-import { JssProvider, SheetsRegistry } from 'shared/styles';
+import { BaseStyles, JssProvider, SheetsRegistry } from 'shared/styles';
 
 import createRoutes from './routes';
 
@@ -14,7 +15,7 @@ interface IAppProps {
   disableStylesGeneration?: boolean;
 }
 
-export function App({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
+function ClientApp({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -23,6 +24,8 @@ export function App({ modules, store, jssDeps, disableStylesGeneration }: IAppDa
     </Provider>
   );
 }
+
+export const App = hot(ClientApp);
 
 interface IServerAppProps {
   jssDeps: IJssDependencies;
@@ -56,7 +59,9 @@ function renderSharedPart(
       disableStylesGeneration={disableStylesGeneration}
     >
       <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
-        {createRoutes(modules)}
+        <BaseStyles>
+          {createRoutes(modules)}
+        </BaseStyles>
       </ThemeProvider>
     </JssProvider>
   );

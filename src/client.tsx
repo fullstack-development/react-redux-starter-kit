@@ -1,6 +1,5 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
-import { AppContainer } from 'react-hot-loader';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as bootstrapper from 'react-async-bootstrapper';
@@ -36,7 +35,7 @@ if ((module as any).hot && process.env.NODE_ENV !== 'production') {
 
 function render(component: React.ReactElement<any>) {
   ReactDOM.hydrate(
-    <AppContainer>{component}</AppContainer>,
+    component,
     document.getElementById('root'),
     () => {
       // We don't need the static css any more once we have launched our application.
