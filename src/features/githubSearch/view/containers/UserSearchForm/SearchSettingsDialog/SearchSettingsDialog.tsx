@@ -1,19 +1,18 @@
 import * as React from 'react';
 import block from 'bem-cn';
 import { bind } from 'decko';
-import FormLabel from '@material-ui/core/FormLabel'; // ??
 
-import { Button, FormControlLabel, Radio } from 'shared/view/elements';
-import { TextInputField, SelectField, NumberInputField, RadioGroupInputField } from 'shared/view/form';
+import { Button, FormLabel } from 'shared/view/elements';
+import { TextInputField, SelectField, NumberInputField, RadioField } from 'shared/view/form';
 import { Dialog } from 'shared/view/components';
 
-import { IFormFields } from '../../../namespace';
-import { searchByOptions, perPageOptions } from './constants';
+import { IUserSearchFormFields } from '../../../../namespace';
+import { searchByOptions, perPageOptions } from '../constants';
 import './SearchSettingsDialog.scss';
 
 interface IProps {
   isOpen: boolean;
-  fieldNames: Record<keyof IFormFields, string>;
+  fieldNames: Record<keyof IUserSearchFormFields, string>;
   onClose(): void;
 }
 
@@ -83,11 +82,14 @@ class SearchSettingsDialog extends React.PureComponent<IProps> {
   private renderSearchTypeSettings() {
     const { fieldNames } = this.props;
     return (
-      <RadioGroupInputField name={fieldNames.searchType} label="Search type" defaultValue="both">
-        <FormControlLabel value="user" control={<Radio />} label="Only users" />
-        <FormControlLabel value="org" control={<Radio />} label="Only organizations" />
-        <FormControlLabel value="both" control={<Radio />} label="Both" />
-      </RadioGroupInputField>
+      <FormLabel>
+        Search type
+        <div className={b('checkbox-group')}>
+          <RadioField name={fieldNames.searchType} value="user" label="User" />
+          <RadioField name={fieldNames.searchType} value="org" label="Organizations" />
+          <RadioField name={fieldNames.searchType} value="both" label="Both" />
+        </div>
+      </FormLabel>
     );
   }
 

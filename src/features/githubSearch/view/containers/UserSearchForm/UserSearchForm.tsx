@@ -9,9 +9,10 @@ import { makeFormFieldNames } from 'shared/helpers';
 import { TextInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 
-import { SearchSettingsDialog } from '../../components';
+import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 import { actions } from './../../../redux';
-import { IFormFields } from '../../../namespace';
+import { IUserSearchFormFields } from '../../../namespace';
+import { formInitialValues } from './constants';
 import './UserSearchForm.scss';
 
 interface IState {
@@ -30,10 +31,9 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
   }, dispatch);
 }
 
-const fieldNames = makeFormFieldNames<IFormFields>([
+const fieldNames = makeFormFieldNames<IUserSearchFormFields>([
   'search', 'searchBy', 'minRepos', 'maxRepos', 'searchType', 'reposLanguage', 'perPage',
 ]);
-const formInitialValues: Partial<IFormFields> = { searchBy: 'login-email', searchType: 'both', perPage: 30 };
 const b = block('user-search-form');
 
 class UserSearchForm extends React.PureComponent<IProps> {
@@ -74,7 +74,7 @@ class UserSearchForm extends React.PureComponent<IProps> {
   }
 
   @bind
-  private handleUserSearchFormSubmit(values: IFormFields) {
+  private handleUserSearchFormSubmit(values: IUserSearchFormFields) {
     const { search, ...options } = values;
     this.props.searchUser({ queryText: search, options });
   }

@@ -1,6 +1,6 @@
 import { IUser, IUserDetails } from 'shared/types/models';
-import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 import { IUserSearchOptions } from 'shared/types/github';
+import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
   data: {
@@ -13,12 +13,12 @@ export interface IReduxState {
   };
 }
 
-export interface IFormFields extends IUserSearchOptions {
+export interface IUserSearchFormFields extends IUserSearchOptions {
   search: string;
 }
 
 export interface ISearchUserPayload {
-  queryText: string;
+  queryText: string; // ??? think about it
   options: IUserSearchOptions;
 }
 
