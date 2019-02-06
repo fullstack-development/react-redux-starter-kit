@@ -3,7 +3,7 @@ import { bind } from 'decko';
 import { IUserSearchOptions } from 'shared/types/github';
 import { ISearchUserResponse, IDetailedServerUser, IUserSearchResults } from 'shared/types/models';
 
-import { constructUserSearchQuery } from './helpers';
+import { constructUserSearchQuery, getTotalPagesFromLinkHeader } from './helpers';
 import { convertUser, convertUserDetails } from './converters';
 import HttpActions from './HttpActions';
 
@@ -14,15 +14,16 @@ class Api {
     this.actions = new HttpActions('https://api.github.com/');
   }
 
+  // TODO: accept header with api version?
   @bind
   public async searchUser(
-    searchString: string, options: IUserSearchOptions, page: number = 1,
+    searchString: string, options: IUserSearchOptions, page: number,
   ): Promise<IUserSearchResults> {
     const URL = `/search/users?q=${constructUserSearchQuery(searchString, options, page)}`;
     const response = await this.actions.get<ISearchUserResponse>(URL);
     const users = response.data.items;
-    const totalUsers = response.data.total_count;
-    return { totalUsers, users: users.map(convertUser) };
+    const totalPages = getTotalPagesFromLinkHeader(response.headers.link);
+    return { totalPages, users: users.map(convertUser) };
   }
 
   @bind

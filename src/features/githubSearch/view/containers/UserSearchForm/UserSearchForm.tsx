@@ -15,6 +15,10 @@ import { IUserSearchFormFields } from '../../../namespace';
 import { formInitialValues } from './constants';
 import './UserSearchForm.scss';
 
+interface IOwnProps {
+  onSubmit(values: IUserSearchFormFields): void;
+}
+
 interface IState {
   isSettingsDialogOpen: boolean;
 }
@@ -23,7 +27,7 @@ interface IActionProps {
   searchUser: typeof actions.searchUser;
 }
 
-type IProps = IActionProps;
+type IProps = IOwnProps & IActionProps;
 
 function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
@@ -50,7 +54,7 @@ class UserSearchForm extends React.PureComponent<IProps> {
       />
     );
   }
-
+  // TODO: think about api auth
   // TODO: add 18n everywhere
   @bind
   private renderForm({ handleSubmit }: FormRenderProps) {
@@ -75,7 +79,9 @@ class UserSearchForm extends React.PureComponent<IProps> {
 
   @bind
   private handleUserSearchFormSubmit(values: IUserSearchFormFields) {
-    this.props.searchUser(values);
+    const { searchUser, onSubmit } = this.props;
+    searchUser({ ...values, page: 1 });
+    onSubmit(values);
   }
 
   @bind

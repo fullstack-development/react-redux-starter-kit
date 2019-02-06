@@ -21,9 +21,9 @@ function getSaga(deps: IDependencies) {
 
 function* executeSearchUser({ api }: IDependencies, { payload }: NS.ISearchUser) {
   try {
-    const { searchString, ...options } = payload;
-    const searchUsersResults: IUserSearchResults = yield call(api.searchUser, searchString, options);
-    yield put(actions.searchUserSuccess(searchUsersResults));
+    const { searchString, page, ...options } = payload;
+    const searchUsersResults: IUserSearchResults = yield call(api.searchUser, searchString, options, page);
+    yield put(actions.searchUserSuccess({ ...searchUsersResults, page }));
   } catch (error) {
     yield put(actions.searchUserFail(getErrorMsg(error)));
   }

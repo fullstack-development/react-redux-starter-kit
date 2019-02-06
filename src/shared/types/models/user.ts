@@ -34,6 +34,6 @@ export interface IDetailedUser extends IUser {
 }
 
 export interface IUserSearchResults {
-  totalUsers: number;
+  totalPages: number;
   users: IUser[];
 }

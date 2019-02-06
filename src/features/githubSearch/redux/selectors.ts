@@ -1,5 +1,6 @@
 import { IAppReduxState } from 'shared/types/app';
 import { IUser, IDetailedUser } from 'shared/types/models';
+import { IPaginationState } from 'shared/types/common';
 import { ICommunication } from 'shared/types/redux';
 import * as NS from '../namespace';
 
@@ -19,4 +20,8 @@ export function selectCommunication(
   state: IAppReduxState, name: keyof NS.IReduxState['communication'],
 ): ICommunication {
   return selectFeatureState(state).communication[name];
+}
+
+export function selectUserSearchPaginationState(state: IAppReduxState): IPaginationState | null {
+  return selectFeatureState(state).ui.userSearchPaginationState;
 }

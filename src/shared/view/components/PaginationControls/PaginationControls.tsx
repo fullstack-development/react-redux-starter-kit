@@ -5,39 +5,66 @@ import { bind } from 'decko';
 
 import './PaginationControls.scss';
 
+type ArrowDirection = 'left' | 'right';
+
 interface IProps {
   totalPages: number;
   currentPage: number;
   onPageRequest(pageNumber: number): void;
 }
 
+const maxRenderedPages = 11;
+const pagesFromMiddlePage = Math.floor(maxRenderedPages / 2);
+
 const b = block('pagination-controls');
 
 class PaginationControls extends React.PureComponent<IProps, {}> {
   public render() {
     const { currentPage, totalPages } = this.props;
+    const pagesOnTheLeft = (totalPages - currentPage) < pagesFromMiddlePage
+      ? maxRenderedPages - (totalPages - currentPage) - 1
+      : pagesFromMiddlePage;
+    const firstRenderedPage = Math.max(1, currentPage - pagesOnTheLeft);
+    const lastRenderedPage = Math.min(totalPages + 1, (firstRenderedPage + maxRenderedPages));
     return (
       <div className={b()}>
         {currentPage > 1 && this.renderArrow('left')}
-        {R.range(1, totalPages).map(this.renderPage)}
+        {R.range(firstRenderedPage, lastRenderedPage).map(this.renderPage)}
         {currentPage < totalPages && this.renderArrow('right')}
       </div>
     );
   }
 
-  private renderArrow(direction: 'left' | 'right') {
-    return <div className={b('arrow', { direction })}/>;
+  private renderArrow(direction: ArrowDirection) {
+    return <div className={b('arrow', { direction })} onClick={this.makeArrowClickHandler(direction)}/>;
   }
 
   @bind
-  private renderPage(_: number, i: number) {
+  private renderPage(page: number) {
     const { currentPage } = this.props;
-    const pageNumber  = i + 1;
     return (
-      <div className={b('page', { active: currentPage === pageNumber })}>
-        {pageNumber}
+      <div
+        className={b('page', { active: currentPage === page })}
+        key={page}
+        onClick={this.makePageClickHandler(page)}
+      >
+        {page}
       </div>
     );
+  }
+
+  @bind
+  private makePageClickHandler(page: number) {
+    return () => this.props.onPageRequest(page);
+  }
+
+  @bind
+  private makeArrowClickHandler(direction: ArrowDirection) {
+    return () => {
+      const { currentPage, onPageRequest } = this.props;
+      const requestingPage = direction === 'left' ? currentPage - 1 : currentPage + 1;
+      onPageRequest(requestingPage);
+    };
   }
 }
 
