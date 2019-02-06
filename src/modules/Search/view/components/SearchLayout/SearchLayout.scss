@@ -8,5 +8,9 @@
   &__search-form {
     margin-top: 0.8rem;
     width: 30rem;
+
+    @media (max-width: 490px) {
+      width: 95%;
+    }
   }
 }

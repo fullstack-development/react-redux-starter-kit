@@ -9,18 +9,18 @@
 
     &_size {
       &_big {
+        min-height: 24rem;
         max-width: 90rem;
-        height: 24rem;
       }
 
       &_medium {
+        min-height: 28rem;
         max-width: 45rem;
-        height: 28rem;
       }
 
       &_small {
+        min-height: 14rem;
         max-width: 45rem;
-        height: 14rem;
       }
     }
   }
