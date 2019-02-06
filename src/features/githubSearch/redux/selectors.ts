@@ -8,7 +8,7 @@ function selectFeatureState(state: IAppReduxState): NS.IReduxState {
   return state.githubSearch;
 }
 
-export function selectFoundUsers(state: IAppReduxState): IUser[] {
+export function selectFoundUsers(state: IAppReduxState): IUser[] | null {
   return selectFeatureState(state).data.foundUsers;
 }
 

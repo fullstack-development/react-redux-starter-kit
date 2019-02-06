@@ -42,7 +42,12 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     return Object.values(this.avatarsLoadingStatus).every(x => x === true);
   }
 
-  private avatarsLoadingStatus: Record<string, boolean> = {}; // { avatarURL: true/false };
+  // { avatarURL: true/false };
+  private avatarsLoadingStatus: Record<string, boolean> = (() => {
+    const { users } = this.props;
+    const avatarsURLs = users.map(x => x.avatarURL);
+    return R.zipObj(avatarsURLs, Array(users.length).fill(false));
+  })();
 
   public componentDidUpdate({ users: prevUsers }: IProps) {
     const { users } = this.props;

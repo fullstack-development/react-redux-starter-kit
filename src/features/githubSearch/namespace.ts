@@ -5,7 +5,7 @@ import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/
 
 export interface IReduxState {
   data: {
-    foundUsers: IUser[];
+    foundUsers: IUser[] | null;
     userDetails: IDetailedUser | null;
   };
   communication: {

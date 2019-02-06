@@ -16,5 +16,5 @@ export const perPageOptions: Array<ISelectOption<IUserSearchOptions['perPage']>>
 ];
 
 export const formInitialValues: IUserSearchFormFields = {
-  searchString: '', searchBy: searchByOptions[0].value, searchType: 'both', perPage: perPageOptions[0].value,
+  searchString: '', searchBy: searchByOptions[0].value, searchType: 'both', perPage: perPageOptions[1].value,
 };

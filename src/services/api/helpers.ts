@@ -44,5 +44,5 @@ export function getTotalPagesFromLinkHeader(link?: string): number {
       }
     }
   }
-  return 1;
+  return 0;
 }

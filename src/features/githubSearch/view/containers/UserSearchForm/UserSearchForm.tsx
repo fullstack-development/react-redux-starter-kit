@@ -5,34 +5,45 @@ import { bind } from 'decko';
 import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
 
+import { IAppReduxState } from 'shared/types/app';
 import { makeFormFieldNames } from 'shared/helpers';
 import { TextInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
-import { actions } from './../../../redux';
+import { selectors, actions } from './../../../redux';
 import { IUserSearchFormFields } from '../../../namespace';
 import { formInitialValues } from './constants';
 import './UserSearchForm.scss';
+
+interface IState {
+  isSettingsDialogOpen: boolean;
+}
 
 interface IOwnProps {
   onSubmit(values: IUserSearchFormFields): void;
 }
 
-interface IState {
-  isSettingsDialogOpen: boolean;
+interface IStateProps {
+  isUserSearchRequesting: boolean;
 }
 
 interface IActionProps {
   searchUser: typeof actions.searchUser;
 }
 
-type IProps = IOwnProps & IActionProps;
+type IProps = IOwnProps & IStateProps & IActionProps;
 
 function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
     searchUser: actions.searchUser,
   }, dispatch);
+}
+
+function mapState(state: IAppReduxState): IStateProps {
+  return {
+    isUserSearchRequesting: selectors.selectCommunication(state, 'searchUser').isRequesting,
+  };
 }
 
 const fieldNames = makeFormFieldNames<IUserSearchFormFields>([
@@ -58,15 +69,28 @@ class UserSearchForm extends React.PureComponent<IProps> {
   // TODO: add 18n everywhere
   @bind
   private renderForm({ handleSubmit }: FormRenderProps) {
+    const { isUserSearchRequesting } = this.props;
     const { isSettingsDialogOpen } = this.state;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <TextInputField name={fieldNames.searchString} fullWidth />
+        <TextInputField name={fieldNames.searchString} fullWidth disabled={isUserSearchRequesting} />
         <div className={b('buttons')}>
           <div className={b('settings-button')}>
-            <Button variant="outlined" onClick={this.handleSettingsButtonClick}>Settings</Button>
+            <Button
+              variant="outlined"
+              onClick={this.handleSettingsButtonClick}
+              disabled={isUserSearchRequesting}
+            >
+              Settings
+            </Button>
           </div>
-          <Button type="submit" variant="outlined">Search</Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled={isUserSearchRequesting}
+          >
+            Search
+          </Button>
         </div>
         <SearchSettingsDialog
           isOpen={isSettingsDialogOpen}
@@ -95,4 +119,4 @@ class UserSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-export default connect(null, mapDispatch)(UserSearchForm);
+export default connect(mapState, mapDispatch)(UserSearchForm);

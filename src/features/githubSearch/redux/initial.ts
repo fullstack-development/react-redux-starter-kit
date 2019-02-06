@@ -3,7 +3,7 @@ import { IReduxState } from '../namespace';
 
 const initial: IReduxState = {
   data: {
-    foundUsers: [],
+    foundUsers: null,
     userDetails: null,
   },
   communication: {
