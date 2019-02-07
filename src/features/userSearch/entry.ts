@@ -8,7 +8,7 @@ const entry = makeFeatureEntry(
   actions,
   selectors,
   {
-    reducers: { githubSearch: reducer },
+    reducers: { userSearch: reducer },
     sagas: [getSaga],
   },
 );

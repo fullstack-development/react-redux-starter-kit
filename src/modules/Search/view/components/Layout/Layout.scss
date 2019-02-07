@@ -1,0 +1,23 @@
+.layout {
+  $footer-height: 3rem;
+
+  position: relative;
+  padding-bottom: $footer-height + 1rem;
+  min-height: 100%;
+
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-right: 2rem;
+    width: 100%;
+    height: $footer-height;
+    text-align: right;
+  }
+
+  &__link {
+    color: #333;
+  }
+}
+
+// TODO: add error notification

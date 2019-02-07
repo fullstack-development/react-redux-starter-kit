@@ -6,14 +6,15 @@ import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
 import { Typography } from 'shared/view/elements';
 
+import Layout from '../Layout/Layout';
 import './SearchLayout.scss';
 
 interface IState {
-  lastSubmittedSearchFormState: features.githubSearch.namespace.IUserSearchFormFields | null;
+  lastSubmittedSearchFormState: features.userSearch.namespace.IUserSearchFormFields | null;
 }
 
 interface IFeatureProps {
-  githubSearchFeatureEntry: features.githubSearch.Entry;
+  userSearchFeatureEntry: features.userSearch.Entry;
 }
 
 type IProps = IFeatureProps;
@@ -26,31 +27,33 @@ class SearchLayout extends React.PureComponent<IProps, IState> {
   };
 
   public render() {
-    const { githubSearchFeatureEntry: { containers } } = this.props;
+    const { userSearchFeatureEntry: { containers } } = this.props;
     const { UserSearchForm, UserSearchResults, UserSearchPagination } = containers;
     const { lastSubmittedSearchFormState } = this.state;
     return (
-      <div className={b()}>
-        <Typography variant="h4">
-          GitHub user search
+      <Layout>
+        <div className={b()}>
+          <Typography variant="h4">
+            GitHub user search
         </Typography>
-        <div className={b('search-form')}>
-          <UserSearchForm onSubmit={this.handleUserSearchFormSubmit} />
+          <div className={b('search-form')}>
+            <UserSearchForm onSubmit={this.handleUserSearchFormSubmit} />
+          </div>
+          <UserSearchResults />
+          {lastSubmittedSearchFormState &&
+            <UserSearchPagination formFields={lastSubmittedSearchFormState} />
+          }
         </div>
-        <UserSearchResults />
-        {lastSubmittedSearchFormState &&
-          <UserSearchPagination formFields={lastSubmittedSearchFormState} />
-        }
-      </div>
+      </Layout>
     );
   }
 
   @bind
-  private handleUserSearchFormSubmit(values: features.githubSearch.namespace.IUserSearchFormFields) {
+  private handleUserSearchFormSubmit(values: features.userSearch.namespace.IUserSearchFormFields) {
     this.setState({ lastSubmittedSearchFormState: values });
   }
 }
 
 export default featureConnect({
-  githubSearchFeatureEntry: features.githubSearch.loadEntry,
+  userSearchFeatureEntry: features.userSearch.loadEntry,
 })(SearchLayout);

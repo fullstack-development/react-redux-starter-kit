@@ -106,6 +106,7 @@ class UserDetails extends React.PureComponent<IProps> {
         </a>
         <a href={`${htmlURL}/repositories`} target="_blank" className={b('attribute')}>
           Repositories
+          {/* TODO: тут можно контейнер провайдером загрузку реп добавить (репы будут справа выезжать по стрелочке) */}
           <span className={b('value')}>{reposNumber}</span>
         </a>
         </div>

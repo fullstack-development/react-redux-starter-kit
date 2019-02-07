@@ -5,7 +5,7 @@ import { ICommunication } from 'shared/types/redux';
 import * as NS from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): NS.IReduxState {
-  return state.githubSearch;
+  return state.userSearch;
 }
 
 export function selectFoundUsers(state: IAppReduxState): IUser[] | null {

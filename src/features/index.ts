@@ -1,3 +1,3 @@
-import * as githubSearch from './githubSearch';
+import * as userSearch from './userSearch';
 
-export { githubSearch };
+export { userSearch };

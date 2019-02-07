@@ -1,1 +1,1 @@
-export * from './githubSearch';
+export * from './userSearch';
