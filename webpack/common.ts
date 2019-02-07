@@ -91,7 +91,6 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
     test: /\.tsx?$/,
     use:
       threadLoader
-<<<<<<< HEAD
         .concat(withHot && type === 'dev' ? {
           loader: 'babel-loader',
           options: {
@@ -111,27 +110,6 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
             logLevel: 'error',
           },
         }),
-=======
-      .concat(withHot && type === 'dev' ? {
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          cacheDirectory: true,
-          plugins: [
-            'react-hot-loader/babel',
-            'syntax-dynamic-import',
-          ],
-        },
-      } : [])
-      .concat({
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-          happyPackMode: true,
-          logLevel: 'error',
-        },
-      }),
->>>>>>> mvp-base
   },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
