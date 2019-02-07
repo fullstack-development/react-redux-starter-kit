@@ -9,8 +9,8 @@ import * as NS from '../namespace';
 import * as actions from './actions';
 
 function getSaga(deps: IDependencies) {
-  const searchUserType: NS.ISearchUser['type'] = 'GITHUB_SEARCH:SEARCH_USER';
-  const loadUserDetailsType: NS.ILoadUserDetails['type'] = 'GITHUB_SEARCH:LOAD_USER_DETAILS';
+  const searchUserType: NS.ISearchUser['type'] = 'USER_SEARCH:SEARCH_USER';
+  const loadUserDetailsType: NS.ILoadUserDetails['type'] = 'USER_SEARCH:LOAD_USER_DETAILS';
   return function* saga(): SagaIterator {
     yield all([
       takeLatest(searchUserType, executeSearchUser, deps),

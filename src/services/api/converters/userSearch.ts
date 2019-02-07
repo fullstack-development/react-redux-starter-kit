@@ -1,4 +1,5 @@
-import { IServerUser, IDetailedServerUser, IUser, IDetailedUser } from 'shared/types/models';
+import { IUser, IDetailedUser } from 'shared/types/models';
+import { IServerUser, IDetailedServerUser } from '../types';
 
 export function convertUser(user: IServerUser): IUser {
   return {

@@ -1,0 +1,18 @@
+.repositories-search-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 84vh; // TODO: возможно сделать элегантнее
+
+  // TODO: в UserSearch такие же стили
+
+  &__search-form {
+    margin-top: 0.8rem;
+    width: 30rem;
+
+    @media (max-width: 490px) {
+      width: 95%;
+    }
+  }
+}

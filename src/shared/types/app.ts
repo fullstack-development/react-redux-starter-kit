@@ -53,6 +53,7 @@ export interface IAppReduxState {
   theme: ThemeProviderNS.IReduxState;
   // features
   userSearch: features.userSearch.namespace.IReduxState;
+  repositoriesSearch: features.repositoriesSearch.namespace.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;

@@ -1,10 +1,11 @@
 import { bind } from 'decko';
 
 import { IUserSearchOptions } from 'shared/types/github';
-import { ISearchUserResponse, IDetailedServerUser, IUserSearchResults } from 'shared/types/models';
+import { IUserSearchResults } from 'shared/types/models';
 
+import { SearchUserResponse, IDetailedServerUser, SearchRepositoryResponse } from './types';
 import { constructUserSearchQuery, getTotalPagesFromLinkHeader } from './helpers';
-import { convertUser, convertUserDetails } from './converters';
+import { convertUser, convertUserDetails, convertRepository } from './converters';
 import HttpActions from './HttpActions';
 
 class Api {
@@ -20,9 +21,12 @@ class Api {
     searchString: string, options: IUserSearchOptions, page: number,
   ): Promise<IUserSearchResults> {
     const URL = `/search/users?q=${constructUserSearchQuery(searchString, options, page)}`;
-    const response = await this.actions.get<ISearchUserResponse>(URL);
+    const response = await this.actions.get<SearchUserResponse>(URL);
     const users = response.data.items;
     const totalPages = getTotalPagesFromLinkHeader(response.headers.link);
+    const meme = await this.actions.get('/search/repositories?q="123"');
+    console.log('USERS', users);
+    console.log(meme);
     return { totalPages, users: users.map(convertUser) };
   }
 
@@ -31,6 +35,14 @@ class Api {
     const URL = `/users/${username}`;
     const response = await this.actions.get<IDetailedServerUser>(URL);
     return convertUserDetails(response.data);
+  }
+
+  @bind
+  public async searchRepository(searchString: string) {
+    const URL = `/search/repositories?q=${searchString}`;
+    const response = await this.actions.get<SearchRepositoryResponse>(URL);
+    const repositories = response.data.items;
+    return repositories.map(convertRepository);
   }
 }
 

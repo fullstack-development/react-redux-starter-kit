@@ -29,15 +29,15 @@ export interface IUserSearchSuccessPayload extends IUserSearchResults {
   page: number;
 }
 
-export type IResetUserDetails = IPlainAction<'GITHUB_SEARCH:RESET_USER_DETAILS'>;
+export type IResetUserDetails = IPlainAction<'USER_SEARCH:RESET_USER_DETAILS'>;
 
-export type ISearchUser = IAction<'GITHUB_SEARCH:SEARCH_USER', ISearchUserPayload>;
-export type ISearchUserSuccess = IAction<'GITHUB_SEARCH:SEARCH_USER_SUCCESS', IUserSearchSuccessPayload>;
-export type ISearchUserFail = IPlainFailAction<'GITHUB_SEARCH:SEARCH_USER_FAIL'>;
+export type ISearchUser = IAction<'USER_SEARCH:SEARCH_USER', ISearchUserPayload>;
+export type ISearchUserSuccess = IAction<'USER_SEARCH:SEARCH_USER_SUCCESS', IUserSearchSuccessPayload>;
+export type ISearchUserFail = IPlainFailAction<'USER_SEARCH:SEARCH_USER_FAIL'>;
 
-export type ILoadUserDetails = IAction<'GITHUB_SEARCH:LOAD_USER_DETAILS', string>;
-export type ILoadUserDetailsSuccess = IAction<'GITHUB_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedUser>;
-export type ILoadUserDetailsFail = IPlainFailAction<'GITHUB_SEARCH:LOAD_USER_DETAILS_FAIL'>;
+export type ILoadUserDetails = IAction<'USER_SEARCH:LOAD_USER_DETAILS', string>;
+export type ILoadUserDetailsSuccess = IAction<'USER_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedUser>;
+export type ILoadUserDetailsFail = IPlainFailAction<'USER_SEARCH:LOAD_USER_DETAILS_FAIL'>;
 
 export type IAction = IResetUserDetails | ISearchUser | ISearchUserSuccess | ISearchUserFail | ILoadUserDetails
 | ILoadUserDetailsFail | ILoadUserDetailsSuccess;
