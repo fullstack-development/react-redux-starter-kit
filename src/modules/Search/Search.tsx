@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
-import { SearchLayout } from './view/components';
+import { UserSearchLayout } from './view/components';
 
 const Search: IModule = {
   getRoutes() {
@@ -12,8 +12,15 @@ const Search: IModule = {
       <Route
         key={routes.search.getElementKey()}
         path={routes.search.getRoutePath()}
-        component={SearchLayout}
-      />
+      >
+        <Switch>
+          <Route
+            key={routes.search.users.getElementKey()}
+            path={routes.search.users.getRoutePath()}
+            component={UserSearchLayout}
+          />
+        </Switch>
+      </Route>
     );
   },
 };

@@ -1,21 +1,30 @@
 .layout {
   $footer-height: 3rem;
+  $horizontal-padding: 2rem;
 
   position: relative;
   padding-bottom: $footer-height + 1rem;
   min-height: 100%;
 
+  &__header {
+    padding: 1rem $horizontal-padding;
+  }
+
+  &__navigation-link {
+    margin-left: 0.8rem;
+  }
+
   &__footer {
     position: absolute;
     bottom: 0;
     left: 0;
-    padding-right: 2rem;
+    padding-right: $horizontal-padding;
     width: 100%;
     height: $footer-height;
     text-align: right;
   }
 
-  &__link {
+  &__company-link {
     color: #333;
   }
 }

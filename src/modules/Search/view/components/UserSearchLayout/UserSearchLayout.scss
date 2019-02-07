@@ -1,9 +1,9 @@
-.search-layout {
+.user-search-layout {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 84vh; // TODO: возможно сделать элегантнее
 
   &__search-form {
     margin-top: 0.8rem;

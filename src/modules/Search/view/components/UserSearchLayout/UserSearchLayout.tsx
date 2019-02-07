@@ -7,7 +7,7 @@ import featureConnect from 'core/FeatureConnector';
 import { Typography } from 'shared/view/elements';
 
 import Layout from '../Layout/Layout';
-import './SearchLayout.scss';
+import './UserSearchLayout.scss';
 
 interface IState {
   lastSubmittedSearchFormState: features.userSearch.namespace.IUserSearchFormFields | null;
@@ -19,9 +19,9 @@ interface IFeatureProps {
 
 type IProps = IFeatureProps;
 
-const b = block('search-layout');
+const b = block('user-search-layout');
 
-class SearchLayout extends React.PureComponent<IProps, IState> {
+class UserSearchLayout extends React.PureComponent<IProps, IState> {
   public state: IState = {
     lastSubmittedSearchFormState: null,
   };
@@ -35,7 +35,7 @@ class SearchLayout extends React.PureComponent<IProps, IState> {
         <div className={b()}>
           <Typography variant="h4">
             GitHub user search
-        </Typography>
+          </Typography>
           <div className={b('search-form')}>
             <UserSearchForm onSubmit={this.handleUserSearchFormSubmit} />
           </div>
@@ -56,4 +56,4 @@ class SearchLayout extends React.PureComponent<IProps, IState> {
 
 export default featureConnect({
   userSearchFeatureEntry: features.userSearch.loadEntry,
-})(SearchLayout);
+})(UserSearchLayout);
