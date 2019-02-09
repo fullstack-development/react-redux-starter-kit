@@ -14,18 +14,18 @@ const resources = {
   },
 };
 
-export const makeI18nInstance = () => {
-  i18n
-    .use(languageDetector)
-    .use(initReactI18next)
-    .init({
-      resources,
-      fallbackLng: FALLBACK_LANGUAGE,
-      interpolation: {
-        format: (value, format, _lng) => {
-          if (format === 'uppercase') { return value.toUpperCase(); }
-          return value;
-        },
+i18n
+  .use(languageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: FALLBACK_LANGUAGE,
+    interpolation: {
+      format: (value, format, _lng) => {
+        if (format === 'uppercase') { return value.toUpperCase(); }
+        return value;
       },
-    });
-};
+    },
+  });
+
+export default i18n;

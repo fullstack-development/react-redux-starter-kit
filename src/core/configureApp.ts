@@ -6,8 +6,8 @@ import { configureJss } from './configureJss';
 import { DemoModule } from 'modules';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as themeProviderRE } from 'services/theme';
-import { makeI18nInstance } from 'services/i18n';
 import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
+import 'services/i18n/i18nContainer';
 
 function configureApp(data?: IAppData): IAppData {
   /* Prepare main app elements */
@@ -36,7 +36,6 @@ function configureApp(data?: IAppData): IAppData {
 
   const dependencies = configureDeps(store);
   const jssDeps = configureJss();
-  makeI18nInstance();
 
   sharedReduxEntries.forEach(connectEntryToStore);
   modules.forEach((module: IModule) => {
