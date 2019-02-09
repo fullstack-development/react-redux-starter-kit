@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { withI18n, tKeys, ITranslateProps } from 'core/configurationI18n';
-import { LanguageSelector } from 'shared/view/components';
+import { useTranslation, tKeys, LanguageSelector } from 'services/i18n';
 
-function DemoTranslations(props: ITranslateProps) {
-  const { t, lng } = props;
+function DemoTranslations() {
+  const { t, i18n: { language } } = useTranslation();
   return (
     <div>
-      <p>{t(tKeys.demo.selectedLang.getKey(), { lng })}</p>
+      <p>{t(tKeys.demo.selectedLang.getKey(), { language })}</p>
       <p>{t(tKeys.demo.selectorLabel.getKey())}</p>
       <div style={{ margin: 10 }}><LanguageSelector /></div>
       <p>{t(tKeys.demo.somethingText.getKey())}</p>
@@ -20,4 +19,4 @@ function DemoTranslations(props: ITranslateProps) {
   );
 }
 
-export default withI18n()(DemoTranslations);
+export default DemoTranslations;

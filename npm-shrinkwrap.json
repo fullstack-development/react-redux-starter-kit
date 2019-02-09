@@ -750,18 +750,18 @@
       "integrity": "sha512-HtKGu+qG1NPvYe1z7ezLsyIaXYyi8SoAVqWDZgDQ8dLrsZvSzUNCwZyfX33uhWxL/SU0ZDQZ3nwZ0nimt507Kw=="
     },
     "@types/react": {
-      "version": "16.7.20",
-      "resolved": "https://registry.npmjs.org/@types/react/-/react-16.7.20.tgz",
-      "integrity": "sha512-Qd5RWkwl6SL7R2XzLk/cicjVQm1Mhc6HqXY5Ei4pWd1Vi8Fkbd5O0sA398x8fRSTPAuHdDYD9nrWmJMYTJI0vQ==",
+      "version": "16.8.2",
+      "resolved": "https://registry.npmjs.org/@types/react/-/react-16.8.2.tgz",
+      "integrity": "sha512-6mcKsqlqkN9xADrwiUz2gm9Wg4iGnlVGciwBRYFQSMWG6MQjhOZ/AVnxn+6v8nslFgfYTV8fNdE6XwKu6va5PA==",
       "requires": {
         "@types/prop-types": "*",
         "csstype": "^2.2.0"
       }
     },
     "@types/react-dom": {
-      "version": "16.0.11",
-      "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-16.0.11.tgz",
-      "integrity": "sha512-x6zUx9/42B5Kl2Vl9HlopV8JF64wLpX3c+Pst9kc1HgzrsH+mkehe/zmHMQTplIrR48H2gpU7ZqurQolYu8XBA==",
+      "version": "16.8.0",
+      "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-16.8.0.tgz",
+      "integrity": "sha512-Jp4ufcEEjVJEB0OHq2MCZcE1u3KYUKO6WnSuiU/tZeYeiZxUoQavfa/TZeiIT+1XoN6l0lQVNM30VINZFDeolQ==",
       "requires": {
         "@types/react": "*"
       }
@@ -8568,9 +8568,9 @@
       "integrity": "sha1-MRYKNpMK2vH8BMYHT360FGXU7Es="
     },
     "i18next": {
-      "version": "14.0.1",
-      "resolved": "https://registry.npmjs.org/i18next/-/i18next-14.0.1.tgz",
-      "integrity": "sha512-wsKfQuYsy4RdCaqqN71eDjWMhizhTfQSIBGttEA7vcboQrUfpQlCezrSzrtmoW9F9tmVyNs38iBgLYLMhRSeIQ=="
+      "version": "14.1.1",
+      "resolved": "https://registry.npmjs.org/i18next/-/i18next-14.1.1.tgz",
+      "integrity": "sha512-HItn9RHLyrDqe6pw6qXMYHGPHNc3y1FZndJfBlD6k4sRS0FAlYLvqCDVIWFc1XultBgsv348TtvL/lleG6JgBg=="
     },
     "i18next-browser-languagedetector": {
       "version": "2.2.4",
@@ -14726,20 +14726,20 @@
       }
     },
     "react": {
-      "version": "16.7.0",
-      "resolved": "https://registry.npmjs.org/react/-/react-16.7.0.tgz",
-      "integrity": "sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==",
+      "version": "16.8.1",
+      "resolved": "https://registry.npmjs.org/react/-/react-16.8.1.tgz",
+      "integrity": "sha512-wLw5CFGPdo7p/AgteFz7GblI2JPOos0+biSoxf1FPsGxWQZdN/pj6oToJs1crn61DL3Ln7mN86uZ4j74p31ELQ==",
       "requires": {
         "loose-envify": "^1.1.0",
         "object-assign": "^4.1.1",
         "prop-types": "^15.6.2",
-        "scheduler": "^0.12.0"
+        "scheduler": "^0.13.1"
       },
       "dependencies": {
         "scheduler": {
-          "version": "0.12.0",
-          "resolved": "https://registry.npmjs.org/scheduler/-/scheduler-0.12.0.tgz",
-          "integrity": "sha512-t7MBR28Akcp4Jm+QoR63XgAi9YgCUmgvDHqf5otgAj4QvdoBE4ImCX0ffehefePPG+aitiYHp0g/mW6s4Tp+dw==",
+          "version": "0.13.1",
+          "resolved": "https://registry.npmjs.org/scheduler/-/scheduler-0.13.1.tgz",
+          "integrity": "sha512-VJKOkiKIN2/6NOoexuypwSrybx13MY7NSy9RNt8wPvZDMRT1CW6qlpF5jXRToXNHz3uWzbm2elNpZfXfGPqP9A==",
           "requires": {
             "loose-envify": "^1.1.0",
             "object-assign": "^4.1.1"
@@ -14756,20 +14756,20 @@
       }
     },
     "react-dom": {
-      "version": "16.7.0",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-16.7.0.tgz",
-      "integrity": "sha512-D0Ufv1ExCAmF38P2Uh1lwpminZFRXEINJe53zRAbm4KPwSyd6DY/uDoS0Blj9jvPpn1+wivKpZYc8aAAN/nAkg==",
+      "version": "16.8.1",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-16.8.1.tgz",
+      "integrity": "sha512-N74IZUrPt6UiDjXaO7UbDDFXeUXnVhZzeRLy/6iqqN1ipfjrhR60Bp5NuBK+rv3GMdqdIuwIl22u1SYwf330bg==",
       "requires": {
         "loose-envify": "^1.1.0",
         "object-assign": "^4.1.1",
         "prop-types": "^15.6.2",
-        "scheduler": "^0.12.0"
+        "scheduler": "^0.13.1"
       },
       "dependencies": {
         "scheduler": {
-          "version": "0.12.0",
-          "resolved": "https://registry.npmjs.org/scheduler/-/scheduler-0.12.0.tgz",
-          "integrity": "sha512-t7MBR28Akcp4Jm+QoR63XgAi9YgCUmgvDHqf5otgAj4QvdoBE4ImCX0ffehefePPG+aitiYHp0g/mW6s4Tp+dw==",
+          "version": "0.13.1",
+          "resolved": "https://registry.npmjs.org/scheduler/-/scheduler-0.13.1.tgz",
+          "integrity": "sha512-VJKOkiKIN2/6NOoexuypwSrybx13MY7NSy9RNt8wPvZDMRT1CW6qlpF5jXRToXNHz3uWzbm2elNpZfXfGPqP9A==",
           "requires": {
             "loose-envify": "^1.1.0",
             "object-assign": "^4.1.1"
@@ -14848,12 +14848,12 @@
       }
     },
     "react-i18next": {
-      "version": "9.0.10",
-      "resolved": "https://registry.npmjs.org/react-i18next/-/react-i18next-9.0.10.tgz",
-      "integrity": "sha512-xpeCWNut7ylQLs3Qqyo7dT13kgZbML1CdftbdnswLCv0RbRT16bRP16ma59iLe1KHIbn92VJo0Q8LSKYoXVNvg==",
+      "version": "10.0.2",
+      "resolved": "https://registry.npmjs.org/react-i18next/-/react-i18next-10.0.2.tgz",
+      "integrity": "sha512-J8iKjJhdoeKFugf7oZU0w43MZ43LFjDUj0bYVPmz4I1nZlQZXTpvxMZaR3bzFQT7Uprmwv9av4OYkSunv/mDrA==",
       "requires": {
         "@babel/runtime": "^7.3.1",
-        "hoist-non-react-statics": "3.2.1",
+        "hoist-non-react-statics": "3.3.0",
         "html-parse-stringify2": "2.0.1"
       },
       "dependencies": {
@@ -14864,6 +14864,19 @@
           "requires": {
             "regenerator-runtime": "^0.12.0"
           }
+        },
+        "hoist-non-react-statics": {
+          "version": "3.3.0",
+          "resolved": "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz",
+          "integrity": "sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==",
+          "requires": {
+            "react-is": "^16.7.0"
+          }
+        },
+        "react-is": {
+          "version": "16.8.1",
+          "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.8.1.tgz",
+          "integrity": "sha512-ioMCzVDWvCvKD8eeT+iukyWrBGrA3DiFYkXfBsVYIRdaREZuBjENG+KjrikavCLasozqRWTwFUagU/O4vPpRMA=="
         },
         "regenerator-runtime": {
           "version": "0.12.1",

@@ -6,7 +6,7 @@ export default {
   modules: {},
   modules1: {},
   demo: {
-    selectedLang: 'Выбран язык {{lng, uppercase}}',
+    selectedLang: 'Выбран язык {{language, uppercase}}',
     selectorLabel: 'Селектор языка:',
     somethingText: 'Какой-то текст',
     pluralLabel: 'Демонстрация множественных переводов:',

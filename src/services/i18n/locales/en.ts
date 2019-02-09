@@ -5,7 +5,7 @@ export default {
   documents: {},
   modules: {},
   demo: {
-    selectedLang: 'Selected language is {{lng, uppercase}}',
+    selectedLang: 'Selected language is {{language, uppercase}}',
     selectorLabel: 'Language selector:',
     somethingText: 'Something text',
     pluralLabel: 'Pluralize demonstration:',

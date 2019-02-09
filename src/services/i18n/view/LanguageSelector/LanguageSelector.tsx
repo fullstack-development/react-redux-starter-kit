@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { bind } from 'decko';
-import { withNamespaces as withI18n, WithNamespaces } from 'react-i18next';
+import { WithTranslation, withTranslation } from 'react-i18next';
+
 import { Lang } from 'shared/types/app';
 
 interface IOption {
@@ -8,18 +9,18 @@ interface IOption {
   label: string;
 }
 
-class LanguageSelector extends React.PureComponent<WithNamespaces> {
+class LanguageSelector extends React.PureComponent<WithTranslation> {
   public static options: IOption[] = [
     { value: 'en', label: 'en' },
     { value: 'ru', label: 'ru' },
   ];
 
   public render() {
-    const { lng } = this.props;
+    const { i18n: { language } } = this.props;
 
     return (
       <div>
-        <select value={lng} onChange={this.changeLanguage}>
+        <select value={language} onChange={this.changeLanguage}>
           {LanguageSelector.options.map(({ value, label }, i) => (
             <option value={value} key={i}>{label}</option>
           ))}
@@ -35,4 +36,4 @@ class LanguageSelector extends React.PureComponent<WithNamespaces> {
   }
 }
 
-export default withI18n()(LanguageSelector);
+export default withTranslation()(LanguageSelector);
