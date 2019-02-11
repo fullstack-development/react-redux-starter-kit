@@ -14,9 +14,9 @@ import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import './RepositoriesSearchForm.scss';
 
-// interface IOwnProps {
-//   onSubmit(values: IRepositoriesSearchFormFields): void;
-// }
+interface IOwnProps {
+  onSubmit(searchString: string): void;
+}
 
 interface IStateProps {
   isRepositoriesSearchRequesting: boolean;
@@ -26,7 +26,7 @@ interface IActionProps {
   searchRepositories: typeof actions.searchRepositories;
 }
 
-type IProps = /*IOwnProps & */IStateProps & IActionProps;
+type IProps = IOwnProps & IStateProps & IActionProps;
 
 function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
@@ -78,8 +78,9 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
 
   @bind
   private handleRepositoriesSearchFormSubmit({ searchString }: IRepositoriesSearchFormFields) {
-    const { searchRepositories } = this.props;
-    searchRepositories(searchString);
+    const { searchRepositories, onSubmit } = this.props;
+    searchRepositories({ searchString, page: 1 });
+    onSubmit(searchString);
   }
 }
 

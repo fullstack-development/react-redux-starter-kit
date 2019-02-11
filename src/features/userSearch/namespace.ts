@@ -25,14 +25,14 @@ export interface ISearchUserPayload extends IUserSearchFormFields {
   page: number;
 }
 
-export interface IUserSearchSuccessPayload extends IUserSearchResults {
+export interface ISearchUserSuccessPayload extends IUserSearchResults {
   page: number;
 }
 
 export type IResetUserDetails = IPlainAction<'USER_SEARCH:RESET_USER_DETAILS'>;
 
 export type ISearchUser = IAction<'USER_SEARCH:SEARCH_USER', ISearchUserPayload>;
-export type ISearchUserSuccess = IAction<'USER_SEARCH:SEARCH_USER_SUCCESS', IUserSearchSuccessPayload>;
+export type ISearchUserSuccess = IAction<'USER_SEARCH:SEARCH_USER_SUCCESS', ISearchUserSuccessPayload>;
 export type ISearchUserFail = IPlainFailAction<'USER_SEARCH:SEARCH_USER_FAIL'>;
 
 export type ILoadUserDetails = IAction<'USER_SEARCH:LOAD_USER_DETAILS', string>;

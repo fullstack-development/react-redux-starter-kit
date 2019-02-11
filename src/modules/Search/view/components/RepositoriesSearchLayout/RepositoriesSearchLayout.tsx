@@ -1,6 +1,6 @@
 import * as React from 'react';
 import block from 'bem-cn';
-// import { bind } from 'decko';
+import { bind } from 'decko';
 
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
@@ -10,7 +10,7 @@ import Layout from '../Layout/Layout';
 import './RepositoriesSearchLayout.scss';
 
 interface IState {
-  lastSubmittedSearchFormState: features.userSearch.namespace.IUserSearchFormFields | null;
+  lastSubmittedSearchString: string | null;
 }
 
 interface IFeatureProps {
@@ -23,13 +23,13 @@ const b = block('repositories-search-layout');
 
 class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
   public state: IState = {
-    lastSubmittedSearchFormState: null,
+    lastSubmittedSearchString: null,
   };
 
   public render() {
     const { repositoriesSearchFeatureEntry: { containers } } = this.props;
-    const { RepositoriesSearchForm, RepositoriesSearchResults } = containers;
-    // const { lastSubmittedSearchFormState } = this.state;
+    const { RepositoriesSearchForm, RepositoriesSearchResults, RepositoriesSearchPagination } = containers;
+    const { lastSubmittedSearchString } = this.state;
     return (
       <Layout>
         <div className={b()}>
@@ -37,24 +37,23 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
             GitHub repositories search
           </Typography>
           <div className={b('search-form')}>
-            <RepositoriesSearchForm />
+            <RepositoriesSearchForm onSubmit={this.handleRepositoriesSearchFormSubmit}/>
           </div>
           <div className={b('search-results')}>
             <RepositoriesSearchResults />
           </div>
-          {/* <UserSearchResults />
-          {lastSubmittedSearchFormState &&
-            <UserSearchPagination formFields={lastSubmittedSearchFormState} />
-          } */}
+          {lastSubmittedSearchString !== null &&
+            <RepositoriesSearchPagination searchString={lastSubmittedSearchString} />
+          }
         </div>
       </Layout>
     );
   }
 
-  // @bind
-  // private handleUserSearchFormSubmit(values: features.userSearch.namespace.IUserSearchFormFields) {
-  //   this.setState({ lastSubmittedSearchFormState: values });
-  // }
+  @bind
+  private handleRepositoriesSearchFormSubmit(searchString: string) {
+    this.setState({ lastSubmittedSearchString: searchString });
+  }
 }
 
 export default featureConnect({

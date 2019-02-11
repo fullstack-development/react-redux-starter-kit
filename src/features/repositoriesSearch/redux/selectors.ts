@@ -1,6 +1,6 @@
 import { IAppReduxState } from 'shared/types/app';
 import { IRepository } from 'shared/types/models';
-// import { IPaginationState } from 'shared/types/common';
+import { IPaginationState } from 'shared/types/common';
 import { ICommunication } from 'shared/types/redux';
 import * as NS from '../namespace';
 
@@ -18,6 +18,6 @@ export function selectCommunication(
   return selectFeatureState(state).communication[name];
 }
 
-// export function selectUserSearchPaginationState(state: IAppReduxState): IPaginationState | null {
-//   return selectFeatureState(state).ui.userSearchPaginationState;
-// }
+export function selectRepositoriesSearchPaginationState(state: IAppReduxState): IPaginationState | null {
+  return selectFeatureState(state).ui.repositoriesSearchPaginationState;
+}

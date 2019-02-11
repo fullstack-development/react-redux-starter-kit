@@ -12,3 +12,8 @@ export interface IRepository {
   updatedAt: string;
   owner: IUser;
 }
+
+export interface IRepositoriesSearchResult {
+  totalPages: number;
+  repositories: IRepository[];
+}
