@@ -75,7 +75,7 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     return users.length > 0 && (
       <div className={b()}>
         <ul className={b('avatars', { size: this.wallSize })}>
-          <Preloader isShown={!areAllAvatarsLoaded} size={100} backgroundColor="#fafafa"/>
+          <Preloader isShown={!areAllAvatarsLoaded} size={100} backgroundColor="#fff"/>
           {users.map(this.renderUserAvatar)}
         </ul>
       </div>

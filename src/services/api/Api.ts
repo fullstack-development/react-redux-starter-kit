@@ -3,7 +3,7 @@ import { bind } from 'decko';
 import { IUserSearchOptions } from 'shared/types/github';
 import { IUserSearchResults } from 'shared/types/models';
 
-import { SearchUserResponse, IDetailedServerUser, SearchRepositoryResponse } from './types';
+import { SearchUserResponse, IDetailedServerUser, SearchRepositoriesResponse } from './types';
 import { constructUserSearchQuery, getTotalPagesFromLinkHeader } from './helpers';
 import { convertUser, convertUserDetails, convertRepository } from './converters';
 import HttpActions from './HttpActions';
@@ -16,6 +16,7 @@ class Api {
   }
 
   // TODO: accept header with api version?
+  // TODO: user => users
   @bind
   public async searchUser(
     searchString: string, options: IUserSearchOptions, page: number,
@@ -38,10 +39,11 @@ class Api {
   }
 
   @bind
-  public async searchRepository(searchString: string) {
+  public async searchRepositories(searchString: string) {
     const URL = `/search/repositories?q=${searchString}`;
-    const response = await this.actions.get<SearchRepositoryResponse>(URL);
+    const response = await this.actions.get<SearchRepositoriesResponse>(URL);
     const repositories = response.data.items;
+    console.log(repositories);
     return repositories.map(convertRepository);
   }
 }

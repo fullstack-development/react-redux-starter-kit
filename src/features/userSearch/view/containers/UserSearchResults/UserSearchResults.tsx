@@ -34,7 +34,7 @@ class UserSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
     selectedUserUsername: null,
   };
-
+  // TODO: pagination disappears on switch pages
   public render() {
     const { users } = this.props;
     const { selectedUserUsername } = this.state;

@@ -9,17 +9,17 @@ import * as NS from '../namespace';
 import * as actions from './actions';
 
 function getSaga(deps: IDependencies) {
-  const searchRepositoryType: NS.ISearchRepositories['type'] = 'REPOSITORY_SEARCH:SEARCH_REPOSITORIES';
+  const searchRepositoriesType: NS.ISearchRepositories['type'] = 'REPOSITORY_SEARCH:SEARCH_REPOSITORIES';
   return function* saga(): SagaIterator {
     yield all([
-      takeLatest(searchRepositoryType, executeSearchRepository, deps),
+      takeLatest(searchRepositoriesType, executeSearchRepositories, deps),
     ]);
   };
 }
 
-function* executeSearchRepository({ api }: IDependencies, { payload }: NS.ISearchRepositories) {
+function* executeSearchRepositories({ api }: IDependencies, { payload }: NS.ISearchRepositories) {
   try {
-    const repositories: IRepository[] = yield call(api.searchRepository, payload);
+    const repositories: IRepository[] = yield call(api.searchRepositories, payload);
     yield put(actions.searchRepositoriesSuccess(repositories));
   } catch (error) {
     yield put(actions.searchRepositoriesFail(getErrorMsg(error)));

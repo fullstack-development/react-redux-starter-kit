@@ -1,0 +1,9 @@
+.repositories-search-results {
+  &__repository-preview {
+    border-top: 1px solid #cfcfcf;
+
+    &:last-child {
+      border-bottom: 1px solid #cfcfcf;
+    }
+  }
+}

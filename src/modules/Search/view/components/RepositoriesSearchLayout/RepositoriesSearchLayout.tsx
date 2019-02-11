@@ -28,7 +28,7 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
 
   public render() {
     const { repositoriesSearchFeatureEntry: { containers } } = this.props;
-    const { RepositoriesSearchForm } = containers;
+    const { RepositoriesSearchForm, RepositoriesSearchResults } = containers;
     // const { lastSubmittedSearchFormState } = this.state;
     return (
       <Layout>
@@ -38,6 +38,9 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
           </Typography>
           <div className={b('search-form')}>
             <RepositoriesSearchForm />
+          </div>
+          <div className={b('search-results')}>
+            <RepositoriesSearchResults />
           </div>
           {/* <UserSearchResults />
           {lastSubmittedSearchFormState &&

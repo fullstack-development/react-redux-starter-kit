@@ -1,0 +1,62 @@
+.repository-preview {
+  display: flex;
+  padding: 1rem;
+  width: 46rem;
+  background: white;
+
+  &__description {
+    margin: 0.7rem 0 1.2rem;
+  }
+
+  &__name {
+    color: #1d67e0;
+    text-decoration: none;
+    font-size: 1.4rem;
+  }
+
+  &__stars {
+    display: flex;
+    align-items: center;
+  }
+
+  &__star {
+    margin-right: 0.2rem;
+    width: 0.75rem;
+    height: 0.85rem;
+    background: url('./img/star.png') no-repeat;
+    background-size: contain;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+
+    &:first-child {
+      flex: 1.5;
+      padding-right: 4.5rem;
+    }
+
+    &:nth-child(2) {
+      flex: 0.5;
+    }
+
+    &:nth-child(3) {
+      flex: 0.2;
+    }
+  }
+
+  &__attributes {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__attribute {
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  &__title {
+    margin-right: 0.25rem;
+    font-style: italic;
+  }
+}
