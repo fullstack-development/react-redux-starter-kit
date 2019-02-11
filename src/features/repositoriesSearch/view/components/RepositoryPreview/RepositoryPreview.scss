@@ -3,6 +3,7 @@
   padding: 1rem;
   width: 46rem;
   background: white;
+  color: #222;
 
   &__description {
     margin: 0.7rem 0 1.2rem;
@@ -58,5 +59,12 @@
   &__title {
     margin-right: 0.25rem;
     font-style: italic;
+  }
+
+  &__value {
+    &_owner {
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }

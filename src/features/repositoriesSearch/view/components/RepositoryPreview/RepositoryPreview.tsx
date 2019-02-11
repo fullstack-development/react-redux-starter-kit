@@ -1,6 +1,6 @@
 import * as React from 'react';
 import block from 'bem-cn';
-// import { bind } from 'decko';
+import { bind } from 'decko';
 
 import { IRepository } from 'shared/types/models';
 
@@ -8,6 +8,7 @@ import './RepositoryPreview.scss';
 
 interface IProps {
   repository: IRepository;
+  onOwnerClick(username: string): void;
 }
 
 const b = block('repository-preview');
@@ -36,7 +37,10 @@ class RepositoryPreview extends React.PureComponent<IProps> {
             </div>
             <div className={b('attributes-group')}>
               {this.renderAttribute('Last updated', (new Date(updatedAt)).toLocaleDateString())}
-              {this.renderAttribute('Owner', owner.username)}
+              <div className={b('attribute')}>
+                <span className={b('title')}>Owner:</span>
+                <span className={b('value', { owner: true })} onClick={this.handleOwnerClick}>{owner.username}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -60,6 +64,12 @@ class RepositoryPreview extends React.PureComponent<IProps> {
         <span className={b('value')}>{value}</span>
       </div>
     );
+  }
+
+  @bind
+  private handleOwnerClick() {
+    const { repository: { owner: { username } }, onOwnerClick } = this.props;
+    onOwnerClick(username);
   }
 }
 
