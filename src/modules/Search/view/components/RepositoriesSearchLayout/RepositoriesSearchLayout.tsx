@@ -39,11 +39,11 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
           <div className={b('search-form')}>
             <RepositoriesSearchForm onSubmit={this.handleRepositoriesSearchFormSubmit}/>
           </div>
-          <div className={b('search-results')}>
-            <RepositoriesSearchResults />
-          </div>
-          {lastSubmittedSearchString !== null &&
-            <RepositoriesSearchPagination searchString={lastSubmittedSearchString} />
+          <RepositoriesSearchResults />
+          {lastSubmittedSearchString !== null && // рендерить когда есть резалты?
+            <div className={b('pagination')}>
+              <RepositoriesSearchPagination searchString={lastSubmittedSearchString} />
+            </div>
           }
         </div>
       </Layout>

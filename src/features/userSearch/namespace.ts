@@ -30,6 +30,7 @@ export interface ISearchUserSuccessPayload extends IUserSearchResults {
 }
 
 export type IResetUserDetails = IPlainAction<'USER_SEARCH:RESET_USER_DETAILS'>;
+export type IResetSearchResults = IPlainAction<'USER_SEARCH:RESET_SEARCH_RESULTS'>;
 
 export type ISearchUser = IAction<'USER_SEARCH:SEARCH_USER', ISearchUserPayload>;
 export type ISearchUserSuccess = IAction<'USER_SEARCH:SEARCH_USER_SUCCESS', ISearchUserSuccessPayload>;
@@ -39,5 +40,5 @@ export type ILoadUserDetails = IAction<'USER_SEARCH:LOAD_USER_DETAILS', string>;
 export type ILoadUserDetailsSuccess = IAction<'USER_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedUser>;
 export type ILoadUserDetailsFail = IPlainFailAction<'USER_SEARCH:LOAD_USER_DETAILS_FAIL'>;
 
-export type IAction = IResetUserDetails | ISearchUser | ISearchUserSuccess | ISearchUserFail | ILoadUserDetails
-| ILoadUserDetailsFail | ILoadUserDetailsSuccess;
+export type IAction = IResetUserDetails | IResetSearchResults | ISearchUser | ISearchUserSuccess | ISearchUserFail
+| ILoadUserDetails | ILoadUserDetailsFail | ILoadUserDetailsSuccess;

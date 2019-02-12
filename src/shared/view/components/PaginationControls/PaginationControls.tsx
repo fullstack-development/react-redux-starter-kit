@@ -28,15 +28,15 @@ class PaginationControls extends React.PureComponent<IProps, {}> {
     const lastRenderedPage = Math.min(totalPages + 1, (firstRenderedPage + maxRenderedPages));
     return (
       <div className={b()}>
-        {currentPage > 1 && this.renderArrow('left')}
+        {this.renderArrow('left', currentPage <= 1)}
         {R.range(firstRenderedPage, lastRenderedPage).map(this.renderPage)}
-        {currentPage < totalPages && this.renderArrow('right')}
+        {this.renderArrow('right', currentPage >= totalPages)}
       </div>
     );
   }
 
-  private renderArrow(direction: ArrowDirection) {
-    return <div className={b('arrow', { direction })} onClick={this.makeArrowClickHandler(direction)}/>;
+  private renderArrow(direction: ArrowDirection, hidden: boolean) {
+    return <div className={b('arrow', { direction, hidden })} onClick={this.makeArrowClickHandler(direction)}/>;
   }
 
   @bind

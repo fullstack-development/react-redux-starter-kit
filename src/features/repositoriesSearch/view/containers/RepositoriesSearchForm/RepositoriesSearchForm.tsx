@@ -24,6 +24,7 @@ interface IStateProps {
 
 interface IActionProps {
   searchRepositories: typeof actions.searchRepositories;
+  resetSearchResults: typeof actions.resetSearchResults;
 }
 
 type IProps = IOwnProps & IStateProps & IActionProps;
@@ -31,6 +32,7 @@ type IProps = IOwnProps & IStateProps & IActionProps;
 function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
     searchRepositories: actions.searchRepositories,
+    resetSearchResults: actions.resetSearchResults,
   }, dispatch);
 }
 
@@ -51,6 +53,11 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
         render={this.renderForm}
       />
     );
+  }
+
+  public componentWillUnmount() {
+    const { resetSearchResults } = this.props;
+    resetSearchResults();
   }
 
   @bind

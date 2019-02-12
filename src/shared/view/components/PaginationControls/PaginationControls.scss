@@ -21,6 +21,10 @@
         transform: rotate(-45deg);
       }
     }
+
+    &_hidden {
+      visibility: hidden;
+    }
   }
 
   &__page {

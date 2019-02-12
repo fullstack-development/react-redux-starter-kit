@@ -60,11 +60,13 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       public componentWillUnmount() {
         this.saveContainerToState = null;
       }
-
+      // TODO: УДОЛИ
       public render() {
-        return typeof preloader !== 'undefined' && !this.isAllContainersLoaded()
-          ? preloader
-          : <WrappedComponent {...this.state.containers} {...this.props} />;
+        if (!this.isAllContainersLoaded()) {
+          return preloader !== void 0 ? preloader : null;
+        } else {
+          return <WrappedComponent {...this.state.containers} {...this.props} />;
+        }
       }
 
       @bind

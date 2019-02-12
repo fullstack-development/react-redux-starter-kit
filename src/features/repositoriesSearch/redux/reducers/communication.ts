@@ -6,9 +6,9 @@ import initial from '../initial';
 // tslint:disable:max-line-length
 export default combineReducers<NS.IReduxState['communication']>({
   searchRepositories: makeCommunicationReducer<NS.ISearchRepositories, NS.ISearchRepositoriesSuccess, NS.ISearchRepositoriesFail>(
-    'REPOSITORY_SEARCH:SEARCH_REPOSITORIES',
-    'REPOSITORY_SEARCH:SEARCH_REPOSITORIES_SUCCESS',
-    'REPOSITORY_SEARCH:SEARCH_REPOSITORIES_FAIL',
+    'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES',
+    'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_SUCCESS',
+    'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_FAIL',
     initial.communication.searchRepositories,
   ),
 });

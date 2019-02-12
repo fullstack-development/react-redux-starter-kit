@@ -9,7 +9,7 @@ import * as NS from '../namespace';
 import * as actions from './actions';
 
 function getSaga(deps: IDependencies) {
-  const searchRepositoriesType: NS.ISearchRepositories['type'] = 'REPOSITORY_SEARCH:SEARCH_REPOSITORIES';
+  const searchRepositoriesType: NS.ISearchRepositories['type'] = 'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES';
   return function* saga(): SagaIterator {
     yield all([
       takeLatest(searchRepositoriesType, executeSearchRepositories, deps),

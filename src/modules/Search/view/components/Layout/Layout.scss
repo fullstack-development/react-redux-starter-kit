@@ -1,17 +1,25 @@
 .layout {
-  $footer-height: 3rem;
+  $header-footer-height: 3rem;
+  $header-footer-margin: 1.5rem;
   $horizontal-padding: 2rem;
 
   position: relative;
-  padding-bottom: $footer-height + 1rem;
+  padding-bottom: $header-footer-height + $header-footer-margin;
   min-height: 100%;
 
   &__header {
-    padding: 1rem $horizontal-padding;
+    display: flex;
+    margin-bottom: $header-footer-margin;
+    padding-left: $horizontal-padding;
+    height: $header-footer-height;
+    background: #333;
+    color: #eaeaea;
+    line-height: $header-footer-height;
   }
 
   &__navigation-link {
-    margin-left: 0.8rem;
+    color: #eaeaea;
+    text-decoration: none;
   }
 
   &__footer {
@@ -20,12 +28,29 @@
     left: 0;
     padding-right: $horizontal-padding;
     width: 100%;
-    height: $footer-height;
+    height: $header-footer-height;
+    background: #333;
     text-align: right;
+    line-height: $header-footer-height;
   }
 
   &__company-link {
-    color: #333;
+    color: #eaeaea;
+  }
+
+  &__tabs {
+    display: flex;
+    margin-left: 1rem;
+  }
+
+  &__tab {
+    width: 8rem;
+    background: #333;
+    text-align: center;
+
+    &_active {
+      background: #555;
+    }
   }
 }
 

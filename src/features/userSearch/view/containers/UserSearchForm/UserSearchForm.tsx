@@ -30,6 +30,7 @@ interface IStateProps {
 
 interface IActionProps {
   searchUser: typeof actions.searchUser;
+  resetSearchResults: typeof actions.resetSearchResults;
 }
 
 type IProps = IOwnProps & IStateProps & IActionProps;
@@ -37,6 +38,7 @@ type IProps = IOwnProps & IStateProps & IActionProps;
 function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
     searchUser: actions.searchUser,
+    resetSearchResults: actions.resetSearchResults,
   }, dispatch);
 }
 
@@ -55,6 +57,11 @@ class UserSearchForm extends React.PureComponent<IProps> {
   public state: IState = {
     isSettingsDialogOpen: false,
   };
+
+  public componentWillUnmount() {
+    const { resetSearchResults } = this.props;
+    resetSearchResults();
+  }
 
   public render() {
     return (

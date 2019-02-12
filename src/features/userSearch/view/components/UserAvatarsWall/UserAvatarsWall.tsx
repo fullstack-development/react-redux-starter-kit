@@ -32,7 +32,7 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
     if (usersNumber <= 30) {
       return 'small';
     }
-    if (usersNumber <= 60) {
+    if (usersNumber <= 50) {
       return 'medium';
     }
     return 'big';

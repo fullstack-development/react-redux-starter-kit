@@ -1,6 +1,6 @@
 import { IRepository, IRepositoriesSearchResult } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
-import { ICommunication, IPlainFailAction, IAction } from 'shared/types/redux';
+import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
   data: {
@@ -26,10 +26,12 @@ export interface ISearchRepositoriesSuccessPayload extends IRepositoriesSearchRe
   page: number;
 }
 
-export type ISearchRepositories = IAction<'REPOSITORY_SEARCH:SEARCH_REPOSITORIES', ISearchRepositoriesPayload>;
-export type ISearchRepositoriesSuccess = IAction<
-  'REPOSITORY_SEARCH:SEARCH_REPOSITORIES_SUCCESS', ISearchRepositoriesSuccessPayload
->;
-export type ISearchRepositoriesFail = IPlainFailAction<'REPOSITORY_SEARCH:SEARCH_REPOSITORIES_FAIL'>;
+export type IResetSearchResults = IPlainAction<'REPOSITORIES_SEARCH:RESET_SEARCH_RESULTS'>;
 
-export type IAction = ISearchRepositories | ISearchRepositoriesSuccess | ISearchRepositoriesFail;
+export type ISearchRepositories = IAction<'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES', ISearchRepositoriesPayload>;
+export type ISearchRepositoriesSuccess = IAction<
+  'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_SUCCESS', ISearchRepositoriesSuccessPayload
+>;
+export type ISearchRepositoriesFail = IPlainFailAction<'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_FAIL'>;
+
+export type IAction = ISearchRepositories | ISearchRepositoriesSuccess | ISearchRepositoriesFail | IResetSearchResults;
