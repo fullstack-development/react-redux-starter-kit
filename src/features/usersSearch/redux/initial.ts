@@ -11,7 +11,7 @@ const initial: IReduxState = {
     loadUserDetails: initialCommunicationField,
   },
   ui: {
-    userSearchPaginationState: null,
+    usersSearchPaginationState: null,
   },
 };
 

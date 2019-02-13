@@ -7,28 +7,28 @@ import featureConnect from 'core/FeatureConnector';
 import { Typography } from 'shared/view/elements';
 
 import Layout from '../Layout/Layout';
-import './UserSearchLayout.scss';
+import './UsersSearchLayout.scss';
 
 interface IState {
-  lastSubmittedSearchFormState: features.userSearch.namespace.IUserSearchFormFields | null;
+  lastSubmittedSearchFormState: features.usersSearch.namespace.IUsersSearchFormFields | null;
 }
 
 interface IFeatureProps {
-  userSearchFeatureEntry: features.userSearch.Entry;
+  usersSearchFeatureEntry: features.usersSearch.Entry;
 }
 
 type IProps = IFeatureProps;
 
-const b = block('user-search-layout');
+const b = block('users-search-layout');
 
-class UserSearchLayout extends React.PureComponent<IProps, IState> {
+class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   public state: IState = {
     lastSubmittedSearchFormState: null,
   };
 
   public render() {
-    const { userSearchFeatureEntry: { containers } } = this.props;
-    const { UserSearchForm, UserSearchResults, UserSearchPagination } = containers;
+    const { usersSearchFeatureEntry: { containers } } = this.props;
+    const { UsersSearchForm, UsersSearchResults, UsersSearchPagination } = containers;
     const { lastSubmittedSearchFormState } = this.state;
     return (
       <Layout>
@@ -37,11 +37,11 @@ class UserSearchLayout extends React.PureComponent<IProps, IState> {
             GitHub user search
           </Typography>
           <div className={b('search-form')}>
-            <UserSearchForm onSubmit={this.handleUserSearchFormSubmit} />
+            <UsersSearchForm onSubmit={this.handleUsersSearchFormSubmit} />
           </div>
-          <UserSearchResults />
+          <UsersSearchResults />
           {lastSubmittedSearchFormState &&
-            <UserSearchPagination formFields={lastSubmittedSearchFormState} />
+            <UsersSearchPagination formFields={lastSubmittedSearchFormState} />
           }
         </div>
       </Layout>
@@ -49,11 +49,11 @@ class UserSearchLayout extends React.PureComponent<IProps, IState> {
   }
 
   @bind
-  private handleUserSearchFormSubmit(values: features.userSearch.namespace.IUserSearchFormFields) {
+  private handleUsersSearchFormSubmit(values: features.usersSearch.namespace.IUsersSearchFormFields) {
     this.setState({ lastSubmittedSearchFormState: values });
   }
 }
 
 export default featureConnect({
-  userSearchFeatureEntry: features.userSearch.loadEntry,
-})(UserSearchLayout);
+  usersSearchFeatureEntry: features.usersSearch.loadEntry,
+})(UsersSearchLayout);

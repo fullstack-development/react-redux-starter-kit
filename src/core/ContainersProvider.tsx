@@ -2,14 +2,14 @@ import * as React from 'react';
 import { bind } from 'decko';
 import { Omit } from '_helpers';
 
-import * as userSearchFeature from 'features/userSearch';
+import * as usersSearchFeature from 'features/usersSearch';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
 import { IFeatureEntry } from 'shared/types/app';
 
 interface IContainerTypes {
-  UserDetails: userSearchFeature.Entry['containers']['UserDetails'];
+  UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];
 }
 
 type Container = keyof IContainerTypes;
@@ -29,7 +29,7 @@ type GenericLoadersMap = {
 };
 
 const containerLoadersDictionary: LoadersMap = {
-  UserDetails: userSearchFeature.loadEntry,
+  UserDetails: usersSearchFeature.loadEntry,
 };
 
 interface IState {

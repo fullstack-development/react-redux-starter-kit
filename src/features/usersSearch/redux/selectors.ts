@@ -5,7 +5,7 @@ import { ICommunication } from 'shared/types/redux';
 import * as NS from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): NS.IReduxState {
-  return state.userSearch;
+  return state.usersSearch;
 }
 
 export function selectFoundUsers(state: IAppReduxState): IUser[] | null {
@@ -22,6 +22,6 @@ export function selectCommunication(
   return selectFeatureState(state).communication[name];
 }
 
-export function selectUserSearchPaginationState(state: IAppReduxState): IPaginationState | null {
-  return selectFeatureState(state).ui.userSearchPaginationState;
+export function selectUsersSearchPaginationState(state: IAppReduxState): IPaginationState | null {
+  return selectFeatureState(state).ui.usersSearchPaginationState;
 }

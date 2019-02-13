@@ -10,7 +10,7 @@ import { Typography } from 'shared/view/elements';
 import { UserAvatarsWall } from '../../components';
 import UserDetails from '../UserDetails/UserDetails';
 import { selectors } from './../../../redux';
-import './UserSearchResults.scss';
+import './UsersSearchResults.scss';
 
 interface IState {
   selectedUserUsername: string | null;
@@ -28,9 +28,9 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const b = block('user-search-results');
+const b = block('users-search-results');
 
-class UserSearchResults extends React.PureComponent<IProps, IState> {
+class UsersSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
     selectedUserUsername: null,
   };
@@ -62,4 +62,4 @@ class UserSearchResults extends React.PureComponent<IProps, IState> {
   }
 }
 
-export default connect(mapState)(UserSearchResults);
+export default connect(mapState)(UsersSearchResults);

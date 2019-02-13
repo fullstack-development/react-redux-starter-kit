@@ -8,11 +8,11 @@ import { IAppReduxState } from 'shared/types/app';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 
-import { IUserSearchFormFields } from '../../../namespace';
+import { IUsersSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
 
 interface IOwnProps {
-  formFields: IUserSearchFormFields;
+  formFields: IUsersSearchFormFields;
 }
 
 interface IStateProps {
@@ -27,7 +27,7 @@ type IProps = IOwnProps & IStateProps & IActionProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
-    paginationState: selectors.selectUserSearchPaginationState(state),
+    paginationState: selectors.selectUsersSearchPaginationState(state),
   };
 }
 
@@ -37,9 +37,9 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
   }, dispatch);
 }
 
-const b = block('user-search-pagination');
+const b = block('users-search-pagination');
 
-class UserSearchPagination extends React.PureComponent<IProps> {
+class UsersSearchPagination extends React.PureComponent<IProps> {
   public render() {
     const { paginationState } = this.props;
     return paginationState && (
@@ -60,4 +60,4 @@ class UserSearchPagination extends React.PureComponent<IProps> {
   }
 }
 
-export default connect(mapState, mapDispatch)(UserSearchPagination);
+export default connect(mapState, mapDispatch)(UsersSearchPagination);

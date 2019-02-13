@@ -1,2 +1,2 @@
-export { default as UserSearchLayout } from './UserSearchLayout/UserSearchLayout';
+export { default as UsersSearchLayout } from './UsersSearchLayout/UsersSearchLayout';
 export { default as RepositoriesSearchLayout } from './RepositoriesSearchLayout/RepositoriesSearchLayout';

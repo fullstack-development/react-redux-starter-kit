@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
-import { UserSearchLayout, RepositoriesSearchLayout } from './view/components';
+import { UsersSearchLayout, RepositoriesSearchLayout } from './view/components';
 
 const Search: IModule = {
   getRoutes() {
@@ -17,7 +17,7 @@ const Search: IModule = {
           <Route
             key={routes.search.users.getElementKey()}
             path={routes.search.users.getRoutePath()}
-            component={UserSearchLayout}
+            component={UsersSearchLayout}
           />
           <Route
             key={routes.search.repositories.getElementKey()}

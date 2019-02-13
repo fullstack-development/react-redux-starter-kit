@@ -1,2 +1,2 @@
-export * from './userSearch';
+export * from './usersSearch';
 export * from './repositoriesSearch';

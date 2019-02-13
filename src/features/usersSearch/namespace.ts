@@ -1,6 +1,6 @@
-import { IUser, IDetailedUser, IUserSearchResults } from 'shared/types/models';
+import { IUser, IDetailedUser, IUsersSearchResults } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
-import { IUserSearchOptions } from 'shared/types/github';
+import { IUsersSearchOptions } from 'shared/types/github';
 import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
@@ -13,19 +13,19 @@ export interface IReduxState {
     loadUserDetails: ICommunication;
   };
   ui: {
-    userSearchPaginationState: IPaginationState | null;
+    usersSearchPaginationState: IPaginationState | null;
   };
 }
 
-export interface IUserSearchFormFields extends IUserSearchOptions {
+export interface IUsersSearchFormFields extends IUsersSearchOptions {
   searchString: string;
 }
 
-export interface ISearchUserPayload extends IUserSearchFormFields {
+export interface ISearchUserPayload extends IUsersSearchFormFields {
   page: number;
 }
 
-export interface ISearchUserSuccessPayload extends IUserSearchResults {
+export interface ISearchUserSuccessPayload extends IUsersSearchResults {
   page: number;
 }
 

@@ -13,7 +13,7 @@ export interface IDetailedUser extends IUser {
   location: null | string;
 }
 
-export interface IUserSearchResults {
+export interface IUsersSearchResults {
   totalPages: number;
   users: IUser[];
 }

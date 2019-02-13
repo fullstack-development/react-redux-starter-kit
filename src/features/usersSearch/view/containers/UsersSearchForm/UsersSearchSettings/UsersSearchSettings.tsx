@@ -5,11 +5,11 @@ import { FormLabel } from 'shared/view/elements';
 import { TextInputField, SelectField, NumberInputField, RadioField } from 'shared/view/form';
 
 import { searchByOptions, perPageOptions, fieldNames } from '../constants';
-import './UserSearchSettings.scss';
+import './UsersSearchSettings.scss';
 
-const b = block('user-search-settings');
+const b = block('users-search-settings');
 
-function UserSearchSettings() {
+function UsersSearchSettings() {
   return (
     <div className={b()}>
       {renderFirstRowSettings()}
@@ -86,4 +86,4 @@ function UserSearchSettings() {
   }
 }
 
-export default UserSearchSettings;
+export default UsersSearchSettings;

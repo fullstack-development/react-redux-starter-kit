@@ -1,5 +1,5 @@
 import { IRepository } from 'shared/types/models';
-import { convertUser } from './userSearch';
+import { convertUser } from './usersSearch';
 import { IServerRepository } from '../types';
 
 export function convertRepository(repo: IServerRepository): IRepository {

@@ -1,4 +1,4 @@
-import { IUserSearchOptions } from 'shared/types/github';
+import { IUsersSearchOptions } from 'shared/types/github';
 
 function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
   if (maxRepos === void 0 && (minRepos && minRepos > 0)) {
@@ -11,7 +11,7 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
   return '';
 }
 
-export function constructUserSearchQuery(queryString: string, options: IUserSearchOptions, page: number) {
+export function constructUsersSearchQuery(queryString: string, options: IUsersSearchOptions, page: number) {
   const { searchBy, searchType, minRepos, maxRepos, reposLanguage, perPage } = options;
   return queryString.concat(
     searchBy !== 'username-email' ? `+in:${searchBy}` : '',

@@ -1,4 +1,4 @@
-import * as userSearch from './userSearch';
+import * as usersSearch from './usersSearch';
 import * as repositoriesSearch from './repositoriesSearch';
 
-export { userSearch, repositoriesSearch };
+export { usersSearch, repositoriesSearch };

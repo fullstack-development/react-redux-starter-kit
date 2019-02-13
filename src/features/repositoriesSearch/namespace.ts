@@ -17,7 +17,7 @@ export interface IReduxState {
 export interface IRepositoriesSearchFormFields {
   searchString: string;
 }
-// TODO: think about these types here & in UserSearch
+// TODO: think about these types here & in UsersSearch
 export interface ISearchRepositoriesPayload extends IRepositoriesSearchFormFields {
   page: number;
 }

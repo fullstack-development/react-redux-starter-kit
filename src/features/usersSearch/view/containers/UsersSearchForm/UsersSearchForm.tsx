@@ -6,16 +6,16 @@ import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 
 import { selectors, actions } from './../../../redux';
-import { IUserSearchFormFields } from '../../../namespace';
+import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
-import UserSearchSettings from './UserSearchSettings/UserSearchSettings';
+import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
-  onSubmit(values: IUserSearchFormFields): void;
+  onSubmit(values: IUsersSearchFormFields): void;
 }
 
 interface IStateProps {
-  isUserSearchRequesting: boolean;
+  isUsersSearchRequesting: boolean;
 }
 
 interface IActionProps {
@@ -34,17 +34,17 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
-    isUserSearchRequesting: selectors.selectCommunication(state, 'searchUser').isRequesting,
+    isUsersSearchRequesting: selectors.selectCommunication(state, 'searchUser').isRequesting,
   };
 }
 
-function UserSearchForm(props: IProps) {
-  const { isUserSearchRequesting } = props;
+function UsersSearchForm(props: IProps) {
+  const { isUsersSearchRequesting } = props;
   return (
-    <SearchForm<IUserSearchFormFields>
-      isSearchRequesting={isUserSearchRequesting}
+    <SearchForm<IUsersSearchFormFields>
+      isSearchRequesting={isUsersSearchRequesting}
       searchInputName={fieldNames.searchString}
-      onSubmit={handleUserSearchFormSubmit}
+      onSubmit={handleUsersSearchFormSubmit}
       initialValues={formInitialValues}
       renderSettings={renderSettings}
       onResetSearchResults={props.resetSearchResults}
@@ -52,14 +52,14 @@ function UserSearchForm(props: IProps) {
   );
 
   function renderSettings() {
-    return <UserSearchSettings />;
+    return <UsersSearchSettings />;
   }
 
-  function handleUserSearchFormSubmit(values: IUserSearchFormFields) {
+  function handleUsersSearchFormSubmit(values: IUsersSearchFormFields) {
     const { searchUser, onSubmit } = props;
     searchUser({ ...values, page: 1 });
     onSubmit(values);
   }
 }
 
-export default connect(mapState, mapDispatch)(UserSearchForm);
+export default connect(mapState, mapDispatch)(UsersSearchForm);

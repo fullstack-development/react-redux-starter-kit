@@ -52,7 +52,7 @@ export interface IAppReduxState {
   // services
   theme: ThemeProviderNS.IReduxState;
   // features
-  userSearch: features.userSearch.namespace.IReduxState;
+  usersSearch: features.usersSearch.namespace.IReduxState;
   repositoriesSearch: features.repositoriesSearch.namespace.IReduxState;
 }
 
