@@ -3,9 +3,10 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
 class HttpActions {
   private request: AxiosInstance;
 
-  constructor(baseURL: string) {
+  constructor(baseURL: string, headers?: AxiosRequestConfig['headers']) {
     const config: AxiosRequestConfig = {
       baseURL,
+      headers,
       withCredentials: false,
     };
 

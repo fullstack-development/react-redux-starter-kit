@@ -11,12 +11,16 @@ import HttpActions from './HttpActions';
 class Api {
   private actions: HttpActions;
 
+  private headers = {
+    get: {
+      'Accept': 'application/vnd.github.v3+json',
+    },
+  };
+
   constructor() {
-    this.actions = new HttpActions('https://api.github.com/');
+    this.actions = new HttpActions('https://api.github.com/', this.headers);
   }
 
-  // TODO: accept header with api version?
-  // TODO: user => users
   @bind
   public async searchUsers(
     searchString: string, options: IUsersSearchOptions, page: number,
