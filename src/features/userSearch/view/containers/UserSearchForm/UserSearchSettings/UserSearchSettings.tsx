@@ -1,53 +1,23 @@
 import * as React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
 
-import { Button, FormLabel } from 'shared/view/elements';
+import { FormLabel } from 'shared/view/elements';
 import { TextInputField, SelectField, NumberInputField, RadioField } from 'shared/view/form';
-import { Dialog } from 'shared/view/components';
 
-import { IUserSearchFormFields } from '../../../../namespace';
-import { searchByOptions, perPageOptions } from '../constants';
-import './SearchSettingsDialog.scss';
+import { searchByOptions, perPageOptions, fieldNames } from '../constants';
+import './UserSearchSettings.scss';
 
-interface IProps {
-  isOpen: boolean;
-  fieldNames: Record<keyof IUserSearchFormFields, string>;
-  onClose(): void;
-}
+const b = block('user-search-settings');
 
-const b = block('search-settings-dialog');
+function UserSearchSettings() {
+  return (
+    <div className={b()}>
+      {renderFirstRowSettings()}
+      {renderSecondRowSettings()}
+    </div>
+  );
 
-class SearchSettingsDialog extends React.PureComponent<IProps> {
-  public render() {
-    const { isOpen, onClose } = this.props;
-    return (
-      <Dialog
-        title="Search settings"
-        onClose={onClose}
-        open={isOpen}
-        renderActions={this.renderActions}
-      >
-        <div className={b()}>
-          {this.renderFirstRowSettings()}
-          {this.renderSecondRowSettings()}
-        </div>
-      </Dialog>
-    );
-  }
-
-  @bind
-  private renderActions() {
-    const { onClose } = this.props;
-    return (
-      <div className={b('actions')}>
-        <Button variant="outlined" onClick={onClose}>Ok</Button>
-      </div>
-    );
-  }
-
-  private renderFirstRowSettings() {
-    const { fieldNames } = this.props;
+  function renderFirstRowSettings() {
     return (
       <div className={b('row')}>
         <div className={b('item')}>
@@ -60,16 +30,15 @@ class SearchSettingsDialog extends React.PureComponent<IProps> {
     );
   }
 
-  private renderSecondRowSettings() {
-    const { fieldNames } = this.props;
+  function renderSecondRowSettings() {
     return (
       <div className={b('row')}>
         <div className={b('item')}>
-          {this.renderSearchTypeSettings()}
+          {renderSearchTypeSettings()}
         </div>
         <div className={b('settings-group')}>
           <div className={b('item')}>
-            {this.renderRepositoriesNumberSettings()}
+            {renderRepositoriesNumberSettings()}
           </div>
           <div className={b('item')}>
             <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} fullWidth />
@@ -79,8 +48,7 @@ class SearchSettingsDialog extends React.PureComponent<IProps> {
     );
   }
 
-  private renderSearchTypeSettings() {
-    const { fieldNames } = this.props;
+  function renderSearchTypeSettings() {
     return (
       <FormLabel>
         Search type
@@ -93,8 +61,7 @@ class SearchSettingsDialog extends React.PureComponent<IProps> {
     );
   }
 
-  private renderRepositoriesNumberSettings() {
-    const { fieldNames } = this.props;
+  function renderRepositoriesNumberSettings() {
     return (
       <FormLabel>
         Repositories number
@@ -117,7 +84,6 @@ class SearchSettingsDialog extends React.PureComponent<IProps> {
       </FormLabel>
     );
   }
-
 }
 
-export default SearchSettingsDialog;
+export default UserSearchSettings;

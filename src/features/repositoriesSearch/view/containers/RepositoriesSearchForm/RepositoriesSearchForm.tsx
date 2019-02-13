@@ -1,18 +1,13 @@
 import * as React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
-import { Form, FormRenderProps } from 'react-final-form';
-import block from 'bem-cn';
 
 import { IAppReduxState } from 'shared/types/app';
 import { makeFormFieldNames } from 'shared/helpers';
-import { TextInputField } from 'shared/view/form';
-import { Button } from 'shared/view/elements';
+import { SearchForm } from 'shared/view/components';
 
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
-import './RepositoriesSearchForm.scss';
 
 interface IOwnProps {
   onSubmit(searchString: string): void;
@@ -43,49 +38,20 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const fieldNames = makeFormFieldNames<IRepositoriesSearchFormFields>(['searchString']);
-const b = block('repositories-search-form');
 
-class RepositoriesSearchForm extends React.PureComponent<IProps> {
-  public render() {
-    return (
-      <Form
-        onSubmit={this.handleRepositoriesSearchFormSubmit}
-        render={this.renderForm}
-      />
-    );
-  }
+function RepositoriesSearchForm(props: IProps) {
+  const { isRepositoriesSearchRequesting, resetSearchResults } = props;
+  return (
+    <SearchForm<IRepositoriesSearchFormFields>
+      searchInputName={fieldNames.searchString}
+      isSearchRequesting={isRepositoriesSearchRequesting}
+      onSubmit={handleRepositoriesSearchFormSubmit}
+      onResetSearchResults={resetSearchResults}
+    />
+  );
 
-  public componentWillUnmount() {
-    const { resetSearchResults } = this.props;
-    resetSearchResults();
-  }
-
-  @bind
-  private renderForm({ handleSubmit }: FormRenderProps) {
-    const { isRepositoriesSearchRequesting } = this.props;
-    return (
-      <form onSubmit={handleSubmit} className={b()}>
-        <TextInputField
-          name={fieldNames.searchString}
-          disabled={isRepositoriesSearchRequesting}
-          fullWidth
-        />
-        <div className={b('button')}>
-          <Button
-            type="submit"
-            variant="outlined"
-            disabled={isRepositoriesSearchRequesting}
-          >
-            Search
-          </Button>
-        </div>
-      </form>
-    );
-  }
-
-  @bind
-  private handleRepositoriesSearchFormSubmit({ searchString }: IRepositoriesSearchFormFields) {
-    const { searchRepositories, onSubmit } = this.props;
+  function handleRepositoriesSearchFormSubmit({ searchString }: IRepositoriesSearchFormFields) {
+    const { searchRepositories, onSubmit } = props;
     searchRepositories({ searchString, page: 1 });
     onSubmit(searchString);
   }

@@ -1,4 +1,4 @@
-.search-settings-dialog {
+.user-search-settings {
   max-height: 15rem;
   width: 27rem;
 
@@ -31,9 +31,5 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-
-  &__actions {
-    text-align: end;
   }
 }

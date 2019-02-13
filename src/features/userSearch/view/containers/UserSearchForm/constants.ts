@@ -1,5 +1,6 @@
 import { ISelectOption } from 'shared/view/elements';
 import { IUserSearchOptions } from 'shared/types/github';
+import { makeFormFieldNames } from 'shared/helpers';
 import { IUserSearchFormFields } from '../../../namespace';
 
 export const searchByOptions: Array<ISelectOption<IUserSearchOptions['searchBy']>> = [
@@ -18,3 +19,7 @@ export const perPageOptions: Array<ISelectOption<IUserSearchOptions['perPage']>>
 export const formInitialValues: IUserSearchFormFields = {
   searchString: '', searchBy: searchByOptions[0].value, searchType: 'both', perPage: perPageOptions[1].value,
 };
+
+export const fieldNames = makeFormFieldNames<IUserSearchFormFields>([
+  'searchString', 'searchBy', 'minRepos', 'maxRepos', 'searchType', 'reposLanguage', 'perPage',
+]);
