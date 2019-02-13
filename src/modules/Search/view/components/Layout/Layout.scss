@@ -22,6 +22,14 @@
     text-decoration: none;
   }
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 77vh;
+  }
+
   &__footer {
     position: absolute;
     bottom: 0;
@@ -50,6 +58,19 @@
 
     &_active {
       background: #555;
+    }
+  }
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__form {
+    margin: 0.8rem auto;
+    width: 30rem;
+
+    @media (max-width: 490px) {
+      width: 95%;
     }
   }
 }

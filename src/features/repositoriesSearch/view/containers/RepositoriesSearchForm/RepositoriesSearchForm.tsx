@@ -10,7 +10,7 @@ import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 
 interface IOwnProps {
-  onSubmit(searchString: string): void;
+  onSubmit(formValues: IRepositoriesSearchFormFields): void;
 }
 
 interface IStateProps {
@@ -50,10 +50,10 @@ function RepositoriesSearchForm(props: IProps) {
     />
   );
 
-  function handleRepositoriesSearchFormSubmit({ searchString }: IRepositoriesSearchFormFields) {
+  function handleRepositoriesSearchFormSubmit(formValues: IRepositoriesSearchFormFields) {
     const { searchRepositories, onSubmit } = props;
-    searchRepositories({ searchString, page: 1 });
-    onSubmit(searchString);
+    searchRepositories({ ...formValues, page: 1 });
+    onSubmit(formValues);
   }
 }
 

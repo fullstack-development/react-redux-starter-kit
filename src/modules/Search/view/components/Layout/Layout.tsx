@@ -5,12 +5,16 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { routes } from '../../../routes';
 import './Layout.scss';
 
-type IProps = RouteComponentProps & React.ComponentProps<'div'>;
+interface IOwnProps {
+  title: string;
+}
+
+type IProps = IOwnProps & RouteComponentProps & React.ComponentProps<'div'>;
 
 const b = block('layout');
 
 function Layout(props: IProps) {
-  const { children, location } = props;
+  const { children, location, title } = props;
 
   return (
     <div className={b()}>
@@ -21,7 +25,12 @@ function Layout(props: IProps) {
           {renderTab(routes.search.repositories.getRoutePath(), 'Repositories')}
         </div>
       </header>
-      {children}
+      <div className={b('content')}>
+        <h1 className={b('title')}>
+          {title}
+        </h1>
+        {children}
+      </div>
       <footer className={b('footer')}>
         <a className={b('company-link')} href="https://fullstack-development.com" target="_blank">
           Fullstack Development
@@ -30,11 +39,11 @@ function Layout(props: IProps) {
     </div>
   );
 
-  function renderTab(path: string, title: string) {
+  function renderTab(path: string, tabTitle: string) {
     return (
       <Link to={path} className={b('navigation-link')}>
         <div className={b('tab', { active: path === location.pathname })}>
-          {title}
+          {tabTitle}
         </div>
       </Link>
     );

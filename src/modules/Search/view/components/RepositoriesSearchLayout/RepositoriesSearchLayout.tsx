@@ -1,17 +1,11 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
 
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
-import { Typography } from 'shared/view/elements';
 
 import Layout from '../Layout/Layout';
 import './RepositoriesSearchLayout.scss';
-
-interface IState {
-  lastSubmittedSearchString: string | null;
-}
 
 interface IFeatureProps {
   repositoriesSearchFeatureEntry: features.repositoriesSearch.Entry;
@@ -21,39 +15,27 @@ type IProps = IFeatureProps;
 
 const b = block('repositories-search-layout');
 
-class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
-  public state: IState = {
-    lastSubmittedSearchString: null,
-  };
+function RepositoriesSearchLayout(props: IProps) {
+  const { repositoriesSearchFeatureEntry: { containers } } = props;
+  const { RepositoriesSearchForm, RepositoriesSearchResults, RepositoriesSearchPagination } = containers;
+  const [lastSubmittedFormState, setLastSubmittedFormState] =
+    useState<features.repositoriesSearch.namespace.IRepositoriesSearchFormFields | null>(null);
 
-  public render() {
-    const { repositoriesSearchFeatureEntry: { containers } } = this.props;
-    const { RepositoriesSearchForm, RepositoriesSearchResults, RepositoriesSearchPagination } = containers;
-    const { lastSubmittedSearchString } = this.state;
-    return (
-      <Layout>
-        <div className={b()}>
-          <Typography variant="h4">
-            GitHub repositories search
-          </Typography>
-          <div className={b('search-form')}>
-            <RepositoriesSearchForm onSubmit={this.handleRepositoriesSearchFormSubmit}/>
-          </div>
-          <RepositoriesSearchResults />
-          {lastSubmittedSearchString !== null && // рендерить когда есть резалты?
-            <div className={b('pagination')}>
-              <RepositoriesSearchPagination searchString={lastSubmittedSearchString} />
-            </div>
-          }
+  return (
+    <Layout title="GitHub repositories search">
+      <div className={b()}>
+        <div className={b('search-form')}>
+          <RepositoriesSearchForm onSubmit={setLastSubmittedFormState}/>
         </div>
-      </Layout>
-    );
-  }
-
-  @bind
-  private handleRepositoriesSearchFormSubmit(searchString: string) {
-    this.setState({ lastSubmittedSearchString: searchString });
-  }
+        <RepositoriesSearchResults />
+        {lastSubmittedFormState !== null && // рендерить когда есть резалты?
+          <div className={b('pagination')}>
+            <RepositoriesSearchPagination formFields={lastSubmittedFormState} />
+          </div>
+        }
+      </div>
+    </Layout>
+  );
 }
 
 export default featureConnect({

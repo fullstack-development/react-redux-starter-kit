@@ -7,11 +7,12 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { IAppReduxState } from 'shared/types/app';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
+import { IRepositoriesSearchFormFields } from '../../../namespace';
 
 import { actions, selectors } from './../../../redux';
 
 interface IOwnProps {
-  searchString: string;
+  formFields: IRepositoriesSearchFormFields;
 }
 
 interface IStateProps {
@@ -54,8 +55,8 @@ class RepositoriesSearchPagination extends React.PureComponent<IProps> {
 
   @bind
   private handlePageRequest(page: number) {
-    const { searchRepositories, searchString } = this.props;
-    searchRepositories({ searchString, page });
+    const { searchRepositories, formFields } = this.props;
+    searchRepositories({ ...formFields, page });
   }
 }
 
