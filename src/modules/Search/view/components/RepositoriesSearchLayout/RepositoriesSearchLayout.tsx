@@ -27,7 +27,9 @@ function RepositoriesSearchLayout(props: IProps) {
         <div className={b('search-form')}>
           <RepositoriesSearchForm onSubmit={setLastSubmittedFormState}/>
         </div>
-        <RepositoriesSearchResults />
+        <div className={b('results')}>
+          <RepositoriesSearchResults />
+        </div>
         {lastSubmittedFormState !== null && // рендерить когда есть резалты?
           <div className={b('pagination')}>
             <RepositoriesSearchPagination formFields={lastSubmittedFormState} />

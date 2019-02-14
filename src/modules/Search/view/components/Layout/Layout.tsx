@@ -19,7 +19,7 @@ function Layout(props: IProps) {
   return (
     <div className={b()}>
       <header className={b('header')}>
-        Search for:
+        <span className={b('header-title')}>Search for:</span>
         <div className={b('tabs')}>
           {renderTab(routes.search.users.getRoutePath(), 'Users')}
           {renderTab(routes.search.repositories.getRoutePath(), 'Repositories')}

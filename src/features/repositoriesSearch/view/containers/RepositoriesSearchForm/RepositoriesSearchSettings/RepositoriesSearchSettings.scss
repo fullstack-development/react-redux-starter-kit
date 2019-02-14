@@ -1,11 +1,20 @@
 .repositories-search-settings {
   width: 25rem;
 
+  @media (max-width: 590px) {
+    width: auto;
+  }
+
   &__row {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: 1.5rem;
+
+    @media (max-width: 590px) {
+      flex-direction: column;
+      margin-bottom: 0;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -14,5 +23,10 @@
 
   &__item {
     width: 11rem;
+
+    @media (max-width: 590px) {
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
   }
 }

@@ -1,14 +1,19 @@
 .repositories-search-layout {
   &__search-form {
-    margin: 0 auto 1rem;
+    margin: auto;
     width: 30rem;
 
-    @media (max-width: 490px) {
-      width: 95%;
+    @media (max-width: 590px) {
+      width: 85%;
     }
   }
 
-  &__pagination {
-    margin-top: 1.5rem;
+  &__results {
+    margin: 1rem auto 1.5rem;
+    width: 32rem;
+
+    @media (max-width: 590px) {
+      width: 100%;
+    }
   }
 }

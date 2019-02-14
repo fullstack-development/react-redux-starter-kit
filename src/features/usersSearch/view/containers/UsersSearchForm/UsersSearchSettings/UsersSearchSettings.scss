@@ -1,11 +1,19 @@
 .users-search-settings {
-  max-height: 15rem;
   width: 27rem;
+
+  @media (max-width: 590px) {
+    width: 15rem;
+  }
 
   &__row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2.5rem;
+
+    @media (max-width: 590px) {
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+    }
 
     &:last-child {
       margin-bottom: 0;
@@ -14,6 +22,10 @@
 
   &__item {
     width: 11rem;
+
+    @media (max-width: 590px) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__repos-number {

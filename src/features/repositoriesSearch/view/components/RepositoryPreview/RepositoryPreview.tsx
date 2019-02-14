@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const b = block('repository-preview');
-/*tslint:disable*/
+
 class RepositoryPreview extends React.PureComponent<IProps> {
   public render() {
     const {
@@ -23,34 +23,32 @@ class RepositoryPreview extends React.PureComponent<IProps> {
     } = this.props;
     return (
       <div className={b()}>
-        <div className={b('column')}>
-          <a className={b('name')} href={htmlURL} target="_blank">
-            {name}
-          </a>
-          <div className={b('description')}>
-            {description}
-          </div>
-          <div className={b('attributes')}>
-            <div className={b('attributes-group')}>
-              {this.renderAttribute('Forks', forksNumber)}
-              {this.renderAttribute('Open issues', openIssuesNumber)}
-            </div>
-            <div className={b('attributes-group')}>
-              {this.renderAttribute('Last updated', (new Date(updatedAt)).toLocaleDateString())}
-              <div className={b('attribute')}>
-                <span className={b('title')}>Owner:</span>
-                <span className={b('value', { owner: true })} onClick={this.handleOwnerClick}>{owner.username}</span>
-              </div>
-            </div>
-          </div>
+        <a className={b('name')} href={htmlURL} target="_blank">
+          {name}
+        </a>
+        <div className={b('description')}>
+          {description}
         </div>
-        <div className={b('column')}>
-          {language}
-        </div>
-        <div className={b('column')}>
+        <div className={b('row')}>
           <div className={b('stars')}>
             <div className={b('star')} />
             {starsNumber}
+          </div>
+          <div className={b('language')}>
+            {language}
+          </div>
+        </div>
+        <div className={b('row')}>
+          <div className={b('attributes')}>
+            {this.renderAttribute('Forks', forksNumber)}
+            {this.renderAttribute('Open issues', openIssuesNumber)}
+          </div>
+          <div className={b('attributes')}>
+            {this.renderAttribute('Last updated', (new Date(updatedAt)).toLocaleDateString())}
+            <div className={b('attribute')}>
+              <span className={b('title')}>Owner:</span>
+              <span className={b('value', { owner: true })} onClick={this.handleOwnerClick}>{owner.username}</span>
+            </div>
           </div>
         </div>
       </div>
