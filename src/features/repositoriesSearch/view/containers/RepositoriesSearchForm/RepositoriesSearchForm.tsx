@@ -3,11 +3,12 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { IAppReduxState } from 'shared/types/app';
-import { makeFormFieldNames } from 'shared/helpers';
 import { SearchForm } from 'shared/view/components';
+import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
+import { fieldNames } from './constants';
 
 interface IOwnProps {
   onSubmit(formValues: IRepositoriesSearchFormFields): void;
@@ -37,8 +38,6 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const fieldNames = makeFormFieldNames<IRepositoriesSearchFormFields>(['searchString']);
-
 function RepositoriesSearchForm(props: IProps) {
   const { isRepositoriesSearchRequesting, resetSearchResults } = props;
   return (
@@ -47,8 +46,13 @@ function RepositoriesSearchForm(props: IProps) {
       isSearchRequesting={isRepositoriesSearchRequesting}
       onSubmit={handleRepositoriesSearchFormSubmit}
       onResetSearchResults={resetSearchResults}
+      renderSettings={renderSettings}
     />
   );
+
+  function renderSettings() {
+    return <RepositoriesSearchSettings />;
+  }
 
   function handleRepositoriesSearchFormSubmit(formValues: IRepositoriesSearchFormFields) {
     const { searchRepositories, onSubmit } = props;

@@ -1,10 +1,14 @@
 .users-search-layout {
   &__search-form {
-    margin: auto;
+    margin: 0 auto 1rem;
     width: 30rem;
 
     @media (max-width: 490px) {
       width: 95%;
     }
+  }
+
+  &__pagination {
+    margin-top: 1.5rem;
   }
 }

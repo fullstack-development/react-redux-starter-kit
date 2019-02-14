@@ -1,0 +1,18 @@
+.repositories-search-settings {
+  width: 25rem;
+
+  &__row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item {
+    width: 11rem;
+  }
+}

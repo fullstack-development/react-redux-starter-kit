@@ -30,7 +30,9 @@ function UsersSearchLayout(props: IProps) {
         </div>
         <UsersSearchResults />
         {lastSubmittedFormState && // TODO логика гавно
-          <UsersSearchPagination formFields={lastSubmittedFormState} />
+          <div className={b('pagination')}>
+            <UsersSearchPagination formFields={lastSubmittedFormState} />
+          </div>
         }
       </div>
     </Layout>

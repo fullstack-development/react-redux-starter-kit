@@ -6,3 +6,12 @@ export interface IUsersSearchOptions {
   minRepos?: number;
   maxRepos?: number;
 }
+
+// TODO: почему это здесь, а юзеры и репы в моделс?
+
+export interface IRepositoriesSearchOptions {
+  starsNumber?: string;
+  forksNumber?: string;
+  language?: string;
+  owner?: string;
+}

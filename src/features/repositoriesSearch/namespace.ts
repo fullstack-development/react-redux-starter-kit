@@ -1,4 +1,5 @@
 import { IRepository, IRepositoriesSearchResult } from 'shared/types/models';
+import { IRepositoriesSearchOptions } from 'shared/types/github';
 import { IPaginationState } from 'shared/types/common';
 import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 
@@ -14,9 +15,10 @@ export interface IReduxState {
   };
 }
 
-export interface IRepositoriesSearchFormFields {
+export interface IRepositoriesSearchFormFields extends IRepositoriesSearchOptions {
   searchString: string;
 }
+
 // TODO: think about these types here & in UsersSearch
 export interface ISearchRepositoriesPayload extends IRepositoriesSearchFormFields {
   page: number;

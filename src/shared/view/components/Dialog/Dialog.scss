@@ -19,6 +19,8 @@
   }
 
   &__actions {
+    display: flex;
+    justify-content: flex-end;
     padding: 1rem $horizontal-padding;
   }
 }

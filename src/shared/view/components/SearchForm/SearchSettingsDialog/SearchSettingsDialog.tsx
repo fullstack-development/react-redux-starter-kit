@@ -1,12 +1,6 @@
 import * as React from 'react';
-import block from 'bem-cn';
-
 import { Button } from 'shared/view/elements';
 import Dialog from '../../Dialog/Dialog';
-
-import './SearchSettingsDialog.scss';
-
-const b = block('search-settings-dialog');
 
 interface IProps {
   isOpen: boolean;
@@ -23,18 +17,12 @@ function SearchSettingsDialog(props: IProps)  {
       open={isOpen}
       renderActions={renderActions}
     >
-      <div className={b()}>
-        {renderContent()}
-      </div>
+      {renderContent()}
     </Dialog>
   );
 
   function renderActions() {
-    return (
-      <div className={b('actions')}>
-        <Button variant="outlined" onClick={onClose}>Ok</Button>
-      </div>
-    );
+    return <Button variant="outlined" onClick={onClose}>Ok</Button>;
   }
 }
 

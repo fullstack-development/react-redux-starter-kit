@@ -2,7 +2,6 @@ import { put, call, all, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 
 import { IDependencies } from 'shared/types/app';
-import { IRepositoriesSearchResult } from 'shared/types/models';
 import { getErrorMsg } from 'shared/helpers';
 
 import * as NS from '../namespace';
@@ -19,8 +18,8 @@ function getSaga(deps: IDependencies) {
 
 function* executeSearchRepositories({ api }: IDependencies, { payload }: NS.ISearchRepositories) {
   try {
-    const { searchString, page } = payload;
-    const searchResult: IRepositoriesSearchResult = yield call(api.searchRepositories, searchString, page);
+    const { searchString, page, ...searchOptions } = payload;
+    const searchResult = yield call(api.searchRepositories, searchString, searchOptions, page);
     yield put(actions.searchRepositoriesSuccess({ ...searchResult, page }));
   } catch (error) {
     yield put(actions.searchRepositoriesFail(getErrorMsg(error)));
