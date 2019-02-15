@@ -3,6 +3,7 @@ import block from 'bem-cn';
 
 import * as features from 'features';
 import { featureConnect } from 'core';
+import Layout from 'modules/shared/Layout/Layout';
 
 import './ProfileLayout.scss';
 
@@ -18,9 +19,11 @@ function ProfileLayout(props: IProps) {
   const { profileFeatureEntry: { containers } } = props;
   const { ProfileEdit } = containers;
   return (
-    <div className={b()}>
-      <ProfileEdit />
-    </div>
+    <Layout title="Edit profile">
+      <div className={b()}>
+        <ProfileEdit />
+      </div>
+    </Layout>
   );
 }
 

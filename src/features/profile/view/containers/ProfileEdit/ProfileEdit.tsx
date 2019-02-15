@@ -68,7 +68,7 @@ function ProfileEdit(props: IProps) {
             <NumberInputField name={fieldNames.age} label="Age" fullWidth />
           </div>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.bio} label="Bio" fullWidth />
+            <TextInputField name={fieldNames.bio} label="Bio" fullWidth multiline rowsMax={10}/>
           </div>
           <div className={b('button')}>
             <Button variant="outlined" type="submit">Save</Button>

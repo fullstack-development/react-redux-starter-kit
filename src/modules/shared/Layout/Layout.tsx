@@ -4,7 +4,7 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { featureConnect } from 'core';
 import * as features from 'features';
-import routes from '../../../../routes';
+import routes from '../../routes';
 import './Layout.scss';
 
 interface IOwnProps {

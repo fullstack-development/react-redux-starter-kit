@@ -73,7 +73,7 @@ function ProfilePreview(props: IProps) {
   }
 
   function handleAvatarClick() {
-    setIsOpen(true);
+    setIsOpen(!isOpen);
   }
 
 }

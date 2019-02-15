@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
 
-import Layout from '../Layout/Layout';
+import Layout from 'modules/shared/Layout/Layout';
 import './RepositoriesSearchLayout.scss';
 
 interface IFeatureProps {
