@@ -2,14 +2,9 @@
   width: 18rem;
 
   &__avatar {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-
-    &-wrapper {
-      margin-bottom: 1rem;
-      text-align: center;
-    }
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
 
   &__fields {

@@ -1,0 +1,17 @@
+.profile-avatar {
+  border-radius: 50%;
+  background-position: 50%;
+
+  &_size {
+    &_big {
+      width: 10rem;
+      height: 10rem;
+    }
+
+    &_small {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 0.1rem solid #e5e5e5;
+    }
+  }
+}

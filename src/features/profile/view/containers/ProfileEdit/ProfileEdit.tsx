@@ -10,14 +10,11 @@ import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { makeFormFieldNames } from 'shared/helpers';
 
+import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
 
 import './ProfileEdit.scss';
-
-// interface IOwnProps {
-
-// }
 
 interface IStateProps {
   profile: IProfile;
@@ -27,7 +24,7 @@ interface IActionProps {
   saveProfile: typeof actions.saveProfile;
 }
 
-type IProps = IStateProps & IActionProps; // & IOwnProps;
+type IProps = IStateProps & IActionProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -57,8 +54,8 @@ function ProfileEdit(props: IProps) {
     const { profile: { avatarURL } } = props;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <div className={b('avatar-wrapper')}>
-          <img className={b('avatar')} src={avatarURL}/>
+        <div className={b('avatar')}>
+          <ProfileAvatar avatarURL={avatarURL} size="big" />
         </div>
         <div className={b('fields')}>
           <div className={b('field')}>
