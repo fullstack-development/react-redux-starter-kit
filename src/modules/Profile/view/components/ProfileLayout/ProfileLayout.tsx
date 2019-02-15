@@ -1,16 +1,29 @@
 import React from 'react';
 import block from 'bem-cn';
 
+import * as features from 'features';
+import { featureConnect } from 'core';
+
 import './ProfileLayout.scss';
+
+interface IFeatureProps {
+  profileFeatureEntry: features.profile.Entry;
+}
+
+type IProps = IFeatureProps;
 
 const b = block('profile-layout');
 
-function ProfileLayout() {
+function ProfileLayout(props: IProps) {
+  const { profileFeatureEntry: { containers } } = props;
+  const { ProfileEdit } = containers;
   return (
     <div className={b()}>
-      N I C E  R 0 F L!
+      <ProfileEdit />
     </div>
   );
 }
 
-export default ProfileLayout;
+export default featureConnect({
+  profileFeatureEntry: features.profile.loadEntry,
+})(ProfileLayout);

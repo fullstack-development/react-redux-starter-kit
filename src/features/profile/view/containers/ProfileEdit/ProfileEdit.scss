@@ -1,0 +1,30 @@
+.profile-edit {
+  width: 18rem;
+
+  &__avatar {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+
+    &-wrapper {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  }
+
+  &__fields {
+    margin: auto;
+  }
+
+  &__field {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__button {
+    text-align: end;
+  }
+}
