@@ -1,0 +1,63 @@
+.notification {
+  $r: &;
+
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 1002;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.79rem 0.71rem;
+  max-width: 42.857rem;
+  border-radius: 0 0 2px 2px;
+  color: white;
+  font-weight: 500;
+  font-size: 0.86rem;
+  transform: translateX(-50%);
+  animation: fadeInOut 10s ease;
+
+  &__holder {
+    display: flex;
+
+    &__content {
+      z-index: 1001;
+    }
+  }
+
+  &_kind {
+    &_error {
+      background-color: #ef4c4c;
+    }
+
+    &_info {
+      background-color: #44ba39;
+    }
+  }
+
+  &__icon {
+    width: 0.93rem;
+    height: 0.93rem;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

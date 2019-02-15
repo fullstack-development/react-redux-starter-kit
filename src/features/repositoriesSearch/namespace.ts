@@ -1,4 +1,4 @@
-import { IRepository, IRepositoriesSearchResult } from 'shared/types/models';
+import { IRepository, IRepositoriesSearchResults } from 'shared/types/models';
 import { IRepositoriesSearchOptions } from 'shared/types/github';
 import { IPaginationState } from 'shared/types/common';
 import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
@@ -24,7 +24,7 @@ export interface ISearchRepositoriesPayload extends IRepositoriesSearchFormField
   page: number;
 }
 
-export interface ISearchRepositoriesSuccessPayload extends IRepositoriesSearchResult {
+export interface ISearchRepositoriesSuccessPayload extends IRepositoriesSearchResults {
   page: number;
 }
 

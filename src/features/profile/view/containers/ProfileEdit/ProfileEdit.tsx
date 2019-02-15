@@ -9,6 +9,7 @@ import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { makeFormFieldNames } from 'shared/helpers';
+import { actions as notificationServiceActions } from 'services/notification';
 
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
@@ -22,6 +23,7 @@ interface IStateProps {
 
 interface IActionProps {
   saveProfile: typeof actions.saveProfile;
+  setNotification: typeof notificationServiceActions.setNotification;
 }
 
 type IProps = IStateProps & IActionProps;
@@ -35,6 +37,7 @@ function mapState(state: IAppReduxState): IStateProps {
 function mapDispatch(dispatch: Dispatch): IActionProps {
   return bindActionCreators({
     saveProfile: actions.saveProfile,
+    setNotification: notificationServiceActions.setNotification,
   }, dispatch);
 }
 
@@ -79,8 +82,9 @@ function ProfileEdit(props: IProps) {
   }
 
   function handleFormSubmit(values: IProfileEditFormFields) {
-    const { saveProfile } = props;
+    const { saveProfile, setNotification } = props;
     saveProfile(values);
+    setNotification({ kind: 'info', text: 'User data was saved.' });
   }
 }
 

@@ -1,7 +1,7 @@
 import { bind } from 'decko';
 
 import { IUsersSearchOptions, IRepositoriesSearchOptions } from 'shared/types/github';
-import { IUsersSearchResults, IRepositoriesSearchResult } from 'shared/types/models';
+import { IUsersSearchResults, IRepositoriesSearchResults } from 'shared/types/models';
 
 import { SearchUserResponse, IDetailedServerUser, SearchRepositoriesResponse } from './types';
 import { constructUsersSearchQuery, getTotalPagesFromLinkHeader, constructRepositoriesSearchQuery } from './helpers';
@@ -42,7 +42,7 @@ class Api {
   @bind
   public async searchRepositories(
     searchString: string, options: IRepositoriesSearchOptions, page: number,
-  ): Promise<IRepositoriesSearchResult> {
+  ): Promise<IRepositoriesSearchResults> {
     const URL = `/search/repositories?q=${constructRepositoriesSearchQuery(searchString, options, page)}`;
     const response = await this.actions.get<SearchRepositoriesResponse>(URL);
     const repositories = response.data.items;

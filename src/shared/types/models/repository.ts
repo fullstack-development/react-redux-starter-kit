@@ -13,7 +13,7 @@ export interface IRepository {
   owner: IUser;
 }
 
-export interface IRepositoriesSearchResult {
+export interface IRepositoriesSearchResults {
   totalPages: number;
   repositories: IRepository[];
 }

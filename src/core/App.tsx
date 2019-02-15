@@ -4,6 +4,7 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
 import { ThemeProvider } from 'services/theme';
+import { containers as notificationContainers } from 'services/notification';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { JssProvider, SheetsRegistry } from 'shared/styles';
 
@@ -62,6 +63,7 @@ function renderSharedPart(
           {createRoutes(modules)}
           {/* </React.StrictMode> */}
         </I18nProvider>
+        <notificationContainers.Notification />
       </ThemeProvider>
     </JssProvider>
   );

@@ -5,7 +5,6 @@ import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IUser } from 'shared/types/models';
-import { Typography } from 'shared/view/elements';
 
 import { UserAvatarsWall } from '../../components';
 import UserDetails from '../UserDetails/UserDetails';
@@ -40,12 +39,7 @@ class UsersSearchResults extends React.PureComponent<IProps, IState> {
     const { selectedUserUsername } = this.state;
     return users !== null && (
       <div className={b()}>
-        {users.length === 0
-          ? <div className={b('no-results')}>
-              <Typography variant="h5">No results found :(</Typography>
-            </div>
-          : <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
-        }
+        <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         <UserDetails username={selectedUserUsername} onClose={this.handleUserDetailsClose}/>
       </div>
     );
