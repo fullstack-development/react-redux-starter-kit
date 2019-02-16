@@ -5,13 +5,13 @@ import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/
 
 export interface IReduxState {
   data: {
-    foundRepositories: IRepository[] | null;
+    foundRepositories: IRepository[];
   };
   communication: {
     searchRepositories: ICommunication;
   };
   ui: {
-    repositoriesSearchPaginationState: IPaginationState | null;
+    repositoriesSearchPaginationState: IPaginationState;
   };
 }
 

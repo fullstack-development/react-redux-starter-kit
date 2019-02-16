@@ -1,9 +1,5 @@
 .users-search-results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  &__no-results {
-    margin-top: 2rem;
+  &__pagination {
+    margin-top: 1rem;
   }
 }

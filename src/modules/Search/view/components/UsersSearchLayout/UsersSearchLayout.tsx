@@ -20,7 +20,7 @@ function UsersSearchLayout(props: IProps) {
     useState<features.usersSearch.namespace.IUsersSearchFormFields | null>(null);
 
   const { usersSearchFeatureEntry: { containers } } = props;
-  const { UsersSearchForm, UsersSearchResults, UsersSearchPagination } = containers;
+  const { UsersSearchForm, UsersSearchResults } = containers;
 
   return (
     <Layout title="GitHub user search">
@@ -28,12 +28,7 @@ function UsersSearchLayout(props: IProps) {
         <div className={b('search-form')}>
           <UsersSearchForm onSubmit={setLastSubmittedFormState} />
         </div>
-        <UsersSearchResults />
-        {lastSubmittedFormState && // TODO логика гавно
-          <div className={b('pagination')}>
-            <UsersSearchPagination formFields={lastSubmittedFormState} />
-          </div>
-        }
+        {lastSubmittedFormState && <UsersSearchResults userSearchQueryOptions={lastSubmittedFormState} />}
       </div>
     </Layout>
   );

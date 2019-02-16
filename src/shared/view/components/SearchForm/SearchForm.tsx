@@ -13,16 +13,16 @@ interface IProps<FormFields> {
   searchInputName: string;
   initialValues?: Partial<FormFields>;
   onSubmit(values: FormFields): void;
-  onResetSearchResults(): void;
+  resetSearchResults(): void;
   renderSettings?(): React.ReactChild;
 }
 
 const b = block('search-form');
 
 function SearchForm<T extends object>(props: IProps<T>) {
-  const { onSubmit, initialValues, onResetSearchResults } = props;
+  const { onSubmit, initialValues, resetSearchResults } = props;
   const [isSettingsDialogOpen, toggleSettingsDialog] = useState(false);
-  useEffect(() => onResetSearchResults, []);
+  useEffect(() => resetSearchResults, []);
 
   return (
     <Form

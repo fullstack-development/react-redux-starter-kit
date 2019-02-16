@@ -1,4 +1,7 @@
 .users-avatars-wall {
+  display: flex;
+  justify-content: center;
+
   &__avatars {
     position: relative;
     display: flex;
@@ -11,17 +14,10 @@
 
     &_size {
       &_big {
-        min-height: 24rem;
         max-width: 90rem;
       }
 
-      &_medium {
-        min-height: 22rem;
-        max-width: 45rem;
-      }
-
       &_small {
-        min-height: 14rem;
         max-width: 45rem;
       }
     }

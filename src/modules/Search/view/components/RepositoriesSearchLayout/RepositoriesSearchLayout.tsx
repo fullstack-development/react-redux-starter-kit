@@ -17,7 +17,7 @@ const b = block('repositories-search-layout');
 
 function RepositoriesSearchLayout(props: IProps) {
   const { repositoriesSearchFeatureEntry: { containers } } = props;
-  const { RepositoriesSearchForm, RepositoriesSearchResults, RepositoriesSearchPagination } = containers;
+  const { RepositoriesSearchForm, RepositoriesSearchResults } = containers;
   const [lastSubmittedFormState, setLastSubmittedFormState] =
     useState<features.repositoriesSearch.namespace.IRepositoriesSearchFormFields | null>(null);
 
@@ -28,13 +28,10 @@ function RepositoriesSearchLayout(props: IProps) {
           <RepositoriesSearchForm onSubmit={setLastSubmittedFormState}/>
         </div>
         <div className={b('results')}>
-          <RepositoriesSearchResults />
+          {lastSubmittedFormState &&
+            <RepositoriesSearchResults repositoriesSearchQueryOptions={lastSubmittedFormState} />
+          }
         </div>
-        {lastSubmittedFormState !== null && // рендерить когда есть резалты?
-          <div className={b('pagination')}>
-            <RepositoriesSearchPagination formFields={lastSubmittedFormState} />
-          </div>
-        }
       </div>
     </Layout>
   );

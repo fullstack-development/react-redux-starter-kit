@@ -1,30 +1,50 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IUser } from 'shared/types/models';
+import { IPaginationState } from 'shared/types/common';
+import { PaginationControls } from 'shared/view/components';
 
+import { IUsersSearchFormFields } from '../../../namespace';
 import { UserAvatarsWall } from '../../components';
+import { actions, selectors } from './../../../redux';
 import UserDetails from '../UserDetails/UserDetails';
-import { selectors } from './../../../redux';
 import './UsersSearchResults.scss';
 
 interface IState {
   selectedUserUsername: string | null;
 }
 
-interface IStateProps {
-  users: IUser[] | null;
+interface IOwnProps {
+  userSearchQueryOptions: IUsersSearchFormFields;
 }
 
-type IProps = IStateProps;
+interface IStateProps {
+  users: IUser[];
+  paginationState: IPaginationState;
+}
+
+interface IActionProps {
+  searchUser: typeof actions.searchUser;
+}
+
+type IProps = IOwnProps & IStateProps & IActionProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
     users: selectors.selectFoundUsers(state),
+    paginationState: selectors.selectUsersSearchPaginationState(state),
   };
+}
+
+function mapDispatch(dispatch: Dispatch) {
+  return bindActionCreators({
+    searchUser: actions.searchUser,
+  }, dispatch);
 }
 
 const b = block('users-search-results');
@@ -33,16 +53,36 @@ class UsersSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
     selectedUserUsername: null,
   };
-  // TODO: pagination disappears on switch pages
+
   public render() {
     const { users } = this.props;
     const { selectedUserUsername } = this.state;
-    return users !== null && (
+    return (
       <div className={b()}>
         <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
-        <UserDetails username={selectedUserUsername} onClose={this.handleUserDetailsClose}/>
+        {this.renderPagination()}
+        {selectedUserUsername && <UserDetails username={selectedUserUsername} onClose={this.handleUserDetailsClose}/>}
       </div>
     );
+  }
+
+  private renderPagination() {
+    const { paginationState: { totalPages, page } } = this.props;
+    return (
+      <div className={b('pagination')}>
+        <PaginationControls
+          totalPages={totalPages}
+          currentPage={page}
+          onPageRequest={this.handlePageRequest}
+        />
+      </div>
+    );
+  }
+
+  @bind
+  private handlePageRequest(page: number) {
+    const { searchUser, userSearchQueryOptions } = this.props;
+    searchUser({ ...userSearchQueryOptions, page });
   }
 
   @bind
@@ -56,4 +96,4 @@ class UsersSearchResults extends React.PureComponent<IProps, IState> {
   }
 }
 
-export default connect(mapState)(UsersSearchResults);
+export default connect(mapState, mapDispatch)(UsersSearchResults);

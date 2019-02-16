@@ -22,18 +22,15 @@ const b = block('users-avatars-wall');
 
 class UserAvatarsWall extends React.PureComponent<IProps> {
   public state: IState = {
-    areAllAvatarsLoaded: false,
+    areAllAvatarsLoaded: true,
   };
 
   private avatarSize = 70;
 
   private get wallSize() {
     const usersNumber = this.props.users.length;
-    if (usersNumber <= 30) {
-      return 'small';
-    }
     if (usersNumber <= 50) {
-      return 'medium';
+      return 'small';
     }
     return 'big';
   }
@@ -83,11 +80,11 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
   }
 
   @bind
-  private renderUserAvatar(user: IUser, i: number) {
+  private renderUserAvatar(user: IUser) {
     const { avatarURL } = user;
     return (
       <li
-        key={i}
+        key={user.id}
         className={b('avatar')}
         onClick={this.makeAvatarClickHandler(user)}
       >

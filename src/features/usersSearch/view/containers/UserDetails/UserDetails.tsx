@@ -14,7 +14,7 @@ import { actions, selectors } from './../../../redux';
 import './UserDetails.scss';
 
 interface IOwnProps {
-  username: string | null;
+  username: string;
   onClose(): void;
 }
 
@@ -48,10 +48,10 @@ class UserDetails extends React.PureComponent<IProps> {
   private avatarSize = 230;
 
   public render() {
-    const { username, isLoadUserDetailsRequesting } = this.props;
+    const { isLoadUserDetailsRequesting } = this.props;
     return (
       <Dialog
-        open={username !== null}
+        open={true}
         title="User details"
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
@@ -96,20 +96,19 @@ class UserDetails extends React.PureComponent<IProps> {
     const { followersNumber, followingNumber, reposNumber, htmlURL } = userDetails;
     return (
       <div className={b('attributes')}>
-        <a href={`${htmlURL}/followers`} target="_blank" className={b('attribute')}>
-          Followers
-          <span className={b('value')}>{followersNumber}</span>
-        </a>
-        <a href={`${htmlURL}/following`} target="_blank" className={b('attribute')}>
-          Following
-          <span className={b('value')}>{followingNumber}</span>
-        </a>
-        <a href={`${htmlURL}/repositories`} target="_blank" className={b('attribute')}>
-          Repositories
-          {/* TODO: тут можно контейнер провайдером загрузку реп добавить (репы будут справа выезжать по стрелочке) */}
-          <span className={b('value')}>{reposNumber}</span>
-        </a>
-        </div>
+        {this.renderAttribute(`${htmlURL}/followers`, 'Followers', followersNumber)}
+        {this.renderAttribute(`${htmlURL}/following`, 'Following', followingNumber)}
+        {this.renderAttribute(`${htmlURL}/repositories`, 'Repositories', reposNumber)}
+      </div>
+    );
+  }
+
+  private renderAttribute(URL: string, title: string, value: number) {
+    return (
+      <a href={URL} target="_blank" className={b('attribute')}>
+        {title}
+        <span className={b('value')}>{value}</span>
+      </a>
     );
   }
 

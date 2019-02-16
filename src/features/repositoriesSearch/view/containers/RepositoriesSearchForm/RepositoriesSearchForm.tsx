@@ -44,17 +44,13 @@ function RepositoriesSearchForm(props: IProps) {
     <SearchForm<IRepositoriesSearchFormFields>
       searchInputName={fieldNames.searchString}
       isSearchRequesting={isRepositoriesSearchRequesting}
-      onSubmit={handleRepositoriesSearchFormSubmit}
-      onResetSearchResults={resetSearchResults}
-      renderSettings={renderSettings}
+      onSubmit={handleFormSubmit}
+      resetSearchResults={resetSearchResults}
+      renderSettings={RepositoriesSearchSettings}
     />
   );
 
-  function renderSettings() {
-    return <RepositoriesSearchSettings />;
-  }
-
-  function handleRepositoriesSearchFormSubmit(formValues: IRepositoriesSearchFormFields) {
+  function handleFormSubmit(formValues: IRepositoriesSearchFormFields) {
     const { searchRepositories, onSubmit } = props;
     searchRepositories({ ...formValues, page: 1 });
     onSubmit(formValues);

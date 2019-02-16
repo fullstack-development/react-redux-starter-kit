@@ -26,7 +26,7 @@ class PaginationControls extends React.PureComponent<IProps, {}> {
       : pagesFromMiddlePage;
     const firstRenderedPage = Math.max(1, currentPage - pagesOnTheLeft);
     const lastRenderedPage = Math.min(totalPages + 1, (firstRenderedPage + maxRenderedPages));
-    return (
+    return totalPages > 1 && (
       <div className={b()}>
         {this.renderArrow('left', currentPage <= 1)}
         {R.range(firstRenderedPage, lastRenderedPage).map(this.renderPage)}

@@ -1,15 +1,15 @@
-import { initialCommunicationField } from 'shared/constants';
+import { initialCommunicationField, initialPaginationState } from 'shared/constants';
 import { IReduxState } from '../namespace';
 
 const initial: IReduxState = {
   data: {
-    foundRepositories: null,
+    foundRepositories: [],
   },
   communication: {
     searchRepositories: initialCommunicationField,
   },
   ui: {
-    repositoriesSearchPaginationState:  null,
+    repositoriesSearchPaginationState: initialPaginationState,
   },
 };
 

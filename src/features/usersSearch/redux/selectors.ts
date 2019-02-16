@@ -8,7 +8,7 @@ function selectFeatureState(state: IAppReduxState): NS.IReduxState {
   return state.usersSearch;
 }
 
-export function selectFoundUsers(state: IAppReduxState): IUser[] | null {
+export function selectFoundUsers(state: IAppReduxState): IUser[] {
   return selectFeatureState(state).data.foundUsers;
 }
 
@@ -22,6 +22,6 @@ export function selectCommunication(
   return selectFeatureState(state).communication[name];
 }
 
-export function selectUsersSearchPaginationState(state: IAppReduxState): IPaginationState | null {
+export function selectUsersSearchPaginationState(state: IAppReduxState): IPaginationState {
   return selectFeatureState(state).ui.usersSearchPaginationState;
 }

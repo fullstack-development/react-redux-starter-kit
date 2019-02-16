@@ -12,6 +12,7 @@
   &__name {
     color: #1d67e0;
     text-decoration: none;
+    word-break: break-all;
     font-size: 1.4rem;
   }
 
@@ -28,28 +29,6 @@
     height: 0.85rem;
     background: url('./img/star.png') no-repeat;
     background-size: contain;
-  }
-
-  &__column {
-    display: flex;
-    flex-direction: column;
-
-    &_type {
-      &_main {
-        flex: 1;
-        padding-right: 4.5rem;
-        min-width: 29rem;
-        word-break: break-all;
-      }
-
-      &_language {
-        flex: 2;
-      }
-
-      &_stars {
-        flex: 1;
-      }
-    }
   }
 
   &__row {

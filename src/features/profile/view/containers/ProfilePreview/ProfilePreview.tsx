@@ -28,10 +28,12 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 function ProfilePreview(props: IProps) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(documentClickEffect);
+
   const { profile: { avatarURL, name, nickname, age, bio }, onEditClick } = props;
   const blockRef = React.useRef<HTMLDivElement | null>(null);
+
   return (
     <div className={b()} ref={blockRef}>
       <div className={b('avatar')} onClick={handleAvatarClick}>
@@ -63,7 +65,7 @@ function ProfilePreview(props: IProps) {
 
   function documentClickEffect() {
     document.addEventListener('click', handleDocumentClick);
-    return () => document.addEventListener('click', handleDocumentClick);
+    return () => document.removeEventListener('click', handleDocumentClick);
   }
 
   function handleDocumentClick(e: MouseEvent) {

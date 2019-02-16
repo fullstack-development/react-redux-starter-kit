@@ -8,7 +8,7 @@ function selectFeatureState(state: IAppReduxState): NS.IReduxState {
   return state.repositoriesSearch;
 }
 
-export function selectFoundRepositories(state: IAppReduxState): IRepository[] | null {
+export function selectFoundRepositories(state: IAppReduxState): IRepository[] {
   return selectFeatureState(state).data.foundRepositories;
 }
 
@@ -18,6 +18,6 @@ export function selectCommunication(
   return selectFeatureState(state).communication[name];
 }
 
-export function selectRepositoriesSearchPaginationState(state: IAppReduxState): IPaginationState | null {
+export function selectRepositoriesSearchPaginationState(state: IAppReduxState): IPaginationState {
   return selectFeatureState(state).ui.repositoriesSearchPaginationState;
 }

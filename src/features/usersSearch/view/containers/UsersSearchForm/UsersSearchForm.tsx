@@ -44,18 +44,14 @@ function UsersSearchForm(props: IProps) {
     <SearchForm<IUsersSearchFormFields>
       isSearchRequesting={isUsersSearchRequesting}
       searchInputName={fieldNames.searchString}
-      onSubmit={handleUsersSearchFormSubmit}
+      onSubmit={handleFormSubmit}
       initialValues={formInitialValues}
-      renderSettings={renderSettings}
-      onResetSearchResults={props.resetSearchResults}
+      renderSettings={UsersSearchSettings}
+      resetSearchResults={props.resetSearchResults}
     />
   );
 
-  function renderSettings() {
-    return <UsersSearchSettings />;
-  }
-
-  function handleUsersSearchFormSubmit(values: IUsersSearchFormFields) {
+  function handleFormSubmit(values: IUsersSearchFormFields) {
     const { searchUser, onSubmit } = props;
     searchUser({ ...values, page: 1 });
     onSubmit(values);
