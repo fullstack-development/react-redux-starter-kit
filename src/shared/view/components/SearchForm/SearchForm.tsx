@@ -36,7 +36,7 @@ function SearchForm<T extends object>(props: IProps<T>) {
     const { isSearchRequesting, renderSettings, searchInputName } = props;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <TextInputField name={searchInputName} disabled={isSearchRequesting} fullWidth />
+        <TextInputField name={searchInputName} disabled={isSearchRequesting} />
         <div className={b('buttons')}>
           <Button
             type="submit"

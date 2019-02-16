@@ -21,7 +21,7 @@ function UsersSearchSettings() {
     return (
       <div className={b('row')}>
         <div className={b('item')}>
-          <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} fullWidth />
+          <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} />
         </div>
         <div className={b('item')}>
           <TextInputField name={fieldNames.reposLanguage} label="Repositories language" />
@@ -41,7 +41,7 @@ function UsersSearchSettings() {
             {renderRepositoriesNumberSettings()}
           </div>
           <div className={b('item')}>
-            <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} fullWidth />
+            <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} />
           </div>
         </div>
       </div>
@@ -70,14 +70,12 @@ function UsersSearchSettings() {
             <NumberInputField
               name={fieldNames.minRepos}
               label="min"
-              fullWidth
             />
           </div>
           <div className={b('repos-number-input')}>
             <NumberInputField
               name={fieldNames.maxRepos}
               label="max"
-              fullWidth
             />
           </div>
         </div>

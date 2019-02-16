@@ -37,6 +37,7 @@ class TextInput extends React.PureComponent<IProps, IState> {
           ...this.props.InputProps,
           endAdornment: this.renderEndAdornment(),
         }}
+        fullWidth
       />
     );
   }

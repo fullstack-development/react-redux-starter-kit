@@ -14,7 +14,7 @@ interface IProps extends StandardTextFieldProps {
 function Select(props: IProps) {
   const { options, ...textInputProps } = props;
   return (
-    <TextField select {...textInputProps}>
+    <TextField select {...textInputProps} fullWidth>
       {options.map(({ value, label }: IOption) => <MenuItem value={value} key={value}>{label}</MenuItem>)}
     </TextField>
   );

@@ -13,3 +13,4 @@ const initial: IReduxState = {
 };
 
 export default initial;
+// TODO: замокать нормального юзера а не этот кал

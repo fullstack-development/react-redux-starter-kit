@@ -51,6 +51,7 @@ class NumberInput extends React.PureComponent<IProps> {
           ...rest.InputProps,
           inputComponent: makeNumberInput({ prefix, thousandSeparator, decimalScale }),
         }}
+        fullWidth
       />
     );
   }

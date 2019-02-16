@@ -52,7 +52,7 @@ function ProfileEdit(props: IProps) {
       render={renderForm}
     />
   );
-  // TODO: глянуть, мб надо везде fullWidth по дефолту сделать на инпутах
+
   function renderForm({ handleSubmit }: FormRenderProps) {
     const { profile: { avatarURL } } = props;
     return (
@@ -62,16 +62,16 @@ function ProfileEdit(props: IProps) {
         </div>
         <div className={b('fields')}>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.name} label="Name" fullWidth />
+            <TextInputField name={fieldNames.name} label="Name" />
           </div>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.nickname} label="Nickname" fullWidth />
+            <TextInputField name={fieldNames.nickname} label="Nickname" />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label="Age" fullWidth />
+            <NumberInputField name={fieldNames.age} label="Age" />
           </div>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.bio} label="Bio" fullWidth multiline rowsMax={10}/>
+            <TextInputField name={fieldNames.bio} label="Bio" multiline rowsMax={10}/>
           </div>
           <div className={b('button')}>
             <Button variant="outlined" type="submit">Save</Button>
