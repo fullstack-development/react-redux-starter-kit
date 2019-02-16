@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
 import { IAppReduxState } from 'shared/types/app';
-import { IDetailedUser } from 'shared/types/models';
+import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader } from 'shared/view/elements';
 
@@ -19,7 +19,7 @@ interface IOwnProps {
 }
 
 interface IStateProps {
-  userDetails: IDetailedUser | null;
+  userDetails: IDetailedGithubUser | null;
   isLoadUserDetailsRequesting: boolean;
 }
 
@@ -77,7 +77,7 @@ class UserDetails extends React.PureComponent<IProps> {
     return null;
   }
 
-  private renderMain(userDetails: IDetailedUser) {
+  private renderMain(userDetails: IDetailedGithubUser) {
     const { htmlURL, avatarURL, realName, username, location } = userDetails;
     return (
       <a href={htmlURL} className={b('main')} target="_blank">
@@ -92,7 +92,7 @@ class UserDetails extends React.PureComponent<IProps> {
     );
   }
 
-  private renderAttributes(userDetails: IDetailedUser) {
+  private renderAttributes(userDetails: IDetailedGithubUser) {
     const { followersNumber, followingNumber, reposNumber, htmlURL } = userDetails;
     return (
       <div className={b('attributes')}>

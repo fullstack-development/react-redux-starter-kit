@@ -1,5 +1,5 @@
 import { IAppReduxState } from 'shared/types/app';
-import { IUser, IDetailedUser } from 'shared/types/models';
+import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { ICommunication } from 'shared/types/redux';
 import * as NS from '../namespace';
@@ -8,11 +8,11 @@ function selectFeatureState(state: IAppReduxState): NS.IReduxState {
   return state.usersSearch;
 }
 
-export function selectFoundUsers(state: IAppReduxState): IUser[] {
+export function selectFoundUsers(state: IAppReduxState): IGithubUser[] {
   return selectFeatureState(state).data.foundUsers;
 }
 
-export function selectUserDetails(state: IAppReduxState): IDetailedUser | null {
+export function selectUserDetails(state: IAppReduxState): IDetailedGithubUser | null {
   return selectFeatureState(state).data.userDetails;
 }
 

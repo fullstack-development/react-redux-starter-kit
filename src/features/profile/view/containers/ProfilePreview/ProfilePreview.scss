@@ -2,6 +2,7 @@
 
 .profile-preview {
   position: relative;
+  z-index: 1;
   color: #444;
 
   &__avatar {
@@ -21,6 +22,11 @@
     font-size: 0.8rem;
     transition-duration: 1s;
     transition-property: display;
+
+    @media (max-width: 590px) {
+      // TODO: add global breakpoint
+      width: 19rem;
+    }
 
     &_open {
       display: block;
@@ -53,6 +59,10 @@
     max-height: 6rem;
     text-align: justify;
     text-overflow: ellipsis;
+
+    @media (max-width: 590px) {
+      max-height: 3rem;
+    }
   }
 
   &__nickname-age,

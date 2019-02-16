@@ -1,4 +1,4 @@
-import { INotification } from 'shared/types/ui';
+import { INotification } from 'shared/types/common';
 import { IAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {

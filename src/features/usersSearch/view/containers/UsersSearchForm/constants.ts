@@ -1,16 +1,16 @@
 import { ISelectOption } from 'shared/view/elements';
-import { IUsersSearchOptions } from 'shared/types/github';
+import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { makeFormFieldNames } from 'shared/helpers';
 import { IUsersSearchFormFields } from '../../../namespace';
 
-export const searchByOptions: Array<ISelectOption<IUsersSearchOptions['searchBy']>> = [
+export const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy']>> = [
   { value: 'username-email', label: 'Username & email' },
   { value: 'login', label: 'Username' },
   { value: 'email', label: 'Email' },
   { value: 'fullname', label: 'Full name' },
 ];
 
-export const perPageOptions: Array<ISelectOption<IUsersSearchOptions['perPage']>> = [
+export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>> = [
   { value: 30, label: 30 },
   { value: 50, label: 50 },
   { value: 100, label: 100 },

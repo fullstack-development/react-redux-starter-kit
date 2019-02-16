@@ -1,7 +1,7 @@
-import { IUser, IDetailedUser } from 'shared/types/models';
+import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
 import { IServerUser, IDetailedServerUser } from '../types';
 
-export function convertUser(user: IServerUser): IUser {
+export function convertUser(user: IServerUser): IGithubUser {
   return {
     id: user.id,
     username: user.login,
@@ -10,7 +10,7 @@ export function convertUser(user: IServerUser): IUser {
   };
 }
 
-export function convertUserDetails(details: IDetailedServerUser): IDetailedUser {
+export function convertUserDetails(details: IDetailedServerUser): IDetailedGithubUser {
   return {
     ...convertUser(details),
     followersNumber: details.followers,

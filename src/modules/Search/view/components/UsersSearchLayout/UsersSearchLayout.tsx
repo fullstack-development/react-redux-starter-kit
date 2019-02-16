@@ -28,7 +28,7 @@ function UsersSearchLayout(props: IProps) {
         <div className={b('search-form')}>
           <UsersSearchForm onSubmit={setLastSubmittedFormState} />
         </div>
-        {lastSubmittedFormState && <UsersSearchResults userSearchQueryOptions={lastSubmittedFormState} />}
+        {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
       </div>
     </Layout>
   );

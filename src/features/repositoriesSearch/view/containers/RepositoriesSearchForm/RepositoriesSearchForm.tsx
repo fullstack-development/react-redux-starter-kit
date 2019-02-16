@@ -52,7 +52,7 @@ function RepositoriesSearchForm(props: IProps) {
 
   function handleFormSubmit(formValues: IRepositoriesSearchFormFields) {
     const { searchRepositories, onSubmit } = props;
-    searchRepositories({ ...formValues, page: 1 });
+    searchRepositories({ searchOptions: formValues, page: 1 });
     onSubmit(formValues);
   }
 }

@@ -5,7 +5,7 @@ import block from 'bem-cn';
 import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
-import { IUser } from 'shared/types/models';
+import { IGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 
@@ -20,11 +20,11 @@ interface IState {
 }
 
 interface IOwnProps {
-  userSearchQueryOptions: IUsersSearchFormFields;
+  searchOptions: IUsersSearchFormFields;
 }
 
 interface IStateProps {
-  users: IUser[];
+  users: IGithubUser[];
   paginationState: IPaginationState;
 }
 
@@ -81,12 +81,12 @@ class UsersSearchResults extends React.PureComponent<IProps, IState> {
 
   @bind
   private handlePageRequest(page: number) {
-    const { searchUser, userSearchQueryOptions } = this.props;
-    searchUser({ ...userSearchQueryOptions, page });
+    const { searchUser, searchOptions } = this.props;
+    searchUser({ searchOptions, page });
   }
 
   @bind
-  private handleUserAvatarClick({ username }: IUser) {
+  private handleUserAvatarClick({ username }: IGithubUser) {
     this.setState({ selectedUserUsername: username });
   }
 

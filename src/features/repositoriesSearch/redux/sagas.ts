@@ -3,7 +3,7 @@ import { SagaIterator } from 'redux-saga';
 
 import { IDependencies } from 'shared/types/app';
 import { getErrorMsg } from 'shared/helpers';
-import { IRepositoriesSearchResults } from 'shared/types/models';
+import { IRepositoriesSearchResults } from 'shared/types/githubSearch';
 import { actions as notificationServiceActions } from 'services/notification';
 
 import * as NS from '../namespace';
@@ -17,15 +17,16 @@ function getSaga(deps: IDependencies) {
     ]);
   };
 }
-
+// TODO: пофиксить пустой запрос
 function* executeSearchRepositories({ api }: IDependencies, { payload }: NS.ISearchRepositories) {
   try {
-    const { searchString, page, ...searchOptions } = payload;
+    const { searchOptions, page } = payload;
+    const { searchString, ...filters } = searchOptions;
     const searchResults: IRepositoriesSearchResults = yield call(
-      api.searchRepositories, searchString, searchOptions, page,
+      api.searchRepositories, searchString, filters, page,
     );
     yield put(actions.searchRepositoriesSuccess({ ...searchResults, page }));
-    if (searchResults.repositories.length === 0) {
+    if (searchResults.data.length === 0) {
       yield put(notificationServiceActions.setNotification({ kind: 'error', text: 'No repositories found :(' }));
     }
   } catch (error) {

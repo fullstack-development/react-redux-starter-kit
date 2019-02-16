@@ -1,12 +1,12 @@
-import { IUser, IDetailedUser, IUsersSearchResults } from 'shared/types/models';
+import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
+import { IUsersSearchResults, IUsersSearchFilters, IPaginatedSearchRequest } from 'shared/types/githubSearch';
 import { IPaginationState } from 'shared/types/common';
-import { IUsersSearchOptions } from 'shared/types/github';
 import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/types/redux';
 
 export interface IReduxState {
   data: {
-    foundUsers: IUser[];
-    userDetails: IDetailedUser | null;
+    foundUsers: IGithubUser[];
+    userDetails: IDetailedGithubUser | null;
   };
   communication: {
     searchUser: ICommunication;
@@ -17,13 +17,11 @@ export interface IReduxState {
   };
 }
 
-export interface IUsersSearchFormFields extends IUsersSearchOptions {
+export interface IUsersSearchFormFields extends IUsersSearchFilters {
   searchString: string;
 }
 
-export interface ISearchUserPayload extends IUsersSearchFormFields {
-  page: number;
-}
+export type ISearchUserPayload = IPaginatedSearchRequest<IUsersSearchFormFields>;
 
 export interface ISearchUserSuccessPayload extends IUsersSearchResults {
   page: number;
@@ -37,7 +35,7 @@ export type ISearchUserSuccess = IAction<'USER_SEARCH:SEARCH_USER_SUCCESS', ISea
 export type ISearchUserFail = IPlainFailAction<'USER_SEARCH:SEARCH_USER_FAIL'>;
 
 export type ILoadUserDetails = IAction<'USER_SEARCH:LOAD_USER_DETAILS', string>;
-export type ILoadUserDetailsSuccess = IAction<'USER_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedUser>;
+export type ILoadUserDetailsSuccess = IAction<'USER_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedGithubUser>;
 export type ILoadUserDetailsFail = IPlainFailAction<'USER_SEARCH:LOAD_USER_DETAILS_FAIL'>;
 
 export type IAction = IResetUserDetails | IResetSearchResults | ISearchUser | ISearchUserSuccess | ISearchUserFail

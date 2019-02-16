@@ -20,7 +20,7 @@ interface IState {
 }
 
 interface IOwnProps {
-  repositoriesSearchQueryOptions: IRepositoriesSearchFormFields;
+  searchOptions: IRepositoriesSearchFormFields;
 }
 
 interface IStateProps {
@@ -105,8 +105,8 @@ class RepositoriesSearchResults extends React.PureComponent<IProps, IState> {
 
   @bind
   private handlePageRequest(page: number) {
-    const { searchRepositories, repositoriesSearchQueryOptions } = this.props;
-    searchRepositories({ ...repositoriesSearchQueryOptions, page });
+    const { searchRepositories, searchOptions } = this.props;
+    searchRepositories({ searchOptions, page });
   }
 }
 

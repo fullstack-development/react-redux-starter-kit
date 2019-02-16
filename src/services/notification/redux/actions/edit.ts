@@ -1,4 +1,4 @@
-import { INotification } from 'shared/types/ui';
+import { INotification } from 'shared/types/common';
 
 import * as NS from '../../namespace';
 

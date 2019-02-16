@@ -51,10 +51,10 @@ function UsersSearchForm(props: IProps) {
     />
   );
 
-  function handleFormSubmit(values: IUsersSearchFormFields) {
+  function handleFormSubmit(formValues: IUsersSearchFormFields) {
     const { searchUser, onSubmit } = props;
-    searchUser({ ...values, page: 1 });
-    onSubmit(values);
+    searchUser({ searchOptions: formValues, page: 1 });
+    onSubmit(formValues);
   }
 }
 

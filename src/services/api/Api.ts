@@ -1,7 +1,8 @@
 import { bind } from 'decko';
 
-import { IUsersSearchOptions, IRepositoriesSearchOptions } from 'shared/types/github';
-import { IUsersSearchResults, IRepositoriesSearchResults } from 'shared/types/models';
+import {
+  IUsersSearchFilters, IRepositoriesSearchFilters, IUsersSearchResults, IRepositoriesSearchResults,
+} from 'shared/types/githubSearch';
 
 import { SearchUserResponse, IDetailedServerUser, SearchRepositoriesResponse } from './types';
 import { constructUsersSearchQuery, getTotalPagesFromLinkHeader, constructRepositoriesSearchQuery } from './helpers';
@@ -23,13 +24,13 @@ class Api {
 
   @bind
   public async searchUsers(
-    searchString: string, options: IUsersSearchOptions, page: number,
+    searchString: string, filters: IUsersSearchFilters, page: number,
   ): Promise<IUsersSearchResults> {
-    const URL = `/search/users?q=${constructUsersSearchQuery(searchString, options, page)}`;
+    const URL = `/search/users?q=${constructUsersSearchQuery(searchString, filters, page)}`;
     const response = await this.actions.get<SearchUserResponse>(URL);
     const users = response.data.items;
     const totalPages = getTotalPagesFromLinkHeader(response.headers.link);
-    return { totalPages, users: users.map(convertUser) };
+    return { totalPages, data: users.map(convertUser) };
   }
 
   @bind
@@ -41,13 +42,13 @@ class Api {
 
   @bind
   public async searchRepositories(
-    searchString: string, options: IRepositoriesSearchOptions, page: number,
+    searchString: string, options: IRepositoriesSearchFilters, page: number,
   ): Promise<IRepositoriesSearchResults> {
     const URL = `/search/repositories?q=${constructRepositoriesSearchQuery(searchString, options, page)}`;
     const response = await this.actions.get<SearchRepositoriesResponse>(URL);
     const repositories = response.data.items;
     const totalPages = getTotalPagesFromLinkHeader(response.headers.link);
-    return { totalPages, repositories: repositories.map(convertRepository) };
+    return { totalPages, data: repositories.map(convertRepository) };
   }
 }
 

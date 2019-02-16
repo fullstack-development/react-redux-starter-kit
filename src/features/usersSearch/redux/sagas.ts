@@ -2,7 +2,8 @@ import { put, call, all, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 
 import { IDependencies } from 'shared/types/app';
-import { IDetailedUser, IUsersSearchResults } from 'shared/types/models';
+import { IDetailedGithubUser } from 'shared/types/models';
+import { IUsersSearchResults } from 'shared/types/githubSearch';
 import { getErrorMsg } from 'shared/helpers';
 import { actions as notificationServiceActions } from 'services/notification';
 
@@ -22,10 +23,11 @@ function getSaga(deps: IDependencies) {
 
 function* executeSearchUser({ api }: IDependencies, { payload }: NS.ISearchUser) {
   try {
-    const { searchString, page, ...options } = payload;
-    const searchUsersResults: IUsersSearchResults = yield call(api.searchUsers, searchString, options, page);
+    const { searchOptions, page } = payload;
+    const { searchString, ...filters } = searchOptions;
+    const searchUsersResults: IUsersSearchResults = yield call(api.searchUsers, searchString, filters, page);
     yield put(actions.searchUserSuccess({ ...searchUsersResults, page }));
-    if (searchUsersResults.users.length === 0) {
+    if (searchUsersResults.data.length === 0) {
       yield put(notificationServiceActions.setNotification({ kind: 'error', text: 'No users found :(' }));
     }
   } catch (error) {
@@ -38,7 +40,7 @@ function* executeSearchUser({ api }: IDependencies, { payload }: NS.ISearchUser)
 function* executeLoadUserDetails({ api }: IDependencies, { payload }: NS.ILoadUserDetails) {
   try {
     yield put(actions.resetUserDetails());
-    const userDetails: IDetailedUser = yield call(api.loadUserDetails, payload);
+    const userDetails: IDetailedGithubUser = yield call(api.loadUserDetails, payload);
     yield put(actions.loadUserDetailsSuccess(userDetails));
   } catch (error) {
     const errorMsg = getErrorMsg(error);

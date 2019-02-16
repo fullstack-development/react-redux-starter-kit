@@ -1,4 +1,4 @@
-import { IUsersSearchOptions, IRepositoriesSearchOptions } from 'shared/types/github';
+import { IUsersSearchFilters, IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
 function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
   if (maxRepos === void 0 && (minRepos && minRepos > 0)) {
@@ -11,8 +11,8 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
   return '';
 }
 
-export function constructUsersSearchQuery(queryString: string, options: IUsersSearchOptions, page: number) {
-  const { searchBy, searchType, minRepos, maxRepos, reposLanguage, perPage } = options;
+export function constructUsersSearchQuery(queryString: string, filters: IUsersSearchFilters, page: number) {
+  const { searchBy, searchType, minRepos, maxRepos, reposLanguage, perPage } = filters;
   return queryString.concat(
     searchBy !== 'username-email' ? `+in:${searchBy}` : '',
     searchType !== 'both' ? `+type:${searchType}` : '',
@@ -24,9 +24,9 @@ export function constructUsersSearchQuery(queryString: string, options: IUsersSe
 }
 
 export function constructRepositoriesSearchQuery(
-  queryString: string, options: IRepositoriesSearchOptions, page: number,
+  queryString: string, filters: IRepositoriesSearchFilters, page: number,
 ) {
-  const { starsNumber, forksNumber, owner, language } = options;
+  const { starsNumber, forksNumber, owner, language } = filters;
   return queryString.concat(
     forksNumber !== void 0 ? `+forks:>${forksNumber}` : '',
     starsNumber !== void 0 ? `+stars:>${starsNumber}` : '',

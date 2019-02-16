@@ -3,7 +3,7 @@ import { bind } from 'decko';
 import block from 'bem-cn';
 import * as R from 'ramda';
 
-import { IUser } from 'shared/types/models';
+import { IGithubUser } from 'shared/types/models';
 import { Preloader } from 'shared/view/elements';
 
 import { injectSizeToAvatarURL } from '../../../helpers';
@@ -14,8 +14,8 @@ interface IState {
 }
 
 interface IProps {
-  users: IUser[];
-  onAvatarClick(user: IUser): void;
+  users: IGithubUser[];
+  onAvatarClick(user: IGithubUser): void;
 }
 
 const b = block('users-avatars-wall');
@@ -80,7 +80,7 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
   }
 
   @bind
-  private renderUserAvatar(user: IUser) {
+  private renderUserAvatar(user: IGithubUser) {
     const { avatarURL } = user;
     return (
       <li
@@ -98,7 +98,7 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
   }
 
   @bind
-  private makeAvatarClickHandler(user: IUser) {
+  private makeAvatarClickHandler(user: IGithubUser) {
     return () => this.props.onAvatarClick(user);
   }
 

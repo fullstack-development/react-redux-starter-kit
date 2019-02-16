@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import block from 'bem-cn';
 
 import { IAppReduxState } from 'shared/types/app';
-import { INotification } from 'shared/types/ui';
+import { INotification } from 'shared/types/common';
 
 import { selectors } from '../../../redux';
 import './Notification.scss';

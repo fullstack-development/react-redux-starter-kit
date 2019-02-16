@@ -29,7 +29,7 @@ function RepositoriesSearchLayout(props: IProps) {
         </div>
         <div className={b('results')}>
           {lastSubmittedFormState &&
-            <RepositoriesSearchResults repositoriesSearchQueryOptions={lastSubmittedFormState} />
+            <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
           }
         </div>
       </div>
