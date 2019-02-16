@@ -26,14 +26,16 @@ function Layout(props: IProps) {
   return (
     <div className={b()}>
       <header className={b('header')}>
-        <div className={b('header-left-part')}>
-          <span className={b('header-title')}>Search for:</span>
-          <div className={b('tabs')}>
-            {renderTab(routes.search.users.getRoutePath(), 'Users')}
-            {renderTab(routes.search.repositories.getRoutePath(), 'Repositories')}
+        <div className={b('header-content')}>
+          <div className={b('header-left-part')}>
+            <span className={b('header-title')}>Search for:</span>
+            <div className={b('tabs')}>
+              {renderTab(routes.search.users.getRoutePath(), 'Users')}
+              {renderTab(routes.search.repositories.getRoutePath(), 'Repositories')}
+            </div>
           </div>
+          <ProfilePreview onEditClick={handleEditProfileClick} />
         </div>
-        <ProfilePreview onEditClick={handleEditProfileClick} />
       </header>
       <div className={b('content')}>
         <h1 className={b('title')}>
@@ -42,9 +44,11 @@ function Layout(props: IProps) {
         {children}
       </div>
       <footer className={b('footer')}>
-        <a className={b('company-link')} href="https://fullstack-development.com" target="_blank">
-          Fullstack Development
-        </a>
+        <div className={b('footer-content')}>
+          <a className={b('company-link')} href="https://fullstack-development.com" target="_blank">
+            Fullstack Development
+          </a>
+        </div>
       </footer>
     </div>
   );

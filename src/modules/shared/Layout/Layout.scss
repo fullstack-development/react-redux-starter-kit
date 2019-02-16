@@ -1,25 +1,36 @@
 .layout {
   $header-footer-height: 3rem;
   $header-footer-margin: 1.5rem;
-  $horizontal-padding: 2rem;
 
   position: relative;
   padding-bottom: $header-footer-height + $header-footer-margin;
   min-height: 100%;
 
+  &__title {
+    text-align: center;
+    font-weight: 500;
+
+    @media (max-width: 590px) {
+      font-size: 1.7rem;
+    }
+  }
+
   &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: $header-footer-margin;
-    padding: 0 $horizontal-padding;
     height: $header-footer-height;
     background: #333;
     color: #eaeaea;
 
     @media (max-width: 590px) {
       justify-content: center;
-      padding: 0;
+    }
+
+    &-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: auto;
+      width: 90%;
     }
 
     &-title {
@@ -32,39 +43,6 @@
       display: flex;
       align-items: center;
     }
-  }
-
-  &__navigation-link {
-    color: #eaeaea;
-    text-decoration: none;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 77vh;
-  }
-
-  &__footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding-right: $horizontal-padding;
-    width: 100%;
-    height: $header-footer-height;
-    background: #333;
-    text-align: right;
-    line-height: $header-footer-height;
-
-    @media (max-width: 590px) {
-      padding-right: 0;
-      text-align: center;
-    }
-  }
-
-  &__company-link {
-    color: #eaeaea;
   }
 
   &__tabs {
@@ -88,13 +66,42 @@
     }
   }
 
-  &__title {
-    text-align: center;
-    font-weight: 500;
+  &__navigation-link {
+    color: #eaeaea;
+    text-decoration: none;
+  }
 
-    @media (max-width: 590px) {
-      font-size: 1.7rem;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 77vh;
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $header-footer-height;
+    background: #333;
+    text-align: right;
+    line-height: $header-footer-height;
+
+    &-content {
+      margin: auto;
+      width: 90%;
+      text-align: end;
+
+      @media (max-width: 590px) {
+        width: 100%;
+        text-align: center;
+      }
     }
+  }
+
+  &__company-link {
+    color: #eaeaea;
   }
 }
 
