@@ -1,9 +1,11 @@
+@import '~shared/styles/variables';
+
 .repositories-search-layout {
   &__search-form {
     margin: 0 auto 1rem;
     width: 30rem;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       width: 85%;
     }
   }
@@ -12,7 +14,7 @@
     margin: auto;
     width: 32rem;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       width: 100%;
     }
   }

@@ -16,7 +16,7 @@ import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
 
 interface IState {
-  selectedUserUsername: string | null;
+  displayedUser: string | null;
 }
 
 interface IOwnProps {
@@ -51,17 +51,17 @@ const b = block('users-search-results');
 
 class UsersSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
-    selectedUserUsername: null,
+    displayedUser: null,
   };
 
   public render() {
     const { users } = this.props;
-    const { selectedUserUsername } = this.state;
+    const { displayedUser } = this.state;
     return (
       <div className={b()}>
         <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         {this.renderPagination()}
-        {selectedUserUsername && <UserDetails username={selectedUserUsername} onClose={this.handleUserDetailsClose}/>}
+        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose}/>}
       </div>
     );
   }
@@ -87,12 +87,12 @@ class UsersSearchResults extends React.PureComponent<IProps, IState> {
 
   @bind
   private handleUserAvatarClick({ username }: IGithubUser) {
-    this.setState({ selectedUserUsername: username });
+    this.setState({ displayedUser: username });
   }
 
   @bind
   private handleUserDetailsClose() {
-    this.setState({ selectedUserUsername: null });
+    this.setState({ displayedUser: null });
   }
 }
 

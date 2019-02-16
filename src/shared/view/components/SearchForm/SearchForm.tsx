@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
 
+import { isRequired } from 'shared/validators';
 import { TextInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
+
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
 import './SearchForm.scss';
@@ -36,7 +38,7 @@ function SearchForm<T extends object>(props: IProps<T>) {
     const { isSearchRequesting, renderSettings, searchInputName } = props;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <TextInputField name={searchInputName} disabled={isSearchRequesting} />
+        <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
         <div className={b('buttons')}>
           <Button
             type="submit"

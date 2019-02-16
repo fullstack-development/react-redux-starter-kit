@@ -1,4 +1,5 @@
 /* doiuse-disable word-break */
+@import '~shared/styles/variables';
 
 .profile-preview {
   position: relative;
@@ -23,8 +24,7 @@
     transition-duration: 1s;
     transition-property: display;
 
-    @media (max-width: 590px) {
-      // TODO: add global breakpoint
+    @media (max-width: $change-view-breakpoint) {
       width: 19rem;
     }
 
@@ -60,7 +60,7 @@
     text-align: justify;
     text-overflow: ellipsis;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       max-height: 3rem;
     }
   }

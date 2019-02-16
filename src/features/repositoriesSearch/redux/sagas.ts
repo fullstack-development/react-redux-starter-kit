@@ -17,7 +17,7 @@ function getSaga(deps: IDependencies) {
     ]);
   };
 }
-// TODO: пофиксить пустой запрос
+
 function* executeSearchRepositories({ api }: IDependencies, { payload }: NS.ISearchRepositories) {
   try {
     const { searchOptions, page } = payload;

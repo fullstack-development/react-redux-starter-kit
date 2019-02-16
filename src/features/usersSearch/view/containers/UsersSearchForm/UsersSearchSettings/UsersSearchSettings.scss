@@ -1,7 +1,9 @@
+@import '~shared/styles/variables';
+
 .users-search-settings {
   width: 27rem;
 
-  @media (max-width: 590px) {
+  @media (max-width: $change-view-breakpoint) {
     width: 15rem;
   }
 
@@ -10,7 +12,7 @@
     justify-content: space-between;
     margin-bottom: 2.5rem;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       flex-direction: column;
       margin-bottom: 1.5rem;
     }
@@ -23,7 +25,7 @@
   &__item {
     width: 11rem;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       margin-bottom: 1rem;
     }
   }

@@ -1,13 +1,12 @@
+@import '~shared/styles/variables';
+
 .users-search-layout {
   &__search-form {
     margin: 0 auto 1rem;
     width: 30rem;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       width: 85%;
     }
   }
 }
-
-// TODO: копипаста
-// TODO: глянуть неюзаемые стили

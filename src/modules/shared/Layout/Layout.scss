@@ -1,3 +1,5 @@
+@import '~shared/styles/variables';
+
 .layout {
   $header-footer-height: 3rem;
   $header-footer-margin: 1.5rem;
@@ -10,7 +12,7 @@
     text-align: center;
     font-weight: 500;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       font-size: 1.7rem;
     }
   }
@@ -21,7 +23,7 @@
     background: #333;
     color: #eaeaea;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       justify-content: center;
     }
 
@@ -34,7 +36,7 @@
     }
 
     &-title {
-      @media (max-width: 590px) {
+      @media (max-width: $change-view-breakpoint) {
         display: none;
       }
     }
@@ -51,7 +53,7 @@
     height: 100%;
     line-height: $header-footer-height;
 
-    @media (max-width: 590px) {
+    @media (max-width: $change-view-breakpoint) {
       margin-left: 0;
     }
   }
@@ -93,7 +95,7 @@
       width: 90%;
       text-align: end;
 
-      @media (max-width: 590px) {
+      @media (max-width: $change-view-breakpoint) {
         width: 100%;
         text-align: center;
       }
@@ -104,6 +106,3 @@
     color: #eaeaea;
   }
 }
-
-// TODO: add error notification
-// TODO: потыкаться в мобилку, там проблемы (прелоедар на аватар wall, правый паддинг на userDetails

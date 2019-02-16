@@ -16,7 +16,7 @@ import { RepositoryPreview } from '../../components';
 import './RepositoriesSearchResults.scss';
 
 interface IState {
-  displayedUserUsername: string | null;
+  displayedRepositoryOwner: string | null;
 }
 
 interface IOwnProps {
@@ -55,18 +55,19 @@ const b = block('repositories-search-results');
 
 class RepositoriesSearchResults extends React.PureComponent<IProps, IState> {
   public state: IState = {
-    displayedUserUsername: null,
+    displayedRepositoryOwner: null,
   };
 
   public render() {
     const { repositories, UserDetails } = this.props;
-    const { displayedUserUsername } = this.state; // TODO
+    const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
         {repositories.map(this.renderRepositoryPreview)}
         {this.renderPagination()}
-        {displayedUserUsername &&
-        <UserDetails username={displayedUserUsername} onClose={this.handleUserDetailsClose} />}
+        {displayedRepositoryOwner &&
+          <UserDetails username={displayedRepositoryOwner} onClose={this.handleUserDetailsClose} />
+        }
       </div>
     );
   }
@@ -95,12 +96,12 @@ class RepositoriesSearchResults extends React.PureComponent<IProps, IState> {
 
   @bind
   private handleRepositoryOwnerClick(username: string) {
-    this.setState({ displayedUserUsername: username });
+    this.setState({ displayedRepositoryOwner: username });
   }
 
   @bind
   private handleUserDetailsClose() {
-    this.setState({ displayedUserUsername: null });
+    this.setState({ displayedRepositoryOwner: null });
   }
 
   @bind
