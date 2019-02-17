@@ -23,7 +23,7 @@ function UsersSearchLayout(props: IProps) {
   const { UsersSearchForm, UsersSearchResults } = containers;
 
   return (
-    <Layout title="GitHub user search">
+    <Layout title="GitHub users search">
       <div className={b()}>
         <div className={b('search-form')}>
           <UsersSearchForm onSubmit={setLastSubmittedFormState} />
