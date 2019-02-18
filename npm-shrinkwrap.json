@@ -9366,7 +9366,8 @@
       "dependencies": {
         "scheduler": {
           "version": "0.13.2",
-          "from": "scheduler@>=0.13.2 <0.14.0"
+          "from": "scheduler@0.13.2",
+          "resolved": "https://registry.npmjs.org/scheduler/-/scheduler-0.13.2.tgz"
         }
       }
     },
@@ -9447,29 +9448,24 @@
       "resolved": "https://registry.npmjs.org/react-number-format/-/react-number-format-4.0.6.tgz"
     },
     "react-redux": {
-      "version": "5.1.1",
-      "from": "react-redux@https://registry.npmjs.org/react-redux/-/react-redux-5.1.1.tgz",
-      "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-5.1.1.tgz",
+      "version": "6.0.0",
+      "from": "react-redux@latest",
+      "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-6.0.0.tgz",
       "dependencies": {
-        "@babel/runtime": {
-          "version": "7.1.5",
-          "from": "@babel/runtime@https://registry.npmjs.org/@babel/runtime/-/runtime-7.1.5.tgz",
-          "resolved": "https://registry.npmjs.org/@babel/runtime/-/runtime-7.1.5.tgz"
-        },
-        "hoist-non-react-statics": {
-          "version": "3.1.0",
-          "from": "hoist-non-react-statics@https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.1.0.tgz",
-          "resolved": "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.1.0.tgz"
-        },
         "invariant": {
           "version": "2.2.4",
           "from": "invariant@https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz",
           "resolved": "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
         },
-        "regenerator-runtime": {
-          "version": "0.12.1",
-          "from": "regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz",
-          "resolved": "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz"
+        "loose-envify": {
+          "version": "1.4.0",
+          "from": "loose-envify@>=1.4.0 <2.0.0",
+          "resolved": "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
+        },
+        "react-is": {
+          "version": "16.8.2",
+          "from": "react-is@>=16.6.3 <17.0.0",
+          "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.8.2.tgz"
         }
       }
     },
@@ -9636,7 +9632,18 @@
     "redux-make-communication": {
       "version": "1.0.1",
       "from": "redux-make-communication@https://registry.npmjs.org/redux-make-communication/-/redux-make-communication-1.0.1.tgz",
-      "resolved": "https://registry.npmjs.org/redux-make-communication/-/redux-make-communication-1.0.1.tgz"
+      "resolved": "https://registry.npmjs.org/redux-make-communication/-/redux-make-communication-1.0.1.tgz",
+      "dependencies": {
+        "invariant": {
+          "version": "2.2.4",
+          "from": "invariant@>=2.2.4 <3.0.0"
+        },
+        "react-redux": {
+          "version": "5.1.1",
+          "from": "react-redux@>=5.1.1 <6.0.0",
+          "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-5.1.1.tgz"
+        }
+      }
     },
     "redux-saga": {
       "version": "0.16.2",
@@ -11285,7 +11292,7 @@
         "minimist": {
           "version": "1.2.0",
           "from": "minimist@https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz",
-          "resolved": "http://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
+          "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz"
         },
         "mute-stream": {
           "version": "0.0.6",
