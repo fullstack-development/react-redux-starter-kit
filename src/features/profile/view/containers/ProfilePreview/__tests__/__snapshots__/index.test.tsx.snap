@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfilePreview component should match snapshot 1`] = `
+<ProfilePreview
+  onEditClick={[MockFunction]}
+  profile={
+    Object {
+      "age": 1,
+      "avatarURL": "",
+      "bio": "biography",
+      "name": "name",
+      "nickname": "nickname",
+    }
+  }
+>
+  <div
+    className="profile-preview"
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      onClick={[Function]}
+    >
+      <ProfileAvatar
+        avatarURL=""
+        size="small"
+      >
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+          style={
+            Object {
+              "backgroundImage": "url()",
+            }
+          }
+        />
+      </ProfileAvatar>
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          name
+        </div>
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <div
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+          >
+            nickname
+          </div>
+          <div
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+          >
+            1
+             y.o.
+          </div>
+        </div>
+      </div>
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        biography
+      </div>
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onClick={[MockFunction]}
+      >
+        Edit
+      </div>
+    </div>
+  </div>
+</ProfilePreview>
+`;

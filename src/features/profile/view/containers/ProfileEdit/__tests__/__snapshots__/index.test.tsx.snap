@@ -1,0 +1,2118 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProfileEdit component should match snapshot 1`] = `
+<ProfileEdit
+  profile={
+    Object {
+      "age": 1,
+      "avatarURL": "",
+      "bio": "biography",
+      "name": "name",
+      "nickname": "nickname",
+    }
+  }
+  saveProfile={[MockFunction]}
+  setNotification={[MockFunction]}
+>
+  <ReactFinalForm
+    initialValues={
+      Object {
+        "age": 1,
+        "avatarURL": "",
+        "bio": "biography",
+        "name": "name",
+        "nickname": "nickname",
+      }
+    }
+    onSubmit={[Function]}
+    render={[Function]}
+  >
+    <form
+      className="profile-edit"
+      onSubmit={[Function]}
+    >
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <ProfileAvatar
+          avatarURL=""
+          size="big"
+        >
+          <div
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+            style={
+              Object {
+                "backgroundImage": "url()",
+              }
+            }
+          />
+        </ProfileAvatar>
+      </div>
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <FieldWithComponent(TextInputField)
+            label="Name"
+            name="name"
+          >
+            <_class
+              component={[Function]}
+              label="Name"
+              name="name"
+            >
+              <Field
+                component={[Function]}
+                format={[Function]}
+                label="Name"
+                name="name"
+                parse={[Function]}
+                reactFinalForm={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "initialize": [Function],
+                    "isValidationPaused": [Function],
+                    "mutators": Object {},
+                    "pauseValidation": [Function],
+                    "registerField": [Function],
+                    "reset": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                  }
+                }
+              >
+                <TextInputField
+                  input={
+                    Object {
+                      "name": "name",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "name",
+                    }
+                  }
+                  label="Name"
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": "name",
+                      "invalid": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "visited": false,
+                    }
+                  }
+                >
+                  <TextInput
+                    error={false}
+                    helperText={false}
+                    label="Name"
+                    name="name"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value="name"
+                  >
+                    <TextField
+                      InputProps={
+                        Object {
+                          "endAdornment": undefined,
+                        }
+                      }
+                      error={false}
+                      fullWidth={true}
+                      helperText={false}
+                      label="Name"
+                      name="name"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      select={false}
+                      value="name"
+                      variant="standard"
+                    >
+                      <WithStyles(FormControl)
+                        error={false}
+                        fullWidth={true}
+                        required={false}
+                        variant="standard"
+                      >
+                        <FormControl
+                          classes={
+                            Object {
+                              "fullWidth": "MuiFormControl-fullWidth-4",
+                              "marginDense": "MuiFormControl-marginDense-3",
+                              "marginNormal": "MuiFormControl-marginNormal-2",
+                              "root": "MuiFormControl-root-1",
+                            }
+                          }
+                          component="div"
+                          disabled={false}
+                          error={false}
+                          fullWidth={true}
+                          margin="none"
+                          required={false}
+                          variant="standard"
+                        >
+                          <div
+                            className="MuiFormControl-root-1 MuiFormControl-fullWidth-4"
+                          >
+                            <WithStyles(WithFormControlContext(InputLabel))>
+                              <WithFormControlContext(InputLabel)
+                                classes={
+                                  Object {
+                                    "animated": "MuiInputLabel-animated-13",
+                                    "disabled": "MuiInputLabel-disabled-7",
+                                    "error": "MuiInputLabel-error-8",
+                                    "filled": "MuiInputLabel-filled-14",
+                                    "focused": "MuiInputLabel-focused-6",
+                                    "formControl": "MuiInputLabel-formControl-10",
+                                    "marginDense": "MuiInputLabel-marginDense-11",
+                                    "outlined": "MuiInputLabel-outlined-15",
+                                    "required": "MuiInputLabel-required-9",
+                                    "root": "MuiInputLabel-root-5",
+                                    "shrink": "MuiInputLabel-shrink-12",
+                                  }
+                                }
+                              >
+                                <InputLabel
+                                  classes={
+                                    Object {
+                                      "animated": "MuiInputLabel-animated-13",
+                                      "disabled": "MuiInputLabel-disabled-7",
+                                      "error": "MuiInputLabel-error-8",
+                                      "filled": "MuiInputLabel-filled-14",
+                                      "focused": "MuiInputLabel-focused-6",
+                                      "formControl": "MuiInputLabel-formControl-10",
+                                      "marginDense": "MuiInputLabel-marginDense-11",
+                                      "outlined": "MuiInputLabel-outlined-15",
+                                      "required": "MuiInputLabel-required-9",
+                                      "root": "MuiInputLabel-root-5",
+                                      "shrink": "MuiInputLabel-shrink-12",
+                                    }
+                                  }
+                                  disableAnimation={false}
+                                  muiFormControl={
+                                    Object {
+                                      "adornedStart": false,
+                                      "disabled": false,
+                                      "error": false,
+                                      "filled": true,
+                                      "focused": false,
+                                      "margin": "none",
+                                      "onBlur": [Function],
+                                      "onEmpty": [Function],
+                                      "onFilled": [Function],
+                                      "onFocus": [Function],
+                                      "required": false,
+                                      "variant": "standard",
+                                    }
+                                  }
+                                >
+                                  <WithStyles(WithFormControlContext(FormLabel))
+                                    className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                    classes={
+                                      Object {
+                                        "disabled": "MuiInputLabel-disabled-7",
+                                        "error": "MuiInputLabel-error-8",
+                                        "focused": "MuiInputLabel-focused-6",
+                                        "required": "MuiInputLabel-required-9",
+                                      }
+                                    }
+                                    data-shrink={true}
+                                  >
+                                    <WithFormControlContext(FormLabel)
+                                      className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                      classes={
+                                        Object {
+                                          "asterisk": "MuiFormLabel-asterisk-22",
+                                          "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                          "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                          "filled": "MuiFormLabel-filled-20",
+                                          "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                          "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                          "root": "MuiFormLabel-root-16",
+                                        }
+                                      }
+                                      data-shrink={true}
+                                    >
+                                      <FormLabel
+                                        className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                        classes={
+                                          Object {
+                                            "asterisk": "MuiFormLabel-asterisk-22",
+                                            "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                            "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                            "filled": "MuiFormLabel-filled-20",
+                                            "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                            "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                            "root": "MuiFormLabel-root-16",
+                                          }
+                                        }
+                                        component="label"
+                                        data-shrink={true}
+                                        muiFormControl={
+                                          Object {
+                                            "adornedStart": false,
+                                            "disabled": false,
+                                            "error": false,
+                                            "filled": true,
+                                            "focused": false,
+                                            "margin": "none",
+                                            "onBlur": [Function],
+                                            "onEmpty": [Function],
+                                            "onFilled": [Function],
+                                            "onFocus": [Function],
+                                            "required": false,
+                                            "variant": "standard",
+                                          }
+                                        }
+                                      >
+                                        <label
+                                          className="MuiFormLabel-root-16 MuiFormLabel-filled-20 MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                          data-shrink={true}
+                                        >
+                                          Name
+                                        </label>
+                                      </FormLabel>
+                                    </WithFormControlContext(FormLabel)>
+                                  </WithStyles(WithFormControlContext(FormLabel))>
+                                </InputLabel>
+                              </WithFormControlContext(InputLabel)>
+                            </WithStyles(WithFormControlContext(InputLabel))>
+                            <WithStyles(Input)
+                              fullWidth={true}
+                              name="name"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              value="name"
+                            >
+                              <Input
+                                classes={
+                                  Object {
+                                    "disabled": "MuiInput-disabled-26",
+                                    "error": "MuiInput-error-28",
+                                    "focused": "MuiInput-focused-25",
+                                    "formControl": "MuiInput-formControl-24",
+                                    "fullWidth": "MuiInput-fullWidth-30",
+                                    "input": "MuiInput-input-31",
+                                    "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                    "inputMultiline": "MuiInput-inputMultiline-33",
+                                    "inputType": "MuiInput-inputType-34",
+                                    "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                    "multiline": "MuiInput-multiline-29",
+                                    "root": "MuiInput-root-23",
+                                    "underline": "MuiInput-underline-27",
+                                  }
+                                }
+                                fullWidth={true}
+                                name="name"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                value="name"
+                              >
+                                <WithStyles(WithFormControlContext(InputBase))
+                                  classes={
+                                    Object {
+                                      "disabled": "MuiInput-disabled-26",
+                                      "error": "MuiInput-error-28",
+                                      "focused": "MuiInput-focused-25",
+                                      "formControl": "MuiInput-formControl-24",
+                                      "fullWidth": "MuiInput-fullWidth-30",
+                                      "input": "MuiInput-input-31",
+                                      "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                      "inputMultiline": "MuiInput-inputMultiline-33",
+                                      "inputType": "MuiInput-inputType-34",
+                                      "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                      "multiline": "MuiInput-multiline-29",
+                                      "root": "MuiInput-root-23 MuiInput-underline-27",
+                                      "underline": null,
+                                    }
+                                  }
+                                  fullWidth={true}
+                                  inputComponent="input"
+                                  multiline={false}
+                                  name="name"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  type="text"
+                                  value="name"
+                                >
+                                  <WithFormControlContext(InputBase)
+                                    classes={
+                                      Object {
+                                        "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                        "adornedStart": "MuiInputBase-adornedStart-40",
+                                        "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                        "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                        "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                        "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                        "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                        "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                        "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                        "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                        "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                        "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                        "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                        "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                        "marginDense": "MuiInputBase-marginDense-43",
+                                        "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                        "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                      }
+                                    }
+                                    fullWidth={true}
+                                    inputComponent="input"
+                                    multiline={false}
+                                    name="name"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    type="text"
+                                    value="name"
+                                  >
+                                    <InputBase
+                                      classes={
+                                        Object {
+                                          "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                          "adornedStart": "MuiInputBase-adornedStart-40",
+                                          "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                          "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                          "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                          "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                          "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                          "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                          "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                          "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                          "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                          "marginDense": "MuiInputBase-marginDense-43",
+                                          "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                          "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                        }
+                                      }
+                                      fullWidth={true}
+                                      inputComponent="input"
+                                      muiFormControl={
+                                        Object {
+                                          "adornedStart": false,
+                                          "disabled": false,
+                                          "error": false,
+                                          "filled": true,
+                                          "focused": false,
+                                          "margin": "none",
+                                          "onBlur": [Function],
+                                          "onEmpty": [Function],
+                                          "onFilled": [Function],
+                                          "onFocus": [Function],
+                                          "required": false,
+                                          "variant": "standard",
+                                        }
+                                      }
+                                      multiline={false}
+                                      name="name"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      type="text"
+                                      value="name"
+                                    >
+                                      <div
+                                        className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24"
+                                        onClick={[Function]}
+                                      >
+                                        <input
+                                          aria-invalid={false}
+                                          className="MuiInputBase-input-46 MuiInput-input-31"
+                                          disabled={false}
+                                          name="name"
+                                          onBlur={[Function]}
+                                          onChange={[Function]}
+                                          onFocus={[Function]}
+                                          required={false}
+                                          type="text"
+                                          value="name"
+                                        />
+                                      </div>
+                                    </InputBase>
+                                  </WithFormControlContext(InputBase)>
+                                </WithStyles(WithFormControlContext(InputBase))>
+                              </Input>
+                            </WithStyles(Input)>
+                          </div>
+                        </FormControl>
+                      </WithStyles(FormControl)>
+                    </TextField>
+                  </TextInput>
+                </TextInputField>
+              </Field>
+            </_class>
+          </FieldWithComponent(TextInputField)>
+        </div>
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <FieldWithComponent(TextInputField)
+            label="Nickname"
+            name="nickname"
+          >
+            <_class
+              component={[Function]}
+              label="Nickname"
+              name="nickname"
+            >
+              <Field
+                component={[Function]}
+                format={[Function]}
+                label="Nickname"
+                name="nickname"
+                parse={[Function]}
+                reactFinalForm={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "initialize": [Function],
+                    "isValidationPaused": [Function],
+                    "mutators": Object {},
+                    "pauseValidation": [Function],
+                    "registerField": [Function],
+                    "reset": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                  }
+                }
+              >
+                <TextInputField
+                  input={
+                    Object {
+                      "name": "nickname",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "nickname",
+                    }
+                  }
+                  label="Nickname"
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": "nickname",
+                      "invalid": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "visited": false,
+                    }
+                  }
+                >
+                  <TextInput
+                    error={false}
+                    helperText={false}
+                    label="Nickname"
+                    name="nickname"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value="nickname"
+                  >
+                    <TextField
+                      InputProps={
+                        Object {
+                          "endAdornment": undefined,
+                        }
+                      }
+                      error={false}
+                      fullWidth={true}
+                      helperText={false}
+                      label="Nickname"
+                      name="nickname"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      select={false}
+                      value="nickname"
+                      variant="standard"
+                    >
+                      <WithStyles(FormControl)
+                        error={false}
+                        fullWidth={true}
+                        required={false}
+                        variant="standard"
+                      >
+                        <FormControl
+                          classes={
+                            Object {
+                              "fullWidth": "MuiFormControl-fullWidth-4",
+                              "marginDense": "MuiFormControl-marginDense-3",
+                              "marginNormal": "MuiFormControl-marginNormal-2",
+                              "root": "MuiFormControl-root-1",
+                            }
+                          }
+                          component="div"
+                          disabled={false}
+                          error={false}
+                          fullWidth={true}
+                          margin="none"
+                          required={false}
+                          variant="standard"
+                        >
+                          <div
+                            className="MuiFormControl-root-1 MuiFormControl-fullWidth-4"
+                          >
+                            <WithStyles(WithFormControlContext(InputLabel))>
+                              <WithFormControlContext(InputLabel)
+                                classes={
+                                  Object {
+                                    "animated": "MuiInputLabel-animated-13",
+                                    "disabled": "MuiInputLabel-disabled-7",
+                                    "error": "MuiInputLabel-error-8",
+                                    "filled": "MuiInputLabel-filled-14",
+                                    "focused": "MuiInputLabel-focused-6",
+                                    "formControl": "MuiInputLabel-formControl-10",
+                                    "marginDense": "MuiInputLabel-marginDense-11",
+                                    "outlined": "MuiInputLabel-outlined-15",
+                                    "required": "MuiInputLabel-required-9",
+                                    "root": "MuiInputLabel-root-5",
+                                    "shrink": "MuiInputLabel-shrink-12",
+                                  }
+                                }
+                              >
+                                <InputLabel
+                                  classes={
+                                    Object {
+                                      "animated": "MuiInputLabel-animated-13",
+                                      "disabled": "MuiInputLabel-disabled-7",
+                                      "error": "MuiInputLabel-error-8",
+                                      "filled": "MuiInputLabel-filled-14",
+                                      "focused": "MuiInputLabel-focused-6",
+                                      "formControl": "MuiInputLabel-formControl-10",
+                                      "marginDense": "MuiInputLabel-marginDense-11",
+                                      "outlined": "MuiInputLabel-outlined-15",
+                                      "required": "MuiInputLabel-required-9",
+                                      "root": "MuiInputLabel-root-5",
+                                      "shrink": "MuiInputLabel-shrink-12",
+                                    }
+                                  }
+                                  disableAnimation={false}
+                                  muiFormControl={
+                                    Object {
+                                      "adornedStart": false,
+                                      "disabled": false,
+                                      "error": false,
+                                      "filled": true,
+                                      "focused": false,
+                                      "margin": "none",
+                                      "onBlur": [Function],
+                                      "onEmpty": [Function],
+                                      "onFilled": [Function],
+                                      "onFocus": [Function],
+                                      "required": false,
+                                      "variant": "standard",
+                                    }
+                                  }
+                                >
+                                  <WithStyles(WithFormControlContext(FormLabel))
+                                    className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                    classes={
+                                      Object {
+                                        "disabled": "MuiInputLabel-disabled-7",
+                                        "error": "MuiInputLabel-error-8",
+                                        "focused": "MuiInputLabel-focused-6",
+                                        "required": "MuiInputLabel-required-9",
+                                      }
+                                    }
+                                    data-shrink={true}
+                                  >
+                                    <WithFormControlContext(FormLabel)
+                                      className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                      classes={
+                                        Object {
+                                          "asterisk": "MuiFormLabel-asterisk-22",
+                                          "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                          "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                          "filled": "MuiFormLabel-filled-20",
+                                          "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                          "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                          "root": "MuiFormLabel-root-16",
+                                        }
+                                      }
+                                      data-shrink={true}
+                                    >
+                                      <FormLabel
+                                        className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                        classes={
+                                          Object {
+                                            "asterisk": "MuiFormLabel-asterisk-22",
+                                            "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                            "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                            "filled": "MuiFormLabel-filled-20",
+                                            "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                            "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                            "root": "MuiFormLabel-root-16",
+                                          }
+                                        }
+                                        component="label"
+                                        data-shrink={true}
+                                        muiFormControl={
+                                          Object {
+                                            "adornedStart": false,
+                                            "disabled": false,
+                                            "error": false,
+                                            "filled": true,
+                                            "focused": false,
+                                            "margin": "none",
+                                            "onBlur": [Function],
+                                            "onEmpty": [Function],
+                                            "onFilled": [Function],
+                                            "onFocus": [Function],
+                                            "required": false,
+                                            "variant": "standard",
+                                          }
+                                        }
+                                      >
+                                        <label
+                                          className="MuiFormLabel-root-16 MuiFormLabel-filled-20 MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                          data-shrink={true}
+                                        >
+                                          Nickname
+                                        </label>
+                                      </FormLabel>
+                                    </WithFormControlContext(FormLabel)>
+                                  </WithStyles(WithFormControlContext(FormLabel))>
+                                </InputLabel>
+                              </WithFormControlContext(InputLabel)>
+                            </WithStyles(WithFormControlContext(InputLabel))>
+                            <WithStyles(Input)
+                              fullWidth={true}
+                              name="nickname"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              value="nickname"
+                            >
+                              <Input
+                                classes={
+                                  Object {
+                                    "disabled": "MuiInput-disabled-26",
+                                    "error": "MuiInput-error-28",
+                                    "focused": "MuiInput-focused-25",
+                                    "formControl": "MuiInput-formControl-24",
+                                    "fullWidth": "MuiInput-fullWidth-30",
+                                    "input": "MuiInput-input-31",
+                                    "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                    "inputMultiline": "MuiInput-inputMultiline-33",
+                                    "inputType": "MuiInput-inputType-34",
+                                    "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                    "multiline": "MuiInput-multiline-29",
+                                    "root": "MuiInput-root-23",
+                                    "underline": "MuiInput-underline-27",
+                                  }
+                                }
+                                fullWidth={true}
+                                name="nickname"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                value="nickname"
+                              >
+                                <WithStyles(WithFormControlContext(InputBase))
+                                  classes={
+                                    Object {
+                                      "disabled": "MuiInput-disabled-26",
+                                      "error": "MuiInput-error-28",
+                                      "focused": "MuiInput-focused-25",
+                                      "formControl": "MuiInput-formControl-24",
+                                      "fullWidth": "MuiInput-fullWidth-30",
+                                      "input": "MuiInput-input-31",
+                                      "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                      "inputMultiline": "MuiInput-inputMultiline-33",
+                                      "inputType": "MuiInput-inputType-34",
+                                      "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                      "multiline": "MuiInput-multiline-29",
+                                      "root": "MuiInput-root-23 MuiInput-underline-27",
+                                      "underline": null,
+                                    }
+                                  }
+                                  fullWidth={true}
+                                  inputComponent="input"
+                                  multiline={false}
+                                  name="nickname"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  type="text"
+                                  value="nickname"
+                                >
+                                  <WithFormControlContext(InputBase)
+                                    classes={
+                                      Object {
+                                        "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                        "adornedStart": "MuiInputBase-adornedStart-40",
+                                        "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                        "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                        "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                        "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                        "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                        "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                        "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                        "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                        "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                        "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                        "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                        "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                        "marginDense": "MuiInputBase-marginDense-43",
+                                        "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                        "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                      }
+                                    }
+                                    fullWidth={true}
+                                    inputComponent="input"
+                                    multiline={false}
+                                    name="nickname"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    type="text"
+                                    value="nickname"
+                                  >
+                                    <InputBase
+                                      classes={
+                                        Object {
+                                          "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                          "adornedStart": "MuiInputBase-adornedStart-40",
+                                          "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                          "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                          "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                          "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                          "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                          "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                          "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                          "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                          "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                          "marginDense": "MuiInputBase-marginDense-43",
+                                          "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                          "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                        }
+                                      }
+                                      fullWidth={true}
+                                      inputComponent="input"
+                                      muiFormControl={
+                                        Object {
+                                          "adornedStart": false,
+                                          "disabled": false,
+                                          "error": false,
+                                          "filled": true,
+                                          "focused": false,
+                                          "margin": "none",
+                                          "onBlur": [Function],
+                                          "onEmpty": [Function],
+                                          "onFilled": [Function],
+                                          "onFocus": [Function],
+                                          "required": false,
+                                          "variant": "standard",
+                                        }
+                                      }
+                                      multiline={false}
+                                      name="nickname"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      type="text"
+                                      value="nickname"
+                                    >
+                                      <div
+                                        className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24"
+                                        onClick={[Function]}
+                                      >
+                                        <input
+                                          aria-invalid={false}
+                                          className="MuiInputBase-input-46 MuiInput-input-31"
+                                          disabled={false}
+                                          name="nickname"
+                                          onBlur={[Function]}
+                                          onChange={[Function]}
+                                          onFocus={[Function]}
+                                          required={false}
+                                          type="text"
+                                          value="nickname"
+                                        />
+                                      </div>
+                                    </InputBase>
+                                  </WithFormControlContext(InputBase)>
+                                </WithStyles(WithFormControlContext(InputBase))>
+                              </Input>
+                            </WithStyles(Input)>
+                          </div>
+                        </FormControl>
+                      </WithStyles(FormControl)>
+                    </TextField>
+                  </TextInput>
+                </TextInputField>
+              </Field>
+            </_class>
+          </FieldWithComponent(TextInputField)>
+        </div>
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <FieldWithComponent(NumberInputField)
+            label="Age"
+            name="age"
+          >
+            <_class
+              component={[Function]}
+              label="Age"
+              name="age"
+            >
+              <Field
+                component={[Function]}
+                format={[Function]}
+                label="Age"
+                name="age"
+                parse={[Function]}
+                reactFinalForm={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "initialize": [Function],
+                    "isValidationPaused": [Function],
+                    "mutators": Object {},
+                    "pauseValidation": [Function],
+                    "registerField": [Function],
+                    "reset": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                  }
+                }
+              >
+                <NumberInputField
+                  input={
+                    Object {
+                      "name": "age",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": 1,
+                    }
+                  }
+                  label="Age"
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": 1,
+                      "invalid": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "visited": false,
+                    }
+                  }
+                >
+                  <NumberInput
+                    error={false}
+                    helperText={false}
+                    label="Age"
+                    name="age"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    value={1}
+                  >
+                    <TextInput
+                      InputLabelProps={
+                        Object {
+                          "shrink": true,
+                        }
+                      }
+                      InputProps={
+                        Object {
+                          "inputComponent": [Function],
+                        }
+                      }
+                      error={false}
+                      fullWidth={true}
+                      helperText={false}
+                      label="Age"
+                      name="age"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      value={1}
+                    >
+                      <TextField
+                        InputLabelProps={
+                          Object {
+                            "shrink": true,
+                          }
+                        }
+                        InputProps={
+                          Object {
+                            "endAdornment": undefined,
+                            "inputComponent": [Function],
+                          }
+                        }
+                        error={false}
+                        fullWidth={true}
+                        helperText={false}
+                        label="Age"
+                        name="age"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        required={false}
+                        select={false}
+                        value={1}
+                        variant="standard"
+                      >
+                        <WithStyles(FormControl)
+                          error={false}
+                          fullWidth={true}
+                          required={false}
+                          variant="standard"
+                        >
+                          <FormControl
+                            classes={
+                              Object {
+                                "fullWidth": "MuiFormControl-fullWidth-4",
+                                "marginDense": "MuiFormControl-marginDense-3",
+                                "marginNormal": "MuiFormControl-marginNormal-2",
+                                "root": "MuiFormControl-root-1",
+                              }
+                            }
+                            component="div"
+                            disabled={false}
+                            error={false}
+                            fullWidth={true}
+                            margin="none"
+                            required={false}
+                            variant="standard"
+                          >
+                            <div
+                              className="MuiFormControl-root-1 MuiFormControl-fullWidth-4"
+                            >
+                              <WithStyles(WithFormControlContext(InputLabel))
+                                shrink={true}
+                              >
+                                <WithFormControlContext(InputLabel)
+                                  classes={
+                                    Object {
+                                      "animated": "MuiInputLabel-animated-13",
+                                      "disabled": "MuiInputLabel-disabled-7",
+                                      "error": "MuiInputLabel-error-8",
+                                      "filled": "MuiInputLabel-filled-14",
+                                      "focused": "MuiInputLabel-focused-6",
+                                      "formControl": "MuiInputLabel-formControl-10",
+                                      "marginDense": "MuiInputLabel-marginDense-11",
+                                      "outlined": "MuiInputLabel-outlined-15",
+                                      "required": "MuiInputLabel-required-9",
+                                      "root": "MuiInputLabel-root-5",
+                                      "shrink": "MuiInputLabel-shrink-12",
+                                    }
+                                  }
+                                  shrink={true}
+                                >
+                                  <InputLabel
+                                    classes={
+                                      Object {
+                                        "animated": "MuiInputLabel-animated-13",
+                                        "disabled": "MuiInputLabel-disabled-7",
+                                        "error": "MuiInputLabel-error-8",
+                                        "filled": "MuiInputLabel-filled-14",
+                                        "focused": "MuiInputLabel-focused-6",
+                                        "formControl": "MuiInputLabel-formControl-10",
+                                        "marginDense": "MuiInputLabel-marginDense-11",
+                                        "outlined": "MuiInputLabel-outlined-15",
+                                        "required": "MuiInputLabel-required-9",
+                                        "root": "MuiInputLabel-root-5",
+                                        "shrink": "MuiInputLabel-shrink-12",
+                                      }
+                                    }
+                                    disableAnimation={false}
+                                    muiFormControl={
+                                      Object {
+                                        "adornedStart": false,
+                                        "disabled": false,
+                                        "error": false,
+                                        "filled": true,
+                                        "focused": false,
+                                        "margin": "none",
+                                        "onBlur": [Function],
+                                        "onEmpty": [Function],
+                                        "onFilled": [Function],
+                                        "onFocus": [Function],
+                                        "required": false,
+                                        "variant": "standard",
+                                      }
+                                    }
+                                    shrink={true}
+                                  >
+                                    <WithStyles(WithFormControlContext(FormLabel))
+                                      className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                      classes={
+                                        Object {
+                                          "disabled": "MuiInputLabel-disabled-7",
+                                          "error": "MuiInputLabel-error-8",
+                                          "focused": "MuiInputLabel-focused-6",
+                                          "required": "MuiInputLabel-required-9",
+                                        }
+                                      }
+                                      data-shrink={true}
+                                    >
+                                      <WithFormControlContext(FormLabel)
+                                        className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                        classes={
+                                          Object {
+                                            "asterisk": "MuiFormLabel-asterisk-22",
+                                            "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                            "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                            "filled": "MuiFormLabel-filled-20",
+                                            "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                            "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                            "root": "MuiFormLabel-root-16",
+                                          }
+                                        }
+                                        data-shrink={true}
+                                      >
+                                        <FormLabel
+                                          className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                          classes={
+                                            Object {
+                                              "asterisk": "MuiFormLabel-asterisk-22",
+                                              "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                              "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                              "filled": "MuiFormLabel-filled-20",
+                                              "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                              "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                              "root": "MuiFormLabel-root-16",
+                                            }
+                                          }
+                                          component="label"
+                                          data-shrink={true}
+                                          muiFormControl={
+                                            Object {
+                                              "adornedStart": false,
+                                              "disabled": false,
+                                              "error": false,
+                                              "filled": true,
+                                              "focused": false,
+                                              "margin": "none",
+                                              "onBlur": [Function],
+                                              "onEmpty": [Function],
+                                              "onFilled": [Function],
+                                              "onFocus": [Function],
+                                              "required": false,
+                                              "variant": "standard",
+                                            }
+                                          }
+                                        >
+                                          <label
+                                            className="MuiFormLabel-root-16 MuiFormLabel-filled-20 MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                            data-shrink={true}
+                                          >
+                                            Age
+                                          </label>
+                                        </FormLabel>
+                                      </WithFormControlContext(FormLabel)>
+                                    </WithStyles(WithFormControlContext(FormLabel))>
+                                  </InputLabel>
+                                </WithFormControlContext(InputLabel)>
+                              </WithStyles(WithFormControlContext(InputLabel))>
+                              <WithStyles(Input)
+                                fullWidth={true}
+                                inputComponent={[Function]}
+                                name="age"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                value={1}
+                              >
+                                <Input
+                                  classes={
+                                    Object {
+                                      "disabled": "MuiInput-disabled-26",
+                                      "error": "MuiInput-error-28",
+                                      "focused": "MuiInput-focused-25",
+                                      "formControl": "MuiInput-formControl-24",
+                                      "fullWidth": "MuiInput-fullWidth-30",
+                                      "input": "MuiInput-input-31",
+                                      "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                      "inputMultiline": "MuiInput-inputMultiline-33",
+                                      "inputType": "MuiInput-inputType-34",
+                                      "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                      "multiline": "MuiInput-multiline-29",
+                                      "root": "MuiInput-root-23",
+                                      "underline": "MuiInput-underline-27",
+                                    }
+                                  }
+                                  fullWidth={true}
+                                  inputComponent={[Function]}
+                                  name="age"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  value={1}
+                                >
+                                  <WithStyles(WithFormControlContext(InputBase))
+                                    classes={
+                                      Object {
+                                        "disabled": "MuiInput-disabled-26",
+                                        "error": "MuiInput-error-28",
+                                        "focused": "MuiInput-focused-25",
+                                        "formControl": "MuiInput-formControl-24",
+                                        "fullWidth": "MuiInput-fullWidth-30",
+                                        "input": "MuiInput-input-31",
+                                        "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                        "inputMultiline": "MuiInput-inputMultiline-33",
+                                        "inputType": "MuiInput-inputType-34",
+                                        "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                        "multiline": "MuiInput-multiline-29",
+                                        "root": "MuiInput-root-23 MuiInput-underline-27",
+                                        "underline": null,
+                                      }
+                                    }
+                                    fullWidth={true}
+                                    inputComponent={[Function]}
+                                    multiline={false}
+                                    name="age"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    type="text"
+                                    value={1}
+                                  >
+                                    <WithFormControlContext(InputBase)
+                                      classes={
+                                        Object {
+                                          "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                          "adornedStart": "MuiInputBase-adornedStart-40",
+                                          "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                          "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                          "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                          "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                          "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                          "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                          "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                          "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                          "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                          "marginDense": "MuiInputBase-marginDense-43",
+                                          "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                          "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                        }
+                                      }
+                                      fullWidth={true}
+                                      inputComponent={[Function]}
+                                      multiline={false}
+                                      name="age"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      type="text"
+                                      value={1}
+                                    >
+                                      <InputBase
+                                        classes={
+                                          Object {
+                                            "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                            "adornedStart": "MuiInputBase-adornedStart-40",
+                                            "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                            "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                            "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                            "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                            "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                            "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                            "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                            "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                            "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                            "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                            "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                            "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                            "marginDense": "MuiInputBase-marginDense-43",
+                                            "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                            "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                          }
+                                        }
+                                        fullWidth={true}
+                                        inputComponent={[Function]}
+                                        muiFormControl={
+                                          Object {
+                                            "adornedStart": false,
+                                            "disabled": false,
+                                            "error": false,
+                                            "filled": true,
+                                            "focused": false,
+                                            "margin": "none",
+                                            "onBlur": [Function],
+                                            "onEmpty": [Function],
+                                            "onFilled": [Function],
+                                            "onFocus": [Function],
+                                            "required": false,
+                                            "variant": "standard",
+                                          }
+                                        }
+                                        multiline={false}
+                                        name="age"
+                                        onBlur={[Function]}
+                                        onChange={[Function]}
+                                        onFocus={[Function]}
+                                        type="text"
+                                        value={1}
+                                      >
+                                        <div
+                                          className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24"
+                                          onClick={[Function]}
+                                        >
+                                          <NumberFormatCustom
+                                            aria-invalid={false}
+                                            className="MuiInputBase-input-46 MuiInput-input-31"
+                                            disabled={false}
+                                            inputRef={[Function]}
+                                            name="age"
+                                            onBlur={[Function]}
+                                            onChange={[Function]}
+                                            onFocus={[Function]}
+                                            required={false}
+                                            type="text"
+                                            value={1}
+                                          >
+                                            <NumberFormat
+                                              allowEmptyFormatting={false}
+                                              allowNegative={true}
+                                              aria-invalid={false}
+                                              className="MuiInputBase-input-46 MuiInput-input-31"
+                                              decimalSeparator="."
+                                              disabled={false}
+                                              displayType="input"
+                                              fixedDecimalScale={false}
+                                              getInputRef={[Function]}
+                                              isAllowed={[Function]}
+                                              isNumericString={false}
+                                              name="age"
+                                              onBlur={[Function]}
+                                              onChange={[Function]}
+                                              onFocus={[Function]}
+                                              onKeyDown={[Function]}
+                                              onMouseUp={[Function]}
+                                              onValueChange={[Function]}
+                                              prefix=""
+                                              required={false}
+                                              suffix=""
+                                              thousandsGroupStyle="thousand"
+                                              type="text"
+                                              value={1}
+                                            >
+                                              <input
+                                                aria-invalid={false}
+                                                className="MuiInputBase-input-46 MuiInput-input-31"
+                                                disabled={false}
+                                                name="age"
+                                                onBlur={[Function]}
+                                                onChange={[Function]}
+                                                onFocus={[Function]}
+                                                onKeyDown={[Function]}
+                                                onMouseUp={[Function]}
+                                                required={false}
+                                                type="text"
+                                                value="1"
+                                              />
+                                            </NumberFormat>
+                                          </NumberFormatCustom>
+                                        </div>
+                                      </InputBase>
+                                    </WithFormControlContext(InputBase)>
+                                  </WithStyles(WithFormControlContext(InputBase))>
+                                </Input>
+                              </WithStyles(Input)>
+                            </div>
+                          </FormControl>
+                        </WithStyles(FormControl)>
+                      </TextField>
+                    </TextInput>
+                  </NumberInput>
+                </NumberInputField>
+              </Field>
+            </_class>
+          </FieldWithComponent(NumberInputField)>
+        </div>
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <FieldWithComponent(TextInputField)
+            label="Bio"
+            multiline={true}
+            name="bio"
+            rowsMax={10}
+          >
+            <_class
+              component={[Function]}
+              label="Bio"
+              multiline={true}
+              name="bio"
+              rowsMax={10}
+            >
+              <Field
+                component={[Function]}
+                format={[Function]}
+                label="Bio"
+                multiline={true}
+                name="bio"
+                parse={[Function]}
+                reactFinalForm={
+                  Object {
+                    "batch": [Function],
+                    "blur": [Function],
+                    "change": [Function],
+                    "focus": [Function],
+                    "getFieldState": [Function],
+                    "getRegisteredFields": [Function],
+                    "getState": [Function],
+                    "initialize": [Function],
+                    "isValidationPaused": [Function],
+                    "mutators": Object {},
+                    "pauseValidation": [Function],
+                    "registerField": [Function],
+                    "reset": [Function],
+                    "resumeValidation": [Function],
+                    "setConfig": [Function],
+                    "submit": [Function],
+                    "subscribe": [Function],
+                  }
+                }
+                rowsMax={10}
+              >
+                <TextInputField
+                  input={
+                    Object {
+                      "name": "bio",
+                      "onBlur": [Function],
+                      "onChange": [Function],
+                      "onFocus": [Function],
+                      "value": "biography",
+                    }
+                  }
+                  label="Bio"
+                  meta={
+                    Object {
+                      "active": false,
+                      "data": Object {},
+                      "dirty": false,
+                      "dirtySinceLastSubmit": false,
+                      "error": undefined,
+                      "initial": "biography",
+                      "invalid": false,
+                      "pristine": true,
+                      "submitError": undefined,
+                      "submitFailed": false,
+                      "submitSucceeded": false,
+                      "submitting": false,
+                      "touched": false,
+                      "valid": true,
+                      "visited": false,
+                    }
+                  }
+                  multiline={true}
+                  rowsMax={10}
+                >
+                  <TextInput
+                    error={false}
+                    helperText={false}
+                    label="Bio"
+                    multiline={true}
+                    name="bio"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    rowsMax={10}
+                    value="biography"
+                  >
+                    <TextField
+                      InputProps={
+                        Object {
+                          "endAdornment": undefined,
+                        }
+                      }
+                      error={false}
+                      fullWidth={true}
+                      helperText={false}
+                      label="Bio"
+                      multiline={true}
+                      name="bio"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      required={false}
+                      rowsMax={10}
+                      select={false}
+                      value="biography"
+                      variant="standard"
+                    >
+                      <WithStyles(FormControl)
+                        error={false}
+                        fullWidth={true}
+                        required={false}
+                        variant="standard"
+                      >
+                        <FormControl
+                          classes={
+                            Object {
+                              "fullWidth": "MuiFormControl-fullWidth-4",
+                              "marginDense": "MuiFormControl-marginDense-3",
+                              "marginNormal": "MuiFormControl-marginNormal-2",
+                              "root": "MuiFormControl-root-1",
+                            }
+                          }
+                          component="div"
+                          disabled={false}
+                          error={false}
+                          fullWidth={true}
+                          margin="none"
+                          required={false}
+                          variant="standard"
+                        >
+                          <div
+                            className="MuiFormControl-root-1 MuiFormControl-fullWidth-4"
+                          >
+                            <WithStyles(WithFormControlContext(InputLabel))>
+                              <WithFormControlContext(InputLabel)
+                                classes={
+                                  Object {
+                                    "animated": "MuiInputLabel-animated-13",
+                                    "disabled": "MuiInputLabel-disabled-7",
+                                    "error": "MuiInputLabel-error-8",
+                                    "filled": "MuiInputLabel-filled-14",
+                                    "focused": "MuiInputLabel-focused-6",
+                                    "formControl": "MuiInputLabel-formControl-10",
+                                    "marginDense": "MuiInputLabel-marginDense-11",
+                                    "outlined": "MuiInputLabel-outlined-15",
+                                    "required": "MuiInputLabel-required-9",
+                                    "root": "MuiInputLabel-root-5",
+                                    "shrink": "MuiInputLabel-shrink-12",
+                                  }
+                                }
+                              >
+                                <InputLabel
+                                  classes={
+                                    Object {
+                                      "animated": "MuiInputLabel-animated-13",
+                                      "disabled": "MuiInputLabel-disabled-7",
+                                      "error": "MuiInputLabel-error-8",
+                                      "filled": "MuiInputLabel-filled-14",
+                                      "focused": "MuiInputLabel-focused-6",
+                                      "formControl": "MuiInputLabel-formControl-10",
+                                      "marginDense": "MuiInputLabel-marginDense-11",
+                                      "outlined": "MuiInputLabel-outlined-15",
+                                      "required": "MuiInputLabel-required-9",
+                                      "root": "MuiInputLabel-root-5",
+                                      "shrink": "MuiInputLabel-shrink-12",
+                                    }
+                                  }
+                                  disableAnimation={false}
+                                  muiFormControl={
+                                    Object {
+                                      "adornedStart": false,
+                                      "disabled": false,
+                                      "error": false,
+                                      "filled": true,
+                                      "focused": false,
+                                      "margin": "none",
+                                      "onBlur": [Function],
+                                      "onEmpty": [Function],
+                                      "onFilled": [Function],
+                                      "onFocus": [Function],
+                                      "required": false,
+                                      "variant": "standard",
+                                    }
+                                  }
+                                >
+                                  <WithStyles(WithFormControlContext(FormLabel))
+                                    className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                    classes={
+                                      Object {
+                                        "disabled": "MuiInputLabel-disabled-7",
+                                        "error": "MuiInputLabel-error-8",
+                                        "focused": "MuiInputLabel-focused-6",
+                                        "required": "MuiInputLabel-required-9",
+                                      }
+                                    }
+                                    data-shrink={true}
+                                  >
+                                    <WithFormControlContext(FormLabel)
+                                      className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                      classes={
+                                        Object {
+                                          "asterisk": "MuiFormLabel-asterisk-22",
+                                          "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                          "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                          "filled": "MuiFormLabel-filled-20",
+                                          "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                          "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                          "root": "MuiFormLabel-root-16",
+                                        }
+                                      }
+                                      data-shrink={true}
+                                    >
+                                      <FormLabel
+                                        className="MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                        classes={
+                                          Object {
+                                            "asterisk": "MuiFormLabel-asterisk-22",
+                                            "disabled": "MuiFormLabel-disabled-18 MuiInputLabel-disabled-7",
+                                            "error": "MuiFormLabel-error-19 MuiInputLabel-error-8",
+                                            "filled": "MuiFormLabel-filled-20",
+                                            "focused": "MuiFormLabel-focused-17 MuiInputLabel-focused-6",
+                                            "required": "MuiFormLabel-required-21 MuiInputLabel-required-9",
+                                            "root": "MuiFormLabel-root-16",
+                                          }
+                                        }
+                                        component="label"
+                                        data-shrink={true}
+                                        muiFormControl={
+                                          Object {
+                                            "adornedStart": false,
+                                            "disabled": false,
+                                            "error": false,
+                                            "filled": true,
+                                            "focused": false,
+                                            "margin": "none",
+                                            "onBlur": [Function],
+                                            "onEmpty": [Function],
+                                            "onFilled": [Function],
+                                            "onFocus": [Function],
+                                            "required": false,
+                                            "variant": "standard",
+                                          }
+                                        }
+                                      >
+                                        <label
+                                          className="MuiFormLabel-root-16 MuiFormLabel-filled-20 MuiInputLabel-root-5 MuiInputLabel-formControl-10 MuiInputLabel-animated-13 MuiInputLabel-shrink-12"
+                                          data-shrink={true}
+                                        >
+                                          Bio
+                                        </label>
+                                      </FormLabel>
+                                    </WithFormControlContext(FormLabel)>
+                                  </WithStyles(WithFormControlContext(FormLabel))>
+                                </InputLabel>
+                              </WithFormControlContext(InputLabel)>
+                            </WithStyles(WithFormControlContext(InputLabel))>
+                            <WithStyles(Input)
+                              fullWidth={true}
+                              multiline={true}
+                              name="bio"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              rowsMax={10}
+                              value="biography"
+                            >
+                              <Input
+                                classes={
+                                  Object {
+                                    "disabled": "MuiInput-disabled-26",
+                                    "error": "MuiInput-error-28",
+                                    "focused": "MuiInput-focused-25",
+                                    "formControl": "MuiInput-formControl-24",
+                                    "fullWidth": "MuiInput-fullWidth-30",
+                                    "input": "MuiInput-input-31",
+                                    "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                    "inputMultiline": "MuiInput-inputMultiline-33",
+                                    "inputType": "MuiInput-inputType-34",
+                                    "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                    "multiline": "MuiInput-multiline-29",
+                                    "root": "MuiInput-root-23",
+                                    "underline": "MuiInput-underline-27",
+                                  }
+                                }
+                                fullWidth={true}
+                                multiline={true}
+                                name="bio"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                rowsMax={10}
+                                value="biography"
+                              >
+                                <WithStyles(WithFormControlContext(InputBase))
+                                  classes={
+                                    Object {
+                                      "disabled": "MuiInput-disabled-26",
+                                      "error": "MuiInput-error-28",
+                                      "focused": "MuiInput-focused-25",
+                                      "formControl": "MuiInput-formControl-24",
+                                      "fullWidth": "MuiInput-fullWidth-30",
+                                      "input": "MuiInput-input-31",
+                                      "inputMarginDense": "MuiInput-inputMarginDense-32",
+                                      "inputMultiline": "MuiInput-inputMultiline-33",
+                                      "inputType": "MuiInput-inputType-34",
+                                      "inputTypeSearch": "MuiInput-inputTypeSearch-35",
+                                      "multiline": "MuiInput-multiline-29",
+                                      "root": "MuiInput-root-23 MuiInput-underline-27",
+                                      "underline": null,
+                                    }
+                                  }
+                                  fullWidth={true}
+                                  inputComponent="input"
+                                  multiline={true}
+                                  name="bio"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  rowsMax={10}
+                                  type="text"
+                                  value="biography"
+                                >
+                                  <WithFormControlContext(InputBase)
+                                    classes={
+                                      Object {
+                                        "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                        "adornedStart": "MuiInputBase-adornedStart-40",
+                                        "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                        "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                        "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                        "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                        "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                        "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                        "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                        "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                        "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                        "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                        "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                        "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                        "marginDense": "MuiInputBase-marginDense-43",
+                                        "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                        "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                      }
+                                    }
+                                    fullWidth={true}
+                                    inputComponent="input"
+                                    multiline={true}
+                                    name="bio"
+                                    onBlur={[Function]}
+                                    onChange={[Function]}
+                                    onFocus={[Function]}
+                                    rowsMax={10}
+                                    type="text"
+                                    value="biography"
+                                  >
+                                    <InputBase
+                                      classes={
+                                        Object {
+                                          "adornedEnd": "MuiInputBase-adornedEnd-41",
+                                          "adornedStart": "MuiInputBase-adornedStart-40",
+                                          "disabled": "MuiInputBase-disabled-39 MuiInput-disabled-26",
+                                          "error": "MuiInputBase-error-42 MuiInput-error-28",
+                                          "focused": "MuiInputBase-focused-38 MuiInput-focused-25",
+                                          "formControl": "MuiInputBase-formControl-37 MuiInput-formControl-24",
+                                          "fullWidth": "MuiInputBase-fullWidth-45 MuiInput-fullWidth-30",
+                                          "input": "MuiInputBase-input-46 MuiInput-input-31",
+                                          "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-52",
+                                          "inputAdornedStart": "MuiInputBase-inputAdornedStart-51",
+                                          "inputMarginDense": "MuiInputBase-inputMarginDense-47 MuiInput-inputMarginDense-32",
+                                          "inputMultiline": "MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33",
+                                          "inputType": "MuiInputBase-inputType-49 MuiInput-inputType-34",
+                                          "inputTypeSearch": "MuiInputBase-inputTypeSearch-50 MuiInput-inputTypeSearch-35",
+                                          "marginDense": "MuiInputBase-marginDense-43",
+                                          "multiline": "MuiInputBase-multiline-44 MuiInput-multiline-29",
+                                          "root": "MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27",
+                                        }
+                                      }
+                                      fullWidth={true}
+                                      inputComponent="input"
+                                      muiFormControl={
+                                        Object {
+                                          "adornedStart": false,
+                                          "disabled": false,
+                                          "error": false,
+                                          "filled": true,
+                                          "focused": false,
+                                          "margin": "none",
+                                          "onBlur": [Function],
+                                          "onEmpty": [Function],
+                                          "onFilled": [Function],
+                                          "onFocus": [Function],
+                                          "required": false,
+                                          "variant": "standard",
+                                        }
+                                      }
+                                      multiline={true}
+                                      name="bio"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      rowsMax={10}
+                                      type="text"
+                                      value="biography"
+                                    >
+                                      <div
+                                        className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24 MuiInputBase-multiline-44 MuiInput-multiline-29"
+                                        onClick={[Function]}
+                                      >
+                                        <WithStyles(Textarea)
+                                          aria-invalid={false}
+                                          className="MuiInputBase-input-46 MuiInput-input-31 MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33"
+                                          disabled={false}
+                                          name="bio"
+                                          onBlur={[Function]}
+                                          onChange={[Function]}
+                                          onFocus={[Function]}
+                                          required={false}
+                                          rowsMax={10}
+                                          textareaRef={[Function]}
+                                          value="biography"
+                                        >
+                                          <Textarea
+                                            aria-invalid={false}
+                                            className="MuiInputBase-input-46 MuiInput-input-31 MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33"
+                                            classes={
+                                              Object {
+                                                "root": "MuiPrivateTextarea-root-53",
+                                                "shadow": "MuiPrivateTextarea-shadow-55",
+                                                "textarea": "MuiPrivateTextarea-textarea-54",
+                                              }
+                                            }
+                                            disabled={false}
+                                            name="bio"
+                                            onBlur={[Function]}
+                                            onChange={[Function]}
+                                            onFocus={[Function]}
+                                            required={false}
+                                            rows={1}
+                                            rowsMax={10}
+                                            textareaRef={[Function]}
+                                            value="biography"
+                                          >
+                                            <div
+                                              className="MuiPrivateTextarea-root-53"
+                                            >
+                                              <EventListener
+                                                onResize={[Function]}
+                                                target="window"
+                                              />
+                                              <textarea
+                                                aria-hidden="true"
+                                                className="MuiPrivateTextarea-textarea-54 MuiPrivateTextarea-shadow-55"
+                                                readOnly={true}
+                                                rows="1"
+                                                tabIndex={-1}
+                                                value=""
+                                              />
+                                              <textarea
+                                                aria-hidden="true"
+                                                className="MuiPrivateTextarea-textarea-54 MuiPrivateTextarea-shadow-55"
+                                                readOnly={true}
+                                                rows={1}
+                                                tabIndex={-1}
+                                                value="biography"
+                                              />
+                                              <textarea
+                                                aria-invalid={false}
+                                                className="MuiPrivateTextarea-textarea-54 MuiInputBase-input-46 MuiInput-input-31 MuiInputBase-inputMultiline-48 MuiInput-inputMultiline-33"
+                                                disabled={false}
+                                                name="bio"
+                                                onBlur={[Function]}
+                                                onChange={[Function]}
+                                                onFocus={[Function]}
+                                                required={false}
+                                                rows={1}
+                                                style={
+                                                  Object {
+                                                    "height": 0,
+                                                  }
+                                                }
+                                                value="biography"
+                                              />
+                                            </div>
+                                          </Textarea>
+                                        </WithStyles(Textarea)>
+                                      </div>
+                                    </InputBase>
+                                  </WithFormControlContext(InputBase)>
+                                </WithStyles(WithFormControlContext(InputBase))>
+                              </Input>
+                            </WithStyles(Input)>
+                          </div>
+                        </FormControl>
+                      </WithStyles(FormControl)>
+                    </TextField>
+                  </TextInput>
+                </TextInputField>
+              </Field>
+            </_class>
+          </FieldWithComponent(TextInputField)>
+        </div>
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <WithStyles(Button)
+            type="submit"
+            variant="outlined"
+          >
+            <Button
+              classes={
+                Object {
+                  "colorInherit": "MuiButton-colorInherit-77",
+                  "contained": "MuiButton-contained-67",
+                  "containedPrimary": "MuiButton-containedPrimary-68",
+                  "containedSecondary": "MuiButton-containedSecondary-69",
+                  "disabled": "MuiButton-disabled-76",
+                  "extendedFab": "MuiButton-extendedFab-74",
+                  "fab": "MuiButton-fab-73",
+                  "flat": "MuiButton-flat-61",
+                  "flatPrimary": "MuiButton-flatPrimary-62",
+                  "flatSecondary": "MuiButton-flatSecondary-63",
+                  "focusVisible": "MuiButton-focusVisible-75",
+                  "fullWidth": "MuiButton-fullWidth-81",
+                  "label": "MuiButton-label-57",
+                  "mini": "MuiButton-mini-78",
+                  "outlined": "MuiButton-outlined-64",
+                  "outlinedPrimary": "MuiButton-outlinedPrimary-65",
+                  "outlinedSecondary": "MuiButton-outlinedSecondary-66",
+                  "raised": "MuiButton-raised-70",
+                  "raisedPrimary": "MuiButton-raisedPrimary-71",
+                  "raisedSecondary": "MuiButton-raisedSecondary-72",
+                  "root": "MuiButton-root-56",
+                  "sizeLarge": "MuiButton-sizeLarge-80",
+                  "sizeSmall": "MuiButton-sizeSmall-79",
+                  "text": "MuiButton-text-58",
+                  "textPrimary": "MuiButton-textPrimary-59",
+                  "textSecondary": "MuiButton-textSecondary-60",
+                }
+              }
+              color="default"
+              component="button"
+              disableFocusRipple={false}
+              disabled={false}
+              fullWidth={false}
+              mini={false}
+              size="medium"
+              type="submit"
+              variant="outlined"
+            >
+              <WithStyles(ButtonBase)
+                className="MuiButton-root-56 MuiButton-outlined-64"
+                component="button"
+                disabled={false}
+                focusRipple={true}
+                focusVisibleClassName="MuiButton-focusVisible-75"
+                type="submit"
+              >
+                <ButtonBase
+                  centerRipple={false}
+                  className="MuiButton-root-56 MuiButton-outlined-64"
+                  classes={
+                    Object {
+                      "disabled": "MuiButtonBase-disabled-83",
+                      "focusVisible": "MuiButtonBase-focusVisible-84",
+                      "root": "MuiButtonBase-root-82",
+                    }
+                  }
+                  component="button"
+                  disableRipple={false}
+                  disableTouchRipple={false}
+                  disabled={false}
+                  focusRipple={true}
+                  focusVisibleClassName="MuiButton-focusVisible-75"
+                  tabIndex="0"
+                  type="submit"
+                >
+                  <button
+                    className="MuiButtonBase-root-82 MuiButton-root-56 MuiButton-outlined-64"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onContextMenu={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex="0"
+                    type="submit"
+                  >
+                    <span
+                      className="MuiButton-label-57"
+                    >
+                      Save
+                    </span>
+                    <NoSsr
+                      defer={false}
+                      fallback={null}
+                    >
+                      <WithStyles(TouchRipple)
+                        center={false}
+                        innerRef={[Function]}
+                      >
+                        <TouchRipple
+                          center={false}
+                          classes={
+                            Object {
+                              "child": "MuiTouchRipple-child-89",
+                              "childLeaving": "MuiTouchRipple-childLeaving-90",
+                              "childPulsate": "MuiTouchRipple-childPulsate-91",
+                              "ripple": "MuiTouchRipple-ripple-86",
+                              "ripplePulsate": "MuiTouchRipple-ripplePulsate-88",
+                              "rippleVisible": "MuiTouchRipple-rippleVisible-87",
+                              "root": "MuiTouchRipple-root-85",
+                            }
+                          }
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            className="MuiTouchRipple-root-85"
+                            component="span"
+                            enter={true}
+                            exit={true}
+                          >
+                            <span
+                              className="MuiTouchRipple-root-85"
+                            />
+                          </TransitionGroup>
+                        </TouchRipple>
+                      </WithStyles(TouchRipple)>
+                    </NoSsr>
+                  </button>
+                </ButtonBase>
+              </WithStyles(ButtonBase)>
+            </Button>
+          </WithStyles(Button)>
+        </div>
+      </div>
+    </form>
+  </ReactFinalForm>
+</ProfileEdit>
+`;
