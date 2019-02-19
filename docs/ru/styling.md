@@ -46,7 +46,7 @@ export type StylesProps = WithStyles<typeof styles>;
 
 Файл `MyComponent.tsx`:
 ```typescript
-import * as React from 'react';
+import React from 'react';
 import { provideStyles, StylesProps } from './MyComponent.style';
 
 interface IProps {

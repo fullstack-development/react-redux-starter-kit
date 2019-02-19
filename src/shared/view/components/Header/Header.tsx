@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
@@ -10,10 +10,10 @@ interface IProps {
 
 class Header extends React.PureComponent<IProps & StylesProps> {
   public render() {
-    const { children } = this.props;
+    const { children, classes } = this.props;
 
     return (
-      <AppBar position="static">
+      <AppBar position="static" className={classes.root}>
         <Toolbar>
           {children}
         </Toolbar>

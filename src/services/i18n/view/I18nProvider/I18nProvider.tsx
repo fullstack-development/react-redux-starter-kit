@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { bind } from 'decko';
-import * as Polyglot from 'node-polyglot';
+import Polyglot from 'node-polyglot';
 
 import { withProps } from 'shared/helpers/react';
 

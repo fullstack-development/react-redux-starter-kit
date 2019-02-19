@@ -1,7 +1,7 @@
 
 declare module 'react-jss/lib/injectSheet' {
-  import * as React from 'react';
-  import * as CSS from 'csstype';
+  import React from 'react';
+  import CSS from 'csstype';
   import { WithTheme, Theme } from 'theming';
   import { ConsistentWith, Overwrite } from '_helpers';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as R from 'ramda';
 import { MergeRight } from '_helpers';
 import NumberFormat, { NumberFormatProps, NumberFormatValues } from 'react-number-format';

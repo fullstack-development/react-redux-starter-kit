@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { bind } from 'decko';
 
 import { Lang, ITranslateProps } from '../../namespace';

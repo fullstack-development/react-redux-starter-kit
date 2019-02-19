@@ -27,7 +27,8 @@
     "strictFunctionTypes": false,
     "strictBindCallApply": true,
     "sourceMap": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*",

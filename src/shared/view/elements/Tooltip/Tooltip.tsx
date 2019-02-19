@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import MuiTooltip, { TooltipProps } from '@material-ui/core/Tooltip';
 
 import { StylesProps, provideStyles } from './Tooltip.styles';

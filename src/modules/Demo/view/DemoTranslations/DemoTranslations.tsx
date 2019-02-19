@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { withI18n, ITranslateProps, tKeys, LanguageSelector } from 'services/i18n';
 
