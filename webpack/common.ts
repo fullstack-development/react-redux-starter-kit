@@ -19,7 +19,7 @@ import getEnvParams from '../src/core/getEnvParams';
 
 export type BuildType = 'dev' | 'prod' | 'server';
 
-const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
+const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode } = getEnvParams();
 
 const threadLoader: webpack.Loader[] = (() => {
   if (process.env.THREADED === 'true') {
@@ -27,7 +27,7 @@ const threadLoader: webpack.Loader[] = (() => {
       workers: require('os').cpus().length - 1,
       poolTimeout: withHot ? Infinity : 2000,
     };
-    threadLoaderLib.warmup(workerPool, [
+    isWatchMode && threadLoaderLib.warmup(workerPool, [
       'babel-loader',
       'ts-loader',
       'postcss-loader',
@@ -90,24 +90,25 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
     test: /\.tsx?$/,
     use:
       threadLoader
-      .concat(withHot && type === 'dev' ? {
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          plugins: [
-            'react-hot-loader/babel',
-            'syntax-dynamic-import',
-          ],
-        },
-      } : [])
-      .concat({
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-          happyPackMode: true,
-          logLevel: 'error',
-        },
-      }),
+        .concat(withHot && type === 'dev' ? {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            cacheDirectory: true,
+            plugins: [
+              'react-hot-loader/babel',
+              'syntax-dynamic-import',
+            ],
+          },
+        } : [])
+        .concat({
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            happyPackMode: true,
+            logLevel: 'error',
+          },
+        }),
   },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,

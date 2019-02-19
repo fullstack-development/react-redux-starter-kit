@@ -1,5 +1,6 @@
+import React from 'react';
 import { rule } from 'shared/helpers/style';
-import { withStyles } from './jss';
+import { withStyles, WithStyles } from './jss';
 
 const styles = {
   '@global': rule({
@@ -18,4 +19,12 @@ const styles = {
   }),
 };
 
-export default withStyles(styles)();
+type StylesProps = WithStyles<typeof styles>;
+
+class BaseStyles extends React.Component<{ children: React.ReactNode } & StylesProps> {
+  public render() {
+    return this.props.children;
+  }
+}
+
+export default withStyles(styles)(BaseStyles);

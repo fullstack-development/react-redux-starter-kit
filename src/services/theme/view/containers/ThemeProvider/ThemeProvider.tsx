@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
-import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 
-import { BaseStyles, Theme } from 'shared/styles';
+import { Theme } from 'shared/styles';
 import { IAppReduxState } from 'shared/types/app';
 
 import { UITheme } from '../../../namespace';
@@ -42,8 +41,6 @@ class ThemeProvider extends React.Component<Props & RouteComponentProps, IState>
 
     return (
       <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
-        <CssBaseline />
-        <BaseStyles />
         {children}
       </MuiThemeProvider>
     );
