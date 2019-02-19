@@ -1,4 +1,4 @@
-import * as Polyglot from 'node-polyglot';
+import Polyglot from 'node-polyglot';
 
 type CustomTranslateFunction = (phrase: IPhraseWithOptions) => string;
 interface IPhraseWithOptions {

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { provideStyles, StylesProps } from './RowsLayout.style';
 import Grid from '@material-ui/core/Grid/Grid';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
 
 import { StylesProps, provideStyles } from './CircleProgressBar.style';

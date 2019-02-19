@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Typography, FormControlLabel, Radio, Grid } from 'shared/view/elements';
 import { RadioGroupInputField } from 'shared/view/form';

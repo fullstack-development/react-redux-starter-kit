@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Typography, Grid } from 'shared/view/elements';
 import { CheckboxInputField } from 'shared/view/form';

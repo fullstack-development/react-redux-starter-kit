@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as Polyglot from 'node-polyglot';
+import React from 'react';
+import Polyglot from 'node-polyglot';
 
 import buildTranslationKeys from './helpers/buildTranslationKeys';
 
