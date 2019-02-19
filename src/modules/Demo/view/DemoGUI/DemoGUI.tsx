@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 
 import { Button, Typography, CircleProgressBar, Grid } from 'shared/view/elements';

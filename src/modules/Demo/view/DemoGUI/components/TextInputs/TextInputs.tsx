@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { Typography, MenuItem, Grid } from 'shared/view/elements';
 import { TextInputField, MaskedInputField, NumberInputField } from 'shared/view/form';

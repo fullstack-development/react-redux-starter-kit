@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import * as express from 'express';
+import express from 'express';
 import clientConfig from '../webpack/isomorphic/client.config';
 import serverConfig from '../webpack/isomorphic/server.config';
 import { startDevelopmentMode, startProductionMode } from './starters';

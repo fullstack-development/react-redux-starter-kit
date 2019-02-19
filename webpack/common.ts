@@ -1,20 +1,20 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import * as CircularDependencyPlugin from 'circular-dependency-plugin';
+import path from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import * as threadLoaderLib from 'thread-loader';
-import * as FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import threadLoaderLib from 'thread-loader';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 
-import * as postcssReporter from 'postcss-reporter';
-import * as postcssEasyImport from 'postcss-easy-import';
-import * as postcssSCSS from 'postcss-scss';
-import * as autoprefixer from 'autoprefixer';
-import * as stylelint from 'stylelint';
-import * as doiuse from 'doiuse';
+import postcssReporter from 'postcss-reporter';
+import postcssEasyImport from 'postcss-easy-import';
+import postcssSCSS from 'postcss-scss';
+import autoprefixer from 'autoprefixer';
+import stylelint from 'stylelint';
+import doiuse from 'doiuse';
 
 import getEnvParams from '../src/core/getEnvParams';
 

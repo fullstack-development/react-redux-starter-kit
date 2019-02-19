@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Field, FieldRenderProps, FieldProps as RFFieldProps } from 'react-final-form';
 import { Omit, MergeRight } from '_helpers';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { rule } from 'shared/helpers/style';
 import { withStyles, WithStyles } from './jss';
 

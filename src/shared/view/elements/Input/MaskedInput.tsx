@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as R from 'ramda';
 import { GetProps } from '_helpers';
 import ReactTextMask from 'react-text-mask';

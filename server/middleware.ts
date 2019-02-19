@@ -1,7 +1,7 @@
-import * as cookieParser from 'cookie-parser';
-import * as compression from 'compression';
-import * as express from 'express';
-import * as path from 'path';
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import express from 'express';
+import path from 'path';
 
 export default function middleware(app: express.Express) {
   app.use(compression());
