@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Omit } from '_helpers';
 
 function withProps<P extends Partial<WP>, WP extends {}>(

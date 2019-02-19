@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
 import { App } from 'core/App';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as bootstrapper from 'react-async-bootstrapper';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import bootstrapper from 'react-async-bootstrapper';
 import configureApp from 'core/configureApp';
 
 import { AppContainer } from 'react-hot-loader';

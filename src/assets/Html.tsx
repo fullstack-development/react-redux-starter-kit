@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as serialize from 'serialize-javascript';
+import React from 'react';
+import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
-import * as redux from 'redux';
+import redux from 'redux';
 import { renderToString } from 'react-dom/server';
 
 import { IAssets } from 'shared/types/app';

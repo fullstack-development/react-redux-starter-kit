@@ -46,7 +46,7 @@ export { loadEntry } from './loader';
 С помощью HOC'а `featureConnect` можно упростить процесс получения данных фичи и подключения фичи к redux-стору. Использовать его можно только в модулях. На вход принимает мап-объект с лоадерами интересующих нас фич и react-компонент, ключи этого объекта должны совпадать с ключами пропсов оборачиваемого react-компонента. После успешной загрузки фич они будут автоматически подключены к redux-стору и объекты с данными фич будут прокинуты в оборачиваемый react-компонент. Также ему можно передать прелоадер, который будет отображаться во время загрузки фич.
 
 ```typescript
-import * as React from 'react';
+import React from 'react';
 import { featureConnect } from 'core';
 
 import { RouteComponentProps } from 'react-router-dom';
@@ -107,7 +107,7 @@ export { IContainerTypes };
 Пример использования:
 
 ```typescript
-import * as React from 'react';
+import React from 'react';
 import { IContainerTypes, containersProvider } from 'core';
 
 interface IProps {
