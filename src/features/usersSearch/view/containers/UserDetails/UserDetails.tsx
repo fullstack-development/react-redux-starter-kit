@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import block from 'bem-cn';
 import { bind } from 'decko';
 import { connect } from 'react-redux';

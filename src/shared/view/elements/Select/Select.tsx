@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button } from 'shared/view/elements';
 import Dialog from '../../Dialog/Dialog';
 

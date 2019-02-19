@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import block from 'bem-cn';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 

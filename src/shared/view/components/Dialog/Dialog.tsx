@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import block from 'bem-cn';
 import Dialog, { DialogProps } from '@material-ui/core/Dialog';
 import Typography from '@material-ui/core/Typography';
