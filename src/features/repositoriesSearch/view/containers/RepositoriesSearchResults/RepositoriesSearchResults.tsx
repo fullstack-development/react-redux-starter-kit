@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
-import { bind } from 'decko';
 
 import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
@@ -14,10 +13,6 @@ import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
 import { RepositoryPreview } from '../../components';
 import './RepositoriesSearchResults.scss';
-
-interface IState {
-  displayedRepositoryOwner: string | null;
-}
 
 interface IOwnProps {
   searchOptions: IRepositoriesSearchFormFields;
@@ -53,61 +48,45 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 
 const b = block('repositories-search-results');
 
-class RepositoriesSearchResults extends React.PureComponent<IProps, IState> {
-  public state: IState = {
-    displayedRepositoryOwner: null,
-  };
+function RepositoriesSearchResults(props: IProps) {
+  const [displayedRepositoryOwner, setDisplayedRepositoryOwner] = useState<string | null>(null);
+  const { repositories, UserDetails, paginationState: { totalPages, page } } = props;
 
-  public render() {
-    const { repositories, UserDetails } = this.props;
-    const { displayedRepositoryOwner } = this.state;
-    return (
-      <div className={b()}>
-        {repositories.map(this.renderRepositoryPreview)}
-        {this.renderPagination()}
-        {displayedRepositoryOwner &&
-          <UserDetails username={displayedRepositoryOwner} onClose={this.handleUserDetailsClose} />
-        }
-      </div>
-    );
-  }
-
-  private renderPagination() {
-    const { paginationState: { page, totalPages } } = this.props;
-    return (
+  return (
+    <div className={b()}>
+      {repositories.map(renderRepositoryPreview)}
       <div className={b('pagination')}>
         <PaginationControls
           totalPages={totalPages}
           currentPage={page}
-          onPageRequest={this.handlePageRequest}
+          onPageRequest={handlePageRequest}
         />
       </div>
-    );
-  }
+      {displayedRepositoryOwner &&
+        <UserDetails username={displayedRepositoryOwner} onClose={handleUserDetailsClose} />
+      }
+    </div>
+  );
 
-  @bind
-  private renderRepositoryPreview(repository: IRepository) {
+  function renderRepositoryPreview(repository: IRepository) {
     return (
       <div className={b('repository-preview')} key={repository.id}>
-        <RepositoryPreview repository={repository} onOwnerClick={this.handleRepositoryOwnerClick}/>
+        <RepositoryPreview repository={repository} onOwnerClick={handleRepositoryOwnerClick}/>
       </div>
     );
   }
 
-  @bind
-  private handleRepositoryOwnerClick(username: string) {
-    this.setState({ displayedRepositoryOwner: username });
+  function handleRepositoryOwnerClick(username: string) {
+    setDisplayedRepositoryOwner(username);
   }
 
-  @bind
-  private handleUserDetailsClose() {
-    this.setState({ displayedRepositoryOwner: null });
+  function handleUserDetailsClose() {
+    setDisplayedRepositoryOwner(null);
   }
 
-  @bind
-  private handlePageRequest(page: number) {
-    const { searchRepositories, searchOptions } = this.props;
-    searchRepositories({ searchOptions, page });
+  function handlePageRequest(pageNumber: number) {
+    const { searchRepositories, searchOptions } = props;
+    searchRepositories({ searchOptions, page: pageNumber });
   }
 }
 
