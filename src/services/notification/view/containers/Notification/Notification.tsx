@@ -22,25 +22,15 @@ type IProps = IStateProps;
 
 const b = block('notification');
 
-class Notification extends React.PureComponent<IProps> {
-
-  public render() {
-    const { notification } = this.props;
-    return (
-      notification && this.renderContent(notification)
-    );
-  }
-
-  private renderContent(notification: INotification) {
-    const { kind, text } = notification;
-    return (
-      <div className={b({ kind })}>
-        <div className={b('text')}>
-          {text}
-        </div>
+function Notification(props: IProps) {
+  const { notification } = props;
+  return notification && (
+    <div className={b({ kind: notification.kind })}>
+      <div className={b('text')}>
+        {notification.text}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default connect(mapState)(Notification);

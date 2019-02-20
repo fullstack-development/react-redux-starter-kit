@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 import block from 'bem-cn';
-import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IGithubUser } from 'shared/types/models';
@@ -14,10 +13,6 @@ import { UserAvatarsWall } from '../../components';
 import { actions, selectors } from './../../../redux';
 import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
-
-interface IState {
-  displayedUser: string | null;
-}
 
 interface IOwnProps {
   searchOptions: IUsersSearchFormFields;
@@ -49,50 +44,35 @@ function mapDispatch(dispatch: Dispatch) {
 
 const b = block('users-search-results');
 
-class UsersSearchResults extends React.PureComponent<IProps, IState> {
-  public state: IState = {
-    displayedUser: null,
-  };
+function UsersSearchResults(props: IProps) {
+  const [displayedUser, setDisplayedUser] = useState<string | null>(null);
+  const { users, paginationState: { page, totalPages } } = props;
 
-  public render() {
-    const { users } = this.props;
-    const { displayedUser } = this.state;
-    return (
-      <div className={b()}>
-        <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
-        {this.renderPagination()}
-        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose}/>}
-      </div>
-    );
-  }
-
-  private renderPagination() {
-    const { paginationState: { totalPages, page } } = this.props;
-    return (
+  return (
+    <div className={b()}>
+      <UserAvatarsWall users={users} onAvatarClick={handleUserAvatarClick} />
       <div className={b('pagination')}>
         <PaginationControls
           totalPages={totalPages}
           currentPage={page}
-          onPageRequest={this.handlePageRequest}
+          onPageRequest={handlePageRequest}
         />
       </div>
-    );
+      {displayedUser && <UserDetails username={displayedUser} onClose={handleUserDetailsClose}/>}
+    </div>
+  );
+
+  function handlePageRequest(pageNumber: number) {
+    const { searchUser, searchOptions } = props;
+    searchUser({ searchOptions, page: pageNumber });
   }
 
-  @bind
-  private handlePageRequest(page: number) {
-    const { searchUser, searchOptions } = this.props;
-    searchUser({ searchOptions, page });
+  function handleUserAvatarClick({ username }: IGithubUser) {
+    setDisplayedUser(username);
   }
 
-  @bind
-  private handleUserAvatarClick({ username }: IGithubUser) {
-    this.setState({ displayedUser: username });
-  }
-
-  @bind
-  private handleUserDetailsClose() {
-    this.setState({ displayedUser: null });
+  function handleUserDetailsClose() {
+    setDisplayedUser(null);
   }
 }
 
