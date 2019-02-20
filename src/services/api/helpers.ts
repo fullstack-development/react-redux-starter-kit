@@ -48,18 +48,21 @@ function optionalParam(name: string, value?: string) {
   <https://api.github.com/search/users?q=asd&per_page=30&page=1>; rel="first"
 */
 export function getTotalPagesFromLinkHeader(link?: string): number {
-  if (link !== void 0) {
-    const lastPageMatch = link.match(/&page=(\d+)>; rel="last"/);
-    if (lastPageMatch) {
-      return Number(lastPageMatch[1]);
-    } else {
-      const prevPageMatch = link.match(/&page=(\d+)>; rel="prev"/);
-      if (prevPageMatch) {
-        return Number(prevPageMatch[1]) + 1;
-      } else {
-        console.error(`Error while trying to get total pages from ${link}`);
-      }
-    }
+  if (link === void 0) {
+    console.error(`Can't get total pages (no Link header provided)`);
+    return 0;
   }
+
+  const lastPageMatch = link.match(/&page=(\d+)>; rel="last"/);
+  if (lastPageMatch) {
+    return Number(lastPageMatch[1]);
+  }
+
+  const prevPageMatch = link.match(/&page=(\d+)>; rel="prev"/);
+  if (prevPageMatch) {
+    return Number(prevPageMatch[1]) + 1;
+  }
+
+  console.error(`Error while trying to get total pages from ${link}`);
   return 0;
 }
