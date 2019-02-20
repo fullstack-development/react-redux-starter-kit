@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
@@ -38,21 +39,24 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function UsersSearchForm(props: IProps) {
-  const { isUsersSearchRequesting } = props;
-  return (
-    <SearchForm<IUsersSearchFormFields>
-      isSearchRequesting={isUsersSearchRequesting}
-      searchInputName={fieldNames.searchString}
-      onSubmit={handleFormSubmit}
-      initialValues={formInitialValues}
-      renderSettings={UsersSearchSettings}
-      resetSearchResults={props.resetSearchResults}
-    />
-  );
+class UsersSearchForm extends React.PureComponent<IProps> {
+  public render() {
+    const { isUsersSearchRequesting, resetSearchResults } = this.props;
+    return (
+      <SearchForm<IUsersSearchFormFields>
+        isSearchRequesting={isUsersSearchRequesting}
+        searchInputName={fieldNames.searchString}
+        onSubmit={this.handleFormSubmit}
+        initialValues={formInitialValues}
+        renderSettings={UsersSearchSettings}
+        resetSearchResults={resetSearchResults}
+      />
+    );
+  }
 
-  function handleFormSubmit(formValues: IUsersSearchFormFields) {
-    const { searchUser, onSubmit } = props;
+  @bind
+  private handleFormSubmit(formValues: IUsersSearchFormFields) {
+    const { searchUser, onSubmit } = this.props;
     searchUser({ searchOptions: formValues, page: 1 });
     onSubmit(formValues);
   }

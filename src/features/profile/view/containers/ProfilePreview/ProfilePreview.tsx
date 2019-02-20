@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
+import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
@@ -8,6 +9,10 @@ import { IProfile } from 'shared/types/models';
 import { ProfileAvatar } from '../../components';
 import { selectors } from '../../../redux';
 import './ProfilePreview.scss';
+
+interface IState {
+  isOpen: boolean;
+}
 
 interface IOwnProps {
   onEditClick(): void;
@@ -27,55 +32,64 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function ProfilePreview(props: IProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  useEffect(documentClickEffect);
+class ProfilePreview extends React.PureComponent<IProps, IState> {
+  public state: IState = {
+    isOpen: false,
+  };
 
-  const { profile: { avatarURL, name, nickname, age, bio }, onEditClick } = props;
-  const blockRef = React.useRef<HTMLDivElement | null>(null);
+  private blockRef = React.createRef<HTMLDivElement>();
 
-  return (
-    <div className={b()} ref={blockRef}>
-      <div className={b('avatar')} onClick={handleAvatarClick}>
-        <ProfileAvatar avatarURL={avatarURL} size="small" />
-      </div>
-      <div className={b('info', { open: isOpen })}>
-        <div className={b('main-info')}>
-          <div className={b('name')}>
-            {name}
-          </div>
-          <div className={b('nickname-age')}>
-            <div className={b('nickname')}>
-              {nickname}
-            </div>
-            <div className={b('age')}>
-              {age} y.o.
-            </div>
-          </div>
-        </div>
-        <div className={b('bio')}>
-          {bio}
-        </div>
-        <div className={b('edit')} onClick={onEditClick}>
-          Edit
-        </div>
-      </div>
-    </div>
-  );
-
-  function documentClickEffect() {
-    document.addEventListener('click', handleDocumentClick);
-    return () => document.removeEventListener('click', handleDocumentClick);
+  public componentDidMount() {
+    document.addEventListener('click', this.handleDocumentClick);
   }
 
-  function handleDocumentClick(e: MouseEvent) {
-    if (blockRef.current !== null && !blockRef.current.contains(e.target as Node)) {
-      setIsOpen(false);
+  public componentWillUnmount() {
+    document.removeEventListener('click', this.handleDocumentClick);
+  }
+
+  public render() {
+    const { profile: { avatarURL, name, nickname, age, bio }, onEditClick } = this.props;
+    const { isOpen } = this.state;
+    return (
+      <div className={b()} ref={this.blockRef}>
+        <div className={b('avatar')} onClick={this.handleAvatarClick}>
+          <ProfileAvatar avatarURL={avatarURL} size="small" />
+        </div>
+        <div className={b('info', { open: isOpen })}>
+          <div className={b('main-info')}>
+            <div className={b('name')}>
+              {name}
+            </div>
+            <div className={b('nickname-age')}>
+              <div className={b('nickname')}>
+                {nickname}
+              </div>
+              <div className={b('age')}>
+                {age} y.o.
+              </div>
+            </div>
+          </div>
+          <div className={b('bio')}>
+            {bio}
+          </div>
+          <div className={b('edit')} onClick={onEditClick}>
+            Edit
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  @bind
+  private handleDocumentClick(e: MouseEvent) {
+    if (this.blockRef.current !== null && !this.blockRef.current.contains(e.target as Node)) {
+      this.setState({ isOpen: false });
     }
   }
 
-  function handleAvatarClick() {
-    setIsOpen(!isOpen);
+  @bind
+  private handleAvatarClick() {
+    this.setState({ isOpen: true });
   }
 
 }

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
+import { bind } from 'decko';
 
 import { isRequired } from 'shared/validators';
 import { TextInputField } from 'shared/view/form';
@@ -9,6 +10,10 @@ import { Button } from 'shared/view/elements';
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
 import './SearchForm.scss';
+
+interface IState {
+  isSettingsDialogOpen: boolean;
+}
 
 interface IProps<FormFields> {
   isSearchRequesting: boolean;
@@ -21,21 +26,30 @@ interface IProps<FormFields> {
 
 const b = block('search-form');
 
-function SearchForm<T extends object>(props: IProps<T>) {
-  const { onSubmit, initialValues, resetSearchResults } = props;
-  const [isSettingsDialogOpen, toggleSettingsDialog] = useState(false);
-  useEffect(() => resetSearchResults, []);
+class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState> {
+  public state: IState = {
+    isSettingsDialogOpen: false,
+  };
 
-  return (
-    <Form
-      onSubmit={onSubmit}
-      initialValues={initialValues}
-      render={renderForm}
-    />
-  );
+  public componentWillUnmount() {
+    this.props.resetSearchResults();
+  }
 
-  function renderForm({ handleSubmit }: FormRenderProps) {
-    const { isSearchRequesting, renderSettings, searchInputName } = props;
+  public render() {
+    const { onSubmit, initialValues } = this.props;
+    return (
+      <Form
+        onSubmit={onSubmit}
+        initialValues={initialValues}
+        render={this.renderForm}
+      />
+    );
+  }
+
+  @bind
+  private renderForm({ handleSubmit }: FormRenderProps) {
+    const { isSearchRequesting, renderSettings, searchInputName } = this.props;
+    const { isSettingsDialogOpen } = this.state;
     return (
       <form onSubmit={handleSubmit} className={b()}>
         <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
@@ -51,14 +65,14 @@ function SearchForm<T extends object>(props: IProps<T>) {
             <div className={b('settings')}>
               <Button
                 variant="outlined"
-                onClick={handleSettingsButtonClick}
+                onClick={this.handleSettingsButtonClick}
                 disabled={isSearchRequesting}
               >
                 Settings
               </Button>
               <SearchSettingsDialog
                 isOpen={isSettingsDialogOpen}
-                onClose={handleSettingsDialogClose}
+                onClose={this.handleSettingsDialogClose}
                 renderContent={renderSettings}
               />
             </div>
@@ -68,12 +82,14 @@ function SearchForm<T extends object>(props: IProps<T>) {
     );
   }
 
-  function handleSettingsButtonClick() {
-    toggleSettingsDialog(true);
+  @bind
+  private handleSettingsButtonClick() {
+    this.setState({ isSettingsDialogOpen: true });
   }
 
-  function handleSettingsDialogClose() {
-    toggleSettingsDialog(false);
+  @bind
+  private handleSettingsDialogClose() {
+    this.setState({ isSettingsDialogOpen: false });
   }
 }
 

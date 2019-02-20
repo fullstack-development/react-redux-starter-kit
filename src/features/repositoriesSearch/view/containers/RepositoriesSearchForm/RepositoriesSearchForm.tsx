@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
@@ -38,20 +39,23 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function RepositoriesSearchForm(props: IProps) {
-  const { isRepositoriesSearchRequesting, resetSearchResults } = props;
-  return (
-    <SearchForm<IRepositoriesSearchFormFields>
-      searchInputName={fieldNames.searchString}
-      isSearchRequesting={isRepositoriesSearchRequesting}
-      onSubmit={handleFormSubmit}
-      resetSearchResults={resetSearchResults}
-      renderSettings={RepositoriesSearchSettings}
-    />
-  );
+class RepositoriesSearchForm extends React.PureComponent<IProps> {
+  public render() {
+    const { isRepositoriesSearchRequesting, resetSearchResults } = this.props;
+    return (
+      <SearchForm<IRepositoriesSearchFormFields>
+        searchInputName={fieldNames.searchString}
+        isSearchRequesting={isRepositoriesSearchRequesting}
+        onSubmit={this.handleFormSubmit}
+        resetSearchResults={resetSearchResults}
+        renderSettings={RepositoriesSearchSettings}
+      />
+    );
+  }
 
-  function handleFormSubmit(formValues: IRepositoriesSearchFormFields) {
-    const { searchRepositories, onSubmit } = props;
+  @bind
+  private handleFormSubmit(formValues: IRepositoriesSearchFormFields) {
+    const { searchRepositories, onSubmit } = this.props;
     searchRepositories({ searchOptions: formValues, page: 1 });
     onSubmit(formValues);
   }

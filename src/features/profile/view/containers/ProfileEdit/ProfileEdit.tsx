@@ -3,6 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { Form, FormRenderProps } from 'react-final-form';
+import { bind } from 'decko';
 
 import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
@@ -44,17 +45,21 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 const fieldNames = makeFormFieldNames<IProfileEditFormFields>(['age', 'avatarURL', 'bio', 'name', 'nickname']);
 const b = block('profile-edit');
 
-function ProfileEdit(props: IProps) {
-  return (
-    <Form
-      onSubmit={handleFormSubmit}
-      initialValues={props.profile}
-      render={renderForm}
-    />
-  );
+class ProfileEdit extends React.PureComponent<IProps> {
+  public render() {
+    const { profile } = this.props;
+    return (
+      <Form
+        onSubmit={this.handleFormSubmit}
+        initialValues={profile}
+        render={this.renderForm}
+      />
+    );
+  }
 
-  function renderForm({ handleSubmit }: FormRenderProps) {
-    const { profile: { avatarURL } } = props;
+  @bind
+  private renderForm({ handleSubmit }: FormRenderProps) {
+    const { profile: { avatarURL } } = this.props;
     return (
       <form onSubmit={handleSubmit} className={b()}>
         <div className={b('avatar')}>
@@ -81,8 +86,9 @@ function ProfileEdit(props: IProps) {
     );
   }
 
-  function handleFormSubmit(values: IProfileEditFormFields) {
-    const { saveProfile, setNotification } = props;
+  @bind
+  private handleFormSubmit(values: IProfileEditFormFields) {
+    const { saveProfile, setNotification } = this.props;
     saveProfile(values);
     setNotification({ kind: 'info', text: 'User data was saved.' });
   }
