@@ -1,6 +1,5 @@
 import React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
@@ -43,67 +42,54 @@ function mapDispatch(dispatch: Dispatch): IActionProps {
 }
 
 const b = block('user-details');
+const avatarSize = 230;
 
-class UserDetails extends React.PureComponent<IProps> {
-  private avatarSize = 230;
-
-  public render() {
-    const { isLoadUserDetailsRequesting } = this.props;
-    return (
-      <Dialog
-        open={true}
-        title="User details"
-        onEnter={this.handleDialogEnter}
-        onClose={this.handleDialogClose}
-      >
-        <div className={b()}>
-          <Preloader size={80} isShown={isLoadUserDetailsRequesting} backgroundColor="#fff" />
-          {this.renderContent()}
-        </div>
-      </Dialog>
-    );
-  }
-
-  private renderContent() {
-    const { userDetails } = this.props;
-    if (userDetails) {
-      return (
-        <>
-          {this.renderMain(userDetails)}
-          {this.renderAttributes(userDetails)}
-        </>
-      );
-    }
-    return null;
-  }
-
-  private renderMain(userDetails: IDetailedGithubUser) {
-    const { htmlURL, avatarURL, realName, username, location } = userDetails;
-    return (
-      <a href={htmlURL} className={b('main')} target="_blank">
-        <img
-          className={b('avatar')}
-          src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
-        />
-        <Typography variant="h5">{realName}</Typography>
-        <Typography variant="subtitle1">{username}</Typography>
-        {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
-      </a>
-    );
-  }
-
-  private renderAttributes(userDetails: IDetailedGithubUser) {
-    const { followersNumber, followingNumber, reposNumber, htmlURL } = userDetails;
-    return (
-      <div className={b('attributes')}>
-        {this.renderAttribute(`${htmlURL}/followers`, 'Followers', followersNumber)}
-        {this.renderAttribute(`${htmlURL}/following`, 'Following', followingNumber)}
-        {this.renderAttribute(`${htmlURL}/repositories`, 'Repositories', reposNumber)}
+function UserDetails(props: IProps) {
+  const { isLoadUserDetailsRequesting, userDetails } = props;
+  return (
+    <Dialog
+      open={true}
+      title="User details"
+      onEnter={handleDialogEnter}
+      onClose={handleDialogClose}
+    >
+      <div className={b()}>
+        <Preloader size={80} isShown={isLoadUserDetailsRequesting} backgroundColor="#fff" />
+        {renderContent()}
       </div>
-    );
-  }
+    </Dialog>
+  );
 
-  private renderAttribute(URL: string, title: string, value: number) {
+  function renderContent() {
+      if (userDetails) {
+        const {
+          htmlURL, avatarURL, realName, username, location,
+          followersNumber, followingNumber, reposNumber,
+        } = userDetails;
+        return (
+          <>
+            <a href={htmlURL} className={b('main')} target="_blank">
+              <img
+                className={b('avatar')}
+                src={injectSizeToAvatarURL(avatarURL, avatarSize)}
+              />
+              <Typography variant="h5">{realName}</Typography>
+              <Typography variant="subtitle1">{username}</Typography>
+              {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
+            </a>
+            <div className={b('attributes')}>
+              {renderAttribute(`${htmlURL}/followers`, 'Followers', followersNumber)}
+              {renderAttribute(`${htmlURL}/following`, 'Following', followingNumber)}
+              {renderAttribute(`${htmlURL}/repositories`, 'Repositories', reposNumber)}
+            </div>
+          </>
+        );
+      }
+
+      return null;
+    }
+
+  function renderAttribute(URL: string, title: string, value: number) {
     return (
       <a href={URL} target="_blank" className={b('attribute')}>
         {title}
@@ -112,17 +98,13 @@ class UserDetails extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
-  private handleDialogEnter() {
-    const { username, loadUserDetails } = this.props;
-    if (username) {
-      loadUserDetails(username);
-    }
+  function handleDialogEnter() {
+    const { username, loadUserDetails } = props;
+    loadUserDetails(username);
   }
 
-  @bind
-  private handleDialogClose() {
-    const { onClose } = this.props;
+  function handleDialogClose() {
+    const { onClose } = props;
     onClose();
   }
 }
