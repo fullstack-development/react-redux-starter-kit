@@ -15,15 +15,15 @@ function SearchSettingsDialog(props: IProps)  {
       title="Search settings"
       onClose={onClose}
       open={isOpen}
-      renderActions={renderActions}
     >
-      {renderContent()}
+      <Dialog.Content>
+        {renderContent()}
+      </Dialog.Content>
+      <Dialog.Actions>
+        <Button variant="outlined" onClick={onClose}>Ok</Button>
+      </Dialog.Actions>
     </Dialog>
   );
-
-  function renderActions() {
-    return <Button variant="outlined" onClick={onClose}>Ok</Button>;
-  }
 }
 
 export default SearchSettingsDialog;

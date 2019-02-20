@@ -53,10 +53,12 @@ function UserDetails(props: IProps) {
       onEnter={handleDialogEnter}
       onClose={handleDialogClose}
     >
-      <div className={b()}>
-        <Preloader size={80} isShown={isLoadUserDetailsRequesting} backgroundColor="#fff" />
-        {renderContent()}
-      </div>
+      <Dialog.Content>
+        <div className={b()}>
+          <Preloader size={80} isShown={isLoadUserDetailsRequesting} backgroundColor="#fff" />
+          {renderContent()}
+        </div>
+      </Dialog.Content>
     </Dialog>
   );
 
