@@ -16,6 +16,9 @@ const styles = {
     'html, body, #root': {
       height: '100%',
     },
+    '*': {
+      boxSizing: 'border-box',
+    },
   }),
 };
 
