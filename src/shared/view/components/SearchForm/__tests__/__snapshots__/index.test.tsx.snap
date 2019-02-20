@@ -1,0 +1,767 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchForm component should match snapshot 1`] = `
+<SearchForm
+  initialValues={
+    Object {
+      "search": "abc",
+    }
+  }
+  isSearchRequesting={false}
+  onSubmit={[MockFunction]}
+  renderSettings={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "isThrow": false,
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  resetSearchResults={[MockFunction]}
+  searchInputName="search"
+>
+  <ReactFinalForm
+    initialValues={
+      Object {
+        "search": "abc",
+      }
+    }
+    onSubmit={[MockFunction]}
+    render={[Function]}
+  >
+    <form
+      className="search-form"
+      onSubmit={[Function]}
+    >
+      <FieldWithComponent(TextInputField)
+        disabled={false}
+        name="search"
+        validate={[Function]}
+      >
+        <_class
+          component={[Function]}
+          disabled={false}
+          name="search"
+          validate={[Function]}
+        >
+          <Field
+            component={[Function]}
+            disabled={false}
+            format={[Function]}
+            name="search"
+            parse={[Function]}
+            reactFinalForm={
+              Object {
+                "batch": [Function],
+                "blur": [Function],
+                "change": [Function],
+                "focus": [Function],
+                "getFieldState": [Function],
+                "getRegisteredFields": [Function],
+                "getState": [Function],
+                "initialize": [Function],
+                "isValidationPaused": [Function],
+                "mutators": Object {},
+                "pauseValidation": [Function],
+                "registerField": [Function],
+                "reset": [Function],
+                "resumeValidation": [Function],
+                "setConfig": [Function],
+                "submit": [Function],
+                "subscribe": [Function],
+              }
+            }
+            validate={[Function]}
+          >
+            <TextInputField
+              disabled={false}
+              input={
+                Object {
+                  "name": "search",
+                  "onBlur": [Function],
+                  "onChange": [Function],
+                  "onFocus": [Function],
+                  "value": "abc",
+                }
+              }
+              meta={
+                Object {
+                  "active": false,
+                  "data": Object {},
+                  "dirty": false,
+                  "dirtySinceLastSubmit": false,
+                  "error": undefined,
+                  "initial": "abc",
+                  "invalid": false,
+                  "pristine": true,
+                  "submitError": undefined,
+                  "submitFailed": false,
+                  "submitSucceeded": false,
+                  "submitting": false,
+                  "touched": false,
+                  "valid": true,
+                  "visited": false,
+                }
+              }
+            >
+              <TextInput
+                disabled={false}
+                error={false}
+                helperText={false}
+                name="search"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                value="abc"
+              >
+                <TextField
+                  InputProps={
+                    Object {
+                      "endAdornment": undefined,
+                    }
+                  }
+                  disabled={false}
+                  error={false}
+                  fullWidth={true}
+                  helperText={false}
+                  name="search"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={false}
+                  select={false}
+                  value="abc"
+                  variant="standard"
+                >
+                  <WithStyles(FormControl)
+                    disabled={false}
+                    error={false}
+                    fullWidth={true}
+                    required={false}
+                    variant="standard"
+                  >
+                    <FormControl
+                      classes={
+                        Object {
+                          "fullWidth": "MuiFormControl-fullWidth-4",
+                          "marginDense": "MuiFormControl-marginDense-3",
+                          "marginNormal": "MuiFormControl-marginNormal-2",
+                          "root": "MuiFormControl-root-1",
+                        }
+                      }
+                      component="div"
+                      disabled={false}
+                      error={false}
+                      fullWidth={true}
+                      margin="none"
+                      required={false}
+                      variant="standard"
+                    >
+                      <div
+                        className="MuiFormControl-root-1 MuiFormControl-fullWidth-4"
+                      >
+                        <WithStyles(Input)
+                          fullWidth={true}
+                          name="search"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          value="abc"
+                        >
+                          <Input
+                            classes={
+                              Object {
+                                "disabled": "MuiInput-disabled-8",
+                                "error": "MuiInput-error-10",
+                                "focused": "MuiInput-focused-7",
+                                "formControl": "MuiInput-formControl-6",
+                                "fullWidth": "MuiInput-fullWidth-12",
+                                "input": "MuiInput-input-13",
+                                "inputMarginDense": "MuiInput-inputMarginDense-14",
+                                "inputMultiline": "MuiInput-inputMultiline-15",
+                                "inputType": "MuiInput-inputType-16",
+                                "inputTypeSearch": "MuiInput-inputTypeSearch-17",
+                                "multiline": "MuiInput-multiline-11",
+                                "root": "MuiInput-root-5",
+                                "underline": "MuiInput-underline-9",
+                              }
+                            }
+                            fullWidth={true}
+                            name="search"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            value="abc"
+                          >
+                            <WithStyles(WithFormControlContext(InputBase))
+                              classes={
+                                Object {
+                                  "disabled": "MuiInput-disabled-8",
+                                  "error": "MuiInput-error-10",
+                                  "focused": "MuiInput-focused-7",
+                                  "formControl": "MuiInput-formControl-6",
+                                  "fullWidth": "MuiInput-fullWidth-12",
+                                  "input": "MuiInput-input-13",
+                                  "inputMarginDense": "MuiInput-inputMarginDense-14",
+                                  "inputMultiline": "MuiInput-inputMultiline-15",
+                                  "inputType": "MuiInput-inputType-16",
+                                  "inputTypeSearch": "MuiInput-inputTypeSearch-17",
+                                  "multiline": "MuiInput-multiline-11",
+                                  "root": "MuiInput-root-5 MuiInput-underline-9",
+                                  "underline": null,
+                                }
+                              }
+                              fullWidth={true}
+                              inputComponent="input"
+                              multiline={false}
+                              name="search"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              type="text"
+                              value="abc"
+                            >
+                              <WithFormControlContext(InputBase)
+                                classes={
+                                  Object {
+                                    "adornedEnd": "MuiInputBase-adornedEnd-23",
+                                    "adornedStart": "MuiInputBase-adornedStart-22",
+                                    "disabled": "MuiInputBase-disabled-21 MuiInput-disabled-8",
+                                    "error": "MuiInputBase-error-24 MuiInput-error-10",
+                                    "focused": "MuiInputBase-focused-20 MuiInput-focused-7",
+                                    "formControl": "MuiInputBase-formControl-19 MuiInput-formControl-6",
+                                    "fullWidth": "MuiInputBase-fullWidth-27 MuiInput-fullWidth-12",
+                                    "input": "MuiInputBase-input-28 MuiInput-input-13",
+                                    "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-34",
+                                    "inputAdornedStart": "MuiInputBase-inputAdornedStart-33",
+                                    "inputMarginDense": "MuiInputBase-inputMarginDense-29 MuiInput-inputMarginDense-14",
+                                    "inputMultiline": "MuiInputBase-inputMultiline-30 MuiInput-inputMultiline-15",
+                                    "inputType": "MuiInputBase-inputType-31 MuiInput-inputType-16",
+                                    "inputTypeSearch": "MuiInputBase-inputTypeSearch-32 MuiInput-inputTypeSearch-17",
+                                    "marginDense": "MuiInputBase-marginDense-25",
+                                    "multiline": "MuiInputBase-multiline-26 MuiInput-multiline-11",
+                                    "root": "MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9",
+                                  }
+                                }
+                                fullWidth={true}
+                                inputComponent="input"
+                                multiline={false}
+                                name="search"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                type="text"
+                                value="abc"
+                              >
+                                <InputBase
+                                  classes={
+                                    Object {
+                                      "adornedEnd": "MuiInputBase-adornedEnd-23",
+                                      "adornedStart": "MuiInputBase-adornedStart-22",
+                                      "disabled": "MuiInputBase-disabled-21 MuiInput-disabled-8",
+                                      "error": "MuiInputBase-error-24 MuiInput-error-10",
+                                      "focused": "MuiInputBase-focused-20 MuiInput-focused-7",
+                                      "formControl": "MuiInputBase-formControl-19 MuiInput-formControl-6",
+                                      "fullWidth": "MuiInputBase-fullWidth-27 MuiInput-fullWidth-12",
+                                      "input": "MuiInputBase-input-28 MuiInput-input-13",
+                                      "inputAdornedEnd": "MuiInputBase-inputAdornedEnd-34",
+                                      "inputAdornedStart": "MuiInputBase-inputAdornedStart-33",
+                                      "inputMarginDense": "MuiInputBase-inputMarginDense-29 MuiInput-inputMarginDense-14",
+                                      "inputMultiline": "MuiInputBase-inputMultiline-30 MuiInput-inputMultiline-15",
+                                      "inputType": "MuiInputBase-inputType-31 MuiInput-inputType-16",
+                                      "inputTypeSearch": "MuiInputBase-inputTypeSearch-32 MuiInput-inputTypeSearch-17",
+                                      "marginDense": "MuiInputBase-marginDense-25",
+                                      "multiline": "MuiInputBase-multiline-26 MuiInput-multiline-11",
+                                      "root": "MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9",
+                                    }
+                                  }
+                                  fullWidth={true}
+                                  inputComponent="input"
+                                  muiFormControl={
+                                    Object {
+                                      "adornedStart": false,
+                                      "disabled": false,
+                                      "error": false,
+                                      "filled": true,
+                                      "focused": false,
+                                      "margin": "none",
+                                      "onBlur": [Function],
+                                      "onEmpty": [Function],
+                                      "onFilled": [Function],
+                                      "onFocus": [Function],
+                                      "required": false,
+                                      "variant": "standard",
+                                    }
+                                  }
+                                  multiline={false}
+                                  name="search"
+                                  onBlur={[Function]}
+                                  onChange={[Function]}
+                                  onFocus={[Function]}
+                                  type="text"
+                                  value="abc"
+                                >
+                                  <div
+                                    className="MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9 MuiInputBase-fullWidth-27 MuiInput-fullWidth-12 MuiInputBase-formControl-19 MuiInput-formControl-6"
+                                    onClick={[Function]}
+                                  >
+                                    <input
+                                      aria-invalid={false}
+                                      className="MuiInputBase-input-28 MuiInput-input-13"
+                                      disabled={false}
+                                      name="search"
+                                      onBlur={[Function]}
+                                      onChange={[Function]}
+                                      onFocus={[Function]}
+                                      required={false}
+                                      type="text"
+                                      value="abc"
+                                    />
+                                  </div>
+                                </InputBase>
+                              </WithFormControlContext(InputBase)>
+                            </WithStyles(WithFormControlContext(InputBase))>
+                          </Input>
+                        </WithStyles(Input)>
+                      </div>
+                    </FormControl>
+                  </WithStyles(FormControl)>
+                </TextField>
+              </TextInput>
+            </TextInputField>
+          </Field>
+        </_class>
+      </FieldWithComponent(TextInputField)>
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <WithStyles(Button)
+          disabled={false}
+          type="submit"
+          variant="outlined"
+        >
+          <Button
+            classes={
+              Object {
+                "colorInherit": "MuiButton-colorInherit-56",
+                "contained": "MuiButton-contained-46",
+                "containedPrimary": "MuiButton-containedPrimary-47",
+                "containedSecondary": "MuiButton-containedSecondary-48",
+                "disabled": "MuiButton-disabled-55",
+                "extendedFab": "MuiButton-extendedFab-53",
+                "fab": "MuiButton-fab-52",
+                "flat": "MuiButton-flat-40",
+                "flatPrimary": "MuiButton-flatPrimary-41",
+                "flatSecondary": "MuiButton-flatSecondary-42",
+                "focusVisible": "MuiButton-focusVisible-54",
+                "fullWidth": "MuiButton-fullWidth-60",
+                "label": "MuiButton-label-36",
+                "mini": "MuiButton-mini-57",
+                "outlined": "MuiButton-outlined-43",
+                "outlinedPrimary": "MuiButton-outlinedPrimary-44",
+                "outlinedSecondary": "MuiButton-outlinedSecondary-45",
+                "raised": "MuiButton-raised-49",
+                "raisedPrimary": "MuiButton-raisedPrimary-50",
+                "raisedSecondary": "MuiButton-raisedSecondary-51",
+                "root": "MuiButton-root-35",
+                "sizeLarge": "MuiButton-sizeLarge-59",
+                "sizeSmall": "MuiButton-sizeSmall-58",
+                "text": "MuiButton-text-37",
+                "textPrimary": "MuiButton-textPrimary-38",
+                "textSecondary": "MuiButton-textSecondary-39",
+              }
+            }
+            color="default"
+            component="button"
+            disableFocusRipple={false}
+            disabled={false}
+            fullWidth={false}
+            mini={false}
+            size="medium"
+            type="submit"
+            variant="outlined"
+          >
+            <WithStyles(ButtonBase)
+              className="MuiButton-root-35 MuiButton-outlined-43"
+              component="button"
+              disabled={false}
+              focusRipple={true}
+              focusVisibleClassName="MuiButton-focusVisible-54"
+              type="submit"
+            >
+              <ButtonBase
+                centerRipple={false}
+                className="MuiButton-root-35 MuiButton-outlined-43"
+                classes={
+                  Object {
+                    "disabled": "MuiButtonBase-disabled-62",
+                    "focusVisible": "MuiButtonBase-focusVisible-63",
+                    "root": "MuiButtonBase-root-61",
+                  }
+                }
+                component="button"
+                disableRipple={false}
+                disableTouchRipple={false}
+                disabled={false}
+                focusRipple={true}
+                focusVisibleClassName="MuiButton-focusVisible-54"
+                tabIndex="0"
+                type="submit"
+              >
+                <button
+                  className="MuiButtonBase-root-61 MuiButton-root-35 MuiButton-outlined-43"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onContextMenu={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onKeyUp={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseLeave={[Function]}
+                  onMouseUp={[Function]}
+                  onTouchEnd={[Function]}
+                  onTouchMove={[Function]}
+                  onTouchStart={[Function]}
+                  tabIndex="0"
+                  type="submit"
+                >
+                  <span
+                    className="MuiButton-label-36"
+                  >
+                    Search
+                  </span>
+                  <NoSsr
+                    defer={false}
+                    fallback={null}
+                  >
+                    <WithStyles(TouchRipple)
+                      center={false}
+                      innerRef={[Function]}
+                    >
+                      <TouchRipple
+                        center={false}
+                        classes={
+                          Object {
+                            "child": "MuiTouchRipple-child-84",
+                            "childLeaving": "MuiTouchRipple-childLeaving-85",
+                            "childPulsate": "MuiTouchRipple-childPulsate-86",
+                            "ripple": "MuiTouchRipple-ripple-81",
+                            "ripplePulsate": "MuiTouchRipple-ripplePulsate-83",
+                            "rippleVisible": "MuiTouchRipple-rippleVisible-82",
+                            "root": "MuiTouchRipple-root-80",
+                          }
+                        }
+                      >
+                        <TransitionGroup
+                          childFactory={[Function]}
+                          className="MuiTouchRipple-root-80"
+                          component="span"
+                          enter={true}
+                          exit={true}
+                        >
+                          <span
+                            className="MuiTouchRipple-root-80"
+                          />
+                        </TransitionGroup>
+                      </TouchRipple>
+                    </WithStyles(TouchRipple)>
+                  </NoSsr>
+                </button>
+              </ButtonBase>
+            </WithStyles(ButtonBase)>
+          </Button>
+        </WithStyles(Button)>
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <WithStyles(Button)
+            disabled={false}
+            onClick={[Function]}
+            variant="outlined"
+          >
+            <Button
+              classes={
+                Object {
+                  "colorInherit": "MuiButton-colorInherit-56",
+                  "contained": "MuiButton-contained-46",
+                  "containedPrimary": "MuiButton-containedPrimary-47",
+                  "containedSecondary": "MuiButton-containedSecondary-48",
+                  "disabled": "MuiButton-disabled-55",
+                  "extendedFab": "MuiButton-extendedFab-53",
+                  "fab": "MuiButton-fab-52",
+                  "flat": "MuiButton-flat-40",
+                  "flatPrimary": "MuiButton-flatPrimary-41",
+                  "flatSecondary": "MuiButton-flatSecondary-42",
+                  "focusVisible": "MuiButton-focusVisible-54",
+                  "fullWidth": "MuiButton-fullWidth-60",
+                  "label": "MuiButton-label-36",
+                  "mini": "MuiButton-mini-57",
+                  "outlined": "MuiButton-outlined-43",
+                  "outlinedPrimary": "MuiButton-outlinedPrimary-44",
+                  "outlinedSecondary": "MuiButton-outlinedSecondary-45",
+                  "raised": "MuiButton-raised-49",
+                  "raisedPrimary": "MuiButton-raisedPrimary-50",
+                  "raisedSecondary": "MuiButton-raisedSecondary-51",
+                  "root": "MuiButton-root-35",
+                  "sizeLarge": "MuiButton-sizeLarge-59",
+                  "sizeSmall": "MuiButton-sizeSmall-58",
+                  "text": "MuiButton-text-37",
+                  "textPrimary": "MuiButton-textPrimary-38",
+                  "textSecondary": "MuiButton-textSecondary-39",
+                }
+              }
+              color="default"
+              component="button"
+              disableFocusRipple={false}
+              disabled={false}
+              fullWidth={false}
+              mini={false}
+              onClick={[Function]}
+              size="medium"
+              type="button"
+              variant="outlined"
+            >
+              <WithStyles(ButtonBase)
+                className="MuiButton-root-35 MuiButton-outlined-43"
+                component="button"
+                disabled={false}
+                focusRipple={true}
+                focusVisibleClassName="MuiButton-focusVisible-54"
+                onClick={[Function]}
+                type="button"
+              >
+                <ButtonBase
+                  centerRipple={false}
+                  className="MuiButton-root-35 MuiButton-outlined-43"
+                  classes={
+                    Object {
+                      "disabled": "MuiButtonBase-disabled-62",
+                      "focusVisible": "MuiButtonBase-focusVisible-63",
+                      "root": "MuiButtonBase-root-61",
+                    }
+                  }
+                  component="button"
+                  disableRipple={false}
+                  disableTouchRipple={false}
+                  disabled={false}
+                  focusRipple={true}
+                  focusVisibleClassName="MuiButton-focusVisible-54"
+                  onClick={[Function]}
+                  tabIndex="0"
+                  type="button"
+                >
+                  <button
+                    className="MuiButtonBase-root-61 MuiButton-root-35 MuiButton-outlined-43"
+                    disabled={false}
+                    onBlur={[Function]}
+                    onClick={[Function]}
+                    onContextMenu={[Function]}
+                    onFocus={[Function]}
+                    onKeyDown={[Function]}
+                    onKeyUp={[Function]}
+                    onMouseDown={[Function]}
+                    onMouseLeave={[Function]}
+                    onMouseUp={[Function]}
+                    onTouchEnd={[Function]}
+                    onTouchMove={[Function]}
+                    onTouchStart={[Function]}
+                    tabIndex="0"
+                    type="button"
+                  >
+                    <span
+                      className="MuiButton-label-36"
+                    >
+                      Settings
+                    </span>
+                    <NoSsr
+                      defer={false}
+                      fallback={null}
+                    >
+                      <WithStyles(TouchRipple)
+                        center={false}
+                        innerRef={[Function]}
+                      >
+                        <TouchRipple
+                          center={false}
+                          classes={
+                            Object {
+                              "child": "MuiTouchRipple-child-84",
+                              "childLeaving": "MuiTouchRipple-childLeaving-85",
+                              "childPulsate": "MuiTouchRipple-childPulsate-86",
+                              "ripple": "MuiTouchRipple-ripple-81",
+                              "ripplePulsate": "MuiTouchRipple-ripplePulsate-83",
+                              "rippleVisible": "MuiTouchRipple-rippleVisible-82",
+                              "root": "MuiTouchRipple-root-80",
+                            }
+                          }
+                        >
+                          <TransitionGroup
+                            childFactory={[Function]}
+                            className="MuiTouchRipple-root-80"
+                            component="span"
+                            enter={true}
+                            exit={true}
+                          >
+                            <span
+                              className="MuiTouchRipple-root-80"
+                            />
+                          </TransitionGroup>
+                        </TouchRipple>
+                      </WithStyles(TouchRipple)>
+                    </NoSsr>
+                  </button>
+                </ButtonBase>
+              </WithStyles(ButtonBase)>
+            </Button>
+          </WithStyles(Button)>
+          <SearchSettingsDialog
+            isOpen={false}
+            onClose={[Function]}
+            renderContent={
+              [MockFunction] {
+                "calls": Array [
+                  Array [],
+                ],
+                "results": Array [
+                  Object {
+                    "isThrow": false,
+                    "value": undefined,
+                  },
+                ],
+              }
+            }
+          >
+            <Dialog
+              onClose={[Function]}
+              open={false}
+              title="Search settings"
+            >
+              <WithStyles(Dialog)
+                onClose={[Function]}
+                open={false}
+              >
+                <Dialog
+                  PaperComponent={[Function]}
+                  TransitionComponent={[Function]}
+                  classes={
+                    Object {
+                      "container": "MuiDialog-container-67",
+                      "paper": "MuiDialog-paper-68",
+                      "paperFullScreen": "MuiDialog-paperFullScreen-77",
+                      "paperFullWidth": "MuiDialog-paperFullWidth-76",
+                      "paperScrollBody": "MuiDialog-paperScrollBody-70",
+                      "paperScrollPaper": "MuiDialog-paperScrollPaper-69",
+                      "paperWidthLg": "MuiDialog-paperWidthLg-74",
+                      "paperWidthMd": "MuiDialog-paperWidthMd-73",
+                      "paperWidthSm": "MuiDialog-paperWidthSm-72",
+                      "paperWidthXl": "MuiDialog-paperWidthXl-75",
+                      "paperWidthXs": "MuiDialog-paperWidthXs-71",
+                      "root": "MuiDialog-root-64",
+                      "scrollBody": "MuiDialog-scrollBody-66",
+                      "scrollPaper": "MuiDialog-scrollPaper-65",
+                    }
+                  }
+                  disableBackdropClick={false}
+                  disableEscapeKeyDown={false}
+                  fullScreen={false}
+                  fullWidth={false}
+                  maxWidth="sm"
+                  onClose={[Function]}
+                  open={false}
+                  scroll="paper"
+                  transitionDuration={
+                    Object {
+                      "enter": 225,
+                      "exit": 195,
+                    }
+                  }
+                >
+                  <WithStyles(Modal)
+                    BackdropProps={
+                      Object {
+                        "transitionDuration": Object {
+                          "enter": 225,
+                          "exit": 195,
+                        },
+                      }
+                    }
+                    className="MuiDialog-root-64"
+                    closeAfterTransition={true}
+                    disableBackdropClick={false}
+                    disableEscapeKeyDown={false}
+                    onClose={[Function]}
+                    open={false}
+                    role="dialog"
+                  >
+                    <Modal
+                      BackdropComponent={[Function]}
+                      BackdropProps={
+                        Object {
+                          "transitionDuration": Object {
+                            "enter": 225,
+                            "exit": 195,
+                          },
+                        }
+                      }
+                      className="MuiDialog-root-64"
+                      classes={
+                        Object {
+                          "hidden": "MuiModal-hidden-79",
+                          "root": "MuiModal-root-78",
+                        }
+                      }
+                      closeAfterTransition={true}
+                      disableAutoFocus={false}
+                      disableBackdropClick={false}
+                      disableEnforceFocus={false}
+                      disableEscapeKeyDown={false}
+                      disablePortal={false}
+                      disableRestoreFocus={false}
+                      hideBackdrop={false}
+                      keepMounted={false}
+                      manager={
+                        ModalManager {
+                          "data": Array [],
+                          "handleContainerOverflow": true,
+                          "hideSiblingNodes": true,
+                          "modals": Array [],
+                        }
+                      }
+                      onClose={[Function]}
+                      open={false}
+                      role="dialog"
+                    />
+                  </WithStyles(Modal)>
+                </Dialog>
+              </WithStyles(Dialog)>
+            </Dialog>
+          </SearchSettingsDialog>
+        </div>
+      </div>
+    </form>
+  </ReactFinalForm>
+</SearchForm>
+`;

@@ -68,4 +68,5 @@ class PaginationControls extends React.PureComponent<IProps> {
   }
 }
 
+export { IProps as IPaginationControlsProps };
 export default PaginationControls;

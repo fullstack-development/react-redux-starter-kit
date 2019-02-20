@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationControls component should match snapshot 1`] = `
+<PaginationControls
+  currentPage={2}
+  onPageRequest={[MockFunction]}
+  totalPages={5}
+>
+  <div
+    className="pagination-controls"
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      onClick={[Function]}
+    />
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="3"
+      onClick={[Function]}
+    >
+      3
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="4"
+      onClick={[Function]}
+    >
+      4
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="5"
+      onClick={[Function]}
+    >
+      5
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      onClick={[Function]}
+    />
+  </div>
+</PaginationControls>
+`;
