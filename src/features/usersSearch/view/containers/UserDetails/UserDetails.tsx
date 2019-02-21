@@ -9,6 +9,7 @@ import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader } from 'shared/view/elements';
 
+import { UserAttribute } from '../../components';
 import { injectSizeToAvatarURL } from '../../../helpers';
 import { actions, selectors } from './../../../redux';
 import './UserDetails.scss';
@@ -85,24 +86,15 @@ class UserDetails extends React.PureComponent<IProps> {
             {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
           </a>
           <div className={b('attributes')}>
-            {this.renderAttribute(`${htmlURL}/followers`, 'Followers', followersNumber)}
-            {this.renderAttribute(`${htmlURL}/following`, 'Following', followingNumber)}
-            {this.renderAttribute(`${htmlURL}/repositories`, 'Repositories', reposNumber)}
+            <UserAttribute URL={`${htmlURL}/followers`} title="Followers" value={followersNumber} />
+            <UserAttribute URL={`${htmlURL}/following`} title="Following" value={followingNumber} />
+            <UserAttribute URL={`${htmlURL}/repositories`} title="Repositories" value={reposNumber} />
           </div>
         </>
       );
     }
 
     return null;
-  }
-
-  private renderAttribute(URL: string, title: string, value: number) {
-    return (
-      <a href={URL} target="_blank" className={b('attribute')}>
-        {title}
-        <span className={b('value')}>{value}</span>
-      </a>
-    );
   }
 
   @bind
