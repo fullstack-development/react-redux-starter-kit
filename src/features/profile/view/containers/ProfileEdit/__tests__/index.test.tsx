@@ -1,9 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { ProfileEdit, IProps } from '../ProfileEdit';
+import { ProfileEdit, IProfileEditProps } from '../ProfileEdit';
 
-const props: IProps = {
+const props: IProfileEditProps = {
   profile: {
     name: 'name',
     nickname: 'nickname',

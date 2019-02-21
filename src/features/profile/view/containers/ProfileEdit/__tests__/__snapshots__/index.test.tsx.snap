@@ -1939,7 +1939,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                                 rows={1}
                                                 style={
                                                   Object {
-                                                    "height": 0,
+                                                    "height": 19,
                                                   }
                                                 }
                                                 value="biography"

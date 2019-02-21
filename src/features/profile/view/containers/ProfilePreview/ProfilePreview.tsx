@@ -92,5 +92,5 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
 
 }
 
-export { ProfilePreview, IProps };
+export { ProfilePreview, IProps as IProfilePreviewProps };
 export default connect(mapState)(ProfilePreview);
