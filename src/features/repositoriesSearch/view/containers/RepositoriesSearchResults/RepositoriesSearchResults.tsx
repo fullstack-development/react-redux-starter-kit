@@ -99,4 +99,5 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+export { RepositoriesSearchResults, IProps as IRepositoriesSearchResultsProps };
 export default connect(mapState, mapDispatch)(containersProvider(['UserDetails'])(RepositoriesSearchResults));

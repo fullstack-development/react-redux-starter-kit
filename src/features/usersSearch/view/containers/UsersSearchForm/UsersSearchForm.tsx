@@ -56,4 +56,5 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 }
 
+export { UsersSearchForm, IProps as IUsersSearchFormProps };
 export default connect(mapState, mapDispatch)(UsersSearchForm);

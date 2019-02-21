@@ -84,4 +84,5 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+export { UsersSearchResults, IProps as IUsersSearchResultsProps };
 export default connect(mapState, mapDispatch)(UsersSearchResults);

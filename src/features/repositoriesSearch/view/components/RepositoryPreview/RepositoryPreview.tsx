@@ -78,4 +78,5 @@ class RepositoryPreview extends React.PureComponent<IProps> {
   }
 }
 
+export { IProps as IRepositoryPreviewProps };
 export default RepositoryPreview;

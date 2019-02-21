@@ -1,16 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+import { getProfileMock } from 'shared/helpers';
+
 import { ProfileEdit, IProfileEditProps } from '../ProfileEdit';
 
 const props: IProfileEditProps = {
-  profile: {
-    name: 'name',
-    nickname: 'nickname',
-    age: 1,
-    bio: 'biography',
-    avatarURL: '',
-  },
+  profile: getProfileMock(),
   setNotification: jest.fn(),
   saveProfile: jest.fn(),
 };

@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserAvatarsWall component should match snapshot 1`] = `
+<div
+  class="users-avatars-wall"
+>
+  <ul
+    class="users-avatars-wall__avatars users-avatars-wall__avatars_size_small"
+  >
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+    <li
+      class="users-avatars-wall__avatar"
+    >
+      <img
+        class="users-avatars-wall__image"
+        src="http://the-url.com&s=70"
+      />
+    </li>
+  </ul>
+</div>
+`;

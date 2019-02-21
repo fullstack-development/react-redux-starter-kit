@@ -4,11 +4,11 @@ exports[`ProfileEdit component should match snapshot 1`] = `
 <ProfileEdit
   profile={
     Object {
-      "age": 1,
-      "avatarURL": "",
-      "bio": "biography",
-      "name": "name",
-      "nickname": "nickname",
+      "age": 100,
+      "avatarURL": "https://the-url.com",
+      "bio": "profile bio",
+      "name": "Name name",
+      "nickname": "Nickname",
     }
   }
   saveProfile={[MockFunction]}
@@ -17,11 +17,11 @@ exports[`ProfileEdit component should match snapshot 1`] = `
   <ReactFinalForm
     initialValues={
       Object {
-        "age": 1,
-        "avatarURL": "",
-        "bio": "biography",
-        "name": "name",
-        "nickname": "nickname",
+        "age": 100,
+        "avatarURL": "https://the-url.com",
+        "bio": "profile bio",
+        "name": "Name name",
+        "nickname": "Nickname",
       }
     }
     onSubmit={[Function]}
@@ -44,7 +44,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
         }
       >
         <ProfileAvatar
-          avatarURL=""
+          avatarURL="https://the-url.com"
           size="big"
         >
           <div
@@ -60,7 +60,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
             }
             style={
               Object {
-                "backgroundImage": "url()",
+                "backgroundImage": "url(https://the-url.com)",
               }
             }
           />
@@ -134,7 +134,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "onBlur": [Function],
                       "onChange": [Function],
                       "onFocus": [Function],
-                      "value": "name",
+                      "value": "Name name",
                     }
                   }
                   label="Name"
@@ -145,7 +145,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "dirty": false,
                       "dirtySinceLastSubmit": false,
                       "error": undefined,
-                      "initial": "name",
+                      "initial": "Name name",
                       "invalid": false,
                       "pristine": true,
                       "submitError": undefined,
@@ -166,7 +166,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
-                    value="name"
+                    value="Name name"
                   >
                     <TextField
                       InputProps={
@@ -184,7 +184,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       onFocus={[Function]}
                       required={false}
                       select={false}
-                      value="name"
+                      value="Name name"
                       variant="standard"
                     >
                       <WithStyles(FormControl)
@@ -342,7 +342,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
-                              value="name"
+                              value="Name name"
                             >
                               <Input
                                 classes={
@@ -367,7 +367,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
-                                value="name"
+                                value="Name name"
                               >
                                 <WithStyles(WithFormControlContext(InputBase))
                                   classes={
@@ -395,7 +395,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                   onChange={[Function]}
                                   onFocus={[Function]}
                                   type="text"
-                                  value="name"
+                                  value="Name name"
                                 >
                                   <WithFormControlContext(InputBase)
                                     classes={
@@ -427,7 +427,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                     onChange={[Function]}
                                     onFocus={[Function]}
                                     type="text"
-                                    value="name"
+                                    value="Name name"
                                   >
                                     <InputBase
                                       classes={
@@ -475,7 +475,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       type="text"
-                                      value="name"
+                                      value="Name name"
                                     >
                                       <div
                                         className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24"
@@ -491,7 +491,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                           onFocus={[Function]}
                                           required={false}
                                           type="text"
-                                          value="name"
+                                          value="Name name"
                                         />
                                       </div>
                                     </InputBase>
@@ -565,7 +565,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "onBlur": [Function],
                       "onChange": [Function],
                       "onFocus": [Function],
-                      "value": "nickname",
+                      "value": "Nickname",
                     }
                   }
                   label="Nickname"
@@ -576,7 +576,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "dirty": false,
                       "dirtySinceLastSubmit": false,
                       "error": undefined,
-                      "initial": "nickname",
+                      "initial": "Nickname",
                       "invalid": false,
                       "pristine": true,
                       "submitError": undefined,
@@ -597,7 +597,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
-                    value="nickname"
+                    value="Nickname"
                   >
                     <TextField
                       InputProps={
@@ -615,7 +615,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       onFocus={[Function]}
                       required={false}
                       select={false}
-                      value="nickname"
+                      value="Nickname"
                       variant="standard"
                     >
                       <WithStyles(FormControl)
@@ -773,7 +773,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
-                              value="nickname"
+                              value="Nickname"
                             >
                               <Input
                                 classes={
@@ -798,7 +798,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
-                                value="nickname"
+                                value="Nickname"
                               >
                                 <WithStyles(WithFormControlContext(InputBase))
                                   classes={
@@ -826,7 +826,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                   onChange={[Function]}
                                   onFocus={[Function]}
                                   type="text"
-                                  value="nickname"
+                                  value="Nickname"
                                 >
                                   <WithFormControlContext(InputBase)
                                     classes={
@@ -858,7 +858,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                     onChange={[Function]}
                                     onFocus={[Function]}
                                     type="text"
-                                    value="nickname"
+                                    value="Nickname"
                                   >
                                     <InputBase
                                       classes={
@@ -906,7 +906,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       type="text"
-                                      value="nickname"
+                                      value="Nickname"
                                     >
                                       <div
                                         className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24"
@@ -922,7 +922,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                           onFocus={[Function]}
                                           required={false}
                                           type="text"
-                                          value="nickname"
+                                          value="Nickname"
                                         />
                                       </div>
                                     </InputBase>
@@ -996,7 +996,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "onBlur": [Function],
                       "onChange": [Function],
                       "onFocus": [Function],
-                      "value": 1,
+                      "value": 100,
                     }
                   }
                   label="Age"
@@ -1007,7 +1007,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "dirty": false,
                       "dirtySinceLastSubmit": false,
                       "error": undefined,
-                      "initial": 1,
+                      "initial": 100,
                       "invalid": false,
                       "pristine": true,
                       "submitError": undefined,
@@ -1028,7 +1028,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
-                    value={1}
+                    value={100}
                   >
                     <TextInput
                       InputLabelProps={
@@ -1049,7 +1049,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
-                      value={1}
+                      value={100}
                     >
                       <TextField
                         InputLabelProps={
@@ -1073,7 +1073,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                         onFocus={[Function]}
                         required={false}
                         select={false}
-                        value={1}
+                        value={100}
                         variant="standard"
                       >
                         <WithStyles(FormControl)
@@ -1236,7 +1236,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                 onBlur={[Function]}
                                 onChange={[Function]}
                                 onFocus={[Function]}
-                                value={1}
+                                value={100}
                               >
                                 <Input
                                   classes={
@@ -1262,7 +1262,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                   onBlur={[Function]}
                                   onChange={[Function]}
                                   onFocus={[Function]}
-                                  value={1}
+                                  value={100}
                                 >
                                   <WithStyles(WithFormControlContext(InputBase))
                                     classes={
@@ -1290,7 +1290,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                     onChange={[Function]}
                                     onFocus={[Function]}
                                     type="text"
-                                    value={1}
+                                    value={100}
                                   >
                                     <WithFormControlContext(InputBase)
                                       classes={
@@ -1322,7 +1322,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                       onChange={[Function]}
                                       onFocus={[Function]}
                                       type="text"
-                                      value={1}
+                                      value={100}
                                     >
                                       <InputBase
                                         classes={
@@ -1370,7 +1370,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                         onChange={[Function]}
                                         onFocus={[Function]}
                                         type="text"
-                                        value={1}
+                                        value={100}
                                       >
                                         <div
                                           className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24"
@@ -1387,7 +1387,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                             onFocus={[Function]}
                                             required={false}
                                             type="text"
-                                            value={1}
+                                            value={100}
                                           >
                                             <NumberFormat
                                               allowEmptyFormatting={false}
@@ -1413,7 +1413,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                               suffix=""
                                               thousandsGroupStyle="thousand"
                                               type="text"
-                                              value={1}
+                                              value={100}
                                             >
                                               <input
                                                 aria-invalid={false}
@@ -1427,7 +1427,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                                 onMouseUp={[Function]}
                                                 required={false}
                                                 type="text"
-                                                value="1"
+                                                value="100"
                                               />
                                             </NumberFormat>
                                           </NumberFormatCustom>
@@ -1510,7 +1510,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "onBlur": [Function],
                       "onChange": [Function],
                       "onFocus": [Function],
-                      "value": "biography",
+                      "value": "profile bio",
                     }
                   }
                   label="Bio"
@@ -1521,7 +1521,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       "dirty": false,
                       "dirtySinceLastSubmit": false,
                       "error": undefined,
-                      "initial": "biography",
+                      "initial": "profile bio",
                       "invalid": false,
                       "pristine": true,
                       "submitError": undefined,
@@ -1546,7 +1546,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                     onChange={[Function]}
                     onFocus={[Function]}
                     rowsMax={10}
-                    value="biography"
+                    value="profile bio"
                   >
                     <TextField
                       InputProps={
@@ -1566,7 +1566,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                       required={false}
                       rowsMax={10}
                       select={false}
-                      value="biography"
+                      value="profile bio"
                       variant="standard"
                     >
                       <WithStyles(FormControl)
@@ -1726,7 +1726,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                               onChange={[Function]}
                               onFocus={[Function]}
                               rowsMax={10}
-                              value="biography"
+                              value="profile bio"
                             >
                               <Input
                                 classes={
@@ -1753,7 +1753,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                 onChange={[Function]}
                                 onFocus={[Function]}
                                 rowsMax={10}
-                                value="biography"
+                                value="profile bio"
                               >
                                 <WithStyles(WithFormControlContext(InputBase))
                                   classes={
@@ -1782,7 +1782,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                   onFocus={[Function]}
                                   rowsMax={10}
                                   type="text"
-                                  value="biography"
+                                  value="profile bio"
                                 >
                                   <WithFormControlContext(InputBase)
                                     classes={
@@ -1815,7 +1815,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                     onFocus={[Function]}
                                     rowsMax={10}
                                     type="text"
-                                    value="biography"
+                                    value="profile bio"
                                   >
                                     <InputBase
                                       classes={
@@ -1864,7 +1864,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                       onFocus={[Function]}
                                       rowsMax={10}
                                       type="text"
-                                      value="biography"
+                                      value="profile bio"
                                     >
                                       <div
                                         className="MuiInputBase-root-36 MuiInput-root-23 MuiInput-underline-27 MuiInputBase-fullWidth-45 MuiInput-fullWidth-30 MuiInputBase-formControl-37 MuiInput-formControl-24 MuiInputBase-multiline-44 MuiInput-multiline-29"
@@ -1881,7 +1881,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                           required={false}
                                           rowsMax={10}
                                           textareaRef={[Function]}
-                                          value="biography"
+                                          value="profile bio"
                                         >
                                           <Textarea
                                             aria-invalid={false}
@@ -1902,7 +1902,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                             rows={1}
                                             rowsMax={10}
                                             textareaRef={[Function]}
-                                            value="biography"
+                                            value="profile bio"
                                           >
                                             <div
                                               className="MuiPrivateTextarea-root-53"
@@ -1925,7 +1925,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                                 readOnly={true}
                                                 rows={1}
                                                 tabIndex={-1}
-                                                value="biography"
+                                                value="profile bio"
                                               />
                                               <textarea
                                                 aria-invalid={false}
@@ -1942,7 +1942,7 @@ exports[`ProfileEdit component should match snapshot 1`] = `
                                                     "height": 19,
                                                   }
                                                 }
-                                                value="biography"
+                                                value="profile bio"
                                               />
                                             </div>
                                           </Textarea>

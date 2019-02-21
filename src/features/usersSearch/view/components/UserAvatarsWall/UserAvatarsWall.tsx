@@ -114,4 +114,5 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
   }
 }
 
+export { IProps as IUserAvatarsWallProps };
 export default UserAvatarsWall;

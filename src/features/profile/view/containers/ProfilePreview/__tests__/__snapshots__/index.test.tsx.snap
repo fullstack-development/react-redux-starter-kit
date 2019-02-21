@@ -5,11 +5,11 @@ exports[`ProfilePreview component should match snapshot 1`] = `
   onEditClick={[MockFunction]}
   profile={
     Object {
-      "age": 1,
-      "avatarURL": "",
-      "bio": "biography",
-      "name": "name",
-      "nickname": "nickname",
+      "age": 100,
+      "avatarURL": "https://the-url.com",
+      "bio": "profile bio",
+      "name": "Name name",
+      "nickname": "Nickname",
     }
   }
 >
@@ -30,7 +30,7 @@ exports[`ProfilePreview component should match snapshot 1`] = `
       onClick={[Function]}
     >
       <ProfileAvatar
-        avatarURL=""
+        avatarURL="https://the-url.com"
         size="small"
       >
         <div
@@ -46,7 +46,7 @@ exports[`ProfilePreview component should match snapshot 1`] = `
           }
           style={
             Object {
-              "backgroundImage": "url()",
+              "backgroundImage": "url(https://the-url.com)",
             }
           }
         />
@@ -88,7 +88,7 @@ exports[`ProfilePreview component should match snapshot 1`] = `
             }
           }
         >
-          name
+          Name name
         </div>
         <div
           className={
@@ -114,7 +114,7 @@ exports[`ProfilePreview component should match snapshot 1`] = `
               }
             }
           >
-            nickname
+            Nickname
           </div>
           <div
             className={
@@ -128,7 +128,7 @@ exports[`ProfilePreview component should match snapshot 1`] = `
               }
             }
           >
-            1
+            100
              y.o.
           </div>
         </div>
@@ -145,7 +145,7 @@ exports[`ProfilePreview component should match snapshot 1`] = `
           }
         }
       >
-        biography
+        profile bio
       </div>
       <div
         className={

@@ -1,3 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dialog component should match snapshot 1`] = `null`;
+exports[`Dialog component should match snapshot 1`] = `
+<WithStyles(Dialog)
+  onClose={[MockFunction]}
+  open={true}
+>
+  <div
+    className="dialog"
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <WithStyles(Typography)
+        variant="h6"
+      >
+        title
+      </WithStyles(Typography)>
+    </div>
+    <div />
+  </div>
+</WithStyles(Dialog)>
+`;

@@ -1,17 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+import { getProfileMock } from 'shared/helpers';
+
 import { ProfilePreview, IProfilePreviewProps } from '../ProfilePreview';
 
 const props: IProfilePreviewProps = {
   onEditClick: jest.fn(),
-  profile: {
-    name: 'name',
-    nickname: 'nickname',
-    age: 1,
-    bio: 'biography',
-    avatarURL: '',
-  },
+  profile: getProfileMock(),
 };
 
 describe('ProfilePreview component', () => {

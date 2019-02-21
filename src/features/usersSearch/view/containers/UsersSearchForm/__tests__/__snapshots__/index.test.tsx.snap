@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersSearchForm component should match snapshot 1`] = `
+<form
+  class="search-form"
+>
+  <div
+    class="MuiFormControl-root-1 MuiFormControl-fullWidth-4"
+  >
+    <div
+      class="MuiInputBase-root-18 MuiInput-root-5 MuiInput-underline-9 MuiInputBase-fullWidth-27 MuiInput-fullWidth-12 MuiInputBase-formControl-19 MuiInput-formControl-6"
+    >
+      <input
+        aria-invalid="false"
+        class="MuiInputBase-input-28 MuiInput-input-13"
+        name="searchString"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    class="search-form__buttons"
+  >
+    <button
+      class="MuiButtonBase-root-61 MuiButton-root-35 MuiButton-outlined-43"
+      tabindex="0"
+      type="submit"
+    >
+      <span
+        class="MuiButton-label-36"
+      >
+        Search
+      </span>
+    </button>
+    <div
+      class="search-form__settings"
+    >
+      <button
+        class="MuiButtonBase-root-61 MuiButton-root-35 MuiButton-outlined-43"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiButton-label-36"
+        >
+          Settings
+        </span>
+      </button>
+    </div>
+  </div>
+</form>
+`;

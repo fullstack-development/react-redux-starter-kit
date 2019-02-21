@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Dialog, { IDialogProps } from '../Dialog';
 
@@ -10,7 +10,7 @@ const props: IDialogProps = {
 };
 
 describe('Dialog component', () => {
-  const component = render(<Dialog {...props} />);
+  const component = shallow(<Dialog {...props}><div/></Dialog>);
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();
   });

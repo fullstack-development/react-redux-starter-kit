@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserDetails component should match snapshot 1`] = `
+<Dialog
+  onClose={[Function]}
+  onEnter={[Function]}
+  open={true}
+  title="User details"
+>
+  <Component>
+    <div
+      className="user-details"
+    >
+      <Preloader
+        backgroundColor="#fff"
+        isShown={false}
+        size={80}
+      />
+      <a
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        href="http://the-url.com"
+        target="_blank"
+      >
+        <img
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+          src="http://the-url.com&s=230"
+        />
+        <WithStyles(Typography)
+          variant="h5"
+        >
+          The real name
+        </WithStyles(Typography)>
+        <WithStyles(Typography)
+          variant="subtitle1"
+        >
+          username
+        </WithStyles(Typography)>
+        <WithStyles(Typography)
+          color="textSecondary"
+          variant="subtitle2"
+        >
+          Nowhere
+        </WithStyles(Typography)>
+      </a>
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <a
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+          href="http://the-url.com/followers"
+          target="_blank"
+        >
+          Followers
+          <span
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+          >
+            12
+          </span>
+        </a>
+        <a
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+          href="http://the-url.com/following"
+          target="_blank"
+        >
+          Following
+          <span
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+          >
+            12
+          </span>
+        </a>
+        <a
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+          href="http://the-url.com/repositories"
+          target="_blank"
+        >
+          Repositories
+          <span
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+          >
+            12
+          </span>
+        </a>
+      </div>
+    </div>
+  </Component>
+</Dialog>
+`;

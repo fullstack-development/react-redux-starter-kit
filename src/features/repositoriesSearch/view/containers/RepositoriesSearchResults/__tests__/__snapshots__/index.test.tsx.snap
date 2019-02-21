@@ -1,0 +1,386 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoriesSearchResults component should match snapshot 1`] = `
+<div
+  className="repositories-search-results"
+>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    key="1"
+  >
+    <RepositoryPreview
+      onOwnerClick={[Function]}
+      repository={
+        Object {
+          "description": "description",
+          "forksNumber": 1,
+          "htmlURL": "http://the-url.com",
+          "id": 1,
+          "language": "en",
+          "name": "name",
+          "openIssuesNumber": 1,
+          "owner": Object {
+            "avatarURL": "http://the-url.com",
+            "htmlURL": "http://the-url.com",
+            "id": 1,
+            "username": "username",
+          },
+          "starsNumber": 1,
+          "updatedAt": "05/05/2005",
+        }
+      }
+    />
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+  >
+    <PaginationControls
+      currentPage={1}
+      onPageRequest={[Function]}
+      totalPages={1}
+    />
+  </div>
+</div>
+`;

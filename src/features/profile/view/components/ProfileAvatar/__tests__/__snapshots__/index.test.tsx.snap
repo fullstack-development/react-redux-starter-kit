@@ -19,23 +19,3 @@ exports[`ProfileAvatar component should match snapshot 1`] = `
   }
 />
 `;
-
-exports[`ProfileAvatar component should match snapshot 2`] = `
-<div
-  className={
-    Object {
-      "has": [Function],
-      "is": [Function],
-      "mix": [Function],
-      "split": [Function],
-      "state": [Function],
-      "toString": [Function],
-    }
-  }
-  style={
-    Object {
-      "backgroundImage": "url()",
-    }
-  }
-/>
-`;
