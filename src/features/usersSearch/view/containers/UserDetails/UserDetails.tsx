@@ -1,7 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
 import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
@@ -24,9 +23,7 @@ interface IStateProps {
   isLoadUserDetailsRequesting: boolean;
 }
 
-interface IActionProps {
-  loadUserDetails: typeof actions.loadUserDetails;
-}
+type IActionProps = typeof mapDispatch;
 
 type IProps = IStateProps & IActionProps & IOwnProps;
 
@@ -37,11 +34,9 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function mapDispatch(dispatch: Dispatch): IActionProps {
-  return bindActionCreators({
-    loadUserDetails: actions.loadUserDetails,
-  }, dispatch);
-}
+const mapDispatch = {
+  loadUserDetails: actions.loadUserDetails,
+};
 
 const b = block('user-details');
 

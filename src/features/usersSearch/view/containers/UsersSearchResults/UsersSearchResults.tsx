@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
@@ -28,9 +27,7 @@ interface IStateProps {
   paginationState: IPaginationState;
 }
 
-interface IActionProps {
-  searchUser: typeof actions.searchUser;
-}
+type IActionProps = typeof mapDispatch;
 
 type IProps = IOwnProps & IStateProps & IActionProps;
 
@@ -41,11 +38,9 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function mapDispatch(dispatch: Dispatch) {
-  return bindActionCreators({
-    searchUser: actions.searchUser,
-  }, dispatch);
-}
+const mapDispatch = {
+  searchUser: actions.searchUser,
+};
 
 const b = block('users-search-results');
 

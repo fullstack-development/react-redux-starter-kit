@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
@@ -19,19 +18,14 @@ interface IStateProps {
   isRepositoriesSearchRequesting: boolean;
 }
 
-interface IActionProps {
-  searchRepositories: typeof actions.searchRepositories;
-  resetSearchResults: typeof actions.resetSearchResults;
-}
+type IActionProps = typeof mapDispatch;
 
 type IProps = IOwnProps & IStateProps & IActionProps;
 
-function mapDispatch(dispatch: Dispatch): IActionProps {
-  return bindActionCreators({
-    searchRepositories: actions.searchRepositories,
-    resetSearchResults: actions.resetSearchResults,
-  }, dispatch);
-}
+const mapDispatch = {
+  searchRepositories: actions.searchRepositories,
+  resetSearchResults: actions.resetSearchResults,
+};
 
 function mapState(state: IAppReduxState): IStateProps {
   return {

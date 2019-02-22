@@ -1,7 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
-import { Dispatch, bindActionCreators } from 'redux';
 import { bind } from 'decko';
 
 import { containersProvider, IContainerTypes } from 'core';
@@ -28,9 +27,7 @@ interface IStateProps {
   paginationState: IPaginationState;
 }
 
-interface IActionProps {
-  searchRepositories: typeof actions.searchRepositories;
-}
+type IActionProps = typeof mapDispatch;
 
 interface IContainerProps {
   UserDetails: IContainerTypes['UserDetails'];
@@ -45,11 +42,9 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function mapDispatch(dispatch: Dispatch): IActionProps {
-  return bindActionCreators({
-    searchRepositories: actions.searchRepositories,
-  }, dispatch);
-}
+const mapDispatch = {
+  searchRepositories: actions.searchRepositories,
+};
 
 const b = block('repositories-search-results');
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
 import { Form, FormRenderProps } from 'react-final-form';
 import { bind } from 'decko';
 
@@ -22,10 +21,7 @@ interface IStateProps {
   profile: IProfile;
 }
 
-interface IActionProps {
-  saveProfile: typeof actions.saveProfile;
-  setNotification: typeof notificationServiceActions.setNotification;
-}
+type IActionProps = typeof mapDispatch;
 
 type IProps = IStateProps & IActionProps;
 
@@ -35,12 +31,10 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-function mapDispatch(dispatch: Dispatch): IActionProps {
-  return bindActionCreators({
-    saveProfile: actions.saveProfile,
-    setNotification: notificationServiceActions.setNotification,
-  }, dispatch);
-}
+const mapDispatch = {
+  saveProfile: actions.saveProfile,
+  setNotification: notificationServiceActions.setNotification,
+};
 
 const fieldNames = makeFormFieldNames<IProfileEditFormFields>(['age', 'avatarURL', 'bio', 'name', 'nickname']);
 const b = block('profile-edit');
