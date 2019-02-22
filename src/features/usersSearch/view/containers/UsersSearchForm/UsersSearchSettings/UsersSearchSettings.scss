@@ -3,7 +3,7 @@
 .users-search-settings {
   width: 27rem;
 
-  @media (max-width: $change-view-breakpoint) {
+  @media (max-width: $breakpoint-sm) {
     width: 15rem;
   }
 
@@ -12,7 +12,7 @@
     justify-content: space-between;
     margin-bottom: 2.5rem;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       flex-direction: column;
       margin-bottom: 1.5rem;
     }
@@ -25,7 +25,7 @@
   &__item {
     width: 11rem;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       margin-bottom: 1rem;
     }
   }

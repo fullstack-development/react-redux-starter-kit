@@ -12,7 +12,7 @@
     text-align: center;
     font-weight: 500;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       font-size: 1.7rem;
     }
   }
@@ -23,7 +23,7 @@
     background: #333;
     color: #eaeaea;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       justify-content: center;
     }
 
@@ -36,7 +36,7 @@
     }
 
     &-title {
-      @media (max-width: $change-view-breakpoint) {
+      @media (max-width: $breakpoint-sm) {
         display: none;
       }
     }
@@ -53,7 +53,7 @@
     height: 100%;
     line-height: $header-footer-height;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       margin-left: 0;
     }
   }
@@ -95,7 +95,7 @@
       width: 90%;
       text-align: end;
 
-      @media (max-width: $change-view-breakpoint) {
+      @media (max-width: $breakpoint-sm) {
         width: 100%;
         text-align: center;
       }

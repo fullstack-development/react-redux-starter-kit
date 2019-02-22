@@ -24,7 +24,7 @@
     transition-duration: 1s;
     transition-property: display;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       width: 19rem;
     }
 
@@ -60,7 +60,7 @@
     text-align: justify;
     text-overflow: ellipsis;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       max-height: 3rem;
     }
   }

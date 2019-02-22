@@ -5,7 +5,7 @@
     margin: 0 auto 1rem;
     width: 30rem;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       width: 85%;
     }
   }
@@ -14,7 +14,7 @@
     margin: auto;
     width: 32rem;
 
-    @media (max-width: $change-view-breakpoint) {
+    @media (max-width: $breakpoint-sm) {
       width: 100%;
     }
   }
