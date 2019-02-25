@@ -5,6 +5,7 @@ import { bind } from 'decko';
 import { IRepository } from 'shared/types/models';
 import { StarIcon } from 'shared/view/elements';
 
+import RepositoryAttribute from '../RepositoryAttribute/RepositoryAttribute';
 import './RepositoryPreview.scss';
 
 interface IProps {
@@ -44,26 +45,28 @@ class RepositoryPreview extends React.PureComponent<IProps> {
         </div>
         <div className={b('row')}>
           <div className={b('attributes')}>
-            {this.renderAttribute('Forks', forksNumber)}
-            {this.renderAttribute('Open issues', openIssuesNumber)}
+            <RepositoryAttribute
+              title="Forks"
+              value={forksNumber}
+            />
+            <RepositoryAttribute
+              title="Open issues"
+              value={openIssuesNumber}
+            />
           </div>
           <div className={b('attributes')}>
-            {this.renderAttribute('Last updated', (new Date(updatedAt)).toLocaleDateString())}
-            <div className={b('attribute')}>
-              <span className={b('title')}>Owner:</span>
-              <span className={b('value', { owner: true })} onClick={this.handleOwnerClick}>{owner.username}</span>
-            </div>
+            <RepositoryAttribute
+              title="Last updated"
+              value={(new Date(updatedAt)).toLocaleDateString()}
+            />
+            <RepositoryAttribute
+              title="Owner"
+              value={owner.username}
+              onValueClick={this.handleOwnerClick}
+              type="owner"
+            />
           </div>
         </div>
-      </div>
-    );
-  }
-
-  private renderAttribute(title: string, value: string | number) {
-    return (
-      <div className={b('attribute')}>
-        <span className={b('title')}>{title}:</span>
-        <span className={b('value')}>{value}</span>
       </div>
     );
   }
