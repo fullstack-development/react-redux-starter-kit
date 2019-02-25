@@ -46,6 +46,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         initialValues={profile}
         render={this.renderForm}
+        subscription={{}}
       />
     );
   }

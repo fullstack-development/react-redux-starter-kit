@@ -42,6 +42,7 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
         onSubmit={onSubmit}
         initialValues={initialValues}
         render={this.renderForm}
+        subscription={{}}
       />
     );
   }
