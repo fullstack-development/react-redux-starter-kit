@@ -5,6 +5,7 @@ import { bind } from 'decko';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
+import { Popover } from 'shared/view/components';
 
 import { ProfileAvatar } from '../../components';
 import { selectors } from '../../../redux';
@@ -39,14 +40,6 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
 
   private blockRef = React.createRef<HTMLDivElement>();
 
-  public componentDidMount() {
-    document.addEventListener('click', this.handleDocumentClick);
-  }
-
-  public componentWillUnmount() {
-    document.removeEventListener('click', this.handleDocumentClick);
-  }
-
   public render() {
     const { profile: { avatarURL, name, nickname, age, bio }, onEditClick } = this.props;
     const { isOpen } = this.state;
@@ -55,36 +48,41 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
         <div className={b('avatar')} onClick={this.handleAvatarClick}>
           <ProfileAvatar avatarURL={avatarURL} size="small" />
         </div>
-        <div className={b('info', { open: isOpen })}>
-          <div className={b('main-info')}>
-            <div className={b('name')}>
-              {name}
-            </div>
-            <div className={b('nickname-age')}>
-              <div className={b('nickname')}>
-                {nickname}
+        <Popover
+          open={isOpen}
+          onClose={this.handlePopoverClose}
+          anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+          anchorEl={this.blockRef.current}
+        >
+          <div className={b('info')}>
+            <div className={b('main-info')}>
+              <div className={b('name')}>
+                {name}
               </div>
-              <div className={b('age')}>
-                {age} y.o.
+              <div className={b('nickname-age')}>
+                <div className={b('nickname')}>
+                  {nickname}
+                </div>
+                <div className={b('age')}>
+                  {age} y.o.
+                </div>
               </div>
             </div>
+            <div className={b('bio')}>
+              {bio}
+            </div>
+            <div className={b('edit')} onClick={onEditClick}>
+              Edit
+            </div>
           </div>
-          <div className={b('bio')}>
-            {bio}
-          </div>
-          <div className={b('edit')} onClick={onEditClick}>
-            Edit
-          </div>
-        </div>
+        </Popover>
       </div>
     );
   }
 
   @bind
-  private handleDocumentClick(e: MouseEvent) {
-    if (this.blockRef.current !== null && !this.blockRef.current.contains(e.target as Node)) {
-      this.setState({ isOpen: false });
-    }
+  private handlePopoverClose() {
+    this.setState({ isOpen: false });
   }
 
   @bind
