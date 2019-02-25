@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+@mixin safe-breakpoint($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    @content;
+  }
+
+  @else {
+    @error 'The #{$bp} breakpoint doesn\'t exist.';
+  }
+}
+
+@mixin breakpoint-up($bp) {
+  @include safe-breakpoint($bp) { // TODO: может лучше это назвать?
+    @media (min-width: map-get($breakpoints, $bp)) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-down($bp) {
+  @include safe-breakpoint($bp) {
+    @media (max-width: map-get($breakpoints, $bp)) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-between($bp-left, $bp-right) {
+  @include safe-breakpoint($bp) {
+    @media (min-width: map-get($breakpoints, $bp-left)) and (max-width: map-get($breakpoints, $bp-right)) {
+      @content;
+    }
+  }
+}

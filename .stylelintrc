@@ -36,6 +36,10 @@
         "type": "at-rule",
         "name": "media",
       },
+      {
+        "type": "at-rule",
+        "name": "include",
+      },
       "rules",
     ],
     "order/properties-order": [

@@ -1,8 +1,9 @@
-@import '~shared/styles/variables';
+@import '~shared/styles/mixins';
 
 .layout {
   $header-footer-height: 3rem;
   $header-footer-margin: 1.5rem;
+  $r: &;
 
   position: relative;
   padding-bottom: $header-footer-height + $header-footer-margin;
@@ -11,21 +12,19 @@
   &__title {
     text-align: center;
     font-weight: 500;
+    font-size: 1.5rem;
 
-    @media (max-width: $breakpoint-sm) {
-      font-size: 1.7rem;
+    @include breakpoint-up(sm) {
+      font-size: 2rem;
     }
   }
 
   &__header {
+    justify-content: center;
     margin-bottom: $header-footer-margin;
     height: $header-footer-height;
     background: #333;
     color: #eaeaea;
-
-    @media (max-width: $breakpoint-sm) {
-      justify-content: center;
-    }
 
     &-content {
       display: flex;
@@ -33,38 +32,67 @@
       justify-content: space-between;
       margin: auto;
       width: 90%;
+      height: 100%;
     }
 
     &-title {
-      @media (max-width: $breakpoint-sm) {
-        display: none;
+      display: none;
+
+      @include breakpoint-up(sm) {
+        display: inline;
       }
     }
 
     &-left-part {
+      position: relative;
       display: flex;
       align-items: center;
+      font-size: 0.9rem;
+    }
+  }
+
+  &__menu {
+    @include breakpoint-up(sm) {
+      display: none;
+    }
+
+    &_open {
+      & ~ #{$r}__tabs {
+        position: absolute;
+        top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
     }
   }
 
   &__tabs {
-    display: flex;
-    margin-left: 1rem;
+    display: none;
     height: 100%;
     line-height: $header-footer-height;
 
-    @media (max-width: $breakpoint-sm) {
-      margin-left: 0;
+    @include breakpoint-up(sm) {
+      display: flex;
+      flex-direction: row;
+      margin-left: 1rem;
     }
   }
 
   &__tab {
     width: 8rem;
-    background: #333;
+    background: #444;
     text-align: center;
 
+    @include breakpoint-up(sm) {
+      background: #333;
+    }
+
     &_active {
-      background: #555;
+      background: #666;
+
+      @include breakpoint-up(sm) {
+        background: #555;
+      }
     }
   }
 
@@ -92,12 +120,12 @@
 
     &-content {
       margin: auto;
-      width: 90%;
-      text-align: end;
+      width: 100%;
+      text-align: center;
 
-      @media (max-width: $breakpoint-sm) {
-        width: 100%;
-        text-align: center;
+      @include breakpoint-up(sm) {
+        width: 90%;
+        text-align: end;
       }
     }
   }

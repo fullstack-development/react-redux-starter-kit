@@ -1,1 +1,13 @@
+// xs: 320
+// sm: 600
+// md: 960
+// lg: 1280
+// xl: 1920
+$breakpoints: (
+  xs: 320px,
+  sm: 590px,
+  md: 960px,
+);
+$breakpoint-xs: 320px; // TODO: UDOLI
 $breakpoint-sm: 590px;
+$breakpoint-md: 960px;
