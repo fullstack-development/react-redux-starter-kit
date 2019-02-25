@@ -3,6 +3,7 @@ import block from 'bem-cn';
 import { bind } from 'decko';
 
 import { IRepository } from 'shared/types/models';
+import { StarIcon } from 'shared/view/elements';
 
 import './RepositoryPreview.scss';
 
@@ -32,7 +33,9 @@ class RepositoryPreview extends React.PureComponent<IProps> {
         </div>
         <div className={b('row')}>
           <div className={b('stars')}>
-            <div className={b('star')} />
+            <div className={b('star')}>
+              <StarIcon fontSize="inherit" />
+            </div>
             {starsNumber}
           </div>
           <div className={b('language')}>
