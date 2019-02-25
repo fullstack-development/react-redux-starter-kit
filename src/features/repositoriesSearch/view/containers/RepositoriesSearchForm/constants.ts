@@ -1,6 +1,10 @@
-import { makeFormFieldNames } from 'shared/helpers';
+import { FormFieldNames } from 'shared/types/form';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 
-export const fieldNames = makeFormFieldNames<IRepositoriesSearchFormFields>([
-  'searchString', 'forksNumber', 'owner', 'starsNumber', 'language',
-]);
+export const fieldNames: FormFieldNames<IRepositoriesSearchFormFields> = {
+  searchString: 'searchString',
+  starsNumber: 'starsNumber',
+  forksNumber: 'forksNumber',
+  language: 'language',
+  owner: 'owner',
+};

@@ -8,9 +8,9 @@ import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
-import { makeFormFieldNames } from 'shared/helpers';
 import { actions as notificationServiceActions } from 'services/notification';
 
+import { fieldNames } from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -36,7 +36,6 @@ const mapDispatch = {
   setNotification: notificationServiceActions.setNotification,
 };
 
-const fieldNames = makeFormFieldNames<IProfileEditFormFields>(['age', 'avatarURL', 'bio', 'name', 'nickname']);
 const b = block('profile-edit');
 
 class ProfileEdit extends React.PureComponent<IProps> {
