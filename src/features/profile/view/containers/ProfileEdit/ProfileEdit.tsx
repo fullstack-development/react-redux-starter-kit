@@ -10,7 +10,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { actions as notificationServiceActions } from 'services/notification';
 
-import { fieldNames } from './constants';
+import { fieldNames, validateBio, validateName, validateNickname } from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -61,16 +61,16 @@ class ProfileEdit extends React.PureComponent<IProps> {
         </div>
         <div className={b('fields')}>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.name} label="Name" />
+            <TextInputField name={fieldNames.name} label="Name" validate={validateName}/>
           </div>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.nickname} label="Nickname" />
+            <TextInputField name={fieldNames.nickname} label="Nickname" validate={validateNickname} />
           </div>
           <div className={b('field')}>
             <NumberInputField name={fieldNames.age} label="Age" />
           </div>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.bio} label="Bio" multiline rowsMax={10}/>
+            <TextInputField name={fieldNames.bio} label="Bio" multiline rowsMax={10} validate={validateBio}/>
           </div>
           <div className={b('button')}>
             <Button variant="outlined" type="submit">Save</Button>
