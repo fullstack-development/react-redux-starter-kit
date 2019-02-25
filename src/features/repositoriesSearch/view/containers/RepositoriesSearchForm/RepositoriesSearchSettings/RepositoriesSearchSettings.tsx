@@ -11,13 +11,6 @@ const b = block('repositories-search-settings');
 function RepositoriesSearchSettings() {
   return (
     <div className={b()}>
-      {renderFirstRowSettings()}
-      {renderSecondRowSettings()}
-    </div>
-  );
-
-  function renderFirstRowSettings() {
-    return (
       <div className={b('row')}>
         <div className={b('item')}>
           <NumberInputField
@@ -32,11 +25,6 @@ function RepositoriesSearchSettings() {
           />
         </div>
       </div>
-    );
-  }
-
-  function renderSecondRowSettings() {
-    return (
       <div className={b('row')}>
         <div className={b('item')}>
           <TextInputField
@@ -48,8 +36,8 @@ function RepositoriesSearchSettings() {
           <TextInputField name={fieldNames.owner} label="Owner" />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default RepositoriesSearchSettings;
