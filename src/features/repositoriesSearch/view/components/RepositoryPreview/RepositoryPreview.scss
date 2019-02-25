@@ -1,4 +1,5 @@
 /* doiuse-disable word-break */
+@import '~shared/styles/mixins';
 
 .repository-preview {
   padding: 1rem;
@@ -19,7 +20,12 @@
   &__stars {
     display: flex;
     align-items: center;
+    margin-bottom: 0.6rem;
     width: 5rem;
+
+    @include breakpoint-up(sm) {
+      margin-bottom: 0;
+    }
   }
 
   &__star {
@@ -31,8 +37,14 @@
 
   &__row {
     display: flex;
-    align-items: center;
-    max-width: 36rem;
+    flex-direction: column;
+    align-items: flex-start;
+
+    @include breakpoint-up(sm) {
+      flex-direction: row;
+      align-items: center;
+      max-width: 36rem;
+    }
   }
 
   &__attributes {
@@ -40,7 +52,10 @@
     flex-direction: column;
     justify-content: space-between;
     margin-top: 0.7rem;
-    width: 50%;
     height: 2.35rem;
+
+    @include breakpoint-up(sm) {
+      width: 50%;
+    }
   }
 }
