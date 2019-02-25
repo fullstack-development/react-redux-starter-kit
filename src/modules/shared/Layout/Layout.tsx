@@ -20,7 +20,7 @@ type IProps = IOwnProps & IFeatureProps & RouteComponentProps & React.ComponentP
 
 const b = block('layout');
 
-class Layout extends React.PureComponent<IProps> {
+class Layout extends React.Component<IProps> {
   public render() {
     const { children, title, profileFeatureEntry: { containers } } = this.props;
     const { ProfilePreview } = containers;

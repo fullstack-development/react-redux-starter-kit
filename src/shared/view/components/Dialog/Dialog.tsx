@@ -12,7 +12,7 @@ interface IProps extends DialogProps {
 
 const b = block('dialog');
 
-class Dialog extends React.PureComponent<IProps> {
+class Dialog extends React.Component<IProps> {
   public static Content: FunctionComponent = (props) => {
     const { children } = props;
     return (

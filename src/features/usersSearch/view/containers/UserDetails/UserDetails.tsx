@@ -40,7 +40,7 @@ const mapDispatch = {
 
 const b = block('user-details');
 
-class UserDetails extends React.PureComponent<IProps> {
+class UserDetails extends React.Component<IProps> {
   private avatarSize = 230;
 
   public render() {
