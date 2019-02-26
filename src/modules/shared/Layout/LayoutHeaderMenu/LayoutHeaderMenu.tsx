@@ -83,5 +83,5 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { IMenuItem };
+export { IMenuItem as IHeaderMenuItem };
 export default LayoutHeaderMenu;

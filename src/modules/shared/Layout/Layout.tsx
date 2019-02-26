@@ -6,7 +6,7 @@ import { bind } from 'decko';
 import { featureConnect } from 'core';
 import * as features from 'features';
 
-import LayoutHeaderMenu, { IMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
+import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import routes from '../../routes';
 import './Layout.scss';
 
@@ -23,7 +23,7 @@ type IProps = IOwnProps & IFeatureProps & RouteComponentProps & React.ComponentP
 const b = block('layout');
 
 class Layout extends React.Component<IProps> {
-  private menuItems: IMenuItem[] = [
+  private menuItems: IHeaderMenuItem[] = [
     {
       path: routes.search.users.getRoutePath(),
       title: 'Users',
