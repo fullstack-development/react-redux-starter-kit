@@ -1,3 +1,4 @@
+/* doiuse-disable calc */
 @import '~shared/styles/mixins';
 
 .dialog {
@@ -37,5 +38,10 @@
     @include breakpoint-up(sm) {
       padding: 1rem $horizontal-padding-md;
     }
+  }
+
+  &__paper {
+    margin: 1.5rem !important;
+    max-height: calc(100% - 2rem) !important;
   }
 }

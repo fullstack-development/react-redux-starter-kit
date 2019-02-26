@@ -34,7 +34,7 @@ class Dialog extends React.Component<IProps> {
   public render() {
     const { title, children, onClose, ...dialogProps } = this.props;
     return (
-      <MUIDialog onClose={onClose} {...dialogProps}>
+      <MUIDialog onClose={onClose} PaperProps={{ classes: { root: b('paper').toString() } }} {...dialogProps}>
         <div className={b()}>
           <div className={b('header')}>
             <Typography variant="h6">{title}</Typography>
