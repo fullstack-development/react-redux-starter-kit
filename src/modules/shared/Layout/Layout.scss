@@ -3,13 +3,13 @@
 .layout {
   $header-footer-height: 3rem;
   $header-footer-margin: 1.5rem;
-  $r: &;
 
   position: relative;
   padding-bottom: $header-footer-height + $header-footer-margin;
   min-height: 100%;
 
   &__title {
+    padding: 0 0.7rem;
     text-align: center;
     font-weight: 500;
     font-size: 1.5rem;
@@ -34,71 +34,10 @@
       width: 90%;
       height: 100%;
     }
-
-    &-title {
-      display: none;
-
-      @include breakpoint-up(sm) {
-        display: inline;
-      }
-    }
-
-    &-left-part {
-      position: relative;
-      display: flex;
-      align-items: center;
-      font-size: 0.9rem;
-    }
   }
 
   &__menu {
-    @include breakpoint-up(sm) {
-      display: none;
-    }
-
-    &_open {
-      & ~ #{$r}__tabs {
-        position: absolute;
-        top: 1.5rem;
-        display: flex;
-        flex-direction: column;
-      }
-    }
-  }
-
-  &__tabs {
-    display: none;
-    height: 100%;
     line-height: $header-footer-height;
-
-    @include breakpoint-up(sm) {
-      display: flex;
-      flex-direction: row;
-      margin-left: 1rem;
-    }
-  }
-
-  &__tab {
-    width: 8rem;
-    background: #444;
-    text-align: center;
-
-    @include breakpoint-up(sm) {
-      background: #333;
-    }
-
-    &_active {
-      background: #666;
-
-      @include breakpoint-up(sm) {
-        background: #555;
-      }
-    }
-  }
-
-  &__navigation-link {
-    color: #eaeaea;
-    text-decoration: none;
   }
 
   &__content {
