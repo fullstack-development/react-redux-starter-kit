@@ -1,0 +1,34 @@
+@import '~shared/styles/variables';
+
+.repositories-search-settings {
+  width: 25rem;
+
+  @media (max-width: $breakpoint-sm) {
+    width: auto;
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item {
+    width: 11rem;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+  }
+}

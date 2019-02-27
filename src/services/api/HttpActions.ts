@@ -2,11 +2,11 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
 
 class HttpActions {
   private request: AxiosInstance;
-  private host = __HOST__;
 
-  constructor(baseURL: string) {
+  constructor(baseURL: string, headers?: AxiosRequestConfig['headers']) {
     const config: AxiosRequestConfig = {
-      baseURL: this.host + baseURL,
+      baseURL,
+      headers,
       withCredentials: false,
     };
 

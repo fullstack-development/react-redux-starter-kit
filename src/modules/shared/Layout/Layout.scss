@@ -1,0 +1,108 @@
+@import '~shared/styles/variables';
+
+.layout {
+  $header-footer-height: 3rem;
+  $header-footer-margin: 1.5rem;
+
+  position: relative;
+  padding-bottom: $header-footer-height + $header-footer-margin;
+  min-height: 100%;
+
+  &__title {
+    text-align: center;
+    font-weight: 500;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 1.7rem;
+    }
+  }
+
+  &__header {
+    margin-bottom: $header-footer-margin;
+    height: $header-footer-height;
+    background: #333;
+    color: #eaeaea;
+
+    @media (max-width: $breakpoint-sm) {
+      justify-content: center;
+    }
+
+    &-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: auto;
+      width: 90%;
+    }
+
+    &-title {
+      @media (max-width: $breakpoint-sm) {
+        display: none;
+      }
+    }
+
+    &-left-part {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    margin-left: 1rem;
+    height: 100%;
+    line-height: $header-footer-height;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-left: 0;
+    }
+  }
+
+  &__tab {
+    width: 8rem;
+    background: #333;
+    text-align: center;
+
+    &_active {
+      background: #555;
+    }
+  }
+
+  &__navigation-link {
+    color: #eaeaea;
+    text-decoration: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 77vh;
+  }
+
+  &__footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: $header-footer-height;
+    background: #333;
+    text-align: right;
+    line-height: $header-footer-height;
+
+    &-content {
+      margin: auto;
+      width: 90%;
+      text-align: end;
+
+      @media (max-width: $breakpoint-sm) {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  &__company-link {
+    color: #eaeaea;
+  }
+}

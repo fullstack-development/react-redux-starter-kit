@@ -10,7 +10,6 @@ import threadLoaderLib from 'thread-loader';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 
 import postcssReporter from 'postcss-reporter';
-import postcssEasyImport from 'postcss-easy-import';
 import postcssSCSS from 'postcss-scss';
 import autoprefixer from 'autoprefixer';
 import stylelint from 'stylelint';
@@ -170,9 +169,6 @@ const commonScssLoaders: webpack.Loader[] = [
       syntax: postcssSCSS,
       plugins: () => {
         return [
-          postcssEasyImport({
-            extensions: '.scss',
-          }),
           stylelint(),
           doiuse({
             // https://github.com/browserslist/browserslist

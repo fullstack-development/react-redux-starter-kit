@@ -1,0 +1,49 @@
+@import '~shared/styles/variables';
+
+.users-search-settings {
+  width: 27rem;
+
+  @media (max-width: $breakpoint-sm) {
+    width: 15rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+
+    @media (max-width: $breakpoint-sm) {
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item {
+    width: 11rem;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__repos-number {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+    width: 11rem;
+
+    &-input {
+      width: 5rem;
+    }
+  }
+
+  &__settings-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

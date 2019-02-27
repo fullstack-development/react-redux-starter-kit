@@ -1,10 +1,7 @@
-import build from 'build-route-tree';
+import { routes as searchRoutes } from './Search/routes';
+import { routes as profileRoutes } from './Profile/routes';
 
-const rawTree = {
-  demo: {
-    gui: null,
-    translations: null,
-  },
+export default {
+  ...searchRoutes,
+  ...profileRoutes,
 };
-
-export default build(rawTree);

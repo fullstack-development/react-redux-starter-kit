@@ -1,5 +1,5 @@
 import React from 'react';
-import * as block from 'bem-cn';
+import block from 'bem-cn';
 import { bind } from 'decko';
 
 import './SomeComponent.scss';

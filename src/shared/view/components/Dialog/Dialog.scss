@@ -1,0 +1,26 @@
+.dialog {
+  $horizontal-padding: 1.8rem;
+
+  display: inline-block;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem $horizontal-padding;
+  }
+
+  &__content {
+    $border-style: 0.1rem solid #e5e5e5;
+
+    padding: 1.5rem $horizontal-padding;
+    border-top: $border-style;
+    border-bottom: $border-style;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem $horizontal-padding;
+  }
+}

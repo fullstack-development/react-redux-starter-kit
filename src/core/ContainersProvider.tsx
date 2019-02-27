@@ -2,14 +2,14 @@ import React from 'react';
 import { bind } from 'decko';
 import { Omit } from '_helpers';
 
+import * as usersSearchFeature from 'features/usersSearch';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
 import { IFeatureEntry } from 'shared/types/app';
 
 interface IContainerTypes {
-  MockContainer: any; // TODO update this with containers type
-  // CategorySelect: categorySelectFeature.Entry['containers']['CategorySelect'];
+  UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];
 }
 
 type Container = keyof IContainerTypes;
@@ -29,8 +29,7 @@ type GenericLoadersMap = {
 };
 
 const containerLoadersDictionary: LoadersMap = {
-  MockContainer: [] as any, // TODO update this with containers entry
-  // CategorySelect: categorySelectFeature.loadEntry,
+  UserDetails: usersSearchFeature.loadEntry,
 };
 
 interface IState {
@@ -61,11 +60,13 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       public componentWillUnmount() {
         this.saveContainerToState = null;
       }
-
+      // TODO: УДОЛИ
       public render() {
-        return typeof preloader !== 'undefined' && !this.isAllContainersLoaded()
-          ? preloader
-          : <WrappedComponent {...this.state.containers} {...this.props} />;
+        if (!this.isAllContainersLoaded()) {
+          return preloader !== void 0 ? preloader : null;
+        } else {
+          return <WrappedComponent {...this.state.containers} {...this.props} />;
+        }
       }
 
       @bind

@@ -1,0 +1,46 @@
+/* doiuse-disable word-break */
+
+.repository-preview {
+  padding: 1rem;
+  background: white;
+  color: #222;
+
+  &__description {
+    margin: 0.7rem 0 0.9rem;
+  }
+
+  &__name {
+    color: #1d67e0;
+    text-decoration: none;
+    word-break: break-all;
+    font-size: 1.4rem;
+  }
+
+  &__stars {
+    display: flex;
+    align-items: center;
+    width: 5rem;
+  }
+
+  &__star {
+    margin-right: 0.2rem;
+    height: 1.3rem;
+    color: #444;
+    font-size: 1.2rem;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    max-width: 36rem;
+  }
+
+  &__attributes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0.7rem;
+    width: 50%;
+    height: 2.35rem;
+  }
+}

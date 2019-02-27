@@ -5,6 +5,7 @@ import 'normalize.css';
 
 import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'services/theme';
+import { containers as NotificationContainers } from 'services/notification';
 import { I18nProvider } from 'services/i18n';
 import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
 import { BaseStyles, JssProvider, SheetsRegistry } from 'shared/styles';
@@ -65,6 +66,7 @@ function renderSharedPart(
             {createRoutes(modules)}
           </BaseStyles>
         </I18nProvider>
+        <NotificationContainers.Notification />
       </ThemeProvider>
     </JssProvider>
   );
