@@ -69,7 +69,7 @@ function UsersSearchLayout(props: IProps) {
     <Layout title="GitHub users search">
       <div className={b()}>
         <div className={b('search-form')}>
-          <UsersSearchForm onSubmit={setLastSubmittedFormState} />
+          <UsersSearchForm />
         </div>
         <UsersSearchResults />
       </div>
