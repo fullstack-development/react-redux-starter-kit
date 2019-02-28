@@ -1,21 +1,22 @@
-@import '~shared/styles/variables';
+@import '~shared/styles/mixins';
 
 .repositories-search-settings {
-  width: 25rem;
+  width: 12rem;
 
-  @media (max-width: $breakpoint-sm) {
-    width: auto;
+  @include breakpoint-up(sm) {
+    width: 25rem;
   }
 
   &__row {
     display: flex;
+    flex-direction: column;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
 
-    @media (max-width: $breakpoint-sm) {
-      flex-direction: column;
-      margin-bottom: 0;
+    @include breakpoint-up(sm) {
+      flex-direction: row;
+      margin-bottom: 1.5rem;
     }
 
     &:last-child {
@@ -24,11 +25,12 @@
   }
 
   &__item {
-    width: 11rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
 
-    @media (max-width: $breakpoint-sm) {
-      margin-bottom: 1.5rem;
-      width: 100%;
+    @include breakpoint-up(sm) {
+      margin-bottom: 0;
+      width: 11rem;
     }
   }
 }

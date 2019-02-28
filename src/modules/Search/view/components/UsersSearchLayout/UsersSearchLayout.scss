@@ -1,12 +1,12 @@
-@import '~shared/styles/variables';
+@import '~shared/styles/mixins';
 
 .users-search-layout {
   &__search-form {
     margin: 0 auto 1rem;
-    width: 30rem;
+    width: 85%;
 
-    @media (max-width: $breakpoint-sm) {
-      width: 85%;
+    @include breakpoint-up(sm) {
+      width: 30rem;
     }
   }
 }

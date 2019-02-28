@@ -1,7 +1,13 @@
+@import '~shared/styles/mixins';
+
 .user-details {
   position: relative;
   min-height: 20rem;
-  width: 13rem;
+  width: 11rem;
+
+  @include breakpoint-up(sm) {
+    width: 13rem;
+  }
 
   &__main {
     display: block;
@@ -11,7 +17,11 @@
   }
 
   &__avatar {
-    height: 13rem;
+    height: 10rem;
+
+    @include breakpoint-up(sm) {
+      height: 13rem;
+    }
   }
 
   &__attribute {

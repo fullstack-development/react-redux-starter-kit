@@ -1,5 +1,9 @@
+/* doiuse-disable calc */
+@import '~shared/styles/mixins';
+
 .dialog {
-  $horizontal-padding: 1.8rem;
+  $horizontal-padding-sm: 1.3rem;
+  $horizontal-padding-md: 1.8rem;
 
   display: inline-block;
 
@@ -7,20 +11,37 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem $horizontal-padding;
+    padding: 0.7rem $horizontal-padding-sm;
+
+    @include breakpoint-up(sm) {
+      padding: 1rem $horizontal-padding-md;
+    }
   }
 
   &__content {
     $border-style: 0.1rem solid #e5e5e5;
 
-    padding: 1.5rem $horizontal-padding;
+    padding: 1rem $horizontal-padding-sm;
     border-top: $border-style;
     border-bottom: $border-style;
+
+    @include breakpoint-up(sm) {
+      padding: 1.5rem $horizontal-padding-md;
+    }
   }
 
   &__actions {
     display: flex;
     justify-content: flex-end;
-    padding: 1rem $horizontal-padding;
+    padding: 0.7rem $horizontal-padding-sm;
+
+    @include breakpoint-up(sm) {
+      padding: 1rem $horizontal-padding-md;
+    }
+  }
+
+  &__paper {
+    margin: 1.5rem !important;
+    max-height: calc(100% - 2rem) !important;
   }
 }
