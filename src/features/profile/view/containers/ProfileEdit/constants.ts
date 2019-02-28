@@ -20,8 +20,8 @@ export const validateName = composeValidators(
 
 export const validateNickname = composeValidators(
   isRequired,
-  makeMinCharactersValidator(5, 'Nickname'),
-  makeMaxCharactersValidator(20, 'Nickname'),
+  makeMinCharactersValidator(3, 'Nickname'),
+  makeMaxCharactersValidator(13, 'Nickname'),
 );
 
 export const validateBio = makeMaxCharactersValidator(200, 'Bio');
