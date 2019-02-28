@@ -11,7 +11,7 @@
 }
 
 @mixin breakpoint-up($bp) {
-  @include safe-breakpoint($bp) { // TODO: может лучше это назвать?
+  @include safe-breakpoint($bp) {
     @media (min-width: map-get($breakpoints, $bp)) {
       @content;
     }
