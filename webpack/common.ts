@@ -19,7 +19,7 @@ import getEnvParams from '../src/core/getEnvParams';
 
 export type BuildType = 'dev' | 'prod' | 'server';
 
-const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode } = getEnvParams();
+const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode, forGHPages } = getEnvParams();
 
 const threadLoader: webpack.Loader[] = (() => {
   if (process.env.THREADED === 'true') {
@@ -75,6 +75,13 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   ) : [])
   .concat(withHot && type !== 'prod' ? (
     new webpack.HotModuleReplacementPlugin()
+  ) : [])
+  .concat(forGHPages ? (
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: 'assets/index.html',
+      chunksSortMode: sortChunks,
+    })
   ) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {

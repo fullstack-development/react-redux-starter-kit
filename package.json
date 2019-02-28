@@ -7,6 +7,7 @@
     "check-types": "node_modules/.bin/tsc -p . --noEmit",
     "dev": "npm run watch:dev",
     "prod": "npm run watch:prod",
+    "deploy:gh-pages": "npm run build:gh-pages && gh-pages -d build",
     "watch:dev": "better-npm-run watch:dev",
     "watch:prod": "better-npm-run watch:prod",
     "server:dev": "better-npm-run server:dev",
@@ -19,6 +20,7 @@
     "test:coverage": "node_modules/.bin/jest --coverage --watch",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
+    "build:gh-pages": "better-npm-run build:gh-pages",
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
@@ -128,6 +130,16 @@
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
         "THREADED": false
       }
+    },
+    "build:gh-pages": {
+      "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.ts",
+      "env": {
+        "FOR_GH_PAGES": true,
+        "NODE_ENV": "production",
+        "TS_NODE_FILES": true,
+        "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}",
+        "THREADED": false
+      }
     }
   },
   "repository": {
@@ -164,6 +176,7 @@
     "enzyme-adapter-react-16": "^1.7.0",
     "enzyme-to-json": "^3.3.4",
     "fork-ts-checker-webpack-plugin": "^0.5.0",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.5",
