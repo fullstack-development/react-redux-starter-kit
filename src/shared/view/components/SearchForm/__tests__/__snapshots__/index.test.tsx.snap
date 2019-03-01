@@ -661,11 +661,25 @@ exports[`SearchForm component should match snapshot 1`] = `
               title="Search settings"
             >
               <WithStyles(Dialog)
+                PaperProps={
+                  Object {
+                    "classes": Object {
+                      "root": "dialog__paper",
+                    },
+                  }
+                }
                 onClose={[Function]}
                 open={false}
               >
                 <Dialog
                   PaperComponent={[Function]}
+                  PaperProps={
+                    Object {
+                      "classes": Object {
+                        "root": "dialog__paper",
+                      },
+                    }
+                  }
                   TransitionComponent={[Function]}
                   classes={
                     Object {

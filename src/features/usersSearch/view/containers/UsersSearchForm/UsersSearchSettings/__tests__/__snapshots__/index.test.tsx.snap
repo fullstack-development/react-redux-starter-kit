@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersSearchSettings component should match snapshot 1`] = `
+<div
+  className="users-search-settings"
+>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <FieldWithComponent(SelectField)
+        label="Search by"
+        name="searchBy"
+        options={
+          Array [
+            Object {
+              "label": "Username & email",
+              "value": "username-email",
+            },
+            Object {
+              "label": "Username",
+              "value": "login",
+            },
+            Object {
+              "label": "Email",
+              "value": "email",
+            },
+            Object {
+              "label": "Full name",
+              "value": "fullname",
+            },
+          ]
+        }
+      />
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <FieldWithComponent(TextInputField)
+        label="Repositories language"
+        name="reposLanguage"
+      />
+    </div>
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <WithStyles(WithFormControlContext(FormLabel))>
+        Search type
+        <div
+          className={
+            Object {
+              "has": [Function],
+              "is": [Function],
+              "mix": [Function],
+              "split": [Function],
+              "state": [Function],
+              "toString": [Function],
+            }
+          }
+        >
+          <FieldWithComponent(RadioField)
+            label="User"
+            name="searchType"
+            value="user"
+          />
+          <FieldWithComponent(RadioField)
+            label="Organizations"
+            name="searchType"
+            value="org"
+          />
+          <FieldWithComponent(RadioField)
+            label="Both"
+            name="searchType"
+            value="both"
+          />
+        </div>
+      </WithStyles(WithFormControlContext(FormLabel))>
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <WithStyles(WithFormControlContext(FormLabel))>
+          Repositories number
+          <div
+            className={
+              Object {
+                "has": [Function],
+                "is": [Function],
+                "mix": [Function],
+                "split": [Function],
+                "state": [Function],
+                "toString": [Function],
+              }
+            }
+          >
+            <div
+              className={
+                Object {
+                  "has": [Function],
+                  "is": [Function],
+                  "mix": [Function],
+                  "split": [Function],
+                  "state": [Function],
+                  "toString": [Function],
+                }
+              }
+            >
+              <FieldWithComponent(NumberInputField)
+                label="min"
+                name="minRepos"
+              />
+            </div>
+            <div
+              className={
+                Object {
+                  "has": [Function],
+                  "is": [Function],
+                  "mix": [Function],
+                  "split": [Function],
+                  "state": [Function],
+                  "toString": [Function],
+                }
+              }
+            >
+              <FieldWithComponent(NumberInputField)
+                label="max"
+                name="maxRepos"
+              />
+            </div>
+          </div>
+        </WithStyles(WithFormControlContext(FormLabel))>
+      </div>
+      <div
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+      >
+        <FieldWithComponent(SelectField)
+          label="Results per page"
+          name="perPage"
+          options={
+            Array [
+              Object {
+                "label": 30,
+                "value": 30,
+              },
+              Object {
+                "label": 50,
+                "value": 50,
+              },
+              Object {
+                "label": 100,
+                "value": 100,
+              },
+            ]
+          }
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

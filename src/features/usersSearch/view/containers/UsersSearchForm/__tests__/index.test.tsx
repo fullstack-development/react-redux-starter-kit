@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { UsersSearchForm, IUsersSearchFormProps } from '../UsersSearchForm';
 
@@ -11,7 +11,7 @@ const props: IUsersSearchFormProps = {
 };
 
 describe('UsersSearchForm component', () => {
-  const component = render(<UsersSearchForm {...props} />);
+  const component = shallow(<UsersSearchForm {...props} />);
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();
   });

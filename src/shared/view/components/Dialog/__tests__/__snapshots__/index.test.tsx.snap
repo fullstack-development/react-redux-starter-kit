@@ -2,6 +2,13 @@
 
 exports[`Dialog component should match snapshot 1`] = `
 <WithStyles(Dialog)
+  PaperProps={
+    Object {
+      "classes": Object {
+        "root": "dialog__paper",
+      },
+    }
+  }
   onClose={[MockFunction]}
   open={true}
 >
