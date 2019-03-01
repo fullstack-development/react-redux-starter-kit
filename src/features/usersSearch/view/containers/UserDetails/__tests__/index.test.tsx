@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { getDetailedGithubUserMock } from 'shared/helpers';
+import { detailedGithubUser } from 'shared/mocks';
 
 import { UserDetails, IUserDetailsProps } from '../UserDetails';
 
 const props: IUserDetailsProps = {
-  userDetails: getDetailedGithubUserMock(),
+  userDetails: detailedGithubUser,
   isLoadUserDetailsRequesting: false,
   loadUserDetails: jest.fn(),
   onClose: jest.fn(),

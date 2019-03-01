@@ -34,20 +34,17 @@ describe('PaginationControls component', () => {
   });
 
   it('should not render left arrow if first page', () => {
-    component.setProps({ currentPage: 1 }, () => {
-      expect(leftArrow.hasClass('pagination-controls__arrow_hidden')).toBe(false);
-    });
+    component.setProps({ currentPage: 1 });
+    expect(leftArrow.hasClass('pagination-controls__arrow_hidden')).toBe(false);
   });
 
   it('should not render right arrow if last page', () => {
-    component.setProps({ currentPage: 5 }, () => {
-      expect(rightArrow.hasClass('pagination-controls__arrow_hidden')).toBe(false);
-    });
+    component.setProps({ currentPage: 5 });
+    expect(rightArrow.hasClass('pagination-controls__arrow_hidden')).toBe(false);
   });
 
   it('should not be rendered if totalPages <= 1', () => {
-    component.setProps({ totalPages: 1 }, () => {
-      expect(component.html()).toBeNull();
-    });
+    component.setProps({ totalPages: 1 });
+    expect(component.html()).toBeNull();
   });
 });

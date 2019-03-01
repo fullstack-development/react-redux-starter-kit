@@ -1,17 +1,17 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { getGithubUserMock } from 'shared/helpers';
+import { githubUser } from 'shared/mocks';
 
 import UserAvatarsWall, { IUserAvatarsWallProps } from '../UserAvatarsWall';
 
 const props: IUserAvatarsWallProps = {
-  users: Array(10).fill(getGithubUserMock()),
+  users: Array(10).fill(githubUser),
   onAvatarClick: jest.fn(),
 };
 
 describe('UserAvatarsWall component', () => {
-  const component = render(<UserAvatarsWall {...props} />);
+  const component = shallow(<UserAvatarsWall {...props} />);
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();
   });

@@ -1,57 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ProfilePreview component should match snapshot 1`] = `
-<ProfilePreview
-  onEditClick={[MockFunction]}
-  profile={
-    Object {
-      "age": 100,
-      "avatarURL": "https://the-url.com",
-      "bio": "profile bio",
-      "name": "Name name",
-      "nickname": "Nickname",
-    }
-  }
+<div
+  className="profile-preview"
 >
   <div
-    className="profile-preview"
-  >
-    <div
-      className={
-        Object {
-          "has": [Function],
-          "is": [Function],
-          "mix": [Function],
-          "split": [Function],
-          "state": [Function],
-          "toString": [Function],
-        }
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
       }
-      onClick={[Function]}
-    >
-      <ProfileAvatar
-        avatarURL="https://the-url.com"
-        size="small"
-      >
-        <div
-          className={
-            Object {
-              "has": [Function],
-              "is": [Function],
-              "mix": [Function],
-              "split": [Function],
-              "state": [Function],
-              "toString": [Function],
-            }
-          }
-          style={
-            Object {
-              "backgroundImage": "url(https://the-url.com)",
-            }
-          }
-        />
-      </ProfileAvatar>
-    </div>
+    }
+    onClick={[Function]}
+  >
+    <ProfileAvatar
+      avatarURL="https://the-url.com"
+      size="small"
+    />
+  </div>
+  <WithStyles(Popover)
+    anchorEl={null}
+    anchorOrigin={
+      Object {
+        "horizontal": "left",
+        "vertical": "bottom",
+      }
+    }
+    onClose={[Function]}
+    open={true}
+  >
     <div
       className={
         Object {
@@ -163,6 +144,6 @@ exports[`ProfilePreview component should match snapshot 1`] = `
         Edit
       </div>
     </div>
-  </div>
-</ProfilePreview>
+  </WithStyles(Popover)>
+</div>
 `;

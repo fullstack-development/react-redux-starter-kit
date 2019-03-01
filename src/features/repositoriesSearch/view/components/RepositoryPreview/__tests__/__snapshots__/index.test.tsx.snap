@@ -1,61 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryPreview component should match snapshot 1`] = `
-<RepositoryPreview
-  onOwnerClick={[MockFunction]}
-  repository={
-    Object {
-      "description": "description",
-      "forksNumber": 1,
-      "htmlURL": "http://the-url.com",
-      "id": 1,
-      "language": "en",
-      "name": "name",
-      "openIssuesNumber": 1,
-      "owner": Object {
-        "avatarURL": "http://the-url.com",
-        "htmlURL": "http://the-url.com",
-        "id": 1,
-        "username": "username",
-      },
-      "starsNumber": 1,
-      "updatedAt": "05/05/2005",
-    }
-  }
+<div
+  className="repository-preview"
 >
-  <div
-    className="repository-preview"
+  <a
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+    href="http://the-url.com"
+    target="_blank"
   >
-    <a
-      className={
-        Object {
-          "has": [Function],
-          "is": [Function],
-          "mix": [Function],
-          "split": [Function],
-          "state": [Function],
-          "toString": [Function],
-        }
+    name
+  </a>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
       }
-      href="http://the-url.com"
-      target="_blank"
-    >
-      name
-    </a>
-    <div
-      className={
-        Object {
-          "has": [Function],
-          "is": [Function],
-          "mix": [Function],
-          "split": [Function],
-          "state": [Function],
-          "toString": [Function],
-        }
+    }
+  >
+    description
+  </div>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
       }
-    >
-      description
-    </div>
+    }
+  >
     <div
       className={
         Object {
@@ -80,34 +70,11 @@ exports[`RepositoryPreview component should match snapshot 1`] = `
           }
         }
       >
-        <div
-          className={
-            Object {
-              "has": [Function],
-              "is": [Function],
-              "mix": [Function],
-              "split": [Function],
-              "state": [Function],
-              "toString": [Function],
-            }
-          }
+        <pure(StarIcon)
+          fontSize="inherit"
         />
-        1
       </div>
-      <div
-        className={
-          Object {
-            "has": [Function],
-            "is": [Function],
-            "mix": [Function],
-            "split": [Function],
-            "state": [Function],
-            "toString": [Function],
-          }
-        }
-      >
-        en
-      </div>
+      1
     </div>
     <div
       className={
@@ -121,201 +88,65 @@ exports[`RepositoryPreview component should match snapshot 1`] = `
         }
       }
     >
-      <div
-        className={
-          Object {
-            "has": [Function],
-            "is": [Function],
-            "mix": [Function],
-            "split": [Function],
-            "state": [Function],
-            "toString": [Function],
-          }
-        }
-      >
-        <div
-          className={
-            Object {
-              "has": [Function],
-              "is": [Function],
-              "mix": [Function],
-              "split": [Function],
-              "state": [Function],
-              "toString": [Function],
-            }
-          }
-        >
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            Forks
-            :
-          </span>
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            1
-          </span>
-        </div>
-        <div
-          className={
-            Object {
-              "has": [Function],
-              "is": [Function],
-              "mix": [Function],
-              "split": [Function],
-              "state": [Function],
-              "toString": [Function],
-            }
-          }
-        >
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            Open issues
-            :
-          </span>
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            1
-          </span>
-        </div>
-      </div>
-      <div
-        className={
-          Object {
-            "has": [Function],
-            "is": [Function],
-            "mix": [Function],
-            "split": [Function],
-            "state": [Function],
-            "toString": [Function],
-          }
-        }
-      >
-        <div
-          className={
-            Object {
-              "has": [Function],
-              "is": [Function],
-              "mix": [Function],
-              "split": [Function],
-              "state": [Function],
-              "toString": [Function],
-            }
-          }
-        >
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            Last updated
-            :
-          </span>
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            5/4/2005
-          </span>
-        </div>
-        <div
-          className={
-            Object {
-              "has": [Function],
-              "is": [Function],
-              "mix": [Function],
-              "split": [Function],
-              "state": [Function],
-              "toString": [Function],
-            }
-          }
-        >
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-          >
-            Owner:
-          </span>
-          <span
-            className={
-              Object {
-                "has": [Function],
-                "is": [Function],
-                "mix": [Function],
-                "split": [Function],
-                "state": [Function],
-                "toString": [Function],
-              }
-            }
-            onClick={[Function]}
-          >
-            username
-          </span>
-        </div>
-      </div>
+      en
     </div>
   </div>
-</RepositoryPreview>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <RepositoryAttribute
+        title="Forks"
+        value={1}
+      />
+      <RepositoryAttribute
+        title="Open issues"
+        value={1}
+      />
+    </div>
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      <RepositoryAttribute
+        title="Last updated"
+        value="5/4/2005"
+      />
+      <RepositoryAttribute
+        onValueClick={[Function]}
+        title="Owner"
+        type="owner"
+        value="username"
+      />
+    </div>
+  </div>
+</div>
 `;

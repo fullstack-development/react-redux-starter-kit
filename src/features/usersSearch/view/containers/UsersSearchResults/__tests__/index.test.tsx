@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { getGithubUserMock } from 'shared/helpers';
+import { githubUser } from 'shared/mocks';
 
 import { UsersSearchResults, IUsersSearchResultsProps } from '../UsersSearchResults';
 
@@ -12,7 +12,7 @@ const props: IUsersSearchResultsProps = {
     searchString: 'search',
     searchType: 'user',
   },
-  users: Array(10).fill(getGithubUserMock()),
+  users: Array(10).fill(githubUser),
   paginationState: {
     page: 1,
     totalPages: 2,

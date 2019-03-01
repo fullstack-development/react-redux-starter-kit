@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { INotification } from 'shared/types/common';
 import { Notification } from '../Notification';
 
@@ -8,7 +8,7 @@ describe('Notification component', () => {
     kind: 'error',
     text: 'notification text',
   };
-  const component = mount(<Notification notification={notification} />);
+  const component = shallow(<Notification notification={notification} />);
 
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();

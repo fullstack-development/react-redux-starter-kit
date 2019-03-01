@@ -1,12 +1,12 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { getProfileMock } from 'shared/helpers';
+import { profile } from 'shared/mocks';
 
 import { ProfileEdit, IProfileEditProps } from '../ProfileEdit';
 
 const props: IProfileEditProps = {
-  profile: getProfileMock(),
+  profile,
   setNotification: jest.fn(),
   saveProfile: jest.fn(),
 };

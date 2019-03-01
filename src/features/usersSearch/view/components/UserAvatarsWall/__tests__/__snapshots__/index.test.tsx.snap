@@ -2,88 +2,312 @@
 
 exports[`UserAvatarsWall component should match snapshot 1`] = `
 <div
-  class="users-avatars-wall"
+  className="users-avatars-wall"
 >
   <ul
-    class="users-avatars-wall__avatars users-avatars-wall__avatars_size_small"
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
   >
+    <Preloader
+      backgroundColor="#fff"
+      isShown={false}
+      size={100}
+    />
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>
     <li
-      class="users-avatars-wall__avatar"
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+      key="1"
+      onClick={[Function]}
     >
       <img
-        class="users-avatars-wall__image"
+        className={
+          Object {
+            "has": [Function],
+            "is": [Function],
+            "mix": [Function],
+            "split": [Function],
+            "state": [Function],
+            "toString": [Function],
+          }
+        }
+        onLoad={[Function]}
         src="http://the-url.com&s=70"
       />
     </li>

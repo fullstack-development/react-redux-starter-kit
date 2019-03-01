@@ -33,6 +33,7 @@ exports[`SearchForm component should match snapshot 1`] = `
     }
     onSubmit={[MockFunction]}
     render={[Function]}
+    subscription={Object {}}
   >
     <form
       className="search-form"

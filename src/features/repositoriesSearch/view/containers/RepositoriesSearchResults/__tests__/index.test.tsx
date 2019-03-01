@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import 'reflect-metadata';
 
-import { createContainerMock, getRepositoryMock } from 'shared/helpers';
+import { Container, repository } from 'shared/mocks';
 
 import { RepositoriesSearchResults, IRepositoriesSearchResultsProps } from '../RepositoriesSearchResults';
 
@@ -10,13 +10,13 @@ const props: IRepositoriesSearchResultsProps = {
   searchOptions: {
     searchString: 'search',
   },
-  repositories: Array(10).fill(getRepositoryMock()),
+  repositories: Array(10).fill(repository),
   paginationState: {
     page: 1,
     totalPages: 1,
   },
   searchRepositories: jest.fn(),
-  UserDetails: createContainerMock(),
+  UserDetails: Container,
 };
 
 describe('RepositoriesSearchResults component', () => {

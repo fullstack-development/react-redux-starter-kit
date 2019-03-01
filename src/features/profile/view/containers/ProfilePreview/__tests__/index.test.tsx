@@ -1,17 +1,18 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import { getProfileMock } from 'shared/helpers';
+import { profile } from 'shared/mocks';
 
 import { ProfilePreview, IProfilePreviewProps } from '../ProfilePreview';
 
 const props: IProfilePreviewProps = {
   onEditClick: jest.fn(),
-  profile: getProfileMock(),
+  profile,
 };
 
 describe('ProfilePreview component', () => {
-  const component = mount(<ProfilePreview {...props}/>);
+  const component = shallow(<ProfilePreview {...props}/>);
+  component.setState({ isOpen: true });
 
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();

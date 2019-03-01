@@ -20,26 +20,27 @@ const props: ISearchFormProps<IFormFields> = {
 
 describe('SearchForm component', () => {
   const component = mount(<SearchForm<IFormFields> {...props}/>);
+  const form = component.find('form');
+
   it('should match snapshot', () => {
     expect(component).toMatchSnapshot();
   });
 
   it('should call onSubmit on submit', () => {
-    component.find('form').simulate('submit');
+    form.simulate('submit');
     expect(props.onSubmit).toHaveBeenCalledTimes(1);
   });
 
   it('should not submit without a search string', () => {
     component.find('input').simulate('change', { target: { value: '' } });
-    component.find('form').simulate('submit');
+    form.simulate('submit');
     expect(props.onSubmit).toHaveBeenCalledTimes(1);
   });
 
   it('should not submit while requesting', () => {
-    component.setProps({ isSearchRequesting: true }, () => {
-      component.find('form').simulate('submit');
-      expect(props.onSubmit).toHaveBeenCalledTimes(1);
-    });
+    component.setProps({ isSearchRequesting: true });
+    form.simulate('submit');
+    expect(props.onSubmit).toHaveBeenCalledTimes(1);
   });
 
   it('should reset search results on unmount', () => {
