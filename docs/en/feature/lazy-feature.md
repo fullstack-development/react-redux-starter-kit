@@ -1,8 +1,8 @@
 # Lazy feature
-To speed up the application initialization and the initial load processes, a feature's content can be loaded lazily. To achieve this, a dynamic import & webpack chunks are used so a feature is loaded only when it is required by the currently exeucting code. The details of how it's implemented are listed below.
+To speed up the application initialization and the initial load processes, a feature's content can be loaded lazily. To achieve this, a dynamic import & webpack chunks are used so a feature is loaded only on demand. The details of how it's implemented are listed below.
 
 ## Feature entry
-Each lazy feature must have a file called `entry.ts`, containing a *feature entry*, which is basically an object with the data that gets exported by the feature. The entry is created using a shared helper function `makeFeatureEntry`. Entry is the part of the feature which is getting loaded dynamically.
+Each lazy feature must have a file called `entry.ts`, containing a *feature entry*, which is basically an object with data that gets exported by the feature. The entry is created using a shared helper function `makeFeatureEntry` and is the part of the feature which is getting loaded dynamically.
 ```
 /* userSearch feature */
 

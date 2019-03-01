@@ -10,7 +10,7 @@ Example:
 
 Feature exports its containers and redux logic which can be used in two places:
 1. Containers and redux logic can be used in [modules](./modules.md).
-2. Containers can be used in `ContainersProvider.tsx` to allow to use these containers in other features using the `containersProvider` HOC.
+2. Containers can be used in `ContainersProvider.tsx` to allow to use the containers in other features using the `containersProvider` HOC.
 
 ## Kinds of features
 

@@ -30,7 +30,7 @@ A service can contain:
 - react containers;
 - react Higher-Order Components (HOC) that can encapsulate logic related to service classes, pass through props to wrapped containers or control a rendering of wrapped containers depending on a service state;
 
-A service can also encapsulate logic related to side-effects, like API calls to the server or working with local storage.
+A service can also encapsulate logic related to side-effects, like API calls to the server or work with the local storage.
 
 Example:
 

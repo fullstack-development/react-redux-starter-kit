@@ -22,7 +22,7 @@ is now stored using an assigned to the feature instance unique ID (also called `
 }
 ```
 ## How to use a multi-instance feature:
-Let's say we have a widget in our app which is represented by a `widget` feature. A user can add as many instances (the feature containers) of that widget on the page as he wants. The widget displays some data fetched from a server. The user can also configure the widget to change the data that gets fetched and displayed.
+Let's say we have a widget in our app which is represented by a `widget` feature. A user can add as many instances (the feature containers) of that widget on the page as he wants. The widget displays some data fetched from a server. The user can also configure the widget to change the data that get fetched and displayed.
 
 So in this case every container with the widget would need to be able to use its own redux state, which can be achieved by making the feature multi-instance.
 
@@ -60,7 +60,7 @@ To make a feature multi-instance you should:
       ```
    - mapDispatchToProps function (written just like one for the regular `connect`);
 
-   A component wrapped with `multiConnect` also have the `instanceKey` prop. If you want to make use of it you should use the `IMultiConnectProps` in props type. `instanceKey` is either generated automatically by the `multiConnect` or passed explicitly to the component in case you need multiple containers to use the same redux state branch.
+   A component wrapped with `multiConnect` also have the `instanceKey` prop. If you want to make use of it, you should use the `IMultiConnectProps` in props type. `instanceKey` is either generated automatically by the `multiConnect` or passed explicitly to the component if you need multiple containers to use the same redux state branch.
 
 
     ```
@@ -82,7 +82,7 @@ To make a feature multi-instance you should:
     );
     ```
 
-4. In order to diffirentiate between redux actions dispatched from the feature instances, multi-instance feature actions are dispached with the `_instanceKey` field. The field is added automatically by the `multiConnect` HOC so you don't have to worry about that. But the feature reducer have to be configured separately to react on the actions with the `_instanceKey` field. To do that use a `multiReducer` function to wrap a regular feature reducer:
+4. In order to differentiate between redux actions dispatched from the feature instances, multi-instance feature actions are dispached with the `_instanceKey` field. The field is added automatically by the `multiConnect` HOC so you don't have to worry about that. But the feature reducer have to be configured separately to react on the actions with the `_instanceKey` field. To do that use a `multiReducer` function to wrap a regular feature reducer:
    ```
    export default (
     multiReducer(
@@ -94,7 +94,7 @@ To make a feature multi-instance you should:
     )
    );
    ```
-5. If you dispatch actions is saga, then you should add the `_instanceKey` to them explicitly and extend `IMultiAction` when declaring the action interface (it can be found in the action caught by saga):
+5. If you dispatch actions in a saga, then you should add the `_instanceKey` to them explicitly and extend `IMultiAction` when declaring an action interface (it can be found in the action caught by the saga):
     ```
     interface ILoadWidgetData extends IMultiAction {
       type: 'WIDGET:LOAD_WIDGET_DATA';
