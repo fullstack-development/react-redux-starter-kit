@@ -8,6 +8,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import threadLoaderLib from 'thread-loader';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import FileManagerWebpackPlugin from 'filemanager-webpack-plugin';
 
 import postcssReporter from 'postcss-reporter';
 import postcssSCSS from 'postcss-scss';
@@ -82,7 +83,17 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
       template: 'assets/index.html',
       chunksSortMode: sortChunks,
     })
-  ) : []);
+  ) : [])
+  .concat(forGHPages ? new FileManagerWebpackPlugin({
+    onEnd: {
+      copy: [
+        {
+          source: `src/assets/ghPages/**`,
+          destination: `build`,
+        },
+      ],
+    },
+  }) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];

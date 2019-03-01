@@ -244,6 +244,7 @@
     "express": "^4.16.3",
     "favicons-webpack-plugin": "0.0.9",
     "file-loader": "^2.0.0",
+    "filemanager-webpack-plugin": "^2.0.5",
     "final-form": "^4.11.0",
     "inversify": "^5.0.1",
     "inversify-inject-decorators": "^3.1.0",
