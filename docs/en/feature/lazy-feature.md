@@ -86,7 +86,7 @@ In this example `usersSearchFeatureEntry` will be loaded only when `UsersSearchL
 
 ### In ContainersProvider
 
-If a feature needs to use another feature's container it is loaded using the `containersProvider` HOC. It works the same way as the `featureConnect`, but:
+If a feature needs to use another feature's container, it is loaded using the `containersProvider` HOC. It works the same way as the `featureConnect`, but:
 - it takes an array of container names as the first argument (a feature doesn't really know that it's using a container of some other feature, because from its perspective `containersProvider` is just an API for getting containers by their name);
 - a component returned by `containersProvider` includes only chosen containers as props and not feature entries with all feature's data;
 - `containersProvider` provides only those containers that are defined in its configuration in the `ContainersProvider.tsx` file. If you want to add a new container that `containersProvider` can provide, then you'll need to extend the configuration as follows:
