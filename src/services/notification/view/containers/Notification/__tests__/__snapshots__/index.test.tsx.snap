@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notification component should match snapshot 1`] = `
+<Notification
+  notification={
+    Object {
+      "kind": "error",
+      "text": "notification text",
+    }
+  }
+>
+  <div
+    className={
+      Object {
+        "has": [Function],
+        "is": [Function],
+        "mix": [Function],
+        "split": [Function],
+        "state": [Function],
+        "toString": [Function],
+      }
+    }
+  >
+    <div
+      className={
+        Object {
+          "has": [Function],
+          "is": [Function],
+          "mix": [Function],
+          "split": [Function],
+          "state": [Function],
+          "toString": [Function],
+        }
+      }
+    >
+      notification text
+    </div>
+  </div>
+</Notification>
+`;
