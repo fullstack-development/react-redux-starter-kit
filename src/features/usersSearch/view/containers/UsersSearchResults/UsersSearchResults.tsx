@@ -9,7 +9,7 @@ import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 
 import { IUsersSearchFormFields } from '../../../namespace';
-import { UserAvatarsWall } from '../../components';
+import { UsersAvatarsWall } from '../../components';
 import { actions, selectors } from './../../../redux';
 import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
@@ -54,7 +54,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
     const { displayedUser } = this.state;
     return (
       <div className={b()}>
-        <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
+        <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         <div className={b('pagination')}>
           <PaginationControls
             totalPages={totalPages}

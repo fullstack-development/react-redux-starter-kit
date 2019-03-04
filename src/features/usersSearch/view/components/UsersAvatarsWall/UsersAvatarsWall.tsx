@@ -7,7 +7,7 @@ import { IGithubUser } from 'shared/types/models';
 import { Preloader } from 'shared/view/elements';
 
 import { injectSizeToAvatarURL } from '../../../helpers';
-import './UserAvatarsWall.scss';
+import './UsersAvatarsWall.scss';
 
 interface IState {
   areAllAvatarsLoaded: boolean;
@@ -20,7 +20,7 @@ interface IProps {
 
 const b = block('users-avatars-wall');
 
-class UserAvatarsWall extends React.PureComponent<IProps> {
+class UsersAvatarsWall extends React.PureComponent<IProps> {
   public state: IState = {
     areAllAvatarsLoaded: true,
   };
@@ -114,5 +114,5 @@ class UserAvatarsWall extends React.PureComponent<IProps> {
   }
 }
 
-export { IProps as IUserAvatarsWallProps };
-export default UserAvatarsWall;
+export { IProps as IUsersAvatarsWallProps };
+export default UsersAvatarsWall;
