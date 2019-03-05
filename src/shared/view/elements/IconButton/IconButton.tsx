@@ -1,3 +1,1 @@
-import MuiIconButton from '@material-ui/core/IconButton';
-
-export default MuiIconButton;
+export { default } from '@material-ui/core/IconButton';
