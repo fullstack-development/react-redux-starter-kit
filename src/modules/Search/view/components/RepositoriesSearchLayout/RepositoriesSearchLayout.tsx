@@ -37,6 +37,7 @@ function RepositoriesSearchLayout(props: IProps) {
   );
 }
 
+export { RepositoriesSearchLayout, IProps as IRepositoriesSearchLayoutProps  };
 export default featureConnect({
   repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
 })(RepositoriesSearchLayout);

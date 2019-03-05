@@ -34,6 +34,7 @@ function UsersSearchLayout(props: IProps) {
   );
 }
 
+export { UsersSearchLayout, IProps as IUsersSearchLayoutProps  };
 export default featureConnect({
   usersSearchFeatureEntry: features.usersSearch.loadEntry,
 })(UsersSearchLayout);

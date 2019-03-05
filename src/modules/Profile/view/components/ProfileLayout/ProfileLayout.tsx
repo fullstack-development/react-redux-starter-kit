@@ -27,6 +27,7 @@ function ProfileLayout(props: IProps) {
   );
 }
 
+export { ProfileLayout, IProps as IProfileLayoutProps };
 export default featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
 })(ProfileLayout);
