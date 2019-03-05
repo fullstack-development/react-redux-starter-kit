@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import PaginationControls, { IPaginationControlsProps } from '../PaginationControls';
 
@@ -10,7 +10,7 @@ const props: IPaginationControlsProps = {
 };
 
 describe('PaginationControls component', () => {
-  const component = mount(<PaginationControls {...props} />);
+  const component = shallow(<PaginationControls {...props} />);
   const leftArrow = component.find('.pagination-controls__arrow_direction_left');
   const rightArrow = component.find('.pagination-controls__arrow_direction_right');
 
@@ -25,12 +25,12 @@ describe('PaginationControls component', () => {
 
   it('should call onPageRequest with prev page number on left arrow click', () => {
     leftArrow.simulate('click');
-    expect(props.onPageRequest).toHaveBeenCalledWith(component.prop('currentPage') - 1);
+    expect(props.onPageRequest).toHaveBeenCalledWith(props.currentPage - 1);
   });
 
   it('should call onPageRequest with next page number on right arrow click', () => {
     rightArrow.simulate('click');
-    expect(props.onPageRequest).toHaveBeenCalledWith(component.prop('currentPage') + 1);
+    expect(props.onPageRequest).toHaveBeenCalledWith(props.currentPage + 1);
   });
 
   it('should not render left arrow if first page', () => {
