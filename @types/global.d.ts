@@ -45,3 +45,4 @@ declare module 'postcss-scss';
 declare module 'doiuse';
 declare module 'favicons-webpack-plugin';
 declare module 'circular-dependency-plugin';
+declare module 'filemanager-webpack-plugin';

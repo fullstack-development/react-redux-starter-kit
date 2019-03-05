@@ -1,3 +1,1 @@
-import MuiTypography from '@material-ui/core/Typography';
-
-export default MuiTypography;
+export { default } from '@material-ui/core/Typography';
