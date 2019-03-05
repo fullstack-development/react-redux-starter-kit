@@ -1,6 +1,9 @@
+import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
+import { ResultEntry, Containers, ActionCreators, Selectors } from 'shared/helpers/makeFeatureEntry';
 
-export const Container: any = () => null;
+export const Container: any = () => React.createElement('div');
 
 export const profile: IProfile = {
   age: 100,
@@ -37,4 +40,61 @@ export const repository: IRepository = {
   language: 'en',
   updatedAt: '05/05/2005',
   owner: githubUser,
+};
+
+export function makeMockEntry(
+  containers?: Containers<any> | null,
+  actions?: ActionCreators<any> | null,
+  selectors?: Selectors<any> | null,
+) {
+  return {
+    containers: new Proxy(containers || {}, {
+      get: (target, property: string) => {
+        return target[property] || Container;
+      },
+    }),
+    actions: new Proxy(actions || {}, {
+      get: (target, property: string) => {
+        return target[property] || jest.fn();
+      },
+    }),
+    selectors: new Proxy(selectors || {}, {
+      get: (target, property: string) => {
+        return target[property] || jest.fn();
+      },
+    }),
+  } as ResultEntry<any, any, any>;
+}
+
+export const withRouterProps: RouteComponentProps = {
+  history: {
+    length: 1,
+    action: 'PUSH',
+    push: jest.fn(),
+    replace: jest.fn(),
+    go: jest.fn(),
+    goBack: jest.fn(),
+    goForward: jest.fn(),
+    listen: jest.fn(),
+    block: jest.fn(),
+    createHref: jest.fn(),
+    location: {
+      pathname: 'pathname',
+      hash: 'hash',
+      state: null,
+      search: 'search',
+    },
+  },
+  location: {
+    pathname: 'pathname',
+    hash: 'hash',
+    state: null,
+    search: 'search',
+  },
+  match: {
+    params: {},
+    isExact: true,
+    path: 'path',
+    url: 'https://the_url.com',
+  },
 };

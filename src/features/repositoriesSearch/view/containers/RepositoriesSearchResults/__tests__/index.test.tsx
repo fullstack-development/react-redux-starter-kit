@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import 'reflect-metadata';
 
 import { Container, repository } from 'shared/mocks';
 
