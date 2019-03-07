@@ -12,11 +12,6 @@ const props: IProfilePreviewProps = {
 
 describe('ProfilePreview component', () => {
   const component = shallow(<ProfilePreview {...props}/>);
-  component.setState({ isOpen: true });
-
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
 
   it('should call onEditClick on Edit click', () => {
     component.find('.profile-preview__edit').simulate('click');

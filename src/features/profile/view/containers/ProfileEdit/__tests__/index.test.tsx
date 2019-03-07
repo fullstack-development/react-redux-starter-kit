@@ -14,13 +14,9 @@ const props: IProfileEditProps = {
 describe('ProfileEdit component', () => {
   const component = mount(<ProfileEdit {...props} />);
 
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
-
   it('should save profile & set notification on submit', () => {
     component.find('form').simulate('submit');
     expect(props.setNotification).toHaveBeenCalledTimes(1);
-    expect(props.saveProfile).toHaveBeenCalledTimes(1);
+    expect(props.saveProfile).toHaveBeenCalledWith(props.profile);
   });
 });
