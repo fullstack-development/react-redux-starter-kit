@@ -3,7 +3,11 @@ import { RouteComponentProps } from 'react-router-dom';
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { ResultEntry, Containers, ActionCreators, Selectors } from 'shared/helpers/makeFeatureEntry';
 
-export const Container: any = () => React.createElement('div');
+export const makeMockContainer: any = (containerName: string) => {
+  const Container = () => React.createElement('div');
+  Container.displayName = containerName;
+  return Container;
+};
 
 export const profile: IProfile = {
   age: 100,
@@ -50,7 +54,7 @@ export function makeMockEntry(
   return {
     containers: new Proxy(containers || {}, {
       get: (target, property: string) => {
-        return target[property] || Container;
+        return target[property] || makeMockContainer('Container');
       },
     }),
     actions: new Proxy(actions || {}, {
