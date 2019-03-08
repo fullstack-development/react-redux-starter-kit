@@ -11,9 +11,6 @@ const props: IRepositoryAttributeProps = {
 
 describe('RepositoryAttribute component', () => {
   const component = shallow(<RepositoryAttribute {...props} />);
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
 
   it('should call onValueClick on value click', () => {
     component.find('.repository-attribute__value').simulate('click');

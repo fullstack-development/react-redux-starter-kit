@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { RepositoriesSearchForm, IRepositoriesSearchFormProps } from '../RepositoriesSearchForm';
 
@@ -11,8 +11,18 @@ const props: IRepositoriesSearchFormProps = {
 };
 
 describe('RepositoriesSearchForm component', () => {
-  const component = render(<RepositoriesSearchForm {...props} />);
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
+  const component = shallow(<RepositoriesSearchForm {...props} />);
+  const searchForm = component.find('SearchForm');
+
+  it('should call onSubmit and searchRepositories with form values on form submit', () => {
+    const formValues = {};
+    searchForm.prop<(formValues: object) => void>('onSubmit')(formValues);
+    expect(props.searchRepositories).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
+    expect(props.onSubmit).toHaveBeenCalledWith(formValues);
+  });
+
+  it('should call resetRepositories on reset search results', () => {
+    searchForm.prop<() => void>('resetSearchResults')();
+    expect(props.resetSearchResults).toHaveBeenCalledTimes(1);
   });
 });
