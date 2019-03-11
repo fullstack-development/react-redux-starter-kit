@@ -39,7 +39,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  searchUser: actions.searchUser,
+  searchUsers: actions.searchUsers,
 };
 
 const b = block('users-search-results');
@@ -69,8 +69,8 @@ class UsersSearchResults extends React.PureComponent<IProps> {
 
   @bind
   private handlePageRequest(pageNumber: number) {
-    const { searchUser, searchOptions } = this.props;
-    searchUser({ searchOptions, page: pageNumber });
+    const { searchUsers, searchOptions } = this.props;
+    searchUsers({ searchOptions, page: pageNumber });
   }
 
   @bind
