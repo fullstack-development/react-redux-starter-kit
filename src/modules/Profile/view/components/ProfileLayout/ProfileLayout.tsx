@@ -3,8 +3,8 @@ import block from 'bem-cn';
 
 import * as features from 'features';
 import { featureConnect } from 'core';
-import Layout from 'modules/shared/Layout/Layout';
 
+import { withLayout } from '../../../../shared';
 import './ProfileLayout.scss';
 
 interface IFeatureProps {
@@ -19,15 +19,15 @@ function ProfileLayout(props: IProps) {
   const { profileFeatureEntry: { containers } } = props;
   const { ProfileEdit } = containers;
   return (
-    <Layout title="Edit profile">
-      <div className={b()}>
-        <ProfileEdit />
-      </div>
-    </Layout>
+    <div className={b()}>
+      <ProfileEdit />
+    </div>
   );
 }
 
 export { ProfileLayout, IProps as IProfileLayoutProps };
-export default featureConnect({
-  profileFeatureEntry: features.profile.loadEntry,
-})(ProfileLayout);
+export default withLayout('Edit profile')(
+  featureConnect({
+    profileFeatureEntry: features.profile.loadEntry,
+  })(ProfileLayout),
+);

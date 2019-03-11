@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
 
-import Layout from 'modules/shared/Layout/Layout';
+import { withLayout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
 
 interface IFeatureProps {
@@ -22,22 +22,22 @@ function RepositoriesSearchLayout(props: IProps) {
     useState<features.repositoriesSearch.namespace.IRepositoriesSearchFormFields | null>(null);
 
   return (
-    <Layout title="GitHub repositories search">
-      <div className={b()}>
-        <div className={b('search-form')}>
-          <RepositoriesSearchForm onSubmit={setLastSubmittedFormState}/>
-        </div>
-        <div className={b('results')}>
-          {lastSubmittedFormState &&
-            <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
-          }
-        </div>
+    <div className={b()}>
+      <div className={b('search-form')}>
+        <RepositoriesSearchForm onSubmit={setLastSubmittedFormState}/>
       </div>
-    </Layout>
+      <div className={b('results')}>
+        {lastSubmittedFormState &&
+          <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
+        }
+      </div>
+    </div>
   );
 }
 
 export { RepositoriesSearchLayout, IProps as IRepositoriesSearchLayoutProps  };
-export default featureConnect({
-  repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
-})(RepositoriesSearchLayout);
+export default withLayout('GitHub repositories search')(
+  featureConnect({
+    repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
+  })(RepositoriesSearchLayout),
+);

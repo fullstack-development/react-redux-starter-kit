@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
 
-import Layout from 'modules/shared/Layout/Layout';
+import { withLayout } from '../../../../shared';
 import './UsersSearchLayout.scss';
 
 interface IFeatureProps {
@@ -23,18 +23,18 @@ function UsersSearchLayout(props: IProps) {
   const { UsersSearchForm, UsersSearchResults } = containers;
 
   return (
-    <Layout title="GitHub users search">
-      <div className={b()}>
-        <div className={b('search-form')}>
-          <UsersSearchForm onSubmit={setLastSubmittedFormState} />
-        </div>
-        {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
+    <div className={b()}>
+      <div className={b('search-form')}>
+        <UsersSearchForm onSubmit={setLastSubmittedFormState} />
       </div>
-    </Layout>
+      {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
+    </div>
   );
 }
 
 export { UsersSearchLayout, IProps as IUsersSearchLayoutProps  };
-export default featureConnect({
-  usersSearchFeatureEntry: features.usersSearch.loadEntry,
-})(UsersSearchLayout);
+export default withLayout('GitHub users search')(
+    featureConnect({
+    usersSearchFeatureEntry: features.usersSearch.loadEntry,
+  })(UsersSearchLayout),
+);
