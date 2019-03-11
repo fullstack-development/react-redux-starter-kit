@@ -103,6 +103,6 @@ export const withRouterProps: RouteComponentProps = {
   },
 };
 
-export const event = {
-  preventDefault: () => void 0,
-};
+export function makeMockEvent(type: string) {
+  return new Event(type);
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { event } from 'shared/mocks';
+import { makeMockEvent } from 'shared/mocks';
 
 import LayoutHeaderMenu, { IHeaderMenuProps } from '../LayoutHeaderMenu';
 
@@ -18,6 +18,8 @@ const props: IHeaderMenuProps = {
   ],
 };
 
+const clickEvent = makeMockEvent('click');
+
 describe('(modules/shared) LayoutHeaderMenu component', () => {
   const component = shallow(<LayoutHeaderMenu {...props} />);
 
@@ -29,19 +31,19 @@ describe('(modules/shared) LayoutHeaderMenu component', () => {
     const menuIcon = component.find('.layout-header-menu__menu-icon');
 
     expect(component.state().isMenuOpen).toBe(false);
-    menuIcon.simulate('click', event);
+    menuIcon.simulate('click', clickEvent);
     expect(component.state().isMenuOpen).toBe(true);
-    menuIcon.simulate('click', event);
+    menuIcon.simulate('click', clickEvent);
     expect(component.state().isMenuOpen).toBe(false);
 
-    menuIcon.simulate('touchend', event);
+    menuIcon.simulate('touchend', clickEvent);
     expect(component.state().isMenuOpen).toBe(true);
-    menuIcon.simulate('touchend', event);
+    menuIcon.simulate('touchend', clickEvent);
     expect(component.state().isMenuOpen).toBe(false);
   });
 
   it('should close menu on clickaway', () => {
-    component.find('.layout-header-menu__menu-icon').simulate('click', event);
+    component.find('.layout-header-menu__menu-icon').simulate('click', clickEvent);
     expect(component.state().isMenuOpen).toBe(true);
     component.find('ClickAwayListener').prop<() => void>('onClickAway')();
     expect(component.state().isMenuOpen).toBe(false);
