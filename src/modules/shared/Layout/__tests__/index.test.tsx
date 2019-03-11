@@ -1,19 +1,23 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { makeMockEntry, withRouterProps } from 'shared/mocks';
+import { makeMockEntry, makeMockContainer, withRouterProps } from 'shared/mocks';
 
 import { Layout, ILayoutProps } from '../Layout';
+import routes from '../../../routes';
 
 const props: ILayoutProps = {
   title: 'Title',
-  profileFeatureEntry: makeMockEntry(),
+  profileFeatureEntry: makeMockEntry({
+    ProfilePreview: makeMockContainer('ProfilePreview'),
+  }),
   ...withRouterProps,
 };
 
 describe('Layout component', () => {
-  it('should match snapshot', () => {
-    const component = shallow(<Layout {...props} />);
-    expect(component).toMatchSnapshot();
+  const component = shallow(<Layout {...props} />);
+  it('should redirect to profile page on edit profile click', () => {
+    component.find('ProfilePreview').prop<() => void>('onEditClick')();
+    expect(props.history.push).toHaveBeenCalledWith(routes.profile.getRoutePath());
   });
 });

@@ -102,3 +102,7 @@ export const withRouterProps: RouteComponentProps = {
     url: 'https://the_url.com',
   },
 };
+
+export const event = {
+  preventDefault: () => void 0,
+};
