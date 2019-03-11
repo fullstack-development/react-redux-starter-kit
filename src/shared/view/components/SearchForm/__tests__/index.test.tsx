@@ -18,13 +18,9 @@ const props: ISearchFormProps<IFormFields> = {
   },
 };
 
-describe('SearchForm component', () => {
+describe('(shared/view) SearchForm component', () => {
   const component = mount(<SearchForm<IFormFields> {...props}/>);
   const form = component.find('form');
-
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
 
   it('should call onSubmit on submit', () => {
     form.simulate('submit');

@@ -3,16 +3,12 @@ import { shallow } from 'enzyme';
 import { INotification } from 'shared/types/common';
 import { Notification } from '../Notification';
 
-describe('Notification component', () => {
+describe('(services/notification) Notification container', () => {
   const notification: INotification = {
     kind: 'error',
     text: 'notification text',
   };
   const component = shallow(<Notification notification={notification} />);
-
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
 
   it('should render notification text', () => {
     expect(component.find('.notification__text').text()).toBe(notification.text);

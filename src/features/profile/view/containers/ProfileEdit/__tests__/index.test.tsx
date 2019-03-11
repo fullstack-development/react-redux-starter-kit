@@ -11,7 +11,7 @@ const props: IProfileEditProps = {
   saveProfile: jest.fn(),
 };
 
-describe('ProfileEdit component', () => {
+describe('(features/profile) ProfileEdit container', () => {
   const component = mount(<ProfileEdit {...props} />);
 
   it('should save profile & set notification on submit', () => {

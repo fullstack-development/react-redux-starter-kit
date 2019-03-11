@@ -12,7 +12,7 @@ const props: IRepositoriesSearchLayoutProps = {
   }),
 };
 
-describe('RepositoriesSearchLayout component', () => {
+describe('(modules/Search) RepositoriesSearchLayout component', () => {
   const component = shallow(<RepositoriesSearchLayout {...props} />);
   it('should show search results after submit search form', () => {
     expect(component.find('RepositoriesSearchResults').length).toBe(0);

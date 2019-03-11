@@ -18,7 +18,7 @@ const props: IHeaderMenuProps = {
   ],
 };
 
-describe('LayoutHeaderMenu component', () => {
+describe('(modules/shared) LayoutHeaderMenu component', () => {
   const component = shallow(<LayoutHeaderMenu {...props} />);
 
   it('should render every menu item', () => {

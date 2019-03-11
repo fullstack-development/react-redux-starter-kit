@@ -13,7 +13,7 @@ const props: IUsersSearchFormProps = {
   isUsersSearchRequesting: false,
 };
 
-describe('UsersSearchForm component', () => {
+describe('(features/usersSearch) UsersSearchForm container', () => {
   const component = shallow(<UsersSearchForm {...props} />);
   const searchForm = component.find('SearchForm');
 

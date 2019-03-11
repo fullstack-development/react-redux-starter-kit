@@ -13,7 +13,7 @@ const props: IUserDetailsProps = {
   username: 'the user',
 };
 
-describe('UserDetails component', () => {
+describe('(features/usersSearch) UserDetails container', () => {
   const component = shallow(<UserDetails {...props} />);
   it('should show preloader if user details are requesting', () => {
     expect(component.find('Preloader').prop('isShown')).toBe(true);

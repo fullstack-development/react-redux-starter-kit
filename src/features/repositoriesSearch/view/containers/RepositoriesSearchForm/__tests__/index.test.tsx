@@ -10,7 +10,7 @@ const props: IRepositoriesSearchFormProps = {
   isRepositoriesSearchRequesting: false,
 };
 
-describe('RepositoriesSearchForm component', () => {
+describe('(features/repositoriesSearch) RepositoriesSearchForm container', () => {
   const component = shallow(<RepositoriesSearchForm {...props} />);
   const searchForm = component.find('SearchForm');
 

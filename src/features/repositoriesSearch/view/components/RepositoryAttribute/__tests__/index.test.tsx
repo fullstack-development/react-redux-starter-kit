@@ -9,7 +9,7 @@ const props: IRepositoryAttributeProps = {
   onValueClick: jest.fn(),
 };
 
-describe('RepositoryAttribute component', () => {
+describe('(features/repositoriesSearch) RepositoryAttribute component', () => {
   const component = shallow(<RepositoryAttribute {...props} />);
 
   it('should call onValueClick on value click', () => {

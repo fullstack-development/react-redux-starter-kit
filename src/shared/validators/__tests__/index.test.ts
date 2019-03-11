@@ -1,6 +1,6 @@
 import { isRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators } from '../';
 
-describe('Validators tests', () => {
+describe('(shared) Validators', () => {
   describe('composeValidators', () => {
     const mockValidators = Array(5).fill(jest.fn());
     const composedValidator = composeValidators(...mockValidators);

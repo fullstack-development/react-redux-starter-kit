@@ -10,7 +10,7 @@ const props: IProfilePreviewProps = {
   profile,
 };
 
-describe('ProfilePreview component', () => {
+describe('(features/profile) ProfilePreview container', () => {
   const component = mount(<ProfilePreview {...props}/>);
 
   it('should not show profile info initially', () => {

@@ -22,7 +22,7 @@ const props: IUsersSearchResultsProps = {
   searchUsers: jest.fn(),
 };
 
-describe('UsersSearchResults component', () => {
+describe('(features/usersSearch) UsersSearchResults container', () => {
   const component = shallow(<UsersSearchResults {...props} />);
 
   it('should show UserDetails on user avatar click', () => {

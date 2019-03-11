@@ -12,7 +12,7 @@ const props: IUsersSearchLayoutProps = {
   }),
 };
 
-describe('UsersSearchLayout component', () => {
+describe('(modules/Search) UsersSearchLayout component', () => {
   const component = shallow(<UsersSearchLayout {...props} />);
   it('should show search results after submit search form', () => {
     expect(component.find('UsersSearchResults').length).toBe(0);

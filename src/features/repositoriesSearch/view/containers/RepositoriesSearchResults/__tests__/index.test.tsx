@@ -18,7 +18,7 @@ const props: IRepositoriesSearchResultsProps = {
   UserDetails: makeMockContainer('UserDetails'),
 };
 
-describe('RepositoriesSearchResults component', () => {
+describe('(features/repositoriesSearch) RepositoriesSearchResults container', () => {
   const component = shallow(<RepositoriesSearchResults {...props} />);
 
   it('should render all found repositories', () => {
@@ -34,7 +34,7 @@ describe('RepositoriesSearchResults component', () => {
     expect(searchRepositories).toHaveBeenCalledWith({ searchOptions, page });
   });
 
-  it('shound render user details after RepositoryPreview owner click', () => {
+  it('should render user details after RepositoryPreview owner click', () => {
     expect(component.find('UserDetails').length).toBe(0);
     const { username } = props.repositories[0].owner;
     const repositoryPreview = component.find('RepositoryPreview').at(0);

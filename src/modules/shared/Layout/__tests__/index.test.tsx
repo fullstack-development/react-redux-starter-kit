@@ -14,7 +14,7 @@ const props: ILayoutProps = {
   ...withRouterProps,
 };
 
-describe('Layout component', () => {
+describe('(modules/shared) Layout component', () => {
   const component = shallow(<Layout {...props} />);
   it('should redirect to profile page on edit profile click', () => {
     component.find('ProfilePreview').prop<() => void>('onEditClick')();

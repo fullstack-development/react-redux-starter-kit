@@ -9,14 +9,10 @@ const props: IPaginationControlsProps = {
   onPageRequest: jest.fn(),
 };
 
-describe('PaginationControls component', () => {
+describe('(shared/view) PaginationControls component', () => {
   const component = shallow(<PaginationControls {...props} />);
   const leftArrow = component.find('.pagination-controls__arrow_direction_left');
   const rightArrow = component.find('.pagination-controls__arrow_direction_right');
-
-  it('should match snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
 
   it('should call onPageRequest with page number on page number click', () => {
     component.find('.pagination-controls__page').at(2).simulate('click');

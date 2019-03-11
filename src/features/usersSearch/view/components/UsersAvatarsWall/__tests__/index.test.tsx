@@ -11,7 +11,7 @@ const props: IUsersAvatarsWallProps = {
   onAvatarClick: jest.fn(),
 };
 
-describe('UsersAvatarsWall component', () => {
+describe('(features/usersSearch) UsersAvatarsWall component', () => {
   const component = shallow(<UsersAvatarsWall {...props} />);
   const avatars = component.find('.users-avatars-wall__avatar');
 
