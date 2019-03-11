@@ -22,7 +22,7 @@ const b = block('users-avatars-wall');
 
 class UsersAvatarsWall extends React.PureComponent<IProps> {
   public state: IState = {
-    areAllAvatarsLoaded: true,
+    areAllAvatarsLoaded: false,
   };
 
   private avatarSize = 70;
