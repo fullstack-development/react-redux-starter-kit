@@ -1,8 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import { ISearchFormProps } from 'shared/view/components';
-
 import { UsersSearchForm, IUsersSearchFormProps } from '../UsersSearchForm';
 import { IUsersSearchFormFields } from '../../../../namespace';
 
@@ -24,13 +22,13 @@ describe('(features/usersSearch) UsersSearchForm container', () => {
       searchType: 'both',
       perPage: 30,
     };
-    searchForm.prop<ISearchFormProps<IUsersSearchFormFields>['onSubmit']>('onSubmit')(formValues);
+    searchForm.prop<(formValues: object) => void>('onSubmit')(formValues);
     expect(props.searchUsers).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
     expect(props.onSubmit).toHaveBeenCalledWith(formValues);
   });
 
   it('should call resetUsers on reset search results', () => {
-    searchForm.prop<ISearchFormProps<IUsersSearchFormFields>['resetSearchResults']>('resetSearchResults')();
+    searchForm.prop<() => void>('resetSearchResults')();
     expect(props.resetSearchResults).toHaveBeenCalledTimes(1);
   });
 });

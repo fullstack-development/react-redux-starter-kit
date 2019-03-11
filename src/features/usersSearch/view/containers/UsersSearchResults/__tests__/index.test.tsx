@@ -2,9 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { githubUser } from 'shared/mocks';
-import { IPaginationControlsProps } from 'shared/view/components';
+import { IGithubUser } from 'shared/types/models';
 
-import { IUsersAvatarsWallProps } from '../../../components/UsersAvatarsWall/UsersAvatarsWall';
 import { UsersSearchResults, IUsersSearchResultsProps } from '../UsersSearchResults';
 
 const props: IUsersSearchResultsProps = {
@@ -27,8 +26,7 @@ describe('(features/usersSearch) UsersSearchResults container', () => {
 
   it('should show UserDetails on user avatar click', () => {
     expect(component.find('Connect(UserDetails)').length).toBe(0);
-    // TODO: add proper types to .prop calls
-    component.find('UsersAvatarsWall').prop<IUsersAvatarsWallProps['onAvatarClick']>('onAvatarClick')(githubUser);
+    component.find('UsersAvatarsWall').prop<(user: IGithubUser) => void>('onAvatarClick')(githubUser);
     expect(component.find('Connect(UserDetails)').length).toBe(1);
   });
 
@@ -36,7 +34,7 @@ describe('(features/usersSearch) UsersSearchResults container', () => {
     const page = 1;
     const { searchOptions, searchUsers } = props;
     const paginationControls = component.find('PaginationControls');
-    paginationControls.prop<IPaginationControlsProps['onPageRequest']>('onPageRequest')(page);
+    paginationControls.prop<(page: number) => void>('onPageRequest')(page);
     expect(searchUsers).toHaveBeenCalledWith({ searchOptions, page });
   });
 });
