@@ -28,10 +28,10 @@ describe('RepositoriesSearchResults component', () => {
 
   it('should call searchRepositories with search options and page number on PaginationControls page request', () => {
     const page = 1;
-    const { searchOptions } = props;
+    const { searchOptions, searchRepositories } = props;
     const paginationControls = component.find('PaginationControls');
     paginationControls.prop<(page: number) => void>('onPageRequest')(page);
-    expect(props.searchRepositories).toHaveBeenCalledWith({ searchOptions, page });
+    expect(searchRepositories).toHaveBeenCalledWith({ searchOptions, page });
   });
 
   it('shound render user details after RepositoryPreview owner click', () => {
