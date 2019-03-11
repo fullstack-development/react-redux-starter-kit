@@ -11,7 +11,7 @@ const props: IProfilePreviewProps = {
 };
 
 describe('(features/profile) ProfilePreview container', () => {
-  const component = mount(<ProfilePreview {...props}/>);
+  const component = mount(<ProfilePreview {...props}/>); // mount required for popover to work
 
   it('should not show profile info initially', () => {
     const info = component.find('.profile-preview__info');

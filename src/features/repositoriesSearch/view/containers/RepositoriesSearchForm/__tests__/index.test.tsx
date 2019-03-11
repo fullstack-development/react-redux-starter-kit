@@ -21,7 +21,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchForm container', () =>
     expect(props.onSubmit).toHaveBeenCalledWith(formValues);
   });
 
-  it('should call resetRepositories on reset search results', () => {
+  it('should call resetSearchResults on reset search results', () => {
     searchForm.prop<() => void>('resetSearchResults')();
     expect(props.resetSearchResults).toHaveBeenCalledTimes(1);
   });

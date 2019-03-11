@@ -27,7 +27,7 @@ describe('(features/usersSearch) UsersSearchForm container', () => {
     expect(props.onSubmit).toHaveBeenCalledWith(formValues);
   });
 
-  it('should call resetUsers on reset search results', () => {
+  it('should call resetSearchResults on reset search results', () => {
     searchForm.prop<() => void>('resetSearchResults')();
     expect(props.resetSearchResults).toHaveBeenCalledTimes(1);
   });

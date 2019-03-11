@@ -1,7 +1,8 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import { profile } from 'shared/mocks';
+import { IProfile } from 'shared/types/models';
 
 import { ProfileEdit, IProfileEditProps } from '../ProfileEdit';
 
@@ -12,11 +13,11 @@ const props: IProfileEditProps = {
 };
 
 describe('(features/profile) ProfileEdit container', () => {
-  const component = mount(<ProfileEdit {...props} />);
+  const component = shallow(<ProfileEdit {...props} />);
 
-  it('should save profile & set notification on submit', () => {
-    component.find('form').simulate('submit');
-    expect(props.setNotification).toHaveBeenCalledTimes(1);
+  it('should save profile & set notification on form submit', () => {
+    component.prop<(profile: IProfile) => void>('onSubmit')(profile);
     expect(props.saveProfile).toHaveBeenCalledWith(props.profile);
+    expect(props.setNotification).toHaveBeenCalledTimes(1);
   });
 });
