@@ -735,9 +735,9 @@
       "integrity": "sha512-wRUeF7KN2yxCMw4VoXzPh3GWStbGaiyVjyX22fG7mpSzt6etLvsA2S0g0IuGeXGwVNIlztzVmGP6AxZMmYTQhw=="
     },
     "@types/ramda": {
-      "version": "0.25.29",
-      "resolved": "https://registry.npmjs.org/@types/ramda/-/ramda-0.25.29.tgz",
-      "integrity": "sha512-fWuYGHXie0IfRMh7zh90fsbgEvAfPt+SBmg1eNhTVecnjDQujP4npzJJFZdron9RwxfKmZ2PWmcfa1oKln4yfA=="
+      "version": "0.26.3",
+      "resolved": "https://registry.npmjs.org/@types/ramda/-/ramda-0.26.3.tgz",
+      "integrity": "sha512-ZTepXW1dgQySkTUbxb2JC61vJxnLqofq4S43rFWpobRRsDh9HgNQxjEWhjQcjoYAMhkyV8JsE9mhE7Pgo3AYbg=="
     },
     "@types/range-parser": {
       "version": "1.2.2",
@@ -15003,9 +15003,9 @@
       "dev": true
     },
     "ramda": {
-      "version": "0.25.0",
-      "resolved": "https://registry.npmjs.org/ramda/-/ramda-0.25.0.tgz",
-      "integrity": "sha512-GXpfrYVPwx3K7RQ6aYT8KPS8XViSXUVJT1ONhoKPE9VAleW42YE+U+8VEyGWt41EnEQW7gwecYJriTI0pKoecQ=="
+      "version": "0.26.1",
+      "resolved": "https://registry.npmjs.org/ramda/-/ramda-0.26.1.tgz",
+      "integrity": "sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ=="
     },
     "randexp": {
       "version": "0.4.6",
