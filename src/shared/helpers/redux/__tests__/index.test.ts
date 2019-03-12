@@ -1,6 +1,6 @@
 import { composeReducers, isSuccessedByState, makeIdentityReducer, makeResetStateReducer } from '..';
 
-describe('Redux helpers', () => {
+describe('(shared) Redux helpers', () => {
   describe('composeReducers', () => {
     it('every passed reducer should be called from right to the left', () => {
       const reducers = [
