@@ -14,10 +14,12 @@ const props: IUsersSearchLayoutProps = {
 
 describe('(modules/Search) UsersSearchLayout component', () => {
   const component = shallow(<UsersSearchLayout {...props} />);
+
   it('should show search results after submit search form', () => {
-    expect(component.find('UsersSearchResults').length).toBe(0);
-    const formFields = {};
-    component.find('UsersSearchForm').prop<(formFields: object) => void>('onSubmit')(formFields);
-    expect(component.find('UsersSearchResults').length).toBe(1);
+    const { UsersSearchResults, UsersSearchForm } = props.usersSearchFeatureEntry.containers;
+    expect(component.find(UsersSearchResults).length).toBe(0);
+
+    component.find(UsersSearchForm).prop('onSubmit')({} as any);
+    expect(component.find(UsersSearchResults).length).toBe(1);
   });
 });

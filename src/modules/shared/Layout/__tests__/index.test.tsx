@@ -16,8 +16,10 @@ const props: ILayoutProps = {
 
 describe('(modules/shared) Layout component', () => {
   const component = shallow(<Layout {...props} />);
+
   it('should redirect to profile page on edit profile click', () => {
-    component.find('ProfilePreview').prop<() => void>('onEditClick')();
+    const { ProfilePreview } = props.profileFeatureEntry.containers;
+    component.find(ProfilePreview).prop('onEditClick')();
     expect(props.history.push).toHaveBeenCalledWith(routes.profile.getRoutePath());
   });
 });

@@ -15,9 +15,10 @@ const props: IRepositoriesSearchLayoutProps = {
 describe('(modules/Search) RepositoriesSearchLayout component', () => {
   const component = shallow(<RepositoriesSearchLayout {...props} />);
   it('should show search results after submit search form', () => {
-    expect(component.find('RepositoriesSearchResults').length).toBe(0);
-    const formFields = {};
-    component.find('RepositoriesSearchForm').prop<(formFields: object) => void>('onSubmit')(formFields);
-    expect(component.find('RepositoriesSearchResults').length).toBe(1);
+    const { RepositoriesSearchResults, RepositoriesSearchForm } = props.repositoriesSearchFeatureEntry.containers;
+    expect(component.find(RepositoriesSearchResults).length).toBe(0);
+
+    component.find(RepositoriesSearchForm).prop('onSubmit')({} as any);
+    expect(component.find(RepositoriesSearchResults).length).toBe(1);
   });
 });

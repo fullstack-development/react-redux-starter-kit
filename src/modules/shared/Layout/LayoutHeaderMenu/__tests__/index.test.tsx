@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { makeMockEvent } from 'shared/mocks';
+import { ClickAwayListener } from 'shared/view/components';
 
 import LayoutHeaderMenu, { IHeaderMenuProps } from '../LayoutHeaderMenu';
 
@@ -45,13 +46,13 @@ describe('(modules/shared) LayoutHeaderMenu component', () => {
   it('should close menu on clickaway', () => {
     component.find('.layout-header-menu__menu-icon').simulate('click', clickEvent);
     expect(component.state().isMenuOpen).toBe(true);
-    component.find('ClickAwayListener').prop<() => void>('onClickAway')();
+    component.find(ClickAwayListener).prop('onClickAway')();
     expect(component.state().isMenuOpen).toBe(false);
   });
 
   it('should not open menu on clickaway', () => {
     expect(component.state().isMenuOpen).toBe(false);
-    component.find('ClickAwayListener').prop<() => void>('onClickAway')();
+    component.find(ClickAwayListener).prop('onClickAway')();
     expect(component.state().isMenuOpen).toBe(false);
   });
 });
