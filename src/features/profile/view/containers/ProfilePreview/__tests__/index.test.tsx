@@ -19,7 +19,7 @@ describe('(features/profile) ProfilePreview container', () => {
     expect(popover.prop('open')).toBe(false);
   });
 
-  it('should show profile info on avatar click', () => {
+  it('should show popover with profile info on avatar click', () => {
     component.find('.profile-preview__avatar').simulate('click');
     const popover = component.find(Popover);
     expect(popover.prop('open')).toBe(true);
