@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
+import { Popover } from 'shared/view/components';
 import { profile } from 'shared/mocks';
 
 import { ProfilePreview, IProfilePreviewProps } from '../ProfilePreview';
@@ -11,17 +12,17 @@ const props: IProfilePreviewProps = {
 };
 
 describe('(features/profile) ProfilePreview container', () => {
-  const component = mount(<ProfilePreview {...props}/>); // mount required for popover to work
+  const component = shallow(<ProfilePreview {...props}/>);
 
-  it('should not show profile info initially', () => {
-    const info = component.find('.profile-preview__info');
-    expect(info.length).toBe(0);
+  it('should not show popover with profile info initially', () => {
+    const popover = component.find(Popover);
+    expect(popover.prop('open')).toBe(false);
   });
 
   it('should show profile info on avatar click', () => {
     component.find('.profile-preview__avatar').simulate('click');
-    const info = component.find('.profile-preview__info');
-    expect(info.length).toBeGreaterThan(0);
+    const popover = component.find(Popover);
+    expect(popover.prop('open')).toBe(true);
   });
 
   it('should call onEditClick on Edit click', () => {
