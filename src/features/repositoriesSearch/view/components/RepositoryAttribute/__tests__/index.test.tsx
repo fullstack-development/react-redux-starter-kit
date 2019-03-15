@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import RepositoryAttribute, { IRepositoryAttributeProps } from '../RepositoryAttribute';
 
@@ -10,7 +10,8 @@ const props: IRepositoryAttributeProps = {
 };
 
 describe('(features/repositoriesSearch) RepositoryAttribute component', () => {
-  const component = shallow(<RepositoryAttribute {...props} />);
+  let component: ShallowWrapper<IRepositoryAttributeProps>;
+  beforeEach(() => component = shallow(<RepositoryAttribute {...props} />));
 
   it('should call onValueClick on value click', () => {
     component.find('.repository-attribute__value').simulate('click');

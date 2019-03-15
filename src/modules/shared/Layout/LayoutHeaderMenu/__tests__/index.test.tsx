@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { makeMockEvent } from 'shared/mocks';
 import { ClickAwayListener } from 'shared/view/components';
 
-import LayoutHeaderMenu, { IHeaderMenuProps } from '../LayoutHeaderMenu';
+import LayoutHeaderMenu, { IHeaderMenuProps, IHeaderMenuState } from '../LayoutHeaderMenu';
 
 const props: IHeaderMenuProps = {
   menuItems: [
@@ -22,7 +22,8 @@ const props: IHeaderMenuProps = {
 const clickEvent = makeMockEvent('click');
 
 describe('(modules/shared) LayoutHeaderMenu component', () => {
-  const component = shallow(<LayoutHeaderMenu {...props} />);
+  let component: ShallowWrapper<IHeaderMenuProps, IHeaderMenuState>;
+  beforeEach(() => component = shallow(<LayoutHeaderMenu {...props} />));
 
   it('should render every menu item', () => {
     expect(component.find('.layout-header-menu__menu-item').length).toBe(props.menuItems.length);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { makeMockEntry, makeMockContainer, withRouterProps } from 'shared/mocks';
 
@@ -15,7 +15,8 @@ const props: ILayoutProps = {
 };
 
 describe('(modules/shared) Layout component', () => {
-  const component = shallow(<Layout {...props} />);
+  let component: ShallowWrapper<ILayoutProps>;
+  beforeEach(() => component = shallow(<Layout {...props} />));
 
   it('should redirect to profile page on edit profile click', () => {
     const { ProfilePreview } = props.profileFeatureEntry.containers;

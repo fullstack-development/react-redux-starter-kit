@@ -1,17 +1,20 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { INotification } from 'shared/types/common';
-import { Notification } from '../Notification';
+import { shallow, ShallowWrapper } from 'enzyme';
+import { Notification, INotificationProps } from '../Notification';
 
-describe('(services/notification) Notification container', () => {
-  const notification: INotification = {
+const props: INotificationProps = {
+  notification: {
     kind: 'error',
     text: 'notification text',
-  };
-  const component = shallow(<Notification notification={notification} />);
+  },
+};
+
+describe('(services/notification) Notification container', () => {
+  let component: ShallowWrapper<INotificationProps>;
+  beforeEach(() => component = shallow(<Notification {...props} />));
 
   it('should render notification text', () => {
-    expect(component.find('.notification__text').text()).toBe(notification.text);
+    expect(component.find('.notification__text').text()).toBe(props.notification!.text);
   });
 
   it('should not render if no notification provided', () => {

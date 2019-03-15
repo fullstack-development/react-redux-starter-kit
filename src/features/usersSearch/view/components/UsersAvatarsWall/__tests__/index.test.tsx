@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 import * as R from 'ramda';
 
 import { githubUser } from 'shared/mocks';
@@ -13,14 +13,16 @@ const props: IUsersAvatarsWallProps = {
 };
 
 describe('(features/usersSearch) UsersAvatarsWall component', () => {
-  const component = shallow(<UsersAvatarsWall {...props} />);
-  const avatars = component.find('.users-avatars-wall__avatar');
+  let component: ShallowWrapper<IUsersAvatarsWallProps>;
+  beforeAll(() => component = shallow(<UsersAvatarsWall {...props} />));
 
   it('should render all users avatars', () => {
+    const avatars = component.find('.users-avatars-wall__avatar');
     expect(avatars.length).toEqual(props.users.length);
   });
 
   it('should call onAvatarClick with user data on avatar click', () => {
+    const avatars = component.find('.users-avatars-wall__avatar');
     avatars.at(0).simulate('click');
     expect(props.onAvatarClick).toHaveBeenCalledWith(props.users[0]);
   });

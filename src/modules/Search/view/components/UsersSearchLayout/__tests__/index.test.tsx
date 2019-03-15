@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { makeMockEntry, makeMockContainer } from 'shared/mocks';
 
@@ -13,7 +13,8 @@ const props: IUsersSearchLayoutProps = {
 };
 
 describe('(modules/Search) UsersSearchLayout component', () => {
-  const component = shallow(<UsersSearchLayout {...props} />);
+  let component: ShallowWrapper<IUsersSearchLayoutProps>;
+  beforeEach(() => component = shallow(<UsersSearchLayout {...props} />));
 
   it('should show search results after submit search form', () => {
     const { UsersSearchResults, UsersSearchForm } = props.usersSearchFeatureEntry.containers;

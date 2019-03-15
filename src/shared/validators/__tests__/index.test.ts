@@ -14,9 +14,9 @@ describe('(shared) Validators', () => {
     });
 
     it('should return undefined if all validators run successful', () => {
-      mockValidators[0].mockReturnValue(undefined);
-      mockValidators[1].mockReturnValue(undefined);
-      mockValidators[2].mockReturnValue(undefined);
+      mockValidators[0].mockReturnValueOnce(undefined);
+      mockValidators[1].mockReturnValueOnce(undefined);
+      mockValidators[2].mockReturnValueOnce(undefined);
       expect(composedValidator('')).toBe(undefined);
     });
   });

@@ -1,11 +1,13 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { makeMockContainer, repository } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
 import { RepositoryPreview } from '../../../components';
-import { RepositoriesSearchResults, IRepositoriesSearchResultsProps } from '../RepositoriesSearchResults';
+import {
+  RepositoriesSearchResults, IRepositoriesSearchResultsProps, IRepositoriesSearchResultsState,
+} from '../RepositoriesSearchResults';
 
 const props: IRepositoriesSearchResultsProps = {
   searchOptions: {
@@ -21,7 +23,8 @@ const props: IRepositoriesSearchResultsProps = {
 };
 
 describe('(features/repositoriesSearch) RepositoriesSearchResults container', () => {
-  const component = shallow(<RepositoriesSearchResults {...props} />);
+  let component: ShallowWrapper<IRepositoriesSearchResultsProps, IRepositoriesSearchResultsState>;
+  beforeEach(() => component = shallow(<RepositoriesSearchResults {...props} />));
 
   it('should render all found repositories', () => {
     const renderedRepos = component.find('.repositories-search-results__repository-preview');
@@ -47,6 +50,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
 
   it('should hide user details after UserDetails onClose call', () => {
     const { UserDetails } = props;
+    component.setState({ displayedRepositoryOwner: 'owner' });
     expect(component.find(UserDetails).length).toBe(1);
 
     const userDetails = component.find(UserDetails);

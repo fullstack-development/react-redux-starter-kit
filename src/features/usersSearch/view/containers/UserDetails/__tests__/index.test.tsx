@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { detailedGithubUser } from 'shared/mocks';
 import { Preloader } from 'shared/view/elements';
@@ -16,7 +16,8 @@ const props: IUserDetailsProps = {
 };
 
 describe('(features/usersSearch) UserDetails container', () => {
-  const component = shallow(<UserDetails {...props} />);
+  let component: ShallowWrapper<IUserDetailsProps>;
+  beforeEach(() => component = shallow(<UserDetails {...props} />));
 
   it('should show preloader if user details are requesting', () => {
     expect(component.find(Preloader).prop('isShown')).toBe(true);

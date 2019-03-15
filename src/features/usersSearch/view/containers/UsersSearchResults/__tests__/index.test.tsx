@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { githubUser } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
@@ -24,7 +24,8 @@ const props: IUsersSearchResultsProps = {
 };
 
 describe('(features/usersSearch) UsersSearchResults container', () => {
-  const component = shallow(<UsersSearchResults {...props} />);
+  let component: ShallowWrapper<IUsersSearchResultsProps>;
+  beforeEach(() => component = shallow(<UsersSearchResults {...props} />));
 
   it('should show UserDetails on user avatar click', () => {
     expect(component.find(UserDetails).length).toBe(0);

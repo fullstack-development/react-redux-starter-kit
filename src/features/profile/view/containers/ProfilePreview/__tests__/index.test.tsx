@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { Popover } from 'shared/view/components';
 import { profile } from 'shared/mocks';
@@ -12,7 +12,8 @@ const props: IProfilePreviewProps = {
 };
 
 describe('(features/profile) ProfilePreview container', () => {
-  const component = shallow(<ProfilePreview {...props}/>);
+  let component: ShallowWrapper<IProfilePreviewProps>;
+  beforeEach(() => component = shallow(<ProfilePreview {...props}/>));
 
   it('should not show popover with profile info initially', () => {
     const popover = component.find(Popover);

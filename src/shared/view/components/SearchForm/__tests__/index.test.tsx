@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, ReactWrapper, HTMLAttributes } from 'enzyme';
 
 import SearchForm, { ISearchFormProps } from '../SearchForm';
 
@@ -19,8 +19,12 @@ const props: ISearchFormProps<IFormFields> = {
 };
 
 describe('(shared/view) SearchForm component', () => {
-  const component = mount(<SearchForm<IFormFields> {...props}/>);
-  const form = component.find('form');
+  let component: ReactWrapper<ISearchFormProps<object>>;
+  let form: ReactWrapper<HTMLAttributes>;
+  beforeAll(() => {
+    component = mount(<SearchForm<IFormFields> {...props}/>);
+    form = component.find('form');
+  });
 
   it('should call onSubmit on submit', () => {
     form.simulate('submit');

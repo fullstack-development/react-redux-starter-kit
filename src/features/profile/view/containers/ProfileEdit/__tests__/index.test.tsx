@@ -1,5 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme';
+import { Form } from 'react-final-form';
 
 import { profile } from 'shared/mocks';
 
@@ -12,10 +13,11 @@ const props: IProfileEditProps = {
 };
 
 describe('(features/profile) ProfileEdit container', () => {
-  const component = shallow(<ProfileEdit {...props} />);
+  let component: ShallowWrapper<IProfileEditProps>;
+  beforeEach(() => component = shallow(<ProfileEdit {...props} />));
 
   it('should save profile & set notification on form submit', () => {
-    component.prop('onSubmit')(profile);
+    component.find(Form).prop('onSubmit')(profile);
     expect(props.saveProfile).toHaveBeenCalledWith(props.profile);
     expect(props.setNotification).toHaveBeenCalledTimes(1);
   });
