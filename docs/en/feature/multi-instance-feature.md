@@ -47,7 +47,16 @@ To make a feature multi-instance you should:
    Action creators are written as usual.
 
 3. Use the `multiConnect` HOC instead of the regular redux `connect` in the feature's containers. `multiConnect` takes the following arguments:
-   - path to the feature state (array of strings);
+   - path to the multi-instance state. Usually it would just contain a path to the feature state:
+      ```
+      // path to the multi-instance widget feature state
+      ['widget']
+      ```
+     but sometimes you may want to implement only a part of your feature as the multi-instance, and keep the rest of the feature non-multi-instance. In this case you'd pass the path to the multi-instance part of the feature state like this:
+        ```
+        // path to the multi-instance part of the state (the widget feature is not multi-instance in general)
+        ['widget', 'multi-instance-part']
+        ```
    - initial feature state;
    - mapStateToProps function (the first argument is the feature state, as the multi-instance feature selectors are taking the feature state as its argument instead of the app state; the other arguments are the same as in the regular `connect`, starting from appState);
       ```
