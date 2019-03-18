@@ -13,6 +13,22 @@
 ## Basic architecture description
 An application is built using three kinds of architectural units — [services](#service), [features](#feature) and [modules](#module). Beside these units there is also the `shared` folder, that contains code which is used accross the whole application and isn't tied up with a particular feature, service, module or anything else. Shared code doesn't know anything about the rest of the application. It contains various constants, helper functions, types, and shared react components like Button, Table, Calendar etc.
 
+### Feature
+
+A feature is the main unit in the architecture. A feature has its own branch in the redux state, redux logic, and react components which implement a functionality represented by the feature.
+
+Features are independent from one another and can use services, shared code (components, styles, types, helpers etc.) or containers provided by [containersProvider HOC](./lazy-feature.md). Other than that a feature doesn't know anything about the rest of the app.
+
+Feature exports its containers and redux logic which can be used in two places:
+1. Containers and redux logic can be used in [modules](#module).
+2. Containers can be used in `ContainersProvider.tsx` to allow to use these containers in other features using the `containersProvider` HOC.
+
+
+Example:
+> `github users search` feature can contain redux logic for searching github users and storing the results in the redux state, and containers for displaying the results and making a search query.
+
+[Read more about features](./feature/feature.md)
+
 ### Service
 
 A service is a standalone functionality unit that can be used in modules and features and knows nothing about the rest of the application.
@@ -42,22 +58,6 @@ The i18n service contains:
 - a class that updates a tranlsation function (a function that translates a string using the stored translations) and notifies subscribers that the language was changed;
 - a HOC, that passes the translation function to a wrapped component as a prop, and rerenders the component after the language switching passing the new translate function.
 ```
-
-### Feature
-
-A feature is the main unit in the architecture. A feature has its own branch in the redux state, redux logic, and react components which implement a functionality represented by the feature.
-
-Features are independent from one another and can use services, shared code (components, styles, types, helpers etc.) or containers provided by [containersProvider HOC](./lazy-feature.md). Other than that a feature doesn't know anything about the rest of the app.
-
-Feature exports its containers and redux logic which can be used in two places:
-1. Containers and redux logic can be used in [modules](#module).
-2. Containers can be used in `ContainersProvider.tsx` to allow to use these containers in other features using the `containersProvider` HOC.
-
-
-Example:
-> `github users search` feature can contain redux logic for searching github users and storing the results in the redux state, and containers for displaying the results and making a search query.
-
-[Read more about features](./feature/feature.md)
 
 ### Module
 A module represents different "pages" of the application which are connected in their meaning and purpose, and which routes are built from the same root route. A module can have redux logic and react components.
