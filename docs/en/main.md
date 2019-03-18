@@ -11,7 +11,7 @@
 
 
 ## Basic architecture description
-An application is built using three kinds of architectural units — [services](#service), [features](#feature) and [modules](#module). Beside these units there is also the `shared` folder, that contains code which is used accross the whole application and isn't tied up with a particular feature, service, module or anything else. Shared code doesn't know anything about the rest of the application. It contains various constants, helper functions, types, and shared react components like Button, Table, Calendar etc.
+An application is built using three kinds of architectural units — [features](#feature), [services](#service) and [modules](#module). Beside these units there is also the `shared` folder, that contains code which is used across the whole application and isn't tied up with a particular feature, service, module or anything else. It contains various constants, helper functions, types, and react components like Button, Table, Calendar etc.
 
 ### Feature
 
@@ -31,7 +31,7 @@ Example:
 
 ### Service
 
-A service is a standalone functionality unit that can be used in modules and features and knows nothing about the rest of the application.
+A service is a standalone functionality unit that can be used in modules and features and cannot depend on them or on other services.
 
 You need to create a service if there is some functionality that can or will be used independently by different parts of the appliation, for example:
  - i18n service can be used for translation in the whole application;

@@ -2,7 +2,7 @@
 
 A feature is the main unit in the architecture. A feature has its own branch in the redux state, redux logic, and react components which implement a functionality represented by the feature.
 
-Features are independent from one another and can use services, shared code (components, styles, types, helpers etc.) or containers provided by [containersProvider HOC](./lazy-feature.md). Other than that a feature doesn't know anything about the rest of the app.
+Features can depend on services, shared code (components, styles, types, helpers etc.) or core helpers (such as [containersProvider HOC](./lazy-feature.md)). Features cannot depend on modules or other features.
 
 Example:
 
