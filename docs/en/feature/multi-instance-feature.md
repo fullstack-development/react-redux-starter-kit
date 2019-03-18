@@ -52,7 +52,7 @@ To make a feature multi-instance you should:
       // path to the multi-instance widget feature state
       ['widget']
       ```
-     but sometimes you may want to implement only a part of your feature as the multi-instance, and keep the rest of the feature non-multi-instance. In this case you'd pass the path to the multi-instance part of the feature state like this:
+     but sometimes you may want to implement only a part of your feature as multi-instance, and keep the rest of the feature non-multi-instance. In this case you'd pass the path to the multi-instance part of the feature state like this:
         ```
         // path to the multi-instance part of the state (the widget feature is not multi-instance in general)
         ['widget', 'multi-instance-part']
