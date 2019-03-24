@@ -1,0 +1,73 @@
+/* doiuse-disable word-break */
+@import '~shared/styles/mixins';
+
+.profile-preview {
+  &__avatar {
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  &__info {
+    margin-top: 0.2rem;
+    padding: 0.7rem 1rem;
+    width: 18rem;
+    border-radius: 5px;
+    background: #f2f2f2;
+    font-size: 0.8rem;
+
+    @include breakpoint-up(sm) {
+      padding: 1rem 1.3rem;
+      width: 23rem;
+    }
+  }
+
+  &__main-info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__name {
+    word-break: break-all;
+    font-size: 1rem;
+
+    @include breakpoint-up(sm) {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__nickname-age {
+    margin-left: 1rem;
+    width: 6rem;
+    text-align: end;
+  }
+
+  &__nickname {
+    @include breakpoint-up(sm) {
+      font-weight: 600;
+    }
+  }
+
+  &__bio {
+    overflow: hidden;
+    margin: 1rem 0;
+    max-height: 6rem;
+    max-height: 3rem;
+    text-align: justify;
+    text-overflow: ellipsis;
+
+    @include breakpoint-up(sm) {
+      max-height: auto;
+    }
+  }
+
+  &__nickname-age,
+  &__bio {
+    line-height: 1rem;
+  }
+
+  &__edit {
+    text-decoration: underline;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+}

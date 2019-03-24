@@ -1,0 +1,64 @@
+@import '~shared/styles/mixins';
+
+.layout-header-menu {
+  $r: &;
+
+  position: relative;
+  display: flex;
+  font-size: 0.9rem;
+
+  &__title {
+    display: none;
+
+    @include breakpoint-up(sm) {
+      display: inline;
+    }
+  }
+
+  &__menu-icon {
+    display: flex;
+
+    @include breakpoint-up(sm) {
+      display: none;
+    }
+
+    &_open {
+      & ~ #{$r}__menu-items {
+        position: absolute;
+        top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__menu-items {
+    display: none;
+
+    @include breakpoint-up(sm) {
+      display: flex;
+      flex-direction: row;
+      margin-left: 1rem;
+    }
+  }
+
+  &__menu-item {
+    width: 8rem;
+    background: #444;
+    color: #eaeaea;
+    text-align: center;
+    text-decoration: none;
+
+    @include breakpoint-up(sm) {
+      background: #333;
+    }
+
+    &_active {
+      background: #666;
+
+      @include breakpoint-up(sm) {
+        background: #555;
+      }
+    }
+  }
+}

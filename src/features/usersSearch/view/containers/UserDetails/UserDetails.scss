@@ -1,0 +1,41 @@
+@import '~shared/styles/mixins';
+
+.user-details {
+  position: relative;
+  min-height: 20rem;
+  width: 11rem;
+
+  @include breakpoint-up(sm) {
+    width: 13rem;
+  }
+
+  &__main {
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  &__avatar {
+    height: 10rem;
+
+    @include breakpoint-up(sm) {
+      height: 13rem;
+    }
+  }
+
+  &__attribute {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    height: 2.5rem;
+    border-bottom: 0.15rem solid #e5e5e5;
+    color: #000;
+    text-decoration: none;
+
+    &:hover {
+      border-color: #bbb;
+    }
+  }
+}

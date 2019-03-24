@@ -1,26 +1,26 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
-import * as CleanWebpackPlugin from 'clean-webpack-plugin';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import * as CircularDependencyPlugin from 'circular-dependency-plugin';
+import path from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import * as ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import * as threadLoaderLib from 'thread-loader';
-import * as FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import threadLoaderLib from 'thread-loader';
+import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
+import FileManagerWebpackPlugin from 'filemanager-webpack-plugin';
 
-import * as postcssReporter from 'postcss-reporter';
-import * as postcssEasyImport from 'postcss-easy-import';
-import * as postcssSCSS from 'postcss-scss';
-import * as autoprefixer from 'autoprefixer';
-import * as stylelint from 'stylelint';
-import * as doiuse from 'doiuse';
+import postcssReporter from 'postcss-reporter';
+import postcssSCSS from 'postcss-scss';
+import autoprefixer from 'autoprefixer';
+import stylelint from 'stylelint';
+import doiuse from 'doiuse';
 
 import getEnvParams from '../src/core/getEnvParams';
 
 export type BuildType = 'dev' | 'prod' | 'server';
 
-const { chunkHash, withAnalyze, chunkName, withHot } = getEnvParams();
+const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode, forGHPages } = getEnvParams();
 
 const threadLoader: webpack.Loader[] = (() => {
   if (process.env.THREADED === 'true') {
@@ -28,7 +28,7 @@ const threadLoader: webpack.Loader[] = (() => {
       workers: require('os').cpus().length - 1,
       poolTimeout: withHot ? Infinity : 2000,
     };
-    threadLoaderLib.warmup(workerPool, [
+    isWatchMode && threadLoaderLib.warmup(workerPool, [
       'babel-loader',
       'ts-loader',
       'postcss-loader',
@@ -76,7 +76,24 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   ) : [])
   .concat(withHot && type !== 'prod' ? (
     new webpack.HotModuleReplacementPlugin()
-  ) : []);
+  ) : [])
+  .concat(forGHPages ? (
+    new HtmlWebpackPlugin({
+      filename: '404.html',
+      template: 'assets/index.html',
+      chunksSortMode: sortChunks,
+    })
+  ) : [])
+  .concat(forGHPages ? new FileManagerWebpackPlugin({
+    onEnd: {
+      copy: [
+        {
+          source: `src/assets/ghPages/**`,
+          destination: `build`,
+        },
+      ],
+    },
+  }) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
@@ -91,25 +108,25 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
     test: /\.tsx?$/,
     use:
       threadLoader
-      .concat(withHot && type === 'dev' ? {
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          cacheDirectory: true,
-          plugins: [
-            'react-hot-loader/babel',
-            'syntax-dynamic-import',
-          ],
-        },
-      } : [])
-      .concat({
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-          happyPackMode: true,
-          logLevel: 'error',
-        },
-      }),
+        .concat(withHot && type === 'dev' ? {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            cacheDirectory: true,
+            plugins: [
+              'react-hot-loader/babel',
+              'syntax-dynamic-import',
+            ],
+          },
+        } : [])
+        .concat({
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+            happyPackMode: true,
+            logLevel: 'error',
+          },
+        }),
   },
   {
     test: /\.(ttf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -170,9 +187,6 @@ const commonScssLoaders: webpack.Loader[] = [
       syntax: postcssSCSS,
       plugins: () => {
         return [
-          postcssEasyImport({
-            extensions: '.scss',
-          }),
           stylelint(),
           doiuse({
             // https://github.com/browserslist/browserslist

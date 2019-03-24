@@ -1,8 +1,8 @@
-import * as webpack from 'webpack';
+import webpack from 'webpack';
 import { Express } from 'express';
-import * as hotMiddleware from 'webpack-hot-middleware';
-import * as SSRMiddleware from 'webpack-isomorphic-dev-middleware';
-import * as $ from 'cheerio';
+import hotMiddleware from 'webpack-hot-middleware';
+import SSRMiddleware from 'webpack-isomorphic-dev-middleware';
+import $ from 'cheerio';
 
 import { IAssets } from '../src/shared/types/app';
 

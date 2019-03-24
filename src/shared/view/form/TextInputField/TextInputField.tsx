@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
 import { GetProps } from '_helpers';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { bind } from 'decko';
 import { MarkAsPartial, SubSet } from '_helpers';
 
@@ -37,6 +37,7 @@ class TextInput extends React.PureComponent<IProps, IState> {
           ...this.props.InputProps,
           endAdornment: this.renderEndAdornment(),
         }}
+        fullWidth
       />
     );
   }

@@ -1,0 +1,20 @@
+.profile-avatar {
+  border-style: solid;
+  border-color: #e5e5e5;
+  border-radius: 50%;
+  background-size: 100%;
+
+  &_size {
+    &_big {
+      width: 10rem;
+      height: 10rem;
+      border-width: 0.3rem;
+    }
+
+    &_small {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-width: 0.1rem;
+    }
+  }
+}

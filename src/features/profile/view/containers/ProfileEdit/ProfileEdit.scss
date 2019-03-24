@@ -1,0 +1,25 @@
+.profile-edit {
+  width: 18rem;
+
+  &__avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  &__fields {
+    margin: auto;
+  }
+
+  &__field {
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__button {
+    text-align: end;
+  }
+}

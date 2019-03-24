@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { rule } from 'shared/helpers/style';
 import { withStyles, WithStyles } from './jss';
 
@@ -11,9 +11,13 @@ const styles = {
     body: {
       margin: 0,
       fontSize: '1rem',
+      background: '#fff',
     },
     'html, body, #root': {
       height: '100%',
+    },
+    '*': {
+      boxSizing: 'border-box',
     },
   }),
 };

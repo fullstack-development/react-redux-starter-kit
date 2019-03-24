@@ -1,0 +1,11 @@
+.search-form {
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+
+  &__settings {
+    margin-left: 0.6rem;
+  }
+}

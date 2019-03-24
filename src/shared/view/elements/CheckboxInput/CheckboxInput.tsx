@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { CheckIdentity } from '_helpers';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormHelperText, { FormHelperTextProps } from '@material-ui/core/FormHelperText';

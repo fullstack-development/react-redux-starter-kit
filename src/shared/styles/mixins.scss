@@ -1,0 +1,42 @@
+@import './variables.scss';
+
+@mixin safe-breakpoints($breakpoints...) {
+  @each $bp in $breakpoints {
+    @if not map-has-key($available-breakpoints, $bp) {
+      @error 'The #{$bp} breakpoint doesn\'t exist.';
+    }
+  }
+
+  @content;
+}
+
+@mixin breakpoint-up($bp) {
+  @include safe-breakpoints($bp) {
+    @media (min-width: map-get($available-breakpoints, $bp)) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-down($bp) {
+  @include safe-breakpoints($bp) {
+    @media (max-width: map-get($available-breakpoints, $bp) - 0.05px) {
+      @content;
+    }
+  }
+}
+
+@mixin breakpoint-between($bp-left, $bp-right) {
+  @include safe-breakpoints($bp-left, $bp-right) {
+    $min-width: map-get($available-breakpoints, $bp-left);
+    $max-width: map-get($available-breakpoints, $bp-right) - 0.05px;
+
+    @if ($min-width >= $max-width) {
+      @error 'For breakpoint-between the left boundary of the interval must be less than the right boundary';
+    }
+
+    @media (min-width: $min-width) and (max-width: $max-width) {
+      @content;
+    }
+  }
+}
