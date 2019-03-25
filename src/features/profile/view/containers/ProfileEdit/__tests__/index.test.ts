@@ -15,9 +15,11 @@ const getComponent = makeShallowRenderer(ProfileEdit, props);
 
 describe('(features/profile) ProfileEdit container', () => {
   it('should save profile & set notification on form submit', () => {
-    const component = getComponent();
+    const saveProfile = jest.fn();
+    const setNotification = jest.fn();
+    const component = getComponent({ saveProfile, setNotification });
     component.find(Form).prop('onSubmit')(profile);
-    expect(props.saveProfile).toHaveBeenCalledWith(props.profile);
-    expect(props.setNotification).toHaveBeenCalledTimes(1);
+    expect(saveProfile).toHaveBeenCalledWith(props.profile);
+    expect(setNotification).toHaveBeenCalledTimes(1);
   });
 });

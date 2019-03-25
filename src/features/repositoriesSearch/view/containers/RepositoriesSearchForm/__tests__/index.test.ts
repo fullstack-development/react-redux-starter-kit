@@ -14,18 +14,21 @@ const getComponent = makeShallowRenderer(RepositoriesSearchForm, props);
 
 describe('(features/repositoriesSearch) RepositoriesSearchForm container', () => {
   it('should call onSubmit and searchRepositories with form values on form submit', () => {
-    const component = getComponent();
+    const searchRepositories = jest.fn();
+    const onSubmit = jest.fn();
+    const component = getComponent({ searchRepositories, onSubmit });
     const formValues = {};
     const searchForm = component.find(SearchForm);
     searchForm.prop('onSubmit')(formValues);
-    expect(props.searchRepositories).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
-    expect(props.onSubmit).toHaveBeenCalledWith(formValues);
+    expect(searchRepositories).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
+    expect(onSubmit).toHaveBeenCalledWith(formValues);
   });
 
   it('should call resetSearchResults on reset search results', () => {
-    const component = getComponent();
+    const resetSearchResults = jest.fn();
+    const component = getComponent({ resetSearchResults });
     const searchForm = component.find(SearchForm);
     searchForm.prop('resetSearchResults')();
-    expect(props.resetSearchResults).toHaveBeenCalledTimes(1);
+    expect(resetSearchResults).toHaveBeenCalledTimes(1);
   });
 });

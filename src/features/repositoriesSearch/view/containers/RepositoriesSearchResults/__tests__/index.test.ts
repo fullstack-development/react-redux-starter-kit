@@ -30,9 +30,10 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
   });
 
   it('should call searchRepositories with search options and page number on PaginationControls page request', () => {
-    const component = getComponent();
+    const searchRepositories = jest.fn();
+    const component = getComponent({ searchRepositories });
     const page = 1;
-    const { searchOptions, searchRepositories } = props;
+    const { searchOptions } = props;
     component.find(PaginationControls).prop('onPageRequest')(page);
     expect(searchRepositories).toHaveBeenCalledWith({ searchOptions, page });
   });

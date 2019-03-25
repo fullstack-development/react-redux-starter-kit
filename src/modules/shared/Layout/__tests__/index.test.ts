@@ -1,3 +1,5 @@
+import * as R from 'ramda';
+
 import { makeShallowRenderer } from 'shared/helpers';
 import { makeMockEntry, makeMockContainer, withRouterProps } from 'shared/mocks';
 
@@ -16,9 +18,10 @@ const getComponent = makeShallowRenderer(Layout, props);
 
 describe('(modules/shared) Layout component', () => {
   it('should redirect to profile page on edit profile click', () => {
-    const component = getComponent();
+    const history = R.clone(props.history);
+    const component = getComponent({ history });
     const { ProfilePreview } = props.profileFeatureEntry.containers;
     component.find(ProfilePreview).prop('onEditClick')();
-    expect(props.history.push).toHaveBeenCalledWith(routes.profile.getRoutePath());
+    expect(history.push).toHaveBeenCalledWith(routes.profile.getRoutePath());
   });
 });

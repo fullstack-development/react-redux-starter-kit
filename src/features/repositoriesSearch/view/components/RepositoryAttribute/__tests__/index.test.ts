@@ -12,8 +12,9 @@ const getComponent = makeShallowRenderer(RepositoryAttribute, props);
 
 describe('(features/repositoriesSearch) RepositoryAttribute component', () => {
   it('should call onValueClick on value click', () => {
-    const component = getComponent();
+    const onValueClick = jest.fn();
+    const component = getComponent({ onValueClick });
     component.find('.repository-attribute__value').simulate('click');
-    expect(props.onValueClick).toHaveBeenCalledTimes(1);
+    expect(onValueClick).toHaveBeenCalledTimes(1);
   });
 });

@@ -11,23 +11,26 @@ const getComponent = makeShallowRenderer(PaginationControls, props);
 
 describe('(shared/view) PaginationControls component', () => {
   it('should call onPageRequest with page number on page number click', () => {
-    const component = getComponent();
+    const onPageRequest = jest.fn();
+    const component = getComponent({ onPageRequest });
     component.find('.pagination-controls__page').at(2).simulate('click');
-    expect(props.onPageRequest).toHaveBeenCalledWith(3);
+    expect(onPageRequest).toHaveBeenCalledWith(3);
   });
 
   it('should call onPageRequest with prev page number on left arrow click', () => {
-    const component = getComponent();
+    const onPageRequest = jest.fn();
+    const component = getComponent({ onPageRequest });
     const leftArrow = component.find('.pagination-controls__arrow_direction_left');
     leftArrow.simulate('click');
-    expect(props.onPageRequest).toHaveBeenCalledWith(props.currentPage - 1);
+    expect(onPageRequest).toHaveBeenCalledWith(props.currentPage - 1);
   });
 
   it('should call onPageRequest with next page number on right arrow click', () => {
-    const component = getComponent();
+    const onPageRequest = jest.fn();
+    const component = getComponent({ onPageRequest });
     const rightArrow = component.find('.pagination-controls__arrow_direction_right');
     rightArrow.simulate('click');
-    expect(props.onPageRequest).toHaveBeenCalledWith(props.currentPage + 1);
+    expect(onPageRequest).toHaveBeenCalledWith(props.currentPage + 1);
   });
 
   it('should render both arrows if not first or last page', () => {

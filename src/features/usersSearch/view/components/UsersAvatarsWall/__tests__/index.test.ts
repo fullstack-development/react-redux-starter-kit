@@ -21,10 +21,11 @@ describe('(features/usersSearch) UsersAvatarsWall component', () => {
   });
 
   it('should call onAvatarClick with user data on avatar click', () => {
-    const component = getComponent();
+    const onAvatarClick = jest.fn();
+    const component = getComponent({ onAvatarClick });
     const avatars = component.find('.users-avatars-wall__avatar');
     avatars.at(0).simulate('click');
-    expect(props.onAvatarClick).toHaveBeenCalledWith(props.users[0]);
+    expect(onAvatarClick).toHaveBeenCalledWith(props.users[0]);
   });
 
   it('should show preloader initially', () => {

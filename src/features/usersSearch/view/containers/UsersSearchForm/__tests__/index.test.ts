@@ -14,18 +14,21 @@ const getComponent = makeShallowRenderer(UsersSearchForm, props);
 
 describe('(features/usersSearch) UsersSearchForm container', () => {
   it('should call onSubmit and searchUsers with form values on form submit', () => {
-    const component = getComponent();
+    const searchUsers = jest.fn();
+    const onSubmit = jest.fn();
+    const component = getComponent({ searchUsers, onSubmit });
     const formValues = {};
     const searchForm = component.find(SearchForm);
     searchForm.prop('onSubmit')(formValues);
-    expect(props.searchUsers).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
-    expect(props.onSubmit).toHaveBeenCalledWith(formValues);
+    expect(searchUsers).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
+    expect(onSubmit).toHaveBeenCalledWith(formValues);
   });
 
   it('should call resetSearchResults on reset search results', () => {
-    const component = getComponent();
+    const resetSearchResults = jest.fn();
+    const component = getComponent({ resetSearchResults });
     const searchForm = component.find(SearchForm);
     searchForm.prop('resetSearchResults')();
-    expect(props.resetSearchResults).toHaveBeenCalledTimes(1);
+    expect(resetSearchResults).toHaveBeenCalledTimes(1);
   });
 });

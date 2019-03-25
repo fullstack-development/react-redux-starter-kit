@@ -27,8 +27,9 @@ describe('(features/profile) ProfilePreview container', () => {
   });
 
   it('should call onEditClick on Edit click', () => {
-    const component = getComponent();
+    const onEditClick = jest.fn();
+    const component = getComponent({ onEditClick });
     component.find('.profile-preview__edit').simulate('click');
-    expect(props.onEditClick).toHaveBeenCalledTimes(1);
+    expect(onEditClick).toHaveBeenCalledTimes(1);
   });
 });

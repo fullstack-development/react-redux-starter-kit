@@ -33,9 +33,10 @@ describe('(features/usersSearch) UsersSearchResults container', () => {
   });
 
   it('should call searchUser with search options and page number on PaginationControls page request', () => {
-    const component = getComponent();
+    const searchUsers = jest.fn();
+    const component = getComponent({ searchUsers });
     const page = 1;
-    const { searchOptions, searchUsers } = props;
+    const { searchOptions } = props;
     component.find(PaginationControls).prop('onPageRequest')(page);
     expect(searchUsers).toHaveBeenCalledWith({ searchOptions, page });
   });

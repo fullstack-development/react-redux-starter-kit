@@ -27,14 +27,16 @@ describe('(features/usersSearch) UserDetails container', () => {
   });
 
   it('should call loadUserDetails with username on dialog enter', () => {
-    const component = getComponent();
+    const loadUserDetails = jest.fn();
+    const component = getComponent({ loadUserDetails });
     component.find(Dialog).prop('onEnter')!(document.createElement('div'), false);
-    expect(props.loadUserDetails).toHaveBeenCalledWith(props.username);
+    expect(loadUserDetails).toHaveBeenCalledWith(props.username);
   });
 
   it('should call onClose on dialog close', () => {
-    const component = getComponent();
+    const onClose = jest.fn();
+    const component = getComponent({ onClose });
     component.find(Dialog).prop('onClose')();
-    expect(props.onClose).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
   });
 });
