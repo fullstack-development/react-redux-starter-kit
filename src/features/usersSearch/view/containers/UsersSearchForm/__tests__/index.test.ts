@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { SearchForm } from 'shared/view/components';
 
 import { UsersSearchForm, IUsersSearchFormProps } from '../UsersSearchForm';
@@ -12,11 +10,11 @@ const props: IUsersSearchFormProps = {
   isUsersSearchRequesting: false,
 };
 
-describe('(features/usersSearch) UsersSearchForm container', () => {
-  let component: ShallowWrapper<IUsersSearchFormProps>;
-  beforeEach(() => component = shallow(<UsersSearchForm {...props} />));
+const getComponent = makeShallowRenderer(UsersSearchForm, props);
 
+describe('(features/usersSearch) UsersSearchForm container', () => {
   it('should call onSubmit and searchUsers with form values on form submit', () => {
+    const component = getComponent();
     const formValues = {};
     const searchForm = component.find(SearchForm);
     searchForm.prop('onSubmit')(formValues);
@@ -25,6 +23,7 @@ describe('(features/usersSearch) UsersSearchForm container', () => {
   });
 
   it('should call resetSearchResults on reset search results', () => {
+    const component = getComponent();
     const searchForm = component.find(SearchForm);
     searchForm.prop('resetSearchResults')();
     expect(props.resetSearchResults).toHaveBeenCalledTimes(1);

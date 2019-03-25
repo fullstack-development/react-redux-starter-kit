@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { githubUser } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
@@ -23,11 +21,11 @@ const props: IUsersSearchResultsProps = {
   searchUsers: jest.fn(),
 };
 
-describe('(features/usersSearch) UsersSearchResults container', () => {
-  let component: ShallowWrapper<IUsersSearchResultsProps>;
-  beforeEach(() => component = shallow(<UsersSearchResults {...props} />));
+const getComponent = makeShallowRenderer(UsersSearchResults, props);
 
+describe('(features/usersSearch) UsersSearchResults container', () => {
   it('should show UserDetails on user avatar click', () => {
+    const component = getComponent();
     expect(component.find(UserDetails).length).toBe(0);
 
     component.find(UsersAvatarsWall).prop('onAvatarClick')(githubUser);
@@ -35,6 +33,7 @@ describe('(features/usersSearch) UsersSearchResults container', () => {
   });
 
   it('should call searchUser with search options and page number on PaginationControls page request', () => {
+    const component = getComponent();
     const page = 1;
     const { searchOptions, searchUsers } = props;
     component.find(PaginationControls).prop('onPageRequest')(page);

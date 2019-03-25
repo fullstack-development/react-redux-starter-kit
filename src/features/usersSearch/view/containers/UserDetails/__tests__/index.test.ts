@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { detailedGithubUser } from 'shared/mocks';
 import { Preloader } from 'shared/view/elements';
 import { Dialog } from 'shared/view/components';
@@ -15,25 +13,27 @@ const props: IUserDetailsProps = {
   username: 'the user',
 };
 
-describe('(features/usersSearch) UserDetails container', () => {
-  let component: ShallowWrapper<IUserDetailsProps>;
-  beforeEach(() => component = shallow(<UserDetails {...props} />));
+const getComponent = makeShallowRenderer(UserDetails, props);
 
+describe('(features/usersSearch) UserDetails container', () => {
   it('should show preloader if user details are requesting', () => {
+    const component = getComponent();
     expect(component.find(Preloader).prop('isShown')).toBe(true);
   });
 
   it('should hide preloader if user details are not requesting', () => {
-    component.setProps({ isLoadUserDetailsRequesting: false });
+    const component = getComponent({ isLoadUserDetailsRequesting: false });
     expect(component.find(Preloader).prop('isShown')).toBe(false);
   });
 
   it('should call loadUserDetails with username on dialog enter', () => {
+    const component = getComponent();
     component.find(Dialog).prop('onEnter')!(document.createElement('div'), false);
     expect(props.loadUserDetails).toHaveBeenCalledWith(props.username);
   });
 
   it('should call onClose on dialog close', () => {
+    const component = getComponent();
     component.find(Dialog).prop('onClose')();
     expect(props.onClose).toHaveBeenCalledTimes(1);
   });

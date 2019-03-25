@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { makeMockEntry, makeMockContainer } from 'shared/mocks';
 
 import { RepositoriesSearchLayout, IRepositoriesSearchLayoutProps } from '../RepositoriesSearchLayout';
@@ -12,11 +10,11 @@ const props: IRepositoriesSearchLayoutProps = {
   }),
 };
 
-describe('(modules/Search) RepositoriesSearchLayout component', () => {
-  let component: ShallowWrapper<IRepositoriesSearchLayoutProps>;
-  beforeEach(() => component = shallow(<RepositoriesSearchLayout {...props} />));
+const getComponent = makeShallowRenderer(RepositoriesSearchLayout, props);
 
+describe('(modules/Search) RepositoriesSearchLayout component', () => {
   it('should show search results after submit search form', () => {
+    const component = getComponent();
     const { RepositoriesSearchResults, RepositoriesSearchForm } = props.repositoriesSearchFeatureEntry.containers;
     expect(component.find(RepositoriesSearchResults).length).toBe(0);
 

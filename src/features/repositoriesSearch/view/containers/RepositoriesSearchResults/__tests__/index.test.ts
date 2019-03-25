@@ -1,12 +1,10 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { makeMockContainer, repository } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
 import { RepositoryPreview } from '../../../components';
 import {
-  RepositoriesSearchResults, IRepositoriesSearchResultsProps, IRepositoriesSearchResultsState,
+  RepositoriesSearchResults, IRepositoriesSearchResultsProps,
 } from '../RepositoriesSearchResults';
 
 const props: IRepositoriesSearchResultsProps = {
@@ -22,16 +20,17 @@ const props: IRepositoriesSearchResultsProps = {
   UserDetails: makeMockContainer('UserDetails'),
 };
 
-describe('(features/repositoriesSearch) RepositoriesSearchResults container', () => {
-  let component: ShallowWrapper<IRepositoriesSearchResultsProps, IRepositoriesSearchResultsState>;
-  beforeEach(() => component = shallow(<RepositoriesSearchResults {...props} />));
+const getComponent = makeShallowRenderer(RepositoriesSearchResults, props);
 
+describe('(features/repositoriesSearch) RepositoriesSearchResults container', () => {
   it('should render all found repositories', () => {
+    const component = getComponent();
     const renderedRepos = component.find('.repositories-search-results__repository-preview');
     expect(renderedRepos.length).toBe(props.repositories.length);
   });
 
   it('should call searchRepositories with search options and page number on PaginationControls page request', () => {
+    const component = getComponent();
     const page = 1;
     const { searchOptions, searchRepositories } = props;
     component.find(PaginationControls).prop('onPageRequest')(page);
@@ -39,6 +38,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
   });
 
   it('should render user details after RepositoryPreview owner click', () => {
+    const component = getComponent();
     const { UserDetails } = props;
     expect(component.find(UserDetails).length).toBe(0);
 
@@ -49,6 +49,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
   });
 
   it('should hide user details after UserDetails onClose call', () => {
+    const component = getComponent();
     const { UserDetails } = props;
     component.setState({ displayedRepositoryOwner: 'owner' });
     expect(component.find(UserDetails).length).toBe(1);

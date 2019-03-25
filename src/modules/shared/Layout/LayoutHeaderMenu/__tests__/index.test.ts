@@ -1,10 +1,8 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { makeMockEvent } from 'shared/mocks';
 import { ClickAwayListener } from 'shared/view/components';
 
-import LayoutHeaderMenu, { IHeaderMenuProps, IHeaderMenuState } from '../LayoutHeaderMenu';
+import LayoutHeaderMenu, { IHeaderMenuProps } from '../LayoutHeaderMenu';
 
 const props: IHeaderMenuProps = {
   menuItems: [
@@ -20,16 +18,16 @@ const props: IHeaderMenuProps = {
 };
 
 const clickEvent = makeMockEvent('click');
+const getComponent = makeShallowRenderer(LayoutHeaderMenu, props);
 
 describe('(modules/shared) LayoutHeaderMenu component', () => {
-  let component: ShallowWrapper<IHeaderMenuProps, IHeaderMenuState>;
-  beforeEach(() => component = shallow(<LayoutHeaderMenu {...props} />));
-
   it('should render every menu item', () => {
+    const component = getComponent();
     expect(component.find('.layout-header-menu__menu-item').length).toBe(props.menuItems.length);
   });
 
   it('should toggle menu on menu icon click and touchend', () => {
+    const component = getComponent();
     const menuIcon = component.find('.layout-header-menu__menu-icon');
 
     expect(component.state().isMenuOpen).toBe(false);
@@ -45,6 +43,7 @@ describe('(modules/shared) LayoutHeaderMenu component', () => {
   });
 
   it('should close menu on clickaway', () => {
+    const component = getComponent();
     component.find('.layout-header-menu__menu-icon').simulate('click', clickEvent);
     expect(component.state().isMenuOpen).toBe(true);
     component.find(ClickAwayListener).prop('onClickAway')();
@@ -52,6 +51,7 @@ describe('(modules/shared) LayoutHeaderMenu component', () => {
   });
 
   it('should not open menu on clickaway', () => {
+    const component = getComponent();
     expect(component.state().isMenuOpen).toBe(false);
     component.find(ClickAwayListener).prop('onClickAway')();
     expect(component.state().isMenuOpen).toBe(false);

@@ -1,6 +1,4 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
-
+import { makeShallowRenderer } from 'shared/helpers';
 import { SearchForm } from 'shared/view/components';
 
 import { RepositoriesSearchForm, IRepositoriesSearchFormProps } from '../RepositoriesSearchForm';
@@ -12,11 +10,11 @@ const props: IRepositoriesSearchFormProps = {
   isRepositoriesSearchRequesting: false,
 };
 
-describe('(features/repositoriesSearch) RepositoriesSearchForm container', () => {
-  let component: ShallowWrapper<IRepositoriesSearchFormProps>;
-  beforeEach(() => component = shallow(<RepositoriesSearchForm {...props} />));
+const getComponent = makeShallowRenderer(RepositoriesSearchForm, props);
 
+describe('(features/repositoriesSearch) RepositoriesSearchForm container', () => {
   it('should call onSubmit and searchRepositories with form values on form submit', () => {
+    const component = getComponent();
     const formValues = {};
     const searchForm = component.find(SearchForm);
     searchForm.prop('onSubmit')(formValues);
@@ -25,6 +23,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchForm container', () =>
   });
 
   it('should call resetSearchResults on reset search results', () => {
+    const component = getComponent();
     const searchForm = component.find(SearchForm);
     searchForm.prop('resetSearchResults')();
     expect(props.resetSearchResults).toHaveBeenCalledTimes(1);

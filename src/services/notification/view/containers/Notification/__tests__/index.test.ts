@@ -1,5 +1,4 @@
-import React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { makeShallowRenderer } from 'shared/helpers';
 import { Notification, INotificationProps } from '../Notification';
 
 const props: INotificationProps = {
@@ -9,16 +8,16 @@ const props: INotificationProps = {
   },
 };
 
-describe('(services/notification) Notification container', () => {
-  let component: ShallowWrapper<INotificationProps>;
-  beforeEach(() => component = shallow(<Notification {...props} />));
+const getComponent = makeShallowRenderer(Notification, props);
 
+describe('(services/notification) Notification container', () => {
   it('should render notification text', () => {
+    const component = getComponent();
     expect(component.find('.notification__text').text()).toBe(props.notification!.text);
   });
 
   it('should not render if no notification provided', () => {
-    const emptyNotification = shallow(<Notification notification={null} />);
-    expect(emptyNotification.html()).toBeNull();
+    const component = getComponent({ notification: null });
+    expect(component.html()).toBeNull();
   });
 });
