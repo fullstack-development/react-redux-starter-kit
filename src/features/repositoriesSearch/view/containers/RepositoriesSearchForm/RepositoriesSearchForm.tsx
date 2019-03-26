@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { SearchForm } from 'shared/view/components';
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 

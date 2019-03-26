@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import { IModule } from 'core/types';
 import routes from 'modules/routes';
-import { IModule } from 'shared/types/app';
 
 import { UsersSearchLayout, RepositoriesSearchLayout } from './view/components';
 

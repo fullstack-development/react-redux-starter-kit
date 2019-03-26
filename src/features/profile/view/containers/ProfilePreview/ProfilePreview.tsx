@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { IProfile } from 'shared/types/models';
 import { Popover } from 'shared/view/components';
 

@@ -4,7 +4,7 @@ import hotMiddleware from 'webpack-hot-middleware';
 import SSRMiddleware from 'webpack-isomorphic-dev-middleware';
 import $ from 'cheerio';
 
-import { IAssets } from '../src/shared/types/app';
+import { IAssets } from '../src/core/types';
 
 function startDevelopmentMode(
   server: Express, clientConfig: webpack.Configuration, serverConfig: webpack.Configuration,

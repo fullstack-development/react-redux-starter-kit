@@ -1,7 +1,7 @@
 <% if (reduxConfig) { -%>
 import * as namespace from './namespace';
 import { actions, selectors, reducer<%= (reduxConfig.withSaga) ? ', getSaga' : '' %> } from './redux';
-import { IReduxEntry } from 'shared/types/app';
+import { IReduxEntry } from 'core/types';
 
 export { namespace, selectors, actions };
 <% } -%>

@@ -6,7 +6,7 @@ import { bind } from 'decko';
 
 import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { IProfile } from 'shared/types/models';
 import { actions as notificationServiceActions } from 'services/notification';
 

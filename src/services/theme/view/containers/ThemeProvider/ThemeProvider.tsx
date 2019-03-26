@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 
+import { IAppReduxState } from 'core/types';
 import { Theme } from 'shared/styles';
-import { IAppReduxState } from 'shared/types/app';
 
 import { UITheme } from '../../../namespace';
 import { selectors } from '../../../redux';

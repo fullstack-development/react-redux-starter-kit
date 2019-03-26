@@ -1,27 +1,26 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 import 'normalize.css';
 
-import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'services/theme';
-import { containers as NotificationContainers } from 'services/notification';
-import { I18nProvider } from 'services/i18n';
-import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
-import { BaseStyles, JssProvider, SheetsRegistry } from 'shared/styles';
+import { JssProvider, SheetsRegistry } from 'shared/styles';
 
-import createRoutes from './routes';
+import { reactAppWrappers } from 'config';
+import { IJssDependencies, IAppData } from '../types';
+import Routes from './Routes';
 
 interface IAppProps {
   jssDeps: IJssDependencies;
   disableStylesGeneration?: boolean;
 }
 
-function ClientApp({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
+function ClientApp({ deps, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
   return (
-    <Provider store={store}>
+    <Provider store={deps.store}>
       <BrowserRouter>
-        {renderSharedPart(modules, jssDeps, disableStylesGeneration)}
+        {renderSharedPart(jssDeps, disableStylesGeneration)}
       </BrowserRouter>
     </Provider>
   );
@@ -36,18 +35,18 @@ interface IServerAppProps {
 }
 
 export function ServerApp(props: IAppData & IServerAppProps & StaticRouter['props']) {
-  const { modules, store, registry, jssDeps, disableStylesGeneration, ...routerProps } = props;
+  const { deps, registry, jssDeps, disableStylesGeneration, ...routerProps } = props;
   return (
-    <Provider store={store}>
+    <Provider store={deps.store}>
       <StaticRouter {...routerProps}>
-        {renderSharedPart(modules, jssDeps, disableStylesGeneration, registry)}
+        {renderSharedPart(jssDeps, disableStylesGeneration, registry)}
       </StaticRouter>
     </Provider>
   );
 }
 
 function renderSharedPart(
-  modules: IModule[], jssDeps: IJssDependencies,
+  jssDeps: IJssDependencies,
   disableStylesGeneration?: boolean,
   registry?: SheetsRegistry,
 ) {
@@ -61,13 +60,16 @@ function renderSharedPart(
       disableStylesGeneration={disableStylesGeneration}
     >
       <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
-        <I18nProvider>
-          <BaseStyles>
-            {createRoutes(modules)}
-          </BaseStyles>
-        </I18nProvider>
-        <NotificationContainers.Notification />
+        {renderWrappers(reactAppWrappers, <Routes />)}
       </ThemeProvider>
     </JssProvider>
   );
+}
+
+function renderWrappers(wraps: typeof reactAppWrappers, child: React.ReactElement) {
+  if (wraps.length === 0) {
+    return child;
+  }
+  const Cur = wraps[0];
+  return <Cur>{renderWrappers(wraps.slice(1), child)}</Cur>;
 }

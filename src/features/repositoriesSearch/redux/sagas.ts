@@ -1,7 +1,7 @@
 import { put, call, all, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 
-import { IDependencies } from 'shared/types/app';
+import { IDependencies } from 'core/types';
 import { getErrorMsg } from 'shared/helpers';
 import { IRepositoriesSearchResults } from 'shared/types/githubSearch';
 import { actions as notificationServiceActions } from 'services/notification';

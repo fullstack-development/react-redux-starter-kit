@@ -4,12 +4,12 @@ import React from 'react';
 import bootstrapper from 'react-async-bootstrapper';
 import { renderToString } from 'react-dom/server';
 
-import { IAssets, IAppData } from 'shared/types/app';
 import { SheetsRegistry } from 'shared/styles';
 import Html from 'assets/Html';
 
-import configureApp from 'core/configureApp';
-import { ServerApp } from 'core/App';
+import configureApp from 'core/configure';
+import { ServerApp } from 'core/render';
+import { IAssets, IAppData } from 'core/types';
 
 async function render({ req, res, assets }: { req: express.Request; res: express.Response; assets: IAssets }) {
   try {
@@ -48,7 +48,7 @@ async function renderOnServer(appData: IAppData, assets: IAssets, location: stri
   const appForBootstrap = <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />;
   await bootstrapper(appForBootstrap);
   const app = <ServerApp {...appData} location={location} context={context} registry={sheets} />;
-  const html = <Html assets={assets} component={app} store={appData.store} styleSheets={sheets} />;
+  const html = <Html assets={assets} component={app} store={appData.deps.store} styleSheets={sheets} />;
   const document = `
     <!doctype html>
     ${renderToString(html)}
@@ -57,7 +57,7 @@ async function renderOnServer(appData: IAppData, assets: IAssets, location: stri
 }
 
 function hydrateOnClient(appData: IAppData, assets: IAssets) {
-  const html = <Html assets={assets} store={appData.store} />;
+  const html = <Html assets={assets} store={appData.deps.store} />;
   const document = `
     <!doctype html>
     ${renderToString(html)}

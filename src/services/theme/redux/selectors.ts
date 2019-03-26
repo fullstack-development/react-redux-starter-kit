@@ -1,4 +1,4 @@
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import * as NS from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): NS.IReduxState {

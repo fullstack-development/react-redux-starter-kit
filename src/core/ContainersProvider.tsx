@@ -1,12 +1,11 @@
 import React from 'react';
 import { bind } from 'decko';
+import { injectable } from 'inversify';
 import { Omit } from '_helpers';
 
 import * as usersSearchFeature from 'features/usersSearch';
-import { injectable } from 'inversify';
-import { inject, TYPES } from './configureIoc';
-
-import { IFeatureEntry } from 'shared/types/app';
+import { inject, TYPES } from './configure/ioc';
+import { IFeatureEntry } from './types';
 
 interface IContainerTypes {
   UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];

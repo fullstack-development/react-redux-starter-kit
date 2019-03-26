@@ -1,5 +1,5 @@
-import { IReduxEntry, IDictionary } from '../types/app';
 import { ActionCreator, Action } from 'redux';
+import { IDictionary, IReduxEntry } from 'core/types';
 
 type Containers<C> = IDictionary<React.ComponentType<any>, keyof C>;
 type ActionCreators<A> = IDictionary<ActionCreator<Action>, keyof A>;

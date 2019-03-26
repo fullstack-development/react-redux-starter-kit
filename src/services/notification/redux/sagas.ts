@@ -1,7 +1,7 @@
 import { takeLatest, put, call, all } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 
-import { IDependencies } from 'shared/types/app';
+import { IDependencies } from 'core/types';
 
 import * as actions from './actions';
 import * as NS from '../namespace';

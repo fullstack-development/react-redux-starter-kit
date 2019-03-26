@@ -1,44 +1,38 @@
-import configureDeps from './configureDeps';
-import { TYPES, container } from './configureIoc';
-import configureStore, { createReducer } from './configureStore';
-
-import * as allModules from 'modules';
-import { configureJss } from 'core/configureJss';
+import { makeDeps, modules, reduxEntries } from 'config';
 import { ReducersMap } from 'shared/types/redux';
-import { reduxEntry as themeProviderRE } from 'services/theme';
-import { reduxEntry as notificationReduxEntry } from 'services/notification';
-import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
+
+import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry, IDependencies } from '../types';
+import { TYPES, container } from './ioc';
+import configureStore, { createReducer } from './store';
+import { configureJss } from './jss';
 
 function configureApp(data?: IAppData): IAppData {
-  /* Prepare main app elements */
-  const modules: IModule[] =  Object.values(allModules);
-
   if (data) {
-    return { ...data, modules };
+    return data;
   }
-
-  const sharedReduxEntries: IReduxEntry[] = [
-    themeProviderRE,
-    notificationReduxEntry,
-  ];
 
   const connectedSagas: RootSaga[] = [];
   const connectedReducers: ReducersMap<Partial<IAppReduxState>> = {};
 
   const { runSaga, store } = configureStore();
-  try {
-    container.getAll(TYPES.Store);
-    container.rebind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
-    container.rebind(TYPES.Store).toConstantValue(store);
-  } catch {
-    container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
-    container.bind(TYPES.Store).toConstantValue(store);
-  }
 
-  const dependencies = configureDeps(store);
+  const baseDeps = { runSaga, store };
+  const dependencies: IDependencies = {
+    ...baseDeps,
+    ...makeDeps(baseDeps),
+  };
   const jssDeps = configureJss();
 
-  sharedReduxEntries.forEach(connectEntryToStore);
+  try {
+    container.getAll(TYPES.Deps);
+    container.rebind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
+    container.rebind(TYPES.Deps).toConstantValue(dependencies);
+  } catch {
+    container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
+    container.bind(TYPES.Deps).toConstantValue(dependencies);
+  }
+
+  reduxEntries.forEach(connectEntryToStore);
   modules.forEach((module: IModule) => {
     if (module.getReduxEntry) {
       connectEntryToStore(module.getReduxEntry());
@@ -76,7 +70,7 @@ function configureApp(data?: IAppData): IAppData {
     }
   }
 
-  return { modules, store, jssDeps };
+  return { deps: dependencies, jssDeps };
 }
 
 export default configureApp;

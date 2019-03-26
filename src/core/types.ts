@@ -1,14 +1,20 @@
 import { ReactElement } from 'react';
 import { RouteProps } from 'react-router';
 import { Store, Reducer, ActionCreator, Action } from 'redux';
-import { SagaIterator } from 'redux-saga';
+import { SagaIterator, SagaMiddleware } from 'redux-saga';
 import { GenerateClassName } from 'jss';
 
-import * as features from 'features';
-import Api from 'services/api/Api';
-import * as ThemeProviderNS from 'services/theme/namespace'; // TODO: УДОЛИ
-import { namespace as NotificationNamespace } from 'services/notification';
 import { JSS } from 'shared/styles';
+import { ExtraDeps, IAppReduxState } from 'config';
+
+export { IAppReduxState };
+
+export interface IBaseDeps {
+  store: Store<IAppReduxState>;
+  runSaga: SagaMiddleware<any>['run'];
+}
+
+export type IDependencies = ExtraDeps & IBaseDeps;
 
 export abstract class IModule {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
@@ -16,18 +22,13 @@ export abstract class IModule {
 }
 
 export interface IAppData {
-  modules: IModule[];
-  store: Store<IAppReduxState>;
+  deps: IDependencies;
   jssDeps: IJssDependencies;
 }
 
 export interface IJssDependencies {
   jss: JSS;
   generateClassName: GenerateClassName<any>;
-}
-
-export interface IDependencies {
-  api: Api;
 }
 
 export type IDictionary<T, S extends keyof any = string> = {
@@ -47,16 +48,6 @@ export interface IFeatureEntry<
   actions?: A;
   selectors?: S;
   containers?: C;
-}
-
-export interface IAppReduxState {
-  // services
-  theme: ThemeProviderNS.IReduxState;
-  notification: NotificationNamespace.IReduxState;
-  // features
-  usersSearch: features.usersSearch.namespace.IReduxState;
-  repositoriesSearch: features.repositoriesSearch.namespace.IReduxState;
-  profile: features.profile.namespace.IReduxState;
 }
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;

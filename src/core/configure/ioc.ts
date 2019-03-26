@@ -1,6 +1,10 @@
 import { Container } from 'inversify';
 import getDecorators from 'inversify-inject-decorators';
-import TYPES from './iocTypes';
+
+const TYPES = {
+  Deps: Symbol('Deps'),
+  connectEntryToStore: Symbol('connectFeatureToStore'),
+};
 
 const container = new Container();
 const { lazyInject } = getDecorators(container);

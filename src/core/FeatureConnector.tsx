@@ -4,9 +4,8 @@ import * as R from 'ramda';
 import { injectable } from 'inversify';
 
 import { Omit, GetProps } from '_helpers';
-import { inject, TYPES } from './configureIoc';
-
-import { IFeatureEntry } from 'shared/types/app';
+import { inject, TYPES } from './configure/ioc';
+import { IFeatureEntry } from './types';
 
 type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
 

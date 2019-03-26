@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 
 import { containersProvider, IContainerTypes } from 'core';
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';

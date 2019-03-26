@@ -4,8 +4,8 @@ import Helmet from 'react-helmet';
 import redux from 'redux';
 import { renderToString } from 'react-dom/server';
 
-import { IAssets } from 'shared/types/app';
 import { SheetsRegistry } from 'shared/styles';
+import { IAssets } from 'core/types';
 
 interface IHtmlProps {
   assets: IAssets;
