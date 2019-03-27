@@ -2,6 +2,8 @@ import React from 'react';
 import block from 'bem-cn';
 import * as R from 'ramda';
 import { bind } from 'decko';
+
+import { maxRenderedPages } from './constants';
 import './PaginationControls.scss';
 
 type ArrowDirection = 'left' | 'right';
@@ -12,7 +14,6 @@ interface IProps {
   onPageRequest(pageNumber: number): void;
 }
 
-const maxRenderedPages = 11;
 const pagesFromMiddlePage = Math.floor(maxRenderedPages / 2);
 
 const b = block('pagination-controls');

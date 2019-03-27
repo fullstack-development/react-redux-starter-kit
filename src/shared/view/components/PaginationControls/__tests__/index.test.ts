@@ -1,4 +1,5 @@
 import { makeShallowRenderer } from 'shared/helpers';
+import { maxRenderedPages } from '../constants';
 import PaginationControls, { IPaginationControlsProps } from '../PaginationControls';
 
 const props: IPaginationControlsProps = {
@@ -51,6 +52,11 @@ describe('(shared/view) PaginationControls component', () => {
     const component = getComponent({ currentPage: 5 });
     const rightArrow = component.find('.pagination-controls__arrow_direction_right');
     expect(rightArrow.hasClass('pagination-controls__arrow_hidden')).toBe(true);
+  });
+
+  it('should not render more than max pages', () => {
+    const component = getComponent({ totalPages: maxRenderedPages + 10 });
+    expect(component.find('.pagination-controls__page').length).toBe(maxRenderedPages);
   });
 
   it('should not be rendered if totalPages <= 1', () => {
