@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { ResultEntry, Containers, ActionCreators, Selectors } from 'shared/helpers/makeFeatureEntry';
 
-export const makeMockContainer: any = (containerName: string) => {
+export const makeMockContainer = (containerName: string): React.ComponentType<any> => {
   const Container = () => React.createElement('div');
   Container.displayName = containerName;
   return Container;
