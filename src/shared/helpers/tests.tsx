@@ -1,14 +1,18 @@
 import React from 'react';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 
-function makeShallowRenderer<Props>(Component: React.ComponentType<Props>, defaultProps: Props) {
-  return (props: Partial<Props> = {}): ShallowWrapper<Props> => (
+function makeShallowRenderer<Props, State>(
+  Component: React.ComponentClass<Props, State> | React.FunctionComponent<Props>, defaultProps: Props,
+) {
+  return (props: Partial<Props> = {}): ShallowWrapper<Props, State> => (
     shallow(<Component {...defaultProps} {...props} />)
   );
 }
 
-function makeMountRenderer<Props>(Component: React.ComponentType<Props>, defaultProps: Props) {
-  return (props: Partial<Props> = {}): ReactWrapper<Props> => (
+function makeMountRenderer<Props, State>(
+  Component: React.ComponentClass<Props, State> | React.FunctionComponent<Props>, defaultProps: Props,
+) {
+  return (props: Partial<Props> = {}): ReactWrapper<Props, State> => (
     mount(<Component {...defaultProps} {...props} />)
   );
 }
