@@ -24,12 +24,16 @@ const props: IUsersSearchResultsProps = {
 const getComponent = makeShallowRenderer(UsersSearchResults, props);
 
 describe('(features/usersSearch) UsersSearchResults container', () => {
-  it('should show UserDetails on user avatar click', () => {
+  it('should show UserDetails on user avatar click & hide on UserDetails close', () => {
     const component = getComponent();
     expect(component.find(UserDetails).length).toBe(0);
 
     component.find(UsersAvatarsWall).prop('onAvatarClick')(githubUser);
-    expect(component.find(UserDetails).length).toBe(1);
+    const userDetails = component.find(UserDetails);
+    expect(userDetails.length).toBe(1);
+
+    userDetails.prop('onClose')();
+    expect(component.find(UserDetails).length).toBe(0);
   });
 
   it('should call searchUser with search options and page number on PaginationControls page request', () => {
