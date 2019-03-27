@@ -18,8 +18,7 @@ describe('(features/usersSearch) UsersSearchForm container', () => {
     const onSubmit = jest.fn();
     const component = getComponent({ searchUsers, onSubmit });
     const formValues = {};
-    const searchForm = component.find(SearchForm);
-    searchForm.prop('onSubmit')(formValues);
+    component.find(SearchForm).prop('onSubmit')(formValues);
     expect(searchUsers).toHaveBeenCalledWith({ searchOptions: formValues, page: 1 });
     expect(onSubmit).toHaveBeenCalledWith(formValues);
   });
@@ -27,8 +26,7 @@ describe('(features/usersSearch) UsersSearchForm container', () => {
   it('should call resetSearchResults on reset search results', () => {
     const resetSearchResults = jest.fn();
     const component = getComponent({ resetSearchResults });
-    const searchForm = component.find(SearchForm);
-    searchForm.prop('resetSearchResults')();
+    component.find(SearchForm).prop('resetSearchResults')();
     expect(resetSearchResults).toHaveBeenCalledTimes(1);
   });
 });

@@ -44,8 +44,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
     expect(component.find(UserDetails).length).toBe(0);
 
     const { username } = props.repositories[0].owner;
-    const repositoryPreview = component.find(RepositoryPreview).at(0);
-    repositoryPreview.prop('onOwnerClick')(username);
+    component.find(RepositoryPreview).at(0).prop('onOwnerClick')(username);
     expect(component.find(UserDetails).length).toBe(1);
   });
 
@@ -55,8 +54,7 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
     component.setState({ displayedRepositoryOwner: 'owner' });
     expect(component.find(UserDetails).length).toBe(1);
 
-    const userDetails = component.find(UserDetails);
-    userDetails.prop('onClose')();
+    component.find(UserDetails).prop('onClose')();
     expect(component.find(UserDetails).length).toBe(0);
   });
 });
