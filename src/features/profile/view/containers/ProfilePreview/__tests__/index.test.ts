@@ -18,10 +18,15 @@ describe('(features/profile) ProfilePreview container', () => {
     expect(component.find(Popover).prop('open')).toBe(false);
   });
 
-  it('should show popover with profile info on avatar click', () => {
+  it('should show popover with profile info on avatar click & hide on onClose call', () => {
     const component = getComponent();
     component.find('.profile-preview__avatar').simulate('click');
-    expect(component.find(Popover).prop('open')).toBe(true);
+    const popover = component.find(Popover);
+    expect(popover.prop('open')).toBe(true);
+
+    popover.prop('onClose')();
+    component.update();
+    expect(component.find(Popover).prop('open')).toBe(false);
   });
 
   it('should call onEditClick on Edit click', () => {
