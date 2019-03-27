@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import * as features from 'features';
 import { featureConnect } from 'core';
 
-import { withLayout } from '../../../../shared';
+import { Layout } from '../../../../shared';
 import './ProfileLayout.scss';
 
 interface IFeatureProps {
@@ -19,15 +19,15 @@ function ProfileLayout(props: IProps) {
   const { profileFeatureEntry: { containers } } = props;
   const { ProfileEdit } = containers;
   return (
-    <div className={b()}>
-      <ProfileEdit />
-    </div>
+    <Layout title="Edit profile">
+      <div className={b()}>
+        <ProfileEdit />
+      </div>
+    </Layout>
   );
 }
 
 export { ProfileLayout, IProps as IProfileLayoutProps };
-export default withLayout('Edit profile')(
-  featureConnect({
-    profileFeatureEntry: features.profile.loadEntry,
-  })(ProfileLayout),
-);
+export default featureConnect({
+  profileFeatureEntry: features.profile.loadEntry,
+})(ProfileLayout);

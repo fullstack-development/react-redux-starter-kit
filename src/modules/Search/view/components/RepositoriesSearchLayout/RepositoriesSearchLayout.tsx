@@ -5,7 +5,7 @@ import { bind } from 'decko';
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
 
-import { withLayout } from '../../../../shared';
+import { Layout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
 
 interface IState {
@@ -31,16 +31,18 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <div className={b()}>
-        <div className={b('search-form')}>
-          <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState}/>
+      <Layout title="GitHub repositories search">
+        <div className={b()}>
+          <div className={b('search-form')}>
+            <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState}/>
+          </div>
+          <div className={b('results')}>
+            {lastSubmittedFormState &&
+              <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
+            }
+          </div>
         </div>
-        <div className={b('results')}>
-          {lastSubmittedFormState &&
-            <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
-          }
-        </div>
-      </div>
+      </Layout>
     );
   }
 
@@ -51,8 +53,6 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
 }
 
 export { RepositoriesSearchLayout, IProps as IRepositoriesSearchLayoutProps  };
-export default withLayout('GitHub repositories search')(
-  featureConnect({
-    repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
-  })(RepositoriesSearchLayout),
-);
+export default featureConnect({
+  repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
+})(RepositoriesSearchLayout);

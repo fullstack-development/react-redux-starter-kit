@@ -5,7 +5,7 @@ import { bind } from 'decko';
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
 
-import { withLayout } from '../../../../shared';
+import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
 
 interface IState {
@@ -31,12 +31,14 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <div className={b()}>
-        <div className={b('search-form')}>
-          <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />
+      <Layout title="GitHub users search">
+        <div className={b()}>
+          <div className={b('search-form')}>
+            <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />
+          </div>
+          {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
         </div>
-        {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
-      </div>
+      </Layout>
     );
   }
 
@@ -47,8 +49,6 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
 }
 
 export { UsersSearchLayout, IProps as IUsersSearchLayoutProps  };
-export default withLayout('GitHub users search')(
-  featureConnect({
-    usersSearchFeatureEntry: features.usersSearch.loadEntry,
-  })(UsersSearchLayout),
-);
+export default featureConnect({
+  usersSearchFeatureEntry: features.usersSearch.loadEntry,
+})(UsersSearchLayout);
