@@ -1,12 +1,12 @@
 import { makeShallowRenderer } from 'shared/helpers';
-import { makeMockEntry, makeMockContainer } from 'shared/mocks';
+import { makeMockEntry, makeMockComponent } from 'shared/mocks';
 
 import { RepositoriesSearchLayout, IRepositoriesSearchLayoutProps } from '../RepositoriesSearchLayout';
 
 const props: IRepositoriesSearchLayoutProps = {
   repositoriesSearchFeatureEntry: makeMockEntry({
-    RepositoriesSearchForm: makeMockContainer('RepositoriesSearchForm'),
-    RepositoriesSearchResults: makeMockContainer('RepositoriesSearchResults'),
+    RepositoriesSearchForm: makeMockComponent('RepositoriesSearchForm'),
+    RepositoriesSearchResults: makeMockComponent('RepositoriesSearchResults'),
   }),
 };
 

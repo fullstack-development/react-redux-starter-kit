@@ -1,5 +1,5 @@
 import { makeShallowRenderer } from 'shared/helpers';
-import { makeMockEntry, makeMockContainer, withRouterProps } from 'shared/mocks';
+import { makeMockEntry, makeMockComponent, withRouterProps } from 'shared/mocks';
 
 import { Layout, ILayoutProps } from '../Layout';
 import routes from '../../../routes';
@@ -7,7 +7,7 @@ import routes from '../../../routes';
 const props: ILayoutProps = {
   title: 'Title',
   profileFeatureEntry: makeMockEntry({
-    ProfilePreview: makeMockContainer('ProfilePreview'),
+    ProfilePreview: makeMockComponent('ProfilePreview'),
   }),
   ...withRouterProps,
 };

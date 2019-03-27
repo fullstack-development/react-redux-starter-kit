@@ -1,12 +1,12 @@
 import { makeShallowRenderer } from 'shared/helpers';
-import { makeMockEntry, makeMockContainer } from 'shared/mocks';
+import { makeMockEntry, makeMockComponent } from 'shared/mocks';
 
 import { UsersSearchLayout, IUsersSearchLayoutProps } from '../UsersSearchLayout';
 
 const props: IUsersSearchLayoutProps = {
   usersSearchFeatureEntry: makeMockEntry({
-    UsersSearchForm: makeMockContainer('UsersSearchForm'),
-    UsersSearchResults: makeMockContainer('UsersSearchResults'),
+    UsersSearchForm: makeMockComponent('UsersSearchForm'),
+    UsersSearchResults: makeMockComponent('UsersSearchResults'),
   }),
 };
 

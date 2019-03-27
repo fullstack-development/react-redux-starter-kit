@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { ResultEntry, Containers, ActionCreators, Selectors } from 'shared/helpers/makeFeatureEntry';
 
-export const makeMockContainer = (containerName: string): React.ComponentType<any> => {
+export const makeMockComponent = (containerName: string): any => {
   const Container = () => React.createElement('div');
   Container.displayName = containerName;
   return Container;
@@ -54,7 +54,7 @@ export function makeMockEntry(
   return {
     containers: new Proxy(containers || {}, {
       get: (target, property: string) => {
-        return target[property] || makeMockContainer('Container');
+        return target[property] || makeMockComponent('Container');
       },
     }),
     actions: new Proxy(actions || {}, {

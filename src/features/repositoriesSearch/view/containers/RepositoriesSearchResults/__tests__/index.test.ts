@@ -1,5 +1,5 @@
 import { makeShallowRenderer } from 'shared/helpers';
-import { makeMockContainer, repository } from 'shared/mocks';
+import { makeMockComponent, repository } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
 import { RepositoryPreview } from '../../../components';
@@ -17,7 +17,7 @@ const props: IRepositoriesSearchResultsProps = {
     totalPages: 1,
   },
   searchRepositories: jest.fn(),
-  UserDetails: makeMockContainer('UserDetails'),
+  UserDetails: makeMockComponent('UserDetails'),
 };
 
 const getComponent = makeShallowRenderer(RepositoriesSearchResults, props);
