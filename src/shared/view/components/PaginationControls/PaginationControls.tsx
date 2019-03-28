@@ -3,6 +3,8 @@ import block from 'bem-cn';
 import * as R from 'ramda';
 import { bind } from 'decko';
 
+import PaginationPage from './PaginationPage/PaginationPage';
+import PaginationArrow from './PaginationArrow/PaginationArrow';
 import { maxRenderedPages } from './constants';
 import './PaginationControls.scss';
 
@@ -36,27 +38,30 @@ class PaginationControls extends React.PureComponent<IProps> {
     );
   }
 
-  private renderArrow(direction: ArrowDirection, hidden: boolean) {
-    return <div className={b('arrow', { direction, hidden })} onClick={this.makeArrowClickHandler(direction)}/>;
-  }
-
-  @bind
-  private renderPage(page: number) {
-    const { currentPage } = this.props;
+  private renderArrow(direction: ArrowDirection, disabled: boolean) {
     return (
-      <div
-        className={b('page', { active: currentPage === page })}
-        key={page}
-        onClick={this.makePageClickHandler(page)}
-      >
-        {page}
+      <div className={b('arrow')}>
+        <PaginationArrow
+          direction={direction}
+          onClick={this.makeArrowClickHandler(direction)}
+          disabled={disabled}
+        />
       </div>
     );
   }
 
   @bind
-  private makePageClickHandler(page: number) {
-    return () => this.props.onPageRequest(page);
+  private renderPage(page: number) {
+    const { currentPage, onPageRequest } = this.props;
+    return (
+      <div className={b('page')} key={page}>
+        <PaginationPage
+          active={currentPage === page}
+          onClick={onPageRequest}
+          page={page}
+        />
+      </div>
+    );
   }
 
   @bind
