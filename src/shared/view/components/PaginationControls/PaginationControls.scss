@@ -4,37 +4,14 @@
   justify-content: center;
 
   &__arrow {
-    width: 0.4rem;
-    height: 0.4rem;
-    border: solid;
-    border-width: 0 0.1rem 0.1rem 0;
-    color: #777;
-    cursor: pointer;
+    display: flex;
 
-    &_direction {
-      &_left {
-        margin-right: 0.5rem;
-        transform: rotate(135deg);
-      }
-
-      &_right {
-        transform: rotate(-45deg);
-      }
-    }
-
-    &_hidden {
-      visibility: hidden;
+    &:first-child {
+      margin-right: 0.5rem;
     }
   }
 
   &__page {
     margin-right: 0.5rem;
-    color: #777;
-    cursor: pointer;
-
-    &_active {
-      box-shadow: 0 0.1rem;
-      color: black;
-    }
   }
 }

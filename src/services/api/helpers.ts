@@ -49,7 +49,6 @@ function optionalParam(name: string, value?: string) {
 */
 export function getTotalPagesFromLinkHeader(link?: string): number {
   if (link === void 0) {
-    console.error(`Can't get total pages (no Link header provided)`);
     return 0;
   }
 

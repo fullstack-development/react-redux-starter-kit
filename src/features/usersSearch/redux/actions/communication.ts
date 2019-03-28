@@ -1,16 +1,16 @@
 import { makeCommunicationActionCreators } from 'redux-make-communication';
 import * as NS from '../../namespace';
 
-export const { execute: searchUser, completed: searchUserSuccess, failed: searchUserFail } =
-  makeCommunicationActionCreators<NS.ISearchUser, NS.ISearchUserSuccess, NS.ISearchUserFail>(
-    'USER_SEARCH:SEARCH_USER',
-    'USER_SEARCH:SEARCH_USER_SUCCESS',
-    'USER_SEARCH:SEARCH_USER_FAIL',
+export const { execute: searchUsers, completed: searchUsersSuccess, failed: searchUsersFail } =
+  makeCommunicationActionCreators<NS.ISearchUsers, NS.ISearchUsersSuccess, NS.ISearchUsersFail>(
+    'USERS_SEARCH:SEARCH_USERS',
+    'USERS_SEARCH:SEARCH_USERS_SUCCESS',
+    'USERS_SEARCH:SEARCH_USERS_FAIL',
   );
 
 export const { execute: loadUserDetails, completed: loadUserDetailsSuccess, failed: loadUserDetailsFail } =
   makeCommunicationActionCreators<NS.ILoadUserDetails, NS.ILoadUserDetailsSuccess, NS.ILoadUserDetailsFail>(
-    'USER_SEARCH:LOAD_USER_DETAILS',
-    'USER_SEARCH:LOAD_USER_DETAILS_SUCCESS',
-    'USER_SEARCH:LOAD_USER_DETAILS_FAIL',
+    'USERS_SEARCH:LOAD_USER_DETAILS',
+    'USERS_SEARCH:LOAD_USER_DETAILS_SUCCESS',
+    'USERS_SEARCH:LOAD_USER_DETAILS_FAIL',
   );

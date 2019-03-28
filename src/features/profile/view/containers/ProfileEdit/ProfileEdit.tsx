@@ -88,4 +88,5 @@ class ProfileEdit extends React.PureComponent<IProps> {
   }
 }
 
+export { ProfileEdit, IProps as IProfileEditProps };
 export default connect(mapState, mapDispatch)(ProfileEdit);
