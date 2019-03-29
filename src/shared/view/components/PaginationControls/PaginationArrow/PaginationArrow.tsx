@@ -29,4 +29,5 @@ class PaginationArrow extends PureComponent<IProps> {
   }
 }
 
+export { IProps as IPaginationArrowProps };
 export default PaginationArrow;
