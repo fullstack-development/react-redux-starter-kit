@@ -105,4 +105,5 @@ class UserDetails extends React.Component<IProps> {
   }
 }
 
+export { UserDetails, IProps as IUserDetailsProps };
 export default connect(mapState, mapDispatch)(UserDetails);

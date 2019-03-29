@@ -22,4 +22,5 @@ function RepositoryAttribute(props: IProps) {
   );
 }
 
+export { IProps as IRepositoryAttributeProps };
 export default RepositoryAttribute;

@@ -18,7 +18,7 @@ interface IFeatureProps {
   profileFeatureEntry: features.profile.Entry;
 }
 
-type IProps = IOwnProps & IFeatureProps & RouteComponentProps & React.ComponentProps<'div'>;
+type IProps = IOwnProps & IFeatureProps & RouteComponentProps;
 
 const b = block('layout');
 
@@ -71,6 +71,7 @@ class Layout extends React.Component<IProps> {
   }
 }
 
+export { Layout, IProps as ILayoutProps };
 export default featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
 })(withRouter(Layout));
