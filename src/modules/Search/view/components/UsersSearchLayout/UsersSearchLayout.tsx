@@ -27,7 +27,7 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   };
 
   public render() {
-    const { usersSearchFeatureEntry: { containers } } = this.props;
+    const { usersSearchFeatureEntry: { containers }, t } = this.props;
     const { UsersSearchForm, UsersSearchResults } = containers;
     const { lastSubmittedFormState } = this.state;
 
