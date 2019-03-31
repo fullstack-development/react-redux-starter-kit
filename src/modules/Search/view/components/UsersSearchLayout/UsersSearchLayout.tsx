@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import block from 'bem-cn';
 
 import * as features from 'features';
+import { useTranslation, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
-
 import Layout from 'modules/shared/Layout/Layout';
+
 import './UsersSearchLayout.scss';
 
 interface IFeatureProps {
@@ -21,9 +22,10 @@ function UsersSearchLayout(props: IProps) {
 
   const { usersSearchFeatureEntry: { containers } } = props;
   const { UsersSearchForm, UsersSearchResults } = containers;
+  const { t } = useTranslation();
 
   return (
-    <Layout title="GitHub users search">
+    <Layout title={t(tKeys.features.userSearch.usersSearch.getKey())}>
       <div className={b()}>
         <div className={b('search-form')}>
           <UsersSearchForm onSubmit={setLastSubmittedFormState} />

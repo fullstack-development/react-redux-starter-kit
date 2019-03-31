@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { Button } from 'shared/view/elements';
+import { useTranslation, tKeys } from 'services/i18n';
+
 import Dialog from '../../Dialog/Dialog';
 
 interface IProps {
@@ -8,11 +11,13 @@ interface IProps {
   onClose(): void;
 }
 
-function SearchSettingsDialog(props: IProps)  {
+const { searchSettings, ok } = tKeys.shared;
+function SearchSettingsDialog(props: IProps) {
   const { isOpen, onClose, renderContent } = props;
+  const { t } = useTranslation();
   return (
     <Dialog
-      title="Search settings"
+      title={t(searchSettings.getKey())}
       onClose={onClose}
       open={isOpen}
     >
@@ -20,7 +25,9 @@ function SearchSettingsDialog(props: IProps)  {
         {renderContent()}
       </Dialog.Content>
       <Dialog.Actions>
-        <Button variant="outlined" onClick={onClose}>Ok</Button>
+        <Button variant="outlined" onClick={onClose}>
+          {t(ok.getKey())}
+        </Button>
       </Dialog.Actions>
     </Dialog>
   );

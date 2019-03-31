@@ -3,6 +3,7 @@ import block from 'bem-cn';
 
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
+import { useTranslation, tKeys } from 'services/i18n';
 
 import Layout from 'modules/shared/Layout/Layout';
 import './RepositoriesSearchLayout.scss';
@@ -20,12 +21,13 @@ function RepositoriesSearchLayout(props: IProps) {
   const { RepositoriesSearchForm, RepositoriesSearchResults } = containers;
   const [lastSubmittedFormState, setLastSubmittedFormState] =
     useState<features.repositoriesSearch.namespace.IRepositoriesSearchFormFields | null>(null);
+  const { t } = useTranslation();
 
   return (
-    <Layout title="GitHub repositories search">
+    <Layout title={t(tKeys.features.userSearch.repositoriesSearch.getKey())}>
       <div className={b()}>
         <div className={b('search-form')}>
-          <RepositoriesSearchForm onSubmit={setLastSubmittedFormState}/>
+          <RepositoriesSearchForm onSubmit={setLastSubmittedFormState} />
         </div>
         <div className={b('results')}>
           {lastSubmittedFormState &&

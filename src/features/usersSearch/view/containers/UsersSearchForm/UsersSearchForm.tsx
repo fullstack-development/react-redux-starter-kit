@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
+import { withTranslation, WithTranslation } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 
@@ -20,7 +21,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IOwnProps & IStateProps & IActionProps;
+type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
 
 const mapDispatch = {
   searchUser: actions.searchUser,
@@ -35,9 +36,10 @@ function mapState(state: IAppReduxState): IStateProps {
 
 class UsersSearchForm extends React.PureComponent<IProps> {
   public render() {
-    const { isUsersSearchRequesting, resetSearchResults } = this.props;
+    const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
     return (
       <SearchForm<IUsersSearchFormFields>
+        t={t}
         isSearchRequesting={isUsersSearchRequesting}
         searchInputName={fieldNames.searchString}
         onSubmit={this.handleFormSubmit}
@@ -56,4 +58,5 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-export default connect(mapState, mapDispatch)(UsersSearchForm);
+const connectedComponent = connect(mapState, mapDispatch)(UsersSearchForm);
+export default withTranslation()(connectedComponent);

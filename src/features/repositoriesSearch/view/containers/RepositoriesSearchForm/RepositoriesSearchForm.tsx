@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
+import { withTranslation, WithTranslation } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
-import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 
+import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { fieldNames } from './constants';
@@ -20,7 +21,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IOwnProps & IStateProps & IActionProps;
+type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
 
 const mapDispatch = {
   searchRepositories: actions.searchRepositories,
@@ -35,9 +36,10 @@ function mapState(state: IAppReduxState): IStateProps {
 
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
   public render() {
-    const { isRepositoriesSearchRequesting, resetSearchResults } = this.props;
+    const { isRepositoriesSearchRequesting, resetSearchResults, t } = this.props;
     return (
       <SearchForm<IRepositoriesSearchFormFields>
+        t={t}
         searchInputName={fieldNames.searchString}
         isSearchRequesting={isRepositoriesSearchRequesting}
         onSubmit={this.handleFormSubmit}
@@ -55,4 +57,5 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-export default connect(mapState, mapDispatch)(RepositoriesSearchForm);
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchForm);
+export default withTranslation()(connectedComponent);

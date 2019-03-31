@@ -4,6 +4,7 @@ import block from 'bem-cn';
 import { bind } from 'decko';
 
 import { isRequired } from 'shared/validators';
+import { TranslateFunction, tKeys } from 'services/i18n';
 import { TextInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 
@@ -15,7 +16,8 @@ interface IState {
   isSettingsDialogOpen: boolean;
 }
 
-interface IProps<FormFields> {
+interface IOwnProps<FormFields> {
+  t: TranslateFunction;
   isSearchRequesting: boolean;
   searchInputName: string;
   initialValues?: Partial<FormFields>;
@@ -24,7 +26,10 @@ interface IProps<FormFields> {
   renderSettings?(): React.ReactChild;
 }
 
+type IProps<T> = IOwnProps<T>;
+
 const b = block('search-form');
+const { search, settings } = tKeys.shared;
 
 class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState> {
   public state: IState = {
@@ -49,7 +54,7 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
 
   @bind
   private renderForm({ handleSubmit }: FormRenderProps) {
-    const { isSearchRequesting, renderSettings, searchInputName } = this.props;
+    const { isSearchRequesting, renderSettings, searchInputName, t } = this.props;
     const { isSettingsDialogOpen } = this.state;
     return (
       <form onSubmit={handleSubmit} className={b()}>
@@ -60,7 +65,7 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
             variant="outlined"
             disabled={isSearchRequesting}
           >
-            Search
+            {t(search.getKey())}
           </Button>
           {renderSettings !== void 0 &&
             <div className={b('settings')}>
@@ -69,7 +74,7 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
                 onClick={this.handleSettingsButtonClick}
                 disabled={isSearchRequesting}
               >
-                Settings
+                {t(settings.getKey())}
               </Button>
               <SearchSettingsDialog
                 isOpen={isSettingsDialogOpen}

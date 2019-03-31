@@ -3,6 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
+import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { Popover } from 'shared/view/components';
@@ -23,9 +24,10 @@ interface IStateProps {
   profile: IProfile;
 }
 
-type IProps = IOwnProps & IStateProps;
+type IProps = IOwnProps & IStateProps & WithTranslation;
 
 const b = block('profile-preview');
+const { profile } = tKeys.features;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -41,7 +43,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
   private blockRef = React.createRef<HTMLDivElement>();
 
   public render() {
-    const { profile: { avatarURL, name, nickname, age, bio }, onEditClick } = this.props;
+    const { profile: { avatarURL, name, nickname, age, bio }, onEditClick, t } = this.props;
     const { isOpen } = this.state;
     return (
       <div className={b()} ref={this.blockRef}>
@@ -64,7 +66,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
                   {nickname}
                 </div>
                 <div className={b('age')}>
-                  {age} y.o.
+                  {age + ' ' + t(profile.yearsOld.getKey())}
                 </div>
               </div>
             </div>
@@ -72,7 +74,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
               {bio}
             </div>
             <div className={b('edit')} onClick={onEditClick}>
-              Edit
+              {t(profile.edit.getKey())}
             </div>
           </div>
         </Popover>
@@ -92,4 +94,5 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
 
 }
 
-export default connect(mapState)(ProfilePreview);
+const connectedComponent = connect(mapState)(ProfilePreview);
+export default withTranslation()(connectedComponent);
