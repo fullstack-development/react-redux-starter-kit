@@ -25,9 +25,9 @@ export default {
       age: 'Возраст',
       bio: 'Биография',
       editProfile: 'Редактировать профиль',
-      yearsOld: 'лет',
-      yearsOld_1: 'года',
-      yearsOld_2: 'год',
+      yearsOld: '{{count}} лет',
+      yearsOld_1: '{{count}} года',
+      yearsOld_2: '{{count}} год',
       edit: 'Редактировать',
     },
     repositoriesSearch: {

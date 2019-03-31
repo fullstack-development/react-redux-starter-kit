@@ -25,7 +25,7 @@ export default {
       age: 'Age',
       bio: 'Bio',
       editProfile: 'Edit profile',
-      yearsOld: 'y.o.',
+      yearsOld: '{{count}} y.o.',
       edit: 'Edit',
     },
     repositoriesSearch: {

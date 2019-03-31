@@ -42,12 +42,12 @@ class Layout extends React.Component<IProps> {
       <div className={b()}>
         <header className={b('header')}>
           <div className={b('header-content')}>
-            <div className={b('menu')}>
+            <div className={b('left-menu')}>
               <LayoutHeaderMenu menuItems={menuItems} />
             </div>
-            <div>
+            <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
-              <LanguageSelector />
+              <div className={b('language-selector')}><LanguageSelector /></div>
             </div>
           </div>
         </header>

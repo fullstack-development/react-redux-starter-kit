@@ -36,8 +36,13 @@
     }
   }
 
-  &__menu {
+  &__left-menu {
     line-height: $header-footer-height;
+  }
+
+  &__right-menu {
+    display: flex;
+    align-items: center;
   }
 
   &__content {
@@ -71,5 +76,19 @@
 
   &__company-link {
     color: #eaeaea;
+  }
+
+  &__language-selector {
+    margin: 0 1rem;
+
+    & select {
+      border: none;
+      background: none;
+      color: white;
+      font-weight: 400;
+      font-size: 0.9rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
   }
 }

@@ -66,7 +66,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
                   {nickname}
                 </div>
                 <div className={b('age')}>
-                  {age + ' ' + t(profile.yearsOld.getKey())}
+                  {t(profile.yearsOld.getKey(), { count: age })}
                 </div>
               </div>
             </div>
