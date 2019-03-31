@@ -3,9 +3,9 @@ import block from 'bem-cn';
 
 import * as features from 'features';
 import { featureConnect } from 'core';
-import Layout from 'modules/shared/Layout/Layout';
 import { useTranslation, tKeys } from 'services/i18n';
 
+import { Layout } from '../../../../shared';
 import './ProfileLayout.scss';
 
 interface IFeatureProps {
@@ -30,6 +30,7 @@ function ProfileLayout(props: IProps) {
   );
 }
 
+export { ProfileLayout, IProps as IProfileLayoutProps };
 export default featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
 })(ProfileLayout);

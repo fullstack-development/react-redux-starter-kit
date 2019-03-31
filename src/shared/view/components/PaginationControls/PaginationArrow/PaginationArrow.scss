@@ -1,0 +1,21 @@
+.pagination-arrow {
+  width: 0.4rem;
+  height: 0.4rem;
+  border: solid;
+  border-width: 0 0.1rem 0.1rem 0;
+  color: #777;
+
+  &_direction {
+    &_left {
+      transform: rotate(135deg);
+    }
+
+    &_right {
+      transform: rotate(-45deg);
+    }
+  }
+
+  &:disabled {
+    visibility: hidden;
+  }
+}

@@ -101,4 +101,5 @@ class ProfileEdit extends React.PureComponent<IProps> {
 }
 
 const connectedComponent = connect(mapState, mapDispatch)(ProfileEdit);
+export { ProfileEdit, IProps as IProfileEditProps };
 export default withTranslation()(connectedComponent);

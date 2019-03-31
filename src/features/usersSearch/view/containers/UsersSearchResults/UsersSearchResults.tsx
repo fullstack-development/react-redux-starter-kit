@@ -9,7 +9,7 @@ import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 
 import { IUsersSearchFormFields } from '../../../namespace';
-import { UserAvatarsWall } from '../../components';
+import { UsersAvatarsWall } from '../../components';
 import { actions, selectors } from './../../../redux';
 import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
@@ -39,7 +39,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  searchUser: actions.searchUser,
+  searchUsers: actions.searchUsers,
 };
 
 const b = block('users-search-results');
@@ -54,7 +54,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
     const { displayedUser } = this.state;
     return (
       <div className={b()}>
-        <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
+        <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         <div className={b('pagination')}>
           <PaginationControls
             totalPages={totalPages}
@@ -69,8 +69,8 @@ class UsersSearchResults extends React.PureComponent<IProps> {
 
   @bind
   private handlePageRequest(pageNumber: number) {
-    const { searchUser, searchOptions } = this.props;
-    searchUser({ searchOptions, page: pageNumber });
+    const { searchUsers, searchOptions } = this.props;
+    searchUsers({ searchOptions, page: pageNumber });
   }
 
   @bind
@@ -84,4 +84,5 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+export { UsersSearchResults, IProps as IUsersSearchResultsProps };
 export default connect(mapState, mapDispatch)(UsersSearchResults);

@@ -120,4 +120,6 @@ class UserDetails extends React.Component<IProps> {
 }
 
 const connectedComponent = connect(mapState, mapDispatch)(UserDetails);
+
+export { UserDetails, IProps as IUserDetailsProps };
 export default withTranslation()(connectedComponent);

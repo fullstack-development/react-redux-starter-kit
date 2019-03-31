@@ -19,7 +19,7 @@ interface IFeatureProps {
   profileFeatureEntry: features.profile.Entry;
 }
 
-type IProps = IOwnProps & IFeatureProps & RouteComponentProps & React.ComponentProps<'div'> & WithTranslation;
+type IProps = IOwnProps & IFeatureProps & RouteComponentProps & WithTranslation;
 
 const b = block('layout');
 const { header, footer } = tKeys.shared;
@@ -76,6 +76,8 @@ class Layout extends React.Component<IProps> {
 }
 
 const wrappedComponent = withTranslation()(withRouter(Layout));
+
+export { Layout, IProps as ILayoutProps };
 export default featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
 })(wrappedComponent);

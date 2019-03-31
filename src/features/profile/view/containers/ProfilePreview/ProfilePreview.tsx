@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
@@ -40,7 +40,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
     isOpen: false,
   };
 
-  private blockRef = React.createRef<HTMLDivElement>();
+  private blockRef = createRef<HTMLDivElement>();
 
   public render() {
     const { profile: { avatarURL, name, nickname, age, bio }, onEditClick, t } = this.props;
@@ -95,4 +95,6 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
 }
 
 const connectedComponent = connect(mapState)(ProfilePreview);
+
+export { ProfilePreview, IProps as IProfilePreviewProps };
 export default withTranslation()(connectedComponent);

@@ -46,4 +46,5 @@ class Dialog extends React.Component<IProps> {
   }
 }
 
+export { IProps as IDialogProps };
 export default Dialog;

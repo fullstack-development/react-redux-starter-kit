@@ -33,4 +33,5 @@ function Notification(props: IProps) {
   );
 }
 
+export { Notification, IProps as INotificationProps };
 export default connect(mapState)(Notification);

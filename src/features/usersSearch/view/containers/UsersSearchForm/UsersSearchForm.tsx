@@ -24,7 +24,7 @@ type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
 
 const mapDispatch = {
-  searchUser: actions.searchUser,
+  searchUsers: actions.searchUsers,
   resetSearchResults: actions.resetSearchResults,
 };
 
@@ -52,11 +52,13 @@ class UsersSearchForm extends React.PureComponent<IProps> {
 
   @bind
   private handleFormSubmit(formValues: IUsersSearchFormFields) {
-    const { searchUser, onSubmit } = this.props;
-    searchUser({ searchOptions: formValues, page: 1 });
+    const { searchUsers, onSubmit } = this.props;
+    searchUsers({ searchOptions: formValues, page: 1 });
     onSubmit(formValues);
   }
 }
 
 const connectedComponent = connect(mapState, mapDispatch)(UsersSearchForm);
+
+export { UsersSearchForm, IProps as IUsersSearchFormProps };
 export default withTranslation()(connectedComponent);

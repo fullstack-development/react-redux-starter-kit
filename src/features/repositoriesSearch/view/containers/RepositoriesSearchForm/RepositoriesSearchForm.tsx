@@ -58,4 +58,6 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
 }
 
 const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchForm);
+
+export { RepositoriesSearchForm, IProps as IRepositoriesSearchFormProps };
 export default withTranslation()(connectedComponent);

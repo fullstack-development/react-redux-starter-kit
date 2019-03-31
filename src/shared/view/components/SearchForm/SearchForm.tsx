@@ -99,4 +99,5 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
   }
 }
 
+export { IProps as ISearchFormProps };
 export default SearchForm;
