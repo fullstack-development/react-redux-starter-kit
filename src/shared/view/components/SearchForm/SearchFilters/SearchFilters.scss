@@ -1,0 +1,23 @@
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  color: #666;
+  list-style: none;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+
+  &__filter {
+    margin-right: 1rem;
+
+    &-name {
+      font-weight: 600;
+    }
+
+    &-value {
+      text-transform: lowercase;
+    }
+  }
+}
