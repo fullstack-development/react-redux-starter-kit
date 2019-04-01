@@ -4,6 +4,7 @@ import { IReduxState } from '../namespace';
 const initial: IReduxState = {
   data: {
     foundRepositories: [],
+    totalResults: 0,
   },
   communication: {
     searchRepositories: initialCommunicationField,

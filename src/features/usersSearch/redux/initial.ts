@@ -5,6 +5,7 @@ const initial: IReduxState = {
   data: {
     foundUsers: [],
     userDetails: null,
+    totalResults: 0,
   },
   communication: {
     searchUser: initialCommunicationField,
