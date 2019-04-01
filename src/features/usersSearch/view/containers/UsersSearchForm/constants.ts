@@ -11,33 +11,33 @@ export const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy'
 
 export const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
   searchBy: 'Search by',
-  searchType: 'Search for',
+  searchFor: 'Search for',
   perPage: 'Results per page',
   reposLanguage: 'Repositories language',
   minRepos: 'min',
   maxRepos: 'max',
 };
 
-export const searchTypeLabels: Record<IUsersSearchFilters['searchType'], string> = {
+export const searchForLabels: Record<IUsersSearchFilters['searchFor'], string> = {
   both: 'Both',
   org: 'Organizations',
   user: 'Users',
 };
 
 export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>> = [
-  { value: 30, label: 30 },
-  { value: 50, label: 50 },
-  { value: 100, label: 100 },
+  { value: 30, label: '30'},
+  { value: 50, label: '50' },
+  { value: 100, label: '100' },
 ];
 
 export const formInitialValues: IUsersSearchFormFields = {
-  searchString: '', searchBy: searchByOptions[0].value, searchType: 'both', perPage: perPageOptions[0].value,
+  searchString: '', searchBy: searchByOptions[0].value, searchFor: 'both', perPage: perPageOptions[0].value,
 };
 
 export const fieldNames: FormFieldNames<IUsersSearchFormFields> = {
   searchString: 'searchString',
   searchBy: 'searchBy',
-  searchType: 'searchType',
+  searchFor: 'searchFor',
   perPage: 'perPage',
   reposLanguage: 'reposLanguage',
   maxRepos: 'maxRepos',

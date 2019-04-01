@@ -11,7 +11,7 @@ const props: IUsersSearchResultsProps = {
     perPage: 30,
     searchBy: 'email',
     searchString: 'search',
-    searchType: 'user',
+    searchFor: 'user',
   },
   users: Array(10).fill(githubUser),
   paginationState: {

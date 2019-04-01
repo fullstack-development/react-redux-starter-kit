@@ -11,7 +11,7 @@ import { SearchForm } from 'shared/view/components';
 
 import { selectors, actions } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
-import { formInitialValues, fieldNames, searchByOptions, searchTypeLabels, filtersLabels } from './constants';
+import { formInitialValues, fieldNames, searchByOptions, searchForLabels, filtersLabels } from './constants';
 import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -39,8 +39,8 @@ function mapState(state: IAppReduxState): IStateProps {
 
 class UsersSearchForm extends React.PureComponent<IProps> {
   private filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-    searchBy: x => getSelectValueLabelMap(searchByOptions)[x],
-    searchType: x => ({ ...searchTypeLabels, both: 'Users & organizations' }[x]),
+    searchBy: x => getSelectValueLabelMap(searchByOptions)[x].toLowerCase(),
+    searchFor: x => ({ ...searchForLabels, both: 'users & organizations' })[x].toLowerCase(),
   };
 
   public render() {

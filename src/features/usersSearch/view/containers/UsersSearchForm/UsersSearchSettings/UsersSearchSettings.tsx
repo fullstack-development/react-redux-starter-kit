@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import { FormLabel } from 'shared/view/elements';
 import { TextInputField, SelectField, NumberInputField, RadioField } from 'shared/view/form';
 
-import { searchByOptions, perPageOptions, fieldNames, searchTypeLabels, filtersLabels } from '../constants';
+import { searchByOptions, perPageOptions, fieldNames, searchForLabels, filtersLabels } from '../constants';
 import './UsersSearchSettings.scss';
 
 const b = block('users-search-settings');
@@ -23,11 +23,11 @@ function UsersSearchSettings() {
       <div className={b('row')}>
         <div className={b('item')}>
           <FormLabel>
-            {filtersLabels.searchType}
+            {filtersLabels.searchFor}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchType} value="user" label={searchTypeLabels.user} />
-              <RadioField name={fieldNames.searchType} value="org" label={searchTypeLabels.org} />
-              <RadioField name={fieldNames.searchType} value="both" label={searchTypeLabels.both} />
+              <RadioField name={fieldNames.searchFor} value="user" label={searchForLabels.user} />
+              <RadioField name={fieldNames.searchFor} value="org" label={searchForLabels.org} />
+              <RadioField name={fieldNames.searchFor} value="both" label={searchForLabels.both} />
             </div>
           </FormLabel>
         </div>
