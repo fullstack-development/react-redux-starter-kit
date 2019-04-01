@@ -1,5 +1,6 @@
-import { makeMountRenderer } from 'shared/helpers';
+import { makeMountRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { Button } from 'shared/view/elements';
+
 import SearchSettingsDialog from '../SearchSettingsDialog/SearchSettingsDialog';
 import SearchForm, { ISearchFormProps } from '../SearchForm';
 
@@ -15,6 +16,7 @@ const props: ISearchFormProps<IFormFields> = {
   initialValues: {
     search: 'abc',
   },
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeMountRenderer(SearchForm, props);

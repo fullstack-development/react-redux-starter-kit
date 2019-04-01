@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount, ShallowWrapper, ReactWrapper } from 'enzyme';
 
-function makeShallowRenderer<Props, State>(
+export function makeShallowRenderer<Props, State>(
   Component: React.ComponentClass<Props, State> | React.FunctionComponent<Props>, defaultProps: Props,
 ) {
   return (props: Partial<Props> = {}): ShallowWrapper<Props, State> => (
@@ -9,12 +9,10 @@ function makeShallowRenderer<Props, State>(
   );
 }
 
-function makeMountRenderer<Props, State>(
+export function makeMountRenderer<Props, State>(
   Component: React.ComponentClass<Props, State> | React.FunctionComponent<Props>, defaultProps: Props,
 ) {
   return (props: Partial<Props> = {}): ReactWrapper<Props, State> => (
     mount(<Component {...defaultProps} {...props} />)
   );
 }
-
-export { makeShallowRenderer, makeMountRenderer };

@@ -1,8 +1,8 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEvent } from 'shared/mocks';
 import { ClickAwayListener } from 'shared/view/components';
 
-import LayoutHeaderMenu, { IHeaderMenuProps } from '../LayoutHeaderMenu';
+import { LayoutHeaderMenu, IHeaderMenuProps } from '../LayoutHeaderMenu';
 
 const props: IHeaderMenuProps = {
   menuItems: [
@@ -15,6 +15,7 @@ const props: IHeaderMenuProps = {
       title: 'Title2',
     },
   ],
+  ...getMockedLocaleProps(),
 };
 
 const clickEvent = makeMockEvent('click');

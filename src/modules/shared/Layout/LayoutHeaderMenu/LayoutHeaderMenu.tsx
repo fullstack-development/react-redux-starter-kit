@@ -86,5 +86,5 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { IMenuItem as IHeaderMenuItem, IProps as IHeaderMenuProps, IState as IHeaderMenuState };
+export { LayoutHeaderMenu, IMenuItem as IHeaderMenuItem, IProps as IHeaderMenuProps, IState as IHeaderMenuState };
 export default withTranslation()(LayoutHeaderMenu);

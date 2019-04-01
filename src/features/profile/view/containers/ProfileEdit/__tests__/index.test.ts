@@ -1,6 +1,6 @@
 import { Form } from 'react-final-form';
 
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { profile } from 'shared/mocks';
 
 import { ProfileEdit, IProfileEditProps } from '../ProfileEdit';
@@ -9,6 +9,7 @@ const props: IProfileEditProps = {
   profile,
   setNotification: jest.fn(),
   saveProfile: jest.fn(),
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(ProfileEdit, props);

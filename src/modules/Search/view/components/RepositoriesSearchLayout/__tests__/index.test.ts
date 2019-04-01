@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEntry, makeMockComponent } from 'shared/mocks';
 
 import { RepositoriesSearchLayout, IRepositoriesSearchLayoutProps } from '../RepositoriesSearchLayout';
@@ -8,6 +8,7 @@ const props: IRepositoriesSearchLayoutProps = {
     RepositoriesSearchForm: makeMockComponent('RepositoriesSearchForm'),
     RepositoriesSearchResults: makeMockComponent('RepositoriesSearchResults'),
   }),
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(RepositoriesSearchLayout, props);

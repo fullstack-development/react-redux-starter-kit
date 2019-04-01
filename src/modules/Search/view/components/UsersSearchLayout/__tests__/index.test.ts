@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEntry, makeMockComponent } from 'shared/mocks';
 
 import { UsersSearchLayout, IUsersSearchLayoutProps } from '../UsersSearchLayout';
@@ -8,6 +8,7 @@ const props: IUsersSearchLayoutProps = {
     UsersSearchForm: makeMockComponent('UsersSearchForm'),
     UsersSearchResults: makeMockComponent('UsersSearchResults'),
   }),
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(UsersSearchLayout, props);
