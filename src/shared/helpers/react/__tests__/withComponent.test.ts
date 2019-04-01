@@ -20,10 +20,10 @@ describe('(shared/helpers/react) withComponent', () => {
     const outerComponent = getOuterComponent();
     const outerPropsNames = Object.keys(outerComponentProps);
     const innerPropsNames = Object.keys(outerComponent.find(InnerComponent).props());
-    const areAllPropsPassed = R.intersection(
+    const passedProps = R.intersection(
       outerPropsNames.concat('component'),
       innerPropsNames,
-    ).length === innerPropsNames.length;
-    expect(areAllPropsPassed).toBe(true);
+    );
+    expect(passedProps.length).toBe(innerPropsNames.length);
   });
 });

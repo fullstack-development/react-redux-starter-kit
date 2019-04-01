@@ -30,11 +30,11 @@ describe('(shared/helpers/react) getFieldWithComponent', () => {
     const outerComponent = getOuterComponent();
     const outerPropsNames = Object.keys(outerComponentProps);
     const fieldPropsNames = Object.keys(outerComponent.find(Field).props());
-    const areAllPropsPassed = R.intersection(
+    const passedProps = R.intersection(
       outerPropsNames.concat('component', 'type'),
       fieldPropsNames,
-    ).length === fieldPropsNames.length;
-    expect(areAllPropsPassed).toBe(true);
+    );
+    expect(passedProps.length).toBe(fieldPropsNames.length);
   });
 
   it('should add correct displayName for outer component', () => {
