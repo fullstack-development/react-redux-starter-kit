@@ -26,7 +26,7 @@ function UsersSearchSettings() {
             Search type
             <div className={b('checkbox-group')}>
               <RadioField name={fieldNames.searchType} value="user" label="User" />
-              <RadioField name={fieldNames.searchType} value="org" label="Organizations" />
+              <RadioField name={fieldNames.searchType} value="org" label="Organization" />
               <RadioField name={fieldNames.searchType} value="both" label="Both" />
             </div>
           </FormLabel>

@@ -1,6 +1,5 @@
-import { ISelectOption } from 'shared/view/elements';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
-import { FormFieldNames } from 'shared/types/form';
+import { FormFieldNames, ISelectOption } from 'shared/types/form';
 import { IUsersSearchFormFields } from '../../../namespace';
 
 export const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy']>> = [
@@ -9,6 +8,12 @@ export const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy'
   { value: 'email', label: 'Email' },
   { value: 'fullname', label: 'Full name' },
 ];
+
+export const searchTypeLabels: Record<IUsersSearchFilters['searchType'], string> = {
+  both: 'users & organizations',
+  org: 'organizations',
+  user: 'users',
+};
 
 export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>> = [
   { value: 30, label: 30 },

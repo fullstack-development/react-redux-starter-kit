@@ -12,6 +12,6 @@ export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as CheckboxInput } from './CheckboxInput/CheckboxInput';
 export { default as CircleProgressBar } from './CircleProgressBar/CircleProgressBar';
 export { default as Tooltip } from './Tooltip/Tooltip';
-export { default as Select, ISelectOption } from './Select/Select';
+export { default as Select } from './Select/Select';
 export { default as Preloader } from './Preloader/Preloader';
 export { default as FormLabel } from './FormLabel/FormLabel';
