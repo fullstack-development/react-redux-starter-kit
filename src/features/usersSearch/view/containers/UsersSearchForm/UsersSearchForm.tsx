@@ -5,13 +5,13 @@ import * as R from 'ramda';
 
 import { replaceObjectKeys, replaceObjectValues, getSelectValueLabelMap } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
+import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { KeysToValuesFormattersMap } from 'shared/types/common';
 import { SearchForm } from 'shared/view/components';
-import { IUsersSearchFilters } from 'shared/types/githubSearch';
 
 import { selectors, actions } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
-import { formInitialValues, fieldNames, searchByOptions, searchTypeLabels } from './constants';
+import { formInitialValues, fieldNames, searchByOptions, searchTypeLabels, filtersLabels } from './constants';
 import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -38,18 +38,9 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 class UsersSearchForm extends React.PureComponent<IProps> {
-  private filtersNamesMap: Record<keyof IUsersSearchFilters, string> = {
-    searchBy: 'Search by',
-    searchType: 'Search for',
-    perPage: 'Results per page',
-    reposLanguage: 'Repositories language',
-    minRepos: 'Min repositories',
-    maxRepos: 'Max repositories',
-  };
-
   private filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
     searchBy: x => getSelectValueLabelMap(searchByOptions)[x],
-    searchType: x => searchTypeLabels[x],
+    searchType: x => ({ ...searchTypeLabels, both: 'Users & organizations' }[x]),
   };
 
   public render() {
@@ -71,7 +62,8 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   private getFilters(formFields: IUsersSearchFormFields) {
     const filters = R.omit([fieldNames.searchString], formFields);
     const filtersWithFormattedValues = replaceObjectValues(filters, this.filtersValuesFormattersMap);
-    return replaceObjectKeys(filtersWithFormattedValues, this.filtersNamesMap);
+    const labels = { ...filtersLabels, minRepos: 'Min repositories', maxRepos: 'Max repositories' };
+    return replaceObjectKeys(filtersWithFormattedValues, labels);
   }
 
   @bind

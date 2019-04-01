@@ -9,10 +9,19 @@ export const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy'
   { value: 'fullname', label: 'Full name' },
 ];
 
+export const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
+  searchBy: 'Search by',
+  searchType: 'Search for',
+  perPage: 'Results per page',
+  reposLanguage: 'Repositories language',
+  minRepos: 'min',
+  maxRepos: 'max',
+};
+
 export const searchTypeLabels: Record<IUsersSearchFilters['searchType'], string> = {
-  both: 'users & organizations',
-  org: 'organizations',
-  user: 'users',
+  both: 'Both',
+  org: 'Organizations',
+  user: 'Users',
 };
 
 export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>> = [

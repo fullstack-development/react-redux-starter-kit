@@ -4,14 +4,13 @@ import { bind } from 'decko';
 import * as R from 'ramda';
 
 import { IAppReduxState } from 'shared/types/app';
-import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
 
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
-import { fieldNames } from './constants';
+import { fieldNames, filtersLabels } from './constants';
 
 interface IOwnProps {
   onSubmit(formValues: IRepositoriesSearchFormFields): void;
@@ -37,13 +36,6 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
-  private filtersNamesMap: Record<keyof IRepositoriesSearchFilters, string> = {
-    starsNumber: 'Stars number',
-    forksNumber: 'Forks number',
-    language: 'Language',
-    owner: 'Owner',
-  };
-
   public render() {
     const { isRepositoriesSearchRequesting, resetSearchResults } = this.props;
     return (
@@ -61,7 +53,7 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
   @bind
   private getFilters(formValues: IRepositoriesSearchFormFields) {
     const filters = R.omit([fieldNames.searchString], formValues);
-    return replaceObjectKeys(filters, this.filtersNamesMap);
+    return replaceObjectKeys(filters, filtersLabels);
   }
 
   @bind
