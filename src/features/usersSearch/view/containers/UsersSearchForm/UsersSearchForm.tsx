@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import * as R from 'ramda';
 
-import { replaceObjectKeys, replaceObjectValues, getSelectValueLabelMap } from 'shared/helpers';
+import {
+  replaceObjectKeys, replaceObjectValues, getSelectValueLabelMap, KeysToValuesFormattersMap,
+} from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
-import { KeysToValuesFormattersMap } from 'shared/types/common';
 import { SearchForm } from 'shared/view/components';
 
 import { selectors, actions } from './../../../redux';

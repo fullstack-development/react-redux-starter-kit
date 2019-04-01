@@ -1,5 +1,7 @@
-import { KeysToValuesFormattersMap } from 'shared/types/common';
- // TODO: write tests
+type ValueFormatter<T> = (x: T) => any;
+export type KeysToValuesFormattersMap<T> = Partial<{[K in keyof T]: ValueFormatter<T[K]>}>;
+
+ // TODO: write tests after helpers tests merge
 function replaceObjectValues<T extends Record<string, any>>(
   sourceObj: T, replaceMap: KeysToValuesFormattersMap<T>,
 ) {
