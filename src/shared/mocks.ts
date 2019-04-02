@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
-import { ResultEntry, Containers, ActionCreators, Selectors } from 'shared/helpers/makeFeatureEntry';
+import { IFeatureEntry } from './types/app';
 
 export const makeMockComponent = (componentName: string): any => {
   const Container = () => React.createElement('div');
@@ -46,11 +46,11 @@ export const repository: IRepository = {
   owner: githubUser,
 };
 
-export function makeMockEntry(
-  containers?: Containers<any> | null,
-  actions?: ActionCreators<any> | null,
-  selectors?: Selectors<any> | null,
-) {
+export function makeMockEntry<T extends IFeatureEntry>(
+  containers?: IFeatureEntry['containers'],
+  actions?: IFeatureEntry['actions'],
+  selectors?: IFeatureEntry['selectors'],
+): T {
   return {
     containers: new Proxy(containers || {}, {
       get: (target, property: string) => {
@@ -67,7 +67,7 @@ export function makeMockEntry(
         return target[property] || jest.fn();
       },
     }),
-  } as ResultEntry<any, any, any>;
+  } as T;
 }
 
 export const withRouterProps: RouteComponentProps = {
