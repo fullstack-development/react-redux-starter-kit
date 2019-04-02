@@ -13,7 +13,7 @@ function TotalSearchResults(props: IProps) {
   return totalResults > 0 ? (
     <div className={b()}>
       <span className={b('title')}>
-        {'Total results'.concat(': ')}
+        {'Total results: '}
       </span>
       <span className={b('value')}>
         {totalResults}
