@@ -34,4 +34,5 @@ class PaginationPage extends PureComponent<IProps> {
   }
 }
 
+export { IProps as IPaginationPageProps };
 export default PaginationPage;
