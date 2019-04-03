@@ -18,6 +18,7 @@ export interface IRepositoriesSearchFilters {
 
 export interface IPaginatedResponse<T> {
   totalPages: number;
+  totalResults: number;
   data: T[];
 }
 

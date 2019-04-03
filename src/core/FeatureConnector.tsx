@@ -3,18 +3,18 @@ import { bind } from 'decko';
 import * as R from 'ramda';
 import { injectable } from 'inversify';
 
-import { Omit, GetProps } from '_helpers';
+import { Omit, GetProps, SubSet } from '_helpers';
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry } from 'shared/types/app';
+import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
 
-type FeatureLoader = () => Promise<IFeatureEntry<any, any, any>>;
+type FeatureLoader = () => Promise<IFeatureEntry>;
 
 interface IState {
   mounted: boolean;
 }
 
-const bundles = new Map<FeatureLoader, IFeatureEntry<any, any, any>>();
+const bundles = new Map<FeatureLoader, IFeatureEntry>();
 
 // tslint:disable:max-line-length
 function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, preloader?: React.ReactChild):
@@ -29,7 +29,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
       public state: IState = { mounted: false };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
+      private connectFeatureToStore!: (entry: IReduxEntry) => void;
 
       public async bootstrap() {
         await this.load();
@@ -62,7 +62,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         await Promise.all(
           keys.map((key) => {
             return loaders[key]().then(bundle => {
-              this.connectFeatureToStore(bundle);
+              bundle.reduxEntry && this.connectFeatureToStore(bundle.reduxEntry);
               if (this.saveBundle) {
                 this.saveBundle(bundle, key);
               }
@@ -73,11 +73,11 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         this.saveBundle && this.state.mounted && this.forceUpdate();
       }
 
-      private saveBundle: null | ((bundle: IFeatureEntry<any, any, any>, key: keyof L) => void) = (bundle, key) => {
+      private saveBundle: null | ((bundle: IFeatureEntry, key: keyof L) => void) = (bundle, key) => {
         bundles.set(loaders[key], bundle);
       }
 
-      private getBundles(): Record<string, IFeatureEntry<any, any, any>> {
+      private getBundles(): Record<string, IFeatureEntry> {
         return R.map(value => bundles.get(value) || {}, loaders);
       }
 
@@ -91,11 +91,15 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
   };
 }
 
+type IFeatureEntryWithContainers<
+  C extends Record<string, React.ComponentType<any>>
+  > = SubSet<IFeatureEntry, { containers: C }>;
+
 export function getAsyncContainer<C extends Record<string, React.ComponentType<any>>, K extends keyof C>(
-  loader: () => Promise<IFeatureEntry<C, any, any>>, componentName: K,
+  loader: () => Promise<IFeatureEntryWithContainers<C>>, componentName: K,
 ): React.ComponentClass<GetProps<C[K]>> {
   interface IRenderProps {
-    _entry?: IFeatureEntry<C, any, any>;
+    _entry?: IFeatureEntryWithContainers<C>;
   }
 
   function render({ _entry, ...props }: IRenderProps) {

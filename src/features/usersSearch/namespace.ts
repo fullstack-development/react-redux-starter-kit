@@ -7,6 +7,7 @@ export interface IReduxState {
   data: {
     foundUsers: IGithubUser[];
     userDetails: IDetailedGithubUser | null;
+    totalResults: number;
   };
   communication: {
     searchUser: ICommunication;

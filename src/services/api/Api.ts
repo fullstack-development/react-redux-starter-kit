@@ -5,7 +5,10 @@ import {
 } from 'shared/types/githubSearch';
 
 import { SearchUserResponse, IDetailedServerUser, SearchRepositoriesResponse } from './types';
-import { constructUsersSearchQuery, getTotalPagesFromLinkHeader, constructRepositoriesSearchQuery } from './helpers';
+import {
+  constructUsersSearchQuery, getTotalPagesFromLinkHeader,
+  constructRepositoriesSearchQuery, getTotalResults,
+ } from './helpers';
 import { convertUser, convertUserDetails, convertRepository } from './converters';
 import HttpActions from './HttpActions';
 
@@ -30,7 +33,11 @@ class Api {
     const response = await this.actions.get<SearchUserResponse>(URL);
     const users = response.data.items;
     const totalPages = getTotalPagesFromLinkHeader(response.headers.link);
-    return { totalPages, data: users.map(convertUser) };
+    return {
+      totalPages,
+      data: users.map(convertUser),
+      totalResults: getTotalResults(response.data.total_count),
+    };
   }
 
   @bind
@@ -48,7 +55,11 @@ class Api {
     const response = await this.actions.get<SearchRepositoriesResponse>(URL);
     const repositories = response.data.items;
     const totalPages = getTotalPagesFromLinkHeader(response.headers.link);
-    return { totalPages, data: repositories.map(convertRepository) };
+    return {
+      totalPages,
+      data: repositories.map(convertRepository),
+      totalResults: getTotalResults(response.data.total_count),
+    };
   }
 }
 

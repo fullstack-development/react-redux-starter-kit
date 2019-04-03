@@ -1,4 +1,5 @@
-interface IGithubAPIResponse<T> {
+export interface IGithubAPIResponse<T> {
+  total_count: number;
   items: T[];
 }
 
