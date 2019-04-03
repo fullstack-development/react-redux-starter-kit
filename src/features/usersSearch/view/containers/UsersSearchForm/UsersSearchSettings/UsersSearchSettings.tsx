@@ -2,8 +2,7 @@ import React from 'react';
 import block from 'bem-cn';
 
 import { FormLabel } from 'shared/view/elements';
-import { TextInputField, SelectField, NumberInputField, RadioField } from 'shared/view/form';
-import { LanguageInput } from 'shared/view/components';
+import { SelectField, NumberInputField, RadioField, LanguageInputField } from 'shared/view/form';
 
 import { searchByOptions, perPageOptions, fieldNames } from '../constants';
 import './UsersSearchSettings.scss';
@@ -18,8 +17,7 @@ function UsersSearchSettings() {
           <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} />
         </div>
         <div className={b('item')}>
-          <TextInputField name={fieldNames.reposLanguage} label="Repositories language" />
-          <LanguageInput onLanguageSelect={(() => () => void 0)()} />
+          <LanguageInputField name={fieldNames.reposLanguage} label="Repositories language" />
         </div>
       </div>
       <div className={b('row')}>

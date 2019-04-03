@@ -1,9 +1,9 @@
 import React from 'react';
 import block from 'bem-cn';
 import { bind } from 'decko';
-import { GetProps } from '_helpers';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
-import { TextInput } from 'shared/view/elements';
+import TextInput, { IProps as ITextInputProps } from '../TextInput';
 
 import './InputWithPresets.scss';
 
@@ -12,7 +12,7 @@ interface IPreset {
   icon: JSX.Element;
 }
 
-interface IProps extends GetProps<typeof TextInput> {
+interface IProps extends ITextInputProps {
   presets: IPreset[];
   onPresetClick(presetValue: string): void;
 }
@@ -21,15 +21,23 @@ const b = block('input-with-presets');
 
 class InputWithPresets extends React.PureComponent<IProps> {
   public render() {
-    const { presets, ...rest } = this.props;
+    const { presets, onPresetClick, ...rest } = this.props;
     return (
       <div className={b()}>
         <TextInput {...rest} />
-        {presets.map((x, i) => (
-          <div className={b('preset')} onClick={this.makePresetClickHandler(x.value)} key={i}>
-            {x.icon}
-          </div>
-        ))}
+        <div className={b('presets')}>
+          {presets.map((x, i) => (
+            <ButtonBase
+              className={b('preset').toString()}
+              onClick={this.makePresetClickHandler(x.value)}
+              key={i}
+              focusRipple
+              disableTouchRipple
+            >
+              {x.icon}
+            </ButtonBase>
+          ))}
+        </div>
       </div>
     );
   }
