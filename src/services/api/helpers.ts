@@ -65,3 +65,8 @@ export function getTotalPagesFromLinkHeader(link?: string): number {
   console.error(`Error while trying to get total pages from ${link}`);
   return 0;
 }
+
+export function getTotalResults(totalFromResponse: number) {
+  const maxTotal = 1000; // max results api can give https://developer.github.com/v3/search/
+  return Math.min(totalFromResponse, maxTotal);
+}
