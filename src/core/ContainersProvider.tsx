@@ -1,12 +1,12 @@
 import React from 'react';
 import { bind } from 'decko';
-import { Omit } from '_helpers';
+import { Omit, SubSet } from '_helpers';
 
 import * as usersSearchFeature from 'features/usersSearch';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry } from 'shared/types/app';
+import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
 
 interface IContainerTypes {
   UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];
@@ -14,9 +14,10 @@ interface IContainerTypes {
 
 type Container = keyof IContainerTypes;
 
-interface IEntryWithContainer<K extends string, T> {
+type IEntryWithContainer<K extends string, T extends React.ComponentType<any>> = SubSet<IFeatureEntry, {
   containers: { [D in K]: T };
-}
+  reduxEntry?: IReduxEntry;
+}>;
 
 type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
 
@@ -51,7 +52,7 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       public state: IState = { containers: {} };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore!: (entry: IFeatureEntry<any, any, any>) => void;
+      private connectFeatureToStore!: (entry: IReduxEntry) => void;
 
       public componentDidMount() {
         this.load();
@@ -79,7 +80,7 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
         const bundle = await (containerLoadersDictionary as GenericLoadersMap)[containerKey]();
         const container = bundle.containers[containerKey];
 
-        this.connectFeatureToStore(bundle);
+        bundle.reduxEntry && this.connectFeatureToStore(bundle.reduxEntry);
         if (!container) {
           throw new Error(`ContainersProvider did not find the container "${containerKey}"`);
         }
