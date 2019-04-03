@@ -11,6 +11,6 @@ describe('(shared/helpers) makeFeatureEntry', () => {
     };
     const entry = { containers, actions, selectors, reduxEntry };
     const featureEntry = makeFeatureEntry(entry);
-    expect(featureEntry).toBe(entry);
+    expect(featureEntry).toEqual(entry);
   });
 });
