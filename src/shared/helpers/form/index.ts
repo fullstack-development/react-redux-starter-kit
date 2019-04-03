@@ -1,1 +1,1 @@
-export { default as getSelectValueToLabelMap } from './getSelectValueToLabelMap';
+export { default as getSelectValuesToLabelsMap } from './getSelectValuesToLabelsMap';

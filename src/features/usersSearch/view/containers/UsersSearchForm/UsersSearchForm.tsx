@@ -4,7 +4,7 @@ import { bind } from 'decko';
 import * as R from 'ramda';
 
 import {
-  replaceObjectKeys, replaceObjectValues, getSelectValueToLabelMap, KeysToValuesFormattersMap,
+  replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap,
 } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
@@ -40,7 +40,7 @@ function mapState(state: IAppReduxState): IStateProps {
 
 class UsersSearchForm extends React.PureComponent<IProps> {
   private filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-    searchBy: x => getSelectValueToLabelMap(searchByOptions)[x].toLowerCase(),
+    searchBy: x => getSelectValuesToLabelsMap(searchByOptions)[x].toLowerCase(),
     searchFor: x => ({ ...searchForLabels, both: 'users & organizations' })[x].toLowerCase(),
   };
 
