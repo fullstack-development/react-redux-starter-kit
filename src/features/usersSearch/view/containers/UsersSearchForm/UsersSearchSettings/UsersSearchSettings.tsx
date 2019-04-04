@@ -17,7 +17,7 @@ function UsersSearchSettings() {
           <SelectField options={searchByOptions} label="Search by" name={fieldNames.searchBy} />
         </div>
         <div className={b('item')}>
-          <LanguageInputField name={fieldNames.reposLanguage} label="Repositories language" />
+          <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} />
         </div>
       </div>
       <div className={b('row')}>
@@ -52,7 +52,7 @@ function UsersSearchSettings() {
             </FormLabel>
           </div>
           <div className={b('item')}>
-            <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} />
+            <LanguageInputField name={fieldNames.reposLanguage} label="Repositories language" />
           </div>
         </div>
       </div>
