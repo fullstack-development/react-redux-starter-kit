@@ -1,0 +1,11 @@
+.main-nav {
+  &__list-item {
+    justify-content: center;
+    outline: none;
+    border-bottom: 1px solid #ccc;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

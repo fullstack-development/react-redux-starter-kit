@@ -1,0 +1,23 @@
+.home-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__title {
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #444;
+    text-align: center;
+  }
+
+  &__company {
+    font-size: 6.5rem;
+    line-height: 6rem;
+  }
+
+  &__demo {
+    font-weight: 400;
+    font-size: 1.3rem;
+  }
+}
