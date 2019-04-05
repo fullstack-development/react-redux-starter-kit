@@ -2,19 +2,23 @@
 @import '~shared/styles/mixins';
 
 .repository-preview {
-  padding: 1rem;
+  padding: 1.5rem 1.8rem;
   background: white;
   color: #222;
 
   &__description {
     margin: 0.7rem 0 0.9rem;
+    line-height: 1.4rem;
   }
 
   &__name {
     color: #1d67e0;
-    text-decoration: none;
     word-break: break-all;
     font-size: 1.4rem;
+
+    &:visited {
+      color: #4301a0;
+    }
   }
 
   &__stars {
