@@ -1,4 +1,4 @@
-.search-filters {
+.keys-to-values {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -9,11 +9,11 @@
   font-size: 0.8rem;
   line-height: 1.2rem;
 
-  &__filter {
+  &__item {
     margin-right: 1rem;
+  }
 
-    &-name {
-      font-weight: 600;
-    }
+  &__key {
+    font-weight: 600;
   }
 }

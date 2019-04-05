@@ -16,3 +16,4 @@ export { default as Select } from './Select/Select';
 export { default as Preloader } from './Preloader/Preloader';
 export { default as FormLabel } from './FormLabel/FormLabel';
 export { default as TotalSearchResults } from './TotalSearchResults/TotalSearchResults';
+export { default as KeysToValues } from './KeysToValues/KeysToValues';

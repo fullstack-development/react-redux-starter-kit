@@ -5,9 +5,8 @@ import { bind } from 'decko';
 
 import { isRequired } from 'shared/validators';
 import { TextInputField } from 'shared/view/form';
-import { Button } from 'shared/view/elements';
+import { Button, KeysToValues } from 'shared/view/elements';
 
-import SearchFilters from './SearchFilters/SearchFilters';
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
 import './SearchForm.scss';
@@ -59,7 +58,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
       <form onSubmit={handleSubmit} className={b()}>
         {filtersAreNotEmpty &&
           <div className={b('filters')}>
-            <SearchFilters filters={filters} />
+            <KeysToValues items={filters} />
           </div>
         }
         <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
