@@ -27,7 +27,7 @@ class RepositoryPreview extends React.PureComponent<IProps> {
     return (
       <Card>
         <div className={b()}>
-          <Link className={b('name').toString()} href={htmlURL} target="_blank">
+          <Link className={b('name').toString()} href={htmlURL} target="_blank" rel="noopener noreferrer">
             {name}
           </Link>
           <div className={b('description')}>
