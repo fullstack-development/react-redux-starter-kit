@@ -8,7 +8,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
-import { TotalSearchResults } from 'shared/view/elements';
+import { TotalSearchResults, Preloader } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -27,6 +27,7 @@ interface IStateProps {
   repositories: IRepository[];
   paginationState: IPaginationState;
   totalResults: number;
+  isSearchRequesting: boolean;
 }
 
 type IActionProps = typeof mapDispatch;
@@ -42,6 +43,7 @@ function mapState(state: IAppReduxState): IStateProps {
     repositories: selectors.selectFoundRepositories(state),
     paginationState: selectors.selectRepositoriesSearchPaginationState(state),
     totalResults: selectors.selectTotalResults(state),
+    isSearchRequesting: selectors.selectCommunication(state, 'searchRepositories').isRequesting,
   };
 }
 
@@ -57,12 +59,18 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { repositories, UserDetails, paginationState: { totalPages, page }, totalResults } = this.props;
+    const {
+      repositories, UserDetails, paginationState: { totalPages, page },
+      totalResults, isSearchRequesting,
+    } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
         <TotalSearchResults totalResults={totalResults} />
-        {repositories.map(this.renderRepositoryPreview)}
+        <div className={b('repositories')}>
+          <Preloader size={0} backgroundColor="rgba(0, 0, 0, 0.05)" isShown={isSearchRequesting} />
+          {repositories.map(this.renderRepositoryPreview)}
+        </div>
         <div className={b('pagination')}>
           <PaginationControls
             totalPages={totalPages}
