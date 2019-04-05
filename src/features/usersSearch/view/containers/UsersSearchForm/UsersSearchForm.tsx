@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { withTranslation, WithTranslation } from 'services/i18n';
+import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 
@@ -39,10 +39,11 @@ class UsersSearchForm extends React.PureComponent<IProps> {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
     return (
       <SearchForm<IUsersSearchFormFields>
-        t={t}
         isSearchRequesting={isUsersSearchRequesting}
         searchInputName={fieldNames.searchString}
         onSubmit={this.handleFormSubmit}
+        submitButtonText={t(tKeys.shared.search.getKey())}
+        settingsButtonText={t(tKeys.shared.settings.getKey())}
         initialValues={formInitialValues}
         renderSettings={UsersSearchSettings}
         resetSearchResults={resetSearchResults}

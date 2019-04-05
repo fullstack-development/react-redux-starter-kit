@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { withTranslation, WithTranslation } from 'services/i18n';
+import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 
@@ -39,9 +39,10 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     const { isRepositoriesSearchRequesting, resetSearchResults, t } = this.props;
     return (
       <SearchForm<IRepositoriesSearchFormFields>
-        t={t}
         searchInputName={fieldNames.searchString}
         isSearchRequesting={isRepositoriesSearchRequesting}
+        submitButtonText={t(tKeys.shared.search.getKey())}
+        settingsButtonText={t(tKeys.shared.settings.getKey())}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
