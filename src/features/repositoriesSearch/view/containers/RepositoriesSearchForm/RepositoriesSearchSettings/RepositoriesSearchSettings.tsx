@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 
-import { TextInputField, NumberInputField } from 'shared/view/form';
+import { TextInputField, NumberInputField, LanguageInputField } from 'shared/view/form';
 
 import { fieldNames } from '../constants';
 import './RepositoriesSearchSettings.scss';
@@ -27,13 +27,13 @@ function RepositoriesSearchSettings() {
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
-          <TextInputField
+          <TextInputField name={fieldNames.owner} label="Owner" />
+        </div>
+        <div className={b('item')}>
+          <LanguageInputField
             name={fieldNames.language}
             label="Repositories language"
           />
-        </div>
-        <div className={b('item')}>
-          <TextInputField name={fieldNames.owner} label="Owner" />
         </div>
       </div>
     </div>
