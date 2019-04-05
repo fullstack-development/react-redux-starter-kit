@@ -34,10 +34,6 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
     const { i18n } = this.props;
     i18n.changeLanguage(value);
   }
-
-  // private parseToShortLang(value: string) {
-  //   return value.slice(0, value.indexOf('-'));
-  // }
 }
 
 export { LanguageSelector };

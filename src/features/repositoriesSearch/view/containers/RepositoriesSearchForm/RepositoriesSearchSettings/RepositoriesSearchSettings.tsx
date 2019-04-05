@@ -30,7 +30,7 @@ function RepositoriesSearchSettings() {
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
-          <TextInputField name={fieldNames.owner} label="Owner" />
+          <TextInputField name={fieldNames.owner} label={t(repositoriesSearch.owner.getKey())} />
         </div>
         <div className={b('item')}>
           <LanguageInputField
