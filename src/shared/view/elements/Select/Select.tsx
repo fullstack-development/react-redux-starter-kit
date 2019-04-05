@@ -4,7 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 interface IOption<T extends string | number = string | number> {
   value: T;
-  label: string | number;
+  label: string | number | object;
 }
 
 interface IProps extends StandardTextFieldProps {

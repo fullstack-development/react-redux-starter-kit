@@ -3,13 +3,6 @@ import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { FormFieldNames } from 'shared/types/form';
 import { IUsersSearchFormFields } from '../../../namespace';
 
-export const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy']>> = [
-  { value: 'username-email', label: 'Username & email' },
-  { value: 'login', label: 'Username' },
-  { value: 'email', label: 'Email' },
-  { value: 'fullname', label: 'Full name' },
-];
-
 export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>> = [
   { value: 30, label: 30 },
   { value: 50, label: 50 },
@@ -17,7 +10,7 @@ export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>
 ];
 
 export const formInitialValues: IUsersSearchFormFields = {
-  searchString: '', searchBy: searchByOptions[0].value, searchType: 'both', perPage: perPageOptions[0].value,
+  searchString: '', searchBy: 'username-email', searchType: 'both', perPage: perPageOptions[0].value,
 };
 
 export const fieldNames: FormFieldNames<IUsersSearchFormFields> = {

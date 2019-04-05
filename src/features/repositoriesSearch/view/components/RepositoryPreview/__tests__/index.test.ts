@@ -1,6 +1,6 @@
 import { ShallowWrapper } from 'enzyme';
 
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { repository } from 'shared/mocks';
 
 import RepositoryAttribute, { IRepositoryAttributeProps } from '../../RepositoryAttribute/RepositoryAttribute';
@@ -9,6 +9,7 @@ import { RepositoryPreview, IRepositoryPreviewProps } from '../RepositoryPreview
 const props: IRepositoryPreviewProps = {
   repository,
   onOwnerClick: jest.fn(),
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(RepositoryPreview, props);

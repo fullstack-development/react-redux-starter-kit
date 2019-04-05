@@ -1,11 +1,12 @@
 import React from 'react';
 import block from 'bem-cn';
 
-import { FormLabel } from 'shared/view/elements';
+import { FormLabel, ISelectOption } from 'shared/view/elements';
 import { useTranslation, tKeys } from 'services/i18n';
 import { SelectField, NumberInputField, RadioField, LanguageInputField } from 'shared/view/form';
+import { IUsersSearchFilters } from 'shared/types/githubSearch';
 
-import { searchByOptions, perPageOptions, fieldNames } from '../constants';
+import { perPageOptions, fieldNames } from '../constants';
 import './UsersSearchSettings.scss';
 
 const b = block('users-search-settings');
@@ -13,6 +14,13 @@ const { userSearch } = tKeys.features;
 
 function UsersSearchSettings() {
   const { t } = useTranslation();
+  const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy']>> = [
+    { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) || 'Username & email' },
+    { value: 'login', label: t(userSearch.username.getKey()) || 'Username' },
+    { value: 'email', label: t(userSearch.email.getKey()) || 'Email' },
+    { value: 'fullname', label: t(userSearch.fullName.getKey()) || 'Full name' },
+  ];
+
   return (
     <div className={b()}>
       <div className={b('row')}>
