@@ -53,11 +53,13 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   private renderForm({ handleSubmit, form }: FormRenderProps) {
     const { isSearchRequesting, renderSettings, searchInputName, getFilters } = this.props;
     const { isSettingsDialogOpen } = this.state;
+    const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
+    const filtersAreNotEmpty = Object.keys(filters).length > 0;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        {getFilters &&
+        {filtersAreNotEmpty &&
           <div className={b('filters')}>
-            <SearchFilters filters={getFilters(form.getState().values as FormFields)} />
+            <SearchFilters filters={filters} />
           </div>
         }
         <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
