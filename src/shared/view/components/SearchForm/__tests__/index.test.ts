@@ -1,4 +1,4 @@
-import { makeMountRenderer, getMockedLocaleProps } from 'shared/helpers';
+import { makeMountRenderer } from 'shared/helpers';
 import { Button } from 'shared/view/elements';
 
 import SearchSettingsDialog from '../SearchSettingsDialog/SearchSettingsDialog';
@@ -9,6 +9,8 @@ interface IFormFields {
 }
 
 const props: ISearchFormProps<IFormFields> = {
+  settingsButtonText: 'settings',
+  submitButtonText: 'submit',
   isSearchRequesting: false,
   searchInputName: 'search',
   onSubmit: jest.fn(),
@@ -16,7 +18,6 @@ const props: ISearchFormProps<IFormFields> = {
   initialValues: {
     search: 'abc',
   },
-  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeMountRenderer(SearchForm, props);
