@@ -17,3 +17,5 @@ export { default as Preloader } from './Preloader/Preloader';
 export { default as FormLabel } from './FormLabel/FormLabel';
 export { default as TotalSearchResults } from './TotalSearchResults/TotalSearchResults';
 export { default as KeysToValues } from './KeysToValues/KeysToValues';
+export { default as Card } from './Card/Card';
+export { default as Link } from './Link/Link';
