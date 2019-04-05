@@ -59,7 +59,12 @@ class Layout extends React.Component<IProps> {
         </div>
         <footer className={b('footer')}>
           <div className={b('footer-content')}>
-            <a className={b('company-link')} href="https://fullstack-development.com" target="_blank">
+            <a
+              className={b('company-link')}
+              href="https://fullstack-development.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {t(footer.fsd.getKey())}
             </a>
           </div>

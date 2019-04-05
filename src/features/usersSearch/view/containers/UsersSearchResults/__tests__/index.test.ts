@@ -19,6 +19,7 @@ const props: IUsersSearchResultsProps = {
     totalPages: 2,
   },
   searchUsers: jest.fn(),
+  totalResults: 1,
 };
 
 const getComponent = makeShallowRenderer(UsersSearchResults, props);

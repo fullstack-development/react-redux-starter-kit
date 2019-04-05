@@ -18,6 +18,7 @@ const props: IRepositoriesSearchResultsProps = {
   },
   searchRepositories: jest.fn(),
   UserDetails: makeMockComponent('UserDetails'),
+  totalResults: 1,
 };
 
 const getComponent = makeShallowRenderer(RepositoriesSearchResults, props);

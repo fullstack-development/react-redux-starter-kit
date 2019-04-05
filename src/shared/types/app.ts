@@ -30,23 +30,16 @@ export interface IDependencies {
   api: Api;
 }
 
-export type IDictionary<T, S extends keyof any = string> = {
-  [key in S]: T;
-};
-
 export interface IReduxEntry {
   reducers?: { [key in keyof IAppReduxState]?: Reducer<IAppReduxState[key]> };
   sagas?: Array<(deps: IDependencies) => () => SagaIterator>;
 }
 
-export interface IFeatureEntry<
-  C extends IDictionary<React.ReactType<any>, keyof C> | void,
-  A extends IDictionary<ActionCreator<Action>, keyof A> | void,
-  S extends IDictionary<(state: any, ...args: any[]) => any, keyof S> | void,
-  > extends IReduxEntry {
-  actions?: A;
-  selectors?: S;
-  containers?: C;
+export interface IFeatureEntry {
+  containers?: Record<string, React.ComponentType<any>>;
+  actions?: Record<string, ActionCreator<Action>>;
+  selectors?: Record<string, (state: any, ...args: any[]) => any>;
+  reduxEntry?: IReduxEntry;
 }
 
 export interface IAppReduxState {
