@@ -11,8 +11,8 @@ interface IOption {
 
 class LanguageSelector extends React.PureComponent<WithTranslation> {
   public static options: IOption[] = [
-    { value: 'en', label: 'English' },
-    { value: 'ru', label: 'Русский' },
+    { value: 'en-US', label: 'English' },
+    { value: 'ru-RU', label: 'Русский' },
   ];
 
   public render() {
@@ -34,6 +34,11 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
     const { i18n } = this.props;
     i18n.changeLanguage(value);
   }
+
+  // private parseToShortLang(value: string) {
+  //   return value.slice(0, value.indexOf('-'));
+  // }
 }
 
+export { LanguageSelector };
 export default withTranslation()(LanguageSelector);

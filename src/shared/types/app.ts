@@ -54,7 +54,7 @@ export interface IAppReduxState {
 
 export type RootSaga = (deps: IDependencies) => () => SagaIterator;
 
-export type Lang = 'en' | 'ru';
+export type Lang = 'en-US' | 'ru-RU';
 
 export type Uid = number;
 
