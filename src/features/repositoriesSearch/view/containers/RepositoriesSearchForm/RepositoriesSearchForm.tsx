@@ -8,10 +8,11 @@ import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
 
+import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
-import { fieldNames, filtersLabels } from './constants';
+import { fieldNames } from './constants';
 
 interface IOwnProps {
   onSubmit(formValues: IRepositoriesSearchFormFields): void;
@@ -36,6 +37,8 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
+const { repositoriesSearch } = tKeys.features;
+
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
   public render() {
     const { isRepositoriesSearchRequesting, resetSearchResults, t } = this.props;
@@ -55,7 +58,14 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
 
   @bind
   private getFilters(formValues: IRepositoriesSearchFormFields) {
+    const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
+    const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
+      starsNumber: t(repositoriesSearch.starsNumber.getKey()),
+      forksNumber: t(repositoriesSearch.forksNumber.getKey()),
+      language: t(repositoriesSearch.language.getKey()),
+      owner: t(repositoriesSearch.owner.getKey()),
+    };
     return replaceObjectKeys(filters, filtersLabels);
   }
 

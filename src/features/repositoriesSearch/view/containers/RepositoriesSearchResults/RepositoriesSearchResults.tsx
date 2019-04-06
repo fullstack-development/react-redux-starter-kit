@@ -9,6 +9,7 @@ import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 import { TotalSearchResults } from 'shared/view/elements';
+import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -35,7 +36,7 @@ interface IContainerProps {
   UserDetails: IContainerTypes['UserDetails'];
 }
 
-type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps;
+type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps & WithTranslation;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -57,11 +58,11 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { repositories, UserDetails, paginationState: { totalPages, page }, totalResults } = this.props;
+    const { repositories, UserDetails, paginationState: { totalPages, page }, totalResults, t } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults totalResults={totalResults} />
+        <TotalSearchResults title={t(tKeys.shared.totalResults.getKey())} totalResults={totalResults} />
         {repositories.map(this.renderRepositoryPreview)}
         <div className={b('pagination')}>
           <PaginationControls
@@ -81,7 +82,7 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   private renderRepositoryPreview(repository: IRepository) {
     return (
       <div className={b('repository-preview')} key={repository.id}>
-        <RepositoryPreview repository={repository} onOwnerClick={this.handleRepositoryOwnerClick}/>
+        <RepositoryPreview repository={repository} onOwnerClick={this.handleRepositoryOwnerClick} />
       </div>
     );
   }
@@ -103,9 +104,11 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResults);
+
 export {
   RepositoriesSearchResults,
   IProps as IRepositoriesSearchResultsProps,
   IState as IRepositoriesSearchResultsState,
 };
-export default connect(mapState, mapDispatch)(containersProvider(['UserDetails'])(RepositoriesSearchResults));
+export default withTranslation()(containersProvider(['UserDetails'])(connectedComponent));

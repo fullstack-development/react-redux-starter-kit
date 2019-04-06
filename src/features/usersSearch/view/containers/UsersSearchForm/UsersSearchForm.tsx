@@ -10,10 +10,11 @@ import {
 import { IAppReduxState } from 'shared/types/app';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
+import { ISelectOption } from 'shared/types/form';
 
 import { selectors, actions } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
-import { formInitialValues, fieldNames, searchByOptions, searchForLabels, filtersLabels } from './constants';
+import { formInitialValues, fieldNames } from './constants';
 import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -24,6 +25,7 @@ interface IStateProps {
   isUsersSearchRequesting: boolean;
 }
 
+type OptionType = Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
 type IActionProps = typeof mapDispatch;
 
 type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
@@ -39,14 +41,27 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-class UsersSearchForm extends React.PureComponent<IProps> {
-  private filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-    searchBy: x => getSelectValuesToLabelsMap(searchByOptions)[x].toLowerCase(),
-    searchFor: x => ({ ...searchForLabels, both: 'users & organizations' })[x].toLowerCase(),
-  };
+const { userSearch } = tKeys.features;
 
+class UsersSearchForm extends React.PureComponent<IProps> {
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
+    const getMemoOptions: () => OptionType = R.memoizeWith<() => OptionType>(R.identity, () => [
+      { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
+      { value: 'login', label: t(userSearch.username.getKey()) },
+      { value: 'email', label: t(userSearch.email.getKey()) },
+      { value: 'fullname', label: t(userSearch.fullName.getKey()) },
+    ]);
+    const getMemoLabels: () => Record<IUsersSearchFilters['searchFor'], string> = R.memoizeWith(R.identity, () => ({
+      both: t(userSearch.usersAndOrganizations.getKey()),
+      org: t(userSearch.organizations.getKey()),
+      user: t(userSearch.users.getKey()),
+    }));
+    const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
+      searchBy: x => getSelectValuesToLabelsMap(getMemoOptions())[x].toLowerCase(),
+      searchFor: x => (getMemoLabels())[x].toLowerCase(),
+    };
+
     return (
       <SearchForm<IUsersSearchFormFields>
         isSearchRequesting={isUsersSearchRequesting}
@@ -57,17 +72,27 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         initialValues={formInitialValues}
         renderSettings={UsersSearchSettings}
         resetSearchResults={resetSearchResults}
-        getFilters={this.getFilters}
+        getFilters={this.makeFiltersGetter(filtersValuesFormattersMap)}
       />
     );
   }
 
   @bind
-  private getFilters(formFields: IUsersSearchFormFields) {
-    const filters = R.omit([fieldNames.searchString], formFields);
-    const filtersWithFormattedValues = replaceObjectValues(filters, this.filtersValuesFormattersMap);
-    const labels = { ...filtersLabels, minRepos: 'Min repositories', maxRepos: 'Max repositories' };
-    return replaceObjectKeys(filtersWithFormattedValues, labels);
+  private makeFiltersGetter(filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters>) {
+    return (formFields: IUsersSearchFormFields) => {
+      const { t } = this.props;
+      const filters = R.omit([fieldNames.searchString], formFields);
+      const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
+        searchBy: t(userSearch.searchBy.getKey()),
+        searchFor: t(userSearch.searchFor.getKey()),
+        perPage: t(userSearch.resultsPerPage.getKey()),
+        reposLanguage: t(userSearch.repositoriesLanguage.getKey()),
+        minRepos: t(userSearch.min.getKey()),
+        maxRepos: t(userSearch.max.getKey()),
+      };
+      const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
+      return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
+    };
   }
 
   @bind

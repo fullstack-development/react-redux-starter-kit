@@ -1,5 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
+import * as R from 'ramda';
 
 import { FormLabel } from 'shared/view/elements';
 import { useTranslation, tKeys } from 'services/i18n';
@@ -12,21 +13,22 @@ import './UsersSearchSettings.scss';
 
 const b = block('users-search-settings');
 const { userSearch } = tKeys.features;
+type OptionType = Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
 
 function UsersSearchSettings() {
   const { t } = useTranslation();
-  const searchByOptions: Array<ISelectOption<IUsersSearchFilters['searchBy']>> = [
-    { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) || 'Username & email' },
-    { value: 'login', label: t(userSearch.username.getKey()) || 'Username' },
-    { value: 'email', label: t(userSearch.email.getKey()) || 'Email' },
-    { value: 'fullname', label: t(userSearch.fullName.getKey()) || 'Full name' },
-  ];
+  const getMemoOptions: () => OptionType = R.memoizeWith<() => OptionType>(R.identity, () => [
+    { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
+    { value: 'login', label: t(userSearch.username.getKey()) },
+    { value: 'email', label: t(userSearch.email.getKey()) },
+    { value: 'fullname', label: t(userSearch.fullName.getKey()) },
+  ]);
 
   return (
     <div className={b()}>
       <div className={b('row')}>
         <div className={b('item')}>
-          <SelectField options={searchByOptions} label={t(userSearch.searchBy.getKey())} name={fieldNames.searchBy} />
+          <SelectField options={getMemoOptions()} label={t(userSearch.searchBy.getKey())} name={fieldNames.searchBy} />
         </div>
         <div className={b('item')}>
           <SelectField
@@ -39,7 +41,7 @@ function UsersSearchSettings() {
       <div className={b('row')}>
         <div className={b('item')}>
           <FormLabel>
-            {t(userSearch.searchType.getKey())}
+            {t(userSearch.searchFor.getKey())}
             <div className={b('checkbox-group')}>
               <RadioField name={fieldNames.searchFor} value="user" label={t(userSearch.user.getKey())} />
               <RadioField name={fieldNames.searchFor} value="org" label={t(userSearch.organizations.getKey())} />

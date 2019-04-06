@@ -3,17 +3,18 @@ import block from 'bem-cn';
 import './TotalSearchResults.scss';
 
 interface IProps {
+  title: string;
   totalResults: number;
 }
 
 const b = block('total-search-results');
 
 function TotalSearchResults(props: IProps) {
-  const { totalResults } = props;
+  const { title, totalResults } = props;
   return totalResults > 0 ? (
     <div className={b()}>
       <span className={b('title')}>
-        {'Total results: '}
+        {title}
       </span>
       <span className={b('value')}>
         {totalResults}
