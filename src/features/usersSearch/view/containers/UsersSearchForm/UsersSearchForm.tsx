@@ -1,14 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
+import * as R from 'ramda';
 
 import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import {
+  replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap,
+} from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
+import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 
 import { selectors, actions } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
-import { formInitialValues, fieldNames } from './constants';
+import { formInitialValues, fieldNames, searchByOptions, searchForLabels, filtersLabels } from './constants';
 import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -35,6 +40,11 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 class UsersSearchForm extends React.PureComponent<IProps> {
+  private filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
+    searchBy: x => getSelectValuesToLabelsMap(searchByOptions)[x].toLowerCase(),
+    searchFor: x => ({ ...searchForLabels, both: 'users & organizations' })[x].toLowerCase(),
+  };
+
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
     return (
@@ -47,8 +57,17 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         initialValues={formInitialValues}
         renderSettings={UsersSearchSettings}
         resetSearchResults={resetSearchResults}
+        getFilters={this.getFilters}
       />
     );
+  }
+
+  @bind
+  private getFilters(formFields: IUsersSearchFormFields) {
+    const filters = R.omit([fieldNames.searchString], formFields);
+    const filtersWithFormattedValues = replaceObjectValues(filters, this.filtersValuesFormattersMap);
+    const labels = { ...filtersLabels, minRepos: 'Min repositories', maxRepos: 'Max repositories' };
+    return replaceObjectKeys(filtersWithFormattedValues, labels);
   }
 
   @bind

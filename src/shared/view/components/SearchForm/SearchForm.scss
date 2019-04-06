@@ -1,11 +1,15 @@
 .search-form {
+  &__filters {
+    margin-bottom: 1rem;
+  }
+
   &__buttons {
     display: flex;
     justify-content: center;
     margin-top: 0.8rem;
   }
 
-  &__settings {
+  &__settings-button {
     margin-left: 0.6rem;
   }
 }

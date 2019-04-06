@@ -12,10 +12,10 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
 }
 
 export function constructUsersSearchQuery(queryString: string, filters: IUsersSearchFilters, page: number) {
-  const { searchBy, searchType, minRepos, maxRepos, reposLanguage, perPage } = filters;
+  const { searchBy, searchFor, minRepos, maxRepos, reposLanguage, perPage } = filters;
   return queryString.concat(
     searchBy !== 'username-email' ? `+in:${searchBy}` : '',
-    searchType !== 'both' ? `+type:${searchType}` : '',
+    searchFor !== 'both' ? `+type:${searchFor}` : '',
     optionalParam('language', reposLanguage),
     constructReposNumberQuery(minRepos, maxRepos),
     `&per_page=${perPage}`,

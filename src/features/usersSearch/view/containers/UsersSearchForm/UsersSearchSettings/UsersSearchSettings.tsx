@@ -1,8 +1,9 @@
 import React from 'react';
 import block from 'bem-cn';
 
-import { FormLabel, ISelectOption } from 'shared/view/elements';
+import { FormLabel } from 'shared/view/elements';
 import { useTranslation, tKeys } from 'services/i18n';
+import { ISelectOption } from 'shared/types/form';
 import { SelectField, NumberInputField, RadioField, LanguageInputField } from 'shared/view/form';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 
@@ -40,9 +41,9 @@ function UsersSearchSettings() {
           <FormLabel>
             {t(userSearch.searchType.getKey())}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchType} value="user" label={t(userSearch.user.getKey())} />
-              <RadioField name={fieldNames.searchType} value="org" label={t(userSearch.organizations.getKey())} />
-              <RadioField name={fieldNames.searchType} value="both" label={t(userSearch.both.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="user" label={t(userSearch.user.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="org" label={t(userSearch.organizations.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="both" label={t(userSearch.both.getKey())} />
             </div>
           </FormLabel>
         </div>
