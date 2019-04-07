@@ -21,7 +21,6 @@ module.exports = {
     'ContainersProvider\.tsx$': '<rootDir>/src/core/__mocks__/fileMock.ts',
   },
 
-  mapCoverage: true,
   coverageDirectory: '<rootDir>/coverage',
   collectCoverageFrom: [
     '**/src/**/*.{ts,tsx}',

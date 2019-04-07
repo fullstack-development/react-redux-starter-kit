@@ -26,9 +26,33 @@ describe('(services/i18n) LanguageSelector component', () => {
     };
     const component = getComponent(newProps);
 
-    component.find('select').simulate('change', { target: { value: 'ru' } });
+    component.find('select').simulate('change', { target: { value: 'ru-RU' } });
 
     expect(changeLanguage).toBeCalledTimes(1);
-    expect(changeLanguage).toBeCalledWith('ru');
+    expect(changeLanguage).toBeCalledWith('ru-RU');
+  });
+
+  it('should render select with en-US default language', () => {
+    const component = getComponent();
+
+    expect(component.find('select').props().value).toEqual('en-US');
+  });
+
+  it('should render right options value', () => {
+    const component = getComponent();
+    const options = component.find('option');
+
+    expect(options.length).toEqual(2);
+    expect(options.at(0).props().value).toEqual('en-US');
+    expect(options.at(1).props().value).toEqual('ru-RU');
+  });
+
+  it('should render right labels', () => {
+    const component = getComponent();
+    const options = component.find('option');
+
+    expect(options.length).toEqual(2);
+    expect(options.at(0).props().children).toEqual('English');
+    expect(options.at(1).props().children).toEqual('Русский');
   });
 });

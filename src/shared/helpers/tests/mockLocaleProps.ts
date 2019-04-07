@@ -4,8 +4,8 @@ export const getMockedLocaleProps: () => WithTranslation = () => ({
   t: jest.fn(),
   i18n: {
     isInitialized: true,
-    language: 'en',
-    languages: ['en', 'ru'],
+    language: 'en-US',
+    languages: ['en-US', 'ru-RU'],
     options: {},
     services: {
       backendConnector: {},
@@ -16,9 +16,14 @@ export const getMockedLocaleProps: () => WithTranslation = () => ({
       logger: {},
       pluralResolver: {},
       resourceStore: {
-        en: {
+        'en-US': {
           translationNamespace: {
-            translateMock: 'translateMock',
+            translateMock: 'translate mock',
+          },
+        },
+        'ru-RU': {
+          translationNamespace: {
+            translateMock: 'заглушка перевода',
           },
         },
       },
