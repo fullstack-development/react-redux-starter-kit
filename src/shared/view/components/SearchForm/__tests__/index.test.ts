@@ -53,14 +53,14 @@ describe('(shared/view) SearchForm component', () => {
     const componentWithoutSettings = getComponent();
     const componentWithSettings = getComponent({ renderSettings: jest.fn() });
 
-    expect(componentWithoutSettings.find('.search-form__settings').length).toBe(0);
-    expect(componentWithSettings.find('.search-form__settings').length).toBe(1);
+    expect(componentWithoutSettings.find('.search-form__settings-button').length).toBe(0);
+    expect(componentWithSettings.find('.search-form__settings-button').length).toBe(1);
   });
 
-  it('should open SettingsDialog on settings button click & hode on onClose call', () => {
+  it('should open SettingsDialog on settings button click & node on onClose call', () => {
     const component = getComponent({ renderSettings: jest.fn() });
 
-    const settingsButton = component.find('.search-form__settings').find(Button);
+    const settingsButton = component.find('.search-form__settings-button').find(Button);
     settingsButton.prop('onClick')();
     component.update();
     const settingsDialog = component.find(SearchSettingsDialog);
