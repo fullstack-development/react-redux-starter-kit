@@ -57,7 +57,7 @@ describe('(shared/view) SearchForm component', () => {
     expect(componentWithSettings.find('.search-form__settings-button').length).toBe(1);
   });
 
-  it('should open SettingsDialog on settings button click & node on onClose call', () => {
+  it('should open SettingsDialog on settings button click & hide on onClose call', () => {
     const component = getComponent({ renderSettings: jest.fn() });
 
     const settingsButton = component.find('.search-form__settings-button').find(Button);
