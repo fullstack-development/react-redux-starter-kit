@@ -17,18 +17,23 @@ type OptionType = Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
 
 function UsersSearchSettings() {
   const { t } = useTranslation();
-  const getMemoOptions: () => OptionType = R.memoizeWith<() => OptionType>(R.identity, () => [
+  const options: OptionType = [
     { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
     { value: 'login', label: t(userSearch.username.getKey()) },
     { value: 'email', label: t(userSearch.email.getKey()) },
     { value: 'fullname', label: t(userSearch.fullName.getKey()) },
-  ]);
+  ];
+  const getMemoOptions = R.memoizeWith(R.identity, (x: OptionType) => x);
 
   return (
     <div className={b()}>
       <div className={b('row')}>
         <div className={b('item')}>
-          <SelectField options={getMemoOptions()} label={t(userSearch.searchBy.getKey())} name={fieldNames.searchBy} />
+          <SelectField
+            options={getMemoOptions(options)}
+            label={t(userSearch.searchBy.getKey())}
+            name={fieldNames.searchBy}
+          />
         </div>
         <div className={b('item')}>
           <SelectField

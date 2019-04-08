@@ -25,9 +25,9 @@ interface IStateProps {
   isUsersSearchRequesting: boolean;
 }
 
-type OptionType = Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
+type OptionType = ISelectOption<IUsersSearchFilters['searchBy']>;
+type LabelsType = Record<IUsersSearchFilters['searchFor'], string>;
 type IActionProps = typeof mapDispatch;
-
 type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
 
 const mapDispatch = {
@@ -46,20 +46,23 @@ const { userSearch } = tKeys.features;
 class UsersSearchForm extends React.PureComponent<IProps> {
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
-    const getMemoOptions: () => OptionType = R.memoizeWith<() => OptionType>(R.identity, () => [
+    const options: OptionType[] = [
       { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
       { value: 'login', label: t(userSearch.username.getKey()) },
       { value: 'email', label: t(userSearch.email.getKey()) },
       { value: 'fullname', label: t(userSearch.fullName.getKey()) },
-    ]);
-    const getMemoLabels: () => Record<IUsersSearchFilters['searchFor'], string> = R.memoizeWith(R.identity, () => ({
+    ];
+    const labels: LabelsType = {
       both: t(userSearch.usersAndOrganizations.getKey()),
       org: t(userSearch.organizations.getKey()),
       user: t(userSearch.users.getKey()),
-    }));
+    };
+    const getMemoOptions = R.memoizeWith(R.identity, (x: OptionType[]) => x);
+    const getMemoLabels = R.memoizeWith(R.identity, (x: LabelsType) => x);
+
     const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-      searchBy: x => getSelectValuesToLabelsMap(getMemoOptions())[x].toLowerCase(),
-      searchFor: x => (getMemoLabels())[x].toLowerCase(),
+      searchBy: x => getSelectValuesToLabelsMap(getMemoOptions(options))[x].toLowerCase(),
+      searchFor: x => (getMemoLabels(labels))[x].toLowerCase(),
     };
 
     return (
