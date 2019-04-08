@@ -2,6 +2,7 @@ import { WithTranslation } from 'services/i18n';
 
 export const getMockedLocaleProps: () => WithTranslation = () => ({
   t: jest.fn(),
+  tReady: true,
   i18n: {
     isInitialized: true,
     language: 'en-US',
@@ -10,7 +11,13 @@ export const getMockedLocaleProps: () => WithTranslation = () => ({
     services: {
       backendConnector: {},
       i18nFormat: {},
-      interpolator: {},
+      interpolator: {
+        init: jest.fn(),
+        reset: jest.fn(),
+        resetRegExp: jest.fn(),
+        interpolate: jest.fn(),
+        nest: jest.fn(),
+      },
       languageDetector: {},
       languageUtils: {},
       logger: {},

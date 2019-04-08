@@ -1,13 +1,19 @@
 import React from 'react';
 import { bind } from 'decko';
 import { WithTranslation, withTranslation } from 'react-i18next';
+import block from 'bem-cn';
 
 import { Lang } from 'shared/types/app';
+import { Select } from 'shared/view/elements';
+
+import './LanguageSelector.scss';
 
 interface IOption {
   value: Lang;
   label: string;
 }
+
+const b = block('select');
 
 class LanguageSelector extends React.PureComponent<WithTranslation> {
   public static options: IOption[] = [
@@ -19,12 +25,12 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
     const { i18n: { language } } = this.props;
 
     return (
-      <div>
-        <select value={language} onChange={this.changeLanguage}>
-          {LanguageSelector.options.map(({ value, label }, i) => (
-            <option value={value} key={i}>{label}</option>
-          ))}
-        </select>
+      <div className={b()}>
+        <Select
+          value={language}
+          options={LanguageSelector.options}
+          onChange={this.changeLanguage}
+        />
       </div>
     );
   }

@@ -29,25 +29,24 @@ class Layout extends React.Component<IProps> {
   public render() {
     const { children, title, profileFeatureEntry: { containers }, t } = this.props;
     const { ProfilePreview } = containers;
-    const getMemoMenuItems = R.memoizeWith(R.identity, (): IHeaderMenuItem[] => (
-      [
-        {
-          path: routes.search.users.getRoutePath(),
-          title: this.props.t(header.users.getKey()),
-        },
-        {
-          path: routes.search.repositories.getRoutePath(),
-          title: this.props.t(header.repositories.getKey()),
-        },
-      ]
-    ));
+    const menuItems: IHeaderMenuItem[] = [
+      {
+        path: routes.search.users.getRoutePath(),
+        title: this.props.t(header.users.getKey()),
+      },
+      {
+        path: routes.search.repositories.getRoutePath(),
+        title: this.props.t(header.repositories.getKey()),
+      },
+    ];
+    const getMemoMenuItems = R.memoizeWith(R.identity, (x: IHeaderMenuItem[]): IHeaderMenuItem[] => x);
 
     return (
       <div className={b()}>
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={getMemoMenuItems()} />
+              <LayoutHeaderMenu menuItems={getMemoMenuItems(menuItems)} />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
