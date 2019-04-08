@@ -11,26 +11,23 @@ import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { perPageOptions, fieldNames } from '../constants';
 import './UsersSearchSettings.scss';
 
+interface IProps {
+  options: Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
+}
+
 const b = block('users-search-settings');
 const { userSearch } = tKeys.features;
-type OptionType = Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
 
-function UsersSearchSettings() {
+function UsersSearchSettings(props: IProps) {
   const { t } = useTranslation();
-  const options: OptionType = [
-    { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
-    { value: 'login', label: t(userSearch.username.getKey()) },
-    { value: 'email', label: t(userSearch.email.getKey()) },
-    { value: 'fullname', label: t(userSearch.fullName.getKey()) },
-  ];
-  const getMemoOptions = R.memoizeWith(R.identity, (x: OptionType) => x);
+  const getMemoOptions = R.memoizeWith(R.identity, (x: Array<ISelectOption<IUsersSearchFilters['searchBy']>>) => x);
 
   return (
     <div className={b()}>
       <div className={b('row')}>
         <div className={b('item')}>
           <SelectField
-            options={getMemoOptions(options)}
+            options={getMemoOptions(props.options)}
             label={t(userSearch.searchBy.getKey())}
             name={fieldNames.searchBy}
           />
@@ -48,7 +45,7 @@ function UsersSearchSettings() {
           <FormLabel>
             {t(userSearch.searchFor.getKey())}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchFor} value="user" label={t(userSearch.user.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="user" label={t(userSearch.users.getKey())} />
               <RadioField name={fieldNames.searchFor} value="org" label={t(userSearch.organizations.getKey())} />
               <RadioField name={fieldNames.searchFor} value="both" label={t(userSearch.both.getKey())} />
             </div>

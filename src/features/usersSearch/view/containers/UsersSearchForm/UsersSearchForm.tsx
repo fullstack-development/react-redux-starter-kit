@@ -64,6 +64,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
       searchBy: x => getSelectValuesToLabelsMap(getMemoOptions(options))[x].toLowerCase(),
       searchFor: x => (getMemoLabels(labels))[x].toLowerCase(),
     };
+    const renderUsersSearchSettings = () => <UsersSearchSettings options={options} />;
 
     return (
       <SearchForm<IUsersSearchFormFields>
@@ -73,7 +74,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         submitButtonText={t(tKeys.shared.search.getKey())}
         settingsButtonText={t(tKeys.shared.settings.getKey())}
         initialValues={formInitialValues}
-        renderSettings={UsersSearchSettings}
+        renderSettings={renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
         getFilters={this.makeFiltersGetter(filtersValuesFormattersMap)}
       />

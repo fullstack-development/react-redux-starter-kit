@@ -61,8 +61,8 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
     const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(repositoriesSearch.starsNumber.getKey()),
-      forksNumber: t(repositoriesSearch.forksNumber.getKey()),
+      starsNumber: t(repositoriesSearch.minStars.getKey()),
+      forksNumber: t(repositoriesSearch.minForks.getKey()),
       language: t(repositoriesSearch.language.getKey()),
       owner: t(repositoriesSearch.owner.getKey()),
     };

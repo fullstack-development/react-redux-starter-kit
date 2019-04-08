@@ -6,7 +6,7 @@ export default {
     search: 'Search',
     settings: 'Settings',
     searchSettings: 'Search settings',
-    totalResults: 'Total results:',
+    totalResults: 'Total results: ',
     header: {
       searchFor: 'Search for:',
       users: 'Users',
@@ -32,8 +32,6 @@ export default {
     repositoriesSearch: {
       minStars: 'Min stars',
       minForks: 'Min forks',
-      starsNumber: 'Stars number',
-      forksNumber: 'Forks number',
       language: 'Language',
       repositoriesLanguage: 'Repositories language',
       owner: 'Owner',
@@ -57,8 +55,8 @@ export default {
       following: 'Following',
       repositories: 'Repositories',
       userDetails: 'User details',
-      min: 'min',
-      max: 'max',
+      min: 'Min repos',
+      max: 'Max repos',
       searchBy: 'Search by',
       searchFor: 'Search for',
       repositoriesLanguage: 'Repositories language',
