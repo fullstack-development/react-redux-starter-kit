@@ -1,4 +1,4 @@
-import { isRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators } from '../';
+import { makeRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators } from '../';
 
 describe('(shared) Validators', () => {
   describe('composeValidators', () => {
@@ -23,16 +23,16 @@ describe('(shared) Validators', () => {
 
   describe('isRequired validator', () => {
     it('should return error message if value is empty', () => {
-      expect(typeof isRequired('')).toBe('string');
+      expect(typeof makeRequired('')('')).toBe('string');
     });
 
     it('should return undefined if value is not empty', () => {
-      expect(typeof isRequired('value')).toBe('undefined');
+      expect(typeof makeRequired('')('value')).toBe('undefined');
     });
   });
 
   describe('maxCharacters validator', () => {
-    const validateMaxCharacters = makeMaxCharactersValidator(5);
+    const validateMaxCharacters = makeMaxCharactersValidator(5, 'error');
     it('should return error message if max characters is exceeded', () => {
       expect(typeof validateMaxCharacters('123456')).toBe('string');
     });
@@ -43,7 +43,7 @@ describe('(shared) Validators', () => {
   });
 
   describe('minCharacters validator', () => {
-    const validateMinCharacters = makeMinCharactersValidator(5);
+    const validateMinCharacters = makeMinCharactersValidator(5, 'error');
     it('should return error message if min characters is not reached', () => {
       expect(typeof validateMinCharacters('12')).toBe('string');
     });

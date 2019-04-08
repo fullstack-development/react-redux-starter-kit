@@ -13,6 +13,7 @@ const props: ISearchFormProps<IFormFields> = {
   submitButtonText: 'submit',
   isSearchRequesting: false,
   searchInputName: 'search',
+  errorFormText: 'submit error',
   onSubmit: jest.fn(),
   resetSearchResults: jest.fn(),
   initialValues: {

@@ -1,3 +1,3 @@
-export function isRequired(value: string) {
-  return !value ? 'Field is required' : undefined;
+export function makeRequired(errorMsg: string) {
+  return (value: string) => !value ? errorMsg : undefined;
 }

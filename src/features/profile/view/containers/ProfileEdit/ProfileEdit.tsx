@@ -10,8 +10,13 @@ import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { actions as notificationServiceActions } from 'services/notification';
+import {
+  makeRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators,
+} from 'shared/validators';
 
-import { fieldNames, validateBio, validateName, validateNickname } from './constants';
+import {
+  fieldNames, MAX_BIO_LENGTH, MIN_NAME_LENGTH, MAX_NAME_LENGTH, MIN_NICKNAME_LENGTH, MAX_NICKNAME_LENGTH,
+} from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -63,13 +68,17 @@ class ProfileEdit extends React.PureComponent<IProps> {
         </div>
         <div className={b('fields')}>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.name} label={t(profileT.name.getKey())} validate={validateName} />
+            <TextInputField
+              name={fieldNames.name}
+              label={t(profileT.name.getKey())}
+              validate={this.makeValidateName()}
+            />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.nickname}
               label={t(profileT.nickname.getKey())}
-              validate={validateNickname}
+              validate={this.makeValidateNickname()}
             />
           </div>
           <div className={b('field')}>
@@ -81,7 +90,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
               label={t(profileT.bio.getKey())}
               multiline
               rowsMax={10}
-              validate={validateBio}
+              validate={this.makeValidateBio()}
             />
           </div>
           <div className={b('button')}>
@@ -89,6 +98,47 @@ class ProfileEdit extends React.PureComponent<IProps> {
           </div>
         </div>
       </form>
+    );
+  }
+
+  private makeValidateName() {
+    const { t } = this.props;
+    return composeValidators(
+      makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
+      makeMinCharactersValidator(MIN_NAME_LENGTH, t(tKeys.shared.fieldMinLengthError.getKey(), {
+        field: t(profileT.name.getKey()),
+        minCharacters: MIN_NAME_LENGTH,
+      })),
+      makeMaxCharactersValidator(MAX_NAME_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
+        field: t(profileT.name.getKey()),
+        maxCharacters: MAX_NAME_LENGTH,
+      })),
+    );
+  }
+
+  private makeValidateNickname() {
+    const { t } = this.props;
+    return composeValidators(
+      makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
+      makeMinCharactersValidator(MIN_NICKNAME_LENGTH, t(tKeys.shared.fieldMinLengthError.getKey(), {
+        field: t(profileT.nickname.getKey()),
+        minCharacters: MIN_NICKNAME_LENGTH,
+      })),
+      makeMaxCharactersValidator(MAX_NICKNAME_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
+        field: t(profileT.nickname.getKey()),
+        maxCharacters: MAX_NICKNAME_LENGTH,
+      })),
+    );
+  }
+
+  private makeValidateBio() {
+    const { t } = this.props;
+    return composeValidators(
+      makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
+      makeMaxCharactersValidator(MAX_BIO_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
+        field: t(profileT.bio.getKey()),
+        maxCharacters: MAX_BIO_LENGTH,
+      })),
     );
   }
 
