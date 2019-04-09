@@ -7,6 +7,7 @@ export interface IReduxState {
   data: {
     foundUsers: IGithubUser[];
     userDetails: IDetailedGithubUser | null;
+    totalResults: number;
   };
   communication: {
     searchUser: ICommunication;
@@ -21,22 +22,22 @@ export interface IUsersSearchFormFields extends IUsersSearchFilters {
   searchString: string;
 }
 
-export type ISearchUserPayload = IPaginatedSearchRequest<IUsersSearchFormFields>;
+export type ISearchUsersPayload = IPaginatedSearchRequest<IUsersSearchFormFields>;
 
-export interface ISearchUserSuccessPayload extends IUsersSearchResults {
+export interface ISearchUsersSuccessPayload extends IUsersSearchResults {
   page: number;
 }
 
-export type IResetUserDetails = IPlainAction<'USER_SEARCH:RESET_USER_DETAILS'>;
-export type IResetSearchResults = IPlainAction<'USER_SEARCH:RESET_SEARCH_RESULTS'>;
+export type IResetUserDetails = IPlainAction<'USERS_SEARCH:RESET_USER_DETAILS'>;
+export type IResetSearchResults = IPlainAction<'USERS_SEARCH:RESET_SEARCH_RESULTS'>;
 
-export type ISearchUser = IAction<'USER_SEARCH:SEARCH_USER', ISearchUserPayload>;
-export type ISearchUserSuccess = IAction<'USER_SEARCH:SEARCH_USER_SUCCESS', ISearchUserSuccessPayload>;
-export type ISearchUserFail = IPlainFailAction<'USER_SEARCH:SEARCH_USER_FAIL'>;
+export type ISearchUsers = IAction<'USERS_SEARCH:SEARCH_USERS', ISearchUsersPayload>;
+export type ISearchUsersSuccess = IAction<'USERS_SEARCH:SEARCH_USERS_SUCCESS', ISearchUsersSuccessPayload>;
+export type ISearchUsersFail = IPlainFailAction<'USERS_SEARCH:SEARCH_USERS_FAIL'>;
 
-export type ILoadUserDetails = IAction<'USER_SEARCH:LOAD_USER_DETAILS', string>;
-export type ILoadUserDetailsSuccess = IAction<'USER_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedGithubUser>;
-export type ILoadUserDetailsFail = IPlainFailAction<'USER_SEARCH:LOAD_USER_DETAILS_FAIL'>;
+export type ILoadUserDetails = IAction<'USERS_SEARCH:LOAD_USER_DETAILS', string>;
+export type ILoadUserDetailsSuccess = IAction<'USERS_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedGithubUser>;
+export type ILoadUserDetailsFail = IPlainFailAction<'USERS_SEARCH:LOAD_USER_DETAILS_FAIL'>;
 
-export type IAction = IResetUserDetails | IResetSearchResults | ISearchUser | ISearchUserSuccess | ISearchUserFail
+export type IAction = IResetUserDetails | IResetSearchResults | ISearchUsers | ISearchUsersSuccess | ISearchUsersFail
 | ILoadUserDetails | ILoadUserDetailsFail | ILoadUserDetailsSuccess;

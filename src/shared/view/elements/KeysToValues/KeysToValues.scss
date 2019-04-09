@@ -1,0 +1,22 @@
+.keys-to-values {
+  $side-indent: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  padding-left: $side-indent; // for centering items (they have margin-right) on the screen
+  color: #666;
+  list-style: none;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+
+  &__item {
+    margin-right: $side-indent;
+  }
+
+  &__key {
+    font-weight: 600;
+  }
+}

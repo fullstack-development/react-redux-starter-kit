@@ -18,7 +18,7 @@ interface IFeatureProps {
   profileFeatureEntry: features.profile.Entry;
 }
 
-type IProps = IOwnProps & IFeatureProps & RouteComponentProps & React.ComponentProps<'div'>;
+type IProps = IOwnProps & IFeatureProps & RouteComponentProps;
 
 const b = block('layout');
 
@@ -55,7 +55,12 @@ class Layout extends React.Component<IProps> {
         </div>
         <footer className={b('footer')}>
           <div className={b('footer-content')}>
-            <a className={b('company-link')} href="https://fullstack-development.com" target="_blank">
+            <a
+              className={b('company-link')}
+              href="https://fullstack-development.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Fullstack Development
             </a>
           </div>
@@ -71,6 +76,7 @@ class Layout extends React.Component<IProps> {
   }
 }
 
+export { Layout, IProps as ILayoutProps };
 export default featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
 })(withRouter(Layout));

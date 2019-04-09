@@ -1,0 +1,26 @@
+.input-with-presets {
+  &__presets {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  &__preset {
+    position: relative;
+    margin: 0 0.5rem 0.2rem 0;
+    cursor: pointer;
+
+    &:hover {
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.1);
+        content: '';
+      }
+    }
+  }
+}

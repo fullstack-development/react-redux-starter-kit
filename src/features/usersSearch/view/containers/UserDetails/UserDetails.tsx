@@ -71,7 +71,7 @@ class UserDetails extends React.Component<IProps> {
       } = userDetails;
       return (
         <>
-          <a href={htmlURL} className={b('main')} target="_blank">
+          <a href={htmlURL} className={b('main')} target="_blank" rel="noopener noreferrer">
             <img
               className={b('avatar')}
               src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
@@ -105,4 +105,5 @@ class UserDetails extends React.Component<IProps> {
   }
 }
 
+export { UserDetails, IProps as IUserDetailsProps };
 export default connect(mapState, mapDispatch)(UserDetails);

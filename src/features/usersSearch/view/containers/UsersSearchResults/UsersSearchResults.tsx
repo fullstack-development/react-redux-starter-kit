@@ -7,9 +7,10 @@ import { IAppReduxState } from 'core/types';
 import { IGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
+import { TotalSearchResults } from 'shared/view/elements';
 
 import { IUsersSearchFormFields } from '../../../namespace';
-import { UserAvatarsWall } from '../../components';
+import { UsersAvatarsWall } from '../../components';
 import { actions, selectors } from './../../../redux';
 import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
@@ -25,6 +26,7 @@ interface IOwnProps {
 interface IStateProps {
   users: IGithubUser[];
   paginationState: IPaginationState;
+  totalResults: number;
 }
 
 type IActionProps = typeof mapDispatch;
@@ -35,11 +37,12 @@ function mapState(state: IAppReduxState): IStateProps {
   return {
     users: selectors.selectFoundUsers(state),
     paginationState: selectors.selectUsersSearchPaginationState(state),
+    totalResults: selectors.selectTotalResults(state),
   };
 }
 
 const mapDispatch = {
-  searchUser: actions.searchUser,
+  searchUsers: actions.searchUsers,
 };
 
 const b = block('users-search-results');
@@ -50,11 +53,12 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { users, paginationState: { page, totalPages } } = this.props;
+    const { users, paginationState: { page, totalPages }, totalResults } = this.props;
     const { displayedUser } = this.state;
     return (
       <div className={b()}>
-        <UserAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
+        <TotalSearchResults totalResults={totalResults} />
+        <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         <div className={b('pagination')}>
           <PaginationControls
             totalPages={totalPages}
@@ -69,8 +73,8 @@ class UsersSearchResults extends React.PureComponent<IProps> {
 
   @bind
   private handlePageRequest(pageNumber: number) {
-    const { searchUser, searchOptions } = this.props;
-    searchUser({ searchOptions, page: pageNumber });
+    const { searchUsers, searchOptions } = this.props;
+    searchUsers({ searchOptions, page: pageNumber });
   }
 
   @bind
@@ -84,4 +88,5 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+export { UsersSearchResults, IProps as IUsersSearchResultsProps };
 export default connect(mapState, mapDispatch)(UsersSearchResults);

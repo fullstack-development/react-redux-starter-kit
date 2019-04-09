@@ -1,9 +1,9 @@
 import React from 'react';
 import block from 'bem-cn';
 
-import { TextInputField, NumberInputField } from 'shared/view/form';
+import { TextInputField, NumberInputField, LanguageInputField } from 'shared/view/form';
 
-import { fieldNames } from '../constants';
+import { fieldNames, filtersLabels } from '../constants';
 import './RepositoriesSearchSettings.scss';
 
 const b = block('repositories-search-settings');
@@ -15,25 +15,25 @@ function RepositoriesSearchSettings() {
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.starsNumber}
-            label="Min stars"
+            label={filtersLabels.starsNumber}
           />
         </div>
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.forksNumber}
-            label="Min forks"
+            label={filtersLabels.forksNumber}
           />
         </div>
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
-          <TextInputField
-            name={fieldNames.language}
-            label="Repositories language"
-          />
+          <TextInputField name={fieldNames.owner} label="Owner" />
         </div>
         <div className={b('item')}>
-          <TextInputField name={fieldNames.owner} label="Owner" />
+          <LanguageInputField
+            name={fieldNames.language}
+            label={filtersLabels.language}
+          />
         </div>
       </div>
     </div>

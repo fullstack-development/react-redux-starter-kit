@@ -21,3 +21,7 @@ export function selectCommunication(
 export function selectRepositoriesSearchPaginationState(state: IAppReduxState): IPaginationState {
   return selectFeatureState(state).ui.repositoriesSearchPaginationState;
 }
+
+export function selectTotalResults(state: IAppReduxState): number {
+  return selectFeatureState(state).data.totalResults;
+}

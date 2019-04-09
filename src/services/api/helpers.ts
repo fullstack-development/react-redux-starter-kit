@@ -12,10 +12,10 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
 }
 
 export function constructUsersSearchQuery(queryString: string, filters: IUsersSearchFilters, page: number) {
-  const { searchBy, searchType, minRepos, maxRepos, reposLanguage, perPage } = filters;
+  const { searchBy, searchFor, minRepos, maxRepos, reposLanguage, perPage } = filters;
   return queryString.concat(
     searchBy !== 'username-email' ? `+in:${searchBy}` : '',
-    searchType !== 'both' ? `+type:${searchType}` : '',
+    searchFor !== 'both' ? `+type:${searchFor}` : '',
     optionalParam('language', reposLanguage),
     constructReposNumberQuery(minRepos, maxRepos),
     `&per_page=${perPage}`,
@@ -49,7 +49,6 @@ function optionalParam(name: string, value?: string) {
 */
 export function getTotalPagesFromLinkHeader(link?: string): number {
   if (link === void 0) {
-    console.error(`Can't get total pages (no Link header provided)`);
     return 0;
   }
 
@@ -65,4 +64,9 @@ export function getTotalPagesFromLinkHeader(link?: string): number {
 
   console.error(`Error while trying to get total pages from ${link}`);
   return 0;
+}
+
+export function getTotalResults(totalFromResponse: number) {
+  const maxTotal = 1000; // max results api can give https://developer.github.com/v3/search/
+  return Math.min(totalFromResponse, maxTotal);
 }

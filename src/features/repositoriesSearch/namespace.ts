@@ -8,6 +8,7 @@ import { ICommunication, IPlainFailAction, IAction, IPlainAction } from 'shared/
 export interface IReduxState {
   data: {
     foundRepositories: IRepository[];
+    totalResults: number;
   };
   communication: {
     searchRepositories: ICommunication;

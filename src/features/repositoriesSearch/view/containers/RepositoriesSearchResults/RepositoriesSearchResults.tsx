@@ -8,6 +8,7 @@ import { IAppReduxState } from 'core/types';
 import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
+import { TotalSearchResults } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -25,6 +26,7 @@ interface IOwnProps {
 interface IStateProps {
   repositories: IRepository[];
   paginationState: IPaginationState;
+  totalResults: number;
 }
 
 type IActionProps = typeof mapDispatch;
@@ -39,6 +41,7 @@ function mapState(state: IAppReduxState): IStateProps {
   return {
     repositories: selectors.selectFoundRepositories(state),
     paginationState: selectors.selectRepositoriesSearchPaginationState(state),
+    totalResults: selectors.selectTotalResults(state),
   };
 }
 
@@ -54,10 +57,11 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { repositories, UserDetails, paginationState: { totalPages, page } } = this.props;
+    const { repositories, UserDetails, paginationState: { totalPages, page }, totalResults } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
+        <TotalSearchResults totalResults={totalResults} />
         {repositories.map(this.renderRepositoryPreview)}
         <div className={b('pagination')}>
           <PaginationControls
@@ -99,4 +103,9 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+export {
+  RepositoriesSearchResults,
+  IProps as IRepositoriesSearchResultsProps,
+  IState as IRepositoriesSearchResultsState,
+};
 export default connect(mapState, mapDispatch)(containersProvider(['UserDetails'])(RepositoriesSearchResults));

@@ -5,7 +5,7 @@ import { bind } from 'decko';
 
 import { isRequired } from 'shared/validators';
 import { TextInputField } from 'shared/view/form';
-import { Button } from 'shared/view/elements';
+import { Button, KeysToValues } from 'shared/view/elements';
 
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
@@ -22,11 +22,12 @@ interface IProps<FormFields> {
   onSubmit(values: FormFields): void;
   resetSearchResults(): void;
   renderSettings?(): React.ReactChild;
+  getFilters?(formValues: FormFields): Record<string, string | number>;
 }
 
 const b = block('search-form');
 
-class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState> {
+class SearchForm<FormFields extends object> extends React.PureComponent<IProps<FormFields>, IState> {
   public state: IState = {
     isSettingsDialogOpen: false,
   };
@@ -48,11 +49,18 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
   }
 
   @bind
-  private renderForm({ handleSubmit }: FormRenderProps) {
-    const { isSearchRequesting, renderSettings, searchInputName } = this.props;
+  private renderForm({ handleSubmit, form }: FormRenderProps) {
+    const { isSearchRequesting, renderSettings, searchInputName, getFilters } = this.props;
     const { isSettingsDialogOpen } = this.state;
+    const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
+    const filtersAreNotEmpty = Object.keys(filters).length > 0;
     return (
       <form onSubmit={handleSubmit} className={b()}>
+        {filtersAreNotEmpty &&
+          <div className={b('filters')}>
+            <KeysToValues items={filters} />
+          </div>
+        }
         <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
         <div className={b('buttons')}>
           <Button
@@ -63,7 +71,7 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
             Search
           </Button>
           {renderSettings !== void 0 &&
-            <div className={b('settings')}>
+            <div className={b('settings-button')}>
               <Button
                 variant="outlined"
                 onClick={this.handleSettingsButtonClick}
@@ -94,4 +102,5 @@ class SearchForm<T extends object> extends React.PureComponent<IProps<T>, IState
   }
 }
 
+export { IProps as ISearchFormProps };
 export default SearchForm;
