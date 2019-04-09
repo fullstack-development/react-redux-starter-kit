@@ -27,10 +27,12 @@ Examples:
 
 ### Service
 
-A service is a standalone functionality unit that can be used in modules and features and cannot depend on them or on other services.
+A service is a standalone unit that can be used in modules and features and cannot depend on them or on other services. A service represents generic functionality which is not a part of main functionality of the app (which is represented by [features](./feature/feature.md)), but rather a utility which helps to implement it. A service is generally unaware of the domain or the app it works within and can easily be reused in other apps.
 
-You need to create a service if there is some functionality that can or will be used independently by different parts of the appliation, for example:
+Examples:
+ - api service encapsulating api calls to a server;
  - i18n service can be used for translation in the whole application;
+ - notification service can be used to show generic notifications to a user (for example if an error occured during an api call);
  - user service can provide user-specific data and user-related functionality;
  - config service can provide the app config and a functionality for saving and loading config, changing theme etc.
 
