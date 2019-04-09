@@ -15,7 +15,7 @@ There are no strict rules of how to break your app's functionality into features
 Features can depend on services, shared code (components, styles, types, helpers etc.) or core helpers (such as [containersProvider HOC](./lazy-feature.md)). Features cannot depend on modules or other features.
 
 Feature exports its containers and redux logic which can be used in two places:
-1. Containers and redux logic can be used in [modules](#module).
+1. Containers and redux logic can be used in modules.
 2. Containers can be used in `ContainersProvider.tsx` to allow to use these containers in other features using the `containersProvider` HOC.
 
 ## Kinds of features
