@@ -1,6 +1,5 @@
 import React from 'react';
 import block from 'bem-cn';
-import * as R from 'ramda';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { bind } from 'decko';
 
@@ -39,14 +38,13 @@ class Layout extends React.Component<IProps> {
         title: this.props.t(header.repositories.getKey()),
       },
     ];
-    const getMemoMenuItems = R.memoizeWith(R.identity, (x: IHeaderMenuItem[]): IHeaderMenuItem[] => x);
 
     return (
       <div className={b()}>
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={getMemoMenuItems(menuItems)} />
+              <LayoutHeaderMenu menuItems={menuItems} />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />

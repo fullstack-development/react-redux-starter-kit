@@ -1,5 +1,6 @@
 import { makeMountRenderer } from 'shared/helpers';
 import { Button } from 'shared/view/elements';
+import { makeRequired } from 'shared/validators';
 
 import SearchSettingsDialog from '../SearchSettingsDialog/SearchSettingsDialog';
 import SearchForm, { ISearchFormProps } from '../SearchForm';
@@ -13,7 +14,7 @@ const props: ISearchFormProps<IFormFields> = {
   submitButtonText: 'submit',
   isSearchRequesting: false,
   searchInputName: 'search',
-  errorFormText: 'submit error',
+  validators: makeRequired('submit error'),
   onSubmit: jest.fn(),
   resetSearchResults: jest.fn(),
   initialValues: {

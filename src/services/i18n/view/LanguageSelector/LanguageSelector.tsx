@@ -25,13 +25,17 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
     const { i18n: { language } } = this.props;
 
     return (
-      <div className={b()}>
-        <Select
-          value={language}
-          options={LanguageSelector.options}
-          onChange={this.changeLanguage}
-        />
-      </div>
+      <Select
+        value={language}
+        options={LanguageSelector.options}
+        onChange={this.changeLanguage}
+        SelectProps={{
+          classes: {
+            root: b(),
+            icon: b('icon').toString(),
+          },
+        }}
+      />
     );
   }
 

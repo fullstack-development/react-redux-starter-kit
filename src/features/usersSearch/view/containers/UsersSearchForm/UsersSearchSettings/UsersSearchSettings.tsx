@@ -1,6 +1,5 @@
 import React from 'react';
 import block from 'bem-cn';
-import * as R from 'ramda';
 
 import { FormLabel } from 'shared/view/elements';
 import { useTranslation, tKeys } from 'services/i18n';
@@ -20,14 +19,13 @@ const { userSearch } = tKeys.features;
 
 function UsersSearchSettings(props: IProps) {
   const { t } = useTranslation();
-  const getMemoOptions = R.memoizeWith(R.identity, (x: Array<ISelectOption<IUsersSearchFilters['searchBy']>>) => x);
 
   return (
     <div className={b()}>
       <div className={b('row')}>
         <div className={b('item')}>
           <SelectField
-            options={getMemoOptions(props.options)}
+            options={props.options}
             label={t(userSearch.searchBy.getKey())}
             name={fieldNames.searchBy}
           />

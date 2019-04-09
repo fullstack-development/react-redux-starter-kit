@@ -4,6 +4,7 @@ import { bind } from 'decko';
 import * as R from 'ramda';
 
 import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { makeRequired } from 'shared/validators';
 import {
   replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap,
 } from 'shared/helpers';
@@ -57,12 +58,10 @@ class UsersSearchForm extends React.PureComponent<IProps> {
       org: t(userSearch.organizations.getKey()),
       user: t(userSearch.users.getKey()),
     };
-    const getMemoOptions = R.memoizeWith(R.identity, (x: OptionType[]) => x);
-    const getMemoLabels = R.memoizeWith(R.identity, (x: LabelsType) => x);
 
     const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-      searchBy: x => getSelectValuesToLabelsMap(getMemoOptions(options))[x].toLowerCase(),
-      searchFor: x => (getMemoLabels(labels))[x].toLowerCase(),
+      searchBy: x => getSelectValuesToLabelsMap(options)[x].toLowerCase(),
+      searchFor: x => (labels)[x].toLowerCase(),
     };
     const renderUsersSearchSettings = () => <UsersSearchSettings options={options} />;
 
@@ -73,7 +72,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         submitButtonText={t(tKeys.shared.search.getKey())}
         settingsButtonText={t(tKeys.shared.settings.getKey())}
-        errorFormText={t(tKeys.shared.fieldIsRequiredError.getKey())}
+        validators={makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey()))}
         initialValues={formInitialValues}
         renderSettings={renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}

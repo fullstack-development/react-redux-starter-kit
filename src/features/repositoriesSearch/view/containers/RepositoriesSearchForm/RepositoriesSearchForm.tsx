@@ -7,6 +7,7 @@ import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
+import { makeRequired } from 'shared/validators';
 
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
@@ -48,7 +49,7 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
         isSearchRequesting={isRepositoriesSearchRequesting}
         submitButtonText={t(tKeys.shared.search.getKey())}
         settingsButtonText={t(tKeys.shared.settings.getKey())}
-        errorFormText={t(tKeys.shared.fieldIsRequiredError.getKey())}
+        validators={makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey()))}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
