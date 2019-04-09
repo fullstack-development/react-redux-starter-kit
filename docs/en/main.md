@@ -15,17 +15,13 @@ An application is built using three kinds of architectural units — [features](
 
 ### Feature
 
-A feature is the main unit in the architecture. A feature has its own branch in the redux state, redux logic, and react components which implement a functionality represented by the feature.
+A feature is the main building block in the architecture. A feature is a functional unit which represents a specific part of the app's functionality.
 
-Features can depend on services, shared code (components, styles, types, helpers etc.) or core helpers (such as [containersProvider HOC](./lazy-feature.md)). Features cannot depend on modules or other features.
+A feature has its own branch in the redux state, redux logic, and react components which implement functionality represented by the feature.
 
-Feature exports its containers and redux logic which can be used in two places:
-1. Containers and redux logic can be used in [modules](#module).
-2. Containers can be used in `ContainersProvider.tsx` to allow to use these containers in other features using the `containersProvider` HOC.
-
-
-Example:
-> `github users search` feature can contain redux logic for searching github users and storing the results in the redux state, and containers for displaying the results and making a search query.
+Examples:
+> `github users search` feature can contain redux logic for searching github users and storing the results in the redux state, and containers for displaying the results and making a search query;
+> `auth` feature can contain redux logic & containers for login, logout, password recovery etc.
 
 [Read more about features](./feature/feature.md)
 
