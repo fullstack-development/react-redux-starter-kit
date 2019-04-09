@@ -43,7 +43,7 @@ const mapDispatch = {
 };
 
 const b = block('profile-edit');
-const { profile: profileT } = tKeys.features;
+const { profile: translations } = tKeys.features;
 
 class ProfileEdit extends React.PureComponent<IProps> {
   public render() {
@@ -70,24 +70,24 @@ class ProfileEdit extends React.PureComponent<IProps> {
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.name}
-              label={t(profileT.name.getKey())}
+              label={t(translations.name.getKey())}
               validate={this.makeValidateName()}
             />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.nickname}
-              label={t(profileT.nickname.getKey())}
+              label={t(translations.nickname.getKey())}
               validate={this.makeValidateNickname()}
             />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(profileT.age.getKey())} />
+            <NumberInputField name={fieldNames.age} label={t(translations.age.getKey())} />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.bio}
-              label={t(profileT.bio.getKey())}
+              label={t(translations.bio.getKey())}
               multiline
               rowsMax={10}
               validate={this.makeValidateBio()}
@@ -106,11 +106,11 @@ class ProfileEdit extends React.PureComponent<IProps> {
     return composeValidators(
       makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
       makeMinCharactersValidator(MIN_NAME_LENGTH, t(tKeys.shared.fieldMinLengthError.getKey(), {
-        field: t(profileT.name.getKey()),
+        field: t(translations.name.getKey()),
         minCharacters: MIN_NAME_LENGTH,
       })),
       makeMaxCharactersValidator(MAX_NAME_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
-        field: t(profileT.name.getKey()),
+        field: t(translations.name.getKey()),
         maxCharacters: MAX_NAME_LENGTH,
       })),
     );
@@ -121,11 +121,11 @@ class ProfileEdit extends React.PureComponent<IProps> {
     return composeValidators(
       makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
       makeMinCharactersValidator(MIN_NICKNAME_LENGTH, t(tKeys.shared.fieldMinLengthError.getKey(), {
-        field: t(profileT.nickname.getKey()),
+        field: t(translations.nickname.getKey()),
         minCharacters: MIN_NICKNAME_LENGTH,
       })),
       makeMaxCharactersValidator(MAX_NICKNAME_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
-        field: t(profileT.nickname.getKey()),
+        field: t(translations.nickname.getKey()),
         maxCharacters: MAX_NICKNAME_LENGTH,
       })),
     );
@@ -136,7 +136,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
     return composeValidators(
       makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
       makeMaxCharactersValidator(MAX_BIO_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
-        field: t(profileT.bio.getKey()),
+        field: t(translations.bio.getKey()),
         maxCharacters: MAX_BIO_LENGTH,
       })),
     );

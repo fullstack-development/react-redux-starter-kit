@@ -42,21 +42,21 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { userSearch } = tKeys.features;
+const { userSearch: translations } = tKeys.features;
 
 class UsersSearchForm extends React.PureComponent<IProps> {
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
     const options: OptionType[] = [
-      { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
-      { value: 'login', label: t(userSearch.username.getKey()) },
-      { value: 'email', label: t(userSearch.email.getKey()) },
-      { value: 'fullname', label: t(userSearch.fullName.getKey()) },
+      { value: 'username-email', label: t(translations.usernameAndEmail.getKey()) },
+      { value: 'login', label: t(translations.username.getKey()) },
+      { value: 'email', label: t(translations.email.getKey()) },
+      { value: 'fullname', label: t(translations.fullName.getKey()) },
     ];
     const labels: LabelsType = {
-      both: t(userSearch.usersAndOrganizations.getKey()),
-      org: t(userSearch.organizations.getKey()),
-      user: t(userSearch.users.getKey()),
+      both: t(translations.usersAndOrganizations.getKey()),
+      org: t(translations.organizations.getKey()),
+      user: t(translations.users.getKey()),
     };
 
     const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
@@ -87,12 +87,12 @@ class UsersSearchForm extends React.PureComponent<IProps> {
       const { t } = this.props;
       const filters = R.omit([fieldNames.searchString], formFields);
       const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
-        searchBy: t(userSearch.searchBy.getKey()),
-        searchFor: t(userSearch.searchFor.getKey()),
-        perPage: t(userSearch.resultsPerPage.getKey()),
-        reposLanguage: t(userSearch.repositoriesLanguage.getKey()),
-        minRepos: t(userSearch.minRepos.getKey()),
-        maxRepos: t(userSearch.maxRepos.getKey()),
+        searchBy: t(translations.searchBy.getKey()),
+        searchFor: t(translations.searchFor.getKey()),
+        perPage: t(translations.resultsPerPage.getKey()),
+        reposLanguage: t(translations.repositoriesLanguage.getKey()),
+        minRepos: t(translations.minRepos.getKey()),
+        maxRepos: t(translations.maxRepos.getKey()),
       };
       const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
       return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);

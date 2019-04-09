@@ -17,7 +17,7 @@ interface IOwnProps {
 type IProps = IOwnProps & WithTranslation;
 
 const b = block('repository-preview');
-const { repositoriesSearch } = tKeys.features;
+const { repositoriesSearch: translations } = tKeys.features;
 
 class RepositoryPreview extends React.PureComponent<IProps> {
   public render() {
@@ -52,21 +52,21 @@ class RepositoryPreview extends React.PureComponent<IProps> {
           <div className={b('row')}>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title={t(repositoriesSearch.forks.getKey())}
+                title={t(translations.forks.getKey())}
                 value={forksNumber}
               />
               <RepositoryAttribute
-                title={t(repositoriesSearch.openIssues.getKey())}
+                title={t(translations.openIssues.getKey())}
                 value={openIssuesNumber}
               />
             </div>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title={t(repositoriesSearch.lastUpdated.getKey())}
+                title={t(translations.lastUpdated.getKey())}
                 value={(new Date(updatedAt)).toLocaleDateString()}
               />
               <RepositoryAttribute
-                title={t(repositoriesSearch.owner.getKey())}
+                title={t(translations.owner.getKey())}
                 value={owner.username}
                 onValueClick={this.handleOwnerClick}
                 type="owner"
