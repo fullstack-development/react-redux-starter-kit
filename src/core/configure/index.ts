@@ -2,7 +2,7 @@ import { makeDeps, modules, reduxEntries } from 'config';
 import { ReducersMap } from 'shared/types/redux';
 
 import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry, IDependencies } from '../types';
-import { TYPES, container } from './ioc';
+import { TYPES, container, IocTypes } from './ioc';
 import configureStore, { createReducer } from './store';
 import { configureJss } from './jss';
 
@@ -24,12 +24,14 @@ function configureApp(data?: IAppData): IAppData {
   const jssDeps = configureJss();
 
   try {
-    container.getAll(TYPES.Deps);
-    container.rebind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
-    container.rebind(TYPES.Deps).toConstantValue(dependencies);
+    container.getAll<IocTypes[typeof TYPES.connectEntryToStore]>(TYPES.Deps);
+    container.rebind<IocTypes[typeof TYPES.connectEntryToStore]>(TYPES.connectEntryToStore)
+      .toConstantValue(connectEntryToStore);
+    container.rebind<IocTypes[typeof TYPES.Deps]>(TYPES.Deps).toConstantValue(dependencies);
   } catch {
-    container.bind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
-    container.bind(TYPES.Deps).toConstantValue(dependencies);
+    container.bind<IocTypes[typeof TYPES.connectEntryToStore]>(TYPES.connectEntryToStore)
+      .toConstantValue(connectEntryToStore);
+    container.bind<IocTypes[typeof TYPES.Deps]>(TYPES.Deps).toConstantValue(dependencies);
   }
 
   reduxEntries.forEach(connectEntryToStore);

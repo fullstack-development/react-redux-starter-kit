@@ -4,8 +4,8 @@ import * as R from 'ramda';
 import { injectable } from 'inversify';
 
 import { Omit, GetProps, SubSet } from '_helpers';
-import { inject, TYPES } from './configure/ioc';
-import { IFeatureEntry, IReduxEntry } from './types';
+import { inject, TYPES, IocTypes } from './configure/ioc';
+import { IFeatureEntry } from './types';
 
 type FeatureLoader = () => Promise<IFeatureEntry>;
 
@@ -28,7 +28,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
       public state: IState = { mounted: false };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore!: (entry: IReduxEntry) => void;
+      private connectFeatureToStore!: IocTypes[typeof TYPES.connectEntryToStore];
 
       public async bootstrap() {
         await this.load();

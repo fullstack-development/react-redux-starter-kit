@@ -4,7 +4,7 @@ import { injectable } from 'inversify';
 import { Omit, SubSet } from '_helpers';
 
 import * as usersSearchFeature from 'features/usersSearch';
-import { inject, TYPES } from './configure/ioc';
+import { inject, TYPES, IocTypes } from './configure/ioc';
 import { IFeatureEntry, IReduxEntry } from './types';
 
 interface IContainerTypes {
@@ -51,7 +51,7 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       public state: IState = { containers: {} };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore!: (entry: IReduxEntry) => void;
+      private connectFeatureToStore!: IocTypes[typeof TYPES.connectEntryToStore];
 
       public componentDidMount() {
         this.load();
