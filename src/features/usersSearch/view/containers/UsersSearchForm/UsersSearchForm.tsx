@@ -91,8 +91,8 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         searchFor: t(userSearch.searchFor.getKey()),
         perPage: t(userSearch.resultsPerPage.getKey()),
         reposLanguage: t(userSearch.repositoriesLanguage.getKey()),
-        minRepos: t(userSearch.min.getKey()),
-        maxRepos: t(userSearch.max.getKey()),
+        minRepos: t(userSearch.minRepos.getKey()),
+        maxRepos: t(userSearch.maxRepos.getKey()),
       };
       const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
       return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
