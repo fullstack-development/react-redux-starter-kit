@@ -1,6 +1,7 @@
+// tslint:disable-next-line: import-blacklist
+import { WithTranslation, withTranslation } from 'react-i18next';
 import React from 'react';
 import { bind } from 'decko';
-import { WithTranslation, withTranslation } from 'react-i18next';
 import block from 'bem-cn';
 
 import { Lang } from 'shared/types/app';

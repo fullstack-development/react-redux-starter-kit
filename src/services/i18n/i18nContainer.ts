@@ -1,3 +1,4 @@
+// tslint:disable: import-blacklist
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { default as languageDetector } from 'i18next-browser-languagedetector';

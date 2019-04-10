@@ -1,3 +1,4 @@
+// tslint:disable: import-blacklist
 import i18next from 'i18next';
 import { withTranslation, WithTranslation, useTranslation } from 'react-i18next';
 import { tKeys } from './constants';
