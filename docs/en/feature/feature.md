@@ -10,7 +10,7 @@ Examples:
 > `orders` feature can contain redux logic & containers for making orders, view orders history, etc. in some kind of online store app;
 > `auth` feature can contain redux logic & containers for login, logout, password recovery etc.
 
-There are no strict rules of how to break your app's functionality into features. For example, `github users search` and `github repositories search` could be the same feature named `github search`, or `orders` feature could be broken into `make order` and `order history` features. What's important is that feature's code makes something within the functionality the feature represents. This functionality can be more specific (like `github * search` features) or more general (like `orders`). How much "specific" or "general" a feature is made depends on how appropriate or convenient it is in each particular case.
+There are no strict rules of how to break your app's functionality into features. For example, `github users search` and `github repositories search` could be the same feature named `github search`, or `orders` feature could be broken into `make order` and `order history` features. Functionality that feature represents can be more specific (like `github * search` features) or more general (like `orders`). How much "specific" or "general" a feature is made depends on how appropriate or convenient it is in each particular case.
 
 Features can depend on services, shared code (components, styles, types, helpers etc.) or containers provided by [containersProvider HOC](./lazy-feature.md). Features cannot depend on modules or other features.
 
