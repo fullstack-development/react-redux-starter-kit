@@ -8,8 +8,8 @@ export default {
     searchSettings: 'Search settings',
     totalResults: 'Total results: ',
     fieldIsRequiredError: 'Field is required',
-    fieldMinLengthError: '{{field}} field must be at least {{minCharacters}} characters long',
-    fieldMaxLengthError: '{{field}} field must be less than {{maxCharacters}} characters long',
+    fieldMinLengthError: 'Field must be at least {{minCharacters}} characters long',
+    fieldMaxLengthError: 'Field must be less than {{maxCharacters}} characters long',
     header: {
       searchFor: 'Search for:',
       users: 'Users',

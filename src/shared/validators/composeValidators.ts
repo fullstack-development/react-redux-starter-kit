@@ -1,4 +1,6 @@
-type Validator = (value: string) => string | undefined;
+import { ITranslateObject } from 'services/i18n';
+
+type Validator = (value: string) => string | ITranslateObject | undefined;
 
 export function composeValidators(...validators: Validator[]) {
   return (value: string) => validators.reduce((error, validator) => error || validator(value), void 0);

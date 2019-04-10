@@ -5,6 +5,7 @@ import { bind } from 'decko';
 
 import { TextInputField } from 'shared/view/form';
 import { Button, KeysToValues } from 'shared/view/elements';
+import { TranslateFunction, ITranslateObject } from 'services/i18n';
 
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
@@ -20,7 +21,8 @@ interface IOwnProps<FormFields> {
   initialValues?: Partial<FormFields>;
   submitButtonText: string;
   settingsButtonText: string;
-  validators(value: any): string | undefined;
+  t: TranslateFunction;
+  validators(value: string): string | ITranslateObject | undefined;
   onSubmit(values: FormFields): void;
   resetSearchResults(): void;
   renderSettings?(): React.ReactChild;
@@ -56,7 +58,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   private renderForm({ handleSubmit, form }: FormRenderProps) {
     const {
       isSearchRequesting, renderSettings, searchInputName, getFilters, settingsButtonText, submitButtonText,
-      validators,
+      validators, t,
     } = this.props;
     const { isSettingsDialogOpen } = this.state;
     const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
@@ -72,6 +74,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
           name={searchInputName}
           disabled={isSearchRequesting}
           validate={validators}
+          t={t}
         />
         <div className={b('buttons')}>
           <Button

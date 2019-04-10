@@ -8,8 +8,8 @@ export default {
     searchSettings: 'Настройки поиска',
     totalResults: 'Количество результатов: ',
     fieldIsRequiredError: 'Поле обязательно',
-    fieldMinLengthError: 'Поле {{field}} должно быть не меньше {{minCharacters}} символов',
-    fieldMaxLengthError: 'Поле {{field}} должно быть не более {{maxCharacters}} символов',
+    fieldMinLengthError: 'Поле должно быть не меньше {{minCharacters}} символов',
+    fieldMaxLengthError: 'Поле должно быть не более {{maxCharacters}} символов',
     header: {
       searchFor: 'Искать:',
       users: 'Пользователей',

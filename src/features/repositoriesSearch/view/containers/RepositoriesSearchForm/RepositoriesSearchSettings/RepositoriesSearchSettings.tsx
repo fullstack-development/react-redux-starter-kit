@@ -30,7 +30,7 @@ function RepositoriesSearchSettings() {
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
-          <TextInputField name={fieldNames.owner} label={t(translations.owner.getKey())} />
+          <TextInputField name={fieldNames.owner} label={t(translations.owner.getKey())} t={t} />
         </div>
         <div className={b('item')}>
           <LanguageInputField

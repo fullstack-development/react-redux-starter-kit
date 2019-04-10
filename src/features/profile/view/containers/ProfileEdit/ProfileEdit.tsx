@@ -72,6 +72,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
               name={fieldNames.name}
               label={t(translations.name.getKey())}
               validate={this.makeValidateName()}
+              t={t}
             />
           </div>
           <div className={b('field')}>
@@ -79,6 +80,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
               name={fieldNames.nickname}
               label={t(translations.nickname.getKey())}
               validate={this.makeValidateNickname()}
+              t={t}
             />
           </div>
           <div className={b('field')}>
@@ -91,6 +93,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
               multiline
               rowsMax={10}
               validate={this.makeValidateBio()}
+              t={t}
             />
           </div>
           <div className={b('button')}>
@@ -102,43 +105,40 @@ class ProfileEdit extends React.PureComponent<IProps> {
   }
 
   private makeValidateName() {
-    const { t } = this.props;
     return composeValidators(
-      makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
-      makeMinCharactersValidator(MIN_NAME_LENGTH, t(tKeys.shared.fieldMinLengthError.getKey(), {
-        field: t(translations.name.getKey()),
-        minCharacters: MIN_NAME_LENGTH,
-      })),
-      makeMaxCharactersValidator(MAX_NAME_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
-        field: t(translations.name.getKey()),
-        maxCharacters: MAX_NAME_LENGTH,
-      })),
+      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
+      makeMinCharactersValidator(MIN_NAME_LENGTH, {
+        key: tKeys.shared.fieldMinLengthError.getKey(),
+        options: { minCharacters: MIN_NAME_LENGTH },
+      }),
+      makeMaxCharactersValidator(MAX_NAME_LENGTH, {
+        key: tKeys.shared.fieldMaxLengthError.getKey(),
+        options: { maxCharacters: MAX_NAME_LENGTH },
+      }),
     );
   }
 
   private makeValidateNickname() {
-    const { t } = this.props;
     return composeValidators(
-      makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
-      makeMinCharactersValidator(MIN_NICKNAME_LENGTH, t(tKeys.shared.fieldMinLengthError.getKey(), {
-        field: t(translations.nickname.getKey()),
-        minCharacters: MIN_NICKNAME_LENGTH,
-      })),
-      makeMaxCharactersValidator(MAX_NICKNAME_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
-        field: t(translations.nickname.getKey()),
-        maxCharacters: MAX_NICKNAME_LENGTH,
-      })),
+      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
+      makeMinCharactersValidator(MIN_NICKNAME_LENGTH, {
+        key: tKeys.shared.fieldMinLengthError.getKey(),
+        options: { minCharacters: MIN_NICKNAME_LENGTH },
+      }),
+      makeMaxCharactersValidator(MAX_NICKNAME_LENGTH, {
+        key: tKeys.shared.fieldMaxLengthError.getKey(),
+        options: { maxCharacters: MAX_NICKNAME_LENGTH },
+      }),
     );
   }
 
   private makeValidateBio() {
-    const { t } = this.props;
     return composeValidators(
-      makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey())),
-      makeMaxCharactersValidator(MAX_BIO_LENGTH, t(tKeys.shared.fieldMaxLengthError.getKey(), {
-        field: t(translations.bio.getKey()),
-        maxCharacters: MAX_BIO_LENGTH,
-      })),
+      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
+      makeMaxCharactersValidator(MAX_BIO_LENGTH, {
+        key: tKeys.shared.fieldMaxLengthError.getKey(),
+        options: { maxCharacters: MAX_BIO_LENGTH },
+      }),
     );
   }
 

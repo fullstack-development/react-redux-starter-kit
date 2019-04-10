@@ -72,11 +72,12 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         submitButtonText={t(tKeys.shared.search.getKey())}
         settingsButtonText={t(tKeys.shared.settings.getKey())}
-        validators={makeRequired(t(tKeys.shared.fieldIsRequiredError.getKey()))}
+        validators={makeRequired(tKeys.shared.fieldIsRequiredError.getKey())}
         initialValues={formInitialValues}
         renderSettings={renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
         getFilters={this.makeFiltersGetter(filtersValuesFormattersMap)}
+        t={t}
       />
     );
   }

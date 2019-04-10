@@ -15,6 +15,7 @@ const props: ISearchFormProps<IFormFields> = {
   isSearchRequesting: false,
   searchInputName: 'search',
   validators: makeRequired('submit error'),
+  t: jest.fn(),
   onSubmit: jest.fn(),
   resetSearchResults: jest.fn(),
   initialValues: {
