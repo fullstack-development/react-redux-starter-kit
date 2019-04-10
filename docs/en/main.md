@@ -5,7 +5,7 @@
 - CSS-preprocessor: [SASS](https://sass-lang.com/)
 - UI building: [React](https://reactjs.org/)+[Redux](https://redux.js.org/)+[React-Router](https://reacttraining.com/react-router/web) and [BEM](https://en.bem.info/)
 - Handling side effects: [redux-saga](https://redux-saga.js.org/)
-- Interraction with a server: an API service built on top of [axios](https://github.com/axios/axios)
+- Interaction with a server: an API service built on top of [axios](https://github.com/axios/axios)
 - Managing dependencies: [inversify](http://inversify.io/)
 - Testing: [Jest](https://facebook.github.io/jest/), [Enzyme](https://airbnb.io/enzyme/), [Sinon](https://sinonjs.org/)
 

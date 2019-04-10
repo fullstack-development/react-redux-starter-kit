@@ -12,7 +12,7 @@ Examples:
 
 There are no strict rules of how to break your app's functionality into features. For example, `github users search` and `github repositories search` could be the same feature named `github search`, or `orders` feature could be broken into `make order` and `order history` features. What's important is that feature's code makes something within the functionality the feature represents. This functionality can be more specific (like `github * search` features) or more general (like `orders`). How much "specific" or "general" a feature is made depends on how appropriate or convenient it is in each particular case.
 
-Features can depend on services, shared code (components, styles, types, helpers etc.) or core helpers (such as [containersProvider HOC](./lazy-feature.md)). Features cannot depend on modules or other features.
+Features can depend on services, shared code (components, styles, types, helpers etc.) or containers provided by [containersProvider HOC](./lazy-feature.md). Features cannot depend on modules or other features.
 
 Feature exports its containers and redux logic which can be used in two places:
 1. Containers and redux logic can be used in modules.
