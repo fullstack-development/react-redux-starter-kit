@@ -10,8 +10,13 @@ import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { actions as notificationServiceActions } from 'services/notification';
+import {
+  makeRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators,
+} from 'shared/validators';
 
-import { fieldNames, validateBio, validateName, validateNickname } from './constants';
+import {
+  fieldNames, MAX_BIO_LENGTH, MIN_NAME_LENGTH, MAX_NAME_LENGTH, MIN_NICKNAME_LENGTH, MAX_NICKNAME_LENGTH,
+} from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -38,7 +43,7 @@ const mapDispatch = {
 };
 
 const b = block('profile-edit');
-const { profile: profileT } = tKeys.features;
+const { profile: translations } = tKeys.features;
 
 class ProfileEdit extends React.PureComponent<IProps> {
   public render() {
@@ -63,25 +68,32 @@ class ProfileEdit extends React.PureComponent<IProps> {
         </div>
         <div className={b('fields')}>
           <div className={b('field')}>
-            <TextInputField name={fieldNames.name} label={t(profileT.name.getKey())} validate={validateName} />
+            <TextInputField
+              name={fieldNames.name}
+              label={t(translations.name.getKey())}
+              validate={this.makeValidateName()}
+              t={t}
+            />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.nickname}
-              label={t(profileT.nickname.getKey())}
-              validate={validateNickname}
+              label={t(translations.nickname.getKey())}
+              validate={this.makeValidateNickname()}
+              t={t}
             />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(profileT.age.getKey())} />
+            <NumberInputField name={fieldNames.age} label={t(translations.age.getKey())} />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.bio}
-              label={t(profileT.bio.getKey())}
+              label={t(translations.bio.getKey())}
               multiline
               rowsMax={10}
-              validate={validateBio}
+              validate={this.makeValidateBio()}
+              t={t}
             />
           </div>
           <div className={b('button')}>
@@ -89,6 +101,44 @@ class ProfileEdit extends React.PureComponent<IProps> {
           </div>
         </div>
       </form>
+    );
+  }
+
+  private makeValidateName() {
+    return composeValidators(
+      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
+      makeMinCharactersValidator(MIN_NAME_LENGTH, {
+        key: tKeys.shared.fieldMinLengthError.getKey(),
+        options: { minCharacters: MIN_NAME_LENGTH },
+      }),
+      makeMaxCharactersValidator(MAX_NAME_LENGTH, {
+        key: tKeys.shared.fieldMaxLengthError.getKey(),
+        options: { maxCharacters: MAX_NAME_LENGTH },
+      }),
+    );
+  }
+
+  private makeValidateNickname() {
+    return composeValidators(
+      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
+      makeMinCharactersValidator(MIN_NICKNAME_LENGTH, {
+        key: tKeys.shared.fieldMinLengthError.getKey(),
+        options: { minCharacters: MIN_NICKNAME_LENGTH },
+      }),
+      makeMaxCharactersValidator(MAX_NICKNAME_LENGTH, {
+        key: tKeys.shared.fieldMaxLengthError.getKey(),
+        options: { maxCharacters: MAX_NICKNAME_LENGTH },
+      }),
+    );
+  }
+
+  private makeValidateBio() {
+    return composeValidators(
+      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
+      makeMaxCharactersValidator(MAX_BIO_LENGTH, {
+        key: tKeys.shared.fieldMaxLengthError.getKey(),
+        options: { maxCharacters: MAX_BIO_LENGTH },
+      }),
     );
   }
 

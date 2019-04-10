@@ -27,7 +27,7 @@ interface IStateProps {
 type IProps = IOwnProps & IStateProps & WithTranslation;
 
 const b = block('profile-preview');
-const { profile } = tKeys.features;
+const { profile: translations } = tKeys.features;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -66,7 +66,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
                   {nickname}
                 </div>
                 <div className={b('age')}>
-                  {t(profile.yearsOld.getKey(), { count: age })}
+                  {t(translations.yearsOld.getKey(), { count: age })}
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
               {bio}
             </div>
             <div className={b('edit')} onClick={onEditClick}>
-              {t(profile.edit.getKey())}
+              {t(translations.edit.getKey())}
             </div>
           </div>
         </Popover>

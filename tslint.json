@@ -52,7 +52,7 @@
     ]
   },
   "rules": {
-    "import-blacklist": [true, "react-jss", "@material-ui/core", "@material-ui/icons"],
+    "import-blacklist": [true, "react-jss", "@material-ui/core", "@material-ui/icons", "i18next", "react-i18next"],
     "object-literal-key-quotes": false,
     "no-unused-expression": [true, "allow-fast-null-checks"],
     "no-implicit-dependencies": false,

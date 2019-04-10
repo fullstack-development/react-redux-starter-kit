@@ -1,9 +1,7 @@
 .select {
-  & div {
-    color: white;
-  }
+  color: white;
 
-  & svg {
-    fill: white;
+  &__icon {
+    color: white;
   }
 }

@@ -1,7 +1,4 @@
 import { FormFieldNames } from 'shared/types/form';
-import {
-  isRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators,
-} from 'shared/validators';
 import { IProfileEditFormFields } from '../../../namespace';
 
 export const fieldNames: FormFieldNames<IProfileEditFormFields> = {
@@ -12,16 +9,8 @@ export const fieldNames: FormFieldNames<IProfileEditFormFields> = {
   avatarURL: 'avatarURL',
 };
 
-export const validateName = composeValidators(
-  isRequired,
-  makeMinCharactersValidator(3, 'Name'),
-  makeMaxCharactersValidator(35, 'Name'),
-);
-
-export const validateNickname = composeValidators(
-  isRequired,
-  makeMinCharactersValidator(3, 'Nickname'),
-  makeMaxCharactersValidator(13, 'Nickname'),
-);
-
-export const validateBio = makeMaxCharactersValidator(200, 'Bio');
+export const MIN_NAME_LENGTH = 3;
+export const MAX_NAME_LENGTH = 35;
+export const MIN_NICKNAME_LENGTH = 3;
+export const MAX_NICKNAME_LENGTH = 13;
+export const MAX_BIO_LENGTH = 200;

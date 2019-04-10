@@ -1,5 +1,6 @@
 import { makeMountRenderer } from 'shared/helpers';
 import { Button } from 'shared/view/elements';
+import { makeRequired } from 'shared/validators';
 
 import SearchSettingsDialog from '../SearchSettingsDialog/SearchSettingsDialog';
 import SearchForm, { ISearchFormProps } from '../SearchForm';
@@ -13,6 +14,8 @@ const props: ISearchFormProps<IFormFields> = {
   submitButtonText: 'submit',
   isSearchRequesting: false,
   searchInputName: 'search',
+  validators: makeRequired('submit error'),
+  t: jest.fn(),
   onSubmit: jest.fn(),
   resetSearchResults: jest.fn(),
   initialValues: {
@@ -56,14 +59,14 @@ describe('(shared/view) SearchForm component', () => {
     const componentWithoutSettings = getComponent();
     const componentWithSettings = getComponent({ renderSettings: jest.fn() });
 
-    expect(componentWithoutSettings.find('.search-form__settings').length).toBe(0);
-    expect(componentWithSettings.find('.search-form__settings').length).toBe(1);
+    expect(componentWithoutSettings.find('.search-form__settings-button').length).toBe(0);
+    expect(componentWithSettings.find('.search-form__settings-button').length).toBe(1);
   });
 
-  it('should open SettingsDialog on settings button click & hode on onClose call', () => {
+  it('should open SettingsDialog on settings button click & hide on onClose call', () => {
     const component = getComponent({ renderSettings: jest.fn() });
 
-    const settingsButton = component.find('.search-form__settings').find(Button);
+    const settingsButton = component.find('.search-form__settings-button').find(Button);
     settingsButton.prop('onClick')();
     component.update();
     const settingsDialog = component.find(SearchSettingsDialog);

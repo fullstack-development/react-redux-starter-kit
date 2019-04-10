@@ -1,6 +1,5 @@
 import React from 'react';
 import block from 'bem-cn';
-import * as R from 'ramda';
 
 import { FormLabel } from 'shared/view/elements';
 import { useTranslation, tKeys } from 'services/i18n';
@@ -16,26 +15,25 @@ interface IProps {
 }
 
 const b = block('users-search-settings');
-const { userSearch } = tKeys.features;
+const { userSearch: translations } = tKeys.features;
 
 function UsersSearchSettings(props: IProps) {
   const { t } = useTranslation();
-  const getMemoOptions = R.memoizeWith(R.identity, (x: Array<ISelectOption<IUsersSearchFilters['searchBy']>>) => x);
 
   return (
     <div className={b()}>
       <div className={b('row')}>
         <div className={b('item')}>
           <SelectField
-            options={getMemoOptions(props.options)}
-            label={t(userSearch.searchBy.getKey())}
+            options={props.options}
+            label={t(translations.searchBy.getKey())}
             name={fieldNames.searchBy}
           />
         </div>
         <div className={b('item')}>
           <SelectField
             options={perPageOptions}
-            label={t(userSearch.resultsPerPage.getKey())}
+            label={t(translations.resultsPerPage.getKey())}
             name={fieldNames.perPage}
           />
         </div>
@@ -43,36 +41,36 @@ function UsersSearchSettings(props: IProps) {
       <div className={b('row')}>
         <div className={b('item')}>
           <FormLabel>
-            {t(userSearch.searchFor.getKey())}
+            {t(translations.searchFor.getKey())}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchFor} value="user" label={t(userSearch.users.getKey())} />
-              <RadioField name={fieldNames.searchFor} value="org" label={t(userSearch.organizations.getKey())} />
-              <RadioField name={fieldNames.searchFor} value="both" label={t(userSearch.both.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="user" label={t(translations.users.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="org" label={t(translations.organizations.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="both" label={t(translations.both.getKey())} />
             </div>
           </FormLabel>
         </div>
         <div className={b('settings-group')}>
           <div className={b('item')}>
             <FormLabel>
-              {t(userSearch.repositoriesNumber.getKey())}
+              {t(translations.repositoriesNumber.getKey())}
               <div className={b('repos-number')}>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.minRepos}
-                    label={t(userSearch.min.getKey())}
+                    label={t(translations.min.getKey())}
                   />
                 </div>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.maxRepos}
-                    label={t(userSearch.max.getKey())}
+                    label={t(translations.max.getKey())}
                   />
                 </div>
               </div>
             </FormLabel>
           </div>
           <div className={b('item')}>
-            <LanguageInputField name={fieldNames.reposLanguage} label={t(userSearch.repositoriesLanguage.getKey())} />
+            <LanguageInputField name={fieldNames.reposLanguage} label={t(translations.repositoriesLanguage.getKey())} />
           </div>
         </div>
       </div>

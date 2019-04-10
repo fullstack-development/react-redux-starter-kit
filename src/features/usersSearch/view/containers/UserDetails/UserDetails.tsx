@@ -40,7 +40,7 @@ const mapDispatch = {
 };
 
 const b = block('user-details');
-const { userSearch } = tKeys.features;
+const { userSearch: translations } = tKeys.features;
 
 class UserDetails extends React.Component<IProps> {
   private avatarSize = 230;
@@ -50,7 +50,7 @@ class UserDetails extends React.Component<IProps> {
     return (
       <Dialog
         open={true}
-        title={t(userSearch.userDetails.getKey())}
+        title={t(translations.userDetails.getKey())}
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
       >
@@ -85,17 +85,17 @@ class UserDetails extends React.Component<IProps> {
           <div className={b('attributes')}>
             <UserAttribute
               URL={`${htmlURL}/followers`}
-              title={t(userSearch.followers.getKey())}
+              title={t(translations.followers.getKey())}
               value={followersNumber}
             />
             <UserAttribute
               URL={`${htmlURL}/following`}
-              title={t(userSearch.following.getKey())}
+              title={t(translations.following.getKey())}
               value={followingNumber}
             />
             <UserAttribute
               URL={`${htmlURL}/repositories`}
-              title={t(userSearch.repositories.getKey())}
+              title={t(translations.repositories.getKey())}
               value={reposNumber}
             />
           </div>

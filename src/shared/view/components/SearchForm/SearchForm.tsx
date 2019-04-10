@@ -3,9 +3,9 @@ import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
-import { isRequired } from 'shared/validators';
 import { TextInputField } from 'shared/view/form';
 import { Button, KeysToValues } from 'shared/view/elements';
+import { TranslateFunction, ITranslateObject } from 'services/i18n';
 
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
@@ -21,6 +21,8 @@ interface IOwnProps<FormFields> {
   initialValues?: Partial<FormFields>;
   submitButtonText: string;
   settingsButtonText: string;
+  t: TranslateFunction;
+  validators(value: string): string | ITranslateObject | undefined;
   onSubmit(values: FormFields): void;
   resetSearchResults(): void;
   renderSettings?(): React.ReactChild;
@@ -56,6 +58,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   private renderForm({ handleSubmit, form }: FormRenderProps) {
     const {
       isSearchRequesting, renderSettings, searchInputName, getFilters, settingsButtonText, submitButtonText,
+      validators, t,
     } = this.props;
     const { isSettingsDialogOpen } = this.state;
     const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
@@ -67,7 +70,12 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
             <KeysToValues items={filters} />
           </div>
         }
-        <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
+        <TextInputField
+          name={searchInputName}
+          disabled={isSearchRequesting}
+          validate={validators}
+          t={t}
+        />
         <div className={b('buttons')}>
           <Button
             type="submit"

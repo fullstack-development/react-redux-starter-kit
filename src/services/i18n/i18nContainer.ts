@@ -1,4 +1,5 @@
-import { default as i18n } from 'i18next';
+// tslint:disable: import-blacklist
+import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { default as languageDetector } from 'i18next-browser-languagedetector';
 
@@ -14,18 +15,21 @@ const resources = {
   },
 };
 
-i18n
-  .use(languageDetector)
-  .use(initReactI18next)
-  .init({
-    resources,
-    fallbackLng: FALLBACK_LANGUAGE,
-    interpolation: {
-      format: (value, format, _lng) => {
-        if (format === 'uppercase') { return value.toUpperCase(); }
-        return value;
+const initI18n = () => {
+  const i18n = i18next.createInstance();
+  i18n
+    .use(languageDetector)
+    .use(initReactI18next)
+    .init({
+      resources,
+      fallbackLng: FALLBACK_LANGUAGE,
+      interpolation: {
+        format: (value, format, _lng) => {
+          if (format === 'uppercase') { return value.toUpperCase(); }
+          return value;
+        },
       },
-    },
-  });
+    });
+};
 
-export default i18n;
+export { initI18n };

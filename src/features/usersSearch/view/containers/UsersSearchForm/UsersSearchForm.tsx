@@ -4,6 +4,7 @@ import { bind } from 'decko';
 import * as R from 'ramda';
 
 import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { makeRequired } from 'shared/validators';
 import {
   replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap,
 } from 'shared/helpers';
@@ -41,28 +42,26 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { userSearch } = tKeys.features;
+const { userSearch: translations } = tKeys.features;
 
 class UsersSearchForm extends React.PureComponent<IProps> {
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
     const options: OptionType[] = [
-      { value: 'username-email', label: t(userSearch.usernameAndEmail.getKey()) },
-      { value: 'login', label: t(userSearch.username.getKey()) },
-      { value: 'email', label: t(userSearch.email.getKey()) },
-      { value: 'fullname', label: t(userSearch.fullName.getKey()) },
+      { value: 'username-email', label: t(translations.usernameAndEmail.getKey()) },
+      { value: 'login', label: t(translations.username.getKey()) },
+      { value: 'email', label: t(translations.email.getKey()) },
+      { value: 'fullname', label: t(translations.fullName.getKey()) },
     ];
     const labels: LabelsType = {
-      both: t(userSearch.usersAndOrganizations.getKey()),
-      org: t(userSearch.organizations.getKey()),
-      user: t(userSearch.users.getKey()),
+      both: t(translations.usersAndOrganizations.getKey()),
+      org: t(translations.organizations.getKey()),
+      user: t(translations.users.getKey()),
     };
-    const getMemoOptions = R.memoizeWith(R.identity, (x: OptionType[]) => x);
-    const getMemoLabels = R.memoizeWith(R.identity, (x: LabelsType) => x);
 
     const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-      searchBy: x => getSelectValuesToLabelsMap(getMemoOptions(options))[x].toLowerCase(),
-      searchFor: x => (getMemoLabels(labels))[x].toLowerCase(),
+      searchBy: x => getSelectValuesToLabelsMap(options)[x].toLowerCase(),
+      searchFor: x => (labels)[x].toLowerCase(),
     };
     const renderUsersSearchSettings = () => <UsersSearchSettings options={options} />;
 
@@ -73,10 +72,12 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         submitButtonText={t(tKeys.shared.search.getKey())}
         settingsButtonText={t(tKeys.shared.settings.getKey())}
+        validators={makeRequired(tKeys.shared.fieldIsRequiredError.getKey())}
         initialValues={formInitialValues}
         renderSettings={renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
         getFilters={this.makeFiltersGetter(filtersValuesFormattersMap)}
+        t={t}
       />
     );
   }
@@ -87,12 +88,12 @@ class UsersSearchForm extends React.PureComponent<IProps> {
       const { t } = this.props;
       const filters = R.omit([fieldNames.searchString], formFields);
       const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
-        searchBy: t(userSearch.searchBy.getKey()),
-        searchFor: t(userSearch.searchFor.getKey()),
-        perPage: t(userSearch.resultsPerPage.getKey()),
-        reposLanguage: t(userSearch.repositoriesLanguage.getKey()),
-        minRepos: t(userSearch.min.getKey()),
-        maxRepos: t(userSearch.max.getKey()),
+        searchBy: t(translations.searchBy.getKey()),
+        searchFor: t(translations.searchFor.getKey()),
+        perPage: t(translations.resultsPerPage.getKey()),
+        reposLanguage: t(translations.repositoriesLanguage.getKey()),
+        minRepos: t(translations.minRepos.getKey()),
+        maxRepos: t(translations.maxRepos.getKey()),
       };
       const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
       return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);

@@ -7,6 +7,7 @@ import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
+import { makeRequired } from 'shared/validators';
 
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
@@ -37,7 +38,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { repositoriesSearch } = tKeys.features;
+const { repositoriesSearch: translations } = tKeys.features;
 
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
   public render() {
@@ -48,10 +49,12 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
         isSearchRequesting={isRepositoriesSearchRequesting}
         submitButtonText={t(tKeys.shared.search.getKey())}
         settingsButtonText={t(tKeys.shared.settings.getKey())}
+        validators={makeRequired(tKeys.shared.fieldIsRequiredError.getKey())}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
         getFilters={this.getFilters}
+        t={t}
       />
     );
   }
@@ -61,10 +64,10 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
     const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(repositoriesSearch.minStars.getKey()),
-      forksNumber: t(repositoriesSearch.minForks.getKey()),
-      language: t(repositoriesSearch.language.getKey()),
-      owner: t(repositoriesSearch.owner.getKey()),
+      starsNumber: t(translations.minStars.getKey()),
+      forksNumber: t(translations.minForks.getKey()),
+      language: t(translations.language.getKey()),
+      owner: t(translations.owner.getKey()),
     };
     return replaceObjectKeys(filters, filtersLabels);
   }

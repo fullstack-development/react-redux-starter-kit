@@ -1,8 +1,9 @@
-export function makeMinCharactersValidator(minCharacters: number, fieldName?: string) {
+import { ITranslateObject } from 'services/i18n';
+
+export function makeMinCharactersValidator(minCharacters: number, errorMsg: string | ITranslateObject) {
   return (validatedValue: string) => {
     if (validatedValue.length < minCharacters) {
-      const field = fieldName || 'The field';
-      return `${field} must be at least ${minCharacters} characters long`;
+      return errorMsg;
     }
     return void 0;
   };

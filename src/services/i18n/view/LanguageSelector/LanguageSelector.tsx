@@ -1,6 +1,7 @@
+// tslint:disable-next-line: import-blacklist
+import { WithTranslation, withTranslation } from 'react-i18next';
 import React from 'react';
 import { bind } from 'decko';
-import { WithTranslation, withTranslation } from 'react-i18next';
 import block from 'bem-cn';
 
 import { Lang } from 'shared/types/app';
@@ -25,13 +26,17 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
     const { i18n: { language } } = this.props;
 
     return (
-      <div className={b()}>
-        <Select
-          value={language}
-          options={LanguageSelector.options}
-          onChange={this.changeLanguage}
-        />
-      </div>
+      <Select
+        value={language}
+        options={LanguageSelector.options}
+        onChange={this.changeLanguage}
+        SelectProps={{
+          classes: {
+            root: b(),
+            icon: b('icon').toString(),
+          },
+        }}
+      />
     );
   }
 
