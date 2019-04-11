@@ -24,7 +24,8 @@
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
-    "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix"
+    "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix",
+    "prettier": "node_modules/.bin/pretty-quick --pattern \"**/*.*(tsx|ts|scss)\" --branch HEAD"
   },
   "betterScripts": {
     "initial:yeoman": {
@@ -183,6 +184,7 @@
     "lint-staged": "^8.1.5",
     "mini-css-extract-plugin": "^0.4.5",
     "prettier": "^1.16.4",
+    "pretty-quick": "^1.10.0",
     "react-hot-loader": "^4.7.0",
     "redux-devtools-extension": "^2.13.5",
     "sinon": "^7.1.1",
@@ -295,13 +297,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,scss}": "prettier --check",
-    "*.scss": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "*.{ts,tsx}": [
-      "tslint --fix",
-      "git add"
-    ]
+    "*.scss": "stylelint",
+    "*.{ts,tsx}": "tslint"
   }
 }
