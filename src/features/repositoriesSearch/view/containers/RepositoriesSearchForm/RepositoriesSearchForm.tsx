@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import * as R from 'ramda';
 
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
@@ -25,7 +25,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
+type IProps = IOwnProps & IStateProps & IActionProps & TranslationProps;
 
 const mapDispatch = {
   searchRepositories: actions.searchRepositories,

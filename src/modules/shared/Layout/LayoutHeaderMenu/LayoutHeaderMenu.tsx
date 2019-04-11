@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { MenuIcon } from 'shared/view/elements';
 import { ClickAwayListener } from 'shared/view/components';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 
 import './LayoutHeaderMenu.scss';
 
@@ -22,7 +22,7 @@ interface IState {
   isMenuOpen: boolean;
 }
 
-type IProps = WithTranslation & IOwnProps;
+type IProps = TranslationProps & IOwnProps;
 const b = block('layout-header-menu');
 const { header } = tKeys.shared;
 

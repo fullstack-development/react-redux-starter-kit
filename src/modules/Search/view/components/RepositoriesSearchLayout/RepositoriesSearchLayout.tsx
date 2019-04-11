@@ -4,7 +4,7 @@ import { bind } from 'decko';
 
 import * as features from 'features';
 import featureConnect from 'core/FeatureConnector';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
@@ -17,7 +17,7 @@ interface IFeatureProps {
   repositoriesSearchFeatureEntry: features.repositoriesSearch.Entry;
 }
 
-type IProps = IFeatureProps & WithTranslation;
+type IProps = IFeatureProps & TranslationProps;
 
 const b = block('repositories-search-layout');
 

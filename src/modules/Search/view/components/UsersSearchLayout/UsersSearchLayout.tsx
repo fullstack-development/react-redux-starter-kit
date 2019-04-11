@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { bind } from 'decko';
 
 import * as features from 'features';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
 
 import { Layout } from '../../../../shared';
@@ -17,7 +17,7 @@ interface IFeatureProps {
   usersSearchFeatureEntry: features.usersSearch.Entry;
 }
 
-type IProps = IFeatureProps & WithTranslation;
+type IProps = IFeatureProps & TranslationProps;
 
 const b = block('users-search-layout');
 

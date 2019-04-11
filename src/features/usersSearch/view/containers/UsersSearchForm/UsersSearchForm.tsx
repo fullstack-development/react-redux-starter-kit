@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import * as R from 'ramda';
 
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
 import {
   replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap,
@@ -29,7 +29,7 @@ interface IStateProps {
 type OptionType = ISelectOption<IUsersSearchFilters['searchBy']>;
 type LabelsType = Record<IUsersSearchFilters['searchFor'], string>;
 type IActionProps = typeof mapDispatch;
-type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
+type IProps = IOwnProps & IStateProps & IActionProps & TranslationProps;
 
 const mapDispatch = {
   searchUsers: actions.searchUsers,

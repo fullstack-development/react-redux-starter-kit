@@ -12,5 +12,6 @@ interface ITranslateObject {
 }
 
 export {
-  tKeys, withTranslation, WithTranslation, useTranslation, LanguageSelector, TranslateFunction, ITranslateObject,
+  tKeys, withTranslation, WithTranslation as TranslationProps, useTranslation, LanguageSelector, TranslateFunction,
+  ITranslateObject,
 };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
@@ -32,7 +32,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
+type IProps = IOwnProps & IStateProps & IActionProps & TranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
