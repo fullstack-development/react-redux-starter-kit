@@ -16,7 +16,7 @@ function TextInputField(props: IProps) {
     : meta.touched && meta.error;
   const translatedError = isTranslateObject(error)
     ? t(error.key, error.options)
-    : error;
+    : t(error);
 
   return (
     <TextInput
