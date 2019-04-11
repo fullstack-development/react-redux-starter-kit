@@ -25,7 +25,7 @@
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
     "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix",
-    "prettier": "node_modules/.bin/pretty-quick --pattern \"**/*.*(tsx|ts|scss)\" --branch HEAD"
+    "prettier": "node_modules/.bin/pretty-quick --pattern \"**/*.*(tsx|ts|scss|json)\" --branch HEAD"
   },
   "betterScripts": {
     "initial:yeoman": {
@@ -292,11 +292,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test"
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,scss}": "prettier --check",
+    "*.{ts,tsx,scss,json}": "prettier --check",
     "*.scss": "stylelint",
     "*.{ts,tsx}": "tslint"
   }
