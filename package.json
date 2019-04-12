@@ -4,7 +4,7 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
-    "check-types": "node_modules/.bin/tsc -p . --noEmit",
+    "check-types": "tsc -p . --noEmit",
     "dev": "npm run watch:dev",
     "prod": "npm run watch:prod",
     "deploy:gh-pages": "npm run build:gh-pages && gh-pages -d build",
@@ -14,18 +14,18 @@
     "server:dev:debug": "better-npm-run server:dev:debug",
     "server:prod": "better-npm-run server:prod",
     "server:prod:debug": "better-npm-run server:prod:debug",
-    "test": "./node_modules/.bin/jest",
-    "test:watch": "./node_modules/.bin/jest --watch",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch",
-    "test:coverage": "node_modules/.bin/jest --coverage --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect-brk jest --runInBand --watch",
+    "test:coverage": "jest --coverage --watch",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "build:gh-pages": "better-npm-run build:gh-pages",
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
-    "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix",
-    "prettier": "node_modules/.bin/pretty-quick --pattern \"**/*.*(tsx|ts|scss|json)\" --branch HEAD"
+    "stylelint-autofix": "stylelint \"./src/**/*.scss\" --fix",
+    "prettier": "pretty-quick --pattern \"**/*.*(tsx|ts|scss|json)\" --branch HEAD"
   },
   "betterScripts": {
     "initial:yeoman": {
@@ -77,7 +77,7 @@
       }
     },
     "watch:dev": {
-      "command": "node_modules/.bin/webpack-dev-server --watch --progress --colors --config webpack/dev.config.ts",
+      "command": "webpack-dev-server --watch --progress --colors --config webpack/dev.config.ts",
       "env": {
         "NODE_ENV": "development",
         "TS_NODE_FILES": true,
@@ -87,7 +87,7 @@
       }
     },
     "watch:prod": {
-      "command": "node_modules/.bin/webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.ts",
+      "command": "webpack-dev-server --client-log-level info --watch --progress --colors --config webpack/prod.config.ts",
       "env": {
         "NODE_ENV": "production",
         "TS_NODE_FILES": true,
@@ -97,7 +97,7 @@
       }
     },
     "analyze:dev": {
-      "command": "node_modules/.bin/webpack --progress --config webpack/dev.config.ts",
+      "command": "webpack --progress --config webpack/dev.config.ts",
       "env": {
         "BUNDLE_ANALYZE_MODE": true,
         "TS_NODE_FILES": true,
@@ -106,7 +106,7 @@
       }
     },
     "analyze:prod": {
-      "command": "node_modules/.bin/webpack --progress --config webpack/prod.config.ts",
+      "command": "webpack --progress --config webpack/prod.config.ts",
       "env": {
         "BUNDLE_ANALYZE_MODE": true,
         "TS_NODE_FILES": true,
@@ -115,7 +115,7 @@
       }
     },
     "build:dev": {
-      "command": "node_modules/.bin/webpack --progress --colors --config webpack/dev.config.ts",
+      "command": "webpack --progress --colors --config webpack/dev.config.ts",
       "env": {
         "NODE_ENV": "development",
         "TS_NODE_FILES": true,
@@ -124,7 +124,7 @@
       }
     },
     "build:prod": {
-      "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.ts",
+      "command": "webpack --progress --colors --config webpack/prod.config.ts",
       "env": {
         "NODE_ENV": "production",
         "TS_NODE_FILES": true,
@@ -133,7 +133,7 @@
       }
     },
     "build:gh-pages": {
-      "command": "node_modules/.bin/webpack --progress --colors --config webpack/prod.config.ts",
+      "command": "webpack --progress --colors --config webpack/prod.config.ts",
       "env": {
         "FOR_GH_PAGES": true,
         "NODE_ENV": "production",
