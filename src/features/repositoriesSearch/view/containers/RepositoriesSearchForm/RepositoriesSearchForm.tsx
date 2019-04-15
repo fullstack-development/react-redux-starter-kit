@@ -8,8 +8,9 @@ import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
-
+import { memoizeByProps } from 'shared/helpers/decorators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
+
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
@@ -59,7 +60,7 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @memoizeByProps((props: IProps) => [props.t])
   private getFilters(formValues: IRepositoriesSearchFormFields) {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
