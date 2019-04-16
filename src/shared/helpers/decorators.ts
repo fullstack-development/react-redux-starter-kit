@@ -4,7 +4,7 @@ type Transmitter = (deps: any, args?: any) => any[];
 
 /**
  * Accepts a function that takes props and arguments of method, which should be memoized
- * and returns an array of them.
+ * and returns an array of them. Also bind memoized function.
  */
 export const memoizeByProps = (transmitter: Transmitter) =>
   (_target: any, key: any, descriptor: PropertyDescriptor) => {
@@ -14,7 +14,7 @@ export const memoizeByProps = (transmitter: Transmitter) =>
     return {
       configurable: true,
       get() {
-        const fn = descriptor.value || descriptor.get && descriptor.get.call(this);
+        const fn = descriptor.value.bind(this) || descriptor.get && descriptor.get.call(this);
         if (typeof fn !== 'function') {
           throw new Error('Memoization can only be made with function');
         }

@@ -61,7 +61,6 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
   }
 
   @memoizeByProps((props: IProps) => [props.t])
-  @bind
   private getFilters(formValues: IRepositoriesSearchFormFields) {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
