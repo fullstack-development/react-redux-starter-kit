@@ -72,6 +72,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 
   @memoizeByProps((props: IProps) => [props.t])
+  @bind
   private getLabels(): LabelsType {
     const { t } = this.props;
     return {
@@ -82,6 +83,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 
   @memoizeByProps((props: IProps) => [props.t])
+  @bind
   private getOptions(): OptionType[] {
     const { t } = this.props;
     return [
@@ -93,6 +95,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 
   @memoizeByProps((props: IProps) => [props.t])
+  @bind
   private getFiltersGetter(formFields: IUsersSearchFormFields) {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formFields);
