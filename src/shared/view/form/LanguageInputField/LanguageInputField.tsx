@@ -7,10 +7,12 @@ import {
   CppIcon, CsIcon, JavaIcon, JSIcon, TSIcon, PythonIcon, RubyIcon, SwiftIcon, CIcon, HaskellIcon, InputWithPresets,
 } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
+import { TranslateFunction } from 'services/i18n';
 
 const b = block('language-input');
 
-type IProps = Omit<GetProps<typeof InputWithPresets>, 'presets' | 'onPresetClick'> & FieldRenderProps;
+type IProps = Omit<GetProps<typeof InputWithPresets>, 'presets' | 'onPresetClick'> & FieldRenderProps
+  & { t: TranslateFunction };
 
 class LanguageInputField extends React.PureComponent<IProps> {
   private presets = [
@@ -27,7 +29,7 @@ class LanguageInputField extends React.PureComponent<IProps> {
   ];
 
   public render() {
-    const { input, meta, ...rest } = this.props;
+    const { input, meta, t, ...rest } = this.props;
     const error = typeof rest.error === 'boolean'
       ? rest.error && meta.error
       : meta.touched && meta.error;
@@ -36,7 +38,7 @@ class LanguageInputField extends React.PureComponent<IProps> {
         <InputWithPresets
           {...rest}
           {...input}
-          helperText={error}
+          helperText={error && t(error)}
           error={Boolean(error)}
           presets={this.presets}
           onPresetClick={input.onChange}

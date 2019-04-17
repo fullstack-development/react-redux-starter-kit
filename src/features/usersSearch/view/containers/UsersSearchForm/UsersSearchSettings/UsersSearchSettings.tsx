@@ -28,6 +28,7 @@ function UsersSearchSettings(props: IProps) {
             options={props.options}
             label={t(translations.searchBy.getKey())}
             name={fieldNames.searchBy}
+            t={t}
           />
         </div>
         <div className={b('item')}>
@@ -35,6 +36,7 @@ function UsersSearchSettings(props: IProps) {
             options={perPageOptions}
             label={t(translations.resultsPerPage.getKey())}
             name={fieldNames.perPage}
+            t={t}
           />
         </div>
       </div>
@@ -58,19 +60,25 @@ function UsersSearchSettings(props: IProps) {
                   <NumberInputField
                     name={fieldNames.minRepos}
                     label={t(translations.min.getKey())}
+                    t={t}
                   />
                 </div>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.maxRepos}
                     label={t(translations.max.getKey())}
+                    t={t}
                   />
                 </div>
               </div>
             </FormLabel>
           </div>
           <div className={b('item')}>
-            <LanguageInputField name={fieldNames.reposLanguage} label={t(translations.repositoriesLanguage.getKey())} />
+            <LanguageInputField
+              name={fieldNames.reposLanguage}
+              label={t(translations.repositoriesLanguage.getKey())}
+              t={t}
+            />
           </div>
         </div>
       </div>

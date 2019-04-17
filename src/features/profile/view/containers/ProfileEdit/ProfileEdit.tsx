@@ -80,7 +80,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
             />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(translations.age.getKey())} />
+            <NumberInputField name={fieldNames.age} label={t(translations.age.getKey())} t={t} />
           </div>
           <div className={b('field')}>
             <TextInputField

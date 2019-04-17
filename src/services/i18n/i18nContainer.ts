@@ -5,6 +5,8 @@ import { default as languageDetector } from 'i18next-browser-languagedetector';
 
 import { FALLBACK_LANGUAGE } from './constants';
 import { en, ru } from './locales';
+import { IExtendedTranslateKey } from './namespace';
+import { isTranslateGetKey } from 'shared/types/guards';
 
 const resources = {
   en: {
@@ -30,6 +32,17 @@ const initI18n = () => {
         },
       },
     });
+
+  const originalTranslator = i18n.t.bind(i18n);
+  i18n.t = ((key: string | string[] | IExtendedTranslateKey, options: {}) => {
+    if (typeof key !== 'string' && !Array.isArray(key) && !key.getKey) {
+      return originalTranslator(key.key, { ...key.options, ...options });
+    }
+    if (isTranslateGetKey(key)) {
+      return originalTranslator(key.getKey(), options);
+    }
+    return originalTranslator(key, options);
+  }) as i18next.TFunction;
 };
 
 export { initI18n };

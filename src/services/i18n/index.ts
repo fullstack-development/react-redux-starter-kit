@@ -11,6 +11,7 @@ interface ITranslateObject {
   options: Record<string, string | number | object | string[] | object[] | undefined>;
 }
 
+export * from './namespace';
 export {
   tKeys, withTranslation, WithTranslation as TranslationProps, useTranslation, LanguageSelector, TranslateFunction,
   ITranslateObject,

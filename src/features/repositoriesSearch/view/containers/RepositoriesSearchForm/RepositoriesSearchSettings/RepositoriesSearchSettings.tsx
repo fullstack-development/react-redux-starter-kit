@@ -19,12 +19,14 @@ function RepositoriesSearchSettings() {
           <NumberInputField
             name={fieldNames.starsNumber}
             label={t(translations.minStars.getKey())}
+            t={t}
           />
         </div>
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.forksNumber}
             label={t(translations.minForks.getKey())}
+            t={t}
           />
         </div>
       </div>
@@ -36,6 +38,7 @@ function RepositoriesSearchSettings() {
           <LanguageInputField
             name={fieldNames.language}
             label={t(translations.repositoriesLanguage.getKey())}
+            t={t}
           />
         </div>
       </div>
