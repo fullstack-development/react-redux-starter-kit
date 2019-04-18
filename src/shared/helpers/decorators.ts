@@ -7,15 +7,18 @@ type Transmitter = (deps: any, args?: any) => any[];
  * and returns an array of them. Also bind memoized function.
  */
 export const memoizeByProps = (transmitter: Transmitter) =>
-  (_target: any, key: any, descriptor: PropertyDescriptor) => {
+  (_target: any, key: any, { value: oldValue, get: getter }: PropertyDescriptor) => {
     let cache: any;
     let cachedDeps: any[] = [];
 
     return {
       configurable: true,
       get() {
-        const fn = descriptor.value.bind(this) || descriptor.get && descriptor.get.call(this);
-        if (typeof fn !== 'function') {
+        const fn: undefined | false | ((...args: any[]) => any) = (
+          oldValue && typeof oldValue === 'function' && oldValue.bind(this) ||
+          getter && typeof getter === 'function' && getter.call(this)
+        );
+        if (!fn) {
           throw new Error('Memoization can only be made with function');
         }
         const value = (...args: any[]) => {

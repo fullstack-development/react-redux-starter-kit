@@ -1,4 +1,4 @@
-export interface IGetKey {
+export interface ITranslateKey {
   getKey(): string;
 }
 
@@ -10,10 +10,10 @@ interface ITree extends Record<string, ITree | string> { }
 
 type TranslationKeysTree<T> = {
   [key in keyof T]:
-    T[key] extends Record<string, string> ? TranslationKeysTree<T[key]> & IConcatKey :
-    T[key] extends ITree ? TranslationKeysTree<T[key]> :
-    T[key] extends string ? IGetKey :
-    never;
+  T[key] extends Record<string, string> ? TranslationKeysTree<T[key]> & IConcatKey :
+  T[key] extends ITree ? TranslationKeysTree<T[key]> :
+  T[key] extends string ? ITranslateKey :
+  never;
 };
 
 export default function buildTranslationKeys<T extends ITree>(messagesTree: T): TranslationKeysTree<T> {
@@ -24,7 +24,7 @@ export default function buildTranslationKeys<T extends ITree>(messagesTree: T): 
       .reduce<TranslationKeysTree<T>>((acc: TranslationKeysTree<T>, [key, value]: [string, T]) => {
         const xPath = [...path, key];
 
-        const routeData: IGetKey & IConcatKey = {
+        const routeData: ITranslateKey & IConcatKey = {
           getKey: () => xPath.join('.'),
           concat: (_key: string) => xPath.concat(_key).join('.'),
         };

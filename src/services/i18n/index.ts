@@ -1,18 +1,10 @@
-// tslint:disable: import-blacklist
-import i18next from 'i18next';
+// tslint:disable-next-line: import-blacklist
 import { withTranslation, WithTranslation, useTranslation } from 'react-i18next';
 import { tKeys } from './constants';
 import { default as LanguageSelector } from './view/LanguageSelector/LanguageSelector';
 
-type TranslateFunction = i18next.TFunction;
-
-interface ITranslateObject {
-  key: string;
-  options: Record<string, string | number | object | string[] | object[] | undefined>;
-}
-
-export * from './namespace';
+export { ITranslateKey, IConcatKey } from './helpers/buildTranslationKeys';
+export { TranslateFunction, ITranslateObject } from './namespace';
 export {
-  tKeys, withTranslation, WithTranslation as TranslationProps, useTranslation, LanguageSelector, TranslateFunction,
-  ITranslateObject,
+  tKeys, withTranslation, WithTranslation as TranslationProps, useTranslation, LanguageSelector,
 };

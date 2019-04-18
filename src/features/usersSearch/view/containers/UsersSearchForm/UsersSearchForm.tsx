@@ -6,13 +6,12 @@ import * as R from 'ramda';
 import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
 import {
-  replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap,
+  replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap, memoizeByProps,
 } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 import { ISelectOption } from 'shared/types/form';
-import { memoizeByProps } from 'shared/helpers/decorators';
 
 import { selectors, actions } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';

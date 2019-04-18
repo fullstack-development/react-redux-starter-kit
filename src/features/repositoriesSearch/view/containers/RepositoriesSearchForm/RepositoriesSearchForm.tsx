@@ -6,9 +6,8 @@ import * as R from 'ramda';
 import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
-import { replaceObjectKeys } from 'shared/helpers';
+import { replaceObjectKeys, memoizeByProps } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
-import { memoizeByProps } from 'shared/helpers/decorators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
