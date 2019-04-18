@@ -9,7 +9,7 @@ import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 import { TotalSearchResults } from 'shared/view/elements';
-import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
@@ -36,7 +36,7 @@ interface IContainerProps {
   UserDetails: IContainerTypes['UserDetails'];
 }
 
-type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps & TranslationProps;
+type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {

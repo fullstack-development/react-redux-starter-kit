@@ -1,6 +1,6 @@
-import { TranslationProps } from 'services/i18n';
+import { ITranslationProps } from 'services/i18n';
 
-export const getMockedLocaleProps: () => TranslationProps = () => ({
+export const getMockedLocaleProps: () => ITranslationProps = () => ({
   t: jest.fn(),
   tReady: true,
   i18n: {

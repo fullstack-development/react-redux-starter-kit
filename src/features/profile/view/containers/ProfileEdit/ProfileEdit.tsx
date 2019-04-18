@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Form, FormRenderProps } from 'react-final-form';
 import { bind } from 'decko';
 
-import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
@@ -25,7 +25,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IStateProps & IActionProps & TranslationProps;
+type IProps = IStateProps & IActionProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {

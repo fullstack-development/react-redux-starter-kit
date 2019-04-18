@@ -4,7 +4,7 @@ import { bind } from 'decko';
 
 import { IRepository } from 'shared/types/models';
 import { StarIcon, Card, Link } from 'shared/view/elements';
-import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import RepositoryAttribute from '../RepositoryAttribute/RepositoryAttribute';
 import './RepositoryPreview.scss';
@@ -14,7 +14,7 @@ interface IOwnProps {
   onOwnerClick(username: string): void;
 }
 
-type IProps = IOwnProps & TranslationProps;
+type IProps = IOwnProps & ITranslationProps;
 
 const b = block('repository-preview');
 const { repositoriesSearch: translations } = tKeys.features;

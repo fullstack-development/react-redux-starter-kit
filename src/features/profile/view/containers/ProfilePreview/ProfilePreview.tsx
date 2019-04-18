@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { Popover } from 'shared/view/components';
@@ -24,7 +24,7 @@ interface IStateProps {
   profile: IProfile;
 }
 
-type IProps = IOwnProps & IStateProps & TranslationProps;
+type IProps = IOwnProps & IStateProps & ITranslationProps;
 
 const b = block('profile-preview');
 const { profile: translations } = tKeys.features;

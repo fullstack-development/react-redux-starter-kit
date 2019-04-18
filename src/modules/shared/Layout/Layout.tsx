@@ -5,7 +5,7 @@ import { bind } from 'decko';
 
 import { featureConnect } from 'core';
 import * as features from 'features';
-import { LanguageSelector, withTranslation, TranslationProps, tKeys } from 'services/i18n';
+import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import routes from '../../routes';
@@ -19,7 +19,7 @@ interface IFeatureProps {
   profileFeatureEntry: features.profile.Entry;
 }
 
-type IProps = IOwnProps & IFeatureProps & RouteComponentProps & TranslationProps;
+type IProps = IOwnProps & IFeatureProps & RouteComponentProps & ITranslationProps;
 
 const b = block('layout');
 const { header, footer } = tKeys.shared;

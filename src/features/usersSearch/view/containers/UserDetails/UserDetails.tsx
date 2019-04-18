@@ -7,7 +7,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader } from 'shared/view/elements';
-import { withTranslation, TranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { UserAttribute } from '../../components';
 import { injectSizeToAvatarURL } from '../../../helpers';
@@ -26,7 +26,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IStateProps & IActionProps & IOwnProps & TranslationProps;
+type IProps = IStateProps & IActionProps & IOwnProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
