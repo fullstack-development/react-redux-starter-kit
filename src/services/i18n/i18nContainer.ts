@@ -36,7 +36,9 @@ const initializeI18n = () => {
   const originalTranslator = i18n.t.bind(i18n);
   i18n.t = ((key: string | string[] | ITranslateObject | ITranslateKey, options: {}) => {
     if (typeof key !== 'string' && !Array.isArray(key) && !isTranslateGetKey(key)) {
-      return originalTranslator(key.key, { ...key.options, ...options });
+      return originalTranslator(
+        isTranslateGetKey(key.key) ? key.key.getKey() : key.key, { ...key.options, ...options },
+      );
     }
     if (isTranslateGetKey(key)) {
       return originalTranslator(key.getKey(), options);

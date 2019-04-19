@@ -26,7 +26,7 @@ function UsersSearchSettings(props: IProps) {
         <div className={b('item')}>
           <SelectField
             options={props.options}
-            label={t(translations.searchBy.getKey())}
+            label={t(translations.searchBy)}
             name={fieldNames.searchBy}
             t={t}
           />
@@ -34,7 +34,7 @@ function UsersSearchSettings(props: IProps) {
         <div className={b('item')}>
           <SelectField
             options={perPageOptions}
-            label={t(translations.resultsPerPage.getKey())}
+            label={t(translations.resultsPerPage)}
             name={fieldNames.perPage}
             t={t}
           />
@@ -43,30 +43,30 @@ function UsersSearchSettings(props: IProps) {
       <div className={b('row')}>
         <div className={b('item')}>
           <FormLabel>
-            {t(translations.searchFor.getKey())}
+            {t(translations.searchFor)}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchFor} value="user" label={t(translations.users.getKey())} />
-              <RadioField name={fieldNames.searchFor} value="org" label={t(translations.organizations.getKey())} />
-              <RadioField name={fieldNames.searchFor} value="both" label={t(translations.both.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="user" label={t(translations.users)} />
+              <RadioField name={fieldNames.searchFor} value="org" label={t(translations.organizations)} />
+              <RadioField name={fieldNames.searchFor} value="both" label={t(translations.both)} />
             </div>
           </FormLabel>
         </div>
         <div className={b('settings-group')}>
           <div className={b('item')}>
             <FormLabel>
-              {t(translations.repositoriesNumber.getKey())}
+              {t(translations.repositoriesNumber)}
               <div className={b('repos-number')}>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.minRepos}
-                    label={t(translations.min.getKey())}
+                    label={t(translations.min)}
                     t={t}
                   />
                 </div>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.maxRepos}
-                    label={t(translations.max.getKey())}
+                    label={t(translations.max)}
                     t={t}
                   />
                 </div>
@@ -76,7 +76,7 @@ function UsersSearchSettings(props: IProps) {
           <div className={b('item')}>
             <LanguageInputField
               name={fieldNames.reposLanguage}
-              label={t(translations.repositoriesLanguage.getKey())}
+              label={t(translations.repositoriesLanguage)}
               t={t}
             />
           </div>

@@ -53,9 +53,9 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         isSearchRequesting={isUsersSearchRequesting}
         searchInputName={fieldNames.searchString}
         onSubmit={this.handleFormSubmit}
-        submitButtonText={t(tKeys.shared.search.getKey())}
-        settingsButtonText={t(tKeys.shared.settings.getKey())}
-        validators={makeRequired(tKeys.shared.fieldIsRequiredError.getKey())}
+        submitButtonText={t(tKeys.shared.search)}
+        settingsButtonText={t(tKeys.shared.settings)}
+        validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
         initialValues={formInitialValues}
         renderSettings={this.renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
@@ -74,9 +74,9 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   private getLabels(): LabelsType {
     const { t } = this.props;
     return {
-      both: t(translations.usersAndOrganizations.getKey()),
-      org: t(translations.organizations.getKey()),
-      user: t(translations.users.getKey()),
+      both: t(translations.usersAndOrganizations),
+      org: t(translations.organizations),
+      user: t(translations.users),
     };
   }
 
@@ -84,10 +84,10 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   private getOptions(): OptionType[] {
     const { t } = this.props;
     return [
-      { value: 'username-email', label: t(translations.usernameAndEmail.getKey()) },
-      { value: 'login', label: t(translations.username.getKey()) },
-      { value: 'email', label: t(translations.email.getKey()) },
-      { value: 'fullname', label: t(translations.fullName.getKey()) },
+      { value: 'username-email', label: t(translations.usernameAndEmail) },
+      { value: 'login', label: t(translations.username) },
+      { value: 'email', label: t(translations.email) },
+      { value: 'fullname', label: t(translations.fullName) },
     ];
   }
 
@@ -100,12 +100,12 @@ class UsersSearchForm extends React.PureComponent<IProps> {
       searchFor: x => (this.getLabels())[x].toLowerCase(),
     };
     const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
-      searchBy: t(translations.searchBy.getKey()),
-      searchFor: t(translations.searchFor.getKey()),
-      perPage: t(translations.resultsPerPage.getKey()),
-      reposLanguage: t(translations.repositoriesLanguage.getKey()),
-      minRepos: t(translations.minRepos.getKey()),
-      maxRepos: t(translations.maxRepos.getKey()),
+      searchBy: t(translations.searchBy),
+      searchFor: t(translations.searchFor),
+      perPage: t(translations.resultsPerPage),
+      reposLanguage: t(translations.repositoriesLanguage),
+      minRepos: t(translations.minRepos),
+      maxRepos: t(translations.maxRepos),
     };
     const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
     return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);

@@ -32,7 +32,7 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <Layout title={t(tKeys.features.userSearch.repositoriesSearch.getKey())}>
+      <Layout title={t(tKeys.features.userSearch.repositoriesSearch)}>
         <div className={b()}>
           <div className={b('search-form')}>
             <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />

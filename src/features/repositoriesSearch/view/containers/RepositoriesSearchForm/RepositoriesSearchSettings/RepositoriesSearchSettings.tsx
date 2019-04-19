@@ -18,26 +18,26 @@ function RepositoriesSearchSettings() {
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.starsNumber}
-            label={t(translations.minStars.getKey())}
+            label={t(translations.minStars)}
             t={t}
           />
         </div>
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.forksNumber}
-            label={t(translations.minForks.getKey())}
+            label={t(translations.minForks)}
             t={t}
           />
         </div>
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
-          <TextInputField name={fieldNames.owner} label={t(translations.owner.getKey())} t={t} />
+          <TextInputField name={fieldNames.owner} label={t(translations.owner)} t={t} />
         </div>
         <div className={b('item')}>
           <LanguageInputField
             name={fieldNames.language}
-            label={t(translations.repositoriesLanguage.getKey())}
+            label={t(translations.repositoriesLanguage)}
             t={t}
           />
         </div>

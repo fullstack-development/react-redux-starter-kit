@@ -1,6 +1,4 @@
-import { ITranslateObject } from 'services/i18n';
-
-export function makeMinCharactersValidator(minCharacters: number, errorMsg: string | ITranslateObject) {
+export function makeMinCharactersValidator<T>(minCharacters: number, errorMsg: T) {
   return (validatedValue: string) => {
     if (validatedValue.length < minCharacters) {
       return errorMsg;

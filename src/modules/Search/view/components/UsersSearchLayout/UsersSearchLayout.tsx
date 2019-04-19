@@ -32,7 +32,7 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <Layout title={t(tKeys.features.userSearch.usersSearch.getKey())}>
+      <Layout title={t(tKeys.features.userSearch.usersSearch)}>
         <div className={b()}>
           <div className={b('search-form')}>
             <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />

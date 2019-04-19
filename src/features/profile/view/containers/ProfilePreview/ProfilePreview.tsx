@@ -66,7 +66,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
                   {nickname}
                 </div>
                 <div className={b('age')}>
-                  {t(translations.yearsOld.getKey(), { count: age })}
+                  {t(translations.yearsOld, { count: age })}
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
               {bio}
             </div>
             <div className={b('edit')} onClick={onEditClick}>
-              {t(translations.edit.getKey())}
+              {t(translations.edit)}
             </div>
           </div>
         </Popover>

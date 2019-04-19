@@ -5,7 +5,7 @@ import { bind } from 'decko';
 
 import { TextInputField } from 'shared/view/form';
 import { Button, KeysToValues } from 'shared/view/elements';
-import { TranslateFunction, ITranslateObject } from 'services/i18n';
+import { TranslateFunction, ITranslateObject, ITranslateKey } from 'services/i18n';
 
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
@@ -22,7 +22,7 @@ interface IOwnProps<FormFields> {
   submitButtonText: string;
   settingsButtonText: string;
   t: TranslateFunction;
-  validators(value: string): string | ITranslateObject | undefined;
+  validators(value: string): string | ITranslateObject | ITranslateKey | undefined;
   onSubmit(values: FormFields): void;
   resetSearchResults(): void;
   renderSettings?(): React.ReactChild;

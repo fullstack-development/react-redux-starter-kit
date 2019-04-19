@@ -47,9 +47,9 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
       <SearchForm<IRepositoriesSearchFormFields>
         searchInputName={fieldNames.searchString}
         isSearchRequesting={isRepositoriesSearchRequesting}
-        submitButtonText={t(tKeys.shared.search.getKey())}
-        settingsButtonText={t(tKeys.shared.settings.getKey())}
-        validators={makeRequired(tKeys.shared.fieldIsRequiredError.getKey())}
+        submitButtonText={t(tKeys.shared.search)}
+        settingsButtonText={t(tKeys.shared.settings)}
+        validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
@@ -64,10 +64,10 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
     const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(translations.minStars.getKey()),
-      forksNumber: t(translations.minForks.getKey()),
-      language: t(translations.language.getKey()),
-      owner: t(translations.owner.getKey()),
+      starsNumber: t(translations.minStars),
+      forksNumber: t(translations.minForks),
+      language: t(translations.language),
+      owner: t(translations.owner),
     };
     return replaceObjectKeys(filters, filtersLabels);
   }

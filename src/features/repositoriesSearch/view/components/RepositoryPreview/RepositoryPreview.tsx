@@ -52,21 +52,21 @@ class RepositoryPreview extends React.PureComponent<IProps> {
           <div className={b('row')}>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title={t(translations.forks.getKey())}
+                title={t(translations.forks)}
                 value={forksNumber}
               />
               <RepositoryAttribute
-                title={t(translations.openIssues.getKey())}
+                title={t(translations.openIssues)}
                 value={openIssuesNumber}
               />
             </div>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title={t(translations.lastUpdated.getKey())}
+                title={t(translations.lastUpdated)}
                 value={(new Date(updatedAt)).toLocaleDateString()}
               />
               <RepositoryAttribute
-                title={t(translations.owner.getKey())}
+                title={t(translations.owner)}
                 value={owner.username}
                 onValueClick={this.handleOwnerClick}
                 type="owner"

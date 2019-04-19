@@ -33,6 +33,6 @@ export type UseTranslation = (
 ) => IUseTranslationRes;
 
 export interface ITranslateObject {
-  key: string;
+  key: string | ITranslateKey;
   options: i18next.TOptions;
 }

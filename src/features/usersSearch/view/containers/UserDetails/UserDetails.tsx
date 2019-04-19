@@ -50,7 +50,7 @@ class UserDetails extends React.Component<IProps> {
     return (
       <Dialog
         open={true}
-        title={t(translations.userDetails.getKey())}
+        title={t(translations.userDetails)}
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
       >
@@ -85,17 +85,17 @@ class UserDetails extends React.Component<IProps> {
           <div className={b('attributes')}>
             <UserAttribute
               URL={`${htmlURL}/followers`}
-              title={t(translations.followers.getKey())}
+              title={t(translations.followers)}
               value={followersNumber}
             />
             <UserAttribute
               URL={`${htmlURL}/following`}
-              title={t(translations.following.getKey())}
+              title={t(translations.following)}
               value={followingNumber}
             />
             <UserAttribute
               URL={`${htmlURL}/repositories`}
-              title={t(translations.repositories.getKey())}
+              title={t(translations.repositories)}
               value={reposNumber}
             />
           </div>

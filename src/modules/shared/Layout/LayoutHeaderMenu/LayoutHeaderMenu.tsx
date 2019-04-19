@@ -43,7 +43,7 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
         >
           <MenuIcon />
         </div>
-        <span className={b('title')}>{t(header.searchFor.getKey())}</span>
+        <span className={b('title')}>{t(header.searchFor)}</span>
         <ClickAwayListener
           onClickAway={this.handleMenuItemsClickAway}
           mouseEvent="onClick"

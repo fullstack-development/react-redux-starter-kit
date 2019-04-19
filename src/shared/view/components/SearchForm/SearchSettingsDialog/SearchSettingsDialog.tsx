@@ -17,7 +17,7 @@ function SearchSettingsDialog(props: IProps) {
   const { t } = useTranslation();
   return (
     <Dialog
-      title={t(searchSettings.getKey())}
+      title={t(searchSettings)}
       onClose={onClose}
       open={isOpen}
     >
@@ -26,7 +26,7 @@ function SearchSettingsDialog(props: IProps) {
       </Dialog.Content>
       <Dialog.Actions>
         <Button variant="outlined" onClick={onClose}>
-          {t(ok.getKey())}
+          {t(ok)}
         </Button>
       </Dialog.Actions>
     </Dialog>

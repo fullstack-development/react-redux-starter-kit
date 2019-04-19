@@ -66,7 +66,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.name}
-              label={t(translations.name.getKey())}
+              label={t(translations.name)}
               validate={validateName}
               t={t}
             />
@@ -74,18 +74,18 @@ class ProfileEdit extends React.PureComponent<IProps> {
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.nickname}
-              label={t(translations.nickname.getKey())}
+              label={t(translations.nickname)}
               validate={validateNickname}
               t={t}
             />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(translations.age.getKey())} t={t} />
+            <NumberInputField name={fieldNames.age} label={t(translations.age)} t={t} />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.bio}
-              label={t(translations.bio.getKey())}
+              label={t(translations.bio)}
               multiline
               rowsMax={10}
               validate={validateBio}
@@ -93,7 +93,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
             />
           </div>
           <div className={b('button')}>
-            <Button variant="outlined" type="submit">{t(tKeys.shared.save.getKey())}</Button>
+            <Button variant="outlined" type="submit">{t(tKeys.shared.save)}</Button>
           </div>
         </div>
       </form>
@@ -104,7 +104,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
   private handleFormSubmit(values: IProfileEditFormFields) {
     const { saveProfile, setNotification, t } = this.props;
     saveProfile(values);
-    setNotification({ kind: 'info', text: t(tKeys.shared.notifications.saved.getKey()) });
+    setNotification({ kind: 'info', text: t(tKeys.shared.notifications.saved) });
   }
 }
 

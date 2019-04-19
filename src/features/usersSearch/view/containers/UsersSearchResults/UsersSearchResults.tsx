@@ -58,7 +58,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
     const { displayedUser } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults title={t(tKeys.shared.totalResults.getKey())} totalResults={totalResults} />
+        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
         <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         <div className={b('pagination')}>
           <PaginationControls

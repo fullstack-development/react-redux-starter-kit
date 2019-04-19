@@ -22,7 +22,7 @@ function ProfileLayout(props: IProps) {
   const { t } = useTranslation();
 
   return (
-    <Layout title={t(tKeys.features.profile.editProfile.getKey())}>
+    <Layout title={t(tKeys.features.profile.editProfile)}>
       <div className={b()}>
         <ProfileEdit />
       </div>

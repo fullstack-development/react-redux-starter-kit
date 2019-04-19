@@ -62,7 +62,7 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults title={t(tKeys.shared.totalResults.getKey())} totalResults={totalResults} />
+        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
         {repositories.map(this.renderRepositoryPreview)}
         <div className={b('pagination')}>
           <PaginationControls
