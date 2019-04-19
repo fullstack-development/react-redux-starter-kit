@@ -14,6 +14,8 @@ const props: ISearchFormProps<IFormFields> = {
   submitButtonText: 'submit',
   isSearchRequesting: false,
   searchInputName: 'search',
+  dialogSubmitText: 'ok',
+  dialogTitleText: 'Search settings',
   validators: makeRequired('submit error'),
   t: jest.fn(),
   onSubmit: jest.fn(),

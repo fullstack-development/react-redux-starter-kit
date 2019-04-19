@@ -49,6 +49,8 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
         isSearchRequesting={isRepositoriesSearchRequesting}
         submitButtonText={t(tKeys.shared.search)}
         settingsButtonText={t(tKeys.shared.settings)}
+        dialogSubmitText={t(tKeys.shared.ok)}
+        dialogTitleText={t(tKeys.shared.searchSettings)}
         validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}

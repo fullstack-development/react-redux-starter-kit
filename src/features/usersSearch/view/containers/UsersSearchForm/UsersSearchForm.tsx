@@ -55,6 +55,8 @@ class UsersSearchForm extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         submitButtonText={t(tKeys.shared.search)}
         settingsButtonText={t(tKeys.shared.settings)}
+        dialogSubmitText={t(tKeys.shared.ok)}
+        dialogTitleText={t(tKeys.shared.searchSettings)}
         validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
         initialValues={formInitialValues}
         renderSettings={this.renderUsersSearchSettings}

@@ -21,6 +21,8 @@ interface IOwnProps<FormFields> {
   initialValues?: Partial<FormFields>;
   submitButtonText: string;
   settingsButtonText: string;
+  dialogTitleText: string;
+  dialogSubmitText: string;
   t: TranslateFunction;
   validators(value: string): string | ITranslateObject | ITranslateKey | undefined;
   onSubmit(values: FormFields): void;
@@ -58,7 +60,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   private renderForm({ handleSubmit, form }: FormRenderProps) {
     const {
       isSearchRequesting, renderSettings, searchInputName, getFilters, settingsButtonText, submitButtonText,
-      validators, t,
+      validators, t, dialogTitleText, dialogSubmitText,
     } = this.props;
     const { isSettingsDialogOpen } = this.state;
     const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
@@ -95,6 +97,8 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
               </Button>
               <SearchSettingsDialog
                 isOpen={isSettingsDialogOpen}
+                dialogTitleText={dialogTitleText}
+                dialogSubmitText={dialogSubmitText}
                 onClose={this.handleSettingsDialogClose}
                 renderContent={renderSettings}
               />
