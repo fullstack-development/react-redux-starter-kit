@@ -6,12 +6,11 @@ type Transmitter = (deps: any, args?: any) => any[];
  */
 export const memoizeByProps = (transmitter: Transmitter) =>
   (_target: any, key: any, { value: oldValue, get: getter }: PropertyDescriptor) => {
-    let cache: any;
-    let cachedDeps: any[] = [];
-
     return {
       configurable: true,
       get() {
+        let cache: any;
+        let cachedDeps: any[] = [];
         const fn: undefined | false | ((...args: any[]) => any) = (
           typeof oldValue === 'function' && oldValue.bind(this) ||
           typeof getter === 'function' && getter.call(this)
@@ -21,7 +20,7 @@ export const memoizeByProps = (transmitter: Transmitter) =>
         }
         const value = (...args: any[]) => {
           const deps = transmitter(this.props, ...args);
-          if (cachedDeps.every((x, i) => x === deps[i])) {
+          if (cachedDeps.length === 0 || !cachedDeps.every((x, i) => x === deps[i])) {
             cache = fn(...args);
             cachedDeps = deps;
           }
