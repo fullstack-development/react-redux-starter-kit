@@ -6,8 +6,7 @@ import { default as languageDetector } from 'i18next-browser-languagedetector';
 import { FALLBACK_LANGUAGE } from './constants';
 import { en, ru } from './locales';
 import { ITranslateObject } from './namespace';
-import { isTranslateGetKey } from 'shared/types/guards';
-import { ITranslateKey } from './helpers/buildTranslationKeys';
+import { ITranslateKey, isTranslateGetKey } from './helpers';
 
 const resources = {
   en: {
