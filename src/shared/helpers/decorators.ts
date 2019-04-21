@@ -11,11 +11,11 @@ export const memoizeByProps = (transmitter: Transmitter) =>
       get() {
         let cache: any;
         let cachedDeps: any[] = [];
-        const fn: undefined | false | ((...args: any[]) => any) = (
+        const fn: unknown = (
           typeof oldValue === 'function' && oldValue.bind(this) ||
           typeof getter === 'function' && getter.call(this)
         );
-        if (!fn) {
+        if (typeof fn !== 'function') {
           throw new Error('Memoization can only be made with function');
         }
         const value = (...args: any[]) => {
