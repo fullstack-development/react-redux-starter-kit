@@ -1,4 +1,4 @@
-type Transmitter = (deps: any, args?: any) => any[];
+type Transmitter = (props: any, ...args: any) => any[];
 
 /**
  * Accepts a function that takes props and arguments of method, which should be memoized
