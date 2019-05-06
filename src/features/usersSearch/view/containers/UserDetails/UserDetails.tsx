@@ -79,7 +79,7 @@ class UserDetails extends React.Component<IProps> {
               src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
             />
             <Typography variant="h5">{realName}</Typography>
-            <Typography variant="subtitle1">{username}</Typography>
+            <Typography variant="subtitle1" noWrap>{username}</Typography>
             {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
           </a>
           <div className={b('attributes')}>

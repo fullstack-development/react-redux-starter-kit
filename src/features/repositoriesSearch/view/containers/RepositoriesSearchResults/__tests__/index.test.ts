@@ -1,6 +1,7 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockComponent, repository } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
+import { Preloader } from 'shared/view/elements';
 
 import { RepositoryPreview } from '../../../components';
 import {
@@ -19,6 +20,7 @@ const props: IRepositoriesSearchResultsProps = {
   searchRepositories: jest.fn(),
   UserDetails: makeMockComponent('UserDetails'),
   totalResults: 1,
+  isSearchRequesting: false,
   ...getMockedLocaleProps(),
 };
 
@@ -58,5 +60,13 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
 
     component.find(UserDetails).prop('onClose')();
     expect(component.find(UserDetails).length).toBe(0);
+  });
+
+  it('should show preloader if search is requesting', () => {
+    const component = getComponent({ isSearchRequesting: false });
+    expect(component.find(Preloader).prop('isShown')).toBe(false);
+
+    const componentRequesting = getComponent({ isSearchRequesting: true });
+    expect(componentRequesting.find(Preloader).prop('isShown')).toBe(true);
   });
 });
