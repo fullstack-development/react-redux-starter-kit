@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader } from 'shared/view/elements';

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import * as R from 'ramda';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { SearchForm } from 'shared/view/components';
 import { replaceObjectKeys } from 'shared/helpers';
 

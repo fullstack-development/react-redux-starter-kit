@@ -1,4 +1,3 @@
-import React from 'react';
 import { rule } from 'shared/helpers/style';
 import { withStyles, WithStyles } from './jss';
 
@@ -24,10 +23,8 @@ const styles = {
 
 type StylesProps = WithStyles<typeof styles>;
 
-class BaseStyles extends React.Component<{ children: React.ReactNode } & StylesProps> {
-  public render() {
-    return this.props.children;
-  }
+function BaseStyles(_props: StylesProps) {
+  return null;
 }
 
 export default withStyles(styles)(BaseStyles);

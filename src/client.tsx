@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 import 'babel-polyfill';
-import { App } from 'core/App';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import bootstrapper from 'react-async-bootstrapper';
-import configureApp from 'core/configureApp';
 
-import getEnvParams from './core/getEnvParams';
+import { App } from 'core/render';
+import configureApp from 'core/configure';
+import getEnvParams from 'core/getEnvParams';
 
 const { appVersion } = getEnvParams();
 
@@ -25,11 +25,11 @@ main();
 
 /* Hot Module Replacement API */
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
-  (module as any).hot.accept(['./core/App', './core/configureApp'], () => {
-    const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
-    const NextApp: typeof App = require('./core/App').App;
+  (module as any).hot.accept(['./core/render', './core/configure'], () => {
+    const nextConfigureApp: typeof configureApp = require('./core/configure').default;
+    const NextApp: typeof App = require('./core/render').App;
     const nextAppData = nextConfigureApp(appData);
-    render(<NextApp {...nextAppData} jssDeps={appData.jssDeps} />);
+    render(<NextApp {...nextAppData} />);
   });
 }
 

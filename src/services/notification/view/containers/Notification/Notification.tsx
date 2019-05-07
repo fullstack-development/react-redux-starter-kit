@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import block from 'bem-cn';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { INotification } from 'shared/types/common';
 
 import { selectors } from '../../../redux';

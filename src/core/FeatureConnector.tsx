@@ -4,9 +4,8 @@ import * as R from 'ramda';
 import { injectable } from 'inversify';
 
 import { Omit, GetProps, SubSet } from '_helpers';
-import { inject, TYPES } from './configureIoc';
-
-import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
+import { inject, TYPES, IocTypes } from './configure/ioc';
+import { IFeatureEntry } from './types';
 
 type FeatureLoader = () => Promise<IFeatureEntry>;
 
@@ -29,7 +28,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
       public state: IState = { mounted: false };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore!: (entry: IReduxEntry) => void;
+      private connectFeatureToStore!: IocTypes[typeof TYPES.connectEntryToStore];
 
       public async bootstrap() {
         await this.load();
@@ -91,9 +90,8 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
   };
 }
 
-type IFeatureEntryWithContainers<
-  C extends Record<string, React.ComponentType<any>>
-  > = SubSet<IFeatureEntry, { containers: C }>;
+type IFeatureEntryWithContainers<C extends Record<string, React.ComponentType<any>>> =
+  SubSet<IFeatureEntry, { containers: C }>;
 
 export function getAsyncContainer<C extends Record<string, React.ComponentType<any>>, K extends keyof C>(
   loader: () => Promise<IFeatureEntryWithContainers<C>>, componentName: K,

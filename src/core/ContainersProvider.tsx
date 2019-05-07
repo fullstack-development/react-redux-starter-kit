@@ -1,12 +1,11 @@
 import React from 'react';
 import { bind } from 'decko';
+import { injectable } from 'inversify';
 import { Omit, SubSet } from '_helpers';
 
 import * as usersSearchFeature from 'features/usersSearch';
-import { injectable } from 'inversify';
-import { inject, TYPES } from './configureIoc';
-
-import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
+import { inject, TYPES, IocTypes } from './configure/ioc';
+import { IFeatureEntry, IReduxEntry } from './types';
 
 interface IContainerTypes {
   UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];
@@ -45,14 +44,14 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
 
   return <Props extends { [K in L]: IContainerTypes[K] }>(
     WrappedComponent: React.ComponentType<Props>,
-  ): React.ComponentClass<Props> => {
+  ): React.ComponentClass<Omit<Props, L>> => {
 
     @injectable()
     class ContainersProvider extends React.PureComponent<Props, IState> {
       public state: IState = { containers: {} };
 
       @inject(TYPES.connectEntryToStore)
-      private connectFeatureToStore!: (entry: IReduxEntry) => void;
+      private connectFeatureToStore!: IocTypes[typeof TYPES.connectEntryToStore];
 
       public componentDidMount() {
         this.load();

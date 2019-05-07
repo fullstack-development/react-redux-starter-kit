@@ -1,4 +1,4 @@
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { IProfile } from 'shared/types/models';
 
 function selectFeatureState(state: IAppReduxState) {

@@ -1,7 +1,11 @@
-import { routes as searchRoutes } from './Search/routes';
-import { routes as profileRoutes } from './Profile/routes';
+import buildRouteTree from 'build-route-tree';
 
-export default {
-  ...searchRoutes,
-  ...profileRoutes,
-};
+export const routes = buildRouteTree({
+  profile: null,
+  search: {
+    users: null,
+    repositories: null,
+  },
+});
+
+export default routes;

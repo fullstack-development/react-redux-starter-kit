@@ -1,4 +1,4 @@
-import { IReduxEntry } from 'shared/types/app';
+import { IReduxEntry } from 'core/types';
 
 import * as namespace from './namespace';
 import { actions, selectors, reducer, getSaga } from './redux';

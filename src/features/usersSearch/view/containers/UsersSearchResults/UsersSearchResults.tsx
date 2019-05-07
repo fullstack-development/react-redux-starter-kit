@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 import { IGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';

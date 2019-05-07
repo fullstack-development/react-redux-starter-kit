@@ -16,11 +16,6 @@ export interface IFailAction<T, P, E = string> extends IPlainFailAction<T, E> {
   payload: P;
 }
 
-export interface IEditFieldAction<T, F> {
-  type: T;
-  payload: IReduxField<F>;
-}
-
 export interface IMultiAction<T = string> {
   _instanceKey?: string;
   type: T;
@@ -29,12 +24,6 @@ export interface IMultiAction<T = string> {
 export interface ICommunication<E = string> {
   isRequesting: boolean;
   error: E;
-}
-
-export interface IReduxField<T> {
-  value: T;
-  error: string;
-  touched?: boolean;
 }
 
 // TODO: remove

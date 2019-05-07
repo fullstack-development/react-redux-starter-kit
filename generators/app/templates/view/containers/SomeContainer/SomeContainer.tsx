@@ -4,7 +4,7 @@ import { bind } from 'decko';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
-import { IAppReduxState } from 'shared/types/app';
+import { IAppReduxState } from 'core/types';
 
 import { IReduxState } from '../../../namespace';
 import { actions, selectors } from './../../../redux';

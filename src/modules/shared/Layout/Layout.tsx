@@ -5,9 +5,9 @@ import { bind } from 'decko';
 
 import { featureConnect } from 'core';
 import * as features from 'features';
+import routes from 'modules/routes';
 
 import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
-import routes from '../../routes';
 import './Layout.scss';
 
 interface IOwnProps {

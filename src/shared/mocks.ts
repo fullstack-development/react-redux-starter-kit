@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
-import { IFeatureEntry } from './types/app';
+import { IFeatureEntry } from 'core/types';
 
 export const makeMockComponent = (componentName: string): any => {
   const Container = () => React.createElement('div');
