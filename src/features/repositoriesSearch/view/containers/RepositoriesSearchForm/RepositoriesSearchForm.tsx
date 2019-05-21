@@ -38,7 +38,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { repositoriesSearch: translations } = tKeys.features;
+const { repositoriesSearch: intl } = tKeys.features;
 
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
   public render() {
@@ -66,10 +66,10 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
     const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(translations.minStars),
-      forksNumber: t(translations.minForks),
-      language: t(translations.language),
-      owner: t(translations.owner),
+      starsNumber: t(intl.minStars),
+      forksNumber: t(intl.minForks),
+      language: t(intl.language),
+      owner: t(intl.owner),
     };
     return replaceObjectKeys(filters, filtersLabels);
   }

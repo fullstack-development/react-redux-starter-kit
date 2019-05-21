@@ -8,7 +8,7 @@ import { fieldNames } from '../constants';
 import './RepositoriesSearchSettings.scss';
 
 const b = block('repositories-search-settings');
-const { repositoriesSearch: translations } = tKeys.features;
+const { repositoriesSearch: intl } = tKeys.features;
 
 function RepositoriesSearchSettings() {
   const { t } = useTranslation();
@@ -18,26 +18,26 @@ function RepositoriesSearchSettings() {
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.starsNumber}
-            label={t(translations.minStars)}
+            label={t(intl.minStars)}
             t={t}
           />
         </div>
         <div className={b('item')}>
           <NumberInputField
             name={fieldNames.forksNumber}
-            label={t(translations.minForks)}
+            label={t(intl.minForks)}
             t={t}
           />
         </div>
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
-          <TextInputField name={fieldNames.owner} label={t(translations.owner)} t={t} />
+          <TextInputField name={fieldNames.owner} label={t(intl.owner)} t={t} />
         </div>
         <div className={b('item')}>
           <LanguageInputField
             name={fieldNames.language}
-            label={t(translations.repositoriesLanguage)}
+            label={t(intl.repositoriesLanguage)}
             t={t}
           />
         </div>

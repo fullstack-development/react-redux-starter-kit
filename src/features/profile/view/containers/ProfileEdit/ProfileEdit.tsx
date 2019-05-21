@@ -39,7 +39,7 @@ const mapDispatch = {
 };
 
 const b = block('profile-edit');
-const { profile: translations } = tKeys.features;
+const { profile: intl } = tKeys.features;
 
 class ProfileEdit extends React.PureComponent<IProps> {
   public render() {
@@ -66,7 +66,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.name}
-              label={t(translations.name)}
+              label={t(intl.name)}
               validate={validateName}
               t={t}
             />
@@ -74,18 +74,18 @@ class ProfileEdit extends React.PureComponent<IProps> {
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.nickname}
-              label={t(translations.nickname)}
+              label={t(intl.nickname)}
               validate={validateNickname}
               t={t}
             />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(translations.age)} t={t} />
+            <NumberInputField name={fieldNames.age} label={t(intl.age)} t={t} />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.bio}
-              label={t(translations.bio)}
+              label={t(intl.bio)}
               multiline
               rowsMax={10}
               validate={validateBio}

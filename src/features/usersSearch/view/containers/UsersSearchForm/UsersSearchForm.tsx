@@ -42,7 +42,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { userSearch: translations } = tKeys.features;
+const { userSearch: intl } = tKeys.features;
 
 class UsersSearchForm extends React.PureComponent<IProps> {
   public render() {
@@ -75,9 +75,9 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   private getLabels(): LabelsType {
     const { t } = this.props;
     return {
-      both: t(translations.usersAndOrganizations),
-      org: t(translations.organizations),
-      user: t(translations.users),
+      both: t(intl.usersAndOrganizations),
+      org: t(intl.organizations),
+      user: t(intl.users),
     };
   }
 
@@ -85,10 +85,10 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   private getOptions(): OptionType[] {
     const { t } = this.props;
     return [
-      { value: 'username-email', label: t(translations.usernameAndEmail) },
-      { value: 'login', label: t(translations.username) },
-      { value: 'email', label: t(translations.email) },
-      { value: 'fullname', label: t(translations.fullName) },
+      { value: 'username-email', label: t(intl.usernameAndEmail) },
+      { value: 'login', label: t(intl.username) },
+      { value: 'email', label: t(intl.email) },
+      { value: 'fullname', label: t(intl.fullName) },
     ];
   }
 
@@ -101,12 +101,12 @@ class UsersSearchForm extends React.PureComponent<IProps> {
       searchFor: x => (this.getLabels())[x].toLowerCase(),
     };
     const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
-      searchBy: t(translations.searchBy),
-      searchFor: t(translations.searchFor),
-      perPage: t(translations.resultsPerPage),
-      reposLanguage: t(translations.repositoriesLanguage),
-      minRepos: t(translations.minRepos),
-      maxRepos: t(translations.maxRepos),
+      searchBy: t(intl.searchBy),
+      searchFor: t(intl.searchFor),
+      perPage: t(intl.resultsPerPage),
+      reposLanguage: t(intl.repositoriesLanguage),
+      minRepos: t(intl.minRepos),
+      maxRepos: t(intl.maxRepos),
     };
     const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
     return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
