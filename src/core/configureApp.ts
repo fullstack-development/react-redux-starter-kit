@@ -1,17 +1,18 @@
 import configureDeps from './configureDeps';
 import { TYPES, container } from './configureIoc';
 import configureStore, { createReducer } from './configureStore';
+import { configureJss } from './configureJss';
 
 import * as allModules from 'modules';
-import { configureJss } from 'core/configureJss';
 import { ReducersMap } from 'shared/types/redux';
 import { reduxEntry as themeProviderRE } from 'services/theme';
 import { reduxEntry as notificationReduxEntry } from 'services/notification';
 import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
+import { initializeI18n } from 'services/i18n/i18nContainer';
 
 function configureApp(data?: IAppData): IAppData {
   /* Prepare main app elements */
-  const modules: IModule[] =  Object.values(allModules);
+  const modules: IModule[] = Object.values(allModules);
 
   if (data) {
     return { ...data, modules };
@@ -37,6 +38,7 @@ function configureApp(data?: IAppData): IAppData {
 
   const dependencies = configureDeps(store);
   const jssDeps = configureJss();
+  initializeI18n();
 
   sharedReduxEntries.forEach(connectEntryToStore);
   modules.forEach((module: IModule) => {

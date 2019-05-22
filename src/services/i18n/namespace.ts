@@ -1,18 +1,38 @@
-import Polyglot from 'node-polyglot';
+// tslint:disable: import-blacklist
+import i18next from 'i18next';
+import reactI18Next from 'react-i18next';
+import { ITranslateKey } from './helpers/buildTranslationKeys';
 
-type CustomTranslateFunction = (phrase: IPhraseWithOptions) => string;
-interface IPhraseWithOptions {
-  key: string;
-  params: Record<string, string | number>;
+export type TranslateFunction = <
+  TResult extends string | object | Array<string | object> | undefined = string,
+  TKeys extends string | TemplateStringsArray = string,
+  TInterpolationMap extends object = { [key: string]: any }
+  >(
+  key: TKeys | TKeys[] | ITranslateObject | ITranslateKey,
+  options?: i18next.TOptions<TInterpolationMap> | string,
+) => TResult;
+
+interface IWithTFunction {
+  t: TranslateFunction;
 }
 
-export type ITranslateFunction = Polyglot['t'] & CustomTranslateFunction;
-export type ITranslateKey = string | IPhraseWithOptions;
+export interface ITranslationProps extends IWithTFunction {
+  i18n: i18next.i18n;
+  tReady: boolean;
+}
 
-export type Lang = 'en' | 'ru';
+export interface IUseTranslationRes {
+  t: TranslateFunction;
+  i18n: i18next.i18n;
+  ready: boolean;
+}
 
-export interface ITranslateProps {
-  locale: Lang;
-  t: ITranslateFunction;
-  changeLanguage(lang: Lang): void;
+export type UseTranslation = (
+  ns?: reactI18Next.Namespace,
+  options?: reactI18Next.UseTranslationOptions,
+) => IUseTranslationRes;
+
+export interface ITranslateObject {
+  key: string | ITranslateKey;
+  options: i18next.TOptions;
 }

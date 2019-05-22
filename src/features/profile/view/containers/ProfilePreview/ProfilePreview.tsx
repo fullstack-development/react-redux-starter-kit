@@ -3,6 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { Popover } from 'shared/view/components';
@@ -23,9 +24,10 @@ interface IStateProps {
   profile: IProfile;
 }
 
-type IProps = IOwnProps & IStateProps;
+type IProps = IOwnProps & IStateProps & ITranslationProps;
 
 const b = block('profile-preview');
+const { profile: intl } = tKeys.features;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -41,7 +43,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
   private blockRef = createRef<HTMLDivElement>();
 
   public render() {
-    const { profile: { avatarURL, name, nickname, age, bio }, onEditClick } = this.props;
+    const { profile: { avatarURL, name, nickname, age, bio }, onEditClick, t } = this.props;
     const { isOpen } = this.state;
     return (
       <div className={b()} ref={this.blockRef}>
@@ -64,7 +66,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
                   {nickname}
                 </div>
                 <div className={b('age')}>
-                  {age} y.o.
+                  {t(intl.yearsOld, { count: age })}
                 </div>
               </div>
             </div>
@@ -72,7 +74,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
               {bio}
             </div>
             <div className={b('edit')} onClick={onEditClick}>
-              Edit
+              {t(intl.edit)}
             </div>
           </div>
         </Popover>
@@ -92,5 +94,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
 
 }
 
+const connectedComponent = connect(mapState)(ProfilePreview);
+
 export { ProfilePreview, IProps as IProfilePreviewProps };
-export default connect(mapState)(ProfilePreview);
+export default withTranslation()(connectedComponent);

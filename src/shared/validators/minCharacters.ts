@@ -1,8 +1,7 @@
-export function makeMinCharactersValidator(minCharacters: number, fieldName?: string) {
+export function makeMinCharactersValidator<T>(minCharacters: number, errorMsg: T) {
   return (validatedValue: string) => {
     if (validatedValue.length < minCharacters) {
-      const field = fieldName || 'The field';
-      return `${field} must be at least ${minCharacters} characters long`;
+      return errorMsg;
     }
     return void 0;
   };

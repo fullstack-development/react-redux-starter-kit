@@ -4,20 +4,25 @@ import { bind } from 'decko';
 
 import { IRepository } from 'shared/types/models';
 import { StarIcon, Card, Link } from 'shared/view/elements';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import RepositoryAttribute from '../RepositoryAttribute/RepositoryAttribute';
 import './RepositoryPreview.scss';
 
-interface IProps {
+interface IOwnProps {
   repository: IRepository;
   onOwnerClick(username: string): void;
 }
 
+type IProps = IOwnProps & ITranslationProps;
+
 const b = block('repository-preview');
+const { repositoriesSearch: intl } = tKeys.features;
 
 class RepositoryPreview extends React.PureComponent<IProps> {
   public render() {
     const {
+      t,
       repository: {
         name, starsNumber, htmlURL, description, updatedAt,
         owner, forksNumber, openIssuesNumber, language,
@@ -47,21 +52,21 @@ class RepositoryPreview extends React.PureComponent<IProps> {
           <div className={b('row')}>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title="Forks"
+                title={t(intl.forks)}
                 value={forksNumber}
               />
               <RepositoryAttribute
-                title="Open issues"
+                title={t(intl.openIssues)}
                 value={openIssuesNumber}
               />
             </div>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title="Last updated"
+                title={t(intl.lastUpdated)}
                 value={(new Date(updatedAt)).toLocaleDateString()}
               />
               <RepositoryAttribute
-                title="Owner"
+                title={t(intl.owner)}
                 value={owner.username}
                 onValueClick={this.handleOwnerClick}
                 type="owner"
@@ -81,4 +86,4 @@ class RepositoryPreview extends React.PureComponent<IProps> {
 }
 
 export { IProps as IRepositoryPreviewProps, RepositoryPreview };
-export default RepositoryPreview;
+export default withTranslation()(RepositoryPreview);

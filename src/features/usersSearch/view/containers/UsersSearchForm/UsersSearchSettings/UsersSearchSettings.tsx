@@ -2,57 +2,83 @@ import React from 'react';
 import block from 'bem-cn';
 
 import { FormLabel } from 'shared/view/elements';
+import { useTranslation, tKeys } from 'services/i18n';
+import { ISelectOption } from 'shared/types/form';
 import { SelectField, NumberInputField, RadioField, LanguageInputField } from 'shared/view/form';
+import { IUsersSearchFilters } from 'shared/types/githubSearch';
 
-import { searchByOptions, perPageOptions, fieldNames, searchForLabels, filtersLabels } from '../constants';
+import { perPageOptions, fieldNames } from '../constants';
 import './UsersSearchSettings.scss';
 
-const b = block('users-search-settings');
+interface IProps {
+  options: Array<ISelectOption<IUsersSearchFilters['searchBy']>>;
+}
 
-function UsersSearchSettings() {
+const b = block('users-search-settings');
+const { userSearch: intl } = tKeys.features;
+
+function UsersSearchSettings(props: IProps) {
+  const { t } = useTranslation();
+
   return (
     <div className={b()}>
       <div className={b('row')}>
         <div className={b('item')}>
-          <SelectField options={searchByOptions} label={filtersLabels.searchBy} name={fieldNames.searchBy} />
+          <SelectField
+            options={props.options}
+            label={t(intl.searchBy)}
+            name={fieldNames.searchBy}
+            t={t}
+          />
         </div>
         <div className={b('item')}>
-          <SelectField options={perPageOptions} label="Results per page" name={fieldNames.perPage} />
+          <SelectField
+            options={perPageOptions}
+            label={t(intl.resultsPerPage)}
+            name={fieldNames.perPage}
+            t={t}
+          />
         </div>
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
           <FormLabel>
-            {filtersLabels.searchFor}
+            {t(intl.searchFor)}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchFor} value="user" label={searchForLabels.user} />
-              <RadioField name={fieldNames.searchFor} value="org" label={searchForLabels.org} />
-              <RadioField name={fieldNames.searchFor} value="both" label={searchForLabels.both} />
+              <RadioField name={fieldNames.searchFor} value="user" label={t(intl.users)} />
+              <RadioField name={fieldNames.searchFor} value="org" label={t(intl.organizations)} />
+              <RadioField name={fieldNames.searchFor} value="both" label={t(intl.both)} />
             </div>
           </FormLabel>
         </div>
         <div className={b('settings-group')}>
           <div className={b('item')}>
             <FormLabel>
-              Repositories number
+              {t(intl.repositoriesNumber)}
               <div className={b('repos-number')}>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.minRepos}
-                    label={filtersLabels.minRepos}
+                    label={t(intl.min)}
+                    t={t}
                   />
                 </div>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.maxRepos}
-                    label={filtersLabels.maxRepos}
+                    label={t(intl.max)}
+                    t={t}
                   />
                 </div>
               </div>
             </FormLabel>
           </div>
           <div className={b('item')}>
-            <LanguageInputField name={fieldNames.reposLanguage} label="Repositories language" />
+            <LanguageInputField
+              name={fieldNames.reposLanguage}
+              label={t(intl.repositoriesLanguage)}
+              t={t}
+            />
           </div>
         </div>
       </div>

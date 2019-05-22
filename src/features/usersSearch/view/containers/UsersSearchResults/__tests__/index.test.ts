@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { githubUser } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
@@ -20,6 +20,7 @@ const props: IUsersSearchResultsProps = {
   },
   searchUsers: jest.fn(),
   totalResults: 1,
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(UsersSearchResults, props);

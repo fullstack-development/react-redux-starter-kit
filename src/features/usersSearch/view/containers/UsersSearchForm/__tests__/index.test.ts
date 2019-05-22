@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { SearchForm } from 'shared/view/components';
 
 import { UsersSearchForm, IUsersSearchFormProps } from '../UsersSearchForm';
@@ -8,6 +8,7 @@ const props: IUsersSearchFormProps = {
   searchUsers: jest.fn(),
   resetSearchResults: jest.fn(),
   isUsersSearchRequesting: false,
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(UsersSearchForm, props);

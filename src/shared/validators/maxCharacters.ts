@@ -1,8 +1,7 @@
-export function makeMaxCharactersValidator(maxCharacters: number, fieldName?: string) {
+export function makeMaxCharactersValidator<T>(maxCharacters: number, errorMsg: T) {
   return (validatedValue: string) => {
     if (validatedValue.length > maxCharacters) {
-      const field = fieldName || 'The field';
-      return `${field} can be max ${maxCharacters} characters long`;
+      return errorMsg;
     }
     return void 0;
   };

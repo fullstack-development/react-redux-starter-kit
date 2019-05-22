@@ -7,6 +7,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader } from 'shared/view/elements';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { UserAttribute } from '../../components';
 import { injectSizeToAvatarURL } from '../../../helpers';
@@ -25,7 +26,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IStateProps & IActionProps & IOwnProps;
+type IProps = IStateProps & IActionProps & IOwnProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -39,16 +40,17 @@ const mapDispatch = {
 };
 
 const b = block('user-details');
+const { userSearch: intl } = tKeys.features;
 
 class UserDetails extends React.Component<IProps> {
   private avatarSize = 230;
 
   public render() {
-    const { isLoadUserDetailsRequesting } = this.props;
+    const { isLoadUserDetailsRequesting, t } = this.props;
     return (
       <Dialog
         open={true}
-        title="User details"
+        title={t(intl.userDetails)}
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
       >
@@ -63,7 +65,7 @@ class UserDetails extends React.Component<IProps> {
   }
 
   private renderContent() {
-    const { userDetails } = this.props;
+    const { userDetails, t } = this.props;
     if (userDetails) {
       const {
         htmlURL, avatarURL, realName, username, location,
@@ -81,9 +83,21 @@ class UserDetails extends React.Component<IProps> {
             {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
           </a>
           <div className={b('attributes')}>
-            <UserAttribute URL={`${htmlURL}/followers`} title="Followers" value={followersNumber} />
-            <UserAttribute URL={`${htmlURL}/following`} title="Following" value={followingNumber} />
-            <UserAttribute URL={`${htmlURL}/repositories`} title="Repositories" value={reposNumber} />
+            <UserAttribute
+              URL={`${htmlURL}/followers`}
+              title={t(intl.followers)}
+              value={followersNumber}
+            />
+            <UserAttribute
+              URL={`${htmlURL}/following`}
+              title={t(intl.following)}
+              value={followingNumber}
+            />
+            <UserAttribute
+              URL={`${htmlURL}/repositories`}
+              title={t(intl.repositories)}
+              value={reposNumber}
+            />
           </div>
         </>
       );
@@ -105,5 +119,7 @@ class UserDetails extends React.Component<IProps> {
   }
 }
 
+const connectedComponent = connect(mapState, mapDispatch)(UserDetails);
+
 export { UserDetails, IProps as IUserDetailsProps };
-export default connect(mapState, mapDispatch)(UserDetails);
+export default withTranslation()(connectedComponent);

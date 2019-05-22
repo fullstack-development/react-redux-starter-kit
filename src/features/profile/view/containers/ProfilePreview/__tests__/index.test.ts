@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { Popover } from 'shared/view/components';
 import { profile } from 'shared/mocks';
 
@@ -7,6 +7,7 @@ import { ProfilePreview, IProfilePreviewProps } from '../ProfilePreview';
 const props: IProfilePreviewProps = {
   onEditClick: jest.fn(),
   profile,
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(ProfilePreview, props);

@@ -1,38 +1,51 @@
+// tslint:disable-next-line: import-blacklist
+import { WithTranslation, withTranslation } from 'react-i18next';
 import React from 'react';
 import { bind } from 'decko';
+import block from 'bem-cn';
 
-import { Lang, ITranslateProps } from '../../namespace';
-import { withI18n } from '../withI18n/withI18n';
+import { Lang } from 'shared/types/app';
+import { Select } from 'shared/view/elements';
+
+import './LanguageSelector.scss';
 
 interface IOption {
   value: Lang;
   label: string;
 }
 
-class LanguageSelector extends React.PureComponent<ITranslateProps> {
+const b = block('select');
+
+class LanguageSelector extends React.PureComponent<WithTranslation> {
   public static options: IOption[] = [
-    { value: 'en', label: 'en' },
-    { value: 'ru', label: 'ru' },
+    { value: 'en-US', label: 'English' },
+    { value: 'ru-RU', label: 'Русский' },
   ];
 
   public render() {
-    const { locale } = this.props;
+    const { i18n: { language } } = this.props;
 
     return (
-      <div>
-        <select value={locale} onChange={this.changeLanguage}>
-          {LanguageSelector.options.map(({ value, label }, i) => (
-            <option value={value} key={i}>{label}</option>
-          ))}
-        </select>
-      </div>
+      <Select
+        value={language}
+        options={LanguageSelector.options}
+        onChange={this.changeLanguage}
+        SelectProps={{
+          classes: {
+            root: b(),
+            icon: b('icon').toString(),
+          },
+        }}
+      />
     );
   }
 
   @bind
   private changeLanguage({ target: { value } }: React.ChangeEvent<HTMLSelectElement>) {
-    this.props.changeLanguage(value as Lang);
+    const { i18n } = this.props;
+    i18n.changeLanguage(value);
   }
 }
 
-export default withI18n(LanguageSelector);
+export { LanguageSelector };
+export default withTranslation()(LanguageSelector);

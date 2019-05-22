@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { detailedGithubUser } from 'shared/mocks';
 import { Preloader } from 'shared/view/elements';
 import { Dialog } from 'shared/view/components';
@@ -11,6 +11,7 @@ const props: IUserDetailsProps = {
   loadUserDetails: jest.fn(),
   onClose: jest.fn(),
   username: 'the user',
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(UserDetails, props);

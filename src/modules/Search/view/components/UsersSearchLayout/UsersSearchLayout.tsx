@@ -3,6 +3,7 @@ import block from 'bem-cn';
 import { bind } from 'decko';
 
 import * as features from 'features';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
 
 import { Layout } from '../../../../shared';
@@ -16,7 +17,7 @@ interface IFeatureProps {
   usersSearchFeatureEntry: features.usersSearch.Entry;
 }
 
-type IProps = IFeatureProps;
+type IProps = IFeatureProps & ITranslationProps;
 
 const b = block('users-search-layout');
 
@@ -26,12 +27,12 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   };
 
   public render() {
-    const { usersSearchFeatureEntry: { containers } } = this.props;
+    const { usersSearchFeatureEntry: { containers }, t } = this.props;
     const { UsersSearchForm, UsersSearchResults } = containers;
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <Layout title="GitHub users search">
+      <Layout title={t(tKeys.features.userSearch.usersSearch)}>
         <div className={b()}>
           <div className={b('search-form')}>
             <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />
@@ -48,7 +49,7 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { UsersSearchLayout, IProps as IUsersSearchLayoutProps  };
+export { UsersSearchLayout, IProps as IUsersSearchLayoutProps };
 export default featureConnect({
   usersSearchFeatureEntry: features.usersSearch.loadEntry,
-})(UsersSearchLayout);
+})(withTranslation()(UsersSearchLayout));

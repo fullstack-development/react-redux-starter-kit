@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
@@ -31,7 +32,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IOwnProps & IStateProps & IActionProps;
+type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -53,11 +54,11 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { users, paginationState: { page, totalPages }, totalResults } = this.props;
+    const { users, paginationState: { page, totalPages }, totalResults, t } = this.props;
     const { displayedUser } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults totalResults={totalResults} />
+        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
         <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
         <div className={b('pagination')}>
           <PaginationControls
@@ -66,7 +67,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose}/>}
+        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />}
       </div>
     );
   }
@@ -88,5 +89,6 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResults);
 export { UsersSearchResults, IProps as IUsersSearchResultsProps };
-export default connect(mapState, mapDispatch)(UsersSearchResults);
+export default withTranslation()(connectedComponent);

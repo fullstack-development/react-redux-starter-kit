@@ -1,4 +1,4 @@
-import { makeShallowRenderer } from 'shared/helpers';
+import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEntry, makeMockComponent, withRouterProps } from 'shared/mocks';
 
 import { Layout, ILayoutProps } from '../Layout';
@@ -10,6 +10,7 @@ const props: ILayoutProps = {
     ProfilePreview: makeMockComponent('ProfilePreview'),
   }),
   ...withRouterProps,
+  ...getMockedLocaleProps(),
 };
 
 const getComponent = makeShallowRenderer(Layout, props);

@@ -8,6 +8,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TotalSearchResults, Preloader } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
@@ -36,7 +37,7 @@ interface IContainerProps {
   UserDetails: IContainerTypes['UserDetails'];
 }
 
-type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps;
+type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -60,13 +61,13 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
 
   public render() {
     const {
-      repositories, UserDetails, paginationState: { totalPages, page },
+      repositories, UserDetails, paginationState: { totalPages, page }, t,
       totalResults, isSearchRequesting,
     } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults totalResults={totalResults} />
+        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
         <div className={b('repositories')}>
           <Preloader size={0} backgroundColor="rgba(0, 0, 0, 0.05)" isShown={isSearchRequesting} />
           {repositories.map(this.renderRepositoryPreview)}
@@ -89,7 +90,7 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   private renderRepositoryPreview(repository: IRepository) {
     return (
       <div className={b('repository-preview')} key={repository.id}>
-        <RepositoryPreview repository={repository} onOwnerClick={this.handleRepositoryOwnerClick}/>
+        <RepositoryPreview repository={repository} onOwnerClick={this.handleRepositoryOwnerClick} />
       </div>
     );
   }
@@ -111,9 +112,11 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 }
 
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResults);
+
 export {
   RepositoriesSearchResults,
   IProps as IRepositoriesSearchResultsProps,
   IState as IRepositoriesSearchResultsState,
 };
-export default connect(mapState, mapDispatch)(containersProvider(['UserDetails'])(RepositoriesSearchResults));
+export default withTranslation()(containersProvider(['UserDetails'])(connectedComponent));

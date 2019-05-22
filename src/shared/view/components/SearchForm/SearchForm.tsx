@@ -3,9 +3,9 @@ import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
 import { bind } from 'decko';
 
-import { isRequired } from 'shared/validators';
 import { TextInputField } from 'shared/view/form';
 import { Button, KeysToValues } from 'shared/view/elements';
+import { TranslateFunction, ITranslateObject, ITranslateKey } from 'services/i18n';
 
 import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
 
@@ -15,15 +15,23 @@ interface IState {
   isSettingsDialogOpen: boolean;
 }
 
-interface IProps<FormFields> {
+interface IOwnProps<FormFields> {
   isSearchRequesting: boolean;
   searchInputName: string;
   initialValues?: Partial<FormFields>;
+  submitButtonText: string;
+  settingsButtonText: string;
+  dialogTitleText: string;
+  dialogSubmitText: string;
+  t: TranslateFunction;
+  validators(value: string): string | ITranslateObject | ITranslateKey | undefined;
   onSubmit(values: FormFields): void;
   resetSearchResults(): void;
   renderSettings?(): React.ReactChild;
   getFilters?(formValues: FormFields): Record<string, string | number>;
 }
+
+type IProps<T> = IOwnProps<T>;
 
 const b = block('search-form');
 
@@ -50,7 +58,10 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
 
   @bind
   private renderForm({ handleSubmit, form }: FormRenderProps) {
-    const { isSearchRequesting, renderSettings, searchInputName, getFilters } = this.props;
+    const {
+      isSearchRequesting, renderSettings, searchInputName, getFilters, settingsButtonText, submitButtonText,
+      validators, t, dialogTitleText, dialogSubmitText,
+    } = this.props;
     const { isSettingsDialogOpen } = this.state;
     const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
     const filtersAreNotEmpty = Object.keys(filters).length > 0;
@@ -61,14 +72,19 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
             <KeysToValues items={filters} />
           </div>
         }
-        <TextInputField name={searchInputName} disabled={isSearchRequesting} validate={isRequired} />
+        <TextInputField
+          name={searchInputName}
+          disabled={isSearchRequesting}
+          validate={validators}
+          t={t}
+        />
         <div className={b('buttons')}>
           <Button
             type="submit"
             variant="outlined"
             disabled={isSearchRequesting}
           >
-            Search
+            {submitButtonText}
           </Button>
           {renderSettings !== void 0 &&
             <div className={b('settings-button')}>
@@ -77,10 +93,12 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
                 onClick={this.handleSettingsButtonClick}
                 disabled={isSearchRequesting}
               >
-                Settings
+                {settingsButtonText}
               </Button>
               <SearchSettingsDialog
                 isOpen={isSettingsDialogOpen}
+                dialogTitleText={dialogTitleText}
+                dialogSubmitText={dialogSubmitText}
                 onClose={this.handleSettingsDialogClose}
                 renderContent={renderSettings}
               />
