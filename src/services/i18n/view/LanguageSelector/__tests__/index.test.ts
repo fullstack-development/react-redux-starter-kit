@@ -11,7 +11,7 @@ const props: ITranslationProps = {
 const getComponent = makeShallowRenderer(LanguageSelector, props);
 
 describe('(services/i18n) LanguageSelector component', () => {
-  it('should render select', () => {
+  it('should render one Select', () => {
     const component = getComponent();
     expect(component.find(Select).length).toEqual(1);
   });
