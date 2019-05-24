@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IDetailedGithubUser } from 'shared/types/models';
@@ -106,13 +106,13 @@ class UserDetails extends React.Component<IProps> {
     return null;
   }
 
-  @bind
+  @autobind
   private handleDialogEnter() {
     const { username, loadUserDetails } = this.props;
     loadUserDetails(username);
   }
 
-  @bind
+  @autobind
   private handleDialogClose() {
     const { onClose } = this.props;
     onClose();

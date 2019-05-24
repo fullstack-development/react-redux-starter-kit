@@ -1,5 +1,5 @@
 import React from 'react';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import block from 'bem-cn';
 import * as R from 'ramda';
 
@@ -79,7 +79,7 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private renderUserAvatar(user: IGithubUser) {
     const { avatarURL } = user;
     return (
@@ -97,12 +97,12 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private makeAvatarClickHandler(user: IGithubUser) {
     return () => this.props.onAvatarClick(user);
   }
 
-  @bind
+  @autobind
   private makeImageOnLoadHandler(avatarURL: string) {
     return () => {
       this.avatarsLoadingStatus = { ...this.avatarsLoadingStatus, [avatarURL]: true };

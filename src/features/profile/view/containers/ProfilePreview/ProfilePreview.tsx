@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
@@ -82,12 +82,12 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
     );
   }
 
-  @bind
+  @autobind
   private handlePopoverClose() {
     this.setState({ isOpen: false });
   }
 
-  @bind
+  @autobind
   private handleAvatarClick() {
     this.setState({ isOpen: true });
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { TextInputField } from 'shared/view/form';
 import { Button, KeysToValues } from 'shared/view/elements';
@@ -56,7 +56,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
     );
   }
 
-  @bind
+  @autobind
   private renderForm({ handleSubmit, form }: FormRenderProps) {
     const {
       isSearchRequesting, renderSettings, searchInputName, getFilters, settingsButtonText, submitButtonText,
@@ -109,12 +109,12 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
     );
   }
 
-  @bind
+  @autobind
   private handleSettingsButtonClick() {
     this.setState({ isSettingsDialogOpen: true });
   }
 
-  @bind
+  @autobind
   private handleSettingsDialogClose() {
     this.setState({ isSettingsDialogOpen: false });
   }

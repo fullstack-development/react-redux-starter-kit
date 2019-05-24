@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import * as R from 'ramda';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
@@ -67,7 +67,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private renderUsersSearchSettings() {
     return <UsersSearchSettings options={this.getOptions()} />;
   }
@@ -112,7 +112,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
     return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
   }
 
-  @bind
+  @autobind
   private handleFormSubmit(formValues: IUsersSearchFormFields) {
     const { searchUsers, onSubmit } = this.props;
     searchUsers({ searchOptions: formValues, page: 1 });

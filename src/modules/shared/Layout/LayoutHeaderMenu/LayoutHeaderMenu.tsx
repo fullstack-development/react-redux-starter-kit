@@ -1,6 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import { Link } from 'react-router-dom';
 
 import { MenuIcon } from 'shared/view/elements';
@@ -70,17 +70,17 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
     this.setState((prevState: IState) => ({ isMenuOpen: !prevState.isMenuOpen }));
   }
 
-  @bind
+  @autobind
   private handleMenuClick(e: React.MouseEvent<HTMLDivElement>) {
     this.toggleMenu(e);
   }
 
-  @bind
+  @autobind
   private handleMenuTouchEnd(e: React.TouchEvent<HTMLDivElement>) {
     this.toggleMenu(e);
   }
 
-  @bind
+  @autobind
   private handleMenuItemsClickAway() {
     this.setState({ isMenuOpen: false });
   }

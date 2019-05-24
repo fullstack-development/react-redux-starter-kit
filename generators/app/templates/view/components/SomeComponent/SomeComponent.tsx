@@ -1,6 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import './SomeComponent.scss';
 

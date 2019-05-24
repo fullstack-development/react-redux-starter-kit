@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
@@ -86,7 +86,7 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private renderRepositoryPreview(repository: IRepository) {
     return (
       <div className={b('repository-preview')} key={repository.id}>
@@ -95,17 +95,17 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private handleRepositoryOwnerClick(username: string) {
     this.setState({ displayedRepositoryOwner: username });
   }
 
-  @bind
+  @autobind
   private handleUserDetailsClose() {
     this.setState({ displayedRepositoryOwner: null });
   }
 
-  @bind
+  @autobind
   private handlePageRequest(pageNumber: number) {
     const { searchRepositories, searchOptions } = this.props;
     searchRepositories({ searchOptions, page: pageNumber });

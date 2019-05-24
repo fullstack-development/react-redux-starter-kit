@@ -1,5 +1,5 @@
 import React from 'react';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import { Omit, SubSet } from '_helpers';
 
 import * as usersSearchFeature from 'features/usersSearch';
@@ -70,12 +70,12 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
         }
       }
 
-      @bind
+      @autobind
       private async load(): Promise<void> {
         await Promise.all(containers.map(key => this.loadFeatureContainer(key)));
       }
 
-      @bind
+      @autobind
       private async loadFeatureContainer(containerKey: Container): Promise<void> {
         const bundle = await (containerLoadersDictionary as GenericLoadersMap)[containerKey]();
         const container = bundle.containers[containerKey];
@@ -99,7 +99,7 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
           }));
         }
 
-      @bind
+      @autobind
       private isAllContainersLoaded(): boolean {
         return containers.every(key => Boolean(this.state.containers[key]));
       }

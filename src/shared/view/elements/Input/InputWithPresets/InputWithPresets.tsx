@@ -1,6 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 import TextInput, { IProps as ITextInputProps } from '../TextInput';
@@ -42,7 +42,7 @@ class InputWithPresets extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private makePresetClickHandler(presetValue: IPreset['value']) {
     return () => this.props.onPresetClick(presetValue);
   }

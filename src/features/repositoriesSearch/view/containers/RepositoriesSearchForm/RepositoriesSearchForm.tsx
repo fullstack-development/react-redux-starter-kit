@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import * as R from 'ramda';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
@@ -74,7 +74,7 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     return replaceObjectKeys(filters, filtersLabels);
   }
 
-  @bind
+  @autobind
   private handleFormSubmit(formValues: IRepositoriesSearchFormFields) {
     const { searchRepositories, onSubmit } = this.props;
     searchRepositories({ searchOptions: formValues, page: 1 });

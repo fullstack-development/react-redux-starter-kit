@@ -1633,6 +1633,14 @@
         "@types/express": "*"
       }
     },
+    "@types/core-decorators": {
+      "version": "0.20.0",
+      "resolved": "https://registry.npmjs.org/@types/core-decorators/-/core-decorators-0.20.0.tgz",
+      "integrity": "sha512-hiSzDrfKy6dMYZWplTELCEIb2ZeaDm2acO2dVYjpK/+nh5Y+6t/Z5crIyZi5YaZ01f3Hoy7WCdsU9B22dwbMow==",
+      "requires": {
+        "core-decorators": "*"
+      }
+    },
     "@types/debug": {
       "version": "0.0.30",
       "resolved": "https://registry.npmjs.org/@types/debug/-/debug-0.0.30.tgz",
@@ -4952,6 +4960,11 @@
       "resolved": "https://registry.npmjs.org/copy-descriptor/-/copy-descriptor-0.1.1.tgz",
       "integrity": "sha1-Z29us8OZl8LuGsOpJP1hJHSPV40="
     },
+    "core-decorators": {
+      "version": "0.20.0",
+      "resolved": "https://registry.npmjs.org/core-decorators/-/core-decorators-0.20.0.tgz",
+      "integrity": "sha1-YFiWYkBTr4wo775zXCWjAaYcZcU="
+    },
     "core-js": {
       "version": "2.4.1",
       "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.4.1.tgz",
@@ -5449,11 +5462,6 @@
         "decamelize": "^1.1.0",
         "map-obj": "^1.0.0"
       }
-    },
-    "decko": {
-      "version": "1.2.0",
-      "resolved": "https://registry.npmjs.org/decko/-/decko-1.2.0.tgz",
-      "integrity": "sha1-/UPHNelnuAEzBohKVvvmZZlraBc="
     },
     "decode-uri-component": {
       "version": "0.2.0",

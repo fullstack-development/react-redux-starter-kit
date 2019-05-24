@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { IAppReduxState } from 'shared/types/app';
 
@@ -43,7 +43,7 @@ class ThemeSelector extends React.PureComponent<Props> {
     );
   }
 
-  @bind
+  @autobind
   private changeTheme({ target: { value } }: React.ChangeEvent<HTMLSelectElement>) {
     this.props.setTheme(value as UITheme);
   }

@@ -1,4 +1,4 @@
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import {
   IUsersSearchFilters, IRepositoriesSearchFilters, IUsersSearchResults, IRepositoriesSearchResults,
@@ -8,7 +8,7 @@ import { SearchUserResponse, IDetailedServerUser, SearchRepositoriesResponse } f
 import {
   constructUsersSearchQuery, getTotalPagesFromLinkHeader,
   constructRepositoriesSearchQuery, getTotalResults,
- } from './helpers';
+} from './helpers';
 import { convertUser, convertUserDetails, convertRepository } from './converters';
 import HttpActions from './HttpActions';
 
@@ -25,7 +25,7 @@ class Api {
     this.actions = new HttpActions('https://api.github.com/', this.headers);
   }
 
-  @bind
+  @autobind
   public async searchUsers(
     searchString: string, filters: IUsersSearchFilters, page: number,
   ): Promise<IUsersSearchResults> {
@@ -40,14 +40,14 @@ class Api {
     };
   }
 
-  @bind
+  @autobind
   public async loadUserDetails(username: string) {
     const URL = `/users/${username}`;
     const response = await this.actions.get<IDetailedServerUser>(URL);
     return convertUserDetails(response.data);
   }
 
-  @bind
+  @autobind
   public async searchRepositories(
     searchString: string, options: IRepositoriesSearchFilters, page: number,
   ): Promise<IRepositoriesSearchResults> {

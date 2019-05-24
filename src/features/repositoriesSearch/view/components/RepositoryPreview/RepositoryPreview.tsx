@@ -1,6 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { IRepository } from 'shared/types/models';
 import { StarIcon, Card, Link } from 'shared/view/elements';
@@ -78,7 +78,7 @@ class RepositoryPreview extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private handleOwnerClick() {
     const { repository: { owner: { username } }, onOwnerClick } = this.props;
     onOwnerClick(username);
