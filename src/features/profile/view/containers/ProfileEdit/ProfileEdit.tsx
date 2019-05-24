@@ -100,44 +100,6 @@ class ProfileEdit extends React.PureComponent<IProps> {
     );
   }
 
-  private makeValidateName() {
-    return composeValidators(
-      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
-      makeMinCharactersValidator(MIN_NAME_LENGTH, {
-        key: tKeys.shared.fieldMinLengthError.getKey(),
-        options: { minCharacters: MIN_NAME_LENGTH },
-      }),
-      makeMaxCharactersValidator(MAX_NAME_LENGTH, {
-        key: tKeys.shared.fieldMaxLengthError.getKey(),
-        options: { maxCharacters: MAX_NAME_LENGTH },
-      }),
-    );
-  }
-
-  private makeValidateNickname() {
-    return composeValidators(
-      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
-      makeMinCharactersValidator(MIN_NICKNAME_LENGTH, {
-        key: tKeys.shared.fieldMinLengthError.getKey(),
-        options: { minCharacters: MIN_NICKNAME_LENGTH },
-      }),
-      makeMaxCharactersValidator(MAX_NICKNAME_LENGTH, {
-        key: tKeys.shared.fieldMaxLengthError.getKey(),
-        options: { maxCharacters: MAX_NICKNAME_LENGTH },
-      }),
-    );
-  }
-
-  private makeValidateBio() {
-    return composeValidators(
-      makeRequired(tKeys.shared.fieldIsRequiredError.getKey()),
-      makeMaxCharactersValidator(MAX_BIO_LENGTH, {
-        key: tKeys.shared.fieldMaxLengthError.getKey(),
-        options: { maxCharacters: MAX_BIO_LENGTH },
-      }),
-    );
-  }
-
   @bind
   private handleFormSubmit(values: IProfileEditFormFields) {
     const { saveProfile, setNotification, t } = this.props;

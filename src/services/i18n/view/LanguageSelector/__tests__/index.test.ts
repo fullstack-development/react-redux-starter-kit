@@ -1,10 +1,10 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
-import { WithTranslation } from 'services/i18n';
+import { ITranslationProps } from 'services/i18n';
 import { Select } from 'shared/view/elements';
 
 import { LanguageSelector } from '../LanguageSelector';
 
-const props: WithTranslation = {
+const props: ITranslationProps = {
   ...getMockedLocaleProps(),
 };
 
