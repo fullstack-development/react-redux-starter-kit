@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { MenuIcon } from 'shared/view/elements';
 import { ClickAwayListener } from 'shared/view/components';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import './LayoutHeaderMenu.scss';
 
@@ -22,7 +22,7 @@ interface IState {
   isMenuOpen: boolean;
 }
 
-type IProps = WithTranslation & IOwnProps;
+type IProps = ITranslationProps & IOwnProps;
 const b = block('layout-header-menu');
 const { header } = tKeys.shared;
 
@@ -43,7 +43,7 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
         >
           <MenuIcon />
         </div>
-        <span className={b('title')}>{t(header.searchFor.getKey())}</span>
+        <span className={b('title')}>{t(header.searchFor)}</span>
         <ClickAwayListener
           onClickAway={this.handleMenuItemsClickAway}
           mouseEvent="onClick"

@@ -1,12 +1,12 @@
-import { WithTranslation } from 'services/i18n';
+import { ITranslationProps } from 'services/i18n';
 
-export const getMockedLocaleProps: () => WithTranslation = () => ({
+export const getMockedLocaleProps: () => ITranslationProps = () => ({
   t: jest.fn(),
   tReady: true,
   i18n: {
     isInitialized: true,
-    language: 'en-US',
-    languages: ['en-US', 'ru-RU'],
+    language: 'en',
+    languages: ['en', 'ru'],
     options: {},
     services: {
       backendConnector: {},
@@ -23,14 +23,9 @@ export const getMockedLocaleProps: () => WithTranslation = () => ({
       logger: {},
       pluralResolver: {},
       resourceStore: {
-        'en-US': {
+        en: {
           translationNamespace: {
-            translateMock: 'translate mock',
-          },
-        },
-        'ru-RU': {
-          translationNamespace: {
-            translateMock: 'заглушка перевода',
+            translateMock: 'translateMock',
           },
         },
       },

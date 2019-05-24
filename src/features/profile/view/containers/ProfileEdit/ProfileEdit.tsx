@@ -4,18 +4,14 @@ import { connect } from 'react-redux';
 import { Form, FormRenderProps } from 'react-final-form';
 import { bind } from 'decko';
 
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { actions as notificationServiceActions } from 'services/notification';
 import {
-  makeRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators,
-} from 'shared/validators';
-
-import {
-  fieldNames, MAX_BIO_LENGTH, MIN_NAME_LENGTH, MAX_NAME_LENGTH, MIN_NICKNAME_LENGTH, MAX_NICKNAME_LENGTH,
+  fieldNames, validateName, validateNickname, validateBio,
 } from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
@@ -29,7 +25,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IStateProps & IActionProps & WithTranslation;
+type IProps = IStateProps & IActionProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -43,7 +39,7 @@ const mapDispatch = {
 };
 
 const b = block('profile-edit');
-const { profile: translations } = tKeys.features;
+const { profile: intl } = tKeys.features;
 
 class ProfileEdit extends React.PureComponent<IProps> {
   public render() {
@@ -70,34 +66,34 @@ class ProfileEdit extends React.PureComponent<IProps> {
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.name}
-              label={t(translations.name.getKey())}
-              validate={this.makeValidateName()}
+              label={t(intl.name)}
+              validate={validateName}
               t={t}
             />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.nickname}
-              label={t(translations.nickname.getKey())}
-              validate={this.makeValidateNickname()}
+              label={t(intl.nickname)}
+              validate={validateNickname}
               t={t}
             />
           </div>
           <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(translations.age.getKey())} />
+            <NumberInputField name={fieldNames.age} label={t(intl.age)} t={t} />
           </div>
           <div className={b('field')}>
             <TextInputField
               name={fieldNames.bio}
-              label={t(translations.bio.getKey())}
+              label={t(intl.bio)}
               multiline
               rowsMax={10}
-              validate={this.makeValidateBio()}
+              validate={validateBio}
               t={t}
             />
           </div>
           <div className={b('button')}>
-            <Button variant="outlined" type="submit">{t(tKeys.shared.save.getKey())}</Button>
+            <Button variant="outlined" type="submit">{t(tKeys.shared.save)}</Button>
           </div>
         </div>
       </form>
@@ -146,7 +142,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
   private handleFormSubmit(values: IProfileEditFormFields) {
     const { saveProfile, setNotification, t } = this.props;
     saveProfile(values);
-    setNotification({ kind: 'info', text: t(tKeys.shared.notifications.saved.getKey()) });
+    setNotification({ kind: 'info', text: t(tKeys.shared.notifications.saved) });
   }
 }
 

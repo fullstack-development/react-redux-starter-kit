@@ -7,7 +7,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader } from 'shared/view/elements';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { UserAttribute } from '../../components';
 import { injectSizeToAvatarURL } from '../../../helpers';
@@ -26,7 +26,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IStateProps & IActionProps & IOwnProps & WithTranslation;
+type IProps = IStateProps & IActionProps & IOwnProps & ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -40,7 +40,7 @@ const mapDispatch = {
 };
 
 const b = block('user-details');
-const { userSearch: translations } = tKeys.features;
+const { userSearch: intl } = tKeys.features;
 
 class UserDetails extends React.Component<IProps> {
   private avatarSize = 230;
@@ -50,7 +50,7 @@ class UserDetails extends React.Component<IProps> {
     return (
       <Dialog
         open={true}
-        title={t(translations.userDetails.getKey())}
+        title={t(intl.userDetails)}
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
       >
@@ -79,23 +79,23 @@ class UserDetails extends React.Component<IProps> {
               src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
             />
             <Typography variant="h5">{realName}</Typography>
-            <Typography variant="subtitle1">{username}</Typography>
+            <Typography variant="subtitle1" noWrap>{username}</Typography>
             {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
           </a>
           <div className={b('attributes')}>
             <UserAttribute
               URL={`${htmlURL}/followers`}
-              title={t(translations.followers.getKey())}
+              title={t(intl.followers)}
               value={followersNumber}
             />
             <UserAttribute
               URL={`${htmlURL}/following`}
-              title={t(translations.following.getKey())}
+              title={t(intl.following)}
               value={followingNumber}
             />
             <UserAttribute
               URL={`${htmlURL}/repositories`}
-              title={t(translations.repositories.getKey())}
+              title={t(intl.repositories)}
               value={reposNumber}
             />
           </div>

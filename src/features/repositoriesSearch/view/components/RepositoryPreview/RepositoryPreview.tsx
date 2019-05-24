@@ -4,7 +4,7 @@ import { bind } from 'decko';
 
 import { IRepository } from 'shared/types/models';
 import { StarIcon, Card, Link } from 'shared/view/elements';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import RepositoryAttribute from '../RepositoryAttribute/RepositoryAttribute';
 import './RepositoryPreview.scss';
@@ -14,10 +14,10 @@ interface IOwnProps {
   onOwnerClick(username: string): void;
 }
 
-type IProps = IOwnProps & WithTranslation;
+type IProps = IOwnProps & ITranslationProps;
 
 const b = block('repository-preview');
-const { repositoriesSearch: translations } = tKeys.features;
+const { repositoriesSearch: intl } = tKeys.features;
 
 class RepositoryPreview extends React.PureComponent<IProps> {
   public render() {
@@ -52,21 +52,21 @@ class RepositoryPreview extends React.PureComponent<IProps> {
           <div className={b('row')}>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title={t(translations.forks.getKey())}
+                title={t(intl.forks)}
                 value={forksNumber}
               />
               <RepositoryAttribute
-                title={t(translations.openIssues.getKey())}
+                title={t(intl.openIssues)}
                 value={openIssuesNumber}
               />
             </div>
             <div className={b('attributes')}>
               <RepositoryAttribute
-                title={t(translations.lastUpdated.getKey())}
+                title={t(intl.lastUpdated)}
                 value={(new Date(updatedAt)).toLocaleDateString()}
               />
               <RepositoryAttribute
-                title={t(translations.owner.getKey())}
+                title={t(intl.owner)}
                 value={owner.username}
                 onValueClick={this.handleOwnerClick}
                 type="owner"

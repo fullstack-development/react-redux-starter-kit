@@ -1,23 +1,22 @@
 import React from 'react';
 
 import { Button } from 'shared/view/elements';
-import { useTranslation, tKeys } from 'services/i18n';
 
 import Dialog from '../../Dialog/Dialog';
 
 interface IProps {
   isOpen: boolean;
+  dialogTitleText: string;
+  dialogSubmitText: string;
   renderContent(): React.ReactChild;
   onClose(): void;
 }
 
-const { searchSettings, ok } = tKeys.shared;
 function SearchSettingsDialog(props: IProps) {
-  const { isOpen, onClose, renderContent } = props;
-  const { t } = useTranslation();
+  const { isOpen, onClose, renderContent, dialogTitleText, dialogSubmitText } = props;
   return (
     <Dialog
-      title={t(searchSettings.getKey())}
+      title={dialogTitleText}
       onClose={onClose}
       open={isOpen}
     >
@@ -26,7 +25,7 @@ function SearchSettingsDialog(props: IProps) {
       </Dialog.Content>
       <Dialog.Actions>
         <Button variant="outlined" onClick={onClose}>
-          {t(ok.getKey())}
+          {dialogSubmitText}
         </Button>
       </Dialog.Actions>
     </Dialog>

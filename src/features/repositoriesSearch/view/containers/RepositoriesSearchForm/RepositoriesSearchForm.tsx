@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { bind } from 'decko';
 import * as R from 'ramda';
 
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
-import { replaceObjectKeys } from 'shared/helpers';
+import { replaceObjectKeys, memoizeByProps } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
-
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
+
 import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 import { selectors, actions } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
@@ -25,7 +25,7 @@ interface IStateProps {
 
 type IActionProps = typeof mapDispatch;
 
-type IProps = IOwnProps & IStateProps & IActionProps & WithTranslation;
+type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
 const mapDispatch = {
   searchRepositories: actions.searchRepositories,
@@ -38,7 +38,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { repositoriesSearch: translations } = tKeys.features;
+const { repositoriesSearch: intl } = tKeys.features;
 
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
   public render() {
@@ -47,9 +47,11 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
       <SearchForm<IRepositoriesSearchFormFields>
         searchInputName={fieldNames.searchString}
         isSearchRequesting={isRepositoriesSearchRequesting}
-        submitButtonText={t(tKeys.shared.search.getKey())}
-        settingsButtonText={t(tKeys.shared.settings.getKey())}
-        validators={makeRequired(tKeys.shared.fieldIsRequiredError.getKey())}
+        submitButtonText={t(tKeys.shared.search)}
+        settingsButtonText={t(tKeys.shared.settings)}
+        dialogSubmitText={t(tKeys.shared.ok)}
+        dialogTitleText={t(tKeys.shared.searchSettings)}
+        validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
@@ -59,15 +61,15 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @memoizeByProps((props: IProps, formValues) => [props.t, formValues])
   private getFilters(formValues: IRepositoriesSearchFormFields) {
     const { t } = this.props;
     const filters = R.omit([fieldNames.searchString], formValues);
     const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(translations.minStars.getKey()),
-      forksNumber: t(translations.minForks.getKey()),
-      language: t(translations.language.getKey()),
-      owner: t(translations.owner.getKey()),
+      starsNumber: t(intl.minStars),
+      forksNumber: t(intl.minForks),
+      language: t(intl.language),
+      owner: t(intl.owner),
     };
     return replaceObjectKeys(filters, filtersLabels);
   }

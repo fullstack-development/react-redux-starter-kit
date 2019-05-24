@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { bind } from 'decko';
 
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
 import { Popover } from 'shared/view/components';
@@ -24,10 +24,10 @@ interface IStateProps {
   profile: IProfile;
 }
 
-type IProps = IOwnProps & IStateProps & WithTranslation;
+type IProps = IOwnProps & IStateProps & ITranslationProps;
 
 const b = block('profile-preview');
-const { profile: translations } = tKeys.features;
+const { profile: intl } = tKeys.features;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
@@ -66,7 +66,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
                   {nickname}
                 </div>
                 <div className={b('age')}>
-                  {t(translations.yearsOld.getKey(), { count: age })}
+                  {t(intl.yearsOld, { count: age })}
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
               {bio}
             </div>
             <div className={b('edit')} onClick={onEditClick}>
-              {t(translations.edit.getKey())}
+              {t(intl.edit)}
             </div>
           </div>
         </Popover>

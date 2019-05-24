@@ -15,7 +15,7 @@ interface IProps {
 }
 
 const b = block('users-search-settings');
-const { userSearch: translations } = tKeys.features;
+const { userSearch: intl } = tKeys.features;
 
 function UsersSearchSettings(props: IProps) {
   const { t } = useTranslation();
@@ -26,51 +26,59 @@ function UsersSearchSettings(props: IProps) {
         <div className={b('item')}>
           <SelectField
             options={props.options}
-            label={t(translations.searchBy.getKey())}
+            label={t(intl.searchBy)}
             name={fieldNames.searchBy}
+            t={t}
           />
         </div>
         <div className={b('item')}>
           <SelectField
             options={perPageOptions}
-            label={t(translations.resultsPerPage.getKey())}
+            label={t(intl.resultsPerPage)}
             name={fieldNames.perPage}
+            t={t}
           />
         </div>
       </div>
       <div className={b('row')}>
         <div className={b('item')}>
           <FormLabel>
-            {t(translations.searchFor.getKey())}
+            {t(intl.searchFor)}
             <div className={b('checkbox-group')}>
-              <RadioField name={fieldNames.searchFor} value="user" label={t(translations.users.getKey())} />
-              <RadioField name={fieldNames.searchFor} value="org" label={t(translations.organizations.getKey())} />
-              <RadioField name={fieldNames.searchFor} value="both" label={t(translations.both.getKey())} />
+              <RadioField name={fieldNames.searchFor} value="user" label={t(intl.users)} />
+              <RadioField name={fieldNames.searchFor} value="org" label={t(intl.organizations)} />
+              <RadioField name={fieldNames.searchFor} value="both" label={t(intl.both)} />
             </div>
           </FormLabel>
         </div>
         <div className={b('settings-group')}>
           <div className={b('item')}>
             <FormLabel>
-              {t(translations.repositoriesNumber.getKey())}
+              {t(intl.repositoriesNumber)}
               <div className={b('repos-number')}>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.minRepos}
-                    label={t(translations.min.getKey())}
+                    label={t(intl.min)}
+                    t={t}
                   />
                 </div>
                 <div className={b('repos-number-input')}>
                   <NumberInputField
                     name={fieldNames.maxRepos}
-                    label={t(translations.max.getKey())}
+                    label={t(intl.max)}
+                    t={t}
                   />
                 </div>
               </div>
             </FormLabel>
           </div>
           <div className={b('item')}>
-            <LanguageInputField name={fieldNames.reposLanguage} label={t(translations.repositoriesLanguage.getKey())} />
+            <LanguageInputField
+              name={fieldNames.reposLanguage}
+              label={t(intl.repositoriesLanguage)}
+              t={t}
+            />
           </div>
         </div>
       </div>

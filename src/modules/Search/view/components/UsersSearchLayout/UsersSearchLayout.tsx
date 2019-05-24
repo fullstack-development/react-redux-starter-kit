@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { bind } from 'decko';
 
 import * as features from 'features';
-import { withTranslation, WithTranslation, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
 
 import { Layout } from '../../../../shared';
@@ -17,7 +17,7 @@ interface IFeatureProps {
   usersSearchFeatureEntry: features.usersSearch.Entry;
 }
 
-type IProps = IFeatureProps & WithTranslation;
+type IProps = IFeatureProps & ITranslationProps;
 
 const b = block('users-search-layout');
 
@@ -32,7 +32,7 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <Layout title={t(tKeys.features.userSearch.usersSearch.getKey())}>
+      <Layout title={t(tKeys.features.userSearch.usersSearch)}>
         <div className={b()}>
           <div className={b('search-form')}>
             <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />

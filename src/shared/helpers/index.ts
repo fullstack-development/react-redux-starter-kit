@@ -5,3 +5,4 @@ export { default as replaceObjectValues, KeysToValuesFormattersMap } from './rep
 export * from './style';
 export * from './tests';
 export * from './form';
+export * from './decorators';
