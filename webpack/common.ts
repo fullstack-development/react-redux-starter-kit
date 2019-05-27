@@ -146,13 +146,13 @@ export function getStyleRules(type: BuildType) {
   const cssLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader'],
-    server: ['css-loader/locals'],
+    server: [MiniCssExtractPlugin.loader, 'css-loader'],
   };
 
   const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
-    dev: ['style-loader', 'css-loader?importLoaders=1'],
-    prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
-    server: ['css-loader/locals?importLoaders=1'],
+    dev: ['style-loader', 'css-loader'],
+    prod: [MiniCssExtractPlugin.loader, 'css-loader'],
+    server: [MiniCssExtractPlugin.loader, 'css-loader'],
   };
 
   return [
