@@ -1,6 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import * as features from 'features';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
@@ -43,7 +43,7 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
     );
   }
 
-  @bind
+  @autobind
   private setLastSubmittedFormState(formState: features.usersSearch.namespace.IUsersSearchFormFields) {
     this.setState({ lastSubmittedFormState: formState });
   }

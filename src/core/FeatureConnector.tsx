@@ -1,5 +1,5 @@
 import React from 'react';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 import * as R from 'ramda';
 import { injectable } from 'inversify';
 
@@ -55,7 +55,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         }
       }
 
-      @bind
+      @autobind
       private async load() {
         const keys: Array<keyof L> = Object.keys(loaders);
 
@@ -81,7 +81,7 @@ function featureConnect<L extends Record<string, FeatureLoader>>(loaders: L, pre
         return R.map(value => bundles.get(value) || {}, loaders);
       }
 
-      @bind
+      @autobind
       private isAllBundlesLoaded(): boolean {
         return Object.keys(loaders).every(key => Boolean(bundles.get(loaders[key])));
       }

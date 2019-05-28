@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 import * as R from 'ramda';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import PaginationPage from './PaginationPage/PaginationPage';
 import PaginationArrow from './PaginationArrow/PaginationArrow';
@@ -50,7 +50,7 @@ class PaginationControls extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private renderPage(page: number) {
     const { currentPage, onPageRequest } = this.props;
     return (
@@ -64,7 +64,7 @@ class PaginationControls extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private makeArrowClickHandler(direction: ArrowDirection) {
     return () => {
       const { onPageRequest, currentPage } = this.props;

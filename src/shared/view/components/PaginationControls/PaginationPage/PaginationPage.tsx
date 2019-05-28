@@ -1,7 +1,7 @@
 import ButtonBase from '@material-ui/core/ButtonBase';
 import React, { PureComponent } from 'react';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import './PaginationPage.scss';
 
@@ -28,7 +28,7 @@ class PaginationPage extends PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private makePageClickHandler(page: number) {
     return () => this.props.onClick(page);
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { featureConnect } from 'core';
 import * as features from 'features';
@@ -78,7 +78,7 @@ class Layout extends React.Component<IProps> {
     }];
   }
 
-  @bind
+  @autobind
   private handleEditProfileClick() {
     const { history } = this.props;
     history.push(routes.profile.getRoutePath());

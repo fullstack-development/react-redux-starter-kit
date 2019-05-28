@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import block from 'bem-cn';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
@@ -72,18 +72,18 @@ class UsersSearchResults extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private handlePageRequest(pageNumber: number) {
     const { searchUsers, searchOptions } = this.props;
     searchUsers({ searchOptions, page: pageNumber });
   }
 
-  @bind
+  @autobind
   private handleUserAvatarClick({ username }: IGithubUser) {
     this.setState({ displayedUser: username });
   }
 
-  @bind
+  @autobind
   private handleUserDetailsClose() {
     this.setState({ displayedUser: null });
   }

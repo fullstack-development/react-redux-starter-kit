@@ -2,7 +2,7 @@ import React from 'react';
 import block from 'bem-cn';
 import { connect } from 'react-redux';
 import { Form, FormRenderProps } from 'react-final-form';
-import { bind } from 'decko';
+import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TextInputField, NumberInputField } from 'shared/view/form';
@@ -54,7 +54,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private renderForm({ handleSubmit }: FormRenderProps) {
     const { profile: { avatarURL }, t } = this.props;
     return (
@@ -100,7 +100,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
     );
   }
 
-  @bind
+  @autobind
   private handleFormSubmit(values: IProfileEditFormFields) {
     const { saveProfile, setNotification, t } = this.props;
     saveProfile(values);
