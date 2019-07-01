@@ -8,7 +8,6 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import threadLoaderLib from 'thread-loader';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
-import FileManagerWebpackPlugin from 'filemanager-webpack-plugin';
 
 import postcssReporter from 'postcss-reporter';
 import postcssSCSS from 'postcss-scss';
@@ -18,9 +17,33 @@ import doiuse from 'doiuse';
 
 import getEnvParams from '../src/core/getEnvParams';
 
-export type BuildType = 'dev' | 'prod' | 'server';
+export type EnvType = 'server' | 'serverless';
 
-const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode, forGHPages } = getEnvParams();
+export type BuildType = 'dev' | 'prod';
+
+export interface IDevServer {
+  build: 'dev';
+  env: 'server';
+}
+
+export interface IProdServer {
+  build: 'prod';
+  env: 'server';
+}
+
+export interface IDevServerless {
+  build: 'dev';
+  env: 'serverless';
+}
+
+export interface IProdServerless {
+  build: 'prod';
+  env: 'serverless';
+}
+
+export type ModType = IDevServer | IProdServer | IDevServerless | IProdServerless;
+
+const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode } = getEnvParams();
 
 const threadLoader: webpack.Loader[] = (() => {
   if (process.env.THREADED === 'true') {
@@ -39,7 +62,7 @@ const threadLoader: webpack.Loader[] = (() => {
   return [];
 })();
 
-export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
+export const getCommonPlugins: (type: ModType) => webpack.Plugin[] = (type) => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new MiniCssExtractPlugin({
     filename: `css/[name].[${chunkHash}].css`,
@@ -64,7 +87,7 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   }),
   new FaviconsWebpackPlugin(path.resolve(__dirname, '..', 'src', 'assets', 'favicon.png')),
 ]
-  .concat(type !== 'server' ? (
+  .concat(type.env !== 'server' ? (
     new ForkTsCheckerWebpackPlugin({
       checkSyntacticErrors: true,
       async: false,
@@ -74,26 +97,9 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
   ) : [])
-  .concat(withHot && type !== 'prod' ? (
+  .concat(withHot && type.build !== 'prod' ? (
     new webpack.HotModuleReplacementPlugin()
-  ) : [])
-  .concat(forGHPages ? (
-    new HtmlWebpackPlugin({
-      filename: '404.html',
-      template: 'assets/index.html',
-      chunksSortMode: sortChunks,
-    })
-  ) : [])
-  .concat(forGHPages ? new FileManagerWebpackPlugin({
-    onEnd: {
-      copy: [
-        {
-          source: `src/assets/ghPages/**`,
-          destination: `build`,
-        },
-      ],
-    },
-  }) : []);
+  ) : []);
 
 function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) {
   const order = ['app', 'vendors', 'runtime'];
@@ -103,12 +109,12 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
     );
 }
 
-export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
+export const getCommonRules: (mod: ModType) => webpack.Rule[] = (mod) => [
   {
     test: /\.tsx?$/,
     use:
       threadLoader
-        .concat(withHot && type === 'dev' ? {
+        .concat(withHot && mod.build === 'dev' ? {
           loader: 'babel-loader',
           options: {
             babelrc: false,
@@ -142,27 +148,46 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
   },
 ];
 
-export function getStyleRules(type: BuildType) {
-  const cssLoaders: Record<BuildType, webpack.Loader[]> = {
-    dev: ['style-loader', 'css-loader'],
-    prod: [MiniCssExtractPlugin.loader, 'css-loader'],
-    server: ['css-loader/locals'],
+export function getStyleRules(mod: ModType) {
+  interface IModLoaders {
+    server: webpack.Loader[];
+    serverless: webpack.Loader[];
+  }
+
+  const cssLoaders: Record<BuildType, IModLoaders> = {
+    dev: {
+      server: [MiniCssExtractPlugin.loader, 'css-loader'],
+      serverless: ['style-loader', 'css-loader'],
+    },
+    prod: {
+      server: [MiniCssExtractPlugin.loader, 'css-loader'],
+      serverless: [],
+    },
   };
 
-  const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
-    dev: ['style-loader', 'css-loader?importLoaders=1'],
-    prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
-    server: ['css-loader/locals?importLoaders=1'],
+  const scssFirstLoaders: Record<BuildType, IModLoaders> = {
+    dev: {
+      server: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
+      serverless: ['style-loader', 'css-loader?importLoaders=1'],
+    },
+    prod: {
+      server: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
+      serverless: [],
+    },
   };
+
+  // We use cast to please webpack types requirements
+  const cssLoadersAsLoaders = cssLoaders[mod.build][mod.env] as unknown as webpack.Loader;
+  const scssFirstLoadersAsLoaders = scssFirstLoaders[mod.build][mod.env] as unknown as webpack.Loader;
 
   return [
     {
       test: /\.css$/,
-      use: cssLoaders[type],
+      use: cssLoadersAsLoaders,
     },
     {
       test: /\.scss$/,
-      use: threadLoader.concat(scssFirstLoaders[type]).concat(commonScssLoaders),
+      use: threadLoader.concat(scssFirstLoadersAsLoaders).concat(commonScssLoaders),
     },
   ];
 }
@@ -188,6 +213,7 @@ const commonScssLoaders: webpack.Loader[] = [
       plugins: () => {
         return [
           stylelint(),
+          // FIXME: Слишком жестёкие требования
           doiuse({
             // https://github.com/browserslist/browserslist
             // to view resulting browsers list, use the command in terminal `npx browserslist "defaults, not ie > 0"`
@@ -195,6 +221,7 @@ const commonScssLoaders: webpack.Loader[] = [
             ignore: [],
             ignoreFiles: ['**/normalize.css'],
           }),
+          // FIXME: Не показывает ошибки
           postcssReporter({
             clearReportedMessages: true,
             throwError: true,

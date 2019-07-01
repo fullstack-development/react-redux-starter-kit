@@ -5,13 +5,11 @@ import redux from 'redux';
 import { renderToString } from 'react-dom/server';
 
 import { IAssets } from 'shared/types/app';
-import { SheetsRegistry } from 'shared/styles';
 
 interface IHtmlProps {
   assets: IAssets;
   component?: JSX.Element;
   store: redux.Store<any>;
-  styleSheets?: SheetsRegistry;
 }
 
 /**
@@ -29,7 +27,7 @@ export default class Html extends React.PureComponent<IHtmlProps> {
   }
 
   public render() {
-    const { assets, component, store, styleSheets } = this.props;
+    const { assets, component, store } = this.props;
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
@@ -51,9 +49,6 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           {assets.styles.map((filePath, index) => (
             <link href={`/${filePath}`} key={index} media="screen, projection" rel="stylesheet" type="text/css" />
           ))}
-          {!!styleSheets && (
-            <style type="text/css" id="server-side-styles">{styleSheets.toString()}</style>
-          )}
         </head>
 
         <body style={styles}>

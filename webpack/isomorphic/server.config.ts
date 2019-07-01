@@ -5,7 +5,13 @@ import nodeExternals from 'webpack-node-externals';
 import getDevConfig from '../dev.config';
 import getProdConfig from '../prod.config';
 
-const config = process.env.NODE_ENV === 'production' ? getProdConfig('server') : getDevConfig('server');
+const config = process.env.NODE_ENV === 'production' ? getProdConfig({
+  build: 'prod',
+  env: 'server',
+}) : getDevConfig({
+  build: 'dev',
+  env: 'server',
+});
 
 const serverConfig: webpack.Configuration = {
   ...config,

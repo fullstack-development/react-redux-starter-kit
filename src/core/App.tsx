@@ -4,23 +4,16 @@ import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import 'normalize.css';
 
 import { hot } from 'react-hot-loader/root';
-import { ThemeProvider } from 'services/theme';
 import { containers as NotificationContainers } from 'services/notification';
-import { IAppData, IModule, IJssDependencies } from 'shared/types/app';
-import { BaseStyles, JssProvider, SheetsRegistry } from 'shared/styles';
+import { IAppData, IModule } from 'shared/types/app';
 
 import createRoutes from './routes';
 
-interface IAppProps {
-  jssDeps: IJssDependencies;
-  disableStylesGeneration?: boolean;
-}
-
-function ClientApp({ modules, store, jssDeps, disableStylesGeneration }: IAppData & IAppProps) {
+function ClientApp({ modules, store }: IAppData) {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {renderSharedPart(modules, jssDeps, disableStylesGeneration)}
+        {renderSharedPart(modules)}
       </BrowserRouter>
     </Provider>
   );
@@ -29,42 +22,29 @@ function ClientApp({ modules, store, jssDeps, disableStylesGeneration }: IAppDat
 export const App = hot(ClientApp);
 
 interface IServerAppProps {
-  jssDeps: IJssDependencies;
-  registry?: SheetsRegistry;
   disableStylesGeneration?: boolean;
 }
 
 export function ServerApp(props: IAppData & IServerAppProps & StaticRouter['props']) {
-  const { modules, store, registry, jssDeps, disableStylesGeneration, ...routerProps } = props;
+  const { modules, store, ...routerProps } = props;
   return (
     <Provider store={store}>
       <StaticRouter {...routerProps}>
-        {renderSharedPart(modules, jssDeps, disableStylesGeneration, registry)}
+        {renderSharedPart(modules)}
       </StaticRouter>
     </Provider>
   );
 }
 
 function renderSharedPart(
-  modules: IModule[], jssDeps: IJssDependencies,
-  disableStylesGeneration?: boolean,
-  registry?: SheetsRegistry,
+  modules: IModule[],
 ) {
-  const { generateClassName, jss } = jssDeps;
 
+  // FIXME: Стоит избавить от фрагмент
   return (
-    <JssProvider
-      jss={jss}
-      registry={registry}
-      generateClassName={generateClassName}
-      disableStylesGeneration={disableStylesGeneration}
-    >
-      <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
-        <BaseStyles>
-          {createRoutes(modules)}
-        </BaseStyles>
-        <NotificationContainers.Notification />
-      </ThemeProvider>
-    </JssProvider>
+    <>
+      {createRoutes(modules)}
+      <NotificationContainers.Notification />
+    </>
   );
 }

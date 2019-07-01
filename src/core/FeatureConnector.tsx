@@ -1,6 +1,6 @@
+import * as R from 'ramda';
 import React from 'react';
 import { autobind } from 'core-decorators';
-import * as R from 'ramda';
 import { injectable } from 'inversify';
 
 import { Omit, GetProps, SubSet } from '_helpers';

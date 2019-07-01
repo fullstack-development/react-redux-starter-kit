@@ -2,7 +2,6 @@ import 'reflect-metadata';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import bootstrapper from 'react-async-bootstrapper';
 
 import configureApp from 'core/configureApp';
 import { App } from 'core/App';
@@ -13,10 +12,7 @@ const { appVersion } = getEnvParams();
 const appData = configureApp();
 
 async function main() {
-  const appForBootstrap = <App {...appData} disableStylesGeneration />;
-  await bootstrapper(appForBootstrap);
   const app = <App {...appData} />;
-
   render(app);
 }
 
@@ -29,7 +25,7 @@ if ((module as any).hot && process.env.NODE_ENV !== 'production') {
     const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
     const NextApp: typeof App = require('./core/App').App;
     const nextAppData = nextConfigureApp(appData);
-    render(<NextApp {...nextAppData} jssDeps={appData.jssDeps} />);
+    render(<NextApp {...nextAppData} />);
   });
 }
 

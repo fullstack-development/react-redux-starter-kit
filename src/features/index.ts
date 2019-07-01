@@ -1,5 +1,3 @@
-import * as usersSearch from './usersSearch';
-import * as repositoriesSearch from './repositoriesSearch';
-import * as profile from './profile';
+import * as featureExample from './featureExample';
 
-export { usersSearch, repositoriesSearch, profile };
+export { featureExample };

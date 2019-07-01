@@ -1,11 +1,10 @@
 import 'reflect-metadata';
 import express from 'express';
 import React from 'react';
-import bootstrapper from 'react-async-bootstrapper';
 import { renderToString } from 'react-dom/server';
 
+import { Bootstrapper } from 'shared/helpers/bootstrap';
 import { IAssets, IAppData } from 'shared/types/app';
-import { SheetsRegistry } from 'shared/styles';
 import Html from 'assets/Html';
 
 import configureApp from 'core/configureApp';
@@ -44,11 +43,12 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
 }
 
 async function renderOnServer(appData: IAppData, assets: IAssets, location: string, context: object) {
-  const sheets = new SheetsRegistry();
   const appForBootstrap = <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />;
-  await bootstrapper(appForBootstrap);
-  const app = <ServerApp {...appData} location={location} context={context} registry={sheets} />;
-  const html = <Html assets={assets} component={app} store={appData.store} styleSheets={sheets} />;
+  // wait for all async tasks in tree
+  const bootstrapper = new Bootstrapper(appForBootstrap, appData.store);
+  await bootstrapper.waitJobsCompletion();
+  const app = <ServerApp {...appData} location={location} context={context} />;
+  const html = <Html assets={assets} component={app} store={appData.store} />;
   const document = `
     <!doctype html>
     ${renderToString(html)}

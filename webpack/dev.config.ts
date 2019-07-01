@@ -1,11 +1,16 @@
 import webpack from 'webpack';
 
-import { getCommonRules, commonConfig, getStyleRules, BuildType, getCommonPlugins } from './common';
+import { getCommonRules, commonConfig, getStyleRules, getCommonPlugins, ModType } from './common';
 
-const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+const getDevConfig: (mod?: ModType) => webpack.Configuration = (mod) => {
+  const defaultMod: ModType = {
+    build: 'dev',
+    env: 'serverless',
+  };
+
   const rules: webpack.Rule[] = [
-    ...getCommonRules(type || 'dev'),
-    ...getStyleRules(type || 'dev'),
+    ...getCommonRules(mod || defaultMod),
+    ...getStyleRules(mod || defaultMod),
   ];
 
   return {
@@ -18,7 +23,7 @@ const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
     module: {
       rules,
     },
-    plugins: getCommonPlugins(type || 'dev'),
+    plugins: getCommonPlugins(mod || defaultMod),
   };
 };
 

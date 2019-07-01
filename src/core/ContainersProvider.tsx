@@ -2,14 +2,14 @@ import React from 'react';
 import { autobind } from 'core-decorators';
 import { Omit, SubSet } from '_helpers';
 
-import * as usersSearchFeature from 'features/usersSearch';
+import * as featureExample from 'features/featureExample';
 import { injectable } from 'inversify';
 import { inject, TYPES } from './configureIoc';
 
 import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
 
 interface IContainerTypes {
-  UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];
+  FeatureExample: featureExample.Entry['containers']['FeatureExample'];
 }
 
 type Container = keyof IContainerTypes;
@@ -30,7 +30,7 @@ type GenericLoadersMap = {
 };
 
 const containerLoadersDictionary: LoadersMap = {
-  UserDetails: usersSearchFeature.loadEntry,
+  FeatureExample: featureExample.loadEntry,
 };
 
 interface IState {
