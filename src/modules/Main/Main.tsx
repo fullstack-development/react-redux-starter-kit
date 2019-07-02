@@ -6,7 +6,7 @@ import { IModule } from 'shared/types/app';
 
 import { MainLayout } from './view/components';
 
-const Profile: IModule = {
+const Main: IModule = {
   getRoutes() {
     return (
       <Route
@@ -18,4 +18,4 @@ const Profile: IModule = {
   },
 };
 
-export default Profile;
+export default Main;

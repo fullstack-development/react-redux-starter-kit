@@ -1,20 +1,12 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
+import { IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { IFeatureEntry } from './types/app';
 
 export const makeMockComponent = (componentName: string): any => {
   const Container = () => React.createElement('div');
   Container.displayName = componentName;
   return Container;
-};
-
-export const profile: IProfile = {
-  age: 100,
-  nickname: 'Nickname',
-  name: 'Name name',
-  bio: 'profile bio',
-  avatarURL: 'https://the-url.com',
 };
 
 export const githubUser: IGithubUser = {
