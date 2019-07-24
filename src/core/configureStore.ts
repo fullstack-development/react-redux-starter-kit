@@ -4,7 +4,7 @@ import { compose, applyMiddleware, combineReducers, createStore, Reducer, Middle
 
 import { composeReducers } from 'shared/helpers/redux';
 import { IAppReduxState } from 'shared/types/app';
-import { ReducersMap } from 'shared/types/redux';
+import { ReducersMap, IAction } from 'shared/types/redux';
 
 interface IStoreData {
   store: Store<IAppReduxState>;
@@ -18,21 +18,10 @@ function configureStore(): IStoreData {
   const isBrowser = typeof window !== 'undefined';
   const composeEnhancers = isBrowser && process.env.NODE_ENV === 'development' ? composeWithDevTools({}) : compose;
 
-  const initialAppState: IAppReduxState | undefined = isBrowser ? window.__data : undefined;
-
-  const store: Store<IAppReduxState> = initialAppState
-    ? (
-      createStore(
-        (state: IAppReduxState) => state,
-        initialAppState,
-        composeEnhancers(applyMiddleware(...middlewares)),
-      )
-    ) : (
-      createStore(
-        (state: IAppReduxState) => state,
-        composeEnhancers(applyMiddleware(...middlewares)),
-      )
-    );
+  const store: Store<IAppReduxState> = createStore(
+    (state: IAppReduxState) => state,
+    composeEnhancers(applyMiddleware(...middlewares)),
+  );
 
   return {
     store,
@@ -41,9 +30,17 @@ function configureStore(): IStoreData {
 }
 
 function createReducer(reducers: ReducersMap<IAppReduxState>): Reducer<IAppReduxState> {
-  return composeReducers<IAppReduxState>([
+  const composed = composeReducers<IAppReduxState>([
     combineReducers<IAppReduxState>(reducers),
   ]);
+
+  return (state: IAppReduxState, action: IAction<any, any>) => {
+    if (action.type === 'RESET_STATE' && action.payload) {
+      return action.payload;
+    }
+
+    return composed(state, action);
+  };
 }
 
 export { createReducer, IStoreData };

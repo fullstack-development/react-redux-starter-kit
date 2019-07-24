@@ -4,11 +4,17 @@ import configureStore, { createReducer } from './configureStore';
 import { configureJss } from './configureJss';
 
 import * as allModules from 'modules';
-import { ReducersMap } from 'shared/types/redux';
+
 import { reduxEntry as themeProviderRE } from 'services/theme';
 import { reduxEntry as notificationReduxEntry } from 'services/notification';
-import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 import { initializeI18n } from 'services/i18n/i18nContainer';
+
+import { reduxEntry as profileReduxEntry } from 'features/profile/entry';
+import { reduxEntry as repositoriesSearchReduxEntry } from 'features/repositoriesSearch/entry';
+import { reduxEntry as usersSearchReduxEntry } from 'features/usersSearch/entry';
+
+import { ReducersMap } from 'shared/types/redux';
+import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 
 function configureApp(data?: IAppData): IAppData {
   /* Prepare main app elements */
@@ -21,6 +27,9 @@ function configureApp(data?: IAppData): IAppData {
   const sharedReduxEntries: IReduxEntry[] = [
     themeProviderRE,
     notificationReduxEntry,
+    profileReduxEntry,
+    repositoriesSearchReduxEntry,
+    usersSearchReduxEntry,
   ];
 
   const connectedSagas: RootSaga[] = [];
@@ -46,6 +55,10 @@ function configureApp(data?: IAppData): IAppData {
       connectEntryToStore(module.getReduxEntry());
     }
   });
+
+  const isBrowser = typeof window !== 'undefined';
+  const initial: IAppReduxState | undefined = isBrowser ? window.__data : undefined;
+  isBrowser && store.dispatch({ type: 'RESET_STATE', payload: initial });
 
   function connectEntryToStore({ reducers, sagas }: IReduxEntry) {
     if (!store) {
