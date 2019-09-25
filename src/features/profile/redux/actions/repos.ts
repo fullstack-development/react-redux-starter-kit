@@ -1,11 +1,11 @@
 import { IRepository } from 'shared/types/models';
 
-export const addRepo = (user: IRepository) => ({
-  type: 'PROFILE:ADD_REPO',
-  payload: user,
+export const saveRepo = (repo: IRepository) => ({
+  type: 'PROFILE:SAVE_REPO',
+  payload: repo,
 });
 
-export const removeRepo = (id: string) => ({
+export const removeRepo = (id: number) => ({
   type: 'PROFILE:REMOVE_REPO',
   payload: id,
 });
