@@ -1,5 +1,5 @@
 module.exports = {
-  setupTestFrameworkScriptFile: '<rootDir>/jest.setup.ts',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
@@ -21,7 +21,6 @@ module.exports = {
     'ContainersProvider\.tsx$': '<rootDir>/src/core/__mocks__/fileMock.ts',
   },
 
-  mapCoverage: true,
   coverageDirectory: '<rootDir>/coverage',
   collectCoverageFrom: [
     '**/src/**/*.{ts,tsx}',
