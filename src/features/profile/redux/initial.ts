@@ -5,12 +5,6 @@ const initial: IReduxState = {
   edit: {
     profile,
   },
-  users: {
-    saved: [],
-  },
-  repos: {
-    saved: [],
-  },
 };
 
 export default initial;
