@@ -10,6 +10,7 @@ const props: IUserDetailsProps = {
   isLoadUserDetailsRequesting: true,
   loadUserDetails: jest.fn(),
   onClose: jest.fn(),
+  onSaveButtonClick: jest.fn(),
   username: 'the user',
   ...getMockedLocaleProps(),
 };
@@ -30,7 +31,10 @@ describe('(features/usersSearch) UserDetails container', () => {
   it('should call loadUserDetails with username on dialog enter', () => {
     const loadUserDetails = jest.fn();
     const component = getComponent({ loadUserDetails });
-    component.find(Dialog).prop('onEnter')!(document.createElement('div'), false);
+    component.find(Dialog).prop('onEnter')!(
+      document.createElement('div'),
+      false,
+    );
     expect(loadUserDetails).toHaveBeenCalledWith(props.username);
   });
 

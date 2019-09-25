@@ -1,16 +1,19 @@
-import { IProfile } from 'shared/types/models';
+import {
+  IProfile,
+  IDetailedGithubUser,
+  IRepository,
+} from 'shared/types/models';
 import { IAction } from 'shared/types/redux';
-import { IDetailedGithubUser, IRepository } from 'shared/types/models';
 
 export interface IReduxState {
   edit: {
     profile: IProfile;
   };
   users: {
-    saved: Array<IDetailedGithubUser>;
+    saved: IDetailedGithubUser[];
   };
   repos: {
-    saved: Array<IRepository>;
+    saved: IRepository[];
   };
 }
 

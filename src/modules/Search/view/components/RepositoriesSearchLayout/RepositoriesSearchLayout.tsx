@@ -27,7 +27,10 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
   };
 
   public render() {
-    const { repositoriesSearchFeatureEntry: { containers }, t } = this.props;
+    const {
+      repositoriesSearchFeatureEntry: { containers },
+      t,
+    } = this.props;
     const { RepositoriesSearchForm, RepositoriesSearchResults } = containers;
     const { lastSubmittedFormState } = this.state;
 
@@ -38,9 +41,11 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
             <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />
           </div>
           <div className={b('results')}>
-            {lastSubmittedFormState &&
-              <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
-            }
+            {lastSubmittedFormState && (
+              <RepositoriesSearchResults
+                searchOptions={lastSubmittedFormState}
+              />
+            )}
           </div>
         </div>
       </Layout>
@@ -48,7 +53,9 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
   }
 
   @autobind
-  private setLastSubmittedFormState(formState: features.repositoriesSearch.namespace.IRepositoriesSearchFormFields) {
+  private setLastSubmittedFormState(
+    formState: features.repositoriesSearch.namespace.IRepositoriesSearchFormFields,
+  ) {
     this.setState({ lastSubmittedFormState: formState });
   }
 }

@@ -37,14 +37,21 @@ interface IContainerProps {
   UserDetails: IContainerTypes['UserDetails'];
 }
 
-type IProps = IOwnProps & IStateProps & IActionProps & IContainerProps & ITranslationProps;
+type IProps = IOwnProps &
+  IStateProps &
+  IActionProps &
+  IContainerProps &
+  ITranslationProps;
 
 function mapState(state: IAppReduxState): IStateProps {
   return {
     repositories: selectors.selectFoundRepositories(state),
     paginationState: selectors.selectRepositoriesSearchPaginationState(state),
     totalResults: selectors.selectTotalResults(state),
-    isSearchRequesting: selectors.selectCommunication(state, 'searchRepositories').isRequesting,
+    isSearchRequesting: selectors.selectCommunication(
+      state,
+      'searchRepositories',
+    ).isRequesting,
   };
 }
 
@@ -61,15 +68,26 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
 
   public render() {
     const {
-      repositories, UserDetails, paginationState: { totalPages, page }, t,
-      totalResults, isSearchRequesting,
+      repositories,
+      UserDetails,
+      paginationState: { totalPages, page },
+      t,
+      totalResults,
+      isSearchRequesting,
     } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
+        <TotalSearchResults
+          title={t(tKeys.shared.totalResults)}
+          totalResults={totalResults}
+        />
         <div className={b('repositories')}>
-          <Preloader size={0} backgroundColor="rgba(0, 0, 0, 0.05)" isShown={isSearchRequesting} />
+          <Preloader
+            size={0}
+            backgroundColor="rgba(0, 0, 0, 0.05)"
+            isShown={isSearchRequesting}
+          />
           {repositories.map(this.renderRepositoryPreview)}
         </div>
         <div className={b('pagination')}>
@@ -79,9 +97,13 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedRepositoryOwner &&
-          <UserDetails username={displayedRepositoryOwner} onClose={this.handleUserDetailsClose} />
-        }
+        {displayedRepositoryOwner && (
+          <UserDetails
+            username={displayedRepositoryOwner}
+            onSaveButtonClick={this.handleSaveButtonClick}
+            onClose={this.handleUserDetailsClose}
+          />
+        )}
       </div>
     );
   }
@@ -90,7 +112,10 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   private renderRepositoryPreview(repository: IRepository) {
     return (
       <div className={b('repository-preview')} key={repository.id}>
-        <RepositoryPreview repository={repository} onOwnerClick={this.handleRepositoryOwnerClick} />
+        <RepositoryPreview
+          repository={repository}
+          onOwnerClick={this.handleRepositoryOwnerClick}
+        />
       </div>
     );
   }
@@ -110,13 +135,23 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
     const { searchRepositories, searchOptions } = this.props;
     searchRepositories({ searchOptions, page: pageNumber });
   }
+
+  @autobind
+  private handleSaveButtonClick() {
+    console.log('Not implemented');
+  }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResults);
+const connectedComponent = connect(
+  mapState,
+  mapDispatch,
+)(RepositoriesSearchResults);
 
 export {
   RepositoriesSearchResults,
   IProps as IRepositoriesSearchResultsProps,
   IState as IRepositoriesSearchResultsState,
 };
-export default withTranslation()(containersProvider(['UserDetails'])(connectedComponent));
+export default withTranslation()(
+  containersProvider(['UserDetails'])(connectedComponent),
+);

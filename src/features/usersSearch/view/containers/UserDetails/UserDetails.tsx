@@ -16,8 +16,8 @@ import './UserDetails.scss';
 
 interface IOwnProps {
   username: string;
+  onSaveButtonClick(user: IDetailedGithubUser | null): void;
   onClose(): void;
-  onSaveButtonClick: (user: IDetailedGithubUser | null) => void;
 }
 
 interface IStateProps {
@@ -48,7 +48,6 @@ const { userSearch: intl } = tKeys.features;
 
 class UserDetails extends React.Component<IProps> {
   private avatarSize = 230;
-
   public render() {
     const { isLoadUserDetailsRequesting, t } = this.props;
     return (
@@ -70,13 +69,6 @@ class UserDetails extends React.Component<IProps> {
         </Dialog.Content>
       </Dialog>
     );
-  }
-
-  @autobind
-  private handleSaveButtonClick() {
-    const { userDetails, onSaveButtonClick } = this.props;
-
-    onSaveButtonClick(userDetails);
   }
 
   private renderContent() {
@@ -139,6 +131,13 @@ class UserDetails extends React.Component<IProps> {
     }
 
     return null;
+  }
+
+  @autobind
+  private handleSaveButtonClick() {
+    const { userDetails, onSaveButtonClick } = this.props;
+
+    onSaveButtonClick(userDetails);
   }
 
   @autobind

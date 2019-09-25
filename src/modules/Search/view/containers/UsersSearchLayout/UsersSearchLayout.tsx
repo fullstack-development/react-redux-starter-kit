@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
 import * as features from 'features';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
+
+import { saveUser } from 'features/profile/redux/actions';
 
 import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
@@ -17,7 +20,11 @@ interface IFeatureProps {
   usersSearchFeatureEntry: features.usersSearch.Entry;
 }
 
-type IProps = IFeatureProps & ITranslationProps;
+type IActionProps = typeof mapDispatch;
+
+type IProps = IFeatureProps & ITranslationProps & IActionProps;
+
+const mapDispatch = { onSaveUser: saveUser };
 
 const b = block('users-search-layout');
 
@@ -27,7 +34,11 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   };
 
   public render() {
-    const { usersSearchFeatureEntry: { containers }, t } = this.props;
+    const {
+      usersSearchFeatureEntry: { containers },
+      t,
+      onSaveUser,
+    } = this.props;
     const { UsersSearchForm, UsersSearchResults } = containers;
     const { lastSubmittedFormState } = this.state;
 
@@ -37,19 +48,30 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
           <div className={b('search-form')}>
             <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />
           </div>
-          {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
+          {lastSubmittedFormState && (
+            <UsersSearchResults
+              searchOptions={lastSubmittedFormState}
+              onSave={onSaveUser}
+            />
+          )}
         </div>
       </Layout>
     );
   }
 
   @autobind
-  private setLastSubmittedFormState(formState: features.usersSearch.namespace.IUsersSearchFormFields) {
+  private setLastSubmittedFormState(
+    formState: features.usersSearch.namespace.IUsersSearchFormFields,
+  ) {
     this.setState({ lastSubmittedFormState: formState });
   }
 }
 
 export { UsersSearchLayout, IProps as IUsersSearchLayoutProps };
+const connectedComponent = connect(
+  null,
+  mapDispatch,
+)(UsersSearchLayout);
 export default featureConnect({
   usersSearchFeatureEntry: features.usersSearch.loadEntry,
-})(withTranslation()(UsersSearchLayout));
+})(withTranslation()(connectedComponent));

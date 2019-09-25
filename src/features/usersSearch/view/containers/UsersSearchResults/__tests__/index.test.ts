@@ -4,7 +4,10 @@ import { PaginationControls } from 'shared/view/components';
 
 import { UsersAvatarsWall } from '../../../components';
 import UserDetails from '../../UserDetails/UserDetails';
-import { UsersSearchResults, IUsersSearchResultsProps } from '../UsersSearchResults';
+import {
+  UsersSearchResults,
+  IUsersSearchResultsProps,
+} from '../UsersSearchResults';
 
 const props: IUsersSearchResultsProps = {
   searchOptions: {
@@ -13,6 +16,7 @@ const props: IUsersSearchResultsProps = {
     searchString: 'search',
     searchFor: 'user',
   },
+  onSave: jest.fn(),
   users: Array(10).fill(githubUser),
   paginationState: {
     page: 1,

@@ -5,7 +5,7 @@ import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
-import { IGithubUser } from 'shared/types/models';
+import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 import { TotalSearchResults } from 'shared/view/elements';
@@ -22,6 +22,7 @@ interface IState {
 
 interface IOwnProps {
   searchOptions: IUsersSearchFormFields;
+  onSave: (user: IDetailedGithubUser | null) => void;
 }
 
 interface IStateProps {
@@ -54,12 +55,23 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { users, paginationState: { page, totalPages }, totalResults, t } = this.props;
+    const {
+      users,
+      paginationState: { page, totalPages },
+      totalResults,
+      t,
+    } = this.props;
     const { displayedUser } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
-        <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
+        <TotalSearchResults
+          title={t(tKeys.shared.totalResults)}
+          totalResults={totalResults}
+        />
+        <UsersAvatarsWall
+          users={users}
+          onAvatarClick={this.handleUserAvatarClick}
+        />
         <div className={b('pagination')}>
           <PaginationControls
             totalPages={totalPages}
@@ -67,7 +79,13 @@ class UsersSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />}
+        {displayedUser && (
+          <UserDetails
+            username={displayedUser}
+            onClose={this.handleUserDetailsClose}
+            onSaveButtonClick={this.props.onSave}
+          />
+        )}
       </div>
     );
   }
@@ -89,6 +107,9 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResults);
+const connectedComponent = connect(
+  mapState,
+  mapDispatch,
+)(UsersSearchResults);
 export { UsersSearchResults, IProps as IUsersSearchResultsProps };
 export default withTranslation()(connectedComponent);
