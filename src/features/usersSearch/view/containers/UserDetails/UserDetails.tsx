@@ -16,7 +16,9 @@ import './UserDetails.scss';
 
 interface IOwnProps {
   username: string;
+  isSaved: boolean;
   onSaveButtonClick(user: IDetailedGithubUser | null): void;
+  onRemoveButtonClick(id: number): void;
   onClose(): void;
 }
 
@@ -72,7 +74,7 @@ class UserDetails extends React.Component<IProps> {
   }
 
   private renderContent() {
-    const { userDetails, t } = this.props;
+    const { userDetails, t, isSaved } = this.props;
     if (userDetails) {
       const {
         htmlURL,
@@ -123,21 +125,18 @@ class UserDetails extends React.Component<IProps> {
               value={reposNumber}
             />
           </div>
-          <div className={b('save-button-container')}>
-            <Button onClick={this.handleSaveButtonClick}>Save</Button>
+          <div className={b('action-button-container')}>
+            {isSaved ? (
+              <Button onClick={this.handleRemoveButtonClick}>Remove</Button>
+            ) : (
+              <Button onClick={this.handleSaveButtonClick}>Save</Button>
+            )}
           </div>
         </>
       );
     }
 
     return null;
-  }
-
-  @autobind
-  private handleSaveButtonClick() {
-    const { userDetails, onSaveButtonClick } = this.props;
-
-    onSaveButtonClick(userDetails);
   }
 
   @autobind
@@ -150,6 +149,20 @@ class UserDetails extends React.Component<IProps> {
   private handleDialogClose() {
     const { onClose } = this.props;
     onClose();
+  }
+
+  @autobind
+  private handleSaveButtonClick() {
+    const { userDetails, onSaveButtonClick } = this.props;
+
+    onSaveButtonClick(userDetails);
+  }
+
+  @autobind
+  private handleRemoveButtonClick() {
+    const { userDetails, onRemoveButtonClick } = this.props;
+
+    onRemoveButtonClick(userDetails.id);
   }
 }
 

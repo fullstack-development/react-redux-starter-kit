@@ -7,7 +7,10 @@ import * as features from 'features';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
 
-import { saveUser } from 'features/profile/redux/actions';
+import { IAppReduxState } from 'shared/types/app';
+import { IDetailedGithubUser } from 'shared/types/models';
+import { saveUser, removeUser } from 'features/profile/redux/actions';
+import { selectUsers } from 'features/profile/redux/selectors';
 
 import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
@@ -20,11 +23,21 @@ interface IFeatureProps {
   usersSearchFeatureEntry: features.usersSearch.Entry;
 }
 
+interface IStateProps {
+  users: IDetailedGithubUser[];
+}
+
 type IActionProps = typeof mapDispatch;
 
-type IProps = IFeatureProps & ITranslationProps & IActionProps;
+type IProps = IStateProps & IActionProps & IFeatureProps & ITranslationProps;
 
-const mapDispatch = { onSaveUser: saveUser };
+function mapState(state: IAppReduxState): IStateProps {
+  return {
+    users: selectUsers(state),
+  };
+}
+
+const mapDispatch = { onSave: saveUser, onRemove: removeUser };
 
 const b = block('users-search-layout');
 
@@ -37,7 +50,9 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
     const {
       usersSearchFeatureEntry: { containers },
       t,
-      onSaveUser,
+      users,
+      onSave,
+      onRemove,
     } = this.props;
     const { UsersSearchForm, UsersSearchResults } = containers;
     const { lastSubmittedFormState } = this.state;
@@ -51,7 +66,9 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
           {lastSubmittedFormState && (
             <UsersSearchResults
               searchOptions={lastSubmittedFormState}
-              onSave={onSaveUser}
+              savedUsers={users}
+              onSave={onSave}
+              onRemove={onRemove}
             />
           )}
         </div>
@@ -69,7 +86,7 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
 
 export { UsersSearchLayout, IProps as IUsersSearchLayoutProps };
 const connectedComponent = connect(
-  null,
+  mapState,
   mapDispatch,
 )(UsersSearchLayout);
 export default featureConnect({

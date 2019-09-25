@@ -22,7 +22,9 @@ interface IState {
 
 interface IOwnProps {
   searchOptions: IUsersSearchFormFields;
-  onSave: (user: IDetailedGithubUser | null) => void;
+  savedUsers: IDetailedGithubUser[];
+  onSave(user: IDetailedGithubUser | null): void;
+  onRemove(id: number): void;
 }
 
 interface IStateProps {
@@ -60,6 +62,8 @@ class UsersSearchResults extends React.PureComponent<IProps> {
       paginationState: { page, totalPages },
       totalResults,
       t,
+      onSave,
+      onRemove,
     } = this.props;
     const { displayedUser } = this.state;
     return (
@@ -83,7 +87,9 @@ class UsersSearchResults extends React.PureComponent<IProps> {
           <UserDetails
             username={displayedUser}
             onClose={this.handleUserDetailsClose}
-            onSaveButtonClick={this.props.onSave}
+            onSaveButtonClick={onSave}
+            onRemoveButtonClick={onRemove}
+            isSaved={this.userIsSaved()}
           />
         )}
       </div>
@@ -104,6 +110,16 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   @autobind
   private handleUserDetailsClose() {
     this.setState({ displayedUser: null });
+  }
+
+  @autobind
+  private userIsSaved() {
+    const { savedUsers } = this.props;
+    const { displayedUser } = this.state;
+
+    const user = savedUsers.find(({ username }) => username === displayedUser);
+
+    return user ? true : false;
   }
 }
 
