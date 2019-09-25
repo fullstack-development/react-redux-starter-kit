@@ -6,7 +6,7 @@ import { autobind } from 'core-decorators';
 import { IAppReduxState } from 'shared/types/app';
 import { IDetailedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
-import { Typography, Preloader, Button } from 'shared/view/elements';
+import { Typography, Preloader } from 'shared/view/elements';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { UserAttribute } from '../../components';
@@ -17,7 +17,6 @@ import './UserDetails.scss';
 interface IOwnProps {
   username: string;
   onClose(): void;
-  onSaveButtonClick: (user: IDetailedGithubUser | null) => void;
 }
 
 interface IStateProps {
@@ -32,10 +31,7 @@ type IProps = IStateProps & IActionProps & IOwnProps & ITranslationProps;
 function mapState(state: IAppReduxState): IStateProps {
   return {
     userDetails: selectors.selectUserDetails(state),
-    isLoadUserDetailsRequesting: selectors.selectCommunication(
-      state,
-      'loadUserDetails',
-    ).isRequesting,
+    isLoadUserDetailsRequesting: selectors.selectCommunication(state, 'loadUserDetails').isRequesting,
   };
 }
 
@@ -60,11 +56,7 @@ class UserDetails extends React.Component<IProps> {
       >
         <Dialog.Content>
           <div className={b()}>
-            <Preloader
-              size={80}
-              isShown={isLoadUserDetailsRequesting}
-              backgroundColor="#fff"
-            />
+            <Preloader size={80} isShown={isLoadUserDetailsRequesting} backgroundColor="#fff" />
             {this.renderContent()}
           </div>
         </Dialog.Content>
@@ -72,47 +64,23 @@ class UserDetails extends React.Component<IProps> {
     );
   }
 
-  @autobind
-  private handleSaveButtonClick() {
-    const { userDetails, onSaveButtonClick } = this.props;
-
-    onSaveButtonClick(userDetails);
-  }
-
   private renderContent() {
     const { userDetails, t } = this.props;
     if (userDetails) {
       const {
-        htmlURL,
-        avatarURL,
-        realName,
-        username,
-        location,
-        followersNumber,
-        followingNumber,
-        reposNumber,
+        htmlURL, avatarURL, realName, username, location,
+        followersNumber, followingNumber, reposNumber,
       } = userDetails;
       return (
         <>
-          <a
-            href={htmlURL}
-            className={b('main')}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={htmlURL} className={b('main')} target="_blank" rel="noopener noreferrer">
             <img
               className={b('avatar')}
               src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
             />
             <Typography variant="h5">{realName}</Typography>
-            <Typography variant="subtitle1" noWrap>
-              {username}
-            </Typography>
-            {location && (
-              <Typography variant="subtitle2" color="textSecondary">
-                {location}
-              </Typography>
-            )}
+            <Typography variant="subtitle1" noWrap>{username}</Typography>
+            {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
           </a>
           <div className={b('attributes')}>
             <UserAttribute
@@ -130,9 +98,6 @@ class UserDetails extends React.Component<IProps> {
               title={t(intl.repositories)}
               value={reposNumber}
             />
-          </div>
-          <div className={b('save-button-container')}>
-            <Button onClick={this.handleSaveButtonClick}>Save</Button>
           </div>
         </>
       );
@@ -154,10 +119,7 @@ class UserDetails extends React.Component<IProps> {
   }
 }
 
-const connectedComponent = connect(
-  mapState,
-  mapDispatch,
-)(UserDetails);
+const connectedComponent = connect(mapState, mapDispatch)(UserDetails);
 
 export { UserDetails, IProps as IUserDetailsProps };
 export default withTranslation()(connectedComponent);
