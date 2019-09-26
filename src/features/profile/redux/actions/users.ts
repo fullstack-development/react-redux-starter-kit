@@ -1,11 +1,16 @@
+import * as NS from '../../namespace';
 import { IDetailedGithubUser } from 'shared/types/models';
 
-export const saveUser = (user: IDetailedGithubUser) => ({
-  type: 'PROFILE:SAVE_USER',
-  payload: user,
-});
+export function saveUser(payload: IDetailedGithubUser): NS.ISaveUser {
+  return {
+    type: 'PROFILE:SAVE_USER',
+    payload,
+  };
+}
 
-export const removeUser = (id: number) => ({
-  type: 'PROFILE:REMOVE_USER',
-  payload: id,
-});
+export function removeUser(payload: number): NS.IRemoveUser {
+  return {
+    type: 'PROFILE:REMOVE_USER',
+    payload,
+  };
+}

@@ -23,5 +23,7 @@ export type ISaveProfile = IAction<
   'PROFILE:SAVE_PROFILE',
   IProfileEditFormFields
 >;
+export type ISaveUser = IAction<'PROFILE:SAVE_USER', IDetailedGithubUser>;
+export type IRemoveUser = IAction<'PROFILE:REMOVE_USER', number>;
 
-export type IAction = ISaveProfile;
+export type IAction = ISaveProfile | ISaveUser | IRemoveUser;

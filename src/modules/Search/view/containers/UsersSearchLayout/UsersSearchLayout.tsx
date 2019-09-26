@@ -1,4 +1,6 @@
 import React from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
+import { Action } from 'shared/types/redux';
 import { connect } from 'react-redux';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
@@ -6,8 +8,6 @@ import { autobind } from 'core-decorators';
 import * as features from 'features';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
-
-import { saveUser, removeUser } from 'features/profile/redux/actions';
 
 import { IDetailedGithubUser } from 'shared/types/models';
 
@@ -28,19 +28,36 @@ interface IStateProps {
   users: IDetailedGithubUser[];
 }
 
-type IProps = IStateProps &
-  typeof mapDispatch &
-  IFeatureProps &
-  ITranslationProps;
+interface IActionProps {
+  saveUser: Action<features.profile.namespace.ISaveUser>;
+  removeUser: Action<features.profile.namespace.IRemoveUser>;
+}
+
+type IProps = IStateProps & IActionProps & IFeatureProps & ITranslationProps;
 
 const mapState = (
   state: IAppReduxState,
-  { profileFeatureEntry: { selectors } }: IProps,
+  { profileFeatureEntry: { selectors } }: IFeatureProps,
 ) => ({
   users: selectors.selectUsers(state),
 });
 
-const mapDispatch = { saveUser, removeUser };
+function mapDispatch(
+  dispatch: Dispatch<any>,
+  {
+    profileFeatureEntry: {
+      actions: { saveUser, removeUser },
+    },
+  }: IFeatureProps,
+): IActionProps {
+  return bindActionCreators(
+    {
+      saveUser,
+      removeUser,
+    },
+    dispatch,
+  );
+}
 
 const b = block('users-search-layout');
 

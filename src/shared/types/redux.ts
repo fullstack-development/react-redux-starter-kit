@@ -37,6 +37,13 @@ export interface IReduxField<T> {
   touched?: boolean;
 }
 
+export interface IPayloadHolder<T> {
+  payload: T;
+}
+export type Action<A extends IPayloadHolder<T>, T = {}> = (
+  payload: A['payload'],
+) => void;
+
 // TODO: remove
 export type ReducersMap<T> = {
   [key in keyof T]: Reducer<T[key]>;
