@@ -7,13 +7,13 @@ import * as features from 'features';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import featureConnect from 'core/FeatureConnector';
 
-import { IAppReduxState } from 'shared/types/app';
-import { IDetailedGithubUser } from 'shared/types/models';
 import { saveUser, removeUser } from 'features/profile/redux/actions';
-import { selectUsers } from 'features/profile/redux/selectors';
+
+import { IDetailedGithubUser } from 'shared/types/models';
 
 import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
+import { IAppReduxState } from 'shared/types/app';
 
 interface IState {
   lastSubmittedFormState: features.usersSearch.namespace.IUsersSearchFormFields | null;
@@ -21,23 +21,26 @@ interface IState {
 
 interface IFeatureProps {
   usersSearchFeatureEntry: features.usersSearch.Entry;
+  profileFeatureEntry: features.profile.Entry;
 }
 
 interface IStateProps {
   users: IDetailedGithubUser[];
 }
 
-type IActionProps = typeof mapDispatch;
+type IProps = IStateProps &
+  typeof mapDispatch &
+  IFeatureProps &
+  ITranslationProps;
 
-type IProps = IStateProps & IActionProps & IFeatureProps & ITranslationProps;
+const mapState = (
+  state: IAppReduxState,
+  { profileFeatureEntry: { selectors } }: IProps,
+) => ({
+  users: selectors.selectUsers(state),
+});
 
-function mapState(state: IAppReduxState): IStateProps {
-  return {
-    users: selectUsers(state),
-  };
-}
-
-const mapDispatch = { onSave: saveUser, onRemove: removeUser };
+const mapDispatch = { saveUser, removeUser };
 
 const b = block('users-search-layout');
 
@@ -49,10 +52,10 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   public render() {
     const {
       usersSearchFeatureEntry: { containers },
-      t,
+      saveUser,
+      removeUser,
       users,
-      onSave,
-      onRemove,
+      t,
     } = this.props;
     const { UsersSearchForm, UsersSearchResults } = containers;
     const { lastSubmittedFormState } = this.state;
@@ -67,8 +70,8 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
             <UsersSearchResults
               searchOptions={lastSubmittedFormState}
               savedUsers={users}
-              onSave={onSave}
-              onRemove={onRemove}
+              onSave={saveUser}
+              onRemove={removeUser}
             />
           )}
         </div>
@@ -91,4 +94,5 @@ const connectedComponent = connect(
 )(UsersSearchLayout);
 export default featureConnect({
   usersSearchFeatureEntry: features.usersSearch.loadEntry,
+  profileFeatureEntry: features.profile.loadEntry,
 })(withTranslation()(connectedComponent));
