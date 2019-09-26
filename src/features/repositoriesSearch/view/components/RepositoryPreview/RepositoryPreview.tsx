@@ -11,10 +11,10 @@ import './RepositoryPreview.scss';
 
 interface IOwnProps {
   repository: IRepository;
+  isSaved: boolean;
   onOwnerClick(username: string): void;
   onSaveButtonClick(repo: IRepository): void;
   onRemoveButtonClick(repoId: number): void;
-  isSaved: boolean;
 }
 
 type IProps = IOwnProps & ITranslationProps;

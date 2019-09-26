@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
-import { ProfileLayout } from './view/components';
+import { ProfileLayout, SavedListLayout } from './view/components';
 
 const Profile: IModule = {
   getRoutes() {
@@ -12,8 +12,20 @@ const Profile: IModule = {
       <Route
         key={routes.profile.getElementKey()}
         path={routes.profile.getRoutePath()}
-        component={ProfileLayout}
-      />
+      >
+        <Switch>
+          <Route
+            key={routes.profile.edit.getElementKey()}
+            path={routes.profile.edit.getRoutePath()}
+            component={ProfileLayout}
+          />
+          <Route
+            key={routes.profile.saved.getElementKey()}
+            path={routes.profile.saved.getRoutePath()}
+            component={SavedListLayout}
+          />
+        </Switch>
+      </Route>
     );
   },
 };

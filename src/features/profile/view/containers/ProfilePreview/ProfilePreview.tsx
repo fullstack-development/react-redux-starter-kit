@@ -18,6 +18,7 @@ interface IState {
 
 interface IOwnProps {
   onEditClick(): void;
+  onSavedClick(): void;
 }
 
 interface IStateProps {
@@ -43,7 +44,14 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
   private blockRef = createRef<HTMLDivElement>();
 
   public render() {
-    const { profile: { avatarURL, name, nickname, age, bio }, onEditClick, t } = this.props;
+    const {
+      profile: { avatarURL, name, nickname, age, bio },
+      onEditClick,
+      onSavedClick = () => {
+        console.log('Not implemented');
+      },
+      t,
+    } = this.props;
     const { isOpen } = this.state;
     return (
       <div className={b()} ref={this.blockRef}>
@@ -58,23 +66,20 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
         >
           <div className={b('info')}>
             <div className={b('main-info')}>
-              <div className={b('name')}>
-                {name}
-              </div>
+              <div className={b('name')}>{name}</div>
               <div className={b('nickname-age')}>
-                <div className={b('nickname')}>
-                  {nickname}
-                </div>
+                <div className={b('nickname')}>{nickname}</div>
                 <div className={b('age')}>
                   {t(intl.yearsOld, { count: age })}
                 </div>
               </div>
             </div>
-            <div className={b('bio')}>
-              {bio}
-            </div>
+            <div className={b('bio')}>{bio}</div>
             <div className={b('edit')} onClick={onEditClick}>
               {t(intl.edit)}
+            </div>
+            <div className={b('saved')} onClick={onSavedClick}>
+              Saved
             </div>
           </div>
         </Popover>
@@ -91,7 +96,6 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
   private handleAvatarClick() {
     this.setState({ isOpen: true });
   }
-
 }
 
 const connectedComponent = connect(mapState)(ProfilePreview);
