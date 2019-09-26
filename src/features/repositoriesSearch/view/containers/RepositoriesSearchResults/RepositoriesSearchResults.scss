@@ -6,4 +6,10 @@
   &__repository-preview {
     margin-bottom: 1rem;
   }
+
+  &__action-button-container {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+  }
 }

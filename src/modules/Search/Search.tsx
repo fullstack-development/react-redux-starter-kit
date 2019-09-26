@@ -4,8 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import routes from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
-import { RepositoriesSearchLayout } from './view/components';
-import { UsersSearchLayout } from './view/containers';
+import { UsersSearchLayout, RepositoriesSearchLayout } from './view/containers';
 
 const Search: IModule = {
   getRoutes() {

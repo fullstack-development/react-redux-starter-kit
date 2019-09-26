@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
 import { IRepository } from 'shared/types/models';
-import { StarIcon, Card, Link } from 'shared/view/elements';
+import { StarIcon, Card, Link, Button } from 'shared/view/elements';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import RepositoryAttribute from '../RepositoryAttribute/RepositoryAttribute';
@@ -12,6 +12,9 @@ import './RepositoryPreview.scss';
 interface IOwnProps {
   repository: IRepository;
   onOwnerClick(username: string): void;
+  onSaveButtonClick(repo: IRepository): void;
+  onRemoveButtonClick(repoId: number): void;
+  isSaved: boolean;
 }
 
 type IProps = IOwnProps & ITranslationProps;
@@ -24,20 +27,31 @@ class RepositoryPreview extends React.PureComponent<IProps> {
     const {
       t,
       repository: {
-        name, starsNumber, htmlURL, description, updatedAt,
-        owner, forksNumber, openIssuesNumber, language,
+        name,
+        starsNumber,
+        htmlURL,
+        description,
+        updatedAt,
+        owner,
+        forksNumber,
+        openIssuesNumber,
+        language,
       },
+      isSaved,
     } = this.props;
 
     return (
       <Card>
         <div className={b()}>
-          <Link className={b('name').toString()} href={htmlURL} target="_blank" rel="noopener noreferrer">
+          <Link
+            className={b('name').toString()}
+            href={htmlURL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {name}
           </Link>
-          <div className={b('description')}>
-            {description}
-          </div>
+          <div className={b('description')}>{description}</div>
           <div className={b('row')}>
             <div className={b('stars')}>
               <div className={b('star')}>
@@ -45,16 +59,11 @@ class RepositoryPreview extends React.PureComponent<IProps> {
               </div>
               {starsNumber}
             </div>
-            <div className={b('language')}>
-              {language}
-            </div>
+            <div className={b('language')}>{language}</div>
           </div>
           <div className={b('row')}>
             <div className={b('attributes')}>
-              <RepositoryAttribute
-                title={t(intl.forks)}
-                value={forksNumber}
-              />
+              <RepositoryAttribute title={t(intl.forks)} value={forksNumber} />
               <RepositoryAttribute
                 title={t(intl.openIssues)}
                 value={openIssuesNumber}
@@ -63,7 +72,7 @@ class RepositoryPreview extends React.PureComponent<IProps> {
             <div className={b('attributes')}>
               <RepositoryAttribute
                 title={t(intl.lastUpdated)}
-                value={(new Date(updatedAt)).toLocaleDateString()}
+                value={new Date(updatedAt).toLocaleDateString()}
               />
               <RepositoryAttribute
                 title={t(intl.owner)}
@@ -73,6 +82,13 @@ class RepositoryPreview extends React.PureComponent<IProps> {
               />
             </div>
           </div>
+          <div className={b('action-button-container')}>
+            {isSaved ? (
+              <Button onClick={this.handleRemoveButtonClick}>Remove</Button>
+            ) : (
+              <Button onClick={this.handleSaveButtonClick}>Save</Button>
+            )}
+          </div>
         </div>
       </Card>
     );
@@ -80,8 +96,27 @@ class RepositoryPreview extends React.PureComponent<IProps> {
 
   @autobind
   private handleOwnerClick() {
-    const { repository: { owner: { username } }, onOwnerClick } = this.props;
+    const {
+      repository: {
+        owner: { username },
+      },
+      onOwnerClick,
+    } = this.props;
     onOwnerClick(username);
+  }
+
+  @autobind
+  private handleSaveButtonClick() {
+    const { repository, onSaveButtonClick } = this.props;
+
+    onSaveButtonClick(repository);
+  }
+
+  @autobind
+  private handleRemoveButtonClick() {
+    const { repository, onRemoveButtonClick } = this.props;
+
+    onRemoveButtonClick(repository.id);
   }
 }
 

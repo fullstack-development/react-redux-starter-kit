@@ -23,8 +23,8 @@ interface IState {
 interface IOwnProps {
   searchOptions: IUsersSearchFormFields;
   savedUsers: IDetailedGithubUser[];
-  onSave(user: IDetailedGithubUser | null): void;
-  onRemove(id: number): void;
+  onUserSave(user: IDetailedGithubUser | null): void;
+  onUserRemove(id: number): void;
 }
 
 interface IStateProps {
@@ -62,8 +62,8 @@ class UsersSearchResults extends React.PureComponent<IProps> {
       paginationState: { page, totalPages },
       totalResults,
       t,
-      onSave,
-      onRemove,
+      onUserSave,
+      onUserRemove,
     } = this.props;
     const { displayedUser } = this.state;
     return (
@@ -87,8 +87,8 @@ class UsersSearchResults extends React.PureComponent<IProps> {
           <UserDetails
             username={displayedUser}
             onClose={this.handleUserDetailsClose}
-            onSaveButtonClick={onSave}
-            onRemoveButtonClick={onRemove}
+            onSaveButtonClick={onUserSave}
+            onRemoveButtonClick={onUserRemove}
             isSaved={this.userIsSaved()}
           />
         )}

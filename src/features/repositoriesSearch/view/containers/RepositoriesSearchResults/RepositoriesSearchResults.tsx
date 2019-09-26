@@ -5,7 +5,7 @@ import { autobind } from 'core-decorators';
 
 import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
-import { IRepository } from 'shared/types/models';
+import { IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
@@ -22,6 +22,12 @@ interface IState {
 
 interface IOwnProps {
   searchOptions: IRepositoriesSearchFormFields;
+  savedRepos: IRepository[];
+  savedUsers: IDetailedGithubUser[];
+  onRepoSave(repo: IRepository): void;
+  onRepoRemove(repoId: number): void;
+  onUserSave(user: IDetailedGithubUser): void;
+  onUserRemove(userId: number): void;
 }
 
 interface IStateProps {
@@ -74,6 +80,8 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
       t,
       totalResults,
       isSearchRequesting,
+      onUserSave,
+      onUserRemove,
     } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
@@ -100,8 +108,10 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
         {displayedRepositoryOwner && (
           <UserDetails
             username={displayedRepositoryOwner}
-            onSaveButtonClick={this.handleSaveButtonClick}
             onClose={this.handleUserDetailsClose}
+            onSaveButtonClick={onUserSave}
+            onRemoveButtonClick={onUserRemove}
+            isSaved={this.userIsSaved()}
           />
         )}
       </div>
@@ -110,11 +120,16 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
 
   @autobind
   private renderRepositoryPreview(repository: IRepository) {
+    const { onRepoSave, onRepoRemove } = this.props;
+
     return (
       <div className={b('repository-preview')} key={repository.id}>
         <RepositoryPreview
           repository={repository}
           onOwnerClick={this.handleRepositoryOwnerClick}
+          onSaveButtonClick={onRepoSave}
+          onRemoveButtonClick={onRepoRemove}
+          isSaved={this.repoIsSaved(repository.id)}
         />
       </div>
     );
@@ -137,8 +152,23 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleSaveButtonClick() {
-    console.log('Not implemented');
+  private repoIsSaved(repoId: number) {
+    const { savedRepos } = this.props;
+    const repo = savedRepos.find(({ id }) => id === repoId);
+
+    return repo ? true : false;
+  }
+
+  @autobind
+  private userIsSaved() {
+    const { savedUsers } = this.props;
+    const { displayedRepositoryOwner } = this.state;
+
+    const user = savedUsers.find(
+      ({ username }) => username === displayedRepositoryOwner,
+    );
+
+    return user ? true : false;
   }
 }
 

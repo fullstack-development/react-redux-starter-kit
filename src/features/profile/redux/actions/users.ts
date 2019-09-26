@@ -1,16 +1,16 @@
 import * as NS from '../../namespace';
 import { IDetailedGithubUser } from 'shared/types/models';
 
-export function saveUser(payload: IDetailedGithubUser): NS.ISaveUser {
+export function saveUser(user: IDetailedGithubUser): NS.ISaveUser {
   return {
     type: 'PROFILE:SAVE_USER',
-    payload,
+    payload: user,
   };
 }
 
-export function removeUser(payload: number): NS.IRemoveUser {
+export function removeUser(userId: number): NS.IRemoveUser {
   return {
     type: 'PROFILE:REMOVE_USER',
-    payload,
+    payload: userId,
   };
 }

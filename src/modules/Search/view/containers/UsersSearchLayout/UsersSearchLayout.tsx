@@ -87,8 +87,8 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
             <UsersSearchResults
               searchOptions={lastSubmittedFormState}
               savedUsers={users}
-              onSave={saveUser}
-              onRemove={removeUser}
+              onUserSave={saveUser}
+              onUserRemove={removeUser}
             />
           )}
         </div>

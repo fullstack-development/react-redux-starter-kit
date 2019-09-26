@@ -25,5 +25,7 @@ export type ISaveProfile = IAction<
 >;
 export type ISaveUser = IAction<'PROFILE:SAVE_USER', IDetailedGithubUser>;
 export type IRemoveUser = IAction<'PROFILE:REMOVE_USER', number>;
+export type ISaveRepo = IAction<'PROFILE:SAVE_REPO', IRepository>;
+export type IRemoveRepo = IAction<'PROFILE:REMOVE_REPO', number>;
 
 export type IAction = ISaveProfile | ISaveUser | IRemoveUser;
