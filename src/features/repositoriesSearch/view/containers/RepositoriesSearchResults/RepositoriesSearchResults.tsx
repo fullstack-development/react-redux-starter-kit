@@ -7,13 +7,12 @@ import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
 import { IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
-import { PaginationControls } from 'shared/view/components';
+import { PaginationControls, RepositoryPreview } from 'shared/view/components';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TotalSearchResults, Preloader } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actions, selectors } from './../../../redux';
-import { RepositoryPreview } from '../../components';
 import './RepositoriesSearchResults.scss';
 
 interface IState {

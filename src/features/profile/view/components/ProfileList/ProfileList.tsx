@@ -38,7 +38,8 @@ function ProfileList(props: IProps) {
 
   return (
     <div className={b()}>
-      {title && mainTitle}>}{itemRows}
+      {title && mainTitle}
+      {itemRows}
     </div>
   );
 }

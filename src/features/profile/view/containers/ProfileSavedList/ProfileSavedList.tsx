@@ -5,10 +5,13 @@ import { autobind } from 'core-decorators';
 
 import { IDetailedGithubUser, IRepository } from 'shared/types/models';
 import { IAppReduxState } from 'shared/types/app';
+import { IContainerTypes, containersProvider } from 'core';
+import { RepositoryPreview } from 'shared/view/components';
 
 import { ProfileList } from '../../components';
-
 import { selectors, actions } from '../../../redux';
+
+import './ProfileSavedList';
 
 interface IStateProps {
   repos: IRepository[];
@@ -16,8 +19,11 @@ interface IStateProps {
 }
 
 type IActionProps = typeof mapDispatch;
+type IContainerProviderProps = {
+  UserDetailsContainer: IContainerTypes['UserDetails'];
+};
 
-type IProps = IStateProps & IActionProps;
+type IProps = IStateProps & IActionProps & IContainerProviderProps;
 
 interface IState {
   activeUserId: number | null;
@@ -54,21 +60,26 @@ class ProfileSavedList extends React.Component<IProps, IState> {
 
     return (
       <div className={b()}>
-        <div className={b('repos')}>
-          <ProfileList
-            title="Repos"
-            items={repoList}
-            onPreviewClick={this.handleRepoPreview}
-            onRemoveClick={this.handleRepoRemove}
-          />
-        </div>
-        <div className={b('users')}>
-          <ProfileList
-            title="Users"
-            items={userList}
-            onPreviewClick={this.handleUserPreview}
-            onRemoveClick={this.handleUserRemove}
-          />
+        <div className={b('list-container')}>
+          <div className={b('repos')}>
+            <ProfileList
+              title="Repos"
+              items={repoList}
+              onPreviewClick={this.handleRepoPreview}
+              onRemoveClick={this.handleRepoRemove}
+            />
+          </div>
+          <div className={b('users')}>
+            <ProfileList
+              title="Users"
+              items={userList}
+              onPreviewClick={this.handleUserPreview}
+              onRemoveClick={this.handleUserRemove}
+            />
+          </div>
+          <div></div>
+          {this.renderActiveRepository()}
+          {this.renderActiveUser()}
         </div>
       </div>
     );
@@ -93,9 +104,35 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   private handleUserRemove(id: number) {
     this.props.removeUser(id);
   }
+
+  @autobind
+  private renderActiveRepository() {
+    const { repos } = this.props;
+    const { activeRepoId } = this.state;
+    const repo = repos.find(({ id }) => id === activeRepoId);
+
+    if (!repo) {
+      return null;
+    }
+
+    return <RepositoryPreview repository={repo} isSaved={true} />;
+  }
+
+  @autobind
+  private renderActiveUser() {
+    const { users, UserDetailsContainer } = this.props;
+    const { activeUserId } = this.state;
+    const user = users.find(({ id }) => id === activeUserId);
+
+    if (!user) return null;
+
+    return null;
+  }
 }
 
-export default connect(
+const connectedComponent = connect(
   mapState,
   mapDispatch,
 )(ProfileSavedList);
+
+export default containersProvider(['UserDetails'])(connectedComponent);

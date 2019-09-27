@@ -14,12 +14,20 @@ interface IContainerTypes {
 
 type Container = keyof IContainerTypes;
 
-type IEntryWithContainer<K extends string, T extends React.ComponentType<any>> = SubSet<IFeatureEntry, {
-  containers: { [D in K]: T };
-  reduxEntry?: IReduxEntry;
-}>;
+type IEntryWithContainer<
+  K extends string,
+  T extends React.ComponentType<any>
+> = SubSet<
+  IFeatureEntry,
+  {
+    containers: { [D in K]: T };
+    reduxEntry?: IReduxEntry;
+  }
+>;
 
-type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
+type Loader<T extends Container> = () => Promise<
+  IEntryWithContainer<T, IContainerTypes[T]>
+>;
 
 type LoadersMap = {
   [P in Container]: Loader<P>;
@@ -40,13 +48,15 @@ interface IState {
 }
 
 // tslint:disable:max-line-length
-function containersProvider<L extends Container>(containers: L[], preloader?: React.ReactChild):
-  <Props extends { [K in L]: IContainerTypes[K] }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
-
+function containersProvider<L extends Container>(
+  containers: L[],
+  preloader?: React.ReactChild,
+): <Props extends { [K in L]: IContainerTypes[K] }>(
+  WrappedComponent: React.ComponentType<Props>,
+) => React.ComponentClass<Omit<Props, L>> {
   return <Props extends { [K in L]: IContainerTypes[K] }>(
     WrappedComponent: React.ComponentType<Props>,
   ): React.ComponentClass<Props> => {
-
     @injectable()
     class ContainersProvider extends React.PureComponent<Props, IState> {
       public state: IState = { containers: {} };
@@ -66,38 +76,53 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
         if (!this.isAllContainersLoaded()) {
           return preloader !== void 0 ? preloader : null;
         } else {
-          return <WrappedComponent {...this.state.containers} {...this.props} />;
+          return (
+            <WrappedComponent {...this.state.containers} {...this.props} />
+          );
         }
       }
 
       @autobind
       private async load(): Promise<void> {
-        await Promise.all(containers.map(key => this.loadFeatureContainer(key)));
+        await Promise.all(
+          containers.map(key => this.loadFeatureContainer(key)),
+        );
       }
 
       @autobind
-      private async loadFeatureContainer(containerKey: Container): Promise<void> {
-        const bundle = await (containerLoadersDictionary as GenericLoadersMap)[containerKey]();
+      private async loadFeatureContainer(
+        containerKey: Container,
+      ): Promise<void> {
+        const bundle = await (containerLoadersDictionary as GenericLoadersMap)[
+          containerKey
+        ]();
         const container = bundle.containers[containerKey];
 
         bundle.reduxEntry && this.connectFeatureToStore(bundle.reduxEntry);
         if (!container) {
-          throw new Error(`ContainersProvider did not find the container "${containerKey}"`);
+          throw new Error(
+            `ContainersProvider did not find the container "${containerKey}"`,
+          );
         }
 
-        this.saveContainerToState && this.saveContainerToState(container, containerKey);
+        this.saveContainerToState &&
+          this.saveContainerToState(container, containerKey);
       }
 
-      private saveContainerToState: null | ((container: React.ComponentType<any>, key: string) => void) =
-        (cont, key) => {
-          this.setState(state => ({
-            ...state,
-            containers: {
-              ...state.containers,
-              [key]: cont,
-            },
-          }));
-        }
+      private saveContainerToState:
+        | null
+        | ((container: React.ComponentType<any>, key: string) => void) = (
+        cont,
+        key,
+      ) => {
+        this.setState(state => ({
+          ...state,
+          containers: {
+            ...state.containers,
+            [key]: cont,
+          },
+        }));
+      };
 
       @autobind
       private isAllContainersLoaded(): boolean {
