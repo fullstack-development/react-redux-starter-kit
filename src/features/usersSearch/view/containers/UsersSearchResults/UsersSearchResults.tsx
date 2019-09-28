@@ -5,7 +5,11 @@ import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
-import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
+import {
+  IGithubUser,
+  IDetailedGithubUser,
+  ISavedGithubUser,
+} from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 import { TotalSearchResults } from 'shared/view/elements';
@@ -22,8 +26,8 @@ interface IState {
 
 interface IOwnProps {
   searchOptions: IUsersSearchFormFields;
-  savedUsers: IDetailedGithubUser[];
-  onUserSave(user: IDetailedGithubUser | null): void;
+  savedUsers: ISavedGithubUser[];
+  onUserSave(user: ISavedGithubUser): void;
   onUserRemove(id: number): void;
 }
 

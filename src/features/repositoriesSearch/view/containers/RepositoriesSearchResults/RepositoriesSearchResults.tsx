@@ -5,7 +5,12 @@ import { autobind } from 'core-decorators';
 
 import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
-import { IDetailedGithubUser, IRepository } from 'shared/types/models';
+import {
+  IDetailedGithubUser,
+  IRepository,
+  ISavedGithubUser,
+  ISavedRepository,
+} from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls, RepositoryPreview } from 'shared/view/components';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
@@ -21,11 +26,11 @@ interface IState {
 
 interface IOwnProps {
   searchOptions: IRepositoriesSearchFormFields;
-  savedRepos: IRepository[];
-  savedUsers: IDetailedGithubUser[];
-  onRepoSave(repo: IRepository): void;
+  savedRepos: ISavedRepository[];
+  savedUsers: ISavedGithubUser[];
+  onRepoSave(repo: ISavedRepository): void;
   onRepoRemove(repoId: number): void;
-  onUserSave(user: IDetailedGithubUser): void;
+  onUserSave(user: ISavedGithubUser): void;
   onUserRemove(userId: number): void;
 }
 

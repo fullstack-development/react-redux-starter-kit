@@ -2,7 +2,7 @@ import React from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import { IRepository } from 'shared/types/models';
+import { IRepository, ISavedRepository } from 'shared/types/models';
 import { StarIcon, Card, Link, Button } from 'shared/view/elements';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
@@ -13,7 +13,7 @@ interface IOwnProps {
   repository: IRepository;
   isSaved: boolean;
   onOwnerClick?(username: string): void;
-  onSaveButtonClick?(repo: IRepository): void;
+  onSaveButtonClick?(repo: ISavedRepository): void;
   onRemoveButtonClick?(repoId: number): void;
 }
 
@@ -111,9 +111,12 @@ class RepositoryPreview extends React.PureComponent<IProps> {
 
   @autobind
   private handleSaveButtonClick() {
-    const { repository, onSaveButtonClick = () => {} } = this.props;
+    const {
+      repository: { id, name },
+      onSaveButtonClick = () => {},
+    } = this.props;
 
-    onSaveButtonClick(repository);
+    onSaveButtonClick({ id, name });
   }
 
   @autobind

@@ -3,24 +3,24 @@ import { connect } from 'react-redux';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import { IDetailedGithubUser, IRepository } from 'shared/types/models';
+import { ISavedGithubUser, ISavedRepository } from 'shared/types/models';
 import { IAppReduxState } from 'shared/types/app';
 import { IContainerTypes, containersProvider } from 'core';
-import { RepositoryPreview } from 'shared/view/components';
 
+import { ProfileRepositoryPreview } from '../../containers';
 import { ProfileList } from '../../components';
 import { selectors, actions } from '../../../redux';
 
 import './ProfileSavedList';
 
 interface IStateProps {
-  repos: IRepository[];
-  users: IDetailedGithubUser[];
+  repos: ISavedRepository[];
+  users: ISavedGithubUser[];
 }
 
 type IActionProps = typeof mapDispatch;
 type IContainerProviderProps = {
-  UserDetailsContainer: IContainerTypes['UserDetails'];
+  UserDetails: IContainerTypes['UserDetails'];
 };
 
 type IProps = IStateProps & IActionProps & IContainerProviderProps;
@@ -96,6 +96,11 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
+  private handleUserPreviewClose() {
+    this.setState({ activeUserId: null });
+  }
+
+  @autobind
   private handleRepoRemove(id: number) {
     this.props.removeRepo(id);
   }
@@ -115,18 +120,26 @@ class ProfileSavedList extends React.Component<IProps, IState> {
       return null;
     }
 
-    return <RepositoryPreview repository={repo} isSaved={true} />;
+    //return <RepositoryPreview repository={repo} isSaved={true} />;
+    return <ProfileRepositoryPreview />;
   }
 
   @autobind
   private renderActiveUser() {
-    const { users, UserDetailsContainer } = this.props;
+    const { users, UserDetails } = this.props;
     const { activeUserId } = this.state;
     const user = users.find(({ id }) => id === activeUserId);
 
     if (!user) return null;
 
-    return null;
+    return (
+      <UserDetails
+        username={user.username}
+        onClose={this.handleUserPreviewClose}
+        isSaved={true}
+        onRemoveButtonClick={this.handleUserRemove}
+      />
+    );
   }
 }
 

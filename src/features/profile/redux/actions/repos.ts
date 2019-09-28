@@ -1,6 +1,6 @@
-import { IRepository } from 'shared/types/models';
+import { ISavedRepository } from 'shared/types/models';
 
-export const saveRepo = (repo: IRepository) => ({
+export const saveRepo = (repo: ISavedRepository) => ({
   type: 'PROFILE:SAVE_REPO',
   payload: repo,
 });

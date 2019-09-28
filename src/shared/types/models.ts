@@ -1,3 +1,13 @@
+export interface ISavedGithubUser {
+  id: number;
+  username: string;
+}
+
+export interface ISavedRepository {
+  id: number;
+  name: string;
+}
+
 export interface IProfile {
   age: number;
   nickname: string;

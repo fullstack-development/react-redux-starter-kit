@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 
 import { IAppReduxState } from 'shared/types/app';
-import { IDetailedGithubUser } from 'shared/types/models';
+import { IDetailedGithubUser, ISavedGithubUser } from 'shared/types/models';
 import { Dialog } from 'shared/view/components';
 import { Typography, Preloader, Button } from 'shared/view/elements';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
@@ -17,7 +17,7 @@ import './UserDetails.scss';
 interface IOwnProps {
   username: string;
   isSaved: boolean;
-  onSaveButtonClick(user: IDetailedGithubUser | null): void;
+  onSaveButtonClick?(user: ISavedGithubUser): void;
   onRemoveButtonClick(id: number): void;
   onClose(): void;
 }
@@ -153,9 +153,12 @@ class UserDetails extends React.Component<IProps> {
 
   @autobind
   private handleSaveButtonClick() {
-    const { userDetails, onSaveButtonClick } = this.props;
+    const {
+      userDetails: { id, username },
+      onSaveButtonClick,
+    } = this.props;
 
-    onSaveButtonClick(userDetails);
+    onSaveButtonClick({ id, username });
   }
 
   @autobind
