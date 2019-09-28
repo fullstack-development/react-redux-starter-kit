@@ -5,11 +5,7 @@ import { autobind } from 'core-decorators';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
-import {
-  IGithubUser,
-  IDetailedGithubUser,
-  ISavedGithubUser,
-} from 'shared/types/models';
+import { IGithubUser, ISavedGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { PaginationControls } from 'shared/view/components';
 import { TotalSearchResults } from 'shared/view/elements';
@@ -21,7 +17,7 @@ import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
 
 interface IState {
-  displayedUser: string | null;
+  displayedUserId: null | number;
 }
 
 interface IOwnProps {
@@ -57,7 +53,7 @@ const b = block('users-search-results');
 
 class UsersSearchResults extends React.PureComponent<IProps> {
   public state: IState = {
-    displayedUser: null,
+    displayedUserId: null,
   };
 
   public render() {
@@ -69,7 +65,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
       onUserSave,
       onUserRemove,
     } = this.props;
-    const { displayedUser } = this.state;
+    const { displayedUserId } = this.state;
     return (
       <div className={b()}>
         <TotalSearchResults
@@ -87,9 +83,9 @@ class UsersSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedUser && (
+        {displayedUserId && (
           <UserDetails
-            username={displayedUser}
+            id={displayedUserId}
             onClose={this.handleUserDetailsClose}
             onSaveButtonClick={onUserSave}
             onRemoveButtonClick={onUserRemove}
@@ -107,21 +103,21 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleUserAvatarClick({ username }: IGithubUser) {
-    this.setState({ displayedUser: username });
+  private handleUserAvatarClick({ id }: IGithubUser) {
+    this.setState({ displayedUserId: id });
   }
 
   @autobind
   private handleUserDetailsClose() {
-    this.setState({ displayedUser: null });
+    this.setState({ displayedUserId: null });
   }
 
   @autobind
   private userIsSaved() {
     const { savedUsers } = this.props;
-    const { displayedUser } = this.state;
+    const { displayedUserId } = this.state;
 
-    const user = savedUsers.find(({ username }) => username === displayedUser);
+    const user = savedUsers.find(({ id }) => id === displayedUserId);
 
     return user ? true : false;
   }

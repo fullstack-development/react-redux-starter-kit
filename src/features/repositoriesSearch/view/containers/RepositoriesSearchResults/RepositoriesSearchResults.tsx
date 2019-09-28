@@ -6,7 +6,6 @@ import { autobind } from 'core-decorators';
 import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
 import {
-  IDetailedGithubUser,
   IRepository,
   ISavedGithubUser,
   ISavedRepository,
@@ -21,7 +20,7 @@ import { actions, selectors } from './../../../redux';
 import './RepositoriesSearchResults.scss';
 
 interface IState {
-  displayedRepositoryOwner: string | null;
+  displayedOwnerId: number | null;
 }
 
 interface IOwnProps {
@@ -73,7 +72,7 @@ const b = block('repositories-search-results');
 
 class RepositoriesSearchResults extends React.PureComponent<IProps> {
   public state: IState = {
-    displayedRepositoryOwner: null,
+    displayedOwnerId: null,
   };
 
   public render() {
@@ -87,7 +86,7 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
       onUserSave,
       onUserRemove,
     } = this.props;
-    const { displayedRepositoryOwner } = this.state;
+    const { displayedOwnerId } = this.state;
     return (
       <div className={b()}>
         <TotalSearchResults
@@ -109,9 +108,9 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedRepositoryOwner && (
+        {displayedOwnerId && (
           <UserDetails
-            username={displayedRepositoryOwner}
+            id={displayedOwnerId}
             onClose={this.handleUserDetailsClose}
             onSaveButtonClick={onUserSave}
             onRemoveButtonClick={onUserRemove}
@@ -140,8 +139,8 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleRepositoryOwnerClick(username: string) {
-    this.setState({ displayedRepositoryOwner: username });
+  private handleRepositoryOwnerClick(id: number) {
+    this.setState({ displayedOwnerId: id });
   }
 
   @autobind
@@ -166,11 +165,8 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   @autobind
   private userIsSaved() {
     const { savedUsers } = this.props;
-    const { displayedRepositoryOwner } = this.state;
-
-    const user = savedUsers.find(
-      ({ username }) => username === displayedRepositoryOwner,
-    );
+    const { displayedOwnerId } = this.state;
+    const user = savedUsers.find(({ id }) => id === displayedOwnerId);
 
     return user ? true : false;
   }

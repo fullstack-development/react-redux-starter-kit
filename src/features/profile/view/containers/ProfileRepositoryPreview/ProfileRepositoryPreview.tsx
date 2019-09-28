@@ -21,7 +21,7 @@ interface IOwnProps {
   onClose(): void;
   onRemoveButtonClick(id: number): void;
   onSaveButtonClick(repo: ISavedRepository): void;
-  onOwnerClick(username: string): void;
+  onOwnerClick(id: number): void;
 }
 
 type IProps = IOwnProps & IStateProps & typeof mapDispatch;

@@ -12,7 +12,7 @@ import './RepositoryPreview.scss';
 interface IOwnProps {
   repository: IRepository;
   isSaved: boolean;
-  onOwnerClick?(username: string): void;
+  onOwnerClick?(id: number): void;
   onSaveButtonClick?(repo: ISavedRepository): void;
   onRemoveButtonClick?(repoId: number): void;
 }
@@ -100,13 +100,13 @@ class RepositoryPreview extends React.PureComponent<IProps> {
   private handleOwnerClick() {
     const {
       repository: {
-        owner: { username },
+        owner: { id },
       },
       onOwnerClick,
     } = this.props;
     if (!onOwnerClick) return;
 
-    onOwnerClick(username);
+    onOwnerClick(id);
   }
 
   @autobind

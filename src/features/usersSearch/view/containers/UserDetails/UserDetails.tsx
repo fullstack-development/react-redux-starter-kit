@@ -15,7 +15,7 @@ import { actions, selectors } from './../../../redux';
 import './UserDetails.scss';
 
 interface IOwnProps {
-  username: string;
+  id: number;
   isSaved: boolean;
   onSaveButtonClick?(user: ISavedGithubUser): void;
   onRemoveButtonClick(id: number): void;
@@ -141,8 +141,8 @@ class UserDetails extends React.Component<IProps> {
 
   @autobind
   private handleDialogEnter() {
-    const { username, loadUserDetails } = this.props;
-    loadUserDetails(username);
+    const { id, loadUserDetails } = this.props;
+    loadUserDetails(id);
   }
 
   @autobind
@@ -163,9 +163,9 @@ class UserDetails extends React.Component<IProps> {
 
   @autobind
   private handleRemoveButtonClick() {
-    const { userDetails, onRemoveButtonClick } = this.props;
+    const { id, onRemoveButtonClick } = this.props;
 
-    onRemoveButtonClick(userDetails.id);
+    onRemoveButtonClick(id);
   }
 }
 

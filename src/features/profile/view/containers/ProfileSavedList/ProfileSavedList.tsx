@@ -26,8 +26,8 @@ type IContainerProviderProps = {
 type IProps = IStateProps & IActionProps & IContainerProviderProps;
 
 interface IState {
-  activeUserName: string | null;
-  activeRepoId: number | null;
+  displayedUserId: number | null;
+  displayedRepoId: number | null;
 }
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -50,13 +50,12 @@ import './ProfileSavedList.scss';
 
 class ProfileSavedList extends React.Component<IProps, IState> {
   public state = {
-    activeUserName: null,
-    activeRepoId: null,
+    displayedUserId: null,
+    displayedRepoId: null,
   };
 
   public render() {
     const { users, repos } = this.props;
-
     const userList = users.map(({ id, username }) => ({ id, title: username }));
     const repoList = repos.map(({ id, name }) => ({ id, title: name }));
 
@@ -89,24 +88,22 @@ class ProfileSavedList extends React.Component<IProps, IState> {
 
   @autobind
   private handleRepoPreview(id: number) {
-    this.setState({ activeRepoId: id });
+    this.setState({ displayedRepoId: id });
   }
 
   @autobind
   private handleRepoPreviewClose() {
-    this.setState({ activeRepoId: null });
+    this.setState({ displayedRepoId: null });
   }
 
   @autobind
-  private handleUserPreview(userId: number) {
-    const { users } = this.props;
-    const user = users.find(({ id }) => id === userId);
-    this.setState({ activeUserName: user.username });
+  private handleUserPreview(id: number) {
+    this.setState({ displayedUserId: id });
   }
 
   @autobind
   private handleUserPreviewClose() {
-    this.setState({ activeUserName: null });
+    this.setState({ displayedUserId: null });
   }
 
   @autobind
@@ -131,23 +128,23 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private handleRepoOwnerClick(username: string) {
-    this.setState({ activeUserName: username });
+  private handleRepoOwnerClick(id: number) {
+    this.setState({ displayedUserId: id });
   }
 
   @autobind
   private renderActiveRepository() {
     const { repos } = this.props;
-    const { activeRepoId } = this.state;
-    const repo = repos.find(({ id }) => id === activeRepoId);
+    const { displayedRepoId } = this.state;
+    const repo = repos.find(({ id }) => id === displayedRepoId);
 
-    if (!repo || !activeRepoId) {
+    if (!repo || !displayedRepoId) {
       return null;
     }
 
     return (
       <ProfileRepositoryPreview
-        id={activeRepoId}
+        id={displayedRepoId}
         onClose={this.handleRepoPreviewClose}
         onRemoveButtonClick={this.handleRepoRemove}
         onSaveButtonClick={this.handleRepoSave}
@@ -159,13 +156,13 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   @autobind
   private renderActiveUser() {
     const { users, UserDetails } = this.props;
-    const { activeUserName } = this.state;
-    const user = users.find(({ username }) => username === activeUserName);
-    if (!activeUserName) return;
+    const { displayedUserId } = this.state;
+    const user = users.find(({ id }) => id === displayedUserId);
+    if (!displayedUserId) return;
 
     return (
       <UserDetails
-        username={activeUserName}
+        id={displayedUserId}
         onClose={this.handleUserPreviewClose}
         isSaved={user ? true : false}
         onRemoveButtonClick={this.handleUserRemove}
