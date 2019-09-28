@@ -26,7 +26,7 @@ type IContainerProviderProps = {
 type IProps = IStateProps & IActionProps & IContainerProviderProps;
 
 interface IState {
-  activeUserId: number | null;
+  activeUserName: string | null;
   activeRepoId: number | null;
 }
 
@@ -40,6 +40,8 @@ function mapState(state: IAppReduxState): IStateProps {
 const mapDispatch = {
   removeRepo: actions.removeRepo,
   removeUser: actions.removeUser,
+  saveUser: actions.saveUser,
+  saveRepo: actions.saveRepo,
 };
 
 const b = block('profile-saved-list');
@@ -48,7 +50,7 @@ import './ProfileSavedList.scss';
 
 class ProfileSavedList extends React.Component<IProps, IState> {
   public state = {
-    activeUserId: null,
+    activeUserName: null,
     activeRepoId: null,
   };
 
@@ -91,13 +93,20 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private handleUserPreview(id: number) {
-    this.setState({ activeUserId: id });
+  private handleRepoPreviewClose() {
+    this.setState({ activeRepoId: null });
+  }
+
+  @autobind
+  private handleUserPreview(userId: number) {
+    const { users } = this.props;
+    const user = users.find(({ id }) => id === userId);
+    this.setState({ activeUserName: user.username });
   }
 
   @autobind
   private handleUserPreviewClose() {
-    this.setState({ activeUserId: null });
+    this.setState({ activeUserName: null });
   }
 
   @autobind
@@ -106,8 +115,24 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
+  private handleRepoSave(repo: ISavedRepository) {
+    const { saveRepo } = this.props;
+    saveRepo(repo);
+  }
+
+  @autobind
   private handleUserRemove(id: number) {
     this.props.removeUser(id);
+  }
+
+  @autobind
+  private handleUserSave(user: ISavedGithubUser) {
+    this.props.saveUser(user);
+  }
+
+  @autobind
+  private handleRepoOwnerClick(username: string) {
+    this.setState({ activeUserName: username });
   }
 
   @autobind
@@ -116,28 +141,35 @@ class ProfileSavedList extends React.Component<IProps, IState> {
     const { activeRepoId } = this.state;
     const repo = repos.find(({ id }) => id === activeRepoId);
 
-    if (!repo) {
+    if (!repo || !activeRepoId) {
       return null;
     }
 
-    //return <RepositoryPreview repository={repo} isSaved={true} />;
-    return <ProfileRepositoryPreview />;
+    return (
+      <ProfileRepositoryPreview
+        id={activeRepoId}
+        onClose={this.handleRepoPreviewClose}
+        onRemoveButtonClick={this.handleRepoRemove}
+        onSaveButtonClick={this.handleRepoSave}
+        onOwnerClick={this.handleRepoOwnerClick}
+      />
+    );
   }
 
   @autobind
   private renderActiveUser() {
     const { users, UserDetails } = this.props;
-    const { activeUserId } = this.state;
-    const user = users.find(({ id }) => id === activeUserId);
-
-    if (!user) return null;
+    const { activeUserName } = this.state;
+    const user = users.find(({ username }) => username === activeUserName);
+    if (!activeUserName) return;
 
     return (
       <UserDetails
-        username={user.username}
+        username={activeUserName}
         onClose={this.handleUserPreviewClose}
-        isSaved={true}
+        isSaved={user ? true : false}
         onRemoveButtonClick={this.handleUserRemove}
+        onSaveButtonClick={this.handleUserSave}
       />
     );
   }

@@ -1,11 +1,16 @@
 import { combineReducers } from 'redux';
-import editReducer from './edit';
-import usersReducer from './users';
-import reposReducer from './repos';
+import edit from './edit';
+import users from './users';
+import repos from './repos';
+import communication from './communication';
+import data from './data';
+
 import * as NS from '../../namespace';
 
 export default combineReducers<NS.IReduxState>({
-  edit: editReducer,
-  users: usersReducer,
-  repos: reposReducer,
+  edit,
+  users,
+  repos,
+  communication,
+  data,
 });

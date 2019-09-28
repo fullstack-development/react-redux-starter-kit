@@ -1,3 +1,5 @@
+import { initialCommunicationField } from 'shared/constants';
+
 import { profile } from '../constants';
 import { IReduxState } from '../namespace';
 
@@ -20,6 +22,12 @@ const initial: IReduxState = {
         name: 'pytest',
       },
     ],
+  },
+  communication: {
+    loadRepository: initialCommunicationField,
+  },
+  data: {
+    repository: null,
   },
 };
 
