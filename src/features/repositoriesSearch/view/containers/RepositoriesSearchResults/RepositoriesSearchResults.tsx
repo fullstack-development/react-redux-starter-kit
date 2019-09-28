@@ -145,7 +145,7 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
 
   @autobind
   private handleUserDetailsClose() {
-    this.setState({ displayedRepositoryOwner: null });
+    this.setState({ displayedOwnerId: null });
   }
 
   @autobind

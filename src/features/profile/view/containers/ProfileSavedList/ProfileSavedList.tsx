@@ -7,11 +7,10 @@ import { ISavedGithubUser, ISavedRepository } from 'shared/types/models';
 import { IAppReduxState } from 'shared/types/app';
 import { IContainerTypes, containersProvider } from 'core';
 
-import { ProfileRepositoryPreview } from '../../containers';
+import ProfileRepositoryPreview from '../ProfileRepositoryPreview/ProfileRepositoryPreview';
 import { ProfileList } from '../../components';
 import { selectors, actions } from '../../../redux';
-
-import './ProfileSavedList';
+import './ProfileSavedList.scss';
 
 interface IStateProps {
   repos: ISavedRepository[];
@@ -19,9 +18,10 @@ interface IStateProps {
 }
 
 type IActionProps = typeof mapDispatch;
-type IContainerProviderProps = {
+
+interface IContainerProviderProps {
   UserDetails: IContainerTypes['UserDetails'];
-};
+}
 
 type IProps = IStateProps & IActionProps & IContainerProviderProps;
 
@@ -45,8 +45,6 @@ const mapDispatch = {
 };
 
 const b = block('profile-saved-list');
-
-import './ProfileSavedList.scss';
 
 class ProfileSavedList extends React.Component<IProps, IState> {
   public state = {
@@ -78,7 +76,6 @@ class ProfileSavedList extends React.Component<IProps, IState> {
               onRemoveClick={this.handleUserRemove}
             />
           </div>
-          <div></div>
           {this.renderActiveRepository()}
           {this.renderActiveUser()}
         </div>
@@ -158,11 +155,13 @@ class ProfileSavedList extends React.Component<IProps, IState> {
     const { users, UserDetails } = this.props;
     const { displayedUserId } = this.state;
     const user = users.find(({ id }) => id === displayedUserId);
-    if (!displayedUserId) return;
+    if (!displayedUserId) {
+      return;
+    }
 
     return (
       <UserDetails
-        id={displayedUserId}
+        id={Number(displayedUserId)}
         onClose={this.handleUserPreviewClose}
         isSaved={user ? true : false}
         onRemoveButtonClick={this.handleUserRemove}

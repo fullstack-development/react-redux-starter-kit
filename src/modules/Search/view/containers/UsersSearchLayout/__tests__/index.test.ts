@@ -11,7 +11,10 @@ const props: IUsersSearchLayoutProps = {
     UsersSearchForm: makeMockComponent('UsersSearchForm'),
     UsersSearchResults: makeMockComponent('UsersSearchResults'),
   }),
-  onSaveUser: jest.fn(),
+  profileFeatureEntry: makeMockEntry({}),
+  users: [],
+  saveUser: jest.fn(),
+  removeUser: jest.fn(),
   ...getMockedLocaleProps(),
 };
 

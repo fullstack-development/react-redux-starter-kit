@@ -16,7 +16,9 @@ const props: IUsersSearchResultsProps = {
     searchString: 'search',
     searchFor: 'user',
   },
-  onSave: jest.fn(),
+  onUserSave: jest.fn(),
+  onUserRemove: jest.fn(),
+  savedUsers: [],
   users: Array(10).fill(githubUser),
   paginationState: {
     page: 1,

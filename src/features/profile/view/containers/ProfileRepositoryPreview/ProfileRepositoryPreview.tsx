@@ -5,9 +5,8 @@ import { autobind } from 'core-decorators';
 
 import { IAppReduxState } from 'shared/types/app';
 import { IRepository, ISavedRepository } from 'shared/types/models';
-import { Dialog } from 'shared/view/components';
+import { Dialog, RepositoryPreview } from 'shared/view/components';
 import { Preloader } from 'shared/view/elements';
-import { RepositoryPreview } from 'shared/view/components';
 
 import { actions, selectors } from './../../../redux';
 
@@ -83,7 +82,10 @@ class ProfileRepositoryPreview extends React.Component<IProps> {
       onRemoveButtonClick,
       onSaveButtonClick,
     } = this.props;
-    if (!repository) return null;
+    if (!repository) {
+      return null;
+    }
+
     return (
       <RepositoryPreview
         repository={repository}

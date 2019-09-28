@@ -104,7 +104,9 @@ class RepositoryPreview extends React.PureComponent<IProps> {
       },
       onOwnerClick,
     } = this.props;
-    if (!onOwnerClick) return;
+    if (!onOwnerClick) {
+      return;
+    }
 
     onOwnerClick(id);
   }
@@ -113,15 +115,22 @@ class RepositoryPreview extends React.PureComponent<IProps> {
   private handleSaveButtonClick() {
     const {
       repository: { id, name },
-      onSaveButtonClick = () => {},
+      onSaveButtonClick,
     } = this.props;
+
+    if (!onSaveButtonClick) {
+      return;
+    }
 
     onSaveButtonClick({ id, name });
   }
 
   @autobind
   private handleRemoveButtonClick() {
-    const { repository, onRemoveButtonClick = () => {} } = this.props;
+    const { repository, onRemoveButtonClick } = this.props;
+    if (!onRemoveButtonClick) {
+      return;
+    }
 
     onRemoveButtonClick(repository.id);
   }

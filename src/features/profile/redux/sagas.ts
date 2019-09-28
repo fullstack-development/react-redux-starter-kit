@@ -7,7 +7,7 @@ import { actions as notificationServiceActions } from 'services/notification';
 
 import * as NS from '../namespace';
 import * as actions from './actions';
-import { IServerRepository } from 'services/api/types';
+import { IRepository } from 'shared/types/models';
 
 function getSaga(deps: IDependencies) {
   const getRepoType: NS.IGetRepository['type'] = 'PROFILE:GET_REPOSITORY';
@@ -19,13 +19,10 @@ function getSaga(deps: IDependencies) {
 
 function* executeGetRepo(
   { api }: IDependencies,
-  { payload }: NS.IGetRepositoryPayload,
+  { payload }: NS.IGetRepository,
 ) {
   try {
-    const repository: IServerRepository = yield call(
-      api.getRepository,
-      payload,
-    );
+    const repository: IRepository = yield call(api.getRepository, payload);
     yield put(actions.getRepositorySuccess(repository));
   } catch (error) {
     const errorMsg = getErrorMsg(error);

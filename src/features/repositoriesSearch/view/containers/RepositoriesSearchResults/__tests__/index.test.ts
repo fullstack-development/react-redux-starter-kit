@@ -3,9 +3,10 @@ import { makeMockComponent, repository } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 import { Preloader } from 'shared/view/elements';
 
-import { RepositoryPreview } from '../../../components';
+import { RepositoryPreview } from 'shared/view/components/RepositoryPreview/RepositoryPreview';
 import {
-  RepositoriesSearchResults, IRepositoriesSearchResultsProps,
+  RepositoriesSearchResults,
+  IRepositoriesSearchResultsProps,
 } from '../RepositoriesSearchResults';
 
 const props: IRepositoriesSearchResultsProps = {
@@ -21,6 +22,12 @@ const props: IRepositoriesSearchResultsProps = {
   UserDetails: makeMockComponent('UserDetails'),
   totalResults: 1,
   isSearchRequesting: false,
+  savedRepos: [],
+  savedUsers: [],
+  onRepoSave: jest.fn(),
+  onRepoRemove: jest.fn(),
+  onUserSave: jest.fn(),
+  onUserRemove: jest.fn(),
   ...getMockedLocaleProps(),
 };
 
@@ -29,7 +36,9 @@ const getComponent = makeShallowRenderer(RepositoriesSearchResults, props);
 describe('(features/repositoriesSearch) RepositoriesSearchResults container', () => {
   it('should render all found repositories', () => {
     const component = getComponent();
-    const renderedRepos = component.find('.repositories-search-results__repository-preview');
+    const renderedRepos = component.find(
+      '.repositories-search-results__repository-preview',
+    );
     expect(renderedRepos.length).toBe(props.repositories.length);
   });
 
@@ -47,8 +56,11 @@ describe('(features/repositoriesSearch) RepositoriesSearchResults container', ()
     const { UserDetails } = props;
     expect(component.find(UserDetails).length).toBe(0);
 
-    const { username } = props.repositories[0].owner;
-    component.find(RepositoryPreview).at(0).prop('onOwnerClick')(username);
+    const { id } = props.repositories[0].owner;
+    component
+      .find(RepositoryPreview)
+      .at(0)
+      .prop('onOwnerClick')(id);
     expect(component.find(UserDetails).length).toBe(1);
   });
 

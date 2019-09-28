@@ -11,7 +11,9 @@ const props: IUserDetailsProps = {
   loadUserDetails: jest.fn(),
   onClose: jest.fn(),
   onSaveButtonClick: jest.fn(),
-  username: 'the user',
+  id: 123,
+  isSaved: false,
+  onRemoveButtonClick: jest.fn(),
   ...getMockedLocaleProps(),
 };
 
@@ -35,7 +37,7 @@ describe('(features/usersSearch) UserDetails container', () => {
       document.createElement('div'),
       false,
     );
-    expect(loadUserDetails).toHaveBeenCalledWith(props.username);
+    expect(loadUserDetails).toHaveBeenCalledWith(props.id);
   });
 
   it('should call onClose on dialog close', () => {

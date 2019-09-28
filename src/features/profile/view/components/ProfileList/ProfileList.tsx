@@ -21,19 +21,19 @@ type IProps = IOwnProps;
 
 function ProfileList(props: IProps) {
   const { items, title, onRemoveClick, onPreviewClick } = props;
+  const makeHandler = (id: number, cb: (id: number) => void) => () => cb(id);
 
-  const itemRows = items.map(({ id, title }) => (
+  const itemRows = items.map(({ id, title: itemTitle }) => (
     <div className={b('row')} key={id}>
-      <div className={b('item')}>{title}</div>
-      <div className={b('preview')} onClick={() => onPreviewClick(id)}>
+      <div className={b('item')}>{itemTitle}</div>
+      <div className={b('preview')} onClick={makeHandler(id, onPreviewClick)}>
         Preview
       </div>
-      <div className={b('remove')} onClick={() => onRemoveClick(id)}>
+      <div className={b('remove')} onClick={makeHandler(id, onRemoveClick)}>
         Remove
       </div>
     </div>
   ));
-
   const mainTitle = <h2 className={b('main-title')}>{title}</h2>;
 
   return (

@@ -153,11 +153,13 @@ class UserDetails extends React.Component<IProps> {
 
   @autobind
   private handleSaveButtonClick() {
-    const {
-      userDetails: { id, username },
-      onSaveButtonClick,
-    } = this.props;
+    const { userDetails, onSaveButtonClick } = this.props;
 
+    if (!onSaveButtonClick || !userDetails) {
+      return;
+    }
+
+    const { id, username } = userDetails;
     onSaveButtonClick({ id, username });
   }
 
