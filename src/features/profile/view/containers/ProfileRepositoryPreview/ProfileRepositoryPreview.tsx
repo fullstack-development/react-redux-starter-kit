@@ -7,6 +7,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IRepository, ISavedRepository } from 'shared/types/models';
 import { Dialog, RepositoryPreview } from 'shared/view/components';
 import { Preloader } from 'shared/view/elements';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { actions, selectors } from './../../../redux';
 
@@ -24,7 +25,7 @@ interface IOwnProps {
   onOwnerClick(id: number): void;
 }
 
-type IProps = IOwnProps & IStateProps & typeof mapDispatch;
+type IProps = ITranslationProps & IOwnProps & IStateProps & typeof mapDispatch;
 
 function mapState(state: IAppReduxState) {
   return {
@@ -40,25 +41,26 @@ const b = block('repository-preview-dialog');
 
 class ProfileRepositoryPreview extends React.Component<IProps> {
   public render() {
-    const { repositoryIsLoading } = this.props;
+    const { repositoryIsLoading, t } = this.props;
+    const { profile: intl } = tKeys.features;
 
     return (
       <Dialog
         open={true}
-        title="Repository"
+        title={t(intl.repoPreviewTitle)}
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
       >
-        <div className={b()}>
-          {
+        <Dialog.Content>
+          <div className={b()}>
             <Preloader
               size={80}
               isShown={repositoryIsLoading}
               backgroundColor="#fff"
             />
-          }
-          {this.renderPreview()}
-        </div>
+            {this.renderPreview()}
+          </div>
+        </Dialog.Content>
       </Dialog>
     );
   }
@@ -80,11 +82,13 @@ class ProfileRepositoryPreview extends React.Component<IProps> {
     const {
       isSaved,
       repository,
+      repositoryIsLoading,
       onOwnerClick,
       onRemoveButtonClick,
       onSaveButtonClick,
     } = this.props;
-    if (!repository) {
+
+    if (!repository || repositoryIsLoading) {
       return null;
     }
 
@@ -103,4 +107,4 @@ class ProfileRepositoryPreview extends React.Component<IProps> {
 export default connect(
   mapState,
   mapDispatch,
-)(ProfileRepositoryPreview);
+)(withTranslation()(ProfileRepositoryPreview));

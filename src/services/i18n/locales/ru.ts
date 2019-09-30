@@ -39,6 +39,7 @@ export default {
       preview: 'Превью',
       users: 'Пользователи',
       repos: 'Репозитории',
+      repoPreviewTitle: 'Информация о репозитории',
     },
     repositoriesSearch: {
       minStars: 'Мин. звезд',

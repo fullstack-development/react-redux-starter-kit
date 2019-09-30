@@ -3,8 +3,6 @@ import block from 'bem-cn';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
-const b = block('profile-list');
-
 import './ProfileList.scss';
 
 interface Item {
@@ -20,6 +18,8 @@ interface IOwnProps {
 }
 
 type IProps = IOwnProps & ITranslationProps;
+
+const b = block('profile-list');
 
 function ProfileList(props: IProps) {
   const { items, title, onRemoveClick, onPreviewClick, t } = props;

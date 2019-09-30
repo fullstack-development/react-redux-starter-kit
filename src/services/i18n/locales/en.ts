@@ -38,6 +38,7 @@ export default {
       preview: 'Preview',
       users: 'Users',
       repos: 'Repositories',
+      repoPreviewTitle: 'Repository info',
     },
     repositoriesSearch: {
       minStars: 'Min stars',

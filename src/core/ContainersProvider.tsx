@@ -122,7 +122,7 @@ function containersProvider<L extends Container>(
             [key]: cont,
           },
         }));
-      };
+      }
 
       @autobind
       private isAllContainersLoaded(): boolean {

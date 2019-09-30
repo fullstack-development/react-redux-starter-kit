@@ -8,6 +8,10 @@
   background: white;
   color: #222;
 
+  @include breakpoint-up(sm) {
+    width: 37rem;
+  }
+
   &__description {
     margin: 0.7rem 0 0.9rem;
     line-height: 1.4rem;

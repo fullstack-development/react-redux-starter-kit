@@ -11,6 +11,7 @@ import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import ProfileRepositoryPreview from '../ProfileRepositoryPreview/ProfileRepositoryPreview';
 import { ProfileList } from '../../components';
 import { selectors, actions } from '../../../redux';
+
 import './ProfileSavedList.scss';
 
 interface IStateProps {
@@ -81,8 +82,8 @@ class ProfileSavedList extends React.Component<IProps, IState> {
               onRemoveClick={this.handleUserRemove}
             />
           </div>
-          {this.renderActiveRepository()}
-          {this.renderActiveUser()}
+          {this.renderSelectedRepository()}
+          {this.renderSelectedUser()}
         </div>
       </div>
     );
@@ -114,14 +115,14 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private handleRepoSave(repo: ISavedRepository) {
-    const { saveRepo } = this.props;
-    saveRepo(repo);
+  private handleUserRemove(id: number) {
+    this.props.removeUser(id);
   }
 
   @autobind
-  private handleUserRemove(id: number) {
-    this.props.removeUser(id);
+  private handleRepoSave(repo: ISavedRepository) {
+    const { saveRepo } = this.props;
+    saveRepo(repo);
   }
 
   @autobind
@@ -135,7 +136,7 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private renderActiveRepository() {
+  private renderSelectedRepository() {
     const { repos } = this.props;
     const { displayedRepoId } = this.state;
     const repo = repos.find(({ id }) => id === displayedRepoId);
@@ -146,7 +147,7 @@ class ProfileSavedList extends React.Component<IProps, IState> {
 
     return (
       <ProfileRepositoryPreview
-        id={displayedRepoId}
+        id={Number(displayedRepoId)}
         isSaved={repo ? true : false}
         onClose={this.handleRepoPreviewClose}
         onRemoveButtonClick={this.handleRepoRemove}
@@ -157,10 +158,11 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   }
 
   @autobind
-  private renderActiveUser() {
+  private renderSelectedUser() {
     const { users, UserDetails } = this.props;
     const { displayedUserId } = this.state;
     const user = users.find(({ id }) => id === displayedUserId);
+
     if (!displayedUserId) {
       return;
     }

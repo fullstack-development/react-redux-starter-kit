@@ -42,6 +42,7 @@ jspm_packages
 # Other
 build
 static
+.prettierrc
 
 # MacOS deps
 .DS_Store
