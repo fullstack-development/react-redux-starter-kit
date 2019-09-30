@@ -3,12 +3,14 @@ export default {
   shared: {
     ok: 'Ok',
     save: 'Сохранить',
+    remove: 'Удалить',
     search: 'Поиск',
     settings: 'Настройки',
     searchSettings: 'Настройки поиска',
     totalResults: 'Количество результатов: ',
     fieldIsRequiredError: 'Поле обязательно',
-    fieldMinLengthError: 'Поле должно быть не меньше {{minCharacters}} символов',
+    fieldMinLengthError:
+      'Поле должно быть не меньше {{minCharacters}} символов',
     fieldMaxLengthError: 'Поле должно быть не более {{maxCharacters}} символов',
     header: {
       searchFor: 'Искать:',
@@ -33,6 +35,10 @@ export default {
       yearsOld_1: '{{count}} года',
       yearsOld_2: '{{count}} год',
       edit: 'Редактировать',
+      saved: 'Сохраненные',
+      preview: 'Превью',
+      users: 'Пользователи',
+      repos: 'Репозитории',
     },
     repositoriesSearch: {
       minStars: 'Мин. звезд',
@@ -72,5 +78,9 @@ export default {
     },
   },
   documents: {},
-  modules: {},
+  modules: {
+    profile: {
+      savedPageTitle: 'Сохраненные пользователи/репозитории',
+    },
+  },
 };

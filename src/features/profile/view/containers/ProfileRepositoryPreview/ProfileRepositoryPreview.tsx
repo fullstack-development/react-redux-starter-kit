@@ -17,6 +17,7 @@ interface IStateProps {
 
 interface IOwnProps {
   id: number | null;
+  isSaved: boolean;
   onClose(): void;
   onRemoveButtonClick(id: number): void;
   onSaveButtonClick(repo: ISavedRepository): void;
@@ -77,6 +78,7 @@ class ProfileRepositoryPreview extends React.Component<IProps> {
   @autobind
   private renderPreview() {
     const {
+      isSaved,
       repository,
       onOwnerClick,
       onRemoveButtonClick,
@@ -89,7 +91,7 @@ class ProfileRepositoryPreview extends React.Component<IProps> {
     return (
       <RepositoryPreview
         repository={repository}
-        isSaved={true}
+        isSaved={isSaved}
         onRemoveButtonClick={onRemoveButtonClick}
         onSaveButtonClick={onSaveButtonClick}
         onOwnerClick={onOwnerClick}

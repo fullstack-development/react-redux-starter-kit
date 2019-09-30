@@ -6,6 +6,7 @@ import { autobind } from 'core-decorators';
 import { ISavedGithubUser, ISavedRepository } from 'shared/types/models';
 import { IAppReduxState } from 'shared/types/app';
 import { IContainerTypes, containersProvider } from 'core';
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import ProfileRepositoryPreview from '../ProfileRepositoryPreview/ProfileRepositoryPreview';
 import { ProfileList } from '../../components';
@@ -23,7 +24,10 @@ interface IContainerProviderProps {
   UserDetails: IContainerTypes['UserDetails'];
 }
 
-type IProps = IStateProps & IActionProps & IContainerProviderProps;
+type IProps = ITranslationProps &
+  IStateProps &
+  IActionProps &
+  IContainerProviderProps;
 
 interface IState {
   displayedUserId: number | null;
@@ -53,16 +57,17 @@ class ProfileSavedList extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { users, repos } = this.props;
+    const { users, repos, t } = this.props;
     const userList = users.map(({ id, username }) => ({ id, title: username }));
     const repoList = repos.map(({ id, name }) => ({ id, title: name }));
+    const { profile: intl } = tKeys.features;
 
     return (
       <div className={b()}>
         <div className={b('list-container')}>
           <div className={b('repos')}>
             <ProfileList
-              title="Repos"
+              title={t(intl.repos)}
               items={repoList}
               onPreviewClick={this.handleRepoPreview}
               onRemoveClick={this.handleRepoRemove}
@@ -70,7 +75,7 @@ class ProfileSavedList extends React.Component<IProps, IState> {
           </div>
           <div className={b('users')}>
             <ProfileList
-              title="Users"
+              title={t(intl.users)}
               items={userList}
               onPreviewClick={this.handleUserPreview}
               onRemoveClick={this.handleUserRemove}
@@ -135,13 +140,14 @@ class ProfileSavedList extends React.Component<IProps, IState> {
     const { displayedRepoId } = this.state;
     const repo = repos.find(({ id }) => id === displayedRepoId);
 
-    if (!repo || !displayedRepoId) {
+    if (!displayedRepoId) {
       return null;
     }
 
     return (
       <ProfileRepositoryPreview
         id={displayedRepoId}
+        isSaved={repo ? true : false}
         onClose={this.handleRepoPreviewClose}
         onRemoveButtonClick={this.handleRepoRemove}
         onSaveButtonClick={this.handleRepoSave}
@@ -174,6 +180,6 @@ class ProfileSavedList extends React.Component<IProps, IState> {
 const connectedComponent = connect(
   mapState,
   mapDispatch,
-)(ProfileSavedList);
+)(withTranslation()(ProfileSavedList));
 
 export default containersProvider(['UserDetails'])(connectedComponent);

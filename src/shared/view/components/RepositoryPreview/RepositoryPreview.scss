@@ -3,6 +3,8 @@
 
 .repository-preview {
   padding: 1.5rem 1.8rem;
+  min-height: 14rem;
+  width: 37rem;
   background: white;
   color: #222;
 
@@ -59,7 +61,11 @@
     height: 2.35rem;
 
     @include breakpoint-up(sm) {
-      width: 50%;
+      width: 35%;
     }
+  }
+
+  &__action-button-container {
+    margin-left: 1rem;
   }
 }

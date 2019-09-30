@@ -1,6 +1,8 @@
 import React from 'react';
 import block from 'bem-cn';
 
+import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+
 const b = block('profile-list');
 
 import './ProfileList.scss';
@@ -17,20 +19,24 @@ interface IOwnProps {
   onRemoveClick(id: number): void;
 }
 
-type IProps = IOwnProps;
+type IProps = IOwnProps & ITranslationProps;
 
 function ProfileList(props: IProps) {
-  const { items, title, onRemoveClick, onPreviewClick } = props;
+  const { items, title, onRemoveClick, onPreviewClick, t } = props;
   const makeHandler = (id: number, cb: (id: number) => void) => () => cb(id);
+  const {
+    shared: sharedIntl,
+    features: { profile: profileIntl },
+  } = tKeys;
 
   const itemRows = items.map(({ id, title: itemTitle }) => (
     <div className={b('row')} key={id}>
       <div className={b('item')}>{itemTitle}</div>
-      <div className={b('preview')} onClick={makeHandler(id, onPreviewClick)}>
-        Preview
+      <div className={b('link')} onClick={makeHandler(id, onPreviewClick)}>
+        {t(profileIntl.preview)}
       </div>
-      <div className={b('remove')} onClick={makeHandler(id, onRemoveClick)}>
-        Remove
+      <div className={b('link')} onClick={makeHandler(id, onRemoveClick)}>
+        {t(sharedIntl.remove)}
       </div>
     </div>
   ));
@@ -44,4 +50,4 @@ function ProfileList(props: IProps) {
   );
 }
 
-export default ProfileList;
+export default withTranslation()(ProfileList);

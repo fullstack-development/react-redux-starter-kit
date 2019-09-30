@@ -17,7 +17,7 @@ import './UserDetails.scss';
 interface IOwnProps {
   id: number;
   isSaved: boolean;
-  onSaveButtonClick?(user: ISavedGithubUser): void;
+  onSaveButtonClick(user: ISavedGithubUser): void;
   onRemoveButtonClick(id: number): void;
   onClose(): void;
 }
@@ -46,7 +46,10 @@ const mapDispatch = {
 };
 
 const b = block('user-details');
-const { userSearch: intl } = tKeys.features;
+const {
+  shared: sharedIntl,
+  features: { userSearch: intl },
+} = tKeys;
 
 class UserDetails extends React.Component<IProps> {
   private avatarSize = 230;
@@ -127,9 +130,13 @@ class UserDetails extends React.Component<IProps> {
           </div>
           <div className={b('action-button-container')}>
             {isSaved ? (
-              <Button onClick={this.handleRemoveButtonClick}>Remove</Button>
+              <Button onClick={this.handleRemoveButtonClick}>
+                {t(sharedIntl.remove)}
+              </Button>
             ) : (
-              <Button onClick={this.handleSaveButtonClick}>Save</Button>
+              <Button onClick={this.handleSaveButtonClick}>
+                {t(sharedIntl.save)}
+              </Button>
             )}
           </div>
         </>
@@ -155,7 +162,7 @@ class UserDetails extends React.Component<IProps> {
   private handleSaveButtonClick() {
     const { userDetails, onSaveButtonClick } = this.props;
 
-    if (!onSaveButtonClick || !userDetails) {
+    if (!userDetails) {
       return;
     }
 

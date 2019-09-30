@@ -75,11 +75,13 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
               </div>
             </div>
             <div className={b('bio')}>{bio}</div>
-            <div className={b('edit')} onClick={onEditClick}>
-              {t(intl.edit)}
-            </div>
-            <div className={b('saved')} onClick={onSavedClick}>
-              Saved
+            <div className={b('links')}>
+              <div className={b('link')} onClick={onEditClick}>
+                {t(intl.edit)}
+              </div>
+              <div className={b('link')} onClick={onSavedClick}>
+                {t(intl.saved)}
+              </div>
             </div>
           </div>
         </Popover>

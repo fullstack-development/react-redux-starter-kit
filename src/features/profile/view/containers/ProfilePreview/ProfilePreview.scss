@@ -65,7 +65,13 @@
     line-height: 1rem;
   }
 
-  &__edit {
+  &__links {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__link {
+    margin-right: 0.5rem;
     text-decoration: underline;
     font-size: 0.9rem;
     cursor: pointer;

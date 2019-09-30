@@ -1,8 +1,8 @@
 .profile-saved-list {
   &__list-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin: auto;
-    width: 40rem;
+    max-width: 48rem;
   }
 }

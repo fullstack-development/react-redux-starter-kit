@@ -63,7 +63,6 @@ class Api {
   @autobind
   public async loadUserDetails(id: number) {
     const URL = `/user/${id}`;
-    console.log(URL);
     const response = await this.actions.get<IDetailedServerUser>(URL);
     return convertUserDetails(response.data);
   }

@@ -3,13 +3,16 @@ export default {
   shared: {
     ok: 'Ok',
     save: 'Save',
+    remove: 'Remove',
     search: 'Search',
     settings: 'Settings',
     searchSettings: 'Search settings',
     totalResults: 'Total results: ',
     fieldIsRequiredError: 'Field is required',
-    fieldMinLengthError: 'Field must be at least {{minCharacters}} characters long',
-    fieldMaxLengthError: 'Field must be less than {{maxCharacters}} characters long',
+    fieldMinLengthError:
+      'Field must be at least {{minCharacters}} characters long',
+    fieldMaxLengthError:
+      'Field must be less than {{maxCharacters}} characters long',
     header: {
       searchFor: 'Search for:',
       users: 'Users',
@@ -31,6 +34,10 @@ export default {
       editProfile: 'Edit profile',
       yearsOld: '{{count}} y.o.',
       edit: 'Edit',
+      saved: 'Saved',
+      preview: 'Preview',
+      users: 'Users',
+      repos: 'Repositories',
     },
     repositoriesSearch: {
       minStars: 'Min stars',
@@ -70,5 +77,9 @@ export default {
     },
   },
   documents: {},
-  modules: {},
+  modules: {
+    profile: {
+      savedPageTitle: 'Saved repos/users',
+    },
+  },
 };

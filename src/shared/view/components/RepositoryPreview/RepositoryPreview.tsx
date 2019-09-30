@@ -12,15 +12,18 @@ import './RepositoryPreview.scss';
 interface IOwnProps {
   repository: IRepository;
   isSaved: boolean;
-  onOwnerClick?(id: number): void;
-  onSaveButtonClick?(repo: ISavedRepository): void;
-  onRemoveButtonClick?(repoId: number): void;
+  onOwnerClick(id: number): void;
+  onSaveButtonClick(repo: ISavedRepository): void;
+  onRemoveButtonClick(repoId: number): void;
 }
 
 type IProps = IOwnProps & ITranslationProps;
 
 const b = block('repository-preview');
-const { repositoriesSearch: intl } = tKeys.features;
+const {
+  shared: sharedIntl,
+  features: { repositoriesSearch: intl },
+} = tKeys;
 
 class RepositoryPreview extends React.PureComponent<IProps> {
   public render() {
@@ -81,15 +84,19 @@ class RepositoryPreview extends React.PureComponent<IProps> {
                 type="owner"
               />
             </div>
-          </div>
-          <div className={b('action-button-container')}>
-            {isSaved
-              ? this.props.onRemoveButtonClick && (
-                  <Button onClick={this.handleRemoveButtonClick}>Remove</Button>
-                )
-              : this.props.onSaveButtonClick && (
-                  <Button onClick={this.handleSaveButtonClick}>Save</Button>
-                )}
+            <div className={b('action-button-container')}>
+              {isSaved
+                ? this.props.onRemoveButtonClick && (
+                    <Button onClick={this.handleRemoveButtonClick}>
+                      {t(sharedIntl.remove)}
+                    </Button>
+                  )
+                : this.props.onSaveButtonClick && (
+                    <Button onClick={this.handleSaveButtonClick}>
+                      {t(sharedIntl.save)}
+                    </Button>
+                  )}
+            </div>
           </div>
         </div>
       </Card>
@@ -104,33 +111,24 @@ class RepositoryPreview extends React.PureComponent<IProps> {
       },
       onOwnerClick,
     } = this.props;
-    if (!onOwnerClick) {
-      return;
-    }
 
     onOwnerClick(id);
   }
 
   @autobind
   private handleSaveButtonClick() {
-    const {
-      repository: { id, name },
-      onSaveButtonClick,
-    } = this.props;
+    const { repository, onSaveButtonClick } = this.props;
 
-    if (!onSaveButtonClick) {
+    if (!repository) {
       return;
     }
-
+    const { id, name } = repository;
     onSaveButtonClick({ id, name });
   }
 
   @autobind
   private handleRemoveButtonClick() {
     const { repository, onRemoveButtonClick } = this.props;
-    if (!onRemoveButtonClick) {
-      return;
-    }
 
     onRemoveButtonClick(repository.id);
   }
