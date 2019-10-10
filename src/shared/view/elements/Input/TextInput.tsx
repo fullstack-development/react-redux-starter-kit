@@ -1,6 +1,5 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
-import { MarkAsPartial, SubSet } from '_helpers';
 
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -8,14 +7,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Adjust from '@material-ui/icons/Adjust';
 
-// crutch for types :)
-type PartialProps = SubSet<
-  keyof TextFieldProps,
-  | 'className' | 'classes' | 'defaultValue' | 'variant' | 'style' | 'innerRef'
-  | 'inputProps' | 'InputProps' | 'inputRef' | 'rows' | 'rowsMax' | 'value' | 'onChange'
->;
-
-type IProps = MarkAsPartial<TextFieldProps, PartialProps>;
+type IProps = Omit<TextFieldProps, 'ref'>;
 
 interface IState {
   type?: string;

@@ -19,7 +19,7 @@ describe('(shared/helpers/react) withComponent', () => {
   it('should pass all outer component props + component to inner component', () => {
     const outerComponent = getOuterComponent();
     const outerPropsNames = Object.keys(outerComponentProps);
-    const innerPropsNames = Object.keys(outerComponent.find(InnerComponent).props());
+    const innerPropsNames = Object.keys(outerComponent.find<typeof InnerComponent>(InnerComponent).props());
     const passedProps = R.intersection(
       outerPropsNames.concat('component'),
       innerPropsNames,

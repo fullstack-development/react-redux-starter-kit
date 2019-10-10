@@ -1,6 +1,6 @@
 import React from 'react';
 import { rule } from 'shared/helpers/style';
-import { withStyles, WithStyles } from './jss';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 
 const styles = {
   '@global': rule({
@@ -24,9 +24,9 @@ const styles = {
 
 type StylesProps = WithStyles<typeof styles>;
 
-class BaseStyles extends React.Component<{ children: React.ReactNode } & StylesProps> {
+class BaseStyles extends React.Component<StylesProps> {
   public render() {
-    return this.props.children;
+    return null;
   }
 }
 

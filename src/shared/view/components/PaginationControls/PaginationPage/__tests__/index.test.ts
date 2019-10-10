@@ -20,7 +20,7 @@ describe('(shared/view) PaginationControls/PaginationPage component)', () => {
     const onClick = jest.fn();
     const component = getComponent({ onClick });
     expect(onClick).not.toHaveBeenCalled();
-    component.find(ButtonBase).prop('onClick')();
+    component.find(ButtonBase).simulate('click');
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(onClick).toHaveBeenCalledWith(props.page);
   });

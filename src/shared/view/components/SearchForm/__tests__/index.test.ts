@@ -69,7 +69,7 @@ describe('(shared/view) SearchForm component', () => {
     const component = getComponent({ renderSettings: jest.fn() });
 
     const settingsButton = component.find('.search-form__settings-button').find(Button);
-    settingsButton.prop('onClick')();
+    settingsButton.simulate('click');
     component.update();
     const settingsDialog = component.find(SearchSettingsDialog);
     expect(settingsDialog.prop('isOpen')).toBe(true);

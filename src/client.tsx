@@ -13,11 +13,14 @@ const { appVersion } = getEnvParams();
 const appData = configureApp();
 
 async function main() {
+  // await waitForAsyncFeaturesToConnect();
+  const app = <App {...appData} />;
+  render(app);
+}
+
+async function waitForAsyncFeaturesToConnect() {
   const appForBootstrap = <App {...appData} disableStylesGeneration />;
   await bootstrapper(appForBootstrap);
-  const app = <App {...appData} />;
-
-  render(app);
 }
 
 /* Start application */
@@ -29,7 +32,7 @@ if ((module as any).hot && process.env.NODE_ENV !== 'production') {
     const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
     const NextApp: typeof App = require('./core/App').App;
     const nextAppData = nextConfigureApp(appData);
-    render(<NextApp {...nextAppData} jssDeps={appData.jssDeps} />);
+    render(<NextApp {...nextAppData} />);
   });
 }
 
@@ -38,10 +41,10 @@ function render(component: React.ReactElement<any>) {
     component,
     document.getElementById('root'),
     () => {
-      // We don't need the static css any more once we have launched our application.
-      const ssStyles = document.getElementById('server-side-styles');
-      if (ssStyles && ssStyles.parentNode) {
-        ssStyles.parentNode.removeChild(ssStyles);
+      // https://material-ui.com/guides/server-rendering/#the-client-side
+      const jssStyles = document.querySelector('#jss-server-side');
+      if (jssStyles && jssStyles.parentNode) {
+        jssStyles.parentNode.removeChild(jssStyles);
       }
     },
   );

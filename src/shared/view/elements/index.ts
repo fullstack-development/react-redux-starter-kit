@@ -1,6 +1,5 @@
 export * from './Input';
 export * from './Icons';
-export { default as RowsLayout } from './RowsLayout/RowsLayout';
 export { default as Typography } from './Typography/Typography';
 export { default as Button } from './Button/Button';
 export { default as IconButton } from './IconButton/IconButton';
