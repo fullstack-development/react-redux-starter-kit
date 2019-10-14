@@ -3,14 +3,14 @@ import block from 'bem-cn';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 
-import { featureConnect } from 'core';
-import * as features from 'features';
 import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+import { memoizeByProps } from 'shared/helpers';
+import { withAsyncFeatures } from 'core';
+import * as features from 'features';
 
-import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import routes from '../../routes';
 import './Layout.scss';
-import { memoizeByProps } from 'shared/helpers';
+import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 
 interface IOwnProps {
   title: string;
@@ -88,6 +88,6 @@ class Layout extends React.Component<IProps> {
 const wrappedComponent = withTranslation()(withRouter(Layout));
 
 export { Layout, IProps as ILayoutProps };
-export default featureConnect({
+export default withAsyncFeatures({
   profileFeatureEntry: features.profile.loadEntry,
 })(wrappedComponent);

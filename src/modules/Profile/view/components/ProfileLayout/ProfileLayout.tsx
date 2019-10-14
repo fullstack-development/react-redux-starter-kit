@@ -2,7 +2,7 @@ import React from 'react';
 import block from 'bem-cn';
 
 import * as features from 'features';
-import { featureConnect } from 'core';
+import { withAsyncFeatures } from 'core';
 import { useTranslation, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
@@ -31,6 +31,6 @@ function ProfileLayout(props: IProps) {
 }
 
 export { ProfileLayout, IProps as IProfileLayoutProps };
-export default featureConnect({
+export default withAsyncFeatures({
   profileFeatureEntry: features.profile.loadEntry,
 })(ProfileLayout);

@@ -39,7 +39,7 @@ export function loadEntry(): Promise<Entry> {
 ## How to use a lazy feature
 ### In modules
 
-A lazy feature which is used in a module is loaded using a `featureConnect` HOC. It takes a map with features' loaders (you can also pass a preloader as a second argument and it'll be shown while the entries are loading) and returns a component with features' entries passed as props.
+A lazy feature which is used in a module is loaded using a `withAsyncFeatures` HOC. It takes a map with features' loaders (you can also pass a preloader as a second argument and it'll be shown while the entries are loading) and returns a component with features' entries passed as props.
 
 ```
 /* userSearch feature used in Search module */
@@ -48,7 +48,7 @@ import React from 'react';
 import block from 'bem-cn';
 
 import * as features from 'features';
-import featureConnect from 'core/FeatureConnector';
+import { withAsyncFeatures } from 'core/AsyncFeatureConnector';
 
 import Layout from '../shared/Layout/Layout';
 import './UsersSearchLayout.scss';
@@ -77,16 +77,16 @@ function UsersSearchLayout(props: IProps) {
   );
 }
 
-export default featureConnect({
+export default withAsyncFeatures({
   usersSearchFeatureEntry: features.usersSearch.loadEntry,
 })(UsersSearchLayout);
 ```
 
-In this example `usersSearchFeatureEntry` will be loaded only when `UsersSearchLayout` is being used. `featureConnect` also automatically connects provided features to the redux store.
+In this example `usersSearchFeatureEntry` will be loaded only when `UsersSearchLayout` is being used. `withAsyncFeatures` also automatically connects provided features to the redux store.
 
 ### In ContainersProvider
 
-If a feature needs to use another feature's container, it is loaded using the `containersProvider` HOC. It works the same way as the `featureConnect`, but:
+If a feature needs to use another feature's container, it is loaded using the `containersProvider` HOC. It works the same way as the `withAsyncFeatures`, but:
 - it takes an array of container names as the first argument (a feature doesn't really know that it's using a container of some other feature, because from its perspective `containersProvider` is just an API for getting containers by their name);
 - a component returned by `containersProvider` includes only chosen containers as props and not feature entries with all feature's data;
 - `containersProvider` provides only those containers that are defined in its configuration in the `ContainersProvider.tsx` file. If you want to add a new container that `containersProvider` can provide, then you'll need to extend the configuration as follows:

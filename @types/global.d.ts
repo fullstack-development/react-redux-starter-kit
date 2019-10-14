@@ -20,7 +20,6 @@ declare module 'normalizr';
 declare module '*.scss';
 declare module '*.png';
 declare module 'react-hot-loader';
-declare module 'react-async-bootstrapper';
 declare module 'enzyme-adapter-react-16';
 
 declare module 'postcss-reporter';
