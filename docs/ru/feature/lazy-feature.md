@@ -47,7 +47,7 @@ export { loadEntry } from './loader';
 
 ```typescript
 import React from 'react';
-import { withAsyncFeatures } from 'core/AsyncFeatureConnector';
+import { withAsyncFeatures } from 'core/AsyncFeaturesConnector';
 
 import { RouteComponentProps } from 'react-router-dom';
 

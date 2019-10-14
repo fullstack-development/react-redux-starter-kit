@@ -17,7 +17,7 @@ function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoad
     WrappedComponent: React.ComponentType<Props>,
   ): React.ComponentClass<Omit<Props, keyof L>> => {
 
-    class AsyncFeatureConnector extends React.PureComponent<Props> {
+    class AsyncFeaturesConnector extends React.PureComponent<Props> {
       public static getJobCreator() {
         return async () => {
           await asyncFeaturesManager.loadFeatures(featuresLoaders);
@@ -48,7 +48,7 @@ function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoad
       }
     }
 
-    return AsyncFeatureConnector;
+    return AsyncFeaturesConnector;
   };
 }
 

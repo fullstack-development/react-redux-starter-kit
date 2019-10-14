@@ -48,7 +48,7 @@ import React from 'react';
 import block from 'bem-cn';
 
 import * as features from 'features';
-import { withAsyncFeatures } from 'core/AsyncFeatureConnector';
+import { withAsyncFeatures } from 'core/AsyncFeaturesConnector';
 
 import Layout from '../shared/Layout/Layout';
 import './UsersSearchLayout.scss';
