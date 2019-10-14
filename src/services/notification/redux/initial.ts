@@ -1,4 +1,4 @@
-import * as NS from '../../namespace';
+import * as NS from '../namespace';
 
 const initial: NS.IReduxState = {
   edit: {

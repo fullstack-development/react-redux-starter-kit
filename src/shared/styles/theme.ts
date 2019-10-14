@@ -64,9 +64,7 @@ export const baseThemeStyles = {
       borderRadius: 4,
     },
   },
-  spacing: {
-    unit: 8,
-  },
+  spacing: 8,
   typography: {
     primaryFont: ['OpenSans', 'Arial', 'sans-serif'].join(','),
   },

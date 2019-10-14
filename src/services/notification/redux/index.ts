@@ -1,4 +1,4 @@
-import * as selectors from './data/selectors';
+import * as selectors from './selectors';
 import * as actions from './actions';
 
 export { default as reducer } from './reducers';

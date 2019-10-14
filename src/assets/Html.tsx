@@ -3,15 +3,15 @@ import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import redux from 'redux';
 import { renderToString } from 'react-dom/server';
+import { ServerStyleSheets } from '@material-ui/styles';
 
 import { IAssets } from 'shared/types/app';
-import { SheetsRegistry } from 'shared/styles';
 
 interface IHtmlProps {
-  assets: IAssets;
-  component?: JSX.Element;
   store: redux.Store<any>;
-  styleSheets?: SheetsRegistry;
+  assets: IAssets;
+  app?: JSX.Element;
+  muiStyleSheets?: ServerStyleSheets;
 }
 
 /**
@@ -29,12 +29,11 @@ export default class Html extends React.PureComponent<IHtmlProps> {
   }
 
   public render() {
-    const { assets, component, store, styleSheets } = this.props;
+    const { assets, app, store, muiStyleSheets } = this.props;
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
-    // component rendering for injecting styles to jss registry
-    const renderedComponent = component ? renderToString(component) : '';
+    const stringifiedApp = app ? renderToString(app) : '';
     const windowAssets = serialize({ styles: assets.styles, javascript: assets.javascript });
     return (
       <html lang={__LANG__} style={styles}>
@@ -51,14 +50,14 @@ export default class Html extends React.PureComponent<IHtmlProps> {
           {assets.styles.map((filePath, index) => (
             <link href={`/${filePath}`} key={index} media="screen, projection" rel="stylesheet" type="text/css" />
           ))}
-          {!!styleSheets && (
-            <style type="text/css" id="server-side-styles">{styleSheets.toString()}</style>
+          {muiStyleSheets !== undefined && (
+            <style type="text/css" id="jss-server-side">{muiStyleSheets.toString()}</style>
           )}
         </head>
 
         <body style={styles}>
 
-          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: renderedComponent }} />
+          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: stringifiedApp }} />
 
           <div>
             {/* Other code */}

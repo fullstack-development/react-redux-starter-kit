@@ -1,5 +1,5 @@
 import { IAppReduxState } from 'shared/types/app';
-import * as NS from '../../namespace';
+import * as NS from '../namespace';
 
 function selectServiceState(state: IAppReduxState): NS.IReduxState {
   if (!state.notification) {

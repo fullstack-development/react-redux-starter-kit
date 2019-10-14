@@ -36,11 +36,12 @@ class ThemeProvider extends React.Component<Props & RouteComponentProps, IState>
   }
 
   public render() {
+    // TODO: test ssr and then remove or fix disableStylesGeneration
     const { children, disableStylesGeneration } = this.props;
     const { theme } = this.state;
 
     return (
-      <MuiThemeProvider theme={theme} disableStylesGeneration={disableStylesGeneration}>
+      <MuiThemeProvider theme={theme}>
         {children}
       </MuiThemeProvider>
     );
