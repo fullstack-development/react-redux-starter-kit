@@ -10,7 +10,7 @@ import { asyncFeaturesManager } from './AsyncFeaturesManager';
 type FeatureLoader = () => Promise<IFeatureEntry>;
 
 // tslint:disable:max-line-length
-function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoaders: L, preloader?: React.ReactChild):
+function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoaders: L, fallback?: React.ReactChild):
   <Props extends { [K in keyof L]: any }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentType<Omit<Props, keyof L>> {
 
   const featuresToLoad = Object.keys(featuresLoaders);
@@ -42,7 +42,7 @@ function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoad
 
       public render() {
         if (!asyncFeaturesManager.areFeaturesLoaded(featuresToLoad)) {
-          return preloader || null;
+          return fallback || null;
         } else {
           return <WrappedComponent {...asyncFeaturesManager.getFeaturesEntries(featuresToLoad)} {...this.props} />;
         }
