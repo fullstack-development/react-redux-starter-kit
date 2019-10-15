@@ -2,6 +2,7 @@ import React from 'react';
 
 import { makeCancelable, ICancellablePromise } from 'shared/helpers/makeCancelable';
 import { IFeatureEntry } from 'shared/types/app';
+import { serverDataWaiterHOC } from 'shared/helpers/bootstrap';
 import { Omit, GetProps, SubSet } from '_helpers';
 
 import { asyncFeaturesManager } from './AsyncFeaturesManager';
@@ -48,7 +49,7 @@ function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoad
       }
     }
 
-    return AsyncFeaturesConnector;
+    return serverDataWaiterHOC(AsyncFeaturesConnector);
   };
 }
 
