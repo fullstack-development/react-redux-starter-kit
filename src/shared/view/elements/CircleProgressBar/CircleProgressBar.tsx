@@ -2,7 +2,6 @@ import React from 'react';
 import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
 
 import { StylesProps, provideStyles } from './CircleProgressBar.style';
-import { Omit } from '_helpers';
 
 type IProps = Omit<CircularProgressProps, 'classes'> & StylesProps;
 

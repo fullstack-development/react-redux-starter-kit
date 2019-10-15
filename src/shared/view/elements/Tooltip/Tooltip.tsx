@@ -2,7 +2,6 @@ import React from 'react';
 import MuiTooltip, { TooltipProps } from '@material-ui/core/Tooltip';
 
 import { StylesProps, provideStyles } from './Tooltip.styles';
-import { Omit } from '_helpers';
 
 type IProps = Omit<TooltipProps, 'classes' | 'PopperProps'> & StylesProps;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 import { FieldRenderProps } from 'react-final-form';
-import { GetProps, Omit } from '_helpers';
+import { GetProps } from '_helpers';
 
 import {
   CppIcon, CsIcon, JavaIcon, JSIcon, TSIcon, PythonIcon, RubyIcon, SwiftIcon, CIcon, HaskellIcon, InputWithPresets,
