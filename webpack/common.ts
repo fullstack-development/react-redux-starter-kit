@@ -142,31 +142,6 @@ export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
   },
 ];
 
-export function getStyleRules(type: BuildType) {
-  const cssLoaders: Record<BuildType, webpack.Loader[]> = {
-    dev: ['style-loader', 'css-loader'],
-    prod: [MiniCssExtractPlugin.loader, 'css-loader'],
-    server: ['css-loader/locals'],
-  };
-
-  const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
-    dev: ['style-loader', 'css-loader?importLoaders=1'],
-    prod: [MiniCssExtractPlugin.loader, 'css-loader?importLoaders=1'],
-    server: ['css-loader/locals?importLoaders=1'],
-  };
-
-  return [
-    {
-      test: /\.css$/,
-      use: cssLoaders[type],
-    },
-    {
-      test: /\.scss$/,
-      use: threadLoader.concat(scssFirstLoaders[type]).concat(commonScssLoaders),
-    },
-  ];
-}
-
 const commonScssLoaders: webpack.Loader[] = [
   {
     loader: 'postcss-loader',
@@ -204,6 +179,37 @@ const commonScssLoaders: webpack.Loader[] = [
     },
   },
 ];
+
+export function getStyleRules(type: BuildType) {
+  const addCssLoader = (onlyLocals: boolean = false) => ({
+    loader: 'css-loader',
+    options: { onlyLocals, importLoaders: 1 },
+  });
+
+  const cssLoaders: Record<BuildType, webpack.Loader[]> = {
+    dev: ['style-loader', 'css-loader'],
+    prod: [MiniCssExtractPlugin.loader, 'css-loader'],
+    server: [addCssLoader(true)],
+  };
+
+  const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
+    dev: ['style-loader', addCssLoader()],
+    prod: [MiniCssExtractPlugin.loader, addCssLoader()],
+    server: [addCssLoader(true)],
+  };
+
+  return [
+    {
+      test: /\.css$/,
+      use: cssLoaders[type],
+    },
+    {
+      test: /\.scss$/,
+      // TODO: try to add thread-loader back, when sass-loader will be replaced with postcss tools
+      use: scssFirstLoaders[type].concat(commonScssLoaders),
+    },
+  ];
+}
 
 export const commonConfig: webpack.Configuration = {
   target: 'web',
