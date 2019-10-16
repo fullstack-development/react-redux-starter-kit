@@ -1,4 +1,4 @@
-{
+module.exports = {
   "parser": "@typescript-eslint/parser",
   "extends": [
     "airbnb-typescript"
@@ -7,6 +7,7 @@
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "react/jsx-props-no-spreading": "off",
     "react/jsx-boolean-value": "off",
+    "react/state-in-constructor": "off",
     "@typescript-eslint/consistent-type-assertions": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/class-name-casing": "error",
@@ -19,6 +20,7 @@
     "import/order": "off",
     "import/no-internal-modules": "off",
     "no-eval": "error",
+    "max-len": ["error", { "code": 120 }],
     "no-restricted-imports": ["error", "react-jss", "@material-ui/core", "@material-ui/icons", "i18next", "react-i18next"],
     "quote-props": "off",
     "no-trailing-spaces": "error",

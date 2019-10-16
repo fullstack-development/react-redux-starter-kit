@@ -69,7 +69,7 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
       checkSyntacticErrors: true,
       async: false,
       tsconfig: path.resolve('./tsconfig.json'),
-      tslint: path.resolve('./tslint.json'),
+      eslint: true,
     })) : [])
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
@@ -88,8 +88,8 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
     onEnd: {
       copy: [
         {
-          source: `src/assets/ghPages/**`,
-          destination: `build`,
+          source: 'src/assets/ghPages/**',
+          destination: 'build',
         },
       ],
     },
@@ -99,8 +99,8 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
   const order = ['app', 'vendors', 'runtime'];
   return order.findIndex(
     // webpack typings for Chunk are not correct wait for type updates for webpack.compilation.Chunk
-    item => (b as any).names[0].includes(item)) - order.findIndex(item => (a as any).names[0].includes(item),
-    );
+    item => (b as any).names[0].includes(item),
+  ) - order.findIndex(item => (a as any).names[0].includes(item));
 }
 
 export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
@@ -171,13 +171,11 @@ const commonScssLoaders: webpack.Loader[] = [
   {
     loader: 'postcss-loader',
     options: {
-      plugins: () => {
-        return [
-          autoprefixer({
-            browsers: ['last 2 versions'],
-          }),
-        ];
-      },
+      plugins: () => [
+        autoprefixer({
+          browsers: ['last 2 versions'],
+        }),
+      ],
     },
   },
   'sass-loader',
@@ -185,22 +183,20 @@ const commonScssLoaders: webpack.Loader[] = [
     loader: 'postcss-loader',
     options: {
       syntax: postcssSCSS,
-      plugins: () => {
-        return [
-          stylelint(),
-          doiuse({
-            // https://github.com/browserslist/browserslist
-            // to view resulting browsers list, use the command in terminal `npx browserslist "defaults, not ie > 0"`
-            browsers: ['defaults', 'not op_mini all', 'not ie > 0', 'not ie_mob > 0'],
-            ignore: [],
-            ignoreFiles: ['**/normalize.css'],
-          }),
-          postcssReporter({
-            clearReportedMessages: true,
-            throwError: true,
-          }),
-        ];
-      },
+      plugins: () => [
+        stylelint(),
+        doiuse({
+          // https://github.com/browserslist/browserslist
+          // to view resulting browsers list, use the command in terminal `npx browserslist "defaults, not ie > 0"`
+          browsers: ['defaults', 'not op_mini all', 'not ie > 0', 'not ie_mob > 0'],
+          ignore: [],
+          ignoreFiles: ['**/normalize.css'],
+        }),
+        postcssReporter({
+          clearReportedMessages: true,
+          throwError: true,
+        }),
+      ],
     },
   },
 ];
