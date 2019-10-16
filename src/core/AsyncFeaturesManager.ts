@@ -16,7 +16,7 @@ class AsyncFeaturesManager {
   private connectFeatureToStore!: (entry: IReduxEntry) => void;
 
   @autobind
-  public loadFeatures(loaders: FeaturesLoaders) {
+  public async loadFeatures(loaders: FeaturesLoaders) {
     const featuresNames = Object.keys(loaders);
 
     return Promise.all(
