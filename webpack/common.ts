@@ -181,7 +181,7 @@ const commonScssLoaders: webpack.Loader[] = [
 ];
 
 export function getStyleRules(type: BuildType) {
-  const addCssLoader = (onlyLocals: boolean = false) => ({
+  const getCssLoader = (onlyLocals: boolean = false) => ({
     loader: 'css-loader',
     options: { onlyLocals, importLoaders: 1 },
   });
@@ -189,13 +189,13 @@ export function getStyleRules(type: BuildType) {
   const cssLoaders: Record<BuildType, webpack.Loader[]> = {
     dev: ['style-loader', 'css-loader'],
     prod: [MiniCssExtractPlugin.loader, 'css-loader'],
-    server: [addCssLoader(true)],
+    server: [getCssLoader(true)],
   };
 
   const scssFirstLoaders: Record<BuildType, webpack.Loader[]> = {
-    dev: ['style-loader', addCssLoader()],
-    prod: [MiniCssExtractPlugin.loader, addCssLoader()],
-    server: [addCssLoader(true)],
+    dev: ['style-loader', getCssLoader()],
+    prod: [MiniCssExtractPlugin.loader, getCssLoader()],
+    server: [getCssLoader(true)],
   };
 
   return [
