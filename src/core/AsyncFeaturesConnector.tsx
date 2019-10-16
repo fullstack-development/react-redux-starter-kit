@@ -3,7 +3,7 @@ import React from 'react';
 import { makeCancelable, ICancellablePromise } from 'shared/helpers/makeCancelable';
 import { IFeatureEntry } from 'shared/types/app';
 import { serverDataWaiterHOC } from 'shared/helpers/bootstrap';
-import { GetProps, SubSet } from '_helpers';
+import { SubSet } from '_helpers';
 
 import { asyncFeaturesManager } from './AsyncFeaturesManager';
 
@@ -53,13 +53,13 @@ function withAsyncFeatures<L extends Record<string, FeatureLoader>>(featuresLoad
   };
 }
 
-type IFeatureEntryWithContainers<
-  C extends Record<string, React.ComponentType<any>>
-  > = SubSet<IFeatureEntry, { containers: C }>;
+type IFeatureEntryWithContainers<C extends Record<string, React.ComponentType<any>>> = SubSet<
+  IFeatureEntry, { containers: C }
+>;
 
 export function getAsyncContainer<C extends Record<string, React.ComponentType<any>>, K extends keyof C>(
   loader: () => Promise<IFeatureEntryWithContainers<C>>, componentName: K,
-): React.ComponentClass<GetProps<C[K]>> {
+): C[K] {
   interface IRenderProps {
     _entry?: IFeatureEntryWithContainers<C>;
   }
@@ -70,7 +70,7 @@ export function getAsyncContainer<C extends Record<string, React.ComponentType<a
     return <Container {...props} />;
   }
 
-  return withAsyncFeatures({ _entry: loader })(render) as React.ComponentClass<GetProps<C[K]>>;
+  return withAsyncFeatures({ _entry: loader })(render) as C[K];
 }
 
 export { withAsyncFeatures };
