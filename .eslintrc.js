@@ -48,7 +48,11 @@ module.exports = {
     // whitespace rule will provided by prettier
     // ban-keywords is missing in eslint
   },
+  "env": {
+    "jest": true,
+    "browser": true,
+  },
   "globals": {
-    "window": "readonly"
+    "window": "readonly",
   }
 }
