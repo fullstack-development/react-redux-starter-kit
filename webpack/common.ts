@@ -69,7 +69,6 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
       checkSyntacticErrors: true,
       async: false,
       tsconfig: path.resolve('./tsconfig.json'),
-      eslint: true,
     })) : [])
   .concat(withAnalyze ? (
     new BundleAnalyzerPlugin()
