@@ -1,4 +1,5 @@
 import path from 'path';
+
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -9,7 +10,6 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import threadLoaderLib from 'thread-loader';
 import FaviconsWebpackPlugin from 'favicons-webpack-plugin';
 import FileManagerWebpackPlugin from 'filemanager-webpack-plugin';
-
 import postcssReporter from 'postcss-reporter';
 import postcssSCSS from 'postcss-scss';
 import autoprefixer from 'autoprefixer';
