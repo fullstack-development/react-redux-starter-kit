@@ -23,22 +23,16 @@ module.exports = {
       'overrides': { arrow: { 'before': true, 'after': true }} 
     }],
     'import/order': ['error', { 
-      groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+      groups: [['builtin', 'external'], 'internal', ['parent', 'sibling'], 'index'],
       'newlines-between': 'always',
     }],
     'import/no-extraneous-dependencies': "off", // TODO: uncomment ['error', { devDependencies: ['**/test.tsx', '**/test.ts'] }],
     'import/no-internal-modules': 'off',
-    'import/no-unresolved': 'off',
     'max-len': ['error', { 'code': 120 }],
     'no-restricted-imports': ['error', 'react-jss', '@material-ui/core', '@material-ui/icons', 'i18next', 'react-i18next'],
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
     'arrow-parens': ['error', 'as-needed'],
-    'spaced-comment': 'error',
-    'object-curly-newline': 'off'
-    // one-line rule is missing in eslint
-    // whitespace rule will provided by prettier
-    // ban-keywords is missing in eslint
   },
   env: {
     jest: true,
@@ -46,5 +40,12 @@ module.exports = {
   },
   globals: {
     window: 'readonly',
-  }
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['@types', 'src'],
+      }
+    }
+  },
 };
