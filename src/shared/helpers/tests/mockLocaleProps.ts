@@ -5,8 +5,8 @@ export const getMockedLocaleProps: () => ITranslationProps = () => ({
   tReady: true,
   i18n: {
     isInitialized: true,
-    language: 'en',
-    languages: ['en', 'ru'],
+    language: 'en-US',
+    languages: ['en-US', 'ru-RU'],
     options: {},
     services: {
       backendConnector: {},
