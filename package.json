@@ -24,7 +24,8 @@
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
-    "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix"
+    "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix",
+    "eslint-autofix": "./node_modules/.bin/eslint . --ext .ts --ext .tsx --fix"
   },
   "betterScripts": {
     "initial:yeoman": {
@@ -174,6 +175,7 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^1.0.0",
+    "concurrently": "^5.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.15.0",
     "enzyme-to-json": "^3.3.4",
@@ -185,6 +187,7 @@
     "fork-ts-checker-webpack-plugin": "^1.5.1",
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.9",
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^0.4.5",
     "react-hot-loader": "^4.7.0",
