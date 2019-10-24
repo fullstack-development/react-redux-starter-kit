@@ -35,7 +35,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-class ProfilePreview extends React.PureComponent<IProps, IState> {
+class ProfilePreviewComponent extends React.PureComponent<IProps, IState> {
   public state: IState = {
     isOpen: false,
   };
@@ -47,7 +47,13 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
     const { isOpen } = this.state;
     return (
       <div className={b()} ref={this.blockRef}>
-        <div className={b('avatar')} onClick={this.handleAvatarClick}>
+        <div
+          tabIndex={0}
+          role="button img"
+          className={b('avatar')}
+          onClick={this.handleAvatarClick}
+          onKeyPress={this.handleAvatarKeyPress}
+        >
           <ProfileAvatar avatarURL={avatarURL} size="small" />
         </div>
         <Popover
@@ -73,7 +79,13 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
             <div className={b('bio')}>
               {bio}
             </div>
-            <div className={b('edit')} onClick={onEditClick}>
+            <div
+              tabIndex={0}
+              role="button"
+              className={b('edit')}
+              onClick={onEditClick}
+              onKeyPress={this.handleEditButtonKeyPress}
+            >
               {t(intl.edit)}
             </div>
           </div>
@@ -88,13 +100,28 @@ class ProfilePreview extends React.PureComponent<IProps, IState> {
   }
 
   @autobind
+  private handleEditButtonKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
+    const { onEditClick } = this.props;
+
+    if (e.key === 'Enter') {
+      onEditClick();
+    }
+  }
+
+  @autobind
   private handleAvatarClick() {
     this.setState({ isOpen: true });
   }
 
+  @autobind
+  private handleAvatarKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter') {
+      this.setState({ isOpen: true });
+    }
+  }
 }
 
-const connectedComponent = connect(mapState)(ProfilePreview);
+const connectedComponent = connect(mapState)(ProfilePreviewComponent);
+const ProfilePreview = withTranslation()(connectedComponent);
 
-export { ProfilePreview, IProps as IProfilePreviewProps };
-export default withTranslation()(connectedComponent);
+export { ProfilePreview, ProfilePreviewComponent, IProps as IProfilePreviewProps };

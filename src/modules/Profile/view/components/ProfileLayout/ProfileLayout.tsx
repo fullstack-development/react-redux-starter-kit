@@ -16,7 +16,7 @@ type IProps = IFeatureProps;
 
 const b = block('profile-layout');
 
-function ProfileLayout(props: IProps) {
+function ProfileLayoutComponent(props: IProps) {
   const { profileFeatureEntry: { containers } } = props;
   const { ProfileEdit } = containers;
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ function ProfileLayout(props: IProps) {
   );
 }
 
-export { ProfileLayout, IProps as IProfileLayoutProps };
-export default featureConnect({
+export { ProfileLayoutComponent, IProps as IProfileLayoutProps };
+export const ProfileLayout = featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
-})(ProfileLayout);
+})(ProfileLayoutComponent);

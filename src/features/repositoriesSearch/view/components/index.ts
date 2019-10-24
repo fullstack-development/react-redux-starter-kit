@@ -1,1 +1,1 @@
-export { default as RepositoryPreview } from './RepositoryPreview/RepositoryPreview';
+export { RepositoryPreview } from './RepositoryPreview/RepositoryPreview';

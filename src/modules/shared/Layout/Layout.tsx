@@ -6,11 +6,12 @@ import { autobind } from 'core-decorators';
 import { featureConnect } from 'core';
 import * as features from 'features';
 import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-
-import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
-import routes from '../../routes';
-import './Layout.scss';
 import { memoizeByProps } from 'shared/helpers';
+
+import { LayoutHeaderMenu, IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
+import { routes } from '../../routes';
+
+import './Layout.scss';
 
 interface IOwnProps {
   title: string;
@@ -25,9 +26,9 @@ type IProps = IOwnProps & IFeatureProps & RouteComponentProps & ITranslationProp
 const b = block('layout');
 const { header, footer } = tKeys.shared;
 
-class Layout extends React.Component<IProps> {
+class LayoutComponent extends React.Component<IProps> {
   public render() {
-    const { children, title, profileFeatureEntry: { containers }, t } = this.props;
+    const { children, title, location, profileFeatureEntry: { containers }, t } = this.props;
     const { ProfilePreview } = containers;
 
     return (
@@ -35,7 +36,7 @@ class Layout extends React.Component<IProps> {
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={this.getMenuItems()} />
+              <LayoutHeaderMenu menuItems={this.getMenuItems()} currentPathname={location.pathname} />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
@@ -85,9 +86,9 @@ class Layout extends React.Component<IProps> {
   }
 }
 
-const wrappedComponent = withTranslation()(withRouter(Layout));
-
-export { Layout, IProps as ILayoutProps };
-export default featureConnect({
+const wrappedComponent = withTranslation()(withRouter(LayoutComponent));
+const Layout = featureConnect({
   profileFeatureEntry: features.profile.loadEntry,
 })(wrappedComponent);
+
+export { Layout, LayoutComponent, IProps as ILayoutProps };

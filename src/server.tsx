@@ -1,19 +1,18 @@
 import 'reflect-metadata';
 import express from 'express';
 import React from 'react';
-import bootstrapper from 'react-async-bootstrapper';
+// import bootstrapper from 'react-async-bootstrapper';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@material-ui/styles';
 
 import { IAssets, IAppData } from 'shared/types/app';
-import Html from 'assets/Html';
-
-import configureApp from 'core/configureApp';
+import { Html } from 'assets/Html';
+import { configureApp } from 'core/configureApp';
 import { ServerApp } from 'core/App';
 
 async function render({ req, res, assets }: { req: express.Request; res: express.Response; assets: IAssets }) {
   try {
-    await handleAppRequest(req, res, assets);
+    return await handleAppRequest(req, res, assets);
   } catch (e) {
     return res.status(500).send(JSON.stringify(e));
   }
@@ -59,10 +58,10 @@ async function renderWithSSR(appData: IAppData, assets: IAssets, location: strin
   return document;
 }
 
-async function waitForAsyncFeaturesToConnect(appData: IAppData, location: string) {
-  const appForBootstrap = <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />;
-  await bootstrapper(appForBootstrap);
-}
+// async function waitForAsyncFeaturesToConnect(appData: IAppData, location: string) {
+//   const appForBootstrap = <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />;
+//   await bootstrapper(appForBootstrap);
+// }
 
 function renderWithoutSSR(appData: IAppData, assets: IAssets) {
   const html = <Html assets={assets} store={appData.store} />;
@@ -74,4 +73,4 @@ function renderWithoutSSR(appData: IAppData, assets: IAssets) {
   return document;
 }
 
-export default render;
+export { render };

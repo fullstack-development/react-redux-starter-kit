@@ -4,7 +4,7 @@ import { autobind } from 'core-decorators';
 
 import * as features from 'features';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-import featureConnect from 'core/FeatureConnector';
+import { featureConnect } from 'core/FeatureConnector';
 
 import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
@@ -21,7 +21,7 @@ type IProps = IFeatureProps & ITranslationProps;
 
 const b = block('users-search-layout');
 
-class UsersSearchLayout extends React.PureComponent<IProps, IState> {
+class UsersSearchLayoutComponent extends React.PureComponent<IProps, IState> {
   public state: IState = {
     lastSubmittedFormState: null,
   };
@@ -49,7 +49,8 @@ class UsersSearchLayout extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { UsersSearchLayout, IProps as IUsersSearchLayoutProps };
-export default featureConnect({
+const UsersSearchLayout = featureConnect({
   usersSearchFeatureEntry: features.usersSearch.loadEntry,
-})(withTranslation()(UsersSearchLayout));
+})(withTranslation()(UsersSearchLayoutComponent));
+
+export { UsersSearchLayout, UsersSearchLayoutComponent, IProps as IUsersSearchLayoutProps };

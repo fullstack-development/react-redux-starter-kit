@@ -13,10 +13,10 @@ import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 import { ISelectOption } from 'shared/types/form';
 
-import { selectors, actions } from './../../../redux';
+import { selectors, actions } from '../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
-import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
+import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
   onSubmit(values: IUsersSearchFormFields): void;
@@ -44,7 +44,7 @@ function mapState(state: IAppReduxState): IStateProps {
 
 const { userSearch: intl } = tKeys.features;
 
-class UsersSearchForm extends React.PureComponent<IProps> {
+class UsersSearchFormComponent extends React.PureComponent<IProps> {
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
 
@@ -120,7 +120,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UsersSearchForm);
+const connectedComponent = connect(mapState, mapDispatch)(UsersSearchFormComponent);
+const UsersSearchForm = withTranslation()(connectedComponent);
 
-export { UsersSearchForm, IProps as IUsersSearchFormProps };
-export default withTranslation()(connectedComponent);
+export { UsersSearchForm, UsersSearchFormComponent, IProps as IUsersSearchFormProps };

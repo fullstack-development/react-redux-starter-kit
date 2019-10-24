@@ -36,4 +36,4 @@ class HttpActions {
   }
 }
 
-export default HttpActions;
+export { HttpActions };

@@ -27,24 +27,24 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
 
   private avatarSize = 70;
 
-  private get wallSize() {
-    const usersNumber = this.props.users.length;
-    if (usersNumber <= 50) {
-      return 'small';
-    }
-    return 'big';
-  }
-
-  private get areAllAvatarsLoaded() {
-    return Object.values(this.avatarsLoadingStatus).every(x => x === true);
-  }
-
   // { avatarURL: true/false };
   private avatarsLoadingStatus: Record<string, boolean> = (() => {
     const { users } = this.props;
     const avatarsURLs = users.map(x => x.avatarURL);
     return R.zipObj(avatarsURLs, Array(users.length).fill(false));
   })();
+
+  private get wallSize() {
+    const { users } = this.props;
+    const usersNumber = users.length;
+    return usersNumber <= 50
+      ? 'small'
+      : 'big';
+  }
+
+  private get areAllAvatarsLoaded() {
+    return Object.values(this.avatarsLoadingStatus).every(x => x === true);
+  }
 
   public componentDidUpdate({ users: prevUsers }: IProps) {
     const { users } = this.props;
@@ -61,6 +61,7 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
       };
 
       if (!this.areAllAvatarsLoaded) {
+        // eslint-disable-next-line react/no-did-update-set-state
         this.setState({ areAllAvatarsLoaded: false });
       }
     }
@@ -72,7 +73,7 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
     return users.length > 0 && (
       <div className={b()}>
         <ul className={b('avatars', { size: this.wallSize })}>
-          <Preloader isShown={!areAllAvatarsLoaded} size={100} backgroundColor="#fff"/>
+          <Preloader isShown={!areAllAvatarsLoaded} size={100} backgroundColor="#fff" />
           {users.map(this.renderUserAvatar)}
         </ul>
       </div>
@@ -82,24 +83,36 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
   @autobind
   private renderUserAvatar(user: IGithubUser) {
     const { avatarURL } = user;
+
     return (
-      <li
-        key={user.id}
-        className={b('avatar')}
-        onClick={this.makeAvatarClickHandler(user)}
-      >
-        <img
-          className={b('image')}
-          src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
-          onLoad={this.makeImageOnLoadHandler(user.avatarURL)}
-        />
+      <li key={user.id} className={b('avatar')}>
+        <button
+          type="button"
+          className={b('button')}
+          onClick={this.makeAvatarClickHandler(user)}
+          onKeyPress={this.makeAvatarKeyPressHandler(user)}
+        >
+          <img
+            className={b('image')}
+            src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
+            alt="Avatar"
+            onLoad={this.makeImageOnLoadHandler(user.avatarURL)}
+          />
+        </button>
       </li>
     );
   }
 
   @autobind
   private makeAvatarClickHandler(user: IGithubUser) {
-    return () => this.props.onAvatarClick(user);
+    const { onAvatarClick } = this.props;
+    return () => onAvatarClick(user);
+  }
+
+  @autobind
+  private makeAvatarKeyPressHandler(user: IGithubUser) {
+    const { onAvatarClick } = this.props;
+    return (e: React.KeyboardEvent<HTMLButtonElement>) => e.key === 'Enter' && onAvatarClick(user);
   }
 
   @autobind
@@ -114,5 +127,4 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
   }
 }
 
-export { IProps as IUsersAvatarsWallProps };
-export default UsersAvatarsWall;
+export { UsersAvatarsWall, IProps as IUsersAvatarsWallProps };

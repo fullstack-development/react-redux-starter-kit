@@ -47,4 +47,4 @@ function createReducer(reducers: ReducersMap<IAppReduxState>): Reducer<IAppRedux
 }
 
 export { createReducer, IStoreData };
-export default configureStore;
+export { configureStore };

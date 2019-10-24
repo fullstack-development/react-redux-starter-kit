@@ -1,5 +1,4 @@
 import path from 'path';
-
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
@@ -16,7 +15,7 @@ import autoprefixer from 'autoprefixer';
 import stylelint from 'stylelint';
 import doiuse from 'doiuse';
 
-import getEnvParams from '../src/core/getEnvParams';
+import { getEnvParams } from '../src/core/getEnvParams';
 
 export type BuildType = 'dev' | 'prod' | 'server';
 
@@ -25,6 +24,7 @@ const { chunkHash, withAnalyze, chunkName, withHot, isWatchMode, forGHPages } = 
 const threadLoader: webpack.Loader[] = (() => {
   if (process.env.THREADED === 'true') {
     const workerPool = {
+      // eslint-disable-next-line global-require
       workers: require('os').cpus().length - 1,
       poolTimeout: withHot ? Infinity : 2000,
     };
@@ -39,7 +39,7 @@ const threadLoader: webpack.Loader[] = (() => {
   return [];
 })();
 
-export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) => [
+export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = type => [
   new CleanWebpackPlugin(['build', 'static'], { root: path.resolve(__dirname, '..') }),
   new MiniCssExtractPlugin({
     filename: `css/[name].[${chunkHash}].css`,
@@ -52,10 +52,10 @@ export const getCommonPlugins: (type: BuildType) => webpack.Plugin[] = (type) =>
   }),
   new webpack.DefinePlugin({
     'process.env.NODE_ENV_MODE': JSON.stringify(process.env.NODE_ENV_MODE),
-    '__HOST__': JSON.stringify('http://localhost:3000'),
-    '__LANG__': JSON.stringify(process.env.LANG || 'en'),
-    '__CLIENT__': true,
-    '__SERVER__': false,
+    __HOST__: JSON.stringify('http://localhost:3000'),
+    __LANG__: JSON.stringify(process.env.LANG || 'en'),
+    __CLIENT__: true,
+    __SERVER__: false,
   }),
   new CircularDependencyPlugin({
     exclude: /node_modules/,
@@ -102,7 +102,7 @@ function sortChunks(a: webpack.compilation.Chunk, b: webpack.compilation.Chunk) 
   ) - order.findIndex(item => (a as any).names[0].includes(item));
 }
 
-export const getCommonRules: (type: BuildType) => webpack.Rule[] = (type) => [
+export const getCommonRules: (type: BuildType) => webpack.Rule[] = type => [
   {
     test: /\.tsx?$/,
     use:

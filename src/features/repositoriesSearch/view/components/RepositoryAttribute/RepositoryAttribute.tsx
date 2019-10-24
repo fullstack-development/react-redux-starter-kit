@@ -14,13 +14,28 @@ const b = block('repository-attribute');
 
 function RepositoryAttribute(props: IProps) {
   const { title, value, onValueClick, type } = props;
+  const onValueKeyPress = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (e.key === 'Enter' && onValueClick) {
+      onValueClick();
+    }
+  };
+
   return (
     <div className={b()}>
-      <span className={b('title')}>{title}:</span>
-      <span className={b('value', { type })} onClick={onValueClick}>{value}</span>
+      <span className={b('title')}>
+        {title}
+      </span>
+      <span
+        tabIndex={0}
+        role="button"
+        className={b('value', { type })}
+        onClick={onValueClick}
+        onKeyPress={onValueKeyPress}
+      >
+        {value}
+      </span>
     </div>
   );
 }
 
-export { IProps as IRepositoryAttributeProps };
-export default RepositoryAttribute;
+export { RepositoryAttribute, IProps as IRepositoryAttributeProps };

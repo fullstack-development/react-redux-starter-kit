@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+
 import getDevConfig from '../dev.config';
 import getProdConfig from '../prod.config';
 
@@ -21,4 +22,5 @@ const clientConfig: webpack.Configuration = {
   },
 };
 
+/* eslint import/no-default-export: 0 */
 export default clientConfig;

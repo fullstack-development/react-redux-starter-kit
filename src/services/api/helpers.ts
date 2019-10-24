@@ -1,11 +1,11 @@
 import { IUsersSearchFilters, IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
 function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
-  if (maxRepos === void 0 && (minRepos && minRepos > 0)) {
+  if (maxRepos === undefined && (minRepos && minRepos > 0)) {
     return `+repos:>${minRepos}`;
-  } else if (minRepos === void 0 && (maxRepos && maxRepos > 0)) {
+  } if (minRepos === undefined && (maxRepos && maxRepos > 0)) {
     return `+repos:<${maxRepos}`;
-  } else if (minRepos && maxRepos) {
+  } if (minRepos && maxRepos) {
     return `+repos:${minRepos}..${maxRepos}`;
   }
   return '';
@@ -28,8 +28,8 @@ export function constructRepositoriesSearchQuery(
 ) {
   const { starsNumber, forksNumber, owner, language } = filters;
   return queryString.concat(
-    forksNumber !== void 0 ? `+forks:>${forksNumber}` : '',
-    starsNumber !== void 0 ? `+stars:>${starsNumber}` : '',
+    forksNumber !== undefined ? `+forks:>${forksNumber}` : '',
+    starsNumber !== undefined ? `+stars:>${starsNumber}` : '',
     optionalParam('user', owner),
     optionalParam('language', language),
     `&page=${page}`,
@@ -48,7 +48,7 @@ function optionalParam(name: string, value?: string) {
   <https://api.github.com/search/users?q=asd&per_page=30&page=1>; rel="first"
 */
 export function getTotalPagesFromLinkHeader(link?: string): number {
-  if (link === void 0) {
+  if (link === undefined) {
     return 0;
   }
 

@@ -1,4 +1,5 @@
 import { makeShallowRenderer } from 'shared/helpers';
+
 import { Notification, INotificationProps } from '../Notification';
 
 const props: INotificationProps = {

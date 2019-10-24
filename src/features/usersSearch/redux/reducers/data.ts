@@ -1,11 +1,12 @@
 import * as NS from '../../namespace';
-import initial from '../initial';
+import { initial } from '../initial';
 
 function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IAction): NS.IReduxState['data'] {
   switch (action.type) {
-    case 'USERS_SEARCH:SEARCH_USERS_SUCCESS':
+    case 'USERS_SEARCH:SEARCH_USERS_SUCCESS': {
       const { data, totalResults } = action.payload;
       return { ...state, foundUsers: data, totalResults };
+    }
     case 'USERS_SEARCH:LOAD_USER_DETAILS_SUCCESS':
       return { ...state, userDetails: action.payload };
     case 'USERS_SEARCH:RESET_USER_DETAILS':
@@ -17,4 +18,4 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IA
   }
 }
 
-export default dataReducer;
+export { dataReducer };

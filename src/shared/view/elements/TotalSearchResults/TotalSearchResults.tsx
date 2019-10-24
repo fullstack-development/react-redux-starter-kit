@@ -23,5 +23,4 @@ function TotalSearchResults(props: IProps) {
   ) : null;
 }
 
-export { IProps as ITotalSearchResultsProps };
-export default TotalSearchResults;
+export { TotalSearchResults, IProps as ITotalSearchResultsProps };

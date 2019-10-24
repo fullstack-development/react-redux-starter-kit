@@ -24,7 +24,7 @@ declare module '_helpers' {
 
   export type GetProps<T extends React.ComponentType<any>> =
     T extends React.StatelessComponent<infer SP> ? SP :
-    T extends React.ComponentClass<infer CP> ? CP : never;
+      T extends React.ComponentClass<infer CP> ? CP : never;
 
   export type SubSet<T, R extends T> = R;
 
@@ -37,9 +37,9 @@ declare module '_helpers' {
 
   export type MarkAsPartial<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>> & {
     [key in K]?: T[key];
-  }
+  };
 
   export type MarkNotIdentityProps<T, R> = {
     [K in keyof T & keyof R]: CheckIdentity<T[K], R[K]>;
-  }
+  };
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+
 import { IProfile, IGithubUser, IDetailedGithubUser, IRepository } from 'shared/types/models';
+
 import { IFeatureEntry } from './types/app';
 
 export const makeMockComponent = (componentName: string) => {
@@ -53,19 +55,13 @@ export function makeMockEntry<T extends IFeatureEntry>(
 ): T {
   return {
     containers: new Proxy(containers || {}, {
-      get: (target, property: string) => {
-        return target[property] || makeMockComponent('Container');
-      },
+      get: (target, property: string) => target[property] || makeMockComponent('Container'),
     }),
     actions: new Proxy(actions || {}, {
-      get: (target, property: string) => {
-        return target[property] || jest.fn();
-      },
+      get: (target, property: string) => target[property] || jest.fn(),
     }),
     selectors: new Proxy(selectors || {}, {
-      get: (target, property: string) => {
-        return target[property] || jest.fn();
-      },
+      get: (target, property: string) => target[property] || jest.fn(),
     }),
   } as T;
 }

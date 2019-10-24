@@ -3,7 +3,7 @@ import compression from 'compression';
 import express from 'express';
 import path from 'path';
 
-export default function middleware(app: express.Express) {
+export function middleware(app: express.Express) {
   app.use(compression());
   app.use(cookieParser());
 

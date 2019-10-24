@@ -1,4 +1,5 @@
 import { makeMockComponent } from 'shared/mocks';
+
 import { areComponentsEqual } from '..';
 
 describe('areComponentsEqual', () => {

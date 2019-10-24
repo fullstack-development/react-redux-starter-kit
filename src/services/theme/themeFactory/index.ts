@@ -1,5 +1,7 @@
-import { themeFactory, Theme } from 'shared/styles/theme';
 import { createMuiTheme } from '@material-ui/core/styles';
+
+import { themeFactory, Theme } from 'shared/styles/theme';
+
 import { UITheme } from '../namespace';
 
 export const getTheme = (themeName: UITheme): Theme => {

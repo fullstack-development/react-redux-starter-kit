@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 
-import CircleProgressBar from '../CircleProgressBar/CircleProgressBar';
+import { CircleProgressBar } from '../CircleProgressBar/CircleProgressBar';
 import './Preloader.scss';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
 const b = block('preloader');
 
 function Preloader(props: IProps) {
-  const { isShown, size, backgroundColor} = props;
+  const { isShown, size, backgroundColor } = props;
   return isShown
     ? (
       <div className={b()} style={{ backgroundColor }}>
@@ -23,4 +23,4 @@ function Preloader(props: IProps) {
     : null;
 }
 
-export default Preloader;
+export { Preloader };

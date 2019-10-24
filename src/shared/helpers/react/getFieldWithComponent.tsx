@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps, FieldProps as RFFieldProps } from 'react-final-form';
+// eslint-disable-next-line import/no-unresolved
 import { Omit, MergeRight } from '_helpers';
 
 type BaseWrappedFieldProps = FieldRenderProps & {
@@ -17,10 +18,12 @@ function getFieldWithComponent<P extends BaseWrappedFieldProps>(Component: React
   type FieldProps = Pick<RFFieldProps, RFFieldPropKey>;
   type ResultProps = MergeRight<OwnProps, FieldProps>;
 
-  const result: React.StatelessComponent<ResultProps> = (props: ResultProps) =>
-    <Field type={type} {...props} component={Component} />;
+  const result: React.StatelessComponent<ResultProps> = (props: ResultProps) => (
+    <Field type={type} {...props} component={Component} />
+  );
+
   result.displayName = `FieldWithComponent(${Component.displayName || Component.name || 'Component'})`;
   return result;
 }
 
-export default getFieldWithComponent;
+export { getFieldWithComponent };

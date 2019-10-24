@@ -1,5 +1,5 @@
 import * as NS from '../../namespace';
-import initial from '../initial';
+import { initial } from '../initial';
 
 function editReducer(state: NS.IReduxState['edit'] = initial.edit, action: NS.IAction): NS.IReduxState['edit'] {
   switch (action.type) {
@@ -14,4 +14,4 @@ function editReducer(state: NS.IReduxState['edit'] = initial.edit, action: NS.IA
   }
 }
 
-export default editReducer;
+export { editReducer };

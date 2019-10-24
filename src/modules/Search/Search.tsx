@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import routes from 'modules/routes';
+import { routes } from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
 import { UsersSearchLayout, RepositoriesSearchLayout } from './view/components';
@@ -30,4 +30,4 @@ const Search: IModule = {
   },
 };
 
-export default Search;
+export { Search };

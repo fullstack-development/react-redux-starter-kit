@@ -6,4 +6,4 @@ const initial: NS.IReduxState = {
   },
 };
 
-export default initial;
+export { initial };

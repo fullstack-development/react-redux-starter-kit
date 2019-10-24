@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField, { StandardTextFieldProps } from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+
 import { ISelectOption } from 'shared/types/form';
 
 interface IProps extends StandardTextFieldProps {
@@ -16,4 +17,4 @@ function Select(props: IProps) {
   );
 }
 
-export default Select;
+export { Select };

@@ -4,7 +4,7 @@ import { makeShallowRenderer } from 'shared/helpers';
 import { githubUser } from 'shared/mocks';
 import { Preloader } from 'shared/view/elements';
 
-import UsersAvatarsWall, { IUsersAvatarsWallProps } from '../UsersAvatarsWall';
+import { UsersAvatarsWall, IUsersAvatarsWallProps } from '../UsersAvatarsWall';
 
 const props: IUsersAvatarsWallProps = {
   users: Array(10).fill(githubUser),
@@ -48,7 +48,7 @@ describe('(features/usersSearch) UsersAvatarsWall component', () => {
 
   it('should show preloader when a user with new avatar url is added', () => {
     const component = getComponent();
-    const newUser = { ...props.users[0], avatarURL: 'https://new-amazing-url.net'};
+    const newUser = { ...props.users[0], avatarURL: 'https://new-amazing-url.net' };
     component.setProps({ users: [...props.users, newUser] });
     expect(component.find(Preloader).prop('isShown')).toBe(true);
   });

@@ -22,7 +22,7 @@ type IProps = IStateProps;
 
 const b = block('notification');
 
-function Notification(props: IProps) {
+function NotificationContainer(props: IProps) {
   const { notification } = props;
   return notification && (
     <div className={b({ kind: notification.kind })}>
@@ -33,5 +33,5 @@ function Notification(props: IProps) {
   );
 }
 
-export { Notification, IProps as INotificationProps };
-export default connect(mapState)(Notification);
+export { NotificationContainer, IProps as INotificationProps };
+export const Notification = connect(mapState)(NotificationContainer);

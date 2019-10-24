@@ -3,8 +3,8 @@ import block from 'bem-cn';
 import * as R from 'ramda';
 import { autobind } from 'core-decorators';
 
-import PaginationPage from './PaginationPage/PaginationPage';
-import PaginationArrow from './PaginationArrow/PaginationArrow';
+import { PaginationPage } from './PaginationPage/PaginationPage';
+import { PaginationArrow } from './PaginationArrow/PaginationArrow';
 import { maxRenderedPages } from './constants';
 import './PaginationControls.scss';
 
@@ -74,5 +74,4 @@ class PaginationControls extends React.PureComponent<IProps> {
   }
 }
 
-export { IProps as IPaginationControlsProps };
-export default PaginationControls;
+export { PaginationControls, IProps as IPaginationControlsProps };

@@ -1,1 +1,1 @@
-export { default } from '@material-ui/core/Link';
+export { default as Link } from '@material-ui/core/Link';

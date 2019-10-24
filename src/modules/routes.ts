@@ -1,7 +1,7 @@
 import { routes as searchRoutes } from './Search/routes';
 import { routes as profileRoutes } from './Profile/routes';
 
-export default {
+export const routes = {
   ...searchRoutes,
   ...profileRoutes,
 };

@@ -1,4 +1,4 @@
-// tslint:disable-next-line: import-blacklist
+/* eslint no-restricted-imports: 0 */
 import { WithTranslation, withTranslation } from 'react-i18next';
 import React from 'react';
 import { autobind } from 'core-decorators';
@@ -16,7 +16,7 @@ interface IOption {
 
 const b = block('select');
 
-class LanguageSelector extends React.PureComponent<WithTranslation> {
+class LanguageSelectorComponent extends React.PureComponent<WithTranslation> {
   public static options: IOption[] = [
     { value: 'en-US', label: 'English' },
     { value: 'ru-RU', label: 'Русский' },
@@ -28,7 +28,7 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
     return (
       <Select
         value={language}
-        options={LanguageSelector.options}
+        options={LanguageSelectorComponent.options}
         onChange={this.changeLanguage}
         SelectProps={{
           classes: {
@@ -47,5 +47,6 @@ class LanguageSelector extends React.PureComponent<WithTranslation> {
   }
 }
 
-export { LanguageSelector };
-export default withTranslation()(LanguageSelector);
+const LanguageSelector = withTranslation()(LanguageSelectorComponent);
+
+export { LanguageSelector, LanguageSelectorComponent };

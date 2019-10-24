@@ -13,23 +13,23 @@ interface IProps extends DialogProps {
 const b = block('dialog');
 
 class Dialog extends React.Component<IProps> {
-  public static Content: FunctionComponent = (props) => {
+  public static Content: FunctionComponent = props => {
     const { children } = props;
     return (
       <div className={b('content')}>
         {children}
       </div>
     );
-  }
+  };
 
-  public static Actions: FunctionComponent = (props) => {
+  public static Actions: FunctionComponent = props => {
     const { children } = props;
     return (
       <div className={b('actions')}>
         {children}
       </div>
     );
-  }
+  };
 
   public render() {
     const { title, children, onClose, ...dialogProps } = this.props;
@@ -46,5 +46,4 @@ class Dialog extends React.Component<IProps> {
   }
 }
 
-export { IProps as IDialogProps };
-export default Dialog;
+export { Dialog, IProps as IDialogProps };

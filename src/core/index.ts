@@ -1,3 +1,3 @@
-export { default as containersProvider, IContainerTypes } from './ContainersProvider';
-export { default as featureConnect } from './FeatureConnector';
+export { containersProvider, IContainerTypes } from './ContainersProvider';
+export { featureConnect } from './FeatureConnector';
 export { inject, TYPES } from './configureIoc';

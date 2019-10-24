@@ -2,14 +2,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, StaticRouter } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
-import 'normalize.css';
 
 import { IAppData, IModule } from 'shared/types/app';
 import { ThemeProvider } from 'services/theme';
 import { containers as NotificationContainers } from 'services/notification';
 import { BaseStyles } from 'shared/styles';
+import 'normalize.css';
 
-import createRoutes from './routes';
+import { getRoutes } from './routes';
 
 interface IAppProps {
   disableStylesGeneration?: boolean;
@@ -46,7 +46,7 @@ function renderSharedPart(modules: IModule[], disableStylesGeneration?: boolean)
   return (
     <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
       <BaseStyles />
-      {createRoutes(modules)}
+      {getRoutes(modules)}
       <NotificationContainers.Notification />
     </ThemeProvider>
   );

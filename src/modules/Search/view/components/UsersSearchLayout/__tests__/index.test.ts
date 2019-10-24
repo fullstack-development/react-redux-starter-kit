@@ -1,7 +1,7 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEntry, makeMockComponent } from 'shared/mocks';
 
-import { UsersSearchLayout, IUsersSearchLayoutProps } from '../UsersSearchLayout';
+import { UsersSearchLayoutComponent, IUsersSearchLayoutProps } from '../UsersSearchLayout';
 
 const props: IUsersSearchLayoutProps = {
   usersSearchFeatureEntry: makeMockEntry({
@@ -11,7 +11,7 @@ const props: IUsersSearchLayoutProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(UsersSearchLayout, props);
+const getComponent = makeShallowRenderer(UsersSearchLayoutComponent, props);
 
 describe('(modules/Search) UsersSearchLayout component', () => {
   it('should show search results after submit search form', () => {

@@ -7,7 +7,7 @@ import { TextInputField } from 'shared/view/form';
 import { Button, KeysToValues } from 'shared/view/elements';
 import { TranslateFunction, ITranslateObject, ITranslateKey } from 'services/i18n';
 
-import SearchSettingsDialog from './SearchSettingsDialog/SearchSettingsDialog';
+import { SearchSettingsDialog } from './SearchSettingsDialog/SearchSettingsDialog';
 
 import './SearchForm.scss';
 
@@ -41,7 +41,8 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   };
 
   public componentWillUnmount() {
-    this.props.resetSearchResults();
+    const { resetSearchResults } = this.props;
+    resetSearchResults();
   }
 
   public render() {
@@ -67,11 +68,12 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
     const filtersAreNotEmpty = Object.keys(filters).length > 0;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        {filtersAreNotEmpty &&
-          <div className={b('filters')}>
-            <KeysToValues items={filters} />
-          </div>
-        }
+        {filtersAreNotEmpty
+          && (
+            <div className={b('filters')}>
+              <KeysToValues items={filters} />
+            </div>
+          )}
         <TextInputField
           name={searchInputName}
           disabled={isSearchRequesting}
@@ -86,24 +88,25 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
           >
             {submitButtonText}
           </Button>
-          {renderSettings !== void 0 &&
-            <div className={b('settings-button')}>
-              <Button
-                variant="outlined"
-                onClick={this.handleSettingsButtonClick}
-                disabled={isSearchRequesting}
-              >
-                {settingsButtonText}
-              </Button>
-              <SearchSettingsDialog
-                isOpen={isSettingsDialogOpen}
-                dialogTitleText={dialogTitleText}
-                dialogSubmitText={dialogSubmitText}
-                onClose={this.handleSettingsDialogClose}
-                renderContent={renderSettings}
-              />
-            </div>
-          }
+          {renderSettings !== undefined
+            && (
+              <div className={b('settings-button')}>
+                <Button
+                  variant="outlined"
+                  onClick={this.handleSettingsButtonClick}
+                  disabled={isSearchRequesting}
+                >
+                  {settingsButtonText}
+                </Button>
+                <SearchSettingsDialog
+                  isOpen={isSettingsDialogOpen}
+                  dialogTitleText={dialogTitleText}
+                  dialogSubmitText={dialogSubmitText}
+                  onClose={this.handleSettingsDialogClose}
+                  renderContent={renderSettings}
+                />
+              </div>
+            )}
         </div>
       </form>
     );
@@ -120,5 +123,4 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   }
 }
 
-export { IProps as ISearchFormProps };
-export default SearchForm;
+export { SearchForm, IProps as ISearchFormProps };

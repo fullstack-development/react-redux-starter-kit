@@ -1,6 +1,7 @@
 import { Container } from 'inversify';
 import getDecorators from 'inversify-inject-decorators';
-import TYPES from './iocTypes';
+
+import { TYPES } from './iocTypes';
 
 const container = new Container();
 const { lazyInject } = getDecorators(container);

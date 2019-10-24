@@ -2,11 +2,11 @@ import 'reflect-metadata';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import bootstrapper from 'react-async-bootstrapper';
+// import bootstrapper from 'react-async-bootstrapper';
 
-import configureApp from 'core/configureApp';
+import { configureApp } from 'core/configureApp';
 import { App } from 'core/App';
-import getEnvParams from 'core/getEnvParams';
+import { getEnvParams } from 'core/getEnvParams';
 
 const { appVersion } = getEnvParams();
 
@@ -18,13 +18,15 @@ async function main() {
   render(app);
 }
 
-async function waitForAsyncFeaturesToConnect() {
-  const appForBootstrap = <App {...appData} disableStylesGeneration />;
-  await bootstrapper(appForBootstrap);
-}
+// async function waitForAsyncFeaturesToConnect() {
+//   const appForBootstrap = <App {...appData} disableStylesGeneration />;
+//   await bootstrapper(appForBootstrap);
+// }
 
 /* Start application */
 main();
+
+/* eslint global-require: 0 */
 
 /* Hot Module Replacement API */
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
@@ -50,6 +52,5 @@ function render(component: React.ReactElement<any>) {
   );
 }
 
-/* tslint:disable */
+/* eslint-disable-next-line */
 console.info(`%cApp version: ${appVersion}`, 'background: #EBF5F8; color: gray; font-size: x-medium; border-radius: 5px; padding: 5px;');
-/* tslint:enable */

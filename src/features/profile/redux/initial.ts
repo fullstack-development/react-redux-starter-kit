@@ -7,4 +7,4 @@ const initial: IReduxState = {
   },
 };
 
-export default initial;
+export { initial };

@@ -3,4 +3,4 @@ const TYPES = {
   connectEntryToStore: Symbol('connectFeatureToStore'),
 };
 
-export default TYPES;
+export { TYPES };

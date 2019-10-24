@@ -1,6 +1,8 @@
 import * as R from 'ramda';
+
 import { makeMockComponent } from 'shared/mocks';
 import { makeShallowRenderer } from 'shared/helpers';
+
 import { withComponent } from '..';
 
 // Outer passes Passed to Inner

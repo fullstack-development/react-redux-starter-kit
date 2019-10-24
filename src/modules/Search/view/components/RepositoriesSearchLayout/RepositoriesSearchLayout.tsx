@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
 import * as features from 'features';
-import featureConnect from 'core/FeatureConnector';
+import { featureConnect } from 'core/FeatureConnector';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { Layout } from '../../../../shared';
@@ -21,7 +21,7 @@ type IProps = IFeatureProps & ITranslationProps;
 
 const b = block('repositories-search-layout');
 
-class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
+class RepositoriesSearchLayoutComponent extends React.PureComponent<IProps, IState> {
   public state: IState = {
     lastSubmittedFormState: null,
   };
@@ -38,9 +38,7 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
             <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />
           </div>
           <div className={b('results')}>
-            {lastSubmittedFormState &&
-              <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
-            }
+            {lastSubmittedFormState && <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />}
           </div>
         </div>
       </Layout>
@@ -53,7 +51,8 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { RepositoriesSearchLayout, IProps as IRepositoriesSearchLayoutProps };
-export default featureConnect({
+const RepositoriesSearchLayout = featureConnect({
   repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
-})(withTranslation()(RepositoriesSearchLayout));
+})(withTranslation()(RepositoriesSearchLayoutComponent));
+
+export { RepositoriesSearchLayout, RepositoriesSearchLayoutComponent, IProps as IRepositoriesSearchLayoutProps };

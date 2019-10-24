@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/no-unresolved
 import { CheckIdentity } from '_helpers';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
@@ -30,7 +31,7 @@ function RadioGroupInput(props: IProps) {
   return (
     <FormControl {...formControlProps}>
       {label && <FormLabel {...formLabelProps}>{label}</FormLabel>}
-      <RadioGroup  {...radioGroupProps} />
+      <RadioGroup {...radioGroupProps} />
       {helperText && <FormHelperText {...formHelperTextProps}>{helperText}</FormHelperText>}
     </FormControl>
   );
@@ -53,4 +54,4 @@ function normalizeProps(props: IProps): INormalizedProps {
   };
 }
 
-export default RadioGroupInput;
+export { RadioGroupInput };

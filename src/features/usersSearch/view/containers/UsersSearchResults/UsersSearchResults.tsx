@@ -12,8 +12,8 @@ import { TotalSearchResults } from 'shared/view/elements';
 
 import { IUsersSearchFormFields } from '../../../namespace';
 import { UsersAvatarsWall } from '../../components';
-import { actions, selectors } from './../../../redux';
-import UserDetails from '../UserDetails/UserDetails';
+import { actions, selectors } from '../../../redux';
+import { UserDetails } from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
 
 interface IState {
@@ -48,7 +48,7 @@ const mapDispatch = {
 
 const b = block('users-search-results');
 
-class UsersSearchResults extends React.PureComponent<IProps> {
+class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   public state: IState = {
     displayedUser: null,
   };
@@ -89,6 +89,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResults);
-export { UsersSearchResults, IProps as IUsersSearchResultsProps };
-export default withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResultsComponent);
+const UsersSearchResults = withTranslation()(connectedComponent);
+
+export { UsersSearchResults, UsersSearchResultsComponent, IProps as IUsersSearchResultsProps };

@@ -1,8 +1,9 @@
 import { Theme as MaterialTheme } from '@material-ui/core/styles';
-import { UITheme } from 'services/theme/namespace';
 import { PaletteColor } from '@material-ui/core/styles/createPalette';
 
-type PaletteTypes = 'primary' | 'error';    // TODO: add 'secondary' palette type if you need secondary color
+import { UITheme } from 'services/theme/namespace';
+
+type PaletteTypes = 'primary' | 'error'; // TODO: add 'secondary' palette type if you need secondary color
 
 // Find color name http://chir.ag/projects/name-that-color
 // https://github.com/insomnious0x01/ntc-js

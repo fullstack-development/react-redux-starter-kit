@@ -5,8 +5,8 @@ import { autobind } from 'core-decorators';
 import { IAppReduxState } from 'shared/types/app';
 
 import { UITheme } from '../../../namespace';
-import * as actions from './../../../redux/actions';
-import * as selectors from './../../../redux/selectors';
+import * as actions from '../../../redux/actions';
+import * as selectors from '../../../redux/selectors';
 
 interface IOption {
   value: UITheme;
@@ -23,7 +23,7 @@ interface IActionProps {
 
 type Props = IStateProps & IActionProps;
 
-class ThemeSelector extends React.PureComponent<Props> {
+class ThemeSelectorContainer extends React.PureComponent<Props> {
   public static options: IOption[] = [
     { value: 'blue', label: 'blue' },
     { value: 'darkBlue', label: 'darkBlue' },
@@ -35,7 +35,7 @@ class ThemeSelector extends React.PureComponent<Props> {
     return (
       <div>
         <select value={uiTheme} onChange={this.changeTheme}>
-          {ThemeSelector.options.map(({ value, label }, i) => (
+          {ThemeSelectorContainer.options.map(({ value, label }, i) => (
             <option value={value} key={i}>{label}</option>
           ))}
         </select>
@@ -45,7 +45,8 @@ class ThemeSelector extends React.PureComponent<Props> {
 
   @autobind
   private changeTheme({ target: { value } }: React.ChangeEvent<HTMLSelectElement>) {
-    this.props.setTheme(value as UITheme);
+    const { setTheme } = this.props;
+    setTheme(value as UITheme);
   }
 }
 
@@ -59,5 +60,5 @@ const mapDispatch: IActionProps = {
   setTheme: actions.setTheme,
 };
 
-export { ThemeSelector };
-export default connect(mapState, mapDispatch)(ThemeSelector);
+export { ThemeSelectorContainer };
+export const ThemeSelector = connect(mapState, mapDispatch)(ThemeSelectorContainer);

@@ -1,8 +1,9 @@
 import React from 'react';
 import MuiTooltip, { TooltipProps } from '@material-ui/core/Tooltip';
+// eslint-disable-next-line import/no-unresolved
+import { Omit } from '_helpers';
 
 import { StylesProps, provideStyles } from './Tooltip.styles';
-import { Omit } from '_helpers';
 
 type IProps = Omit<TooltipProps, 'classes' | 'PopperProps'> & StylesProps;
 
@@ -10,27 +11,30 @@ interface IState {
   arrowRef: HTMLSpanElement | null;
 }
 
-class Tooltip extends React.Component<IProps> {
+class TooltipComponent extends React.Component<IProps> {
   public state: IState = {
     arrowRef: null,
   };
 
   public render() {
     const { classes, title, ...restProps } = this.props;
+    const { arrowRef } = this.state;
 
     return (
       <MuiTooltip
-        title={<>
-          <span className={classes.title}>{title}</span>
-          <span className={classes.arrow} ref={this.handleArrowRef} />
-        </>}
+        title={(
+          <>
+            <span className={classes.title}>{title}</span>
+            <span className={classes.arrow} ref={this.handleArrowRef} />
+          </>
+        )}
         classes={{ popper: classes.arrowPopper }}
         PopperProps={{
           popperOptions: {
             modifiers: {
               arrow: {
-                enabled: Boolean(this.state.arrowRef),
-                element: this.state.arrowRef,
+                enabled: Boolean(arrowRef),
+                element: arrowRef,
               },
             },
           },
@@ -44,7 +48,7 @@ class Tooltip extends React.Component<IProps> {
     this.setState({
       arrowRef: node,
     });
-  }
+  };
 }
 
-export default provideStyles(Tooltip);
+export const Tooltip = provideStyles(TooltipComponent);

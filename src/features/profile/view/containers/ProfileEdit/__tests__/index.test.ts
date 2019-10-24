@@ -3,7 +3,7 @@ import { Form } from 'react-final-form';
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { profile } from 'shared/mocks';
 
-import { ProfileEdit, IProfileEditProps } from '../ProfileEdit';
+import { ProfileEditComponent, IProfileEditProps } from '../ProfileEdit';
 
 const props: IProfileEditProps = {
   profile,
@@ -12,7 +12,7 @@ const props: IProfileEditProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(ProfileEdit, props);
+const getComponent = makeShallowRenderer(ProfileEditComponent, props);
 
 describe('(features/profile) ProfileEdit container', () => {
   it('should save profile & set notification on form submit', () => {
