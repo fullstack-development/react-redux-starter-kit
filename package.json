@@ -24,6 +24,7 @@
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && tsc --noEmit --pretty",
     "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix",
     "eslint-autofix": "./node_modules/.bin/eslint . --ext .ts --ext .tsx --fix"
   },
