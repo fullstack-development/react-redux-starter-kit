@@ -1,4 +1,5 @@
 import React from 'react';
+import { createSelector } from 'reselect';
 import block from 'bem-cn';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { autobind } from 'core-decorators';
@@ -10,7 +11,6 @@ import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'ser
 import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import routes from '../../routes';
 import './Layout.scss';
-import { memoizeByProps } from 'shared/helpers';
 
 interface IOwnProps {
   title: string;
@@ -24,6 +24,19 @@ type IProps = IOwnProps & IFeatureProps & RouteComponentProps & ITranslationProp
 
 const b = block('layout');
 const { header, footer } = tKeys.shared;
+const selectMenuItems = createSelector(
+  (props: IProps) => props.t,
+  (t): IHeaderMenuItem[] => ([
+    {
+      path: routes.search.users.getRoutePath(),
+      title: t(header.users),
+    },
+    {
+      path: routes.search.repositories.getRoutePath(),
+      title: t(header.repositories),
+    },
+  ]),
+);
 
 class Layout extends React.Component<IProps> {
   public render() {
@@ -35,7 +48,7 @@ class Layout extends React.Component<IProps> {
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={this.getMenuItems()} />
+              <LayoutHeaderMenu menuItems={selectMenuItems(this.props)} />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
@@ -63,19 +76,6 @@ class Layout extends React.Component<IProps> {
         </footer>
       </div>
     );
-  }
-
-  @memoizeByProps((props: IProps) => [props.t])
-  private getMenuItems(): IHeaderMenuItem[] {
-    const { t } = this.props;
-    return [{
-      path: routes.search.users.getRoutePath(),
-      title: t(header.users),
-    },
-    {
-      path: routes.search.repositories.getRoutePath(),
-      title: t(header.repositories),
-    }];
   }
 
   @autobind

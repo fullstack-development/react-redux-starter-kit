@@ -1,4 +1,5 @@
 import React from 'react';
+import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
@@ -6,7 +7,7 @@ import * as R from 'ramda';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
-import { replaceObjectKeys, memoizeByProps } from 'shared/helpers';
+import { replaceObjectKeys } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
@@ -41,6 +42,25 @@ function mapState(state: IAppReduxState): IStateProps {
 const { repositoriesSearch: intl } = tKeys.features;
 
 class RepositoriesSearchForm extends React.PureComponent<IProps> {
+  private selectFiltersLabels = createSelector(
+    (props: IProps) => props.t,
+    (t): Record<keyof IRepositoriesSearchFilters, string> => ({
+      starsNumber: t(intl.minStars),
+      forksNumber: t(intl.minForks),
+      language: t(intl.language),
+      owner: t(intl.owner),
+    }),
+  );
+
+  private selectFilters = createSelector(
+    (formValues: IRepositoriesSearchFormFields) => formValues,
+    formValues => {
+      const filters = R.omit([fieldNames.searchString], formValues);
+      const filtersLabels = this.selectFiltersLabels(this.props);
+      return replaceObjectKeys(filters, filtersLabels);
+    },
+  );
+
   public render() {
     const { isRepositoriesSearchRequesting, resetSearchResults, t } = this.props;
     return (
@@ -55,23 +75,10 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
-        getFilters={this.getFilters}
+        getFilters={this.selectFilters}
         t={t}
       />
     );
-  }
-
-  @memoizeByProps((props: IProps, formValues) => [props.t, formValues])
-  private getFilters(formValues: IRepositoriesSearchFormFields) {
-    const { t } = this.props;
-    const filters = R.omit([fieldNames.searchString], formValues);
-    const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(intl.minStars),
-      forksNumber: t(intl.minForks),
-      language: t(intl.language),
-      owner: t(intl.owner),
-    };
-    return replaceObjectKeys(filters, filtersLabels);
   }
 
   @autobind

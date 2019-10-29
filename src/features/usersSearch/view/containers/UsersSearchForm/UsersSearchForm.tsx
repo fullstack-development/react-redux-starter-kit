@@ -1,21 +1,19 @@
 import React from 'react';
+import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
-import {
-  replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap, memoizeByProps,
-} from 'shared/helpers';
+import { replaceObjectKeys, replaceObjectValues } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
-import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
-import { ISelectOption } from 'shared/types/form';
 
 import { selectors, actions } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
+import { selectFiltersValuesFormatters, selectOptions, selectFiltersLabels } from './selectors';
 import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -26,8 +24,6 @@ interface IStateProps {
   isUsersSearchRequesting: boolean;
 }
 
-type OptionType = ISelectOption<IUsersSearchFilters['searchBy']>;
-type LabelsType = Record<IUsersSearchFilters['searchFor'], string>;
 type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
@@ -42,9 +38,17 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-const { userSearch: intl } = tKeys.features;
-
 class UsersSearchForm extends React.PureComponent<IProps> {
+  private getFilters = createSelector(
+    (formFields: IUsersSearchFormFields) => formFields,
+    formFields => {
+      const filters = R.omit([fieldNames.searchString], formFields);
+      const filtersValuesFormattersMap = selectFiltersValuesFormatters(this.props);
+      const filtersLabels = selectFiltersLabels(this.props);
+      const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
+      return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
+    });
+
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
 
@@ -69,47 +73,7 @@ class UsersSearchForm extends React.PureComponent<IProps> {
 
   @autobind
   private renderUsersSearchSettings() {
-    return <UsersSearchSettings options={this.getOptions()} />;
-  }
-
-  private getLabels(): LabelsType {
-    const { t } = this.props;
-    return {
-      both: t(intl.usersAndOrganizations),
-      org: t(intl.organizations),
-      user: t(intl.users),
-    };
-  }
-
-  @memoizeByProps((props: IProps) => [props.t])
-  private getOptions(): OptionType[] {
-    const { t } = this.props;
-    return [
-      { value: 'username-email', label: t(intl.usernameAndEmail) },
-      { value: 'login', label: t(intl.username) },
-      { value: 'email', label: t(intl.email) },
-      { value: 'fullname', label: t(intl.fullName) },
-    ];
-  }
-
-  @memoizeByProps((props: IProps, formFields) => [props.t, formFields])
-  private getFilters(formFields: IUsersSearchFormFields) {
-    const { t } = this.props;
-    const filters = R.omit([fieldNames.searchString], formFields);
-    const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-      searchBy: x => getSelectValuesToLabelsMap(this.getOptions())[x].toLowerCase(),
-      searchFor: x => (this.getLabels())[x].toLowerCase(),
-    };
-    const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
-      searchBy: t(intl.searchBy),
-      searchFor: t(intl.searchFor),
-      perPage: t(intl.resultsPerPage),
-      reposLanguage: t(intl.repositoriesLanguage),
-      minRepos: t(intl.minRepos),
-      maxRepos: t(intl.maxRepos),
-    };
-    const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
-    return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
+    return <UsersSearchSettings options={selectOptions(this.props)} />;
   }
 
   @autobind
