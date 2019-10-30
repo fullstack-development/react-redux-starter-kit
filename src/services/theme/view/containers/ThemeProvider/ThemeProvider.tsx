@@ -10,10 +10,6 @@ import { UITheme } from '../../../namespace';
 import { selectors } from '../../../redux';
 import { getTheme } from '../../../themeFactory';
 
-interface IOwnProps {
-  disableStylesGeneration?: boolean;
-}
-
 interface IStateProps {
   uiTheme: UITheme;
 }
@@ -22,9 +18,9 @@ interface IState {
   theme: Theme;
 }
 
-type Props = IStateProps & IOwnProps;
+type Props = IStateProps & RouteComponentProps;
 
-class ThemeProviderContainer extends React.Component<Props & RouteComponentProps, IState> {
+class ThemeProviderComponent extends React.Component<Props, IState> {
   public state: IState = {
     theme: getTheme(this.props.uiTheme),
   };
@@ -35,7 +31,6 @@ class ThemeProviderContainer extends React.Component<Props & RouteComponentProps
   }
 
   public render() {
-    // TODO: test ssr and then remove or fix disableStylesGeneration
     const { children } = this.props;
     const { theme } = this.state;
 
@@ -53,4 +48,4 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-export const ThemeProvider = withRouter(connect(mapState)(ThemeProviderContainer));
+export const ThemeProvider = withRouter(connect(mapState)(ThemeProviderComponent));

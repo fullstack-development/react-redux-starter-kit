@@ -3,7 +3,6 @@ import React from 'react';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import redux from 'redux';
-import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@material-ui/styles';
 
 import { IAssets } from 'shared/types/app';
@@ -11,7 +10,7 @@ import { IAssets } from 'shared/types/app';
 interface IHtmlProps {
   store: redux.Store<any>;
   assets: IAssets;
-  app?: JSX.Element;
+  app?: string;
   muiStyleSheets?: ServerStyleSheets;
 }
 
@@ -34,7 +33,6 @@ class Html extends React.PureComponent<IHtmlProps> {
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
-    const stringifiedApp = app ? renderToString(app) : '';
     const windowAssets = serialize({ styles: assets.styles, javascript: assets.javascript });
     return (
       <html lang={__LANG__} style={styles}>
@@ -58,7 +56,7 @@ class Html extends React.PureComponent<IHtmlProps> {
 
         <body style={styles}>
 
-          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: stringifiedApp }} />
+          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: app || '' }} />
 
           <div>
             {/* Other code */}

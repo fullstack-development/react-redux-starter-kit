@@ -15,7 +15,7 @@ const props: IHeaderMenuProps = {
       title: 'Title2',
     },
   ],
-  currentPathname: '/mock/path',
+  activeItemPath: '/',
   ...getMockedLocaleProps(),
 };
 

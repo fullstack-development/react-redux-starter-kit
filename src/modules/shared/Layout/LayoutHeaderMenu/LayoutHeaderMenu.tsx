@@ -15,8 +15,8 @@ interface IMenuItem {
 }
 
 interface IOwnProps {
-  currentPathname: string;
   menuItems: IMenuItem[];
+  activeItemPath: string;
 }
 
 interface IState {
@@ -63,10 +63,9 @@ class LayoutHeaderMenuComponent extends React.PureComponent<IProps, IState> {
 
   @autobind
   private renderMenuItem({ path, title }: IMenuItem, i: number) {
-    const { currentPathname } = this.props;
-
+    const { activeItemPath } = this.props;
     return (
-      <Link to={path} className={b('menu-item', { active: path === currentPathname })} key={i}>
+      <Link to={path} className={b('menu-item', { active: path === activeItemPath })} key={i}>
         {title}
       </Link>
     );

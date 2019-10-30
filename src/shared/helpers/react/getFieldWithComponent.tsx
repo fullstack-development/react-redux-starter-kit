@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, FieldRenderProps, FieldProps as RFFieldProps } from 'react-final-form';
 // eslint-disable-next-line import/no-unresolved
-import { Omit, MergeRight } from '_helpers';
+import { MergeRight } from '_helpers';
 
 type BaseWrappedFieldProps = FieldRenderProps & {
   value?: any;

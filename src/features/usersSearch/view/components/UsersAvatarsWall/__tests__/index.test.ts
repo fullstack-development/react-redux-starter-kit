@@ -23,7 +23,9 @@ describe('(features/usersSearch) UsersAvatarsWall component', () => {
   it('should call onAvatarClick with user data on avatar click', () => {
     const onAvatarClick = jest.fn();
     const component = getComponent({ onAvatarClick });
-    const avatars = component.find('.users-avatars-wall__avatar');
+    const avatars = component
+      .find('.users-avatars-wall__avatar')
+      .find('.users-avatars-wall__button');
     avatars.at(0).simulate('click');
     expect(onAvatarClick).toHaveBeenCalledWith(props.users[0]);
   });

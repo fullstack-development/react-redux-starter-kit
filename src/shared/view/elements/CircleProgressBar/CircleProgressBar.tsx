@@ -1,7 +1,5 @@
 import React from 'react';
 import CircularProgress, { CircularProgressProps } from '@material-ui/core/CircularProgress';
-// eslint-disable-next-line import/no-unresolved
-import { Omit } from '_helpers';
 
 import { StylesProps, provideStyles } from './CircleProgressBar.style';
 

@@ -3,8 +3,8 @@ import React from 'react';
 import block from 'bem-cn';
 
 import * as usersSearch from 'features/usersSearch';
+import { withAsyncFeatures } from 'core';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-import { featureConnect } from 'core/FeatureConnector';
 
 import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
@@ -49,8 +49,9 @@ class UsersSearchLayoutComponent extends React.PureComponent<IProps, IState> {
   }
 }
 
-const UsersSearchLayout = featureConnect({
+const UsersSearchLayout = withAsyncFeatures({
   usersSearchFeatureEntry: usersSearch.loadEntry,
 })(withTranslation()(UsersSearchLayoutComponent));
+
 
 export { UsersSearchLayout, UsersSearchLayoutComponent, IProps as IUsersSearchLayoutProps };

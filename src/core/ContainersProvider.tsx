@@ -1,7 +1,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 // eslint-disable-next-line import/no-unresolved
-import { Omit, SubSet } from '_helpers';
+import { SubSet } from '_helpers';
 import { injectable } from 'inversify';
 
 import * as usersSearchFeature from 'features/usersSearch';

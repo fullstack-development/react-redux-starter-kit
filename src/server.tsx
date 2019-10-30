@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 import express from 'express';
 import React from 'react';
-// import bootstrapper from 'react-async-bootstrapper';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@material-ui/styles';
 
+import { Bootstrapper } from 'shared/helpers/bootstrap';
 import { IAssets, IAppData } from 'shared/types/app';
 import { Html } from 'assets/Html';
 import { configureApp } from 'core/configureApp';
@@ -50,11 +50,10 @@ async function renderWithSSR(
   location: string,
   context: object,
 ) {
-  // await waitForAsyncFeaturesToConnect(appData, location);
-
+  await waitForAsyncTasksToComplete(appData, location);
   const sheets = new ServerStyleSheets();
-  const app = sheets.collect(
-    <ServerApp {...appData} location={location} context={context} />,
+  const app = renderToString(
+    sheets.collect(<ServerApp {...appData} location={location} context={context} />),
   );
 
   const html = <Html app={app} store={appData.store} assets={assets} muiStyleSheets={sheets} />;
@@ -65,12 +64,11 @@ async function renderWithSSR(
   return document;
 }
 
-// async function waitForAsyncFeaturesToConnect(appData: IAppData, location: string) {
-// const appForBootstrap = (
-// <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />
-// );
-//   await bootstrapper(appForBootstrap);
-// }
+async function waitForAsyncTasksToComplete(appData: IAppData, location: string) {
+  const appForBootstrap = <ServerApp {...appData} location={location} context={{}} />;
+  const bootstrapper = new Bootstrapper(appForBootstrap, appData.store);
+  await bootstrapper.waitJobsCompletion();
+}
 
 function renderWithoutSSR(appData: IAppData, assets: IAssets) {
   const html = <Html assets={assets} store={appData.store} />;

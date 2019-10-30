@@ -3,7 +3,7 @@ import { githubUser } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
 import { UsersAvatarsWall } from '../../../components';
-import { UserDetailsComponent } from '../../UserDetails/UserDetails';
+import { UserDetails } from '../../UserDetails/UserDetails';
 import { UsersSearchResultsComponent, IUsersSearchResultsProps } from '../UsersSearchResults';
 
 const props: IUsersSearchResultsProps = {
@@ -28,14 +28,14 @@ const getComponent = makeShallowRenderer(UsersSearchResultsComponent, props);
 describe('(features/usersSearch) UsersSearchResults container', () => {
   it('should show UserDetails on user avatar click & hide on UserDetails close', () => {
     const component = getComponent();
-    expect(component.find(UserDetailsComponent).length).toBe(0);
+    expect(component.find(UserDetails).length).toBe(0);
 
     component.find(UsersAvatarsWall).prop('onAvatarClick')(githubUser);
-    const userDetails = component.find(UserDetailsComponent);
+    const userDetails = component.find(UserDetails);
     expect(userDetails.length).toBe(1);
 
     userDetails.prop('onClose')();
-    expect(component.find(UserDetailsComponent).length).toBe(0);
+    expect(component.find(UserDetails).length).toBe(0);
   });
 
   it('should call searchUser with search options and page number on PaginationControls page request', () => {

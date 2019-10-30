@@ -3,14 +3,13 @@ import block from 'bem-cn';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 
-import { featureConnect } from 'core';
-import * as features from 'features';
 import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { memoizeByProps } from 'shared/helpers';
+import { withAsyncFeatures } from 'core';
+import * as features from 'features';
 
-import { LayoutHeaderMenu, IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import { routes } from '../../routes';
-
+import { LayoutHeaderMenu, IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import './Layout.scss';
 
 interface IOwnProps {
@@ -28,7 +27,7 @@ const { header, footer } = tKeys.shared;
 
 class LayoutComponent extends React.Component<IProps> {
   public render() {
-    const { children, title, location, profileFeatureEntry: { containers }, t } = this.props;
+    const { children, title, profileFeatureEntry: { containers }, location, t } = this.props;
     const { ProfilePreview } = containers;
 
     return (
@@ -38,7 +37,7 @@ class LayoutComponent extends React.Component<IProps> {
             <div className={b('left-menu')}>
               <LayoutHeaderMenu
                 menuItems={this.getMenuItems()}
-                currentPathname={location.pathname}
+                activeItemPath={location.pathname}
               />
             </div>
             <div className={b('right-menu')}>
@@ -90,7 +89,7 @@ class LayoutComponent extends React.Component<IProps> {
 }
 
 const wrappedComponent = withTranslation()(withRouter(LayoutComponent));
-const Layout = featureConnect({
+const Layout = withAsyncFeatures({
   profileFeatureEntry: features.profile.loadEntry,
 })(wrappedComponent);
 

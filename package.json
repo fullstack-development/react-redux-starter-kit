@@ -269,7 +269,6 @@
     "postcss-scss": "^2.0.0",
     "ramda": "^0.26.1",
     "react": "^16.10.1",
-    "react-async-bootstrapper": "^2.1.0",
     "react-dom": "^16.10.1",
     "react-final-form": "^4.0.2",
     "react-helmet": "^5.2.0",

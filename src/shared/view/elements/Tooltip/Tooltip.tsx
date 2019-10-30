@@ -1,7 +1,5 @@
 import React from 'react';
 import MuiTooltip, { TooltipProps } from '@material-ui/core/Tooltip';
-// eslint-disable-next-line import/no-unresolved
-import { Omit } from '_helpers';
 
 import { StylesProps, provideStyles } from './Tooltip.styles';
 

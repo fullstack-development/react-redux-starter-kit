@@ -2,7 +2,7 @@ import React from 'react';
 import block from 'bem-cn';
 import { FieldRenderProps } from 'react-final-form';
 // eslint-disable-next-line import/no-unresolved
-import { GetProps, Omit } from '_helpers';
+import { GetProps } from '_helpers';
 
 import {
   CppIcon,

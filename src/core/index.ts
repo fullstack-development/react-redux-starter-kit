@@ -1,3 +1,3 @@
 export { containersProvider, IContainerTypes } from './ContainersProvider';
-export { featureConnect } from './FeatureConnector';
+export { withAsyncFeatures } from './AsyncFeaturesConnector';
 export { inject, TYPES } from './configureIoc';

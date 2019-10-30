@@ -1,6 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved
-import { Omit } from '_helpers';
 
 function withProps<P extends Partial<WP>, WP extends {}>(
   Child: React.ComponentType<P>, props: WP,

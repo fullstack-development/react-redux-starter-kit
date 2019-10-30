@@ -9,6 +9,7 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/prop-types': 'off',
     'react/no-danger': 'error',
+    'react/static-property-placement': 'off',
     'react/destructuring-assignment': ['error', 'always', { ignoreClassFields: true }],
     'react/sort-comp': ['error', {
       order: [
@@ -44,6 +45,7 @@ module.exports = {
     'no-restricted-imports': ['error', 'react-jss', '@material-ui/core', '@material-ui/icons', 'i18next', 'react-i18next'], // TODO: УДОЛИТЬ react-jss
     'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true  }],
     'no-console': ['error', { allow: ['info', 'warn', 'error'] }],
+    'lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     'arrow-parens': ['error', 'as-needed'], // TODO: УДОЛИТЬ
     'no-undef': 'off',
   },
