@@ -38,6 +38,7 @@ class ThemeProvider extends React.Component<Props & RouteComponentProps, IState>
   public render() {
     // TODO: test ssr and then remove or fix disableStylesGeneration
     const { children, disableStylesGeneration } = this.props;
+    console.log('disableStylesGeneration', disableStylesGeneration);
     const { theme } = this.state;
 
     return (

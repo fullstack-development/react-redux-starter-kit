@@ -44,11 +44,10 @@ async function handleAppRequest(req: express.Request, res: express.Response, ass
 }
 
 async function renderWithSSR(appData: IAppData, assets: IAssets, location: string, context: object) {
-  // await waitForAsyncTasksToComplete(appData, location);
-
+  await waitForAsyncTasksToComplete(appData, location);
   const sheets = new ServerStyleSheets();
-  const app = sheets.collect(
-    <ServerApp {...appData} location={location} context={context} />,
+  const app = renderToString(
+    sheets.collect(<ServerApp {...appData} location={location} context={context} />),
   );
 
   const html = <Html app={app} store={appData.store} assets={assets} muiStyleSheets={sheets} />;

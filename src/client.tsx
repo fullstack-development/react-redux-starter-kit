@@ -13,7 +13,7 @@ const { appVersion } = getEnvParams();
 const appData = configureApp();
 
 async function main() {
-  // await waitForAsyncTasksToComplete();
+  await waitForAsyncTasksToComplete();
   const app = <App {...appData} />;
   render(app);
 }

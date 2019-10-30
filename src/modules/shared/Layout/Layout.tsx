@@ -27,7 +27,7 @@ const { header, footer } = tKeys.shared;
 
 class Layout extends React.Component<IProps> {
   public render() {
-    const { children, title, profileFeatureEntry: { containers }, t } = this.props;
+    const { children, title, profileFeatureEntry: { containers }, location, t } = this.props;
     const { ProfilePreview } = containers;
 
     return (
@@ -35,7 +35,7 @@ class Layout extends React.Component<IProps> {
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={this.getMenuItems()} />
+              <LayoutHeaderMenu menuItems={this.getMenuItems()} activeItemPath={location.pathname} />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />

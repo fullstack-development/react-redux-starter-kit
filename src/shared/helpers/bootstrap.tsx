@@ -56,7 +56,7 @@ function serverDataWaiterHOC<P>(
 
     public constructor(props: P, ctx: any) {
       super(props, ctx);
-      if (__SERVER__ && this.context && Component.getJobCreator && !this.context.isBootstrapped) {
+      if (__SERVER__ && this.context && !this.context.isBootstrapped) {
         const waiter = Component.getJobCreator(this.props, this.context.store);
         this.context.addJobCreator(waiter);
       }

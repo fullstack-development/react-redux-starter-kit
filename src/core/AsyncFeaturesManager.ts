@@ -30,11 +30,6 @@ class AsyncFeaturesManager {
   }
 
   @autobind
-  public areFeaturesLoaded(featuresNames: string[]) {
-    return featuresNames.every(x => this.features.has(x));
-  }
-
-  @autobind
   public getFeaturesEntries(featuresNames: string[]): Record<string, IFeatureEntry> {
     return featuresNames.reduce((acc, featureName) => ({
       ...acc,
