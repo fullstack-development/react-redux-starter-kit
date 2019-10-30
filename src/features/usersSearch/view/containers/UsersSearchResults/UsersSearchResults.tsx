@@ -67,7 +67,9 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />}
+        {displayedUser && (
+          <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />
+        )}
       </div>
     );
   }

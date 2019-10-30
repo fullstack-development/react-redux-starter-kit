@@ -35,7 +35,9 @@ type IProps<T> = IOwnProps<T>;
 
 const b = block('search-form');
 
-class SearchForm<FormFields extends object> extends React.PureComponent<IProps<FormFields>, IState> {
+class SearchForm<
+  FormFields extends object
+> extends React.PureComponent<IProps<FormFields>, IState> {
   public state: IState = {
     isSettingsDialogOpen: false,
   };
@@ -60,7 +62,8 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
   @autobind
   private renderForm({ handleSubmit, form }: FormRenderProps) {
     const {
-      isSearchRequesting, renderSettings, searchInputName, getFilters, settingsButtonText, submitButtonText,
+      isSearchRequesting, renderSettings, searchInputName,
+      getFilters, settingsButtonText, submitButtonText,
       validators, t, dialogTitleText, dialogSubmitText,
     } = this.props;
     const { isSettingsDialogOpen } = this.state;

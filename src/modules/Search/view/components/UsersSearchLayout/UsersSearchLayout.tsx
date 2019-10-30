@@ -1,8 +1,8 @@
+import { autobind } from 'core-decorators';
 import React from 'react';
 import block from 'bem-cn';
-import { autobind } from 'core-decorators';
 
-import * as features from 'features';
+import * as usersSearch from 'features/usersSearch';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { featureConnect } from 'core/FeatureConnector';
 
@@ -10,11 +10,11 @@ import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
 
 interface IState {
-  lastSubmittedFormState: features.usersSearch.namespace.IUsersSearchFormFields | null;
+  lastSubmittedFormState: usersSearch.namespace.IUsersSearchFormFields | null;
 }
 
 interface IFeatureProps {
-  usersSearchFeatureEntry: features.usersSearch.Entry;
+  usersSearchFeatureEntry: usersSearch.Entry;
 }
 
 type IProps = IFeatureProps & ITranslationProps;
@@ -44,13 +44,13 @@ class UsersSearchLayoutComponent extends React.PureComponent<IProps, IState> {
   }
 
   @autobind
-  private setLastSubmittedFormState(formState: features.usersSearch.namespace.IUsersSearchFormFields) {
+  private setLastSubmittedFormState(formState: usersSearch.namespace.IUsersSearchFormFields) {
     this.setState({ lastSubmittedFormState: formState });
   }
 }
 
 const UsersSearchLayout = featureConnect({
-  usersSearchFeatureEntry: features.usersSearch.loadEntry,
+  usersSearchFeatureEntry: usersSearch.loadEntry,
 })(withTranslation()(UsersSearchLayoutComponent));
 
 export { UsersSearchLayout, UsersSearchLayoutComponent, IProps as IUsersSearchLayoutProps };

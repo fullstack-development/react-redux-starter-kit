@@ -16,7 +16,11 @@ export const {
   execute: loadUserDetails,
   completed: loadUserDetailsSuccess,
   failed: loadUserDetailsFail,
-} = makeCommunicationActionCreators<NS.ILoadUserDetails, NS.ILoadUserDetailsSuccess, NS.ILoadUserDetailsFail>(
+} = makeCommunicationActionCreators<
+NS.ILoadUserDetails,
+NS.ILoadUserDetailsSuccess,
+NS.ILoadUserDetailsFail
+>(
   'USERS_SEARCH:LOAD_USER_DETAILS',
   'USERS_SEARCH:LOAD_USER_DETAILS_SUCCESS',
   'USERS_SEARCH:LOAD_USER_DETAILS_FAIL',

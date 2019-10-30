@@ -2,7 +2,7 @@ import React from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import * as features from 'features';
+import * as repositoriesSearch from 'features/repositoriesSearch';
 import { featureConnect } from 'core/FeatureConnector';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
@@ -10,11 +10,11 @@ import { Layout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
 
 interface IState {
-  lastSubmittedFormState: features.repositoriesSearch.namespace.IRepositoriesSearchFormFields | null;
+  lastSubmittedFormState: repositoriesSearch.namespace.IRepositoriesSearchFormFields | null;
 }
 
 interface IFeatureProps {
-  repositoriesSearchFeatureEntry: features.repositoriesSearch.Entry;
+  repositoriesSearchFeatureEntry: repositoriesSearch.Entry;
 }
 
 type IProps = IFeatureProps & ITranslationProps;
@@ -38,7 +38,9 @@ class RepositoriesSearchLayoutComponent extends React.PureComponent<IProps, ISta
             <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />
           </div>
           <div className={b('results')}>
-            {lastSubmittedFormState && <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />}
+            {lastSubmittedFormState && (
+              <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
+            )}
           </div>
         </div>
       </Layout>
@@ -46,13 +48,19 @@ class RepositoriesSearchLayoutComponent extends React.PureComponent<IProps, ISta
   }
 
   @autobind
-  private setLastSubmittedFormState(formState: features.repositoriesSearch.namespace.IRepositoriesSearchFormFields) {
+  private setLastSubmittedFormState(
+    formState: repositoriesSearch.namespace.IRepositoriesSearchFormFields,
+  ) {
     this.setState({ lastSubmittedFormState: formState });
   }
 }
 
 const RepositoriesSearchLayout = featureConnect({
-  repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
+  repositoriesSearchFeatureEntry: repositoriesSearch.loadEntry,
 })(withTranslation()(RepositoriesSearchLayoutComponent));
 
-export { RepositoriesSearchLayout, RepositoriesSearchLayoutComponent, IProps as IRepositoriesSearchLayoutProps };
+export {
+  RepositoriesSearchLayout,
+  RepositoriesSearchLayoutComponent,
+  IProps as IRepositoriesSearchLayoutProps,
+};

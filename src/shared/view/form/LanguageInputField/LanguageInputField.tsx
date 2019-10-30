@@ -5,7 +5,17 @@ import { FieldRenderProps } from 'react-final-form';
 import { GetProps, Omit } from '_helpers';
 
 import {
-  CppIcon, CsIcon, JavaIcon, JSIcon, TSIcon, PythonIcon, RubyIcon, SwiftIcon, CIcon, HaskellIcon, InputWithPresets,
+  CppIcon,
+  CsIcon,
+  JavaIcon,
+  JSIcon,
+  TSIcon,
+  PythonIcon,
+  RubyIcon,
+  SwiftIcon,
+  CIcon,
+  HaskellIcon,
+  InputWithPresets,
 } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 import { TranslateFunction } from 'services/i18n';

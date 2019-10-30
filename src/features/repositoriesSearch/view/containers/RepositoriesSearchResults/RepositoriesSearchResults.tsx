@@ -79,8 +79,12 @@ class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedRepositoryOwner
-          && <UserDetails username={displayedRepositoryOwner} onClose={this.handleUserDetailsClose} />}
+        {displayedRepositoryOwner && (
+          <UserDetails
+            username={displayedRepositoryOwner}
+            onClose={this.handleUserDetailsClose}
+          />
+        )}
       </div>
     );
   }

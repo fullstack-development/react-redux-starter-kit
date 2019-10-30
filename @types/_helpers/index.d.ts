@@ -32,7 +32,10 @@ declare module '_helpers' {
 
   type CheckExtends<T, R> = T extends R ? true : unknown;
   export type CheckIdentity<T, R> = (
-    CheckExtends<T, R> | CheckExtends<R, T> | CheckExtends<keyof T, keyof R> | CheckExtends<keyof R, keyof T>
+    CheckExtends<T, R> |
+    CheckExtends<R, T> |
+    CheckExtends<keyof T, keyof R> |
+    CheckExtends<keyof R, keyof T>
   ) extends true ? T : unknown;
 
   export type MarkAsPartial<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>> & {

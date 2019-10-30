@@ -46,7 +46,9 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   process.stdout.write(`${stats.toString({ colors: true })}\n`);
 
   const clientStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'client-web');
-  // const serverStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'server-web');
+  // const serverStats = (stats as any).stats.find(
+  //   (stat: any) => stat.compilation.name === 'server-web'
+  // );
   const assets = extractAssets(clientStats.compilation);
   /* eslint-disable-next-line */
   const render = require('../static').default;

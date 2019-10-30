@@ -7,7 +7,7 @@ import { TranslateFunction } from 'services/i18n';
 
 type IProps = TextInputProps & FieldRenderProps & { t: TranslateFunction };
 
-function TextInputFieldComponent(props: IProps) {
+function TextInputField(props: IProps) {
   const { input, meta, t, ...rest } = props;
   const error = typeof rest.error === 'boolean'
     ? rest.error && meta.error
@@ -23,4 +23,6 @@ function TextInputFieldComponent(props: IProps) {
   );
 }
 
-export const TextInputField = getFieldWithComponent(TextInputFieldComponent);
+const Component = getFieldWithComponent(TextInputField);
+
+export { Component as TextInputField };

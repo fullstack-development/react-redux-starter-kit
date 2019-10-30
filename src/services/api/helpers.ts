@@ -11,7 +11,11 @@ function constructReposNumberQuery(minRepos?: number, maxRepos?: number) {
   return '';
 }
 
-export function constructUsersSearchQuery(queryString: string, filters: IUsersSearchFilters, page: number) {
+export function constructUsersSearchQuery(
+  queryString: string,
+  filters: IUsersSearchFilters,
+  page: number,
+) {
   const { searchBy, searchFor, minRepos, maxRepos, reposLanguage, perPage } = filters;
   return queryString.concat(
     searchBy !== 'username-email' ? `+in:${searchBy}` : '',

@@ -8,7 +8,11 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IA
       return { ...state, foundRepositories: data, totalResults };
     }
     case 'REPOSITORIES_SEARCH:RESET_SEARCH_RESULTS': {
-      return { ...state, foundRepositories: initial.data.foundRepositories, totalResults: initial.data.totalResults };
+      return {
+        ...state,
+        foundRepositories: initial.data.foundRepositories,
+        totalResults: initial.data.totalResults,
+      };
     }
     default:
       return state;

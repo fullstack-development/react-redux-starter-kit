@@ -56,7 +56,10 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
       const existingAvatarsURLs = R.without(addedAvatarsURLs, currentAvatarsURLs);
 
       this.avatarsLoadingStatus = {
-        ...R.zipObj(existingAvatarsURLs, existingAvatarsURLs.map(x => this.avatarsLoadingStatus[x])),
+        ...R.zipObj(
+          existingAvatarsURLs,
+          existingAvatarsURLs.map(x => this.avatarsLoadingStatus[x]),
+        ),
         ...R.zipObj(addedAvatarsURLs, Array(addedAvatarsURLs.length).fill(false)),
       };
 

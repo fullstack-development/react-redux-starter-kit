@@ -25,7 +25,12 @@ interface INormalizedProps {
 }
 
 function RadioGroupInput(props: IProps) {
-  const { formControlProps, radioGroupProps, formLabelProps, formHelperTextProps, other } = normalizeProps(props);
+  const { formControlProps,
+    radioGroupProps,
+    formLabelProps,
+    formHelperTextProps,
+    other,
+  } = normalizeProps(props);
   const { label, helperText } = other;
 
   return (
@@ -39,8 +44,15 @@ function RadioGroupInput(props: IProps) {
 
 function normalizeProps(props: IProps): INormalizedProps {
   const {
-    error, helperText = null, required, label, formLabelProps = null, formHelperTextProps = null, fullWidth,
-    ...rest } = props;
+    error,
+    helperText = null,
+    required,
+    label,
+    formLabelProps = null,
+    formHelperTextProps = null,
+    fullWidth,
+    ...rest
+  } = props;
 
   const radioGroupProps: CheckIdentity<RadioGroupProps, typeof rest> = rest;
   const formControlProps: FormControlProps = { error, required, fullWidth };

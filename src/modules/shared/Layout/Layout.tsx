@@ -36,7 +36,10 @@ class LayoutComponent extends React.Component<IProps> {
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={this.getMenuItems()} currentPathname={location.pathname} />
+              <LayoutHeaderMenu
+                menuItems={this.getMenuItems()}
+                currentPathname={location.pathname}
+              />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />

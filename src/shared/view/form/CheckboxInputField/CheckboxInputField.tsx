@@ -16,7 +16,13 @@ function CheckboxInputFieldComponent(props: IProps) {
     : meta.touched && meta.error;
   const value = typeof input.value === 'boolean' ? undefined : input.value;
   return (
-    <CheckboxInput {...rest} helperText={error && t(error)} error={Boolean(error)} {...input} value={value} />
+    <CheckboxInput
+      {...rest}
+      helperText={error && t(error)}
+      error={Boolean(error)}
+      {...input}
+      value={value}
+    />
   );
 }
 

@@ -35,4 +35,8 @@ export type ISearchRepositoriesSuccess = IAction<
 >;
 export type ISearchRepositoriesFail = IPlainFailAction<'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_FAIL'>;
 
-export type IAction = ISearchRepositories | ISearchRepositoriesSuccess | ISearchRepositoriesFail | IResetSearchResults;
+export type IAction =
+  | ISearchRepositories
+  | ISearchRepositoriesSuccess
+  | ISearchRepositoriesFail
+  | IResetSearchResults;

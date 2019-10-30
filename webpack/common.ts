@@ -161,7 +161,8 @@ const commonScssLoaders: webpack.Loader[] = [
         stylelint(),
         doiuse({
           // https://github.com/browserslist/browserslist
-          // to view resulting browsers list, use the command in terminal `npx browserslist "defaults, not ie > 0"`
+          // to view resulting browsers list, use the command in terminal
+          // `npx browserslist "defaults, not ie > 0"`
           browsers: ['defaults', 'not op_mini all', 'not ie > 0', 'not ie_mob > 0'],
           ignore: [],
           ignoreFiles: ['**/normalize.css'],

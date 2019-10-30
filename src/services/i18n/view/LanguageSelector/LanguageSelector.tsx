@@ -41,7 +41,9 @@ class LanguageSelectorComponent extends React.PureComponent<WithTranslation> {
   }
 
   @autobind
-  private changeLanguage({ target: { value } }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  private changeLanguage(
+    { target: { value } }: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
     const { i18n } = this.props;
     i18n.changeLanguage(value);
   }

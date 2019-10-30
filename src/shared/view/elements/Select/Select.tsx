@@ -12,7 +12,9 @@ function Select(props: IProps) {
   const { options, ...textInputProps } = props;
   return (
     <TextField select {...textInputProps} fullWidth>
-      {options.map(({ value, label }: ISelectOption) => <MenuItem value={value} key={value}>{label}</MenuItem>)}
+      {options.map(({ value, label }: ISelectOption) => (
+        <MenuItem value={value} key={value}>{label}</MenuItem>
+      ))}
     </TextField>
   );
 }

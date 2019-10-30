@@ -12,7 +12,11 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.IA
     case 'USERS_SEARCH:RESET_USER_DETAILS':
       return { ...state, userDetails: initial.data.userDetails };
     case 'USERS_SEARCH:RESET_SEARCH_RESULTS':
-      return { ...state, foundUsers: initial.data.foundUsers, totalResults: initial.data.totalResults };
+      return {
+        ...state,
+        foundUsers: initial.data.foundUsers,
+        totalResults: initial.data.totalResults,
+      };
     default:
       return state;
   }
