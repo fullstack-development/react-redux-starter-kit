@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import bootstrapper from 'react-async-bootstrapper';
 
+import { Bootstrapper } from 'shared/helpers/bootstrap';
 import configureApp from 'core/configureApp';
 import { App } from 'core/App';
 import getEnvParams from 'core/getEnvParams';
@@ -13,14 +13,15 @@ const { appVersion } = getEnvParams();
 const appData = configureApp();
 
 async function main() {
-  // await waitForAsyncFeaturesToConnect();
+  await waitForAsyncTasksToComplete();
   const app = <App {...appData} />;
   render(app);
 }
 
-async function waitForAsyncFeaturesToConnect() {
-  const appForBootstrap = <App {...appData} disableStylesGeneration />;
-  await bootstrapper(appForBootstrap);
+async function waitForAsyncTasksToComplete() {
+  const appForBootstrap = <App {...appData} />;
+  const bootstrapper = new Bootstrapper(appForBootstrap, appData.store);
+  await bootstrapper.waitJobsCompletion();
 }
 
 /* Start application */

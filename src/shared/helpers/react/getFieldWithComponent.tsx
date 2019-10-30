@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps, FieldProps as RFFieldProps } from 'react-final-form';
-import { Omit, MergeRight } from '_helpers';
+import { MergeRight } from '_helpers';
 
 type BaseWrappedFieldProps = FieldRenderProps & {
   value?: any;

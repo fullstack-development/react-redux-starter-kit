@@ -1,6 +1,6 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
-import { Omit, SubSet } from '_helpers';
+import { SubSet } from '_helpers';
 
 import * as usersSearchFeature from 'features/usersSearch';
 import { injectable } from 'inversify';

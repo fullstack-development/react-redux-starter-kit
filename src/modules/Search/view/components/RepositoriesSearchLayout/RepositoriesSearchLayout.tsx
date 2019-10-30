@@ -2,9 +2,9 @@ import React from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import * as features from 'features';
-import featureConnect from 'core/FeatureConnector';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+import * as features from 'features';
+import { withAsyncFeatures } from 'core';
 
 import { Layout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
@@ -54,6 +54,6 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
 }
 
 export { RepositoriesSearchLayout, IProps as IRepositoriesSearchLayoutProps };
-export default featureConnect({
+export default withAsyncFeatures({
   repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
 })(withTranslation()(RepositoriesSearchLayout));
