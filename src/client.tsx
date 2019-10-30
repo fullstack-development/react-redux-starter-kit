@@ -19,7 +19,7 @@ async function main() {
 }
 
 async function waitForAsyncTasksToComplete() {
-  const appForBootstrap = <App {...appData} disableStylesGeneration />;
+  const appForBootstrap = <App {...appData} />;
   const bootstrapper = new Bootstrapper(appForBootstrap, appData.store);
   await bootstrapper.waitJobsCompletion();
 }

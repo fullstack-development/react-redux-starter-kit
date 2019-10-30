@@ -11,15 +11,11 @@ import { BaseStyles } from 'shared/styles';
 
 import createRoutes from './routes';
 
-interface IAppProps {
-  disableStylesGeneration?: boolean;
-}
-
-function ClientApp({ modules, store, disableStylesGeneration }: IAppData & IAppProps) {
+function ClientApp({ modules, store }: IAppData) {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        {renderSharedPart(modules, disableStylesGeneration)}
+        {renderSharedPart(modules)}
       </BrowserRouter>
     </Provider>
   );
@@ -27,24 +23,20 @@ function ClientApp({ modules, store, disableStylesGeneration }: IAppData & IAppP
 
 export const App = hot(ClientApp);
 
-interface IServerAppProps {
-  disableStylesGeneration?: boolean;
-}
-
-export function ServerApp(props: IAppData & IServerAppProps & StaticRouter['props']) {
-  const { modules, store, disableStylesGeneration, ...routerProps } = props;
+export function ServerApp(props: IAppData & StaticRouter['props']) {
+  const { modules, store, ...routerProps } = props;
   return (
     <Provider store={store}>
       <StaticRouter {...routerProps}>
-        {renderSharedPart(modules, disableStylesGeneration)}
+        {renderSharedPart(modules)}
       </StaticRouter>
     </Provider>
   );
 }
 
-function renderSharedPart(modules: IModule[], disableStylesGeneration?: boolean) {
+function renderSharedPart(modules: IModule[]) {
   return (
-    <ThemeProvider disableStylesGeneration={disableStylesGeneration}>
+    <ThemeProvider>
       <BaseStyles />
       {createRoutes(modules)}
       <NotificationContainers.Notification />

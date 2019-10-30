@@ -59,7 +59,7 @@ async function renderWithSSR(appData: IAppData, assets: IAssets, location: strin
 }
 
 async function waitForAsyncTasksToComplete(appData: IAppData, location: string) {
-  const appForBootstrap = <ServerApp {...appData} location={location} context={{}} disableStylesGeneration />;
+  const appForBootstrap = <ServerApp {...appData} location={location} context={{}} />;
   const bootstrapper = new Bootstrapper(appForBootstrap, appData.store);
   await bootstrapper.waitJobsCompletion();
 }
