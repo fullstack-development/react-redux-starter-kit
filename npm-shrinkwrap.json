@@ -7657,93 +7657,6 @@
         }
       }
     },
-    "eslint-import-resolver-typescript": {
-      "version": "2.0.0",
-      "resolved": "https://registry.npmjs.org/eslint-import-resolver-typescript/-/eslint-import-resolver-typescript-2.0.0.tgz",
-      "integrity": "sha512-bT5Frpl8UWoHBtY25vKUOMoVIMlJQOMefHLyQ4Tz3MQpIZ2N6yYKEEIHMo38bszBNUuMBW6M3+5JNYxeiGFH4w==",
-      "dev": true,
-      "requires": {
-        "debug": "^4.1.1",
-        "is-glob": "^4.0.1",
-        "resolve": "^1.12.0",
-        "tiny-glob": "^0.2.6",
-        "tsconfig-paths": "^3.9.0"
-      },
-      "dependencies": {
-        "debug": {
-          "version": "4.1.1",
-          "resolved": "https://registry.npmjs.org/debug/-/debug-4.1.1.tgz",
-          "integrity": "sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==",
-          "dev": true,
-          "requires": {
-            "ms": "^2.1.1"
-          }
-        },
-        "is-glob": {
-          "version": "4.0.1",
-          "resolved": "https://registry.npmjs.org/is-glob/-/is-glob-4.0.1.tgz",
-          "integrity": "sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg==",
-          "dev": true,
-          "requires": {
-            "is-extglob": "^2.1.1"
-          }
-        },
-        "json5": {
-          "version": "1.0.1",
-          "resolved": "https://registry.npmjs.org/json5/-/json5-1.0.1.tgz",
-          "integrity": "sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==",
-          "dev": true,
-          "requires": {
-            "minimist": "^1.2.0"
-          }
-        },
-        "minimist": {
-          "version": "1.2.0",
-          "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.0.tgz",
-          "integrity": "sha1-o1AIsg9BOD7sH7kU9M1d95omQoQ=",
-          "dev": true
-        },
-        "ms": {
-          "version": "2.1.2",
-          "resolved": "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz",
-          "integrity": "sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==",
-          "dev": true
-        },
-        "path-parse": {
-          "version": "1.0.6",
-          "resolved": "https://registry.npmjs.org/path-parse/-/path-parse-1.0.6.tgz",
-          "integrity": "sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==",
-          "dev": true
-        },
-        "resolve": {
-          "version": "1.12.0",
-          "resolved": "https://registry.npmjs.org/resolve/-/resolve-1.12.0.tgz",
-          "integrity": "sha512-B/dOmuoAik5bKcD6s6nXDCjzUKnaDvdkRyAk6rsmsKLipWj4797iothd7jmmUhWTfinVMU+wc56rYKsit2Qy4w==",
-          "dev": true,
-          "requires": {
-            "path-parse": "^1.0.6"
-          }
-        },
-        "strip-bom": {
-          "version": "3.0.0",
-          "resolved": "https://registry.npmjs.org/strip-bom/-/strip-bom-3.0.0.tgz",
-          "integrity": "sha1-IzTBjpx1n3vdVv3vfprj1YjmjtM=",
-          "dev": true
-        },
-        "tsconfig-paths": {
-          "version": "3.9.0",
-          "resolved": "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-3.9.0.tgz",
-          "integrity": "sha512-dRcuzokWhajtZWkQsDVKbWyY+jgcLC5sqJhg2PSgf4ZkH2aHPvaOY8YWGhmjb68b5qqTfasSsDO9k7RUiEmZAw==",
-          "dev": true,
-          "requires": {
-            "@types/json5": "^0.0.29",
-            "json5": "^1.0.1",
-            "minimist": "^1.2.0",
-            "strip-bom": "^3.0.0"
-          }
-        }
-      }
-    },
     "eslint-module-utils": {
       "version": "2.4.1",
       "resolved": "https://registry.npmjs.org/eslint-module-utils/-/eslint-module-utils-2.4.1.tgz",
@@ -11355,12 +11268,6 @@
       "integrity": "sha512-WHq43gS+6ufNOEqlrDBxVEbb8ntfXrfAUU2ZOpCxrBdGKW3gyv8mCxAfIBD0DroPKGrJ2eSsXsLtY9MPntsyTw==",
       "dev": true
     },
-    "globalyzer": {
-      "version": "0.1.4",
-      "resolved": "https://registry.npmjs.org/globalyzer/-/globalyzer-0.1.4.tgz",
-      "integrity": "sha512-LeguVWaxgHN0MNbWC6YljNMzHkrCny9fzjmEUdnF1kQ7wATFD1RHFRqA1qxaX2tgxGENlcxjOflopBwj3YZiXA==",
-      "dev": true
-    },
     "globby": {
       "version": "6.1.0",
       "resolved": "https://registry.npmjs.org/globby/-/globby-6.1.0.tgz",
@@ -11377,12 +11284,6 @@
       "version": "0.1.4",
       "resolved": "https://registry.npmjs.org/globjoin/-/globjoin-0.1.4.tgz",
       "integrity": "sha1-L0SUrIkZ43Z8XLtpHp9GMyQoXUM=",
-      "dev": true
-    },
-    "globrex": {
-      "version": "0.1.2",
-      "resolved": "https://registry.npmjs.org/globrex/-/globrex-0.1.2.tgz",
-      "integrity": "sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==",
       "dev": true
     },
     "globule": {
@@ -24879,16 +24780,6 @@
       "dev": true,
       "requires": {
         "setimmediate": "^1.0.4"
-      }
-    },
-    "tiny-glob": {
-      "version": "0.2.6",
-      "resolved": "https://registry.npmjs.org/tiny-glob/-/tiny-glob-0.2.6.tgz",
-      "integrity": "sha512-A7ewMqPu1B5PWwC3m7KVgAu96Ch5LA0w4SnEN/LbDREj/gAD0nPWboRbn8YoP9ISZXqeNAlMvKSKoEuhcfK3Pw==",
-      "dev": true,
-      "requires": {
-        "globalyzer": "^0.1.0",
-        "globrex": "^0.1.1"
       }
     },
     "tiny-warning": {
