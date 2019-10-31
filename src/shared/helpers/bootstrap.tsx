@@ -39,8 +39,6 @@ class Bootstrapper implements IBootstrapper {
     const promises = this.jobCreators.map(w => w());
     await Promise.all(promises);
     this.isBootstrapped = true;
-
-    return undefined;
   }
 }
 
