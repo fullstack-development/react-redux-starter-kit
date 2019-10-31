@@ -29,7 +29,6 @@ function configureApp(data?: IAppData): IAppData {
   const connectedReducers: Partial<ReducersMap<IAppReduxState>> = {};
 
   const { runSaga, store } = configureStore();
-  // tslint:disable:max-line-length
   // TODO: research how it works with several concurrent request,
   // it seems that such bindings works well only if requests are synchronous
   try {

@@ -53,5 +53,4 @@ function render(component: React.ReactElement<any>) {
   );
 }
 
-/* eslint-disable-next-line */
 console.info(`%cApp version: ${appVersion}`, 'background: #EBF5F8; color: gray; font-size: x-medium; border-radius: 5px; padding: 5px;');
