@@ -1,1 +1,5 @@
 generators
+coverage
+build
+static
+node_modules
