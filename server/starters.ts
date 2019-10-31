@@ -51,7 +51,7 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
   // );
   const assets = extractAssets(clientStats.compilation);
   /* eslint-disable-next-line */
-  const render = require('../static').default;
+  const render = require('../static').render;
   server.get('*', (req, res) => {
     render({ req, res, assets }).catch(() => res.sendStatus(500).write('Server error'));
   });
