@@ -43,7 +43,7 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
   }
 
   private get areAllAvatarsLoaded() {
-    return Object.values(this.avatarsLoadingStatus).every(x => x === true);
+    return Object.values(this.avatarsLoadingStatus).every(R.equals(true));
   }
 
   public componentDidUpdate({ users: prevUsers }: IProps) {
