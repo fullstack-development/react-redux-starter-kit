@@ -14,7 +14,7 @@ const b = block('repository-attribute');
 
 function RepositoryAttribute(props: IProps) {
   const { title, value, onValueClick, type } = props;
-  const onValueKeyPress = (e: React.KeyboardEvent<HTMLSpanElement>) => {
+  const handleValueKeyPress = (e: React.KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === 'Enter' && onValueClick) {
       onValueClick();
     }
@@ -30,7 +30,7 @@ function RepositoryAttribute(props: IProps) {
         role="button"
         className={b('value', { type })}
         onClick={onValueClick}
-        onKeyPress={onValueKeyPress}
+        onKeyPress={handleValueKeyPress}
       >
         {value}
       </span>
