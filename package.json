@@ -4,7 +4,7 @@
   "description": "Starter kit from Fullstack-development company developers",
   "main": "index.js",
   "scripts": {
-    "check-types": "node_modules/.bin/tsc -p . --noEmit",
+    "check-types": "tsc -p . --noEmit",
     "dev": "npm run watch:dev",
     "prod": "npm run watch:prod",
     "deploy:gh-pages": "npm run build:gh-pages && gh-pages -d build",
@@ -14,20 +14,18 @@
     "server:dev:debug": "better-npm-run server:dev:debug",
     "server:prod": "better-npm-run server:prod",
     "server:prod:debug": "better-npm-run server:prod:debug",
-    "test": "./node_modules/.bin/jest",
-    "test:watch": "./node_modules/.bin/jest --watch",
-    "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand --watch",
-    "test:coverage": "node_modules/.bin/jest --coverage",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:debug": "node --inspect-brk jest --runInBand --watch",
+    "test:coverage": "jest --coverage",
     "build:dev": "better-npm-run build:dev",
     "build:prod": "better-npm-run build:prod",
     "build:gh-pages": "better-npm-run build:gh-pages",
     "analyze:dev": "better-npm-run analyze:dev",
     "analyze:prod": "better-npm-run analyze:prod",
     "yeoman": "better-npm-run initial:yeoman",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && tsc --noEmit --pretty",
-    "lint:autofix": "npm run eslint-autofix && npm run stylelint-autofix",
-    "stylelint-autofix": "./node_modules/.bin/stylelint \"./src/**/*.scss\" --fix",
-    "eslint-autofix": "./node_modules/.bin/eslint . --ext .ts --ext .tsx --fix"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx && stylelint \"./src/**/*.scss\" && tsc --noEmit --pretty",
+    "lint:autofix": "eslint . --ext .ts --ext .tsx --fix && stylelint \"./src/**/*.scss\" --fix"
   },
   "betterScripts": {
     "initial:yeoman": {
