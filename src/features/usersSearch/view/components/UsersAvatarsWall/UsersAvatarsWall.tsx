@@ -91,7 +91,7 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
       <li key={user.id} className={b('avatar')}>
         <button
           type="button"
-          className={b('button')}
+          className={b('avatar-button')}
           onClick={this.makeAvatarClickHandler(user)}
           onKeyPress={this.makeAvatarKeyPressHandler(user)}
         >

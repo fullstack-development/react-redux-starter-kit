@@ -25,7 +25,7 @@ describe('(features/usersSearch) UsersAvatarsWall component', () => {
     const component = getComponent({ onAvatarClick });
     const avatars = component
       .find('.users-avatars-wall__avatar')
-      .find('.users-avatars-wall__button');
+      .find('.users-avatars-wall__avatar-button');
     avatars.at(0).simulate('click');
     expect(onAvatarClick).toHaveBeenCalledWith(props.users[0]);
   });
