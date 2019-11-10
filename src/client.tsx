@@ -27,13 +27,11 @@ async function waitForAsyncTasksToComplete() {
 /* Start application */
 main();
 
-/* eslint global-require: 0 */
-
 /* Hot Module Replacement API */
 if ((module as any).hot && process.env.NODE_ENV !== 'production') {
   (module as any).hot.accept(['./core/App', './core/configureApp'], () => {
-    const nextConfigureApp: typeof configureApp = require('./core/configureApp').default;
-    const NextApp: typeof App = require('./core/App').App;
+    const nextConfigureApp: typeof configureApp = require('./core/configureApp').default; // eslint-disable-line global-require
+    const NextApp: typeof App = require('./core/App').App; // eslint-disable-line global-require
     const nextAppData = nextConfigureApp(appData);
     render(<NextApp {...nextAppData} />);
   });
