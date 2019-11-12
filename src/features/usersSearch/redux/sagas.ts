@@ -5,10 +5,10 @@ import { IDependencies } from 'shared/types/app';
 import { IDetailedGithubUser } from 'shared/types/models';
 import { IUsersSearchResults } from 'shared/types/githubSearch';
 import { getErrorMsg } from 'shared/helpers';
-import { actions as notificationServiceActions } from 'services/notification';
+import { actionCreators as notificationActionCreators } from 'services/notification';
 
 import * as NS from '../namespace';
-import * as actions from './actions';
+import * as actionCreators from './actionCreators';
 
 function getSaga(deps: IDependencies) {
   const searchUserType: NS.ISearchUsers['type'] = 'USERS_SEARCH:SEARCH_USERS';
@@ -26,26 +26,26 @@ function* executeSearchUsers({ api }: IDependencies, { payload }: NS.ISearchUser
     const { searchOptions, page } = payload;
     const { searchString, ...filters } = searchOptions;
     const searchUsersResults: IUsersSearchResults = yield call(api.searchUsers, searchString, filters, page);
-    yield put(actions.searchUsersSuccess({ ...searchUsersResults, page }));
+    yield put(actionCreators.searchUsersSuccess({ ...searchUsersResults, page }));
     if (searchUsersResults.data.length === 0) {
-      yield put(notificationServiceActions.setNotification({ kind: 'error', text: 'No users found :(' }));
+      yield put(notificationActionCreators.setNotification({ kind: 'error', text: 'No users found :(' }));
     }
   } catch (error) {
     const errorMsg = getErrorMsg(error);
-    yield put(actions.searchUsersFail(errorMsg));
-    yield put(notificationServiceActions.setNotification({ kind: 'error', text: errorMsg }));
+    yield put(actionCreators.searchUsersFail(errorMsg));
+    yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
   }
 }
 
 function* executeLoadUserDetails({ api }: IDependencies, { payload }: NS.ILoadUserDetails) {
   try {
-    yield put(actions.resetUserDetails());
+    yield put(actionCreators.resetUserDetails());
     const userDetails: IDetailedGithubUser = yield call(api.loadUserDetails, payload);
-    yield put(actions.loadUserDetailsSuccess(userDetails));
+    yield put(actionCreators.loadUserDetailsSuccess(userDetails));
   } catch (error) {
     const errorMsg = getErrorMsg(error);
-    yield put(actions.loadUserDetailsFail(errorMsg));
-    yield put(notificationServiceActions.setNotification({ kind: 'error', text: errorMsg }));
+    yield put(actionCreators.loadUserDetailsFail(errorMsg));
+    yield put(notificationActionCreators.setNotification({ kind: 'error', text: errorMsg }));
   }
 }
 

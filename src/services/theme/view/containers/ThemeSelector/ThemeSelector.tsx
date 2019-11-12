@@ -5,7 +5,7 @@ import { autobind } from 'core-decorators';
 import { IAppReduxState } from 'shared/types/app';
 
 import { UITheme } from '../../../namespace';
-import * as actions from './../../../redux/actions';
+import * as actionCreators from './../../../redux/actionCreators';
 import * as selectors from './../../../redux/selectors';
 
 interface IOption {
@@ -18,7 +18,7 @@ interface IStateProps {
 }
 
 interface IActionProps {
-  setTheme: typeof actions.setTheme;
+  setTheme: typeof actionCreators.setTheme;
 }
 
 type Props = IStateProps & IActionProps;
@@ -56,7 +56,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch: IActionProps = {
-  setTheme: actions.setTheme,
+  setTheme: actionCreators.setTheme,
 };
 
 export { ThemeSelector };

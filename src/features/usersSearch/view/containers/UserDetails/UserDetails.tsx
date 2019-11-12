@@ -11,7 +11,7 @@ import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
 import { UserAttribute } from '../../components';
 import { injectSizeToAvatarURL } from '../../../helpers';
-import { actions, selectors } from './../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 import './UserDetails.scss';
 
 interface IOwnProps {
@@ -36,7 +36,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  loadUserDetails: actions.loadUserDetails,
+  loadUserDetails: actionCreators.loadUserDetails,
 };
 
 const b = block('user-details');

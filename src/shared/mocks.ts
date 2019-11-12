@@ -48,7 +48,7 @@ export const repository: IRepository = {
 
 export function makeMockEntry<T extends IFeatureEntry>(
   containers?: IFeatureEntry['containers'],
-  actions?: IFeatureEntry['actions'],
+  actionCreators?: IFeatureEntry['actionCreators'],
   selectors?: IFeatureEntry['selectors'],
 ): T {
   return {
@@ -57,7 +57,7 @@ export function makeMockEntry<T extends IFeatureEntry>(
         return target[property] || makeMockComponent('Container');
       },
     }),
-    actions: new Proxy(actions || {}, {
+    actionCreators: new Proxy(actionCreators || {}, {
       get: (target, property: string) => {
         return target[property] || jest.fn();
       },

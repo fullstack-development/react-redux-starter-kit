@@ -12,7 +12,7 @@ import { TotalSearchResults } from 'shared/view/elements';
 
 import { IUsersSearchFormFields } from '../../../namespace';
 import { UsersAvatarsWall } from '../../components';
-import { actions, selectors } from './../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 import UserDetails from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
 
@@ -43,7 +43,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  searchUsers: actions.searchUsers,
+  searchUsers: actionCreators.searchUsers,
 };
 
 const b = block('users-search-results');

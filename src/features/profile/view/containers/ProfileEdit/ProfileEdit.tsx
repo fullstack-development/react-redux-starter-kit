@@ -9,13 +9,13 @@ import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
-import { actions as notificationServiceActions } from 'services/notification';
+import { actionCreators as notificationActionCreators } from 'services/notification';
 import {
   fieldNames, validateName, validateNickname, validateBio,
 } from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
-import { actions, selectors } from './../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 
 import './ProfileEdit.scss';
 
@@ -34,8 +34,8 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  saveProfile: actions.saveProfile,
-  setNotification: notificationServiceActions.setNotification,
+  saveProfile: actionCreators.saveProfile,
+  setNotification: notificationActionCreators.setNotification,
 };
 
 const b = block('profile-edit');

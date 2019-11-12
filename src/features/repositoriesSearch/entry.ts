@@ -1,11 +1,11 @@
 import makeFeatureEntry from 'shared/helpers/makeFeatureEntry';
 
-import { actions, selectors, reducer, getSaga } from './redux';
+import { actionCreators, selectors, reducer, getSaga } from './redux';
 import * as containers from './view/containers';
 
 const entry = makeFeatureEntry({
   containers,
-  actions,
+  actionCreators,
   selectors,
   reduxEntry: {
     reducers: { repositoriesSearch: reducer },
