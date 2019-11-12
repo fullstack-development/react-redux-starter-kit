@@ -1,4 +1,4 @@
-import { makeRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators } from '../';
+import { makeRequired, makeMaxCharactersValidator, makeMinCharactersValidator, composeValidators } from '..';
 
 describe('(shared) Validators', () => {
   describe('composeValidators', () => {

@@ -1,9 +1,11 @@
 import React from 'react';
+// eslint-disable-next-line import/no-unresolved
 import { CheckIdentity } from '_helpers';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormHelperText, { FormHelperTextProps } from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox, { CheckboxProps } from '../Checkbox/Checkbox';
+
+import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
 
 type IProps = CheckboxProps & Pick<FormControlProps, 'error' | 'required' | 'fullWidth'> & {
   label: React.ReactNode;
@@ -52,4 +54,4 @@ function normalizeProps(props: IProps): INormalizedProps {
   };
 }
 
-export default CheckboxInput;
+export { CheckboxInput };

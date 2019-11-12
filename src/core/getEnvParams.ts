@@ -1,6 +1,6 @@
 import * as appInfo from '../../package.json';
 
-export default function getEnvParams() {
+export function getEnvParams() {
   const isProduction = process.env.NODE_ENV === 'production';
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isWatchMode = process.env.WATCH_MODE === 'true';
@@ -13,7 +13,14 @@ export default function getEnvParams() {
   const appVersion = appInfo.version;
 
   return {
-    isProduction, isDevelopment, isWatchMode, withAnalyze,
-    chunkName, chunkHash, withHot, appVersion, forGHPages,
+    isProduction,
+    isDevelopment,
+    isWatchMode,
+    withAnalyze,
+    chunkName,
+    chunkHash,
+    withHot,
+    appVersion,
+    forGHPages,
   };
 }

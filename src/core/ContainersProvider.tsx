@@ -1,12 +1,14 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
+// eslint-disable-next-line import/no-unresolved
 import { SubSet } from '_helpers';
+import { injectable } from 'inversify';
 
 import * as usersSearchFeature from 'features/usersSearch';
-import { injectable } from 'inversify';
+import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
+
 import { inject, TYPES } from './configureIoc';
 
-import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
 
 interface IContainerTypes {
   UserDetails: usersSearchFeature.Entry['containers']['UserDetails'];
@@ -39,14 +41,12 @@ interface IState {
   };
 }
 
-// tslint:disable:max-line-length
+/* eslint max-len: 0 */
 function containersProvider<L extends Container>(containers: L[], preloader?: React.ReactChild):
-  <Props extends { [K in L]: IContainerTypes[K] }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
-
+<Props extends { [K in L]: IContainerTypes[K] }>(WrappedComponent: React.ComponentType<Props>) => React.ComponentClass<Omit<Props, L>> {
   return <Props extends { [K in L]: IContainerTypes[K] }>(
     WrappedComponent: React.ComponentType<Props>,
   ): React.ComponentClass<Props> => {
-
     @injectable()
     class ContainersProvider extends React.PureComponent<Props, IState> {
       public state: IState = { containers: {} };
@@ -61,14 +61,27 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
       public componentWillUnmount() {
         this.saveContainerToState = null;
       }
+
       // TODO: УДОЛИ
       public render() {
+        const { containers: stateContainers } = this.state;
+
         if (!this.isAllContainersLoaded()) {
-          return preloader !== void 0 ? preloader : null;
-        } else {
-          return <WrappedComponent {...this.state.containers} {...this.props} />;
+          return preloader !== undefined ? preloader : null;
         }
+        return <WrappedComponent {...stateContainers} {...this.props} />;
       }
+
+      private saveContainerToState: null | ((container: React.ComponentType<any>, key: string) => void) =
+      (cont, key) => {
+        this.setState(state => ({
+          ...state,
+          containers: {
+            ...state.containers,
+            [key]: cont,
+          },
+        }));
+      };
 
       @autobind
       private async load(): Promise<void> {
@@ -88,20 +101,10 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
         this.saveContainerToState && this.saveContainerToState(container, containerKey);
       }
 
-      private saveContainerToState: null | ((container: React.ComponentType<any>, key: string) => void) =
-        (cont, key) => {
-          this.setState(state => ({
-            ...state,
-            containers: {
-              ...state.containers,
-              [key]: cont,
-            },
-          }));
-        }
-
       @autobind
       private isAllContainersLoaded(): boolean {
-        return containers.every(key => Boolean(this.state.containers[key]));
+        const { containers: stateContainers } = this.state;
+        return containers.every(key => Boolean(stateContainers[key]));
       }
     }
 
@@ -109,5 +112,4 @@ function containersProvider<L extends Container>(containers: L[], preloader?: Re
   };
 }
 
-export { IContainerTypes };
-export default containersProvider;
+export { containersProvider, IContainerTypes };

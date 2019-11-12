@@ -1,4 +1,4 @@
-import { replaceObjectKeys } from '../';
+import { replaceObjectKeys } from '..';
 
 const sourceObj: any = { a: 12, b: 'lmao', c: [1, 2] };
 const replacementMap: any = { a: 'renamed a', b: 'ggg', c: 'd' };

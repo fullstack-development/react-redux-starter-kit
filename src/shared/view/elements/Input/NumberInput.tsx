@@ -1,11 +1,11 @@
 import React from 'react';
 import * as R from 'ramda';
+// eslint-disable-next-line import/no-unresolved
 import { MergeRight } from '_helpers';
 import NumberFormat, { NumberFormatProps, NumberFormatValues } from 'react-number-format';
-
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 
-import TextInput, { IProps as ITextInputProps } from './TextInput';
+import { TextInput, IProps as ITextInputProps } from './TextInput';
 
 interface ICustomProps {
   value: number;
@@ -21,20 +21,22 @@ interface INumberProps {
 
 type IProps = MergeRight<ITextInputProps, ICustomProps> & INumberProps;
 
-const makeNumberInput = R.memoizeWith(R.toString, (ownProps: NumberFormatProps) => {
-  return function NumberFormatCustom(props: MergeRight<InputBaseComponentProps, ICustomProps>) {
-    const { inputRef, onChange, ...other } = props;
+const makeNumberInput = R.memoizeWith(
+  R.toString,
+  (ownProps: NumberFormatProps) =>
+    function NumberFormatCustom(props: MergeRight<InputBaseComponentProps, ICustomProps>) {
+      const { inputRef, onChange, ...other } = props;
 
-    return (
-      <NumberFormat
-        {...ownProps}
-        {...other}
-        getInputRef={inputRef}
-        onValueChange={onChange}
-      />
-    );
-  };
-});
+      return (
+        <NumberFormat
+          {...ownProps}
+          {...other}
+          getInputRef={inputRef}
+          onValueChange={onChange}
+        />
+      );
+    },
+);
 
 class NumberInput extends React.PureComponent<IProps> {
   public render() {
@@ -57,4 +59,4 @@ class NumberInput extends React.PureComponent<IProps> {
   }
 }
 
-export default NumberInput;
+export { NumberInput };

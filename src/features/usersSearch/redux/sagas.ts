@@ -25,7 +25,11 @@ function* executeSearchUsers({ api }: IDependencies, { payload }: NS.ISearchUser
   try {
     const { searchOptions, page } = payload;
     const { searchString, ...filters } = searchOptions;
-    const searchUsersResults: IUsersSearchResults = yield call(api.searchUsers, searchString, filters, page);
+    const searchUsersResults: IUsersSearchResults = yield call(
+      api.searchUsers,
+      searchString, filters,
+      page,
+    );
     yield put(actionCreators.searchUsersSuccess({ ...searchUsersResults, page }));
     if (searchUsersResults.data.length === 0) {
       yield put(notificationActionCreators.setNotification({ kind: 'error', text: 'No users found :(' }));

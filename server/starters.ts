@@ -43,14 +43,17 @@ async function startProductionMode(server: Express, ...configs: webpack.Configur
     return;
   }
 
-  process.stdout.write(stats.toString({ colors: true }) + '\n');
+  process.stdout.write(`${stats.toString({ colors: true })}\n`);
 
   const clientStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'client-web');
-  // const serverStats = (stats as any).stats.find((stat: any) => stat.compilation.name === 'server-web');
+  // const serverStats = (stats as any).stats.find(
+  //   (stat: any) => stat.compilation.name === 'server-web'
+  // );
   const assets = extractAssets(clientStats.compilation);
-  const render = require('../static').default;
+  /* eslint-disable-next-line */
+  const render = require('../static').render;
   server.get('*', (req, res) => {
-    render({ req, res, assets }).catch((_error: any) => res.sendStatus(500).write('Server error'));
+    render({ req, res, assets }).catch(() => res.sendStatus(500).write('Server error'));
   });
 }
 

@@ -21,5 +21,4 @@ function UserAttribute(props: IProps) {
   );
 }
 
-export { IProps as IUserAttributeProps };
-export default UserAttribute;
+export { UserAttribute, IProps as IUserAttributeProps };

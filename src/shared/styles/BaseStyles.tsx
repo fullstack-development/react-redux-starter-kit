@@ -1,6 +1,7 @@
 import React from 'react';
-import { rule } from 'shared/helpers/style';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
+
+import { rule } from 'shared/helpers/style';
 
 const styles = {
   '@global': rule({
@@ -24,10 +25,6 @@ const styles = {
 
 type StylesProps = WithStyles<typeof styles>;
 
-class BaseStyles extends React.Component<StylesProps> {
-  public render() {
-    return null;
-  }
-}
+const BaseStylesComponent: React.SFC<StylesProps> = () => null;
 
-export default withStyles(styles)(BaseStyles);
+export const BaseStyles = withStyles(styles)(BaseStylesComponent);

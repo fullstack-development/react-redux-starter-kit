@@ -1,4 +1,4 @@
-export { default as withProps } from './withProps';
-export { default as getFieldWithComponent } from './getFieldWithComponent';
-export { default as withComponent } from './withComponent';
-export { default as areComponentsEqual } from './areComponentsEqual';
+export { withProps } from './withProps';
+export { getFieldWithComponent } from './getFieldWithComponent';
+export { withComponent } from './withComponent';
+export { areComponentsEqual } from './areComponentsEqual';

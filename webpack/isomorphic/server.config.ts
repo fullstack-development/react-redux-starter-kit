@@ -42,4 +42,5 @@ const serverConfig: webpack.Configuration = {
   },
 };
 
+/* eslint import/no-default-export: 0 */
 export default serverConfig;

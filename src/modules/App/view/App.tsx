@@ -1,11 +1,5 @@
 import React from 'react';
 
-class App extends React.Component {
-  public render() {
-    const { children } = this.props;
+const App: React.FC = ({ children }) => <>{children}</>;
 
-    return children;
-  }
-}
-
-export default App;
+export { App };

@@ -54,7 +54,7 @@ const mapDispatch = {
 
 const b = block('repositories-search-results');
 
-class RepositoriesSearchResults extends React.PureComponent<IProps> {
+class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
   public state: IState = {
     displayedRepositoryOwner: null,
   };
@@ -79,9 +79,12 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedRepositoryOwner &&
-          <UserDetails username={displayedRepositoryOwner} onClose={this.handleUserDetailsClose} />
-        }
+        {displayedRepositoryOwner && (
+          <UserDetails
+            username={displayedRepositoryOwner}
+            onClose={this.handleUserDetailsClose}
+          />
+        )}
       </div>
     );
   }
@@ -112,11 +115,14 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResults);
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResultsComponent);
+const RepositoriesSearchResults = withTranslation()(
+  containersProvider(['UserDetails'])(connectedComponent),
+);
 
 export {
   RepositoriesSearchResults,
+  RepositoriesSearchResultsComponent,
   IProps as IRepositoriesSearchResultsProps,
   IState as IRepositoriesSearchResultsState,
 };
-export default withTranslation()(containersProvider(['UserDetails'])(connectedComponent));

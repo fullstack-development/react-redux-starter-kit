@@ -5,22 +5,22 @@ import { StylesProps, provideStyles } from './CircleProgressBar.style';
 
 type IProps = Omit<CircularProgressProps, 'classes'> & StylesProps;
 
-function CircleProgressBar(props: IProps) {
+function CircleProgressBarComponent(props: IProps) {
   const { classes, ...rest } = props;
   return (
-    <div className={props.classes.piechart}>
+    <div className={classes.piechart}>
       <CircularProgress
-        className={props.classes.overlay}
+        className={classes.overlay}
         variant="determinate"
-        size={props.size}
+        size={rest.size}
         value={100}
       />
       <CircularProgress
-        className={props.classes.progress}
+        className={classes.progress}
         {...rest}
       />
     </div>
   );
 }
 
-export default provideStyles(CircleProgressBar);
+export const CircleProgressBar = provideStyles(CircleProgressBarComponent);

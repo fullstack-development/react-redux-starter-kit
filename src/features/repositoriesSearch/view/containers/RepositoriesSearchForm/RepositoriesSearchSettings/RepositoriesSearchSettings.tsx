@@ -46,4 +46,4 @@ function RepositoriesSearchSettings() {
   );
 }
 
-export default RepositoriesSearchSettings;
+export { RepositoriesSearchSettings };

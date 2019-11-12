@@ -1,3 +1,4 @@
+/* eslint react/no-danger: 0 */
 import React from 'react';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
@@ -22,7 +23,7 @@ interface IHtmlProps {
  * HTML doctype declaration, which is added to the rendered output
  * by the server.js file.
  */
-export default class Html extends React.PureComponent<IHtmlProps> {
+class Html extends React.PureComponent<IHtmlProps> {
   private static getHeadData() {
     return __SERVER__ ? Helmet.renderStatic() : Helmet.peek();
   }
@@ -67,8 +68,7 @@ export default class Html extends React.PureComponent<IHtmlProps> {
             <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(state)};` }} charSet="UTF-8" />
             <script dangerouslySetInnerHTML={{ __html: `window.__assets=${windowAssets};` }} charSet="UTF-8" />
             {assets.javascript.map((filePath, index) =>
-              <script defer src={`/${filePath}`} charSet="UTF-8" key={index} />)
-            }
+              <script defer src={`/${filePath}`} charSet="UTF-8" key={index} />)}
           </div>
 
         </body>

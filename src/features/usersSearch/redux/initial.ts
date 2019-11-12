@@ -1,4 +1,5 @@
 import { initialCommunicationField, initialPaginationState } from 'shared/constants';
+
 import { IReduxState } from '../namespace';
 
 const initial: IReduxState = {
@@ -16,4 +17,4 @@ const initial: IReduxState = {
   },
 };
 
-export default initial;
+export { initial };

@@ -8,9 +8,9 @@ import { memoizeByProps } from 'shared/helpers';
 import { withAsyncFeatures } from 'core';
 import * as features from 'features';
 
-import routes from '../../routes';
+import { routes } from '../../routes';
+import { LayoutHeaderMenu, IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 import './Layout.scss';
-import LayoutHeaderMenu, { IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
 
 interface IOwnProps {
   title: string;
@@ -25,7 +25,7 @@ type IProps = IOwnProps & IFeatureProps & RouteComponentProps & ITranslationProp
 const b = block('layout');
 const { header, footer } = tKeys.shared;
 
-class Layout extends React.Component<IProps> {
+class LayoutComponent extends React.Component<IProps> {
   public render() {
     const { children, title, profileFeatureEntry: { containers }, location, t } = this.props;
     const { ProfilePreview } = containers;
@@ -35,7 +35,10 @@ class Layout extends React.Component<IProps> {
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={this.getMenuItems()} activeItemPath={location.pathname} />
+              <LayoutHeaderMenu
+                menuItems={this.getMenuItems()}
+                activeItemPath={location.pathname}
+              />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
@@ -85,9 +88,9 @@ class Layout extends React.Component<IProps> {
   }
 }
 
-const wrappedComponent = withTranslation()(withRouter(Layout));
-
-export { Layout, IProps as ILayoutProps };
-export default withAsyncFeatures({
+const wrappedComponent = withTranslation()(withRouter(LayoutComponent));
+const Layout = withAsyncFeatures({
   profileFeatureEntry: features.profile.loadEntry,
 })(wrappedComponent);
+
+export { Layout, LayoutComponent, IProps as ILayoutProps };

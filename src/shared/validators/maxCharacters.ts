@@ -3,6 +3,6 @@ export function makeMaxCharactersValidator<T>(maxCharacters: number, errorMsg: T
     if (validatedValue.length > maxCharacters) {
       return errorMsg;
     }
-    return void 0;
+    return undefined;
   };
 }

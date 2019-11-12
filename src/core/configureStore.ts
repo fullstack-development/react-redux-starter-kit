@@ -18,6 +18,7 @@ function configureStore(): IStoreData {
   const isBrowser = typeof window !== 'undefined';
   const composeEnhancers = isBrowser && process.env.NODE_ENV === 'development' ? composeWithDevTools({}) : compose;
 
+  // eslint-disable-next-line no-underscore-dangle
   const initialAppState: IAppReduxState | undefined = isBrowser ? window.__data : undefined;
 
   const store: Store<IAppReduxState> = initialAppState
@@ -47,4 +48,4 @@ function createReducer(reducers: ReducersMap<IAppReduxState>): Reducer<IAppRedux
 }
 
 export { createReducer, IStoreData };
-export default configureStore;
+export { configureStore };

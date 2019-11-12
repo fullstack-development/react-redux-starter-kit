@@ -1,6 +1,6 @@
 import { makeShallowRenderer } from 'shared/helpers';
 
-import KeysToValues, { IKeysToValuesProps } from '../KeysToValues';
+import { KeysToValues, IKeysToValuesProps } from '../KeysToValues';
 
 const props: IKeysToValuesProps = {
   items: {

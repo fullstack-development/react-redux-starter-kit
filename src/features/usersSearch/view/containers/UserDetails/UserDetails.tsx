@@ -42,14 +42,14 @@ const mapDispatch = {
 const b = block('user-details');
 const { userSearch: intl } = tKeys.features;
 
-class UserDetails extends React.Component<IProps> {
+class UserDetailsComponent extends React.Component<IProps> {
   private avatarSize = 230;
 
   public render() {
     const { isLoadUserDetailsRequesting, t } = this.props;
     return (
       <Dialog
-        open={true}
+        open
         title={t(intl.userDetails)}
         onEnter={this.handleDialogEnter}
         onClose={this.handleDialogClose}
@@ -77,6 +77,7 @@ class UserDetails extends React.Component<IProps> {
             <img
               className={b('avatar')}
               src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
+              alt="Avatar"
             />
             <Typography variant="h5">{realName}</Typography>
             <Typography variant="subtitle1" noWrap>{username}</Typography>
@@ -119,7 +120,7 @@ class UserDetails extends React.Component<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UserDetails);
+const connectedComponent = connect(mapState, mapDispatch)(UserDetailsComponent);
+const UserDetails = withTranslation()(connectedComponent);
 
-export { UserDetails, IProps as IUserDetailsProps };
-export default withTranslation()(connectedComponent);
+export { UserDetails, UserDetailsComponent, IProps as IUserDetailsProps };

@@ -1,4 +1,4 @@
-import makeFeatureEntry from 'shared/helpers/makeFeatureEntry';
+import { makeFeatureEntry } from 'shared/helpers/makeFeatureEntry';
 
 import { actionCreators, selectors, reducer } from './redux';
 import * as containers from './view/containers';

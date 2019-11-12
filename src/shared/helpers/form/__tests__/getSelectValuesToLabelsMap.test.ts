@@ -1,5 +1,6 @@
 import { ISelectOption } from 'shared/types/form';
-import { getSelectValuesToLabelsMap } from '../';
+
+import { getSelectValuesToLabelsMap } from '..';
 
 describe('(shared/helpers/form) getSelectValuesToLabelsMap', () => {
   it('should return select values to labels map from select options', () => {

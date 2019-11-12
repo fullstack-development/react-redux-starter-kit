@@ -1,4 +1,5 @@
 import { IProfile } from 'shared/types/models';
+
 import avatar from './img/profile_avatar.png';
 
 export const profile: IProfile = {

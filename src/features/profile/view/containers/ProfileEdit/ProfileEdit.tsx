@@ -41,7 +41,7 @@ const mapDispatch = {
 const b = block('profile-edit');
 const { profile: intl } = tKeys.features;
 
-class ProfileEdit extends React.PureComponent<IProps> {
+class ProfileEditComponent extends React.PureComponent<IProps> {
   public render() {
     const { profile } = this.props;
     return (
@@ -108,6 +108,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(ProfileEdit);
-export { ProfileEdit, IProps as IProfileEditProps };
-export default withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(ProfileEditComponent);
+const ProfileEdit = withTranslation()(connectedComponent);
+
+export { ProfileEdit, ProfileEditComponent, IProps as IProfileEditProps };

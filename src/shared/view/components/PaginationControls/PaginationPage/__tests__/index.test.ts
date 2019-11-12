@@ -1,6 +1,8 @@
 import ButtonBase from '@material-ui/core/ButtonBase';
+
 import { makeShallowRenderer } from 'shared/helpers';
-import PaginationPage , { IPaginationPageProps } from '../PaginationPage';
+
+import { PaginationPage, IPaginationPageProps } from '../PaginationPage';
 
 const props: IPaginationPageProps = {
   page: 1,

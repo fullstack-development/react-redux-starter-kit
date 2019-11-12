@@ -2,7 +2,7 @@ import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEvent } from 'shared/mocks';
 import { ClickAwayListener } from 'shared/view/components';
 
-import { LayoutHeaderMenu, IHeaderMenuProps } from '../LayoutHeaderMenu';
+import { LayoutHeaderMenuComponent, IHeaderMenuProps } from '../LayoutHeaderMenu';
 
 const props: IHeaderMenuProps = {
   menuItems: [
@@ -20,7 +20,7 @@ const props: IHeaderMenuProps = {
 };
 
 const clickEvent = makeMockEvent('click');
-const getComponent = makeShallowRenderer(LayoutHeaderMenu, props);
+const getComponent = makeShallowRenderer(LayoutHeaderMenuComponent, props);
 
 describe('(modules/shared) LayoutHeaderMenu component', () => {
   it('should render every menu item', () => {

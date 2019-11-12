@@ -2,7 +2,7 @@ import webpack from 'webpack';
 
 import { getCommonRules, commonConfig, getStyleRules, BuildType, getCommonPlugins } from './common';
 
-const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
+const getDevConfig: (type?: BuildType) => webpack.Configuration = type => {
   const rules: webpack.Rule[] = [
     ...getCommonRules(type || 'dev'),
     ...getStyleRules(type || 'dev'),
@@ -22,4 +22,5 @@ const getDevConfig: (type?: BuildType) => webpack.Configuration = (type) => {
   };
 };
 
+/* eslint import/no-default-export: 0 */
 export default getDevConfig;

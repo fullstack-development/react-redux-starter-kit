@@ -1,1 +1,1 @@
-export { default as ProfileLayout } from '../components/ProfileLayout/ProfileLayout';
+export { ProfileLayout } from './ProfileLayout/ProfileLayout';

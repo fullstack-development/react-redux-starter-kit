@@ -1,7 +1,9 @@
 import * as R from 'ramda';
 import React from 'react';
+
 import { makeMockComponent } from 'shared/mocks';
 import { makeShallowRenderer } from 'shared/helpers';
+
 import { withProps } from '..';
 
 const staticProps = {
@@ -31,6 +33,6 @@ describe('(shared/helpers/react) withProps', () => {
       .toBe(`WithProps(${ComponentWithoutDisplayName.name})`);
 
     expect(withProps(() => React.createElement('div'), {}).displayName)
-      .toBe(`WithProps(Component)`);
+      .toBe('WithProps(Component)');
   });
 });

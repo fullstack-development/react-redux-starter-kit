@@ -1,9 +1,10 @@
 import { FormFieldNames } from 'shared/types/form';
-import { IProfileEditFormFields } from '../../../namespace';
 import {
   composeValidators, makeRequired, makeMinCharactersValidator, makeMaxCharactersValidator,
 } from 'shared/validators';
 import { tKeys } from 'services/i18n';
+
+import { IProfileEditFormFields } from '../../../namespace';
 
 export const fieldNames: FormFieldNames<IProfileEditFormFields> = {
   age: 'age',

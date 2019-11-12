@@ -10,4 +10,4 @@ function getErrorMsg(error: any): string {
   return String(error);
 }
 
-export default getErrorMsg;
+export { getErrorMsg };

@@ -1,8 +1,9 @@
-// tslint:disable:max-classes-per-file
-
+/* eslint-disable react/destructuring-assignment */
+/* eslint max-classes-per-file: 0 */
 import * as React from 'react';
 import { Store } from 'redux';
 import { renderToString } from 'react-dom/server';
+
 import { IAppReduxState } from 'shared/types/app';
 
 type JobCreator = () => Promise<void>;
@@ -19,27 +20,25 @@ class Bootstrapper implements IBootstrapper {
   public store: IStore;
   public isBootstrapped = false;
 
-  private _jobCreators: JobCreator[] = [];
-  private _tree: React.ReactElement<any>;
+  private tree: React.ReactElement<any>;
+  private jobCreators: JobCreator[] = [];
 
   public constructor(tree: React.ReactElement<any>, store: Store<IAppReduxState>) {
     this.store = store;
-    this._tree = <BootstrapContext.Provider value={this}>{tree}</BootstrapContext.Provider>;
+    this.tree = <BootstrapContext.Provider value={this}>{tree}</BootstrapContext.Provider>;
   }
 
   public addJobCreator(jobCreator: JobCreator) {
-    this._jobCreators.push(jobCreator);
+    this.jobCreators.push(jobCreator);
   }
 
   public async waitJobsCompletion() {
     // will call componentWillMount, and our hoc
     // will collect waiters in context var this
-    renderToString(this._tree);
-    const promises = this._jobCreators.map(w => w());
+    renderToString(this.tree);
+    const promises = this.jobCreators.map(w => w());
     await Promise.all(promises);
     this.isBootstrapped = true;
-
-    return void 0;
   }
 }
 

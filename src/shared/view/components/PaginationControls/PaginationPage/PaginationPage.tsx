@@ -30,9 +30,9 @@ class PaginationPage extends PureComponent<IProps> {
 
   @autobind
   private makePageClickHandler(page: number) {
-    return () => this.props.onClick(page);
+    const { onClick } = this.props;
+    return () => onClick(page);
   }
 }
 
-export { IProps as IPaginationPageProps };
-export default PaginationPage;
+export { PaginationPage, IProps as IPaginationPageProps };

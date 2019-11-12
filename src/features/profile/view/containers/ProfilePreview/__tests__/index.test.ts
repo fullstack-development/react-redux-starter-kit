@@ -2,7 +2,7 @@ import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { Popover } from 'shared/view/components';
 import { profile } from 'shared/mocks';
 
-import { ProfilePreview, IProfilePreviewProps } from '../ProfilePreview';
+import { ProfilePreviewComponent, IProfilePreviewProps } from '../ProfilePreview';
 
 const props: IProfilePreviewProps = {
   onEditClick: jest.fn(),
@@ -10,10 +10,9 @@ const props: IProfilePreviewProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(ProfilePreview, props);
+const getComponent = makeShallowRenderer(ProfilePreviewComponent, props);
 
 describe('(features/profile) ProfilePreview container', () => {
-
   it('should not show popover with profile info initially', () => {
     const component = getComponent();
     expect(component.find(Popover).prop('open')).toBe(false);
