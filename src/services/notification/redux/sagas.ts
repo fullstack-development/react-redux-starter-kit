@@ -6,7 +6,7 @@ import { IDependencies } from 'shared/types/app';
 import * as actions from './actions';
 import * as NS from '../namespace';
 
-export default function getSaga(deps: IDependencies) {
+export function getSaga(deps: IDependencies) {
   const setNotificationType: NS.ISetNotification['type'] = 'NOTIFICATION:SET_NOTIFICATION';
 
   function* saga() {

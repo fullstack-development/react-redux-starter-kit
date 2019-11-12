@@ -1,13 +1,14 @@
-// tslint:disable: import-blacklist
+/* eslint no-restricted-imports: 0 */
 import i18next from 'i18next';
 import reactI18Next from 'react-i18next';
+
 import { ITranslateKey } from './helpers/buildTranslationKeys';
 
 export type TranslateFunction = <
   TResult extends string | object | Array<string | object> | undefined = string,
   TKeys extends string | TemplateStringsArray = string,
   TInterpolationMap extends object = { [key: string]: any }
-  >(
+>(
   key: TKeys | TKeys[] | ITranslateObject | ITranslateKey,
   options?: i18next.TOptions<TInterpolationMap> | string,
 ) => TResult;

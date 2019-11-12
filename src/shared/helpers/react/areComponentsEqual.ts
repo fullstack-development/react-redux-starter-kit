@@ -2,4 +2,4 @@ function areComponentsEqual(a: React.ComponentType, b: React.ComponentType): boo
   return (a.displayName || a.name) === (b.displayName || b.name);
 }
 
-export default areComponentsEqual;
+export { areComponentsEqual };

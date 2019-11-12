@@ -1,13 +1,13 @@
 import React from 'react';
 import * as R from 'ramda';
+// eslint-disable-next-line import/no-unresolved
 import { GetProps } from '_helpers';
 import ReactTextMask from 'react-text-mask';
-
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 
-import TextInput, { IProps as ITextInputProps } from './TextInput';
+import { TextInput, IProps as ITextInputProps } from './TextInput';
 
 type MaskType = 'visa';
 
@@ -19,8 +19,8 @@ const maskByType: Record<MaskType, GetProps<typeof ReactTextMask>['mask']> = {
   visa: [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/],
 };
 
-const makeMaskInput = R.memoizeWith(R.identity, (maskType: MaskType) => {
-  return function TextMaskCustom(props: InputBaseComponentProps) {
+const makeMaskInput = R.memoizeWith(R.identity, (maskType: MaskType) =>
+  function TextMaskCustom(props: InputBaseComponentProps) {
     const { inputRef, value, defaultValue, ...other } = props;
 
     return (
@@ -33,8 +33,7 @@ const makeMaskInput = R.memoizeWith(R.identity, (maskType: MaskType) => {
         showMask
       />
     );
-  };
-});
+  });
 
 class MaskedInput extends React.PureComponent<IProps> {
   public render() {
@@ -59,14 +58,12 @@ class MaskedInput extends React.PureComponent<IProps> {
   private renderEndAdornment(): React.ReactNode {
     const { maskType } = this.props;
 
-    if (maskType === 'visa') {
-      return (
-        <InputAdornment position="end">
-          <AttachMoney />
-        </InputAdornment>
-      );
-    }
+    return maskType === 'visa' ? (
+      <InputAdornment position="end">
+        <AttachMoney />
+      </InputAdornment>
+    ) : null;
   }
 }
 
-export default MaskedInput;
+export { MaskedInput };

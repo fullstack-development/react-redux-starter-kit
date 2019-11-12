@@ -1,8 +1,10 @@
 import * as R from 'ramda';
 import React from 'react';
 import { Field } from 'react-final-form';
+
 import { makeMockComponent } from 'shared/mocks';
 import { makeShallowRenderer } from 'shared/helpers';
+
 import { getFieldWithComponent } from '..';
 
 const PassedComponent = makeMockComponent('PassedComponent');
@@ -45,6 +47,6 @@ describe('(shared/helpers/react) getFieldWithComponent', () => {
       .toBe(`FieldWithComponent(${ComponentWithoutDisplayName.name})`);
 
     expect(getFieldWithComponent(() => React.createElement('div'), fieldType).displayName)
-      .toBe(`FieldWithComponent(Component)`);
+      .toBe('FieldWithComponent(Component)');
   });
 });

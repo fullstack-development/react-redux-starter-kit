@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 /* https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html */
 interface ICancellablePromise<T> {
   promise: Promise<T>;
@@ -9,8 +10,8 @@ const makeCancelable = <T>(promise: Promise<T>): ICancellablePromise<T> => {
 
   const wrappedPromise = new Promise<T>((resolve, reject) => {
     promise.then(
-      val => hasCanceled ? reject({ isCanceled: true }) : resolve(val),
-      error => hasCanceled ? reject({ isCanceled: true }) : reject(error),
+      val => (hasCanceled ? reject({ isCanceled: true }) : resolve(val)),
+      error => (hasCanceled ? reject({ isCanceled: true }) : reject(error)),
     );
   });
 

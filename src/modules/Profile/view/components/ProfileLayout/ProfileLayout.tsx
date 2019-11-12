@@ -16,7 +16,7 @@ type IProps = IFeatureProps;
 
 const b = block('profile-layout');
 
-function ProfileLayout(props: IProps) {
+function ProfileLayoutComponent(props: IProps) {
   const { profileFeatureEntry: { containers } } = props;
   const { ProfileEdit } = containers;
   const { t } = useTranslation();
@@ -30,7 +30,8 @@ function ProfileLayout(props: IProps) {
   );
 }
 
-export { ProfileLayout, IProps as IProfileLayoutProps };
-export default withAsyncFeatures({
+const ProfileLayout = withAsyncFeatures({
   profileFeatureEntry: features.profile.loadEntry,
-})(ProfileLayout);
+})(ProfileLayoutComponent);
+
+export { ProfileLayout, ProfileLayoutComponent, IProps as IProfileLayoutProps };

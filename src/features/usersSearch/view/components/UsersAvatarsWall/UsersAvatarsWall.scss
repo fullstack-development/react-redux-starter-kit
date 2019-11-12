@@ -27,9 +27,19 @@
     margin: 0.25rem;
     width: 4rem;
     height: 4rem;
+  }
+
+  &__avatar-button {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: none;
     cursor: pointer;
     transition: transform 0.15s;
 
+    &:focus,
     &:hover {
       transform: scale(1.15);
     }

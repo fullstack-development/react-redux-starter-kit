@@ -1,5 +1,5 @@
 import * as NS from '../../namespace';
-import initial from '../initial';
+import { initial } from '../initial';
 
 function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.Action): NS.IReduxState['data'] {
   switch (action.type) {
@@ -13,4 +13,4 @@ function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.Ac
   }
 }
 
-export default dataReducer;
+export { dataReducer };

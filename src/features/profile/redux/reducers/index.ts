@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import editReducer from './edit';
+
+import { editReducer } from './edit';
 import * as NS from '../../namespace';
 
-export default combineReducers<NS.IReduxState>({
+export const reducer = combineReducers<NS.IReduxState>({
   edit: editReducer,
 });

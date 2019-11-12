@@ -1,5 +1,6 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
+// eslint-disable-next-line import/no-unresolved
 import { GetProps } from '_helpers';
 
 import { NumberInput } from 'shared/view/elements';
@@ -8,7 +9,7 @@ import { TranslateFunction } from 'services/i18n';
 
 type IProps = GetProps<typeof NumberInput> & FieldRenderProps & { t: TranslateFunction };
 
-class NumberInputField extends React.Component<IProps> {
+class NumberInputFieldComponent extends React.Component<IProps> {
   public render() {
     const { input, meta, t, ...rest } = this.props;
     const error = typeof rest.error === 'boolean'
@@ -25,7 +26,10 @@ class NumberInputField extends React.Component<IProps> {
     );
   }
 
-  private onChange: GetProps<typeof NumberInput>['onChange'] = value => this.props.input.onChange(value.floatValue);
+  private onChange: GetProps<typeof NumberInput>['onChange'] = value => {
+    const { input } = this.props;
+    input.onChange(value.floatValue);
+  };
 }
 
-export default getFieldWithComponent(NumberInputField);
+export const NumberInputField = getFieldWithComponent(NumberInputFieldComponent);

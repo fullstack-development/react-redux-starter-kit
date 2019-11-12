@@ -1,5 +1,6 @@
 import React from 'react';
 import { Omit } from 'react-redux';
+// eslint-disable-next-line import/no-unresolved
 import { GetProps } from '_helpers';
 
 interface IBaseProps {
@@ -9,10 +10,13 @@ interface IBaseProps {
 type StringType = keyof JSX.IntrinsicElements;
 
 type ExtractProps<T extends StringType | React.ComponentType<any>> =
-  T extends StringType ? JSX.IntrinsicElements[T] :
-  T extends React.ComponentType<any> ? GetProps<T> : never;
+  T extends StringType
+    ? JSX.IntrinsicElements[T]
+    : T extends React.ComponentType<any>
+      ? GetProps<T>
+      : never;
 
-export default function withComponent<C extends StringType | React.ComponentType<any>>(component: C) {
+function withComponent<C extends StringType | React.ComponentType<any>>(component: C) {
   return function decorate<BProps extends IBaseProps>(BaseComponent: React.ComponentType<BProps>) {
     type CProps = ExtractProps<C>;
 
@@ -21,3 +25,5 @@ export default function withComponent<C extends StringType | React.ComponentType
     };
   };
 }
+
+export { withComponent };

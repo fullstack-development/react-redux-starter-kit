@@ -1,3 +1,1 @@
-import MuiPopover from '@material-ui/core/Popover';
-
-export default MuiPopover;
+export { default as Popover } from '@material-ui/core/Popover';

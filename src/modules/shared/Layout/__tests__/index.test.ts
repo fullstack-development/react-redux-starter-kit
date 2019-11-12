@@ -1,8 +1,8 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEntry, makeMockComponent, withRouterProps } from 'shared/mocks';
 
-import { Layout, ILayoutProps } from '../Layout';
-import routes from '../../../routes';
+import { LayoutComponent, ILayoutProps } from '../Layout';
+import { routes } from '../../../routes';
 
 const props: ILayoutProps = {
   title: 'Title',
@@ -13,7 +13,7 @@ const props: ILayoutProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(Layout, props);
+const getComponent = makeShallowRenderer(LayoutComponent, props);
 
 describe('(modules/shared) Layout component', () => {
   it('should redirect to profile page on edit profile click', () => {

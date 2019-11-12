@@ -9,7 +9,7 @@ import { ThemeProvider } from 'services/theme';
 import { containers as NotificationContainers } from 'services/notification';
 import { BaseStyles } from 'shared/styles';
 
-import createRoutes from './routes';
+import { getRoutes } from './routes';
 
 function ClientApp({ modules, store }: IAppData) {
   return (
@@ -38,7 +38,7 @@ function renderSharedPart(modules: IModule[]) {
   return (
     <ThemeProvider>
       <BaseStyles />
-      {createRoutes(modules)}
+      {getRoutes(modules)}
       <NotificationContainers.Notification />
     </ThemeProvider>
   );

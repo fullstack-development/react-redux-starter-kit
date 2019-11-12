@@ -10,8 +10,8 @@ import { replaceObjectKeys, memoizeByProps } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
-import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
-import { selectors, actions } from './../../../redux';
+import { RepositoriesSearchSettings } from './RepositoriesSearchSettings/RepositoriesSearchSettings';
+import { selectors, actions } from '../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { fieldNames } from './constants';
 
@@ -40,7 +40,7 @@ function mapState(state: IAppReduxState): IStateProps {
 
 const { repositoriesSearch: intl } = tKeys.features;
 
-class RepositoriesSearchForm extends React.PureComponent<IProps> {
+class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
   public render() {
     const { isRepositoriesSearchRequesting, resetSearchResults, t } = this.props;
     return (
@@ -82,7 +82,11 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchForm);
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchFormComponent);
+const RepositoriesSearchForm = withTranslation()(connectedComponent);
 
-export { RepositoriesSearchForm, IProps as IRepositoriesSearchFormProps };
-export default withTranslation()(connectedComponent);
+export {
+  RepositoriesSearchFormComponent,
+  RepositoriesSearchForm,
+  IProps as IRepositoriesSearchFormProps,
+};

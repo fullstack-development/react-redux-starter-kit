@@ -1,6 +1,6 @@
 import { makeShallowRenderer } from 'shared/helpers';
 
-import RepositoryAttribute, { IRepositoryAttributeProps } from '../RepositoryAttribute';
+import { RepositoryAttribute, IRepositoryAttributeProps } from '../RepositoryAttribute';
 
 const props: IRepositoryAttributeProps = {
   title: 'title',

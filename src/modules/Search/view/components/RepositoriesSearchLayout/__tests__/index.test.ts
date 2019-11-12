@@ -1,7 +1,7 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { makeMockEntry, makeMockComponent } from 'shared/mocks';
 
-import { RepositoriesSearchLayout, IRepositoriesSearchLayoutProps } from '../RepositoriesSearchLayout';
+import { RepositoriesSearchLayoutComponent, IRepositoriesSearchLayoutProps } from '../RepositoriesSearchLayout';
 
 const props: IRepositoriesSearchLayoutProps = {
   repositoriesSearchFeatureEntry: makeMockEntry({
@@ -11,12 +11,15 @@ const props: IRepositoriesSearchLayoutProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(RepositoriesSearchLayout, props);
+const getComponent = makeShallowRenderer(RepositoriesSearchLayoutComponent, props);
 
 describe('(modules/Search) RepositoriesSearchLayout component', () => {
   it('should show search results after submit search form', () => {
     const component = getComponent();
-    const { RepositoriesSearchResults, RepositoriesSearchForm } = props.repositoriesSearchFeatureEntry.containers;
+    const {
+      RepositoriesSearchResults,
+      RepositoriesSearchForm,
+    } = props.repositoriesSearchFeatureEntry.containers;
     expect(component.find(RepositoriesSearchResults).length).toBe(0);
 
     component.find(RepositoriesSearchForm).prop('onSubmit')({} as any);

@@ -20,15 +20,14 @@ interface IState {
 
 type Props = IStateProps & RouteComponentProps;
 
-class ThemeProvider extends React.Component<Props, IState> {
+class ThemeProviderComponent extends React.Component<Props, IState> {
   public state: IState = {
     theme: getTheme(this.props.uiTheme),
   };
 
-  public componentDidUpdate(prevProps: Props) {
-    if (this.props.uiTheme !== prevProps.uiTheme) {
-      this.setState({ theme: getTheme(this.props.uiTheme) });
-    }
+  static getDerivedStateFromProps(props: Props) {
+    const { uiTheme } = props;
+    return { theme: getTheme(uiTheme) };
   }
 
   public render() {
@@ -49,4 +48,4 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-export default withRouter(connect(mapState)(ThemeProvider));
+export const ThemeProvider = withRouter(connect(mapState)(ThemeProviderComponent));

@@ -1,10 +1,8 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
-
 import TextField, { TextFieldProps } from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-
 import Adjust from '@material-ui/icons/Adjust';
 
 type IProps = Omit<TextFieldProps, 'ref'>;
@@ -19,6 +17,7 @@ class TextInput extends React.PureComponent<IProps, IState> {
   };
 
   public render() {
+    const { InputProps } = this.props;
     const { type } = this.state;
 
     return (
@@ -26,7 +25,7 @@ class TextInput extends React.PureComponent<IProps, IState> {
         {...this.props as TextFieldProps}
         type={type}
         InputProps={{
-          ...this.props.InputProps,
+          ...InputProps,
           endAdornment: this.renderEndAdornment(),
         }}
         fullWidth
@@ -37,18 +36,16 @@ class TextInput extends React.PureComponent<IProps, IState> {
   private renderEndAdornment(): React.ReactNode {
     const { type } = this.props;
 
-    if (type === 'password') {
-      return (
-        <InputAdornment position="end">
-          <IconButton
-            aria-label="Toggle password visibility"
-            onClick={this.handleClickShowPassword}
-          >
-            <Adjust />
-          </IconButton>
-        </InputAdornment>
-      );
-    }
+    return type === 'password' ? (
+      <InputAdornment position="end">
+        <IconButton
+          aria-label="Toggle password visibility"
+          onClick={this.handleClickShowPassword}
+        >
+          <Adjust />
+        </IconButton>
+      </InputAdornment>
+    ) : null;
   }
 
   @autobind
@@ -59,5 +56,4 @@ class TextInput extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { IProps };
-export default TextInput;
+export { TextInput, IProps };

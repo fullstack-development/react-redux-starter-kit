@@ -1,4 +1,5 @@
 import { IRepository } from 'shared/types/models';
+
 import { convertUser } from './usersSearch';
 import { IServerRepository } from '../types';
 

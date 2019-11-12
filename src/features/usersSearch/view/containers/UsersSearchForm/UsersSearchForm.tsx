@@ -6,17 +6,21 @@ import * as R from 'ramda';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
 import {
-  replaceObjectKeys, replaceObjectValues, getSelectValuesToLabelsMap, KeysToValuesFormattersMap, memoizeByProps,
+  replaceObjectKeys,
+  replaceObjectValues,
+  getSelectValuesToLabelsMap,
+  KeysToValuesFormattersMap,
+  memoizeByProps,
 } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 import { ISelectOption } from 'shared/types/form';
 
-import { selectors, actions } from './../../../redux';
+import { selectors, actions } from '../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
-import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
+import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
   onSubmit(values: IUsersSearchFormFields): void;
@@ -31,6 +35,8 @@ type LabelsType = Record<IUsersSearchFilters['searchFor'], string>;
 type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
+type UsersSearchForm = IProps;
+
 const mapDispatch = {
   searchUsers: actions.searchUsers,
   resetSearchResults: actions.resetSearchResults,
@@ -44,7 +50,7 @@ function mapState(state: IAppReduxState): IStateProps {
 
 const { userSearch: intl } = tKeys.features;
 
-class UsersSearchForm extends React.PureComponent<IProps> {
+export class UsersSearchFormComponent extends React.PureComponent<IProps> {
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
 
@@ -120,7 +126,6 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UsersSearchForm);
+const UsersSearchForm = withTranslation()(connect(mapState, mapDispatch)(UsersSearchFormComponent));
 
 export { UsersSearchForm, IProps as IUsersSearchFormProps };
-export default withTranslation()(connectedComponent);

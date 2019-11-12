@@ -3,6 +3,6 @@ export function makeMinCharactersValidator<T>(minCharacters: number, errorMsg: T
     if (validatedValue.length < minCharacters) {
       return errorMsg;
     }
-    return void 0;
+    return undefined;
   };
 }

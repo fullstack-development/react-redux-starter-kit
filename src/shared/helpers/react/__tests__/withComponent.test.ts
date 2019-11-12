@@ -1,6 +1,8 @@
 import * as R from 'ramda';
+
 import { makeMockComponent } from 'shared/mocks';
 import { makeShallowRenderer } from 'shared/helpers';
+
 import { withComponent } from '..';
 
 // Outer passes Passed to Inner
@@ -19,7 +21,9 @@ describe('(shared/helpers/react) withComponent', () => {
   it('should pass all outer component props + component to inner component', () => {
     const outerComponent = getOuterComponent();
     const outerPropsNames = Object.keys(outerComponentProps);
-    const innerPropsNames = Object.keys(outerComponent.find<typeof InnerComponent>(InnerComponent).props());
+    const innerPropsNames = Object.keys(
+      outerComponent.find<typeof InnerComponent>(InnerComponent).props(),
+    );
     const passedProps = R.intersection(
       outerPropsNames.concat('component'),
       innerPropsNames,

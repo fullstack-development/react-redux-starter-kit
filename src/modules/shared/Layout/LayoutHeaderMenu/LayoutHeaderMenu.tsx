@@ -27,7 +27,7 @@ type IProps = ITranslationProps & IOwnProps;
 const b = block('layout-header-menu');
 const { header } = tKeys.shared;
 
-class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
+class LayoutHeaderMenuComponent extends React.PureComponent<IProps, IState> {
   public state: IState = {
     isMenuOpen: false,
   };
@@ -38,8 +38,11 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
     return (
       <div className={b()}>
         <div
+          tabIndex={0}
+          role="menu"
           className={b('menu-icon', { open: isMenuOpen })}
           onClick={this.handleMenuClick}
+          onKeyPress={this.handleKeyPress}
           onTouchEnd={this.handleMenuTouchEnd}
         >
           <MenuIcon />
@@ -68,7 +71,7 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
     );
   }
 
-  private toggleMenu(e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) {
+  private toggleMenu(e: React.SyntheticEvent) {
     e.preventDefault();
     this.setState((prevState: IState) => ({ isMenuOpen: !prevState.isMenuOpen }));
   }
@@ -76,6 +79,13 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
   @autobind
   private handleMenuClick(e: React.MouseEvent<HTMLDivElement>) {
     this.toggleMenu(e);
+  }
+
+  @autobind
+  private handleKeyPress(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter') {
+      this.toggleMenu(e);
+    }
   }
 
   @autobind
@@ -89,5 +99,12 @@ class LayoutHeaderMenu extends React.PureComponent<IProps, IState> {
   }
 }
 
-export { LayoutHeaderMenu, IMenuItem as IHeaderMenuItem, IProps as IHeaderMenuProps, IState as IHeaderMenuState };
-export default withTranslation()(LayoutHeaderMenu);
+const LayoutHeaderMenu = withTranslation()(LayoutHeaderMenuComponent);
+
+export {
+  LayoutHeaderMenu,
+  LayoutHeaderMenuComponent,
+  IMenuItem as IHeaderMenuItem,
+  IProps as IHeaderMenuProps,
+  IState as IHeaderMenuState,
+};

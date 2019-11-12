@@ -1,6 +1,8 @@
 import ButtonBase from '@material-ui/core/ButtonBase';
+
 import { makeShallowRenderer } from 'shared/helpers';
-import PaginationArrow , { IPaginationArrowProps } from '../PaginationArrow';
+
+import { PaginationArrow, IPaginationArrowProps } from '../PaginationArrow';
 
 const props: IPaginationArrowProps = {
   direction: 'left',
@@ -26,7 +28,7 @@ describe('(shared/view) PaginationControls/PaginationArrow component)', () => {
   it('should be disabled if disabled prop = true is passed', () => {
     const component = getComponent();
     const disabledComponent = getComponent({ disabled: true });
-    expect(component.find(ButtonBase).prop('disabled')).toBe(void 0);
+    expect(component.find(ButtonBase).prop('disabled')).toBe(undefined);
     expect(disabledComponent.find(ButtonBase).prop('disabled')).toBe(true);
   });
 });

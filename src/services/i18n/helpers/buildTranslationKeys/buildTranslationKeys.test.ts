@@ -1,4 +1,4 @@
-import buildTranslationKeys from './';
+import { buildTranslationKeys } from '.';
 
 describe('(services/i18n/helpers) buildTranslationKey', () => {
   const locales = {

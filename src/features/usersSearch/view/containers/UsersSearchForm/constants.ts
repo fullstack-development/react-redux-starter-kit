@@ -1,5 +1,6 @@
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { FormFieldNames, ISelectOption } from 'shared/types/form';
+
 import { IUsersSearchFormFields } from '../../../namespace';
 
 export const perPageOptions: Array<ISelectOption<IUsersSearchFilters['perPage']>> = [

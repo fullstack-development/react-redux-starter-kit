@@ -17,7 +17,7 @@ interface IProps {
 const b = block('users-search-settings');
 const { userSearch: intl } = tKeys.features;
 
-function UsersSearchSettings(props: IProps) {
+function UsersSearchSettings({ options }: IProps) {
   const { t } = useTranslation();
 
   return (
@@ -25,7 +25,7 @@ function UsersSearchSettings(props: IProps) {
       <div className={b('row')}>
         <div className={b('item')}>
           <SelectField
-            options={props.options}
+            options={options}
             label={t(intl.searchBy)}
             name={fieldNames.searchBy}
             t={t}
@@ -86,4 +86,4 @@ function UsersSearchSettings(props: IProps) {
   );
 }
 
-export default UsersSearchSettings;
+export { UsersSearchSettings };

@@ -23,4 +23,6 @@ function TextInputField(props: IProps) {
   );
 }
 
-export default getFieldWithComponent(TextInputField);
+const Component = getFieldWithComponent(TextInputField);
+
+export { Component as TextInputField };

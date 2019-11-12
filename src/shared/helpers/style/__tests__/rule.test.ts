@@ -1,4 +1,4 @@
-import { rule } from '../';
+import { rule } from '..';
 
 describe('(shared/helpers/style) rule', () => {
   it('should only add TypeScript type and not change input styles', () => {

@@ -11,4 +11,4 @@ function replaceObjectValues<T extends Record<string, any>>(
     }), sourceObj);
 }
 
-export default replaceObjectValues;
+export { replaceObjectValues };

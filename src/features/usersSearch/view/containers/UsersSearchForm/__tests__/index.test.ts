@@ -1,7 +1,7 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { SearchForm } from 'shared/view/components';
 
-import { UsersSearchForm, IUsersSearchFormProps } from '../UsersSearchForm';
+import { UsersSearchFormComponent, IUsersSearchFormProps } from '../UsersSearchForm';
 
 const props: IUsersSearchFormProps = {
   onSubmit: jest.fn(),
@@ -11,7 +11,7 @@ const props: IUsersSearchFormProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(UsersSearchForm, props);
+const getComponent = makeShallowRenderer(UsersSearchFormComponent, props);
 
 describe('(features/usersSearch) UsersSearchForm container', () => {
   it('should call onSubmit and searchUsers with form values on form submit', () => {

@@ -3,8 +3,8 @@ import { githubUser } from 'shared/mocks';
 import { PaginationControls } from 'shared/view/components';
 
 import { UsersAvatarsWall } from '../../../components';
-import UserDetails from '../../UserDetails/UserDetails';
-import { UsersSearchResults, IUsersSearchResultsProps } from '../UsersSearchResults';
+import { UserDetails } from '../../UserDetails/UserDetails';
+import { UsersSearchResultsComponent, IUsersSearchResultsProps } from '../UsersSearchResults';
 
 const props: IUsersSearchResultsProps = {
   searchOptions: {
@@ -23,7 +23,7 @@ const props: IUsersSearchResultsProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(UsersSearchResults, props);
+const getComponent = makeShallowRenderer(UsersSearchResultsComponent, props);
 
 describe('(features/usersSearch) UsersSearchResults container', () => {
   it('should show UserDetails on user avatar click & hide on UserDetails close', () => {

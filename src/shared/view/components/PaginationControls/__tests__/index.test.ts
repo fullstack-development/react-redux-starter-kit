@@ -1,8 +1,9 @@
 import { makeShallowRenderer } from 'shared/helpers';
+
 import { maxRenderedPages } from '../constants';
-import PaginationArrow from '../PaginationArrow/PaginationArrow';
-import PaginationPage from '../PaginationPage/PaginationPage';
-import PaginationControls, { IPaginationControlsProps } from '../PaginationControls';
+import { PaginationArrow } from '../PaginationArrow/PaginationArrow';
+import { PaginationPage } from '../PaginationPage/PaginationPage';
+import { PaginationControls, IPaginationControlsProps } from '../PaginationControls';
 
 const props: IPaginationControlsProps = {
   totalPages: 5,

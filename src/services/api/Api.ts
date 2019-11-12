@@ -10,14 +10,14 @@ import {
   constructRepositoriesSearchQuery, getTotalResults,
 } from './helpers';
 import { convertUser, convertUserDetails, convertRepository } from './converters';
-import HttpActions from './HttpActions';
+import { HttpActions } from './HttpActions';
 
 class Api {
   private actions: HttpActions;
 
   private headers = {
     get: {
-      'Accept': 'application/vnd.github.v3+json',
+      Accept: 'application/vnd.github.v3+json',
     },
   };
 
@@ -63,4 +63,4 @@ class Api {
   }
 }
 
-export default Api;
+export { Api };

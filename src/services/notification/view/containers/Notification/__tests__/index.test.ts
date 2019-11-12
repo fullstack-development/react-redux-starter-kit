@@ -1,5 +1,6 @@
 import { makeShallowRenderer } from 'shared/helpers';
-import { Notification, INotificationProps } from '../Notification';
+
+import { NotificationComponent, INotificationProps } from '../Notification';
 
 const props: INotificationProps = {
   notification: {
@@ -8,7 +9,7 @@ const props: INotificationProps = {
   },
 };
 
-const getComponent = makeShallowRenderer(Notification, props);
+const getComponent = makeShallowRenderer(NotificationComponent, props);
 
 describe('(services/notification) Notification container', () => {
   it('should render notification text', () => {

@@ -1,7 +1,8 @@
-// tslint:disable-next-line: import-blacklist
+/* eslint no-restricted-imports: 0 */
 import { withTranslation, useTranslation as translationHook } from 'react-i18next';
+
 import { tKeys } from './constants';
-import { default as LanguageSelector } from './view/LanguageSelector/LanguageSelector';
+import { LanguageSelector } from './view/LanguageSelector/LanguageSelector';
 import { UseTranslation } from './namespace';
 
 const useTranslation = translationHook as UseTranslation;

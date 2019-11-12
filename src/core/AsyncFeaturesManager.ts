@@ -20,12 +20,10 @@ class AsyncFeaturesManager {
     const featuresNames = Object.keys(loaders);
 
     return Promise.all(
-      featuresNames.map((featureName) => {
-        return loaders[featureName]().then(bundle => {
-          bundle.reduxEntry && this.connectFeatureToStore(bundle.reduxEntry);
-          this.features.set(featureName, bundle);
-        });
-      }),
+      featuresNames.map(featureName => loaders[featureName]().then(bundle => {
+        bundle.reduxEntry && this.connectFeatureToStore(bundle.reduxEntry);
+        this.features.set(featureName, bundle);
+      })),
     );
   }
 
