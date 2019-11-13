@@ -3,7 +3,7 @@ import { delay } from 'redux-saga';
 
 import { IDependencies } from 'shared/types/app';
 
-import * as actions from './actions';
+import * as actionCreators from './actionCreators';
 import * as NS from '../namespace';
 
 export function getSaga(deps: IDependencies) {
@@ -20,5 +20,5 @@ export function getSaga(deps: IDependencies) {
 
 export function* executeSetNotificationSaga() {
   yield call(delay, 10000);
-  yield put(actions.removeNotification());
+  yield put(actionCreators.removeNotification());
 }

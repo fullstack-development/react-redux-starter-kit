@@ -30,7 +30,7 @@ export interface IReduxEntry {
 
 export interface IFeatureEntry {
   containers?: Record<string, React.ComponentType<any>>;
-  actions?: Record<string, ActionCreator<Action>>;
+  actionCreators?: Record<string, ActionCreator<Action>>;
   selectors?: Record<string, (state: any, ...args: any[]) => any>;
   reduxEntry?: IReduxEntry;
 }

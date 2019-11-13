@@ -17,7 +17,7 @@ import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 import { ISelectOption } from 'shared/types/form';
 
-import { selectors, actions } from '../../../redux';
+import { selectors, actionCreators } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
 import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
@@ -38,8 +38,8 @@ type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 type UsersSearchForm = IProps;
 
 const mapDispatch = {
-  searchUsers: actions.searchUsers,
-  resetSearchResults: actions.resetSearchResults,
+  searchUsers: actionCreators.searchUsers,
+  resetSearchResults: actionCreators.resetSearchResults,
 };
 
 function mapState(state: IAppReduxState): IStateProps {

@@ -50,14 +50,14 @@ export const repository: IRepository = {
 
 export function makeMockEntry<T extends IFeatureEntry>(
   containers?: IFeatureEntry['containers'],
-  actions?: IFeatureEntry['actions'],
+  actionCreators?: IFeatureEntry['actionCreators'],
   selectors?: IFeatureEntry['selectors'],
 ): T {
   return {
     containers: new Proxy(containers || {}, {
       get: (target, property: string) => target[property] || makeMockComponent('Container'),
     }),
-    actions: new Proxy(actions || {}, {
+    actionCreators: new Proxy(actionCreators || {}, {
       get: (target, property: string) => target[property] || jest.fn(),
     }),
     selectors: new Proxy(selectors || {}, {
