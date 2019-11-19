@@ -1,8 +1,6 @@
 import React from 'react';
 import block from 'bem-cn';
 import { FieldRenderProps } from 'react-final-form';
-// eslint-disable-next-line import/no-unresolved
-import { GetProps } from '_helpers';
 
 import {
   CppIcon,
@@ -22,7 +20,7 @@ import { TranslateFunction } from 'services/i18n';
 
 const b = block('language-input');
 
-type IProps = Omit<GetProps<typeof InputWithPresets>, 'presets' | 'onPresetClick'> & FieldRenderProps
+type IProps = Omit<React.ComponentProps<typeof InputWithPresets>, 'presets' | 'onPresetClick'> & FieldRenderProps
 & { t: TranslateFunction };
 
 class LanguageInputFieldComponent extends React.PureComponent<IProps> {

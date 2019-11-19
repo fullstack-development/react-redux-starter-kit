@@ -1,16 +1,16 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
-// eslint-disable-next-line import/no-unresolved
-import { GetProps } from '_helpers';
 
 import { Radio, FormControlLabel } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 
-type BaseProps = GetProps<typeof Radio> & FieldRenderProps;
+type BaseProps = React.ComponentProps<typeof Radio> & FieldRenderProps;
 
-interface IProps extends BaseProps {
+interface IOwnProps {
   label: string;
 }
+
+type IProps = BaseProps & IOwnProps;
 
 function RadioFieldComponent(props: IProps) {
   const { input, meta, label, ...rest } = props;
