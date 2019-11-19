@@ -3,11 +3,11 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
+import * as RA from 'ramda-adjunct';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
-import { replaceObjectKeys } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
@@ -57,7 +57,7 @@ class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
     formValues => {
       const filters = R.omit([fieldNames.searchString], formValues);
       const filtersLabels = this.selectFiltersLabels(this.props);
-      return replaceObjectKeys(filters, filtersLabels);
+      return RA.renameKeys(filtersLabels, filters) as Record<string, string | number>;
     },
   );
 

@@ -3,10 +3,10 @@ import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
+import * as RA from 'ramda-adjunct';
 
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
-import { replaceObjectKeys, replaceObjectValues } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 
@@ -47,8 +47,16 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
       const filters = R.omit([fieldNames.searchString], formFields);
       const filtersValuesFormattersMap = selectFiltersValuesFormatters(this.props);
       const filtersLabels = selectFiltersLabels(this.props);
-      const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
-      return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
+      const filtersWithFormattedValues = R.mapObjIndexed(
+        (value: any, key: keyof typeof filters) => {
+          const formatterForCurrentKey = key in filtersValuesFormattersMap
+            ? (filtersValuesFormattersMap as any)[key]
+            : R.identity;
+          return formatterForCurrentKey(value);
+        },
+        filters,
+      );
+      return RA.renameKeys(filtersLabels, filtersWithFormattedValues) as Record<string, string | number>;
     });
 
   public render() {

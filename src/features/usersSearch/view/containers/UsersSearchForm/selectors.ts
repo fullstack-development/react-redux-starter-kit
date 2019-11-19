@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
-import { tKeys } from 'services/i18n';
 
-import { getSelectValuesToLabelsMap, KeysToValuesFormattersMap } from 'shared/helpers';
+import { tKeys } from 'services/i18n';
+import { getSelectValuesToLabelsMap } from 'shared/helpers';
 import { ISelectOption } from 'shared/types/form';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 
@@ -43,11 +43,17 @@ export const selectLabels = createSelector(
   }),
 );
 
+type ValueFormatter<T> = (x: T) => any;
+interface IUserSearchFiltersFormattersMap {
+  searchBy: ValueFormatter<IUsersSearchFilters['searchBy']>;
+  searchFor: ValueFormatter<IUsersSearchFilters['searchFor']>;
+}
+
 export const selectFiltersValuesFormatters = createSelector(
   selectOptions,
   selectLabels,
-  (options, labels): KeysToValuesFormattersMap<IUsersSearchFilters> => ({
-    searchBy: x => getSelectValuesToLabelsMap(options)[x].toLowerCase(),
-    searchFor: x => labels[x].toLowerCase(),
+  (options, labels): IUserSearchFiltersFormattersMap => ({
+    searchBy: searchByValue => getSelectValuesToLabelsMap(options)[searchByValue].toLowerCase(),
+    searchFor: searchForValue => labels[searchForValue].toLowerCase(),
   }),
 );
