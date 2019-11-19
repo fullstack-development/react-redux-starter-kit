@@ -1,9 +1,7 @@
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved
-import { SubSet } from '_helpers';
 
 import { makeCancelable, ICancellablePromise } from 'shared/helpers/makeCancelable';
-import { IFeatureEntry } from 'shared/types/app';
+import { IFeatureEntry, IWithContainers } from 'shared/types/app';
 import { serverDataWaiterHOC } from 'shared/helpers/bootstrap';
 
 import { asyncFeaturesManager } from './AsyncFeaturesManager';
@@ -92,9 +90,7 @@ function withAsyncFeatures<L extends Record<string, FeatureLoader>>(
   };
 }
 
-type IFeatureEntryWithContainers<C extends Record<string, React.ComponentType<any>>> = SubSet<
-IFeatureEntry, { containers: C }
->;
+type IFeatureEntryWithContainers<C extends Record<string, React.ComponentType<any>>> = IWithContainers<C>;
 
 export function getAsyncContainer<
   C extends Record<string, React.ComponentType<any>>,
