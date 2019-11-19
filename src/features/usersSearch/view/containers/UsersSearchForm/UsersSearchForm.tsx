@@ -10,11 +10,11 @@ import { replaceObjectKeys, replaceObjectValues } from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
 
-import { selectors, actions } from './../../../redux';
+import { selectors, actionCreators } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
 import { selectFiltersValuesFormatters, selectOptions, selectFiltersLabels } from './selectors';
-import UsersSearchSettings from './UsersSearchSettings/UsersSearchSettings';
+import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
   onSubmit(values: IUsersSearchFormFields): void;
@@ -27,9 +27,11 @@ interface IStateProps {
 type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
+type UsersSearchForm = IProps;
+
 const mapDispatch = {
-  searchUsers: actions.searchUsers,
-  resetSearchResults: actions.resetSearchResults,
+  searchUsers: actionCreators.searchUsers,
+  resetSearchResults: actionCreators.resetSearchResults,
 };
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -38,7 +40,7 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
-class UsersSearchForm extends React.PureComponent<IProps> {
+export class UsersSearchFormComponent extends React.PureComponent<IProps> {
   private getFilters = createSelector(
     (formFields: IUsersSearchFormFields) => formFields,
     formFields => {
@@ -84,7 +86,6 @@ class UsersSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UsersSearchForm);
+const UsersSearchForm = withTranslation()(connect(mapState, mapDispatch)(UsersSearchFormComponent));
 
 export { UsersSearchForm, IProps as IUsersSearchFormProps };
-export default withTranslation()(connectedComponent);

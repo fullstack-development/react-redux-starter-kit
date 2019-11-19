@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import routes from 'modules/routes';
+import { routes } from 'modules/routes';
 import { IModule } from 'shared/types/app';
 
 import { ProfileLayout } from './view/components';
@@ -18,4 +18,4 @@ const Profile: IModule = {
   },
 };
 
-export default Profile;
+export { Profile };

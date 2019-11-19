@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button } from 'shared/view/elements';
 
-import Dialog from '../../Dialog/Dialog';
+import { Dialog } from '../../Dialog/Dialog';
 
 interface IProps {
   isOpen: boolean;
@@ -32,4 +32,4 @@ function SearchSettingsDialog(props: IProps) {
   );
 }
 
-export default SearchSettingsDialog;
+export { SearchSettingsDialog };

@@ -2,26 +2,26 @@ import React from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 
-import * as features from 'features';
-import featureConnect from 'core/FeatureConnector';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+import * as repositoriesSearch from 'features/repositoriesSearch';
+import { withAsyncFeatures } from 'core';
 
 import { Layout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
 
 interface IState {
-  lastSubmittedFormState: features.repositoriesSearch.namespace.IRepositoriesSearchFormFields | null;
+  lastSubmittedFormState: repositoriesSearch.namespace.IRepositoriesSearchFormFields | null;
 }
 
 interface IFeatureProps {
-  repositoriesSearchFeatureEntry: features.repositoriesSearch.Entry;
+  repositoriesSearchFeatureEntry: repositoriesSearch.Entry;
 }
 
 type IProps = IFeatureProps & ITranslationProps;
 
 const b = block('repositories-search-layout');
 
-class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
+class RepositoriesSearchLayoutComponent extends React.PureComponent<IProps, IState> {
   public state: IState = {
     lastSubmittedFormState: null,
   };
@@ -38,9 +38,9 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
             <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />
           </div>
           <div className={b('results')}>
-            {lastSubmittedFormState &&
+            {lastSubmittedFormState && (
               <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
-            }
+            )}
           </div>
         </div>
       </Layout>
@@ -48,12 +48,19 @@ class RepositoriesSearchLayout extends React.PureComponent<IProps, IState> {
   }
 
   @autobind
-  private setLastSubmittedFormState(formState: features.repositoriesSearch.namespace.IRepositoriesSearchFormFields) {
+  private setLastSubmittedFormState(
+    formState: repositoriesSearch.namespace.IRepositoriesSearchFormFields,
+  ) {
     this.setState({ lastSubmittedFormState: formState });
   }
 }
 
-export { RepositoriesSearchLayout, IProps as IRepositoriesSearchLayoutProps };
-export default featureConnect({
-  repositoriesSearchFeatureEntry: features.repositoriesSearch.loadEntry,
-})(withTranslation()(RepositoriesSearchLayout));
+const RepositoriesSearchLayout = withAsyncFeatures({
+  repositoriesSearchFeatureEntry: repositoriesSearch.loadEntry,
+})(withTranslation()(RepositoriesSearchLayoutComponent));
+
+export {
+  RepositoriesSearchLayout,
+  RepositoriesSearchLayoutComponent,
+  IProps as IRepositoriesSearchLayoutProps,
+};

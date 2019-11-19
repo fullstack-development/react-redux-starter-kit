@@ -31,8 +31,12 @@ export type IResetSearchResults = IPlainAction<'REPOSITORIES_SEARCH:RESET_SEARCH
 
 export type ISearchRepositories = IAction<'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES', ISearchRepositoriesPayload>;
 export type ISearchRepositoriesSuccess = IAction<
-  'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_SUCCESS', ISearchRepositoriesSuccessPayload
+'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_SUCCESS', ISearchRepositoriesSuccessPayload
 >;
 export type ISearchRepositoriesFail = IPlainFailAction<'REPOSITORIES_SEARCH:SEARCH_REPOSITORIES_FAIL'>;
 
-export type IAction = ISearchRepositories | ISearchRepositoriesSuccess | ISearchRepositoriesFail | IResetSearchResults;
+export type IAction =
+  | ISearchRepositories
+  | ISearchRepositoriesSuccess
+  | ISearchRepositoriesFail
+  | IResetSearchResults;

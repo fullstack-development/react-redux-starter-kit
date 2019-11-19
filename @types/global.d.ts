@@ -1,5 +1,5 @@
 // Global definitions (you shouldn't import it, it is global scope)
-/* tslint:disable */
+/* eslint-disable */
 interface Window {
   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?(): any;
   __data: any; // initial redux state, maybe undefined
@@ -20,7 +20,6 @@ declare module 'normalizr';
 declare module '*.scss';
 declare module '*.png';
 declare module 'react-hot-loader';
-declare module 'react-async-bootstrapper';
 declare module 'enzyme-adapter-react-16';
 
 declare module 'postcss-reporter';

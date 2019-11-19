@@ -11,8 +11,8 @@ import { replaceObjectKeys } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
-import RepositoriesSearchSettings from './RepositoriesSearchSettings/RepositoriesSearchSettings';
-import { selectors, actions } from './../../../redux';
+import { RepositoriesSearchSettings } from './RepositoriesSearchSettings/RepositoriesSearchSettings';
+import { selectors, actionCreators } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { fieldNames } from './constants';
 
@@ -29,8 +29,8 @@ type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
 const mapDispatch = {
-  searchRepositories: actions.searchRepositories,
-  resetSearchResults: actions.resetSearchResults,
+  searchRepositories: actionCreators.searchRepositories,
+  resetSearchResults: actionCreators.resetSearchResults,
 };
 
 function mapState(state: IAppReduxState): IStateProps {
@@ -41,7 +41,7 @@ function mapState(state: IAppReduxState): IStateProps {
 
 const { repositoriesSearch: intl } = tKeys.features;
 
-class RepositoriesSearchForm extends React.PureComponent<IProps> {
+class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
   private selectFiltersLabels = createSelector(
     (props: IProps) => props.t,
     (t): Record<keyof IRepositoriesSearchFilters, string> => ({
@@ -89,7 +89,11 @@ class RepositoriesSearchForm extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchForm);
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchFormComponent);
+const RepositoriesSearchForm = withTranslation()(connectedComponent);
 
-export { RepositoriesSearchForm, IProps as IRepositoriesSearchFormProps };
-export default withTranslation()(connectedComponent);
+export {
+  RepositoriesSearchFormComponent,
+  RepositoriesSearchForm,
+  IProps as IRepositoriesSearchFormProps,
+};

@@ -12,8 +12,8 @@ import { TotalSearchResults } from 'shared/view/elements';
 
 import { IUsersSearchFormFields } from '../../../namespace';
 import { UsersAvatarsWall } from '../../components';
-import { actions, selectors } from './../../../redux';
-import UserDetails from '../UserDetails/UserDetails';
+import { actionCreators, selectors } from './../../../redux';
+import { UserDetails } from '../UserDetails/UserDetails';
 import './UsersSearchResults.scss';
 
 interface IState {
@@ -43,12 +43,12 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  searchUsers: actions.searchUsers,
+  searchUsers: actionCreators.searchUsers,
 };
 
 const b = block('users-search-results');
 
-class UsersSearchResults extends React.PureComponent<IProps> {
+class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   public state: IState = {
     displayedUser: null,
   };
@@ -67,7 +67,9 @@ class UsersSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedUser && <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />}
+        {displayedUser && (
+          <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />
+        )}
       </div>
     );
   }
@@ -89,6 +91,7 @@ class UsersSearchResults extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResults);
-export { UsersSearchResults, IProps as IUsersSearchResultsProps };
-export default withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResultsComponent);
+const UsersSearchResults = withTranslation()(connectedComponent);
+
+export { UsersSearchResults, UsersSearchResultsComponent, IProps as IUsersSearchResultsProps };

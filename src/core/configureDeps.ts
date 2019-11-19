@@ -1,10 +1,7 @@
-import { Store } from 'redux';
+import { IDependencies } from 'shared/types/app';
+import { Api } from 'services/api/Api';
 
-import { IDependencies, IAppReduxState } from 'shared/types/app';
-
-import Api from 'services/api/Api';
-
-export default function configureDeps(_store: Store<IAppReduxState>): IDependencies {
+export function configureDeps(): IDependencies {
   const api = new Api();
 
   return { api };

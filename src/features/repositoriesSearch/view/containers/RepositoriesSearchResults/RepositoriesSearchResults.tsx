@@ -12,7 +12,7 @@ import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TotalSearchResults, Preloader } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
-import { actions, selectors } from './../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 import { RepositoryPreview } from '../../components';
 import './RepositoriesSearchResults.scss';
 
@@ -49,12 +49,12 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  searchRepositories: actions.searchRepositories,
+  searchRepositories: actionCreators.searchRepositories,
 };
 
 const b = block('repositories-search-results');
 
-class RepositoriesSearchResults extends React.PureComponent<IProps> {
+class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
   public state: IState = {
     displayedRepositoryOwner: null,
   };
@@ -79,9 +79,12 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
             onPageRequest={this.handlePageRequest}
           />
         </div>
-        {displayedRepositoryOwner &&
-          <UserDetails username={displayedRepositoryOwner} onClose={this.handleUserDetailsClose} />
-        }
+        {displayedRepositoryOwner && (
+          <UserDetails
+            username={displayedRepositoryOwner}
+            onClose={this.handleUserDetailsClose}
+          />
+        )}
       </div>
     );
   }
@@ -112,11 +115,14 @@ class RepositoriesSearchResults extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResults);
+const connectedComponent = connect(mapState, mapDispatch)(RepositoriesSearchResultsComponent);
+const RepositoriesSearchResults = withTranslation()(
+  containersProvider(['UserDetails'])(connectedComponent),
+);
 
 export {
   RepositoriesSearchResults,
+  RepositoriesSearchResultsComponent,
   IProps as IRepositoriesSearchResultsProps,
   IState as IRepositoriesSearchResultsState,
 };
-export default withTranslation()(containersProvider(['UserDetails'])(connectedComponent));

@@ -39,5 +39,12 @@ export type ILoadUserDetails = IAction<'USERS_SEARCH:LOAD_USER_DETAILS', string>
 export type ILoadUserDetailsSuccess = IAction<'USERS_SEARCH:LOAD_USER_DETAILS_SUCCESS', IDetailedGithubUser>;
 export type ILoadUserDetailsFail = IPlainFailAction<'USERS_SEARCH:LOAD_USER_DETAILS_FAIL'>;
 
-export type IAction = IResetUserDetails | IResetSearchResults | ISearchUsers | ISearchUsersSuccess | ISearchUsersFail
-| ILoadUserDetails | ILoadUserDetailsFail | ILoadUserDetailsSuccess;
+export type IAction =
+  | IResetUserDetails
+  | IResetSearchResults
+  | ISearchUsers
+  | ISearchUsersSuccess
+  | ISearchUsersFail
+  | ILoadUserDetails
+  | ILoadUserDetailsFail
+  | ILoadUserDetailsSuccess;

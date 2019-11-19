@@ -26,5 +26,4 @@ function KeysToValues(props: IProps) {
   );
 }
 
-export { IProps as IKeysToValuesProps };
-export default KeysToValues;
+export { KeysToValues, IProps as IKeysToValuesProps };

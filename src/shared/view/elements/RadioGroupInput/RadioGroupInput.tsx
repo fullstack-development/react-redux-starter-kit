@@ -1,4 +1,5 @@
 import React from 'react';
+// eslint-disable-next-line import/no-unresolved
 import { CheckIdentity } from '_helpers';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
@@ -24,13 +25,18 @@ interface INormalizedProps {
 }
 
 function RadioGroupInput(props: IProps) {
-  const { formControlProps, radioGroupProps, formLabelProps, formHelperTextProps, other } = normalizeProps(props);
+  const { formControlProps,
+    radioGroupProps,
+    formLabelProps,
+    formHelperTextProps,
+    other,
+  } = normalizeProps(props);
   const { label, helperText } = other;
 
   return (
     <FormControl {...formControlProps}>
       {label && <FormLabel {...formLabelProps}>{label}</FormLabel>}
-      <RadioGroup  {...radioGroupProps} />
+      <RadioGroup {...radioGroupProps} />
       {helperText && <FormHelperText {...formHelperTextProps}>{helperText}</FormHelperText>}
     </FormControl>
   );
@@ -38,8 +44,15 @@ function RadioGroupInput(props: IProps) {
 
 function normalizeProps(props: IProps): INormalizedProps {
   const {
-    error, helperText = null, required, label, formLabelProps = null, formHelperTextProps = null, fullWidth,
-    ...rest } = props;
+    error,
+    helperText = null,
+    required,
+    label,
+    formLabelProps = null,
+    formHelperTextProps = null,
+    fullWidth,
+    ...rest
+  } = props;
 
   const radioGroupProps: CheckIdentity<RadioGroupProps, typeof rest> = rest;
   const formControlProps: FormControlProps = { error, required, fullWidth };
@@ -53,4 +66,4 @@ function normalizeProps(props: IProps): INormalizedProps {
   };
 }
 
-export default RadioGroupInput;
+export { RadioGroupInput };

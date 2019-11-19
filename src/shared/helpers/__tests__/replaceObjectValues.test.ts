@@ -1,4 +1,4 @@
-import { replaceObjectValues, KeysToValuesFormattersMap } from '../';
+import { replaceObjectValues, KeysToValuesFormattersMap } from '..';
 
 const sourceObj = { a: 12, b: 'lmao', c: [1, 2] };
 

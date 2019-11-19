@@ -3,7 +3,7 @@ import { detailedGithubUser } from 'shared/mocks';
 import { Preloader } from 'shared/view/elements';
 import { Dialog } from 'shared/view/components';
 
-import { UserDetails, IUserDetailsProps } from '../UserDetails';
+import { UserDetailsComponent, IUserDetailsProps } from '../UserDetails';
 
 const props: IUserDetailsProps = {
   userDetails: detailedGithubUser,
@@ -14,7 +14,7 @@ const props: IUserDetailsProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(UserDetails, props);
+const getComponent = makeShallowRenderer(UserDetailsComponent, props);
 
 describe('(features/usersSearch) UserDetails container', () => {
   it('should show preloader if user details are requesting', () => {

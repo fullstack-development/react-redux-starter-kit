@@ -1,1 +1,1 @@
-export { default } from '@material-ui/core/Card';
+export { default as Card } from '@material-ui/core/Card';

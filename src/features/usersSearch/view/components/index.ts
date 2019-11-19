@@ -1,2 +1,2 @@
-export { default as UsersAvatarsWall } from './UsersAvatarsWall/UsersAvatarsWall';
-export { default as UserAttribute } from './UserAttribute/UserAttribute';
+export { UsersAvatarsWall } from './UsersAvatarsWall/UsersAvatarsWall';
+export { UserAttribute } from './UserAttribute/UserAttribute';

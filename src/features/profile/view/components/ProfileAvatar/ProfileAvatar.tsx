@@ -17,4 +17,4 @@ function ProfileAvatar(props: IProps) {
   );
 }
 
-export default ProfileAvatar;
+export { ProfileAvatar };

@@ -1,1 +1,1 @@
-export { default as getFieldWithComponent } from './getFieldWithComponent';
+export { getFieldWithComponent } from './getFieldWithComponent';

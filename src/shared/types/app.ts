@@ -4,12 +4,13 @@ import { Store, Reducer, ActionCreator, Action } from 'redux';
 import { SagaIterator } from 'redux-saga';
 
 import * as features from 'features';
-import Api from 'services/api/Api';
+import { Api } from 'services/api/Api';
 import * as ThemeProviderNS from 'services/theme/namespace'; // TODO: УДОЛИ
 import { namespace as NotificationNamespace } from 'services/notification';
 
 export abstract class IModule {
   public getRoutes?(): ReactElement<RouteProps> | Array<ReactElement<RouteProps>>;
+
   public getReduxEntry?(): IReduxEntry;
 }
 
@@ -29,7 +30,7 @@ export interface IReduxEntry {
 
 export interface IFeatureEntry {
   containers?: Record<string, React.ComponentType<any>>;
-  actions?: Record<string, ActionCreator<Action>>;
+  actionCreators?: Record<string, ActionCreator<Action>>;
   selectors?: Record<string, (state: any, ...args: any[]) => any>;
   reduxEntry?: IReduxEntry;
 }

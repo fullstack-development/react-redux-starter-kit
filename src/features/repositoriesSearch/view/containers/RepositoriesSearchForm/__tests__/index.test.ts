@@ -1,7 +1,7 @@
 import { makeShallowRenderer, getMockedLocaleProps } from 'shared/helpers';
 import { SearchForm } from 'shared/view/components';
 
-import { RepositoriesSearchForm, IRepositoriesSearchFormProps } from '../RepositoriesSearchForm';
+import { RepositoriesSearchFormComponent, IRepositoriesSearchFormProps } from '../RepositoriesSearchForm';
 
 const props: IRepositoriesSearchFormProps = {
   onSubmit: jest.fn(),
@@ -11,7 +11,7 @@ const props: IRepositoriesSearchFormProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(RepositoriesSearchForm, props);
+const getComponent = makeShallowRenderer(RepositoriesSearchFormComponent, props);
 
 describe('(features/repositoriesSearch) RepositoriesSearchForm container', () => {
   it('should call onSubmit and searchRepositories with form values on form submit', () => {

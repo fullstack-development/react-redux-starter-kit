@@ -7,7 +7,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { IAppReduxState } from 'shared/types/app';
 
 import { IReduxState } from '../../../namespace';
-import { actions, selectors } from './../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 
 import './SomeContainer.scss';
 

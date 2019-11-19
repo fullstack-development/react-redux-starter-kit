@@ -2,8 +2,8 @@ import { makeMountRenderer } from 'shared/helpers';
 import { Button } from 'shared/view/elements';
 import { makeRequired } from 'shared/validators';
 
-import SearchSettingsDialog from '../SearchSettingsDialog/SearchSettingsDialog';
-import SearchForm, { ISearchFormProps } from '../SearchForm';
+import { SearchSettingsDialog } from '../SearchSettingsDialog/SearchSettingsDialog';
+import { SearchForm, ISearchFormProps } from '../SearchForm';
 
 interface IFormFields {
   search: string;

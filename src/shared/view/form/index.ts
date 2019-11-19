@@ -1,7 +1,7 @@
-export { default as TextInputField } from './TextInputField/TextInputField';
-export { default as MaskedInputField } from './MaskedInputField/MaskedInputField';
-export { default as NumberInputField } from './NumberInputField/NumberInputField';
-export { default as RadioField } from './RadioField/RadioField';
-export { default as CheckboxInputField } from './CheckboxInputField/CheckboxInputField';
-export { default as SelectField } from './SelectField/SelectField';
-export { default as LanguageInputField } from './LanguageInputField/LanguageInputField';
+export { TextInputField } from './TextInputField/TextInputField';
+export { MaskedInputField } from './MaskedInputField/MaskedInputField';
+export { NumberInputField } from './NumberInputField/NumberInputField';
+export { RadioField } from './RadioField/RadioField';
+export { CheckboxInputField } from './CheckboxInputField/CheckboxInputField';
+export { SelectField } from './SelectField/SelectField';
+export { LanguageInputField } from './LanguageInputField/LanguageInputField';

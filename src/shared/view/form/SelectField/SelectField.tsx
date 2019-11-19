@@ -1,5 +1,6 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
+// eslint-disable-next-line import/no-unresolved
 import { GetProps } from '_helpers';
 
 import { Select } from 'shared/view/elements';
@@ -8,7 +9,7 @@ import { TranslateFunction } from 'services/i18n';
 
 type IProps = GetProps<typeof Select> & FieldRenderProps & { t: TranslateFunction };
 
-function SelectField(props: IProps) {
+function SelectFieldComponent(props: IProps) {
   const { input, meta, t, ...rest } = props;
   const error = typeof rest.error === 'boolean'
     ? rest.error && meta.error
@@ -18,4 +19,4 @@ function SelectField(props: IProps) {
   );
 }
 
-export default getFieldWithComponent(SelectField);
+export const SelectField = getFieldWithComponent(SelectFieldComponent);

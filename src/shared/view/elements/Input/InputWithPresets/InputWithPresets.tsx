@@ -3,7 +3,7 @@ import block from 'bem-cn';
 import { autobind } from 'core-decorators';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-import TextInput, { IProps as ITextInputProps } from '../TextInput';
+import { TextInput, IProps as ITextInputProps } from '../TextInput';
 
 import './InputWithPresets.scss';
 
@@ -44,9 +44,9 @@ class InputWithPresets extends React.PureComponent<IProps> {
 
   @autobind
   private makePresetClickHandler(presetValue: IPreset['value']) {
-    return () => this.props.onPresetClick(presetValue);
+    const { onPresetClick } = this.props;
+    return () => onPresetClick(presetValue);
   }
 }
 
-export { IPreset };
-export default InputWithPresets;
+export { InputWithPresets, IPreset };

@@ -6,7 +6,7 @@ import { IRepository } from 'shared/types/models';
 import { StarIcon, Card, Link } from 'shared/view/elements';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
-import RepositoryAttribute from '../RepositoryAttribute/RepositoryAttribute';
+import { RepositoryAttribute } from '../RepositoryAttribute/RepositoryAttribute';
 import './RepositoryPreview.scss';
 
 interface IOwnProps {
@@ -19,7 +19,7 @@ type IProps = IOwnProps & ITranslationProps;
 const b = block('repository-preview');
 const { repositoriesSearch: intl } = tKeys.features;
 
-class RepositoryPreview extends React.PureComponent<IProps> {
+class RepositoryPreviewComponent extends React.PureComponent<IProps> {
   public render() {
     const {
       t,
@@ -85,5 +85,6 @@ class RepositoryPreview extends React.PureComponent<IProps> {
   }
 }
 
-export { IProps as IRepositoryPreviewProps, RepositoryPreview };
-export default withTranslation()(RepositoryPreview);
+const RepositoryPreview = withTranslation()(RepositoryPreviewComponent);
+
+export { RepositoryPreview, IProps as IRepositoryPreviewProps, RepositoryPreviewComponent };

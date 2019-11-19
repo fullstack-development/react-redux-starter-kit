@@ -1,8 +1,8 @@
+/* eslint react/no-danger: 0 */
 import React from 'react';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import redux from 'redux';
-import { renderToString } from 'react-dom/server';
 import { ServerStyleSheets } from '@material-ui/styles';
 
 import { IAssets } from 'shared/types/app';
@@ -10,7 +10,7 @@ import { IAssets } from 'shared/types/app';
 interface IHtmlProps {
   store: redux.Store<any>;
   assets: IAssets;
-  app?: JSX.Element;
+  app?: string;
   muiStyleSheets?: ServerStyleSheets;
 }
 
@@ -23,7 +23,7 @@ interface IHtmlProps {
  * HTML doctype declaration, which is added to the rendered output
  * by the server.js file.
  */
-export default class Html extends React.PureComponent<IHtmlProps> {
+class Html extends React.PureComponent<IHtmlProps> {
   private static getHeadData() {
     return __SERVER__ ? Helmet.renderStatic() : Helmet.peek();
   }
@@ -33,7 +33,6 @@ export default class Html extends React.PureComponent<IHtmlProps> {
     const styles: React.CSSProperties = { height: '100%' };
     const head = Html.getHeadData();
     const state = store.getState();
-    const stringifiedApp = app ? renderToString(app) : '';
     const windowAssets = serialize({ styles: assets.styles, javascript: assets.javascript });
     return (
       <html lang={__LANG__} style={styles}>
@@ -57,7 +56,7 @@ export default class Html extends React.PureComponent<IHtmlProps> {
 
         <body style={styles}>
 
-          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: stringifiedApp }} />
+          <div id="root" style={styles} dangerouslySetInnerHTML={{ __html: app || '' }} />
 
           <div>
             {/* Other code */}
@@ -69,8 +68,7 @@ export default class Html extends React.PureComponent<IHtmlProps> {
             <script dangerouslySetInnerHTML={{ __html: `window.__data=${serialize(state)};` }} charSet="UTF-8" />
             <script dangerouslySetInnerHTML={{ __html: `window.__assets=${windowAssets};` }} charSet="UTF-8" />
             {assets.javascript.map((filePath, index) =>
-              <script defer src={`/${filePath}`} charSet="UTF-8" key={index} />)
-            }
+              <script defer src={`/${filePath}`} charSet="UTF-8" key={index} />)}
           </div>
 
         </body>

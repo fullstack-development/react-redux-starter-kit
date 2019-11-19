@@ -1,6 +1,3 @@
-import configureDeps from './configureDeps';
-import { TYPES, container } from './configureIoc';
-import configureStore, { createReducer } from './configureStore';
 
 import * as allModules from 'modules';
 import { ReducersMap } from 'shared/types/redux';
@@ -8,6 +5,10 @@ import { reduxEntry as themeProviderRE } from 'services/theme';
 import { reduxEntry as notificationReduxEntry } from 'services/notification';
 import { IAppData, IModule, RootSaga, IAppReduxState, IReduxEntry } from 'shared/types/app';
 import { initializeI18n } from 'services/i18n/i18nContainer';
+
+import { configureStore, createReducer } from './configureStore';
+import { TYPES, container } from './configureIoc';
+import { configureDeps } from './configureDeps';
 
 type ReducerName = keyof IAppReduxState;
 
@@ -28,6 +29,8 @@ function configureApp(data?: IAppData): IAppData {
   const connectedReducers: Partial<ReducersMap<IAppReduxState>> = {};
 
   const { runSaga, store } = configureStore();
+  // TODO: research how it works with several concurrent request,
+  // it seems that such bindings works well only if requests are synchronous
   try {
     container.getAll(TYPES.Store);
     container.rebind(TYPES.connectEntryToStore).toConstantValue(connectEntryToStore);
@@ -37,7 +40,7 @@ function configureApp(data?: IAppData): IAppData {
     container.bind(TYPES.Store).toConstantValue(store);
   }
 
-  const dependencies = configureDeps(store);
+  const dependencies = configureDeps();
   initializeI18n();
 
   sharedReduxEntries.forEach(connectEntryToStore);
@@ -81,4 +84,4 @@ function configureApp(data?: IAppData): IAppData {
   return { modules, store };
 }
 
-export default configureApp;
+export { configureApp };

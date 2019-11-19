@@ -2,6 +2,7 @@ import { IAppReduxState } from 'shared/types/app';
 import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
 import { ICommunication } from 'shared/types/redux';
+
 import * as NS from '../namespace';
 
 function selectFeatureState(state: IAppReduxState): NS.IReduxState {

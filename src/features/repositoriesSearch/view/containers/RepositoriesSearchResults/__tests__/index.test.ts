@@ -5,7 +5,7 @@ import { Preloader } from 'shared/view/elements';
 
 import { RepositoryPreview } from '../../../components';
 import {
-  RepositoriesSearchResults, IRepositoriesSearchResultsProps,
+  RepositoriesSearchResultsComponent, IRepositoriesSearchResultsProps,
 } from '../RepositoriesSearchResults';
 
 const props: IRepositoriesSearchResultsProps = {
@@ -24,7 +24,7 @@ const props: IRepositoriesSearchResultsProps = {
   ...getMockedLocaleProps(),
 };
 
-const getComponent = makeShallowRenderer(RepositoriesSearchResults, props);
+const getComponent = makeShallowRenderer(RepositoriesSearchResultsComponent, props);
 
 describe('(features/repositoriesSearch) RepositoriesSearchResults container', () => {
   it('should render all found repositories', () => {

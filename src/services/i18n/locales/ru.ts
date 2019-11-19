@@ -1,5 +1,5 @@
 // tslint:disable:max-line-length
-export default {
+export const ru = {
   shared: {
     ok: 'Ok',
     save: 'Сохранить',

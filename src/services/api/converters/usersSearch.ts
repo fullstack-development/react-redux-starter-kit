@@ -1,4 +1,5 @@
 import { IGithubUser, IDetailedGithubUser } from 'shared/types/models';
+
 import { IServerUser, IDetailedServerUser } from '../types';
 
 export function convertUser(user: IServerUser): IGithubUser {

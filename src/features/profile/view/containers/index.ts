@@ -1,2 +1,2 @@
-export { default as ProfileEdit } from './ProfileEdit/ProfileEdit';
-export { default as ProfilePreview } from './ProfilePreview/ProfilePreview';
+export { ProfileEdit } from './ProfileEdit/ProfileEdit';
+export { ProfilePreview } from './ProfilePreview/ProfilePreview';

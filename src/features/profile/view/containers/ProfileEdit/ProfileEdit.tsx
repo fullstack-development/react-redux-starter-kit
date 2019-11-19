@@ -9,13 +9,13 @@ import { TextInputField, NumberInputField } from 'shared/view/form';
 import { Button } from 'shared/view/elements';
 import { IAppReduxState } from 'shared/types/app';
 import { IProfile } from 'shared/types/models';
-import { actions as notificationServiceActions } from 'services/notification';
+import { actionCreators as notificationActionCreators } from 'services/notification';
 import {
   fieldNames, validateName, validateNickname, validateBio,
 } from './constants';
 import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
-import { actions, selectors } from './../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 
 import './ProfileEdit.scss';
 
@@ -34,14 +34,14 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  saveProfile: actions.saveProfile,
-  setNotification: notificationServiceActions.setNotification,
+  saveProfile: actionCreators.saveProfile,
+  setNotification: notificationActionCreators.setNotification,
 };
 
 const b = block('profile-edit');
 const { profile: intl } = tKeys.features;
 
-class ProfileEdit extends React.PureComponent<IProps> {
+class ProfileEditComponent extends React.PureComponent<IProps> {
   public render() {
     const { profile } = this.props;
     return (
@@ -108,6 +108,7 @@ class ProfileEdit extends React.PureComponent<IProps> {
   }
 }
 
-const connectedComponent = connect(mapState, mapDispatch)(ProfileEdit);
-export { ProfileEdit, IProps as IProfileEditProps };
-export default withTranslation()(connectedComponent);
+const connectedComponent = connect(mapState, mapDispatch)(ProfileEditComponent);
+const ProfileEdit = withTranslation()(connectedComponent);
+
+export { ProfileEdit, ProfileEditComponent, IProps as IProfileEditProps };

@@ -184,14 +184,14 @@ class CreateFeatureGenerator extends Generator {
         newFileUrl: `${this.featurePath}/namespace.ts`,
       },
     ];
-    const actions: ICreateFileConfig[] = parts
+    const actionCreators: ICreateFileConfig[] = parts
       .map<ICreateFileConfig>(part => ({
-        templateUrl: 'redux/actions/base.ts',
-        newFileUrl: `${reduxPath}/actions/${part}.ts`,
+        templateUrl: 'redux/actionCreators/base.ts',
+        newFileUrl: `${reduxPath}/actionCreators/${part}.ts`,
       }))
       .concat([{
-        templateUrl: 'redux/actions/index.ts',
-        newFileUrl: `${reduxPath}/actions/index.ts`,
+        templateUrl: 'redux/actionCreators/index.ts',
+        newFileUrl: `${reduxPath}/actionCreators/index.ts`,
       }]);
     const reducers: ICreateFileConfig[] = parts
       .filter(part => part !== 'communication')
@@ -213,7 +213,7 @@ class CreateFeatureGenerator extends Generator {
       newFileUrl: `${reduxPath}/sagas/index.ts`,
     }];
 
-    const files = [...index, ...actions, ...reducers].concat(withSaga ? sagas : []);
+    const files = [...index, ...actionCreators, ...reducers].concat(withSaga ? sagas : []);
 
     files.forEach(file => this._createFileFromTemplate(file));
   }
