@@ -41,7 +41,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 export class UsersSearchFormComponent extends React.PureComponent<IProps> {
-  private getFilters = createSelector(
+  private selectFilters = createSelector(
     (formFields: IUsersSearchFormFields) => formFields,
     formFields => {
       const filters = R.omit([fieldNames.searchString], formFields);
@@ -75,7 +75,7 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
         initialValues={formInitialValues}
         renderSettings={this.renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
-        getFilters={this.getFilters}
+        getFilters={this.selectFilters}
         t={t}
       />
     );
