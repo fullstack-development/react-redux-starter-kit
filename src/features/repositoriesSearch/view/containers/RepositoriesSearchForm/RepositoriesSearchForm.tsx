@@ -11,7 +11,7 @@ import { makeRequired } from 'shared/validators';
 import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
 import { RepositoriesSearchSettings } from './RepositoriesSearchSettings/RepositoriesSearchSettings';
-import { selectors, actions } from '../../../redux';
+import { selectors, actionCreators } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { fieldNames } from './constants';
 
@@ -28,8 +28,8 @@ type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
 const mapDispatch = {
-  searchRepositories: actions.searchRepositories,
-  resetSearchResults: actions.resetSearchResults,
+  searchRepositories: actionCreators.searchRepositories,
+  resetSearchResults: actionCreators.resetSearchResults,
 };
 
 function mapState(state: IAppReduxState): IStateProps {

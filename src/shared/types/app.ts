@@ -33,7 +33,7 @@ export interface IWithContainers<T> {
 }
 
 export interface IFeatureEntry extends Partial<IWithContainers<Record<string, React.ComponentType<any>>>> {
-  actions?: Record<string, ActionCreator<Action>>;
+  actionCreators?: Record<string, ActionCreator<Action>>;
   selectors?: Record<string, (state: any, ...args: any[]) => any>;
   reduxEntry?: IReduxEntry;
 }

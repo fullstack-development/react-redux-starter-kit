@@ -12,7 +12,7 @@ import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { TotalSearchResults, Preloader } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
-import { actions, selectors } from '../../../redux';
+import { actionCreators, selectors } from './../../../redux';
 import { RepositoryPreview } from '../../components';
 import './RepositoriesSearchResults.scss';
 
@@ -49,7 +49,7 @@ function mapState(state: IAppReduxState): IStateProps {
 }
 
 const mapDispatch = {
-  searchRepositories: actions.searchRepositories,
+  searchRepositories: actionCreators.searchRepositories,
 };
 
 const b = block('repositories-search-results');

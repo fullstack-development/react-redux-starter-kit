@@ -4,7 +4,7 @@ import { getFeatureEntry } from 'shared/helpers';
 import * as containers from './view/containers';
 <% } -%>
 <% if (reduxConfig) { -%>
-import { actions, selectors, reducer<%= (reduxConfig.withSaga) ? ', getSaga' : '' %> } from './redux';
+import { actionCreators, selectors, reducer<%= (reduxConfig.withSaga) ? ', getSaga' : '' %> } from './redux';
 <% } -%>
 
 const entry = getFeatureEntry({
@@ -12,7 +12,7 @@ const entry = getFeatureEntry({
   containers,
 <% } -%>
 <% if (reduxConfig) { -%>
-  actions,
+  actionCreators,
   selectors,
   reduxEntry: {
     reducers: { <%= featureName %>: reducer },
