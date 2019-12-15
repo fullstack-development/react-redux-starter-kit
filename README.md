@@ -7,11 +7,11 @@ Modular starter kit for React+Redux+React Router projects.
 * [Документация](./docs/ru/main.md)
 
 ## NPM scripts
-### To start localy
+### To start locally
 - ```npm run dev``` for development environment in watch mode
 - ```npm run prod``` for production environment in watch mode
 
-### To build localy (see build folder)
+### To build locally (see build folder)
 - ```npm run build:dev``` for development environment without watch mode
 - ```npm run build:prod``` for production environment without watch mode
 
