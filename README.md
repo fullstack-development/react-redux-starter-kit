@@ -1,32 +1,33 @@
 # react-redux-starter-kit
-Modular starter kit for React+Redux+React Router projects.
 
-* [NPM scripts](#NPM-scripts)
-* [Features](#Features)
+Модульный стартовый комплект для проектов React + Redux + React Router.
+
+* [NPM скрипты](#NPM-scripts)
+* [Особенности](#Особенности)
 * [Тестирование](#Тестирование)
 * [Документация](./docs/ru/main.md)
 
 ## NPM scripts
-### To start locally
-- ```npm run dev``` for development environment in watch mode
-- ```npm run prod``` for production environment in watch mode
+### Локальный запуск
+- ```npm run dev``` среда разработки в режиме просмотра
+- ```npm run prod``` производственная среда в режиме просмотра
 
-### To build locally (see build folder)
-- ```npm run build:dev``` for development environment without watch mode
-- ```npm run build:prod``` for production environment without watch mode
+### Локальная сборка (см. папку build)
+- ```npm run build:dev``` среда разработки без режима просмотра
+- ```npm run build:prod``` производственная среда без режима просмотра
 
-### To start bundle analyzer
-- ```npm run analyze:dev``` for development environment
-- ```npm run analyze:prod``` for production environment
+### Запуск анализатора пакетов
+- ```npm run analyze:dev``` среда разработки
+- ```npm run analyze:prod``` производственная среда
 
-### To start isomorphic server
-- ```npm run server:dev``` for development environment in watch mode
-- ```npm run server:prod``` for production environment without watch mode
+### Запуск изоморфного сервера
+- ```npm run server:dev``` среда разработки в режиме просмотра
+- ```npm run server:prod``` производственная среда без режима просмотра
 
-### To start yeoman generator create-feature
+### Запуск yeoman генератора create-feature
 - ```npm run yeoman```
 
-## Features
+## Особенности
 - [x] Typescript 2.x
 - [x] React 16.x
 - [x] React-router 4.x
