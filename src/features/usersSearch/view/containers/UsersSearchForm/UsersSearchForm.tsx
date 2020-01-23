@@ -8,6 +8,7 @@ import * as RA from 'ramda-adjunct';
 import { withTranslation, ITranslationProps, tKeys, TranslateFunction } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
 import { IAppReduxState } from 'shared/types/app';
+import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
 
 import { selectors, actionCreators } from './../../../redux';
@@ -55,9 +56,10 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
       maxRepos: t(intl.maxRepos),
     };
     const filtersWithFormattedValues = R.mapObjIndexed(
-      (value: any, key: keyof typeof filters) => {
-        const formatterForCurrentKey = key in filtersValuesFormattersMap
-          ? (filtersValuesFormattersMap as any)[key]
+      (value: IUsersSearchFilters[keyof IUsersSearchFilters], key: keyof IUsersSearchFilters) => {
+        const definedFormatter = filtersValuesFormattersMap[key];
+        const formatterForCurrentKey = typeof definedFormatter === 'function'
+          ? definedFormatter
           : R.identity;
         return formatterForCurrentKey(value);
       },

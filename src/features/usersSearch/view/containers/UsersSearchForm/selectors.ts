@@ -47,6 +47,7 @@ type ValueFormatter<T> = (x: T) => any;
 interface IUserSearchFiltersFormattersMap {
   searchBy: ValueFormatter<IUsersSearchFilters['searchBy']>;
   searchFor: ValueFormatter<IUsersSearchFilters['searchFor']>;
+  [key: string]: unknown;
 }
 
 export const selectFiltersValuesFormatters = createSelector(
