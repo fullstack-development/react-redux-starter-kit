@@ -1,11 +1,11 @@
 import React from 'react';
-import { createSelector } from 'reselect';
+import { defaultMemoize } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
 import * as RA from 'ramda-adjunct';
 
-import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys, TranslateFunction } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
@@ -13,7 +13,7 @@ import { SearchForm } from 'shared/view/components';
 import { selectors, actionCreators } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
-import { selectFiltersValuesFormatters, selectOptions, selectFiltersLabels } from './selectors';
+import { selectFiltersValuesFormatters, selectOptions } from './selectors';
 import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -40,24 +40,31 @@ function mapState(state: IAppReduxState): IStateProps {
   };
 }
 
+const { userSearch: intl } = tKeys.features;
+
 export class UsersSearchFormComponent extends React.PureComponent<IProps> {
-  private selectFilters = createSelector(
-    (formFields: IUsersSearchFormFields) => formFields,
-    formFields => {
-      const filters = R.omit([fieldNames.searchString], formFields);
-      const filtersValuesFormattersMap = selectFiltersValuesFormatters(this.props);
-      const filtersLabels = selectFiltersLabels(this.props);
-      const filtersWithFormattedValues = R.mapObjIndexed(
-        (value: any, key: keyof typeof filters) => {
-          const formatterForCurrentKey = key in filtersValuesFormattersMap
-            ? (filtersValuesFormattersMap as any)[key]
-            : R.identity;
-          return formatterForCurrentKey(value);
-        },
-        filters,
-      );
-      return RA.renameKeys(filtersLabels, filtersWithFormattedValues) as Record<string, string | number>;
-    });
+  private makeFiltersSelector = defaultMemoize((t: TranslateFunction) => (formFields: IUsersSearchFormFields) => {
+    const filters = R.omit([fieldNames.searchString], formFields);
+    const filtersValuesFormattersMap = selectFiltersValuesFormatters(this.props);
+    const filtersLabels = {
+      searchBy: t(intl.searchBy),
+      searchFor: t(intl.searchFor),
+      perPage: t(intl.resultsPerPage),
+      reposLanguage: t(intl.repositoriesLanguage),
+      minRepos: t(intl.minRepos),
+      maxRepos: t(intl.maxRepos),
+    };
+    const filtersWithFormattedValues = R.mapObjIndexed(
+      (value: any, key: keyof typeof filters) => {
+        const formatterForCurrentKey = key in filtersValuesFormattersMap
+          ? (filtersValuesFormattersMap as any)[key]
+          : R.identity;
+        return formatterForCurrentKey(value);
+      },
+      filters,
+    );
+    return RA.renameKeys(filtersLabels, filtersWithFormattedValues) as Record<string, string | number>;
+  });
 
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
@@ -75,7 +82,7 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
         initialValues={formInitialValues}
         renderSettings={this.renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
-        getFilters={this.selectFilters}
+        getFilters={this.makeFiltersSelector(t)}
         t={t}
       />
     );
