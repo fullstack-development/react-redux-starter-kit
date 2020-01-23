@@ -1,5 +1,5 @@
 import React from 'react';
-import { A } from 'ts-toolbelt';
+import { A, B } from 'ts-toolbelt';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormHelperText, { FormHelperTextProps } from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -42,7 +42,7 @@ function normalizeProps(props: IProps): INormalizedProps {
     error, helperText = null, label, formHelperTextProps = null, fullWidth,
     ...rest } = props;
 
-  const checkboxProps: A.Equals<CheckboxProps, typeof rest> extends 1 ? CheckboxProps : unknown = rest;
+  const checkboxProps: A.Equals<CheckboxProps, typeof rest> extends B.True ? CheckboxProps : unknown = rest;
   const formControlProps: FormControlProps = { error, required: rest.required, fullWidth };
 
   return {
