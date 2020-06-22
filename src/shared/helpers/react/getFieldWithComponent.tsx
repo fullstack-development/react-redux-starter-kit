@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field, FieldRenderProps, FieldProps as RFFieldProps } from 'react-final-form';
-// eslint-disable-next-line import/no-unresolved
-import { MergeRight } from '_helpers';
+import { O } from 'ts-toolbelt';
 
 type BaseWrappedFieldProps = FieldRenderProps & {
   value?: any;
@@ -19,9 +18,9 @@ function getFieldWithComponent<P extends BaseWrappedFieldProps>(
 ) {
   type OwnProps = Omit<P, keyof BaseWrappedFieldProps>;
   type FieldProps = Pick<RFFieldProps, RFFieldPropKey>;
-  type ResultProps = MergeRight<OwnProps, FieldProps>;
+  type ResultProps = O.Merge<FieldProps, OwnProps>;
 
-  const result: React.StatelessComponent<ResultProps> = (props: ResultProps) => (
+  const result: React.FC<ResultProps> = (props: ResultProps) => (
     <Field type={type} {...props} component={Component} />
   );
 

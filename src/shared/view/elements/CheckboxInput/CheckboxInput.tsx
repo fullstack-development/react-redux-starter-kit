@@ -1,6 +1,5 @@
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved
-import { CheckIdentity } from '_helpers';
+import { A, B } from 'ts-toolbelt';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormHelperText, { FormHelperTextProps } from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -43,7 +42,7 @@ function normalizeProps(props: IProps): INormalizedProps {
     error, helperText = null, label, formHelperTextProps = null, fullWidth,
     ...rest } = props;
 
-  const checkboxProps: CheckIdentity<CheckboxProps, typeof rest> = rest;
+  const checkboxProps: A.Equals<CheckboxProps, typeof rest> extends B.True ? CheckboxProps : unknown = rest;
   const formControlProps: FormControlProps = { error, required: rest.required, fullWidth };
 
   return {

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Omit } from 'react-redux';
-// eslint-disable-next-line import/no-unresolved
-import { GetProps } from '_helpers';
 
 interface IBaseProps {
   component?: React.ReactType<any>;
@@ -13,7 +11,7 @@ type ExtractProps<T extends StringType | React.ComponentType<any>> =
   T extends StringType
     ? JSX.IntrinsicElements[T]
     : T extends React.ComponentType<any>
-      ? GetProps<T>
+      ? React.ComponentProps<T>
       : never;
 
 function withComponent<C extends StringType | React.ComponentType<any>>(component: C) {

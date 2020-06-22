@@ -28,8 +28,11 @@ export interface IReduxEntry {
   sagas?: Array<(deps: IDependencies) => () => SagaIterator>;
 }
 
-export interface IFeatureEntry {
-  containers?: Record<string, React.ComponentType<any>>;
+export interface IWithContainers<T> {
+  containers: T;
+}
+
+export interface IFeatureEntry extends Partial<IWithContainers<Record<string, React.ComponentType<any>>>> {
   actionCreators?: Record<string, ActionCreator<Action>>;
   selectors?: Record<string, (state: any, ...args: any[]) => any>;
   reduxEntry?: IReduxEntry;

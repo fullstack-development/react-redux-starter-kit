@@ -1,13 +1,11 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
-// eslint-disable-next-line import/no-unresolved
-import { GetProps } from '_helpers';
 
 import { NumberInput } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 import { TranslateFunction } from 'services/i18n';
 
-type IProps = GetProps<typeof NumberInput> & FieldRenderProps & { t: TranslateFunction };
+type IProps = React.ComponentProps<typeof NumberInput> & FieldRenderProps & { t: TranslateFunction };
 
 class NumberInputFieldComponent extends React.Component<IProps> {
   public render() {
@@ -26,7 +24,7 @@ class NumberInputFieldComponent extends React.Component<IProps> {
     );
   }
 
-  private onChange: GetProps<typeof NumberInput>['onChange'] = value => {
+  private onChange: React.ComponentProps<typeof NumberInput>['onChange'] = value => {
     const { input } = this.props;
     input.onChange(value.floatValue);
   };

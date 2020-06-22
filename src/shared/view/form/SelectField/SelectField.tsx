@@ -1,13 +1,11 @@
 import React from 'react';
 import { FieldRenderProps } from 'react-final-form';
-// eslint-disable-next-line import/no-unresolved
-import { GetProps } from '_helpers';
 
 import { Select } from 'shared/view/elements';
 import { getFieldWithComponent } from 'shared/helpers/react';
 import { TranslateFunction } from 'services/i18n';
 
-type IProps = GetProps<typeof Select> & FieldRenderProps & { t: TranslateFunction };
+type IProps = React.ComponentProps<typeof Select> & FieldRenderProps & { t: TranslateFunction };
 
 function SelectFieldComponent(props: IProps) {
   const { input, meta, t, ...rest } = props;
