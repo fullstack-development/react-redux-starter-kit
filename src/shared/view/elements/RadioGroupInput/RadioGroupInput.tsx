@@ -1,5 +1,5 @@
 import React from 'react';
-import { A } from 'ts-toolbelt';
+import { A, B } from 'ts-toolbelt';
 import FormControl, { FormControlProps } from '@material-ui/core/FormControl';
 import FormLabel, { FormLabelProps } from '@material-ui/core/FormLabel';
 import RadioGroup, { RadioGroupProps } from '@material-ui/core/RadioGroup';
@@ -53,7 +53,7 @@ function normalizeProps(props: IProps): INormalizedProps {
     ...rest
   } = props;
 
-  const radioGroupProps: A.Equals<RadioGroupProps, typeof rest> extends 1 ? RadioGroupProps : unknown = rest;
+  const radioGroupProps: A.Equals<RadioGroupProps, typeof rest> extends B.True ? RadioGroupProps : unknown = rest;
   const formControlProps: FormControlProps = { error, required, fullWidth };
 
   return {
