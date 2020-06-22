@@ -1,7 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
-// eslint-disable-next-line import/no-unresolved
-import { MergeRight } from '_helpers';
+import { O } from 'ts-toolbelt';
 import NumberFormat, { NumberFormatProps, NumberFormatValues } from 'react-number-format';
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 
@@ -19,12 +18,12 @@ interface INumberProps {
   decimalScale?: number;
 }
 
-type IProps = MergeRight<ITextInputProps, ICustomProps> & INumberProps;
+type IProps = O.Merge<ICustomProps, ITextInputProps> & INumberProps;
 
 const makeNumberInput = R.memoizeWith(
   R.toString,
   (ownProps: NumberFormatProps) =>
-    function NumberFormatCustom(props: MergeRight<InputBaseComponentProps, ICustomProps>) {
+    function NumberFormatCustom(props: O.Merge<ICustomProps, InputBaseComponentProps>) {
       const { inputRef, onChange, ...other } = props;
 
       return (
@@ -51,7 +50,7 @@ class NumberInput extends React.PureComponent<IProps> {
         }}
         InputProps={{
           ...rest.InputProps,
-          inputComponent: makeNumberInput({ prefix, thousandSeparator, decimalScale }),
+          inputComponent: makeNumberInput({ prefix, thousandSeparator, decimalScale }) as any,
         }}
         fullWidth
       />

@@ -1,7 +1,5 @@
 import React from 'react';
 import * as R from 'ramda';
-// eslint-disable-next-line import/no-unresolved
-import { GetProps } from '_helpers';
 import ReactTextMask from 'react-text-mask';
 import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -15,7 +13,7 @@ type IProps = ITextInputProps & {
   maskType: MaskType;
 };
 
-const maskByType: Record<MaskType, GetProps<typeof ReactTextMask>['mask']> = {
+const maskByType: Record<MaskType, React.ComponentProps<typeof ReactTextMask>['mask']> = {
   visa: [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/],
 };
 
@@ -26,8 +24,8 @@ const makeMaskInput = R.memoizeWith(R.identity, (maskType: MaskType) =>
     return (
       <ReactTextMask
         {...other}
-        value={value as GetProps<typeof ReactTextMask>['value']}
-        defaultValue={defaultValue as GetProps<typeof ReactTextMask>['defaultValue']}
+        value={value as React.ComponentProps<typeof ReactTextMask>['value']}
+        defaultValue={defaultValue as React.ComponentProps<typeof ReactTextMask>['defaultValue']}
         ref={inputRef}
         mask={maskByType[maskType]}
         showMask

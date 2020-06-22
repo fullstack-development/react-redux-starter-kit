@@ -25370,6 +25370,11 @@
         }
       }
     },
+    "ts-toolbelt": {
+      "version": "4.10.13",
+      "resolved": "https://registry.npmjs.org/ts-toolbelt/-/ts-toolbelt-4.10.13.tgz",
+      "integrity": "sha512-GsbacJF1pH8D9uWicfFfNLHyFlxmtbKDEmXjdZoFUON5jlc6x51ofMyw8c/99zYDaCnx9+Y/oo+jxLKUI56sUg=="
+    },
     "tsconfig-paths": {
       "version": "3.7.0",
       "resolved": "https://registry.npmjs.org/tsconfig-paths/-/tsconfig-paths-3.7.0.tgz",

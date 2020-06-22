@@ -1,11 +1,9 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
-// eslint-disable-next-line import/no-unresolved
-import { SubSet } from '_helpers';
 import { injectable } from 'inversify';
 
 import * as usersSearchFeature from 'features/usersSearch';
-import { IFeatureEntry, IReduxEntry } from 'shared/types/app';
+import { IFeatureEntry, IReduxEntry, IWithContainers } from 'shared/types/app';
 
 import { inject, TYPES } from './configureIoc';
 
@@ -16,10 +14,7 @@ interface IContainerTypes {
 
 type Container = keyof IContainerTypes;
 
-type IEntryWithContainer<K extends string, T extends React.ComponentType<any>> = SubSet<IFeatureEntry, {
-  containers: { [D in K]: T };
-  reduxEntry?: IReduxEntry;
-}>;
+type IEntryWithContainer<K extends string, T extends React.ComponentType<any>> = IWithContainers<{ [D in K]: T }> & Pick<IFeatureEntry, 'reduxEntry'>;
 
 type Loader<T extends Container> = () => Promise<IEntryWithContainer<T, IContainerTypes[T]>>;
 
