@@ -1,10 +1,10 @@
 import React from 'react';
+import { createSelector } from 'reselect';
 import block from 'bem-cn';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { autobind } from 'core-decorators';
 
 import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-import { memoizeByProps } from 'shared/helpers';
 import { withAsyncFeatures } from 'core';
 import * as features from 'features';
 
@@ -24,6 +24,19 @@ type IProps = IOwnProps & IFeatureProps & RouteComponentProps & ITranslationProp
 
 const b = block('layout');
 const { header, footer } = tKeys.shared;
+const selectMenuItems = createSelector(
+  (props: IProps) => props.t,
+  (t): IHeaderMenuItem[] => ([
+    {
+      path: routes.search.users.getRoutePath(),
+      title: t(header.users),
+    },
+    {
+      path: routes.search.repositories.getRoutePath(),
+      title: t(header.repositories),
+    },
+  ]),
+);
 
 class LayoutComponent extends React.Component<IProps> {
   public render() {
@@ -35,10 +48,7 @@ class LayoutComponent extends React.Component<IProps> {
         <header className={b('header')}>
           <div className={b('header-content')}>
             <div className={b('left-menu')}>
-              <LayoutHeaderMenu
-                menuItems={this.getMenuItems()}
-                activeItemPath={location.pathname}
-              />
+              <LayoutHeaderMenu menuItems={selectMenuItems(this.props)} activeItemPath={location.pathname} />
             </div>
             <div className={b('right-menu')}>
               <ProfilePreview onEditClick={this.handleEditProfileClick} />
@@ -66,19 +76,6 @@ class LayoutComponent extends React.Component<IProps> {
         </footer>
       </div>
     );
-  }
-
-  @memoizeByProps((props: IProps) => [props.t])
-  private getMenuItems(): IHeaderMenuItem[] {
-    const { t } = this.props;
-    return [{
-      path: routes.search.users.getRoutePath(),
-      title: t(header.users),
-    },
-    {
-      path: routes.search.repositories.getRoutePath(),
-      title: t(header.repositories),
-    }];
   }
 
   @autobind

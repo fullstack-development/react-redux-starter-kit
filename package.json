@@ -264,6 +264,7 @@
     "postcss-reporter": "^6.0.0",
     "postcss-scss": "^2.0.0",
     "ramda": "^0.26.1",
+    "ramda-adjunct": "^2.22.1",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-final-form": "^4.0.2",

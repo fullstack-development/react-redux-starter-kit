@@ -59,7 +59,7 @@ export const en = {
       repositories: 'Repositories',
       userDetails: 'User details',
       min: 'Min',
-      max: 'Min',
+      max: 'Max',
       minRepos: 'Min repos',
       maxRepos: 'Max repos',
       searchBy: 'Search by',

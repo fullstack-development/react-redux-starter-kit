@@ -1,25 +1,20 @@
 import React from 'react';
+import { defaultMemoize } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
+import * as RA from 'ramda-adjunct';
 
-import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys, TranslateFunction } from 'services/i18n';
 import { makeRequired } from 'shared/validators';
-import {
-  replaceObjectKeys,
-  replaceObjectValues,
-  getSelectValuesToLabelsMap,
-  KeysToValuesFormattersMap,
-  memoizeByProps,
-} from 'shared/helpers';
 import { IAppReduxState } from 'shared/types/app';
 import { IUsersSearchFilters } from 'shared/types/githubSearch';
 import { SearchForm } from 'shared/view/components';
-import { ISelectOption } from 'shared/types/form';
 
 import { selectors, actionCreators } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
+import { selectFiltersValuesFormatters, selectOptions } from './selectors';
 import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -30,8 +25,6 @@ interface IStateProps {
   isUsersSearchRequesting: boolean;
 }
 
-type OptionType = ISelectOption<IUsersSearchFilters['searchBy']>;
-type LabelsType = Record<IUsersSearchFilters['searchFor'], string>;
 type IActionProps = typeof mapDispatch;
 type IProps = IOwnProps & IStateProps & IActionProps & ITranslationProps;
 
@@ -51,6 +44,30 @@ function mapState(state: IAppReduxState): IStateProps {
 const { userSearch: intl } = tKeys.features;
 
 export class UsersSearchFormComponent extends React.PureComponent<IProps> {
+  private makeFiltersSelector = defaultMemoize((t: TranslateFunction) => (formFields: IUsersSearchFormFields) => {
+    const filters = R.omit([fieldNames.searchString], formFields);
+    const filtersValuesFormattersMap = selectFiltersValuesFormatters(this.props);
+    const filtersLabels = {
+      searchBy: t(intl.searchBy),
+      searchFor: t(intl.searchFor),
+      perPage: t(intl.resultsPerPage),
+      reposLanguage: t(intl.repositoriesLanguage),
+      minRepos: t(intl.minRepos),
+      maxRepos: t(intl.maxRepos),
+    };
+    const filtersWithFormattedValues = R.mapObjIndexed(
+      (value: IUsersSearchFilters[keyof IUsersSearchFilters], key: keyof IUsersSearchFilters) => {
+        const definedFormatter = filtersValuesFormattersMap[key];
+        const formatterForCurrentKey = typeof definedFormatter === 'function'
+          ? definedFormatter
+          : R.identity;
+        return formatterForCurrentKey(value);
+      },
+      filters,
+    );
+    return RA.renameKeys(filtersLabels, filtersWithFormattedValues) as Record<string, string | number>;
+  });
+
   public render() {
     const { isUsersSearchRequesting, resetSearchResults, t } = this.props;
 
@@ -67,7 +84,7 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
         initialValues={formInitialValues}
         renderSettings={this.renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
-        getFilters={this.getFilters}
+        getFilters={this.makeFiltersSelector(t)}
         t={t}
       />
     );
@@ -75,47 +92,7 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
 
   @autobind
   private renderUsersSearchSettings() {
-    return <UsersSearchSettings options={this.getOptions()} />;
-  }
-
-  private getLabels(): LabelsType {
-    const { t } = this.props;
-    return {
-      both: t(intl.usersAndOrganizations),
-      org: t(intl.organizations),
-      user: t(intl.users),
-    };
-  }
-
-  @memoizeByProps((props: IProps) => [props.t])
-  private getOptions(): OptionType[] {
-    const { t } = this.props;
-    return [
-      { value: 'username-email', label: t(intl.usernameAndEmail) },
-      { value: 'login', label: t(intl.username) },
-      { value: 'email', label: t(intl.email) },
-      { value: 'fullname', label: t(intl.fullName) },
-    ];
-  }
-
-  @memoizeByProps((props: IProps, formFields) => [props.t, formFields])
-  private getFilters(formFields: IUsersSearchFormFields) {
-    const { t } = this.props;
-    const filters = R.omit([fieldNames.searchString], formFields);
-    const filtersValuesFormattersMap: KeysToValuesFormattersMap<IUsersSearchFilters> = {
-      searchBy: x => getSelectValuesToLabelsMap(this.getOptions())[x].toLowerCase(),
-      searchFor: x => (this.getLabels())[x].toLowerCase(),
-    };
-    const filtersLabels: Record<keyof IUsersSearchFilters, string> = {
-      searchBy: t(intl.searchBy),
-      searchFor: t(intl.searchFor),
-      perPage: t(intl.resultsPerPage),
-      reposLanguage: t(intl.repositoriesLanguage),
-      minRepos: t(intl.minRepos),
-      maxRepos: t(intl.maxRepos),
-    };
-    const filtersWithFormattedValues = replaceObjectValues(filters, filtersValuesFormattersMap);
-    return replaceObjectKeys(filtersWithFormattedValues, filtersLabels);
+    return <UsersSearchSettings options={selectOptions(this.props)} />;
   }
 
   @autobind

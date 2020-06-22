@@ -2,6 +2,7 @@ import React from 'react';
 import { autobind } from 'core-decorators';
 import block from 'bem-cn';
 import * as R from 'ramda';
+import * as RA from 'ramda-adjunct';
 
 import { IGithubUser } from 'shared/types/models';
 import { Preloader } from 'shared/view/elements';
@@ -43,7 +44,7 @@ class UsersAvatarsWall extends React.PureComponent<IProps> {
   }
 
   private get areAllAvatarsLoaded() {
-    return Object.values(this.avatarsLoadingStatus).every(R.equals(true));
+    return RA.allEqualTo(true, Object.values(this.avatarsLoadingStatus));
   }
 
   public componentDidUpdate({ users: prevUsers }: IProps) {

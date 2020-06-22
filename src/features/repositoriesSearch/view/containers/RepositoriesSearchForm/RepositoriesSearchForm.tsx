@@ -1,14 +1,14 @@
 import React from 'react';
+import { defaultMemoize } from 'reselect';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import * as R from 'ramda';
+import * as RA from 'ramda-adjunct';
 
-import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
+import { withTranslation, ITranslationProps, tKeys, TranslateFunction } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { SearchForm } from 'shared/view/components';
-import { replaceObjectKeys, memoizeByProps } from 'shared/helpers';
 import { makeRequired } from 'shared/validators';
-import { IRepositoriesSearchFilters } from 'shared/types/githubSearch';
 
 import { RepositoriesSearchSettings } from './RepositoriesSearchSettings/RepositoriesSearchSettings';
 import { selectors, actionCreators } from './../../../redux';
@@ -41,6 +41,18 @@ function mapState(state: IAppReduxState): IStateProps {
 const { repositoriesSearch: intl } = tKeys.features;
 
 class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
+
+  private makeFiltersSelector = defaultMemoize((t: TranslateFunction) => (formValues: IRepositoriesSearchFormFields) => {
+    const filters = R.omit([fieldNames.searchString], formValues);
+      const filtersLabels = {
+        starsNumber: t(intl.minStars),
+        forksNumber: t(intl.minForks),
+        language: t(intl.language),
+        owner: t(intl.owner),
+      };
+      return RA.renameKeys(filtersLabels, filters) as Record<string, string | number>;
+  });
+
   public render() {
     const { isRepositoriesSearchRequesting, resetSearchResults, t } = this.props;
     return (
@@ -55,23 +67,10 @@ class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
         renderSettings={RepositoriesSearchSettings}
-        getFilters={this.getFilters}
+        getFilters={this.makeFiltersSelector(t)}
         t={t}
       />
     );
-  }
-
-  @memoizeByProps((props: IProps, formValues) => [props.t, formValues])
-  private getFilters(formValues: IRepositoriesSearchFormFields) {
-    const { t } = this.props;
-    const filters = R.omit([fieldNames.searchString], formValues);
-    const filtersLabels: Record<keyof IRepositoriesSearchFilters, string> = {
-      starsNumber: t(intl.minStars),
-      forksNumber: t(intl.minForks),
-      language: t(intl.language),
-      owner: t(intl.owner),
-    };
-    return replaceObjectKeys(filters, filtersLabels);
   }
 
   @autobind
