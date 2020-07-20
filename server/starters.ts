@@ -21,7 +21,7 @@ function startDevelopmentMode(
     // res.isomorphic contains `compilation` & `exports` properties:
     // - `compilation` contains the webpack-isomorphic-compiler compilation result
     // - `exports` contains the server exports, usually one or more render functions
-    const { compilation, exports: { default: render } } = res.locals.isomorphic;
+    const { compilation, exports: { render } } = res.locals.isomorphic;
     const { clientStats } = compilation;
 
     const assets = extractAssets(clientStats.compilation);
