@@ -80,4 +80,5 @@ function renderWithoutSSR(appData: IAppData, assets: IAssets) {
   return document;
 }
 
+// server export used in server/starters.tsx
 export { render };
