@@ -8,6 +8,7 @@ import { withAsyncFeatures } from 'core';
 
 import { Layout } from '../../../../shared';
 import './RepositoriesSearchLayout.scss';
+import {SearchLayout} from "../SearchLayout/SearchLayout";
 
 interface IState {
   lastSubmittedFormState: repositoriesSearch.namespace.IRepositoriesSearchFormFields | null;
@@ -32,17 +33,19 @@ class RepositoriesSearchLayoutComponent extends React.PureComponent<IProps, ISta
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <Layout title={t(tKeys.features.userSearch.repositoriesSearch)}>
-        <div className={b()}>
-          <div className={b('search-form')}>
-            <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />
+      <Layout title={t(tKeys.shared.header.searchFor)}>
+        <SearchLayout>
+          <div className={b()}>
+            <div className={b('search-form')}>
+              <RepositoriesSearchForm onSubmit={this.setLastSubmittedFormState} />
+            </div>
+            <div className={b('results')}>
+              {lastSubmittedFormState && (
+                <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
+              )}
+            </div>
           </div>
-          <div className={b('results')}>
-            {lastSubmittedFormState && (
-              <RepositoriesSearchResults searchOptions={lastSubmittedFormState} />
-            )}
-          </div>
-        </div>
+        </SearchLayout>
       </Layout>
     );
   }

@@ -6,6 +6,7 @@ import * as usersSearch from 'features/usersSearch';
 import { withAsyncFeatures } from 'core';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 
+import {SearchLayout} from "../SearchLayout/SearchLayout";
 import { Layout } from '../../../../shared';
 import './UsersSearchLayout.scss';
 
@@ -32,13 +33,15 @@ class UsersSearchLayoutComponent extends React.PureComponent<IProps, IState> {
     const { lastSubmittedFormState } = this.state;
 
     return (
-      <Layout title={t(tKeys.features.userSearch.usersSearch)}>
-        <div className={b()}>
-          <div className={b('search-form')}>
-            <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />
+      <Layout title={t(tKeys.shared.header.searchFor)}>
+        <SearchLayout>
+          <div className={b()}>
+            <div className={b('search-form')}>
+              <UsersSearchForm onSubmit={this.setLastSubmittedFormState} />
+            </div>
+            {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
           </div>
-          {lastSubmittedFormState && <UsersSearchResults searchOptions={lastSubmittedFormState} />}
-        </div>
+        </SearchLayout>
       </Layout>
     );
   }

@@ -18,3 +18,6 @@ export { TotalSearchResults } from './TotalSearchResults/TotalSearchResults';
 export { KeysToValues } from './KeysToValues/KeysToValues';
 export { Card } from './Card/Card';
 export { Link } from './Link/Link';
+export { Accordion } from './Accordion/Accordion';
+export { AccordionSummary } from './AccordionSummary/AccordionSummary';
+export { AccordionDetails } from './AccordionDetails/AccordionDetails';

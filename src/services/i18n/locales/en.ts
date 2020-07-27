@@ -11,12 +11,13 @@ export const en = {
     fieldMinLengthError: 'Field must be at least {{minCharacters}} characters long',
     fieldMaxLengthError: 'Field must be less than {{maxCharacters}} characters long',
     header: {
-      searchFor: 'Search for:',
+      title: 'Демо от команды FSD',
+      searchFor: 'Search in GitHub',
       users: 'Users',
       repositories: 'Repositories',
     },
     footer: {
-      fsd: 'Fullstack Development',
+      fsd: 'Go to company site',
     },
     notifications: {
       saved: 'User data was saved.',

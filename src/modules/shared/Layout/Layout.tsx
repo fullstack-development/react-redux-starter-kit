@@ -1,16 +1,17 @@
 import React from 'react';
-import { createSelector } from 'reselect';
 import block from 'bem-cn';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { autobind } from 'core-decorators';
+import {withRouter, RouteComponentProps} from 'react-router-dom';
+// import { autobind } from 'core-decorators';
 
-import { LanguageSelector, withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-import { withAsyncFeatures } from 'core';
+import {withTranslation, ITranslationProps, tKeys} from 'services/i18n';
+import {withAsyncFeatures} from 'core';
 import * as features from 'features';
 
-import { routes } from '../../routes';
-import { LayoutHeaderMenu, IHeaderMenuItem } from './LayoutHeaderMenu/LayoutHeaderMenu';
+import {routes} from '../../routes';
+import {LayoutTopNavigation} from "./LayoutTopNavigation/LayoutTopNavigation";
 import './Layout.scss';
+import {Accordion, AccordionSummary, AccordionDetails} from "../../../shared/view/elements";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 interface IOwnProps {
   title: string;
@@ -22,66 +23,70 @@ interface IFeatureProps {
 
 type IProps = IOwnProps & IFeatureProps & RouteComponentProps & ITranslationProps;
 
+const {header, footer} = tKeys.shared;
+
 const b = block('layout');
-const { header, footer } = tKeys.shared;
-const selectMenuItems = createSelector(
-  (props: IProps) => props.t,
-  (t): IHeaderMenuItem[] => ([
-    {
-      path: routes.search.users.getRoutePath(),
-      title: t(header.users),
-    },
-    {
-      path: routes.search.repositories.getRoutePath(),
-      title: t(header.repositories),
-    },
-  ]),
-);
+
+const topNavigationItems = [
+  {
+    path: routes.search.users.getRoutePath(),
+    title: 'Search'
+  },
+  {
+    path: routes.profile.getRoutePath(),
+    title: 'Profile'
+  }
+]
 
 class LayoutComponent extends React.Component<IProps> {
   public render() {
-    const { children, title, profileFeatureEntry: { containers }, location, t } = this.props;
-    const { ProfilePreview } = containers;
+    const {children, location, t, title} = this.props;
 
     return (
       <div className={b()}>
-        <header className={b('header')}>
-          <div className={b('header-content')}>
-            <div className={b('left-menu')}>
-              <LayoutHeaderMenu menuItems={selectMenuItems(this.props)} activeItemPath={location.pathname} />
+        <div className={b('container')}>
+          <aside className={b('side')}>
+            <h1 className={b('title')}>{t(header.title)}</h1>
+            <div className={b('description')}>
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Для чего мы сделали демо?</AccordionSummary>
+                <AccordionDetails>Чтобы вы могли понять, какой объём работы и функциональность наша команда делает за
+                  100 часов работы.</AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Как этим пользоваться?</AccordionSummary>
+                <AccordionDetails>Настраивайте параметры поиска, просматривайте результаты и погружайтесь в культуру
+                  GitHub.</AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Мне всё понравилось, что дальше?</AccordionSummary>
+                <AccordionDetails>Свяжитесь с нашим CTO, чтобы мы круто поработали над вашим
+                  проектом.</AccordionDetails>
+              </Accordion>
             </div>
-            <div className={b('right-menu')}>
-              <ProfilePreview onEditClick={this.handleEditProfileClick} />
-              <div className={b('language-selector')}><LanguageSelector /></div>
+            <footer className={b('footer')}>
+              <a
+                className={b('company-link')}
+                href="https://fullstack-development.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t(footer.fsd)}
+              </a>
+            </footer>
+          </aside>
+          <main className={b('main')}>
+            <header className={b('header')}>
+              <LayoutTopNavigation menuItems={topNavigationItems} activeItemPath={location.pathname}/>
+            </header>
+            <div className={b('page-title')}>{title}</div>
+            <div className={b('content')}>
+              {children}
             </div>
-          </div>
-        </header>
-        <div className={b('content')}>
-          <h1 className={b('title')}>
-            {title}
-          </h1>
-          {children}
+          </main>
         </div>
-        <footer className={b('footer')}>
-          <div className={b('footer-content')}>
-            <a
-              className={b('company-link')}
-              href="https://fullstack-development.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t(footer.fsd)}
-            </a>
-          </div>
-        </footer>
       </div>
     );
-  }
-
-  @autobind
-  private handleEditProfileClick() {
-    const { history } = this.props;
-    history.push(routes.profile.getRoutePath());
   }
 }
 
@@ -90,4 +95,4 @@ const Layout = withAsyncFeatures({
   profileFeatureEntry: features.profile.loadEntry,
 })(wrappedComponent);
 
-export { Layout, LayoutComponent, IProps as ILayoutProps };
+export {Layout, LayoutComponent, IProps as ILayoutProps};

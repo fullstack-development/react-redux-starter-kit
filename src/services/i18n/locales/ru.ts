@@ -11,12 +11,13 @@ export const ru = {
     fieldMinLengthError: 'Поле должно быть не меньше {{minCharacters}} символов',
     fieldMaxLengthError: 'Поле должно быть не более {{maxCharacters}} символов',
     header: {
-      searchFor: 'Искать:',
+      title: 'Демо от команды FSD',
+      searchFor: 'Найти в GitHub',
       users: 'Пользователей',
       repositories: 'Репозитории',
     },
     footer: {
-      fsd: 'Fullstack Development',
+      fsd: 'Перейти на сайт компании',
     },
     notifications: {
       saved: 'Данные пользователя сохранены.',

@@ -1,0 +1,21 @@
+@import '~shared/styles/mixins';
+
+.layout-top-navigation {
+  display: flex;
+
+  &__item {
+    display: block;
+    margin-left: 2rem;
+    padding: 0;
+    color: rgba(0, 0, 0, 0.87);
+    text-decoration: none;
+    letter-spacing: 0.25px;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1rem;
+
+    &_active {
+      color: #304ffe;
+    }
+  }
+}
