@@ -6,12 +6,8 @@
   color: #777;
 
   &_direction {
-    &_left {
-      transform: rotate(135deg);
-    }
-
     &_right {
-      transform: rotate(-45deg);
+      transform: rotate(180deg);
     }
   }
 

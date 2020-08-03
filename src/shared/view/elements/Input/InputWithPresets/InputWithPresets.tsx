@@ -4,7 +4,7 @@ import { autobind } from 'core-decorators';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 import { TextInput, IProps as ITextInputProps } from '../TextInput';
-
+import { withStyles } from "@material-ui/core";
 import './InputWithPresets.scss';
 
 interface IPreset {
@@ -14,28 +14,38 @@ interface IPreset {
 
 interface IProps extends ITextInputProps {
   presets: IPreset[];
+
   onPresetClick(presetValue: string): void;
 }
 
 const b = block('input-with-presets');
 
+const PresetButton = withStyles({
+  root: {
+    padding: '8px 11px',
+    borderRadius: '16px',
+    background: 'rgba(0, 0, 0, 0.12)',
+    cursor: 'pointer',
+  }
+})(ButtonBase)
+
 class InputWithPresets extends React.PureComponent<IProps> {
   public render() {
-    const { presets, onPresetClick, ...rest } = this.props;
+    const {presets, onPresetClick, ...rest} = this.props;
     return (
       <div className={b()}>
         <TextInput {...rest} />
         <div className={b('presets')}>
           {presets.map((x, i) => (
-            <ButtonBase
+            <PresetButton
               className={b('preset').toString()}
               onClick={this.makePresetClickHandler(x.value)}
               key={i}
               focusRipple
               disableTouchRipple
             >
-              {x.icon}
-            </ButtonBase>
+              {x.value}
+            </PresetButton>
           ))}
         </div>
       </div>
@@ -44,9 +54,9 @@ class InputWithPresets extends React.PureComponent<IProps> {
 
   @autobind
   private makePresetClickHandler(presetValue: IPreset['value']) {
-    const { onPresetClick } = this.props;
+    const {onPresetClick} = this.props;
     return () => onPresetClick(presetValue);
   }
 }
 
-export { InputWithPresets, IPreset };
+export {InputWithPresets, IPreset};

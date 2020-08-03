@@ -7,9 +7,9 @@ import { containersProvider, IContainerTypes } from 'core';
 import { IAppReduxState } from 'shared/types/app';
 import { IRepository } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
-import { PaginationControls } from 'shared/view/components';
+import { SearchResults} from 'shared/view/components';
 import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-import { TotalSearchResults, Preloader } from 'shared/view/elements';
+import { Preloader } from 'shared/view/elements';
 
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { actionCreators, selectors } from './../../../redux';
@@ -61,24 +61,26 @@ class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
 
   public render() {
     const {
-      repositories, UserDetails, paginationState: { totalPages, page }, t,
-      totalResults, isSearchRequesting,
+      repositories, UserDetails, paginationState: { totalPages, page}, t, totalResults,
+      isSearchRequesting,
     } = this.props;
     const { displayedRepositoryOwner } = this.state;
     return (
       <div className={b()}>
-        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
-        <div className={b('repositories')}>
-          <Preloader size={0} backgroundColor="rgba(0, 0, 0, 0.05)" isShown={isSearchRequesting} />
-          {repositories.map(this.renderRepositoryPreview)}
-        </div>
-        <div className={b('pagination')}>
-          <PaginationControls
-            totalPages={totalPages}
-            currentPage={page}
-            onPageRequest={this.handlePageRequest}
-          />
-        </div>
+        <SearchResults
+          title={t(tKeys.shared.searchResults)}
+          totalResults={totalResults}
+          totalPages={totalPages}
+          currentPage={page}
+          onPageRequest={this.handlePageRequest}
+          onChangePerPage={this.handleChangePerPage}
+          results={
+            <main className={b('repositories')}>
+              <Preloader size={0} backgroundColor="rgba(0, 0, 0, 0.05)" isShown={isSearchRequesting} />
+              {repositories.map(this.renderRepositoryPreview)}
+            </main>
+          }
+        />
         {displayedRepositoryOwner && (
           <UserDetails
             username={displayedRepositoryOwner}
@@ -112,6 +114,11 @@ class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
   private handlePageRequest(pageNumber: number) {
     const { searchRepositories, searchOptions } = this.props;
     searchRepositories({ searchOptions, page: pageNumber });
+  }
+
+  @autobind
+  private handleChangePerPage(perPage: number) {
+    return perPage
   }
 }
 

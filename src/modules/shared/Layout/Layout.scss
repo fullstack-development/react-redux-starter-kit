@@ -33,13 +33,14 @@
   }
 
   &__side {
+    position: fixed;
     display: block;
-    margin-right: $header-footer-margin + $header-footer-height;
     min-width: $side-bar-width;
     max-width: $side-bar-width;
   }
 
   &__main {
+    margin-left: 510px;
     width: 100%;
   }
 
@@ -70,7 +71,6 @@
   }
 
   &__footer {
-    position: absolute;
     bottom: 0;
     height: $header-footer-height;
     line-height: $header-footer-height;

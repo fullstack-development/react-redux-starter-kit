@@ -2,64 +2,48 @@
 @import '~shared/styles/mixins';
 
 .repository-preview {
-  padding: 1.5rem 1.8rem;
+  padding: 1.125rem 1.5rem 1.5rem;
+  border: 1px solid #eff2ff;
+  border-left: 2px solid #304ffe;
+  border-radius: 5px;
   background: white;
   color: #222;
 
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   &__description {
-    margin: 0.7rem 0 0.9rem;
-    line-height: 1.4rem;
+    margin: 0.4rem 0 0.9rem;
+    color: #7a7a7a;
+    font-size: 0.9rem;
+    line-height: 1.7rem;
   }
 
   &__name {
-    color: #1d67e0;
+    color: #304ffe;
     word-break: break-all;
-    font-size: 1.4rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    line-height: 1.25rem;
 
     &:visited {
       color: #4301a0;
     }
   }
 
-  &__stars {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.6rem;
-    width: 5rem;
-
-    @include breakpoint-up(sm) {
-      margin-bottom: 0;
-    }
-  }
-
-  &__star {
-    margin-right: 0.2rem;
-    height: 1.3rem;
-    color: #444;
-    font-size: 1.2rem;
-  }
-
-  &__row {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    @include breakpoint-up(sm) {
-      flex-direction: row;
-      align-items: center;
-      max-width: 36rem;
-    }
-  }
-
   &__attributes {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     margin-top: 0.7rem;
-    height: 2.35rem;
-
-    @include breakpoint-up(sm) {
-      width: 50%;
-    }
   }
 }

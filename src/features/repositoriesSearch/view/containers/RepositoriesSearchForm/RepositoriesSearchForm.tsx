@@ -14,6 +14,7 @@ import { RepositoriesSearchSettings } from './RepositoriesSearchSettings/Reposit
 import { selectors, actionCreators } from './../../../redux';
 import { IRepositoriesSearchFormFields } from '../../../namespace';
 import { fieldNames } from './constants';
+import {TextInputField} from "shared/view/form";
 
 interface IOwnProps {
   onSubmit(formValues: IRepositoriesSearchFormFields): void;
@@ -60,17 +61,31 @@ class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
         searchInputName={fieldNames.searchString}
         isSearchRequesting={isRepositoriesSearchRequesting}
         submitButtonText={t(tKeys.shared.search)}
-        settingsButtonText={t(tKeys.shared.settings)}
+        showSettingsButtonText={t(tKeys.shared.showSettings)}
+        hideSettingsButtonText={t(tKeys.shared.hideSettings)}
         dialogSubmitText={t(tKeys.shared.ok)}
         dialogTitleText={t(tKeys.shared.searchSettings)}
         validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
         onSubmit={this.handleFormSubmit}
         resetSearchResults={resetSearchResults}
-        renderSettings={RepositoriesSearchSettings}
+        renderTopField={this.renderTopSearchField}
+        renderSettings={this.renderSearchSetting}
         getFilters={this.makeFiltersSelector(t)}
         t={t}
       />
     );
+  }
+
+  @autobind
+  private renderTopSearchField() {
+    const {t } = this.props;
+
+    return <TextInputField name={fieldNames.owner} placeholder={t(intl.owner)} t={t} />
+  }
+
+  @autobind
+  private renderSearchSetting() {
+    return <RepositoriesSearchSettings/>
   }
 
   @autobind

@@ -6,4 +6,16 @@
   &__repository-preview {
     margin-bottom: 1rem;
   }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__total {
+    color: #666;
+    font-size: 16px;
+    line-height: 18px;
+  }
 }

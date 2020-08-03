@@ -1,0 +1,15 @@
+.language-input {
+  &__label {
+    margin: 0 0 5px;
+    color: rgba(0, 0, 0, 0.6);
+    letter-spacing: 0.25px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: -10px;
+  }
+}

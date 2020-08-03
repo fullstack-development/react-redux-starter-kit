@@ -6,6 +6,7 @@ export { IconButton } from './IconButton/IconButton';
 export { RadioGroupInput } from './RadioGroupInput/RadioGroupInput';
 export { FormControlLabel } from './FormControlLabel/FormControlLabel';
 export { Radio } from './Radio/Radio';
+export { RadioChipField } from './RadioChipField/RadioChipField';
 export { MenuItem } from './MenuItem/MenuItem';
 export { Checkbox } from './Checkbox/Checkbox';
 export { CheckboxInput } from './CheckboxInput/CheckboxInput';

@@ -1,0 +1,32 @@
+.search-results {
+  padding-top: 1rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  &__results {
+    margin-bottom: 1rem;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__total {
+    color: #777;
+    font-size: 12px;
+    line-height: 30px;
+  }
+}

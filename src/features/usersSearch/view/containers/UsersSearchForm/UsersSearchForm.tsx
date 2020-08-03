@@ -14,7 +14,7 @@ import { SearchForm } from 'shared/view/components';
 import { selectors, actionCreators } from './../../../redux';
 import { IUsersSearchFormFields } from '../../../namespace';
 import { formInitialValues, fieldNames } from './constants';
-import { selectFiltersValuesFormatters, selectOptions } from './selectors';
+import {selectFiltersValuesFormatters, selectOptions, selectOptionsSearchFor} from './selectors';
 import { UsersSearchSettings } from './UsersSearchSettings/UsersSearchSettings';
 
 interface IOwnProps {
@@ -77,7 +77,8 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
         searchInputName={fieldNames.searchString}
         onSubmit={this.handleFormSubmit}
         submitButtonText={t(tKeys.shared.search)}
-        settingsButtonText={t(tKeys.shared.settings)}
+        showSettingsButtonText={t(tKeys.shared.showSettings)}
+        hideSettingsButtonText={t(tKeys.shared.hideSettings)}
         dialogSubmitText={t(tKeys.shared.ok)}
         dialogTitleText={t(tKeys.shared.searchSettings)}
         validators={makeRequired(tKeys.shared.fieldIsRequiredError)}
@@ -92,7 +93,9 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
 
   @autobind
   private renderUsersSearchSettings() {
-    return <UsersSearchSettings options={selectOptions(this.props)} />;
+    return <UsersSearchSettings
+      options={selectOptions(this.props)} searchForOptions={selectOptionsSearchFor(this.props)}
+    />;
   }
 
   @autobind

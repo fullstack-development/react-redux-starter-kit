@@ -7,14 +7,12 @@ import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
 import { IAppReduxState } from 'shared/types/app';
 import { IGithubUser } from 'shared/types/models';
 import { IPaginationState } from 'shared/types/common';
-import { PaginationControls } from 'shared/view/components';
-import { TotalSearchResults } from 'shared/view/elements';
+import { SearchResults } from 'shared/view/components';
 
 import { IUsersSearchFormFields } from '../../../namespace';
 import { UsersAvatarsWall } from '../../components';
 import { actionCreators, selectors } from './../../../redux';
 import { UserDetails } from '../UserDetails/UserDetails';
-import './UsersSearchResults.scss';
 
 interface IState {
   displayedUser: string | null;
@@ -56,17 +54,18 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   public render() {
     const { users, paginationState: { page, totalPages }, totalResults, t } = this.props;
     const { displayedUser } = this.state;
+
     return (
       <div className={b()}>
-        <TotalSearchResults title={t(tKeys.shared.totalResults)} totalResults={totalResults} />
-        <UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />
-        <div className={b('pagination')}>
-          <PaginationControls
-            totalPages={totalPages}
-            currentPage={page}
-            onPageRequest={this.handlePageRequest}
-          />
-        </div>
+        <SearchResults
+          title={t(tKeys.shared.searchResults)}
+          totalResults={totalResults}
+          totalPages={totalPages}
+          currentPage={page}
+          onPageRequest={this.handlePageRequest}
+          onChangePerPage={this.handleChangePerPage}
+          results={<UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />}
+        />
         {displayedUser && (
           <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />
         )}
@@ -88,6 +87,11 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   @autobind
   private handleUserDetailsClose() {
     this.setState({ displayedUser: null });
+  }
+
+  @autobind
+  private handleChangePerPage(perPage: number) {
+    return perPage
   }
 }
 

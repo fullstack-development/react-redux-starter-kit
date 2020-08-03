@@ -1,1 +1,1 @@
-export const maxRenderedPages = 11;
+export const maxRenderedPages = 5;

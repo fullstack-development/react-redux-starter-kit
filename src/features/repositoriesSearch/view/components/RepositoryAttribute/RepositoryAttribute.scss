@@ -1,20 +1,26 @@
 .repository-attribute {
-  font-size: 0.9rem;
+  color: #7a7a7a;
+  letter-spacing: 0.4px;
+  font-size: 12px;
+  line-height: 1rem;
+
+  &:not(:last-child) {
+    margin-right: 1.9rem;
+  }
 
   &__title {
     margin-right: 0.25rem;
-    font-style: italic;
   }
 
   &__value {
+    font-weight: bold;
+
     &_type {
       &_owner {
-        text-decoration: underline;
+        color: #304ffe;
+        text-decoration: none;
+        font-weight: normal;
         cursor: pointer;
-
-        &:hover {
-          color: #888;
-        }
       }
     }
   }

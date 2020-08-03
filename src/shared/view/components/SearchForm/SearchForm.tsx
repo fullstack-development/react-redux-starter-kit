@@ -1,18 +1,17 @@
 import React from 'react';
-import { Form, FormRenderProps } from 'react-final-form';
+import {Form, FormRenderProps} from 'react-final-form';
 import block from 'bem-cn';
-import { autobind } from 'core-decorators';
+import {autobind} from 'core-decorators';
 
-import { TextInputField } from 'shared/view/form';
-import { Button, KeysToValues } from 'shared/view/elements';
-import { TranslateFunction, ITranslateObject, ITranslateKey } from 'services/i18n';
+import {TextInputField} from 'shared/view/form';
+import {Button} from 'shared/view/elements';
+import {TranslateFunction, ITranslateObject, ITranslateKey} from 'services/i18n';
 
-import { SearchSettingsDialog } from './SearchSettingsDialog/SearchSettingsDialog';
 
 import './SearchForm.scss';
 
 interface IState {
-  isSettingsDialogOpen: boolean;
+  isSettingsShow: boolean;
 }
 
 interface IOwnProps<FormFields> {
@@ -20,14 +19,22 @@ interface IOwnProps<FormFields> {
   searchInputName: string;
   initialValues?: Partial<FormFields>;
   submitButtonText: string;
-  settingsButtonText: string;
+  showSettingsButtonText: string;
+  hideSettingsButtonText: string;
   dialogTitleText: string;
   dialogSubmitText: string;
   t: TranslateFunction;
+
   validators(value: string): string | ITranslateObject | ITranslateKey | undefined;
+
   onSubmit(values: FormFields): void;
+
   resetSearchResults(): void;
+
   renderSettings?(): React.ReactChild;
+
+  renderTopField?(): React.ReactChild;
+
   getFilters?(formValues: FormFields): Record<string, string | number>;
 }
 
@@ -35,20 +42,18 @@ type IProps<T> = IOwnProps<T>;
 
 const b = block('search-form');
 
-class SearchForm<
-  FormFields extends object
-> extends React.PureComponent<IProps<FormFields>, IState> {
+class SearchForm<FormFields extends object> extends React.PureComponent<IProps<FormFields>, IState> {
   public state: IState = {
-    isSettingsDialogOpen: false,
+    isSettingsShow: false,
   };
 
   public componentWillUnmount() {
-    const { resetSearchResults } = this.props;
+    const {resetSearchResults} = this.props;
     resetSearchResults();
   }
 
   public render() {
-    const { onSubmit, initialValues } = this.props;
+    const {onSubmit, initialValues} = this.props;
     return (
       <Form
         onSubmit={onSubmit}
@@ -60,70 +65,60 @@ class SearchForm<
   }
 
   @autobind
-  private renderForm({ handleSubmit, form }: FormRenderProps) {
+  private renderForm({handleSubmit}: FormRenderProps) {
     const {
-      isSearchRequesting, renderSettings, searchInputName,
-      getFilters, settingsButtonText, submitButtonText,
-      validators, t, dialogTitleText, dialogSubmitText,
+      isSearchRequesting, renderSettings, searchInputName, submitButtonText,
+      validators, t, showSettingsButtonText, hideSettingsButtonText,
+      renderTopField
     } = this.props;
-    const { isSettingsDialogOpen } = this.state;
-    const filters = getFilters ? getFilters(form.getState().values as FormFields) : {};
-    const filtersAreNotEmpty = Object.keys(filters).length > 0;
+
+    const {isSettingsShow} = this.state;
+
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        {filtersAreNotEmpty
-          && (
-            <div className={b('filters')}>
-              <KeysToValues items={filters} />
+        <div className={b('search-line')}>
+          <div className={b('input-line')}>
+            <div className={b('input')}>
+              <TextInputField
+                name={searchInputName}
+                disabled={isSearchRequesting}
+                validate={validators}
+                t={t}
+              />
             </div>
-          )}
-        <TextInputField
-          name={searchInputName}
-          disabled={isSearchRequesting}
-          validate={validators}
-          t={t}
-        />
-        <div className={b('buttons')}>
+            {renderTopField !== undefined && (
+              <div className={b('input')}>{renderTopField()}</div>
+            )}
+          </div>
           <Button
             type="submit"
-            variant="outlined"
+            color="primary"
+            variant="contained"
             disabled={isSearchRequesting}
           >
             {submitButtonText}
           </Button>
-          {renderSettings !== undefined
-            && (
-              <div className={b('settings-button')}>
-                <Button
-                  variant="outlined"
-                  onClick={this.handleSettingsButtonClick}
-                  disabled={isSearchRequesting}
-                >
-                  {settingsButtonText}
-                </Button>
-                <SearchSettingsDialog
-                  isOpen={isSettingsDialogOpen}
-                  dialogTitleText={dialogTitleText}
-                  dialogSubmitText={dialogSubmitText}
-                  onClose={this.handleSettingsDialogClose}
-                  renderContent={renderSettings}
-                />
-              </div>
-            )}
         </div>
+        <div className={b('settings')}>
+          <button className={b('settings-trigger')}
+                  type='button'
+                  onClick={this.handleToggleSettings}
+          >
+            { isSettingsShow ? hideSettingsButtonText : showSettingsButtonText }
+          </button>
+          <div className={b('settings-body', {active: this.state.isSettingsShow})}>
+            {renderSettings !== undefined && renderSettings()}
+          </div>
+        </div>
+
       </form>
     );
   }
 
   @autobind
-  private handleSettingsButtonClick() {
-    this.setState({ isSettingsDialogOpen: true });
-  }
-
-  @autobind
-  private handleSettingsDialogClose() {
-    this.setState({ isSettingsDialogOpen: false });
+  private handleToggleSettings() {
+    this.setState({isSettingsShow: !this.state.isSettingsShow})
   }
 }
 
-export { SearchForm, IProps as ISearchFormProps };
+export {SearchForm, IProps as ISearchFormProps};

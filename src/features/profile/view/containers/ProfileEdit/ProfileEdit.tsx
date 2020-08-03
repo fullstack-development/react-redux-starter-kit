@@ -13,7 +13,6 @@ import { actionCreators as notificationActionCreators } from 'services/notificat
 import {
   fieldNames, validateName, validateNickname, validateBio,
 } from './constants';
-import { ProfileAvatar } from '../../components';
 import { IProfileEditFormFields } from '../../../namespace';
 import { actionCreators, selectors } from './../../../redux';
 
@@ -56,45 +55,49 @@ class ProfileEditComponent extends React.PureComponent<IProps> {
 
   @autobind
   private renderForm({ handleSubmit }: FormRenderProps) {
-    const { profile: { avatarURL }, t } = this.props;
+    const { t } = this.props;
     return (
       <form onSubmit={handleSubmit} className={b()}>
-        <div className={b('avatar')}>
-          <ProfileAvatar avatarURL={avatarURL} size="big" />
+        <div className={b('row')}>
+          <div className={b('column', {short: true})}>
+            <div className={b('field')}>
+              <TextInputField
+                name={fieldNames.name}
+                label={t(intl.name)}
+                validate={validateName}
+                t={t}
+              />
+            </div>
+            <div className={b('field')}>
+              <TextInputField
+                name={fieldNames.nickname}
+                label={t(intl.nickname)}
+                validate={validateNickname}
+                t={t}
+              />
+            </div>
+            <div className={b('field')}>
+              <NumberInputField name={fieldNames.age} label={t(intl.age)} t={t} />
+            </div>
+          </div>
+          <div className={b('column', {long: true})}>
+            <div className={b('field')}>
+              <TextInputField
+                name={fieldNames.bio}
+                label={t(intl.bio)}
+                multiline
+                rowsMax={10}
+                validate={validateBio}
+                t={t}
+              />
+            </div>
+          </div>
         </div>
-        <div className={b('fields')}>
-          <div className={b('field')}>
-            <TextInputField
-              name={fieldNames.name}
-              label={t(intl.name)}
-              validate={validateName}
-              t={t}
-            />
-          </div>
-          <div className={b('field')}>
-            <TextInputField
-              name={fieldNames.nickname}
-              label={t(intl.nickname)}
-              validate={validateNickname}
-              t={t}
-            />
-          </div>
-          <div className={b('field')}>
-            <NumberInputField name={fieldNames.age} label={t(intl.age)} t={t} />
-          </div>
-          <div className={b('field')}>
-            <TextInputField
-              name={fieldNames.bio}
-              label={t(intl.bio)}
-              multiline
-              rowsMax={10}
-              validate={validateBio}
-              t={t}
-            />
-          </div>
-          <div className={b('button')}>
-            <Button variant="outlined" type="submit">{t(tKeys.shared.save)}</Button>
-          </div>
+        <div className={b('button')}>
+          <Button color="primary"
+                  variant="contained"
+                  type="submit"
+          >{t(tKeys.shared.save)}</Button>
         </div>
       </form>
     );

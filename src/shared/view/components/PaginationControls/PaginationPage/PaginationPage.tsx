@@ -1,7 +1,7 @@
-import ButtonBase from '@material-ui/core/ButtonBase';
 import React, { PureComponent } from 'react';
 import block from 'bem-cn';
 import { autobind } from 'core-decorators';
+import PaginationControl from "../PaginationControl/PaginationControl";
 
 import './PaginationPage.scss';
 
@@ -11,20 +11,22 @@ interface IProps {
   onClick(page: number): void;
 }
 
+
+
 const b = block('pagination-page');
 
 class PaginationPage extends PureComponent<IProps> {
   public render() {
     const { page, active } = this.props;
     return (
-      <ButtonBase
+      <PaginationControl
         className={b({ active }).toString()}
         onClick={this.makePageClickHandler(page)}
         focusRipple
         disableTouchRipple
       >
         {page}
-      </ButtonBase>
+      </PaginationControl>
     );
   }
 

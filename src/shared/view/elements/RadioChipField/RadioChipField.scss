@@ -1,0 +1,35 @@
+.radio-chip-field {
+  display: inline-flex;
+  margin-bottom: 10px;
+  padding: 6px 11px;
+  border-radius: 50px;
+  background-color: #e0e0e0;
+  font-size: 14px;
+  line-height: 1.25rem;
+  cursor: pointer;
+  transition: 0.25s background-color ease-in;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &_active {
+    background-color: #d4d9fa;
+    color: #304ffe;
+    cursor: default;
+    transition: 0.25s background-color ease-out;
+  }
+
+  &__icon {
+    display: none;
+
+    &_show {
+      display: inline-flex;
+      margin-right: 8px;
+    }
+  }
+
+  &__radio {
+    display: none;
+  }
+}

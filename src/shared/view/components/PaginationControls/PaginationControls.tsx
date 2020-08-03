@@ -53,6 +53,7 @@ class PaginationControls extends React.PureComponent<IProps> {
   @autobind
   private renderPage(page: number) {
     const { currentPage, onPageRequest } = this.props;
+
     return (
       <div className={b('page')} key={page}>
         <PaginationPage

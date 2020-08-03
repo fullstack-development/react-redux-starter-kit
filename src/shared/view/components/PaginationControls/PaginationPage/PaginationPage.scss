@@ -1,8 +1,11 @@
 .pagination-page {
-  color: #777;
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  color: #5c5d66;
+  font-size: 15px;
 
   &_active {
-    box-shadow: 0 0.1rem;
-    color: black;
+    background-color: #e6e9fe;
   }
 }

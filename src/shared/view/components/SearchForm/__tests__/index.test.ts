@@ -10,7 +10,8 @@ interface IFormFields {
 }
 
 const props: ISearchFormProps<IFormFields> = {
-  settingsButtonText: 'settings',
+  showSettingsButtonText: 'Show settings',
+  hideSettingsButtonText: 'Hide settings',
   submitButtonText: 'submit',
   isSearchRequesting: false,
   searchInputName: 'search',

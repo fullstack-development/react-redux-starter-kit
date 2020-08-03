@@ -1,0 +1,15 @@
+.per-page-selector {
+  display: inline-flex;
+  align-items: center;
+
+  &__label {
+    margin-right: 10px;
+    color: #7a7a7a;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  &__radio {
+    display: block;
+  }
+}

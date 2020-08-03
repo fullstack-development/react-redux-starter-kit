@@ -1,15 +1,51 @@
 .search-form {
-  &__filters {
+  margin: 1.5rem 0;
+
+  &__search-line {
+    display: flex;
+    align-items: flex-start;
     margin-bottom: 1rem;
   }
 
-  &__buttons {
+  &__input-line {
     display: flex;
-    justify-content: center;
-    margin-top: 0.8rem;
+    margin-right: 1rem;
+    width: 100%;
   }
 
-  &__settings-button {
-    margin-left: 0.6rem;
+  &__input {
+    width: 100%;
+
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &__filters {
+    display: flex;
+  }
+
+  &__settings-trigger {
+    padding: 0 0 2px;
+    border: none;
+    border-bottom: 1px dashed #304ffe;
+    background: none;
+    color: #304ffe;
+    font-size: 12px;
+    line-height: 14px;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__settings-body {
+    display: none;
+    padding: 1rem 0 0 0;
+
+    &_active {
+      display: block;
+    }
   }
 }

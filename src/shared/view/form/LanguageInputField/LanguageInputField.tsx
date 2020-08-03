@@ -1,7 +1,5 @@
 import React from 'react';
 import block from 'bem-cn';
-import { FieldRenderProps } from 'react-final-form';
-
 import {
   CppIcon,
   CsIcon,
@@ -13,48 +11,51 @@ import {
   SwiftIcon,
   CIcon,
   HaskellIcon,
-  InputWithPresets,
+  RadioChipField,
 } from 'shared/view/elements';
-import { getFieldWithComponent } from 'shared/helpers/react';
-import { TranslateFunction } from 'services/i18n';
+
+import './LanguageInputField.scss';
 
 const b = block('language-input');
 
-type IProps = Omit<React.ComponentProps<typeof InputWithPresets>, 'presets' | 'onPresetClick'> & FieldRenderProps
-& { t: TranslateFunction };
+interface LanguageInputFieldProps {
+  name: string,
+  label: string
+}
 
-class LanguageInputFieldComponent extends React.PureComponent<IProps> {
+type IProps = LanguageInputFieldProps;
+
+
+class LanguageInputField extends React.Component<IProps> {
   private presets = [
-    { value: 'C', icon: <CIcon /> },
-    { value: 'C++', icon: <CppIcon /> },
-    { value: 'C#', icon: <CsIcon /> },
-    { value: 'Java', icon: <JavaIcon /> },
-    { value: 'JavaScript', icon: <JSIcon /> },
-    { value: 'TypeScript', icon: <TSIcon /> },
-    { value: 'Python', icon: <PythonIcon /> },
-    { value: 'Ruby', icon: <RubyIcon /> },
-    { value: 'Swift', icon: <SwiftIcon /> },
-    { value: 'Haskell', icon: <HaskellIcon /> },
+    {value: 'C', icon: <CIcon/>},
+    {value: 'C++', icon: <CppIcon/>},
+    {value: 'C#', icon: <CsIcon/>},
+    {value: 'Java', icon: <JavaIcon/>},
+    {value: 'JavaScript', icon: <JSIcon/>},
+    {value: 'TypeScript', icon: <TSIcon/>},
+    {value: 'Python', icon: <PythonIcon/>},
+    {value: 'Ruby', icon: <RubyIcon/>},
+    {value: 'Swift', icon: <SwiftIcon/>},
+    {value: 'Haskell', icon: <HaskellIcon/>},
   ];
 
   public render() {
-    const { input, meta, t, ...rest } = this.props;
-    const error = typeof rest.error === 'boolean'
-      ? rest.error && meta.error
-      : meta.touched && meta.error;
+    const {name, label} = this.props;
+
     return (
       <div className={b()}>
-        <InputWithPresets
-          {...rest}
-          {...input}
-          helperText={error && t(error)}
-          error={Boolean(error)}
-          presets={this.presets}
-          onPresetClick={input.onChange}
-        />
+        <div className={b('label')}>{label}</div>
+        <div className={b('chips')}>
+          {
+            this.presets.map((chip, i) =>
+              <RadioChipField key={i} name={name} value={chip.value} label={chip.value}/>
+            )
+          }
+        </div>
       </div>
     );
   }
 }
 
-export const LanguageInputField = getFieldWithComponent(LanguageInputFieldComponent);
+export {LanguageInputField, IProps as ILanguageInputField}
