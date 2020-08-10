@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import block from 'bem-cn';
-import MUIDialog, { DialogProps } from '@material-ui/core/Dialog';
-import Typography from '@material-ui/core/Typography';
+import MUIDialogBase, { DialogProps } from '@material-ui/core/Dialog';
+import {withStyles} from "@material-ui/core";
 
 import './Dialog.scss';
 
@@ -11,6 +11,22 @@ interface IProps extends DialogProps {
 }
 
 const b = block('dialog');
+
+const MUIDialog = withStyles({
+  root: {
+    margin: '1.5rem',
+    '& .MuiPaper-rounded': {
+      borderRadius: '0',
+    },
+    '& .MuiDialog-container': {
+      marginLeft: '540px',
+    },
+    '& .MuiBackdrop-root': {
+      left: '540px',
+      backgroundColor: '#304ffe82',
+    }
+  }
+})(MUIDialogBase);
 
 class Dialog extends React.Component<IProps> {
   public static Content: FunctionComponent = props => {
@@ -34,11 +50,8 @@ class Dialog extends React.Component<IProps> {
   public render() {
     const { title, children, onClose, ...dialogProps } = this.props;
     return (
-      <MUIDialog onClose={onClose} PaperProps={{ classes: { root: b('paper').toString() } }} {...dialogProps}>
+      <MUIDialog onClose={onClose} {...dialogProps}>
         <div className={b()}>
-          <div className={b('header')}>
-            <Typography variant="h6">{title}</Typography>
-          </div>
           {children}
         </div>
       </MUIDialog>

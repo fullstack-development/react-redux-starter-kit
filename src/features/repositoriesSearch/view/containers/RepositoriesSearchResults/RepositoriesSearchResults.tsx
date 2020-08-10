@@ -117,8 +117,12 @@ class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleChangePerPage(perPage: number) {
-    return perPage
+  private handleChangePerPage(perPage: 30 | 50 | 100) {
+    const { searchRepositories, searchOptions } = this.props;
+    searchRepositories({ searchOptions: {
+        ...searchOptions,
+        perPage
+      }, page: 1 });
   }
 }
 

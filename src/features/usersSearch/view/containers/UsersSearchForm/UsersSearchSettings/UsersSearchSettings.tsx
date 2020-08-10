@@ -6,7 +6,7 @@ import {ISelectOption} from 'shared/types/form';
 import {SelectField, NumberInputField, LanguageInputField} from 'shared/view/form';
 import {IUsersSearchFilters} from 'shared/types/githubSearch';
 
-import {perPageOptions, fieldNames} from '../constants';
+import {fieldNames} from '../constants';
 import './UsersSearchSettings.scss';
 
 interface IProps {
@@ -47,7 +47,6 @@ function UsersSearchSettings({options, searchForOptions}: IProps) {
           <div className={b('checkbox-group')}>
             <LanguageInputField label={t(intl.repositoriesLanguage)} name={fieldNames.reposLanguage}/>
           </div>
-
         </div>
       </div>
       <div className={b('row')}>
@@ -64,16 +63,6 @@ function UsersSearchSettings({options, searchForOptions}: IProps) {
             options={searchForOptions}
             label={t(intl.searchFor)}
             name={fieldNames.searchFor}
-            t={t}
-          />
-        </div>
-      </div>
-      <div className={b('row')}>
-        <div className={b('item')}>
-          <SelectField
-            options={perPageOptions}
-            label={t(intl.resultsPerPage)}
-            name={fieldNames.perPage}
             t={t}
           />
         </div>

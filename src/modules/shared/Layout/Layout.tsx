@@ -1,7 +1,7 @@
 import React from 'react';
 import block from 'bem-cn';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
-// import { autobind } from 'core-decorators';
+import { autobind } from 'core-decorators';
 
 import {withTranslation, ITranslationProps, tKeys} from 'services/i18n';
 import {withAsyncFeatures} from 'core';
@@ -27,20 +27,10 @@ const {header, footer} = tKeys.shared;
 
 const b = block('layout');
 
-const topNavigationItems = [
-  {
-    path: routes.search.users.getRoutePath(),
-    title: 'Search'
-  },
-  {
-    path: routes.profile.getRoutePath(),
-    title: 'Profile'
-  }
-]
 
 class LayoutComponent extends React.Component<IProps> {
   public render() {
-    const {children, location, t, title} = this.props;
+    const {children, t, title} = this.props;
 
     return (
       <div className={b()}>
@@ -77,7 +67,7 @@ class LayoutComponent extends React.Component<IProps> {
           </aside>
           <main className={b('main')}>
             <header className={b('header')}>
-              <LayoutTopNavigation menuItems={topNavigationItems} activeItemPath={location.pathname}/>
+              {this.renderTopNavigation()}
             </header>
             <div className={b('page-title')}>{title}</div>
             <div className={b('content')}>
@@ -87,6 +77,22 @@ class LayoutComponent extends React.Component<IProps> {
         </div>
       </div>
     );
+  }
+  @autobind
+  private renderTopNavigation() {
+    const {location, t} = this.props;
+    const topNavigationItems = [
+      {
+        path: routes.search.users.getRoutePath(),
+        title: t(tKeys.shared.search)
+      },
+      {
+        path: routes.profile.getRoutePath(),
+        title: 'Profile'
+      }
+    ]
+
+    return <LayoutTopNavigation menuItems={topNavigationItems} activeItemPath={location.pathname}/>
   }
 }
 

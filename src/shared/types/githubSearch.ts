@@ -10,6 +10,7 @@ export interface IUsersSearchFilters {
 }
 
 export interface IRepositoriesSearchFilters {
+  perPage?: 30 | 50 | 100;
   starsNumber?: string;
   forksNumber?: string;
   language?: string;

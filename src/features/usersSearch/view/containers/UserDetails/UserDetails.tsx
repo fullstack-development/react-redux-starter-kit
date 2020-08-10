@@ -73,32 +73,36 @@ class UserDetailsComponent extends React.Component<IProps> {
       } = userDetails;
       return (
         <>
-          <a href={htmlURL} className={b('main')} target="_blank" rel="noopener noreferrer">
+          <div className={b('main')}>
             <img
               className={b('avatar')}
               src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
               alt="Avatar"
             />
-            <Typography variant="h5">{realName}</Typography>
-            <Typography variant="subtitle1" noWrap>{username}</Typography>
-            {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
-          </a>
-          <div className={b('attributes')}>
-            <UserAttribute
-              URL={`${htmlURL}/followers`}
-              title={t(intl.followers)}
-              value={followersNumber}
-            />
-            <UserAttribute
-              URL={`${htmlURL}/following`}
-              title={t(intl.following)}
-              value={followingNumber}
-            />
-            <UserAttribute
-              URL={`${htmlURL}/repositories`}
-              title={t(intl.repositories)}
-              value={reposNumber}
-            />
+            <div className={b('right')}>
+              <div className={b('body')}>
+                <div className={b('user-real-name')}>{realName}</div>
+                <Typography variant="subtitle2" color="textSecondary">{username}</Typography>
+                {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
+              </div>
+              <div className={b('attributes')}>
+                <UserAttribute
+                  URL={`${htmlURL}/followers`}
+                  title={t(intl.followers)}
+                  value={followersNumber}
+                />
+                <UserAttribute
+                  URL={`${htmlURL}/following`}
+                  title={t(intl.following)}
+                  value={followingNumber}
+                />
+                <UserAttribute
+                  URL={`${htmlURL}/repositories`}
+                  title={t(intl.repositories)}
+                  value={reposNumber}
+                />
+              </div>
+            </div>
           </div>
         </>
       );

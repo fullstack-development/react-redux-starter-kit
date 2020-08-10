@@ -26,6 +26,10 @@ const Radio = withStyles({
     '&:hover': {
       backgroundColor: 'transparent',
     },
+    '& .MuiSvgIcon-root': {
+      width: '1.2rem',
+      height: '1.2rem',
+    }
   },
   icon: {
     borderRadius: '50%',
@@ -76,9 +80,21 @@ class PerPageSelectorComponent extends React.PureComponent<IProps> {
         <div className={b('label')}>Результатов на странице</div>
         <span className={b('radio-buttons')}>
             <RadioGroup name="perPage1" row value={value} onChange={this.handleChange}>
-              <FormControlLabel value="30" control={<Radio size="small"/>} label="30" />
-              <FormControlLabel value="50" control={<Radio size="small"/>} label="50" />
-              <FormControlLabel value="100" control={<Radio size="small"/>} label="100" />
+              <FormControlLabel value="30"
+                                label="30"
+                                control={<Radio size="small" color='primary'/>}
+                                className={b('button-label').toString()}
+              />
+              <FormControlLabel value="50"
+                                label="50"
+                                control={<Radio size="small" color='primary'/>}
+                                className={b('button-label').toString()}
+              />
+              <FormControlLabel value="100"
+                                label="100"
+                                control={<Radio size="small" color='primary'/>}
+                                className={b('button-label').toString()}
+              />
             </RadioGroup>
         </span>
       </label>

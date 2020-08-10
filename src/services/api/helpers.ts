@@ -30,12 +30,13 @@ export function constructUsersSearchQuery(
 export function constructRepositoriesSearchQuery(
   queryString: string, filters: IRepositoriesSearchFilters, page: number,
 ) {
-  const { starsNumber, forksNumber, owner, language } = filters;
+  const { starsNumber, forksNumber, owner, language, perPage } = filters;
   return queryString.concat(
     forksNumber !== undefined ? `+forks:>${forksNumber}` : '',
     starsNumber !== undefined ? `+stars:>${starsNumber}` : '',
     optionalParam('user', owner),
     optionalParam('language', language),
+    `&per_page=${perPage}`,
     `&page=${page}`,
   );
 }

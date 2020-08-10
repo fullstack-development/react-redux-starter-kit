@@ -1,14 +1,20 @@
 .user-attribute {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
-  height: 2.5rem;
-  border-bottom: 0.15rem solid #e5e5e5;
-  color: #000;
+  color: #304ffe;
   text-decoration: none;
+  letter-spacing: 0.4px;
+  font-size: 0.75rem;
+  line-height: 1rem;
 
   &:hover {
     border-color: #bbb;
+  }
+
+  &:not(:last-child) {
+    margin-right: 1.5rem;
+  }
+
+  &__value {
+    margin-left: 3px;
+    font-weight: bold;
   }
 }

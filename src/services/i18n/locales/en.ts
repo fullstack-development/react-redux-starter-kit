@@ -13,6 +13,11 @@ export const en = {
     fieldIsRequiredError: 'Field is required',
     fieldMinLengthError: 'Field must be at least {{minCharacters}} characters long',
     fieldMaxLengthError: 'Field must be less than {{maxCharacters}} characters long',
+    description: {
+      forWhat: '',
+      howToUse: '',
+      whatNext: ''
+    },
     header: {
       title: 'Демо от команды FSD',
       searchFor: 'Search in GitHub',

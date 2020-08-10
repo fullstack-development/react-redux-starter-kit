@@ -15,7 +15,7 @@ function UserAttribute(props: IProps) {
   const { title, value, URL } = props;
   return (
     <a href={URL} target="_blank" className={b()} rel="noopener noreferrer">
-      {title}
+      {title}:
       <span className={b('value')}>{value}</span>
     </a>
   );

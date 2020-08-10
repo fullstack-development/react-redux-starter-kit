@@ -1,18 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import block from 'bem-cn';
-import { autobind } from 'core-decorators';
+import {autobind} from 'core-decorators';
 
-import { withTranslation, ITranslationProps, tKeys } from 'services/i18n';
-import { IAppReduxState } from 'shared/types/app';
-import { IGithubUser } from 'shared/types/models';
-import { IPaginationState } from 'shared/types/common';
-import { SearchResults } from 'shared/view/components';
+import {withTranslation, ITranslationProps, tKeys} from 'services/i18n';
+import {IAppReduxState} from 'shared/types/app';
+import {IGithubUser} from 'shared/types/models';
+import {IPaginationState} from 'shared/types/common';
+import {SearchResults} from 'shared/view/components';
 
-import { IUsersSearchFormFields } from '../../../namespace';
-import { UsersAvatarsWall } from '../../components';
-import { actionCreators, selectors } from './../../../redux';
-import { UserDetails } from '../UserDetails/UserDetails';
+import {IUsersSearchFormFields} from '../../../namespace';
+import {UsersAvatarsWall} from '../../components';
+import {actionCreators, selectors} from './../../../redux';
+import {UserDetails} from '../UserDetails/UserDetails';
 
 interface IState {
   displayedUser: string | null;
@@ -52,8 +52,8 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const { users, paginationState: { page, totalPages }, totalResults, t } = this.props;
-    const { displayedUser } = this.state;
+    const {users, paginationState: {page, totalPages}, totalResults, t} = this.props;
+    const {displayedUser} = this.state;
 
     return (
       <div className={b()}>
@@ -64,10 +64,10 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
           currentPage={page}
           onPageRequest={this.handlePageRequest}
           onChangePerPage={this.handleChangePerPage}
-          results={<UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick} />}
+          results={<UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick}/>}
         />
         {displayedUser && (
-          <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose} />
+          <UserDetails username={displayedUser} onClose={this.handleUserDetailsClose}/>
         )}
       </div>
     );
@@ -75,27 +75,34 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
 
   @autobind
   private handlePageRequest(pageNumber: number) {
-    const { searchUsers, searchOptions } = this.props;
-    searchUsers({ searchOptions, page: pageNumber });
+    const {searchUsers, searchOptions} = this.props;
+    searchUsers({searchOptions, page: pageNumber});
   }
 
   @autobind
-  private handleUserAvatarClick({ username }: IGithubUser) {
-    this.setState({ displayedUser: username });
+  private handleUserAvatarClick({username}: IGithubUser) {
+    this.setState({displayedUser: username});
   }
 
   @autobind
   private handleUserDetailsClose() {
-    this.setState({ displayedUser: null });
+    this.setState({displayedUser: null});
   }
 
   @autobind
-  private handleChangePerPage(perPage: number) {
-    return perPage
+  private handleChangePerPage(perPage: 30 | 50 | 100) {
+    const {searchUsers, searchOptions} = this.props;
+
+    searchUsers({
+      searchOptions: {
+        ...searchOptions,
+        perPage
+      }, page: 1
+    });
   }
 }
 
 const connectedComponent = connect(mapState, mapDispatch)(UsersSearchResultsComponent);
 const UsersSearchResults = withTranslation()(connectedComponent);
 
-export { UsersSearchResults, UsersSearchResultsComponent, IProps as IUsersSearchResultsProps };
+export {UsersSearchResults, UsersSearchResultsComponent, IProps as IUsersSearchResultsProps};

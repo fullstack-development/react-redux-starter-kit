@@ -8,4 +8,5 @@ export const fieldNames: FormFieldNames<IRepositoriesSearchFormFields> = {
   forksNumber: 'forksNumber',
   language: 'language',
   owner: 'owner',
+  perPage: 'perPage'
 };
