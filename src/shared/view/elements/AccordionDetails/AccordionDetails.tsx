@@ -3,6 +3,7 @@ import MuiAccordionDetails from "@material-ui/core/ExpansionPanelDetails";
 
 const AccordionDetails = withStyles(() => ({
     root: {
+        flexDirection: 'column',
         padding: '0 0 15px',
         fontSize: 18,
         lineHeight: 1.3,

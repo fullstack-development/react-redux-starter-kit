@@ -10,7 +10,7 @@ import * as features from 'features';
 import {routes} from '../../routes';
 import {LayoutTopNavigation} from "./LayoutTopNavigation/LayoutTopNavigation";
 import './Layout.scss';
-import {Accordion, AccordionSummary, AccordionDetails} from "../../../shared/view/elements";
+import { Accordion, AccordionSummary, AccordionDetails, Typography } from "shared/view/elements";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 interface IOwnProps {
@@ -36,24 +36,56 @@ class LayoutComponent extends React.Component<IProps> {
       <div className={b()}>
         <div className={b('container')}>
           <aside className={b('side')}>
-            <h1 className={b('title')}>{t(header.title)}</h1>
-            <div className={b('description')}>
-              <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Для чего мы сделали демо?</AccordionSummary>
-                <AccordionDetails>Чтобы вы могли понять, какой объём работы и функциональность наша команда делает за
-                  100 часов работы.</AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Как этим пользоваться?</AccordionSummary>
-                <AccordionDetails>Настраивайте параметры поиска, просматривайте результаты и погружайтесь в культуру
-                  GitHub.</AccordionDetails>
-              </Accordion>
-              <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Мне всё понравилось, что дальше?</AccordionSummary>
-                <AccordionDetails>Свяжитесь с нашим CTO, чтобы мы круто поработали над вашим
-                  проектом.</AccordionDetails>
-              </Accordion>
-            </div>
+            <header className={b('demo')}>
+              <h1 className={b('title')}>{t(header.title)}</h1>
+              <div className={b('description')}>
+                <Accordion>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Для чего мы сделали демо?</AccordionSummary>
+                  <AccordionDetails>Чтобы вы могли понять, какой объём работы и функциональность наша команда делает за
+                    100 часов работы.</AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Как этим пользоваться?</AccordionSummary>
+                  <AccordionDetails>Настраивайте параметры поиска, просматривайте результаты и погружайтесь в культуру
+                    GitHub.</AccordionDetails>
+                </Accordion>
+                <Accordion>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Мне всё понравилось, что дальше?</AccordionSummary>
+                  <AccordionDetails>
+                    Свяжитесь с нашим CTO, чтобы мы круто поработали над вашим
+                    проектом.
+                    <Typography variant='subtitle1'>Черепанов Сергей Андреевич:</Typography>
+                    <div className={b('links')}>
+                      <a
+                        className={b('contact-link')}
+                        href="telegram:znack"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        znack в Telegram
+                      </a>
+                      <a
+                        className={b('contact-link')}
+                        href="mailto:scher56@gmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        scher56@gmail.com
+                      </a>
+                      <a
+                        className={b('contact-link')}
+                        href="skype:scher56?chat"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        scher56
+                      </a>
+                    </div>
+
+                  </AccordionDetails>
+                </Accordion>
+              </div>
+            </header>
             <footer className={b('footer')}>
               <a
                 className={b('company-link')}

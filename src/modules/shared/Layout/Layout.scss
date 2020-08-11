@@ -34,9 +34,13 @@
 
   &__side {
     position: fixed;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 140px;
     min-width: $side-bar-width;
     max-width: $side-bar-width;
+    height: 100%;
   }
 
   &__main {
@@ -74,6 +78,18 @@
     bottom: 0;
     height: $header-footer-height;
     line-height: $header-footer-height;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__contact-link {
+    margin: 0 2rem 3px 0;
+    color: #304ffe;
+    font-size: 1rem;
+    line-height: 20px;
   }
 
   &__company-link {
