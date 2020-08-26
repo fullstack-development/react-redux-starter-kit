@@ -2,6 +2,8 @@
 
 .user-details {
   position: relative;
+  width: 445px;
+  height: 120px;
 
   &__main {
     display: flex;
@@ -9,6 +11,7 @@
 
   &__avatar {
     margin-right: 1.25rem;
+    min-width: 7.5rem;
     height: 7.5rem;
   }
 

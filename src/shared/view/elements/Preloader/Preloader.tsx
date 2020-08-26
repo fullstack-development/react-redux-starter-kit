@@ -14,13 +14,11 @@ const b = block('preloader');
 
 function Preloader(props: IProps) {
   const { isShown, size, backgroundColor } = props;
-  return isShown
-    ? (
-      <div className={b()} style={{ backgroundColor }}>
-        <CircleProgressBar size={size} />
-      </div>
-    )
-    : null;
+  return (
+    <div className={b({show: isShown})} style={{ backgroundColor }}>
+      <CircleProgressBar size={size} />
+    </div>
+  )
 }
 
 export { Preloader };
