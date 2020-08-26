@@ -14,8 +14,11 @@ import {UsersAvatarsWall} from '../../components';
 import {actionCreators, selectors} from './../../../redux';
 import {UserDetails} from '../UserDetails/UserDetails';
 
+type PerPage = 30 | 50 | 100;
+
 interface IState {
   displayedUser: string | null;
+  perPage: PerPage
 }
 
 interface IOwnProps {
@@ -49,6 +52,7 @@ const b = block('users-search-results');
 class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   public state: IState = {
     displayedUser: null,
+    perPage: 30
   };
 
   public render() {
@@ -76,7 +80,11 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   @autobind
   private handlePageRequest(pageNumber: number) {
     const {searchUsers, searchOptions} = this.props;
-    searchUsers({searchOptions, page: pageNumber});
+
+    searchUsers({searchOptions: {
+        ...searchOptions,
+        perPage: this.state.perPage
+      }, page: pageNumber});
   }
 
   @autobind
@@ -90,8 +98,9 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   }
 
   @autobind
-  private handleChangePerPage(perPage: 30 | 50 | 100) {
+  private handleChangePerPage(perPage: PerPage) {
     const {searchUsers, searchOptions} = this.props;
+    this.setState({perPage});
 
     searchUsers({
       searchOptions: {

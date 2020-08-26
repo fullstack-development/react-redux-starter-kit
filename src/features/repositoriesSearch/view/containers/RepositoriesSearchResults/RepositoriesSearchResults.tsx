@@ -16,8 +16,11 @@ import { actionCreators, selectors } from './../../../redux';
 import { RepositoryPreview } from '../../components';
 import './RepositoriesSearchResults.scss';
 
+type PerPage = 30 | 50 | 100;
+
 interface IState {
   displayedRepositoryOwner: string | null;
+  perPage: PerPage;
 }
 
 interface IOwnProps {
@@ -57,6 +60,7 @@ const b = block('repositories-search-results');
 class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
   public state: IState = {
     displayedRepositoryOwner: null,
+    perPage: 30
   };
 
   public render() {
@@ -113,13 +117,16 @@ class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
   @autobind
   private handlePageRequest(pageNumber: number) {
     const { searchRepositories, searchOptions } = this.props;
-    searchRepositories({ searchOptions, page: pageNumber });
+    searchRepositories({searchOptions: {
+      ...searchOptions,
+        perPage: this.state.perPage
+    }, page: pageNumber });
   }
 
   @autobind
-  private handleChangePerPage(perPage: 30 | 50 | 100) {
+  private handleChangePerPage(perPage: PerPage) {
     const { searchRepositories, searchOptions } = this.props;
-    searchRepositories({ searchOptions: {
+      searchRepositories({ searchOptions: {
         ...searchOptions,
         perPage
       }, page: 1 });
