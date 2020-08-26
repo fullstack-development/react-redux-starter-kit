@@ -86,6 +86,7 @@ export class UsersSearchFormComponent extends React.PureComponent<IProps> {
         renderSettings={this.renderUsersSearchSettings}
         resetSearchResults={resetSearchResults}
         getFilters={this.makeFiltersSelector(t)}
+        searchInputPlaceholder='Email/Username/Full name'
         t={t}
       />
     );

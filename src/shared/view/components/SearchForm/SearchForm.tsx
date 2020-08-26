@@ -17,6 +17,7 @@ interface IState {
 interface IOwnProps<FormFields> {
   isSearchRequesting: boolean;
   searchInputName: string;
+  searchInputPlaceholder?: string;
   initialValues?: Partial<FormFields>;
   submitButtonText: string;
   showSettingsButtonText: string;
@@ -69,7 +70,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
     const {
       isSearchRequesting, renderSettings, searchInputName, submitButtonText,
       validators, t, showSettingsButtonText, hideSettingsButtonText,
-      renderTopField
+      renderTopField, searchInputPlaceholder
     } = this.props;
 
     const {isSettingsShow} = this.state;
@@ -84,6 +85,7 @@ class SearchForm<FormFields extends object> extends React.PureComponent<IProps<F
                 disabled={isSearchRequesting}
                 validate={validators}
                 t={t}
+                placeholder={searchInputPlaceholder}
               />
             </div>
             {renderTopField !== undefined && (

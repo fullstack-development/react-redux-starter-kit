@@ -71,6 +71,7 @@ class RepositoriesSearchFormComponent extends React.PureComponent<IProps> {
         renderTopField={this.renderTopSearchField}
         renderSettings={this.renderSearchSetting}
         getFilters={this.makeFiltersSelector(t)}
+        searchInputPlaceholder='Repository name'
         t={t}
       />
     );
