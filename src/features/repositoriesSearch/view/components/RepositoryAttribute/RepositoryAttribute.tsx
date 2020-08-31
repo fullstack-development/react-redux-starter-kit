@@ -7,13 +7,14 @@ interface IProps {
   title: string;
   value: string | number;
   type?: 'owner';
+  icon?: React.ReactChild;
   onValueClick?(): void;
 }
 
 const b = block('repository-attribute');
 
 function RepositoryAttribute(props: IProps) {
-  const { title, value, onValueClick, type } = props;
+  const { title, value, onValueClick, type, icon } = props;
   const handleValueKeyPress = (e: React.KeyboardEvent<HTMLSpanElement>) => {
     if (e.key === 'Enter' && onValueClick) {
       onValueClick();
@@ -21,16 +22,23 @@ function RepositoryAttribute(props: IProps) {
   };
 
   return (
-    <div className={b()}>
+    <div className={b()}
+         tabIndex={0}
+         role="button"
+         onClick={onValueClick}
+         onKeyPress={handleValueKeyPress}
+    >
       <span className={b('title')}>
         {title}
       </span>
+      {
+        icon &&
+        <span className={b('icon')}>
+          {icon}
+        </span>
+      }
       <span
-        tabIndex={0}
-        role="button"
         className={b('value', { type })}
-        onClick={onValueClick}
-        onKeyPress={handleValueKeyPress}
       >
         {value}
       </span>

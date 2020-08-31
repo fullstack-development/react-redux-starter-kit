@@ -6,6 +6,10 @@ import {IRepository} from 'shared/types/models';
 import {Link} from 'shared/view/elements';
 import {withTranslation, ITranslationProps, tKeys} from 'services/i18n';
 
+import StarIcon from '@material-ui/icons/StarRateSharp'
+import CallSplitIcon from '@material-ui/icons/CallSplit'
+import BugReportIcon from '@material-ui/icons/BugReport'
+
 import {RepositoryAttribute} from '../RepositoryAttribute/RepositoryAttribute';
 import './RepositoryPreview.scss';
 
@@ -51,9 +55,9 @@ class RepositoryPreviewComponent extends React.PureComponent<IProps> {
         </div>
         <footer className={b('footer')}>
           <div className={b('attributes')}>
-            <RepositoryAttribute title={t(intl.stars)} value={starsNumber}/>
-            <RepositoryAttribute title={t(intl.forks)} value={forksNumber}/>
-            <RepositoryAttribute title={t(intl.openIssues)} value={openIssuesNumber}/>
+            <RepositoryAttribute title={t(intl.stars)} icon={<StarIcon/>} value={starsNumber}/>
+            <RepositoryAttribute title={t(intl.forks)} icon={<CallSplitIcon/>} value={forksNumber}/>
+            <RepositoryAttribute title={t(intl.openIssues)} icon={<BugReportIcon/>} value={openIssuesNumber}/>
           </div>
           <div className={b('attributes')}>
             <RepositoryAttribute

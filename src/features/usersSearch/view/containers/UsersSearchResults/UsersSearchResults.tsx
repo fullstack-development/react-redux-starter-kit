@@ -29,6 +29,7 @@ interface IStateProps {
   users: IGithubUser[];
   paginationState: IPaginationState;
   totalResults: number;
+  isSearchRequesting: boolean;
 }
 
 type IActionProps = typeof mapDispatch;
@@ -40,6 +41,7 @@ function mapState(state: IAppReduxState): IStateProps {
     users: selectors.selectFoundUsers(state),
     paginationState: selectors.selectUsersSearchPaginationState(state),
     totalResults: selectors.selectTotalResults(state),
+    isSearchRequesting: selectors.selectCommunication(state, 'searchUser').isRequesting,
   };
 }
 
@@ -56,7 +58,7 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
   };
 
   public render() {
-    const {users, paginationState: {page, totalPages}, totalResults, t} = this.props;
+    const {users, paginationState: {page, totalPages}, totalResults, t, isSearchRequesting} = this.props;
     const {displayedUser} = this.state;
 
     return (
@@ -68,6 +70,7 @@ class UsersSearchResultsComponent extends React.PureComponent<IProps> {
           currentPage={page}
           onPageRequest={this.handlePageRequest}
           onChangePerPage={this.handleChangePerPage}
+          isSearchRequesting={isSearchRequesting}
           results={<UsersAvatarsWall users={users} onAvatarClick={this.handleUserAvatarClick}/>}
         />
         {displayedUser && (

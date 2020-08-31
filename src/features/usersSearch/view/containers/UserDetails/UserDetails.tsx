@@ -74,30 +74,32 @@ class UserDetailsComponent extends React.Component<IProps> {
       return (
         <>
           <div className={b('main')}>
-            <img
-              className={b('avatar')}
-              src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
-              alt="Avatar"
-            />
+            <a href={htmlURL} target="_blank">
+              <img
+                className={b('avatar')}
+                src={injectSizeToAvatarURL(avatarURL, this.avatarSize)}
+                alt="Avatar"
+              />
+            </a>
             <div className={b('right')}>
               <div className={b('body')}>
-                <div className={b('user-real-name')}>{realName}</div>
+                <a href={htmlURL} target="_blank" className={b('user-real-name')}>{realName}</a>
                 <Typography variant="subtitle2" color="textSecondary">{username}</Typography>
                 {location && <Typography variant="subtitle2" color="textSecondary">{location}</Typography>}
               </div>
               <div className={b('attributes')}>
                 <UserAttribute
-                  URL={`${htmlURL}/followers`}
+                  URL={`${htmlURL}?tab=followers`}
                   title={t(intl.followers)}
                   value={followersNumber}
                 />
                 <UserAttribute
-                  URL={`${htmlURL}/following`}
+                  URL={`${htmlURL}?tab=following`}
                   title={t(intl.following)}
                   value={followingNumber}
                 />
                 <UserAttribute
-                  URL={`${htmlURL}/repositories`}
+                  URL={`${htmlURL}?tab=repositories`}
                   title={t(intl.repositories)}
                   value={reposNumber}
                 />

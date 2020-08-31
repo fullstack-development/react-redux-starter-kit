@@ -21,15 +21,18 @@
 
   &__item {
     margin-bottom: 1rem;
-    padding: 0 0.5rem;
-    width: 50%;
 
-    &_short {
-      width: 30%;
-    }
+    @include breakpoint-up(sm) {
+      padding: 0 0.5rem;
+      width: 50%;
 
-    &_long {
-      width: 70%;
+      &_short {
+        width: 30%;
+      }
+
+      &_long {
+        width: 70%;
+      }
     }
   }
 

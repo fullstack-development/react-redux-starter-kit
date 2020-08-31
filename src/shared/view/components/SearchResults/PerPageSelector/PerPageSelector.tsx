@@ -27,8 +27,8 @@ const Radio = withStyles({
       backgroundColor: 'transparent',
     },
     '& .MuiSvgIcon-root': {
-      width: '1.2rem',
-      height: '1.2rem',
+      width: '1rem',
+      height: '1rem',
     }
   },
   icon: {

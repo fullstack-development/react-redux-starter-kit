@@ -78,6 +78,7 @@ class RepositoriesSearchResultsComponent extends React.PureComponent<IProps> {
           currentPage={page}
           onPageRequest={this.handlePageRequest}
           onChangePerPage={this.handleChangePerPage}
+          isSearchRequesting={isSearchRequesting}
           results={
             <main className={b('repositories')}>
               <Preloader size={0} backgroundColor="rgba(0, 0, 0, 0.05)" isShown={isSearchRequesting} />

@@ -9,30 +9,13 @@
   font-size: 0.9rem;
 
   &__menu-icon {
-    display: flex;
-
-    @include breakpoint-up(sm) {
-      display: none;
-    }
-
-    &_open {
-      & ~ #{$r}__menu-items {
-        position: absolute;
-        top: 1.5rem;
-        display: flex;
-        flex-direction: column;
-      }
-    }
+    display: none;
   }
 
   &__menu-items {
-    display: none;
-
-    @include breakpoint-up(sm) {
-      display: flex;
-      flex-direction: row;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    }
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   }
 
   &__menu-item {

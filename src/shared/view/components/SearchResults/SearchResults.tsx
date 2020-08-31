@@ -12,6 +12,7 @@ interface IOwnProps {
   currentPage: number;
   totalResults: number;
   title: string;
+  isSearchRequesting: boolean;
 
   onPageRequest(pageNumber: number): void;
   onChangePerPage(perPage: number): void;
@@ -24,11 +25,11 @@ const b = block('search-results');
 
 class SearchResults extends React.PureComponent<IProps> {
   public render() {
-    const {totalPages, currentPage, onPageRequest, results, title, onChangePerPage} = this.props
+    const {totalPages, currentPage, onPageRequest, results, title, onChangePerPage, isSearchRequesting} = this.props
 
     return (
       <div className={b()}>
-        <div className={b('header')}>
+        <div className={b('header', {hide: isSearchRequesting})}>
           <span className={b('title')}>
             {title}
           </span>
@@ -39,7 +40,7 @@ class SearchResults extends React.PureComponent<IProps> {
         <div className={b('results')}>
           {results}
         </div>
-        <div className={b('footer')}>
+        <div className={b('footer', {hide: isSearchRequesting})}>
           {this.renderTotalCountPages()}
           <PaginationControls
             totalPages={totalPages}

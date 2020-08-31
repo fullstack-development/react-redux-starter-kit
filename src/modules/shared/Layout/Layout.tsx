@@ -58,7 +58,7 @@ class LayoutComponent extends React.Component<IProps> {
                     <div className={b('links')}>
                       <a
                         className={b('contact-link')}
-                        href="telegram:znack"
+                        href="tg://resolve?domain=znack"
                         target="_blank"
                         rel="noopener noreferrer"
                       >

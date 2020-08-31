@@ -20,6 +20,7 @@ const props: IUsersSearchResultsProps = {
   },
   searchUsers: jest.fn(),
   totalResults: 1,
+  isSearchRequesting: false,
   ...getMockedLocaleProps(),
 };
 

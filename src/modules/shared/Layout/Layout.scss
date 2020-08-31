@@ -9,8 +9,16 @@
   padding: 4.5rem;
   min-height: 100%;
 
+  @include breakpoint-down(md) {
+    padding: 1rem;
+  }
+
   &__container {
     display: flex;
+
+    @include breakpoint-down(md) {
+      flex-direction: column;
+    }
   }
 
   &__title {
@@ -24,7 +32,7 @@
   &__page-title {
     display: none;
 
-    @include breakpoint-up(sm) {
+    @include breakpoint-down(sm) {
       display: block;
       font-weight: 500;
       font-size: 1.5rem;
@@ -41,11 +49,23 @@
     min-width: $side-bar-width;
     max-width: $side-bar-width;
     height: 100%;
+
+    @include breakpoint-down(md) {
+      position: relative;
+      padding-bottom: 3rem;
+      min-width: auto;
+      max-width: 100%;
+      width: 100%;
+    }
   }
 
   &__main {
     margin-left: 510px;
     width: 100%;
+
+    @include breakpoint-down(md) {
+      margin: 0;
+    }
   }
 
   &__header {

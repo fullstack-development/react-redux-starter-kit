@@ -1,3 +1,15 @@
+@import '~shared/styles/mixins';
+
+@mixin controls-hide() {
+  opacity: 1;
+  transition: 0.2s opacity ease-in;
+
+  &_hide {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
 .search-results {
   padding-top: 1rem;
 
@@ -6,6 +18,18 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
+
+    @include breakpoint-up(sm) {
+      height: 34px;
+    }
+
+    @include breakpoint-down(sm) {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    @include controls-hide;
   }
 
   &__title {
@@ -22,6 +46,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @include breakpoint-up(sm) {
+      height: 30px;
+    }
+
+    @include breakpoint-down(sm) {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    @include controls-hide;
   }
 
   &__total {

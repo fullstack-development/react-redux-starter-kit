@@ -1,3 +1,5 @@
+@import '~shared/styles/mixins';
+
 .profile-edit {
   padding-top: 2rem;
   width: 100%;
@@ -5,6 +7,10 @@
   &__row {
     display: flex;
     margin: 0 -0.5rem;
+
+    @include breakpoint-down(sm) {
+      flex-direction: column;
+    }
 
     &:not(:last-child) {
       margin-bottom: 1.5rem;
@@ -14,15 +20,19 @@
   &__column {
     display: inline-flex;
     flex-direction: column;
-    padding: 0 0.5rem;
-    width: 50%;
+    padding: 0.5rem;
 
-    &_short {
-      width: 40%;
-    }
+    @include breakpoint-up(sm) {
+      padding: 0 0.5rem;
+      width: 50%;
 
-    &_long {
-      width: 60%;
+      &_short {
+        width: 40%;
+      }
+
+      &_long {
+        width: 60%;
+      }
     }
   }
 
